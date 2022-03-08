@@ -37,7 +37,7 @@ class User
     /**
      * 
      *
-     * @var string|null
+     * @var string
      */
     protected $password;
     /**
@@ -196,20 +196,20 @@ class User
     /**
      * 
      *
-     * @return string|null
+     * @return string
      */
-    public function getPassword() : ?string
+    public function getPassword() : string
     {
         return $this->password;
     }
     /**
      * 
      *
-     * @param string|null $password
+     * @param string $password
      *
      * @return self
      */
-    public function setPassword(?string $password) : self
+    public function setPassword(string $password) : self
     {
         $this->password = $password;
         return $this;

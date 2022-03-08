@@ -66,11 +66,8 @@ class UserJsonldNormalizer implements DenormalizerInterface, NormalizerInterface
         if (\array_key_exists('email', $data)) {
             $object->setEmail($data['email']);
         }
-        if (\array_key_exists('password', $data) && $data['password'] !== null) {
+        if (\array_key_exists('password', $data)) {
             $object->setPassword($data['password']);
-        }
-        elseif (\array_key_exists('password', $data) && $data['password'] === null) {
-            $object->setPassword(null);
         }
         if (\array_key_exists('enabled', $data)) {
             $object->setEnabled($data['enabled']);
