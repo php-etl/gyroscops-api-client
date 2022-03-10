@@ -63,7 +63,7 @@ class WorkflowJobPipelineJsonld
      *
      * @var string[]
      */
-    protected $composer;
+    protected $autoload;
     /**
      * 
      *
@@ -264,20 +264,20 @@ class WorkflowJobPipelineJsonld
      *
      * @return string[]
      */
-    public function getComposer() : array
+    public function getAutoload() : array
     {
-        return $this->composer;
+        return $this->autoload;
     }
     /**
      * 
      *
-     * @param string[] $composer
+     * @param string[] $autoload
      *
      * @return self
      */
-    public function setComposer(array $composer) : self
+    public function setAutoload(array $autoload) : self
     {
-        $this->composer = $composer;
+        $this->autoload = $autoload;
         return $this;
     }
     /**

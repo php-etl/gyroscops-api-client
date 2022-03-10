@@ -2,7 +2,7 @@
 
 namespace Gyroscops\Api\Exception;
 
-class AddComposerPipelinePipelineCollectionBadRequestException extends BadRequestException
+class AddPipelineComposerPsr4AutoloadPipelineCollectionBadRequestException extends BadRequestException
 {
     public function __construct()
     {

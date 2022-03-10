@@ -2,10 +2,10 @@
 
 namespace Gyroscops\Api\Endpoint;
 
-class AddComposerPipelinePipelineCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
+class AddPipelineComposerPsr4AutoloadPipelineCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
 {
     /**
-     * Adds PSR4 autoload composer to a pipeline
+     * Adds PSR4 autoload to a pipeline
      *
      * @param \Gyroscops\Api\Model\PipelineAddPipelineComposerPSR4AutoloadCommandInputJsonld|\Gyroscops\Api\Model\PipelineAddPipelineComposerPSR4AutoloadCommandInput $requestBody 
      */
@@ -20,7 +20,7 @@ class AddComposerPipelinePipelineCollection extends \Gyroscops\Api\Runtime\Clien
     }
     public function getUri() : string
     {
-        return '/runtime/pipelines/add-composer';
+        return '/runtime/pipelines/add-composer-psr4-autoload';
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {
@@ -42,8 +42,8 @@ class AddComposerPipelinePipelineCollection extends \Gyroscops\Api\Runtime\Clien
     /**
      * {@inheritdoc}
      *
-     * @throws \Gyroscops\Api\Exception\AddComposerPipelinePipelineCollectionBadRequestException
-     * @throws \Gyroscops\Api\Exception\AddComposerPipelinePipelineCollectionUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\AddPipelineComposerPsr4AutoloadPipelineCollectionBadRequestException
+     * @throws \Gyroscops\Api\Exception\AddPipelineComposerPsr4AutoloadPipelineCollectionUnprocessableEntityException
      *
      * @return null
      */
@@ -53,10 +53,10 @@ class AddComposerPipelinePipelineCollection extends \Gyroscops\Api\Runtime\Clien
             return json_decode($body);
         }
         if (400 === $status) {
-            throw new \Gyroscops\Api\Exception\AddComposerPipelinePipelineCollectionBadRequestException();
+            throw new \Gyroscops\Api\Exception\AddPipelineComposerPsr4AutoloadPipelineCollectionBadRequestException();
         }
         if (422 === $status) {
-            throw new \Gyroscops\Api\Exception\AddComposerPipelinePipelineCollectionUnprocessableEntityException();
+            throw new \Gyroscops\Api\Exception\AddPipelineComposerPsr4AutoloadPipelineCollectionUnprocessableEntityException();
         }
     }
     public function getAuthenticationScopes() : array

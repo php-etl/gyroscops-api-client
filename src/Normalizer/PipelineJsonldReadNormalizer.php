@@ -70,12 +70,12 @@ class PipelineJsonldReadNormalizer implements DenormalizerInterface, NormalizerI
             }
             $object->setRuntime($values);
         }
-        if (\array_key_exists('composer', $data)) {
+        if (\array_key_exists('autoload', $data)) {
             $values_1 = array();
-            foreach ($data['composer'] as $value_1) {
+            foreach ($data['autoload'] as $value_1) {
                 $values_1[] = $value_1;
             }
-            $object->setComposer($values_1);
+            $object->setAutoload($values_1);
         }
         if (\array_key_exists('steps', $data)) {
             $values_2 = array();
@@ -108,10 +108,10 @@ class PipelineJsonldReadNormalizer implements DenormalizerInterface, NormalizerI
         }
         $data['runtime'] = $values;
         $values_1 = array();
-        foreach ($object->getComposer() as $value_1) {
+        foreach ($object->getAutoload() as $value_1) {
             $values_1[] = $value_1;
         }
-        $data['composer'] = $values_1;
+        $data['autoload'] = $values_1;
         if (null !== $object->getSteps()) {
             $values_2 = array();
             foreach ($object->getSteps() as $value_2) {

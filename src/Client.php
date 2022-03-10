@@ -1282,18 +1282,18 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\DeclarePipelinePipelineCollection($requestBody), $fetch);
     }
     /**
-     * Adds PSR4 autoload composer to a pipeline
+     * Adds PSR4 autoload to a pipeline
      *
      * @param \Gyroscops\Api\Model\PipelineAddPipelineComposerPSR4AutoloadCommandInputJsonld|\Gyroscops\Api\Model\PipelineAddPipelineComposerPSR4AutoloadCommandInput $requestBody 
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     * @throws \Gyroscops\Api\Exception\AddComposerPipelinePipelineCollectionBadRequestException
-     * @throws \Gyroscops\Api\Exception\AddComposerPipelinePipelineCollectionUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\AddPipelineComposerPsr4AutoloadPipelineCollectionBadRequestException
+     * @throws \Gyroscops\Api\Exception\AddPipelineComposerPsr4AutoloadPipelineCollectionUnprocessableEntityException
      *
      * @return null|\Psr\Http\Message\ResponseInterface
      */
-    public function addComposerPipelinePipelineCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function addPipelineComposerPsr4AutoloadPipelineCollection($requestBody, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\AddComposerPipelinePipelineCollection($requestBody), $fetch);
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\AddPipelineComposerPsr4AutoloadPipelineCollection($requestBody), $fetch);
     }
     /**
      * Creates a pipeline compilation
