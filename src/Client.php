@@ -1258,6 +1258,8 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *     @var int $page The collection page number
+     *     @var string $code 
+     *     @var array $code[] 
      * }
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *

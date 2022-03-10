@@ -9,6 +9,8 @@ class GetPipelineCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
      *
      * @param array $queryParameters {
      *     @var int $page The collection page number
+     *     @var string $code 
+     *     @var array $code[] 
      * }
      */
     public function __construct(array $queryParameters = array())
@@ -35,10 +37,12 @@ class GetPipelineCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
     protected function getQueryOptionsResolver() : \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(array('page'));
+        $optionsResolver->setDefined(array('page', 'code', 'code[]'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array('page' => 1));
         $optionsResolver->setAllowedTypes('page', array('int'));
+        $optionsResolver->setAllowedTypes('code', array('string'));
+        $optionsResolver->setAllowedTypes('code[]', array('array'));
         return $optionsResolver;
     }
     /**
