@@ -54,8 +54,11 @@ class ExecutionWorkflowJobJsonldNormalizer implements DenormalizerInterface, Nor
         if (\array_key_exists('id', $data)) {
             $object->setId2($data['id']);
         }
-        if (\array_key_exists('workflow', $data)) {
+        if (\array_key_exists('workflow', $data) && $data['workflow'] !== null) {
             $object->setWorkflow($data['workflow']);
+        }
+        elseif (\array_key_exists('workflow', $data) && $data['workflow'] === null) {
+            $object->setWorkflow(null);
         }
         if (\array_key_exists('pipeline', $data) && $data['pipeline'] !== null) {
             $object->setPipeline($data['pipeline']);

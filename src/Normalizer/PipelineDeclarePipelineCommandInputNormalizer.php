@@ -51,6 +51,26 @@ class PipelineDeclarePipelineCommandInputNormalizer implements DenormalizerInter
         if (\array_key_exists('project', $data)) {
             $object->setProject($data['project']);
         }
+        if (\array_key_exists('organization', $data) && $data['organization'] !== null) {
+            $object->setOrganization($data['organization']);
+        }
+        elseif (\array_key_exists('organization', $data) && $data['organization'] === null) {
+            $object->setOrganization(null);
+        }
+        if (\array_key_exists('steps', $data)) {
+            $values = array();
+            foreach ($data['steps'] as $value) {
+                $values[] = $this->denormalizer->denormalize($value, 'Gyroscops\\Api\\Model\\StepInput', 'json', $context);
+            }
+            $object->setSteps($values);
+        }
+        if (\array_key_exists('autoloads', $data)) {
+            $values_1 = array();
+            foreach ($data['autoloads'] as $value_1) {
+                $values_1[] = $this->denormalizer->denormalize($value_1, 'Gyroscops\\Api\\Model\\AutoloadInput', 'json', $context);
+            }
+            $object->setAutoloads($values_1);
+        }
         return $object;
     }
     /**
@@ -67,6 +87,23 @@ class PipelineDeclarePipelineCommandInputNormalizer implements DenormalizerInter
         }
         if (null !== $object->getProject()) {
             $data['project'] = $object->getProject();
+        }
+        if (null !== $object->getOrganization()) {
+            $data['organization'] = $object->getOrganization();
+        }
+        if (null !== $object->getSteps()) {
+            $values = array();
+            foreach ($object->getSteps() as $value) {
+                $values[] = $this->normalizer->normalize($value, 'json', $context);
+            }
+            $data['steps'] = $values;
+        }
+        if (null !== $object->getAutoloads()) {
+            $values_1 = array();
+            foreach ($object->getAutoloads() as $value_1) {
+                $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
+            }
+            $data['autoloads'] = $values_1;
         }
         return $data;
     }

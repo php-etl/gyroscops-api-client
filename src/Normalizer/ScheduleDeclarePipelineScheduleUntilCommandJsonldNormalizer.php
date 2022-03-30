@@ -67,7 +67,7 @@ class ScheduleDeclarePipelineScheduleUntilCommandJsonldNormalizer implements Den
             $object->setEnd(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['end']));
         }
         if (\array_key_exists('user', $data)) {
-            $object->setUser($this->denormalizer->denormalize($data['user'], 'Gyroscops\\Api\\Model\\UserJsonld', 'json', $context));
+            $object->setUser($this->denormalizer->denormalize($data['user'], 'Gyroscops\\Api\\Model\\UserIdJsonld', 'json', $context));
         }
         return $object;
     }

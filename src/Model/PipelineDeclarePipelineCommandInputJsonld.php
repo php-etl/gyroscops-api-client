@@ -43,6 +43,24 @@ class PipelineDeclarePipelineCommandInputJsonld
     /**
      * 
      *
+     * @var string|null
+     */
+    protected $organization;
+    /**
+     * 
+     *
+     * @var StepInputJsonld[]
+     */
+    protected $steps;
+    /**
+     * 
+     *
+     * @var AutoloadInputJsonld[]
+     */
+    protected $autoloads;
+    /**
+     * 
+     *
      * @return mixed
      */
     public function getContext()
@@ -164,6 +182,69 @@ class PipelineDeclarePipelineCommandInputJsonld
     public function setProject(string $project) : self
     {
         $this->project = $project;
+        return $this;
+    }
+    /**
+     * 
+     *
+     * @return string|null
+     */
+    public function getOrganization() : ?string
+    {
+        return $this->organization;
+    }
+    /**
+     * 
+     *
+     * @param string|null $organization
+     *
+     * @return self
+     */
+    public function setOrganization(?string $organization) : self
+    {
+        $this->organization = $organization;
+        return $this;
+    }
+    /**
+     * 
+     *
+     * @return StepInputJsonld[]
+     */
+    public function getSteps() : array
+    {
+        return $this->steps;
+    }
+    /**
+     * 
+     *
+     * @param StepInputJsonld[] $steps
+     *
+     * @return self
+     */
+    public function setSteps(array $steps) : self
+    {
+        $this->steps = $steps;
+        return $this;
+    }
+    /**
+     * 
+     *
+     * @return AutoloadInputJsonld[]
+     */
+    public function getAutoloads() : array
+    {
+        return $this->autoloads;
+    }
+    /**
+     * 
+     *
+     * @param AutoloadInputJsonld[] $autoloads
+     *
+     * @return self
+     */
+    public function setAutoloads(array $autoloads) : self
+    {
+        $this->autoloads = $autoloads;
         return $this;
     }
 }

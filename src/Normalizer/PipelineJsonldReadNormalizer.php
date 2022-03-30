@@ -51,6 +51,15 @@ class PipelineJsonldReadNormalizer implements DenormalizerInterface, NormalizerI
         if (\array_key_exists('@type', $data)) {
             $object->setType($data['@type']);
         }
+        if (\array_key_exists('isSoftDeleted', $data)) {
+            $object->setIsSoftDeleted($data['isSoftDeleted']);
+        }
+        if (\array_key_exists('compiledAt', $data) && $data['compiledAt'] !== null) {
+            $object->setCompiledAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['compiledAt']));
+        }
+        elseif (\array_key_exists('compiledAt', $data) && $data['compiledAt'] === null) {
+            $object->setCompiledAt(null);
+        }
         if (\array_key_exists('id', $data)) {
             $object->setId2($data['id']);
         }
@@ -84,12 +93,6 @@ class PipelineJsonldReadNormalizer implements DenormalizerInterface, NormalizerI
             }
             $object->setSteps($values_2);
         }
-        if (\array_key_exists('compiledAt', $data) && $data['compiledAt'] !== null) {
-            $object->setCompiledAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['compiledAt']));
-        }
-        elseif (\array_key_exists('compiledAt', $data) && $data['compiledAt'] === null) {
-            $object->setCompiledAt(null);
-        }
         return $object;
     }
     /**
@@ -98,6 +101,12 @@ class PipelineJsonldReadNormalizer implements DenormalizerInterface, NormalizerI
     public function normalize($object, $format = null, array $context = array())
     {
         $data = array();
+        if (null !== $object->getIsSoftDeleted()) {
+            $data['isSoftDeleted'] = $object->getIsSoftDeleted();
+        }
+        if (null !== $object->getCompiledAt()) {
+            $data['compiledAt'] = $object->getCompiledAt()->format('Y-m-d\\TH:i:sP');
+        }
         $data['id'] = $object->getId2();
         $data['code'] = $object->getCode();
         $data['label'] = $object->getLabel();
@@ -118,9 +127,6 @@ class PipelineJsonldReadNormalizer implements DenormalizerInterface, NormalizerI
                 $values_2[] = $value_2;
             }
             $data['steps'] = $values_2;
-        }
-        if (null !== $object->getCompiledAt()) {
-            $data['compiledAt'] = $object->getCompiledAt()->format('Y-m-d\\TH:i:sP');
         }
         return $data;
     }

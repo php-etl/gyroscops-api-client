@@ -76,9 +76,6 @@ class OrganizationNormalizer implements DenormalizerInterface, NormalizerInterfa
             }
             $object->setProjects($values_3);
         }
-        if (\array_key_exists('organizationIdentifier', $data)) {
-            $object->setOrganizationIdentifier($data['organizationIdentifier']);
-        }
         return $object;
     }
     /**

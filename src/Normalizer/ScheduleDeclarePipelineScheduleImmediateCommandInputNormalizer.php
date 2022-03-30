@@ -45,6 +45,9 @@ class ScheduleDeclarePipelineScheduleImmediateCommandInputNormalizer implements 
         if (\array_key_exists('pipeline', $data)) {
             $object->setPipeline($data['pipeline']);
         }
+        if (\array_key_exists('organization', $data)) {
+            $object->setOrganization($data['organization']);
+        }
         return $object;
     }
     /**
@@ -55,6 +58,9 @@ class ScheduleDeclarePipelineScheduleImmediateCommandInputNormalizer implements 
         $data = array();
         if (null !== $object->getPipeline()) {
             $data['pipeline'] = $object->getPipeline();
+        }
+        if (null !== $object->getOrganization()) {
+            $data['organization'] = $object->getOrganization();
         }
         return $data;
     }

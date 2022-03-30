@@ -25,6 +25,18 @@ class PipelineJsonldRead
     /**
      * 
      *
+     * @var bool
+     */
+    protected $isSoftDeleted;
+    /**
+     * 
+     *
+     * @var \DateTime|null
+     */
+    protected $compiledAt;
+    /**
+     * 
+     *
      * @var string
      */
     protected $id2;
@@ -64,12 +76,6 @@ class PipelineJsonldRead
      * @var string[]
      */
     protected $steps;
-    /**
-     * 
-     *
-     * @var \DateTime|null
-     */
-    protected $compiledAt;
     /**
      * 
      *
@@ -131,6 +137,48 @@ class PipelineJsonldRead
     public function setType(string $type) : self
     {
         $this->type = $type;
+        return $this;
+    }
+    /**
+     * 
+     *
+     * @return bool
+     */
+    public function getIsSoftDeleted() : bool
+    {
+        return $this->isSoftDeleted;
+    }
+    /**
+     * 
+     *
+     * @param bool $isSoftDeleted
+     *
+     * @return self
+     */
+    public function setIsSoftDeleted(bool $isSoftDeleted) : self
+    {
+        $this->isSoftDeleted = $isSoftDeleted;
+        return $this;
+    }
+    /**
+     * 
+     *
+     * @return \DateTime|null
+     */
+    public function getCompiledAt() : ?\DateTime
+    {
+        return $this->compiledAt;
+    }
+    /**
+     * 
+     *
+     * @param \DateTime|null $compiledAt
+     *
+     * @return self
+     */
+    public function setCompiledAt(?\DateTime $compiledAt) : self
+    {
+        $this->compiledAt = $compiledAt;
         return $this;
     }
     /**
@@ -278,27 +326,6 @@ class PipelineJsonldRead
     public function setSteps(array $steps) : self
     {
         $this->steps = $steps;
-        return $this;
-    }
-    /**
-     * 
-     *
-     * @return \DateTime|null
-     */
-    public function getCompiledAt() : ?\DateTime
-    {
-        return $this->compiledAt;
-    }
-    /**
-     * 
-     *
-     * @param \DateTime|null $compiledAt
-     *
-     * @return self
-     */
-    public function setCompiledAt(?\DateTime $compiledAt) : self
-    {
-        $this->compiledAt = $compiledAt;
         return $this;
     }
 }

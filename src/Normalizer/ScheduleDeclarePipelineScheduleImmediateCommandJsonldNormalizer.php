@@ -58,7 +58,7 @@ class ScheduleDeclarePipelineScheduleImmediateCommandJsonldNormalizer implements
             $object->setPipeline($this->denormalizer->denormalize($data['pipeline'], 'Gyroscops\\Api\\Model\\PipelineIdJsonld', 'json', $context));
         }
         if (\array_key_exists('user', $data)) {
-            $object->setUser($this->denormalizer->denormalize($data['user'], 'Gyroscops\\Api\\Model\\UserJsonld', 'json', $context));
+            $object->setUser($this->denormalizer->denormalize($data['user'], 'Gyroscops\\Api\\Model\\UserIdJsonld', 'json', $context));
         }
         return $object;
     }

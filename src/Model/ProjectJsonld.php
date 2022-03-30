@@ -55,12 +55,6 @@ class ProjectJsonld
     /**
      * 
      *
-     * @var string
-     */
-    protected $projectIdentifier;
-    /**
-     * 
-     *
      * @return mixed
      */
     public function getContext()
@@ -224,27 +218,6 @@ class ProjectJsonld
     public function setUsers(array $users) : self
     {
         $this->users = $users;
-        return $this;
-    }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getProjectIdentifier() : string
-    {
-        return $this->projectIdentifier;
-    }
-    /**
-     * 
-     *
-     * @param string $projectIdentifier
-     *
-     * @return self
-     */
-    public function setProjectIdentifier(string $projectIdentifier) : self
-    {
-        $this->projectIdentifier = $projectIdentifier;
         return $this;
     }
 }

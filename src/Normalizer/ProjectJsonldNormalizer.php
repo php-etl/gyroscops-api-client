@@ -77,9 +77,6 @@ class ProjectJsonldNormalizer implements DenormalizerInterface, NormalizerInterf
             }
             $object->setUsers($values_1);
         }
-        if (\array_key_exists('projectIdentifier', $data)) {
-            $object->setProjectIdentifier($data['projectIdentifier']);
-        }
         return $object;
     }
     /**

@@ -52,7 +52,7 @@ class ScheduleDeclarePipelineScheduleOnceCommandNormalizer implements Denormaliz
             $object->setDate(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['date']));
         }
         if (\array_key_exists('user', $data)) {
-            $object->setUser($this->denormalizer->denormalize($data['user'], 'Gyroscops\\Api\\Model\\User', 'json', $context));
+            $object->setUser($data['user']);
         }
         return $object;
     }
@@ -72,7 +72,7 @@ class ScheduleDeclarePipelineScheduleOnceCommandNormalizer implements Denormaliz
             $data['date'] = $object->getDate()->format('Y-m-d\\TH:i:sP');
         }
         if (null !== $object->getUser()) {
-            $data['user'] = $this->normalizer->normalize($object->getUser(), 'json', $context);
+            $data['user'] = $object->getUser();
         }
         return $data;
     }

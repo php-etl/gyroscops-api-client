@@ -67,7 +67,7 @@ class ScheduleDeclarePipelineScheduleTimesCommandJsonldNormalizer implements Den
             $object->setRecurrences($data['recurrences']);
         }
         if (\array_key_exists('user', $data)) {
-            $object->setUser($this->denormalizer->denormalize($data['user'], 'Gyroscops\\Api\\Model\\UserJsonld', 'json', $context));
+            $object->setUser($this->denormalizer->denormalize($data['user'], 'Gyroscops\\Api\\Model\\UserIdJsonld', 'json', $context));
         }
         return $object;
     }

@@ -87,6 +87,12 @@ class UserJsonld
      *
      * @var string[]
      */
+    protected $additionalOrganizations;
+    /**
+     * 
+     *
+     * @var string[]
+     */
     protected $projects;
     /**
      * 
@@ -377,6 +383,27 @@ class UserJsonld
     public function setAuthorizations(array $authorizations) : self
     {
         $this->authorizations = $authorizations;
+        return $this;
+    }
+    /**
+     * 
+     *
+     * @return string[]
+     */
+    public function getAdditionalOrganizations() : array
+    {
+        return $this->additionalOrganizations;
+    }
+    /**
+     * 
+     *
+     * @param string[] $additionalOrganizations
+     *
+     * @return self
+     */
+    public function setAdditionalOrganizations(array $additionalOrganizations) : self
+    {
+        $this->additionalOrganizations = $additionalOrganizations;
         return $this;
     }
     /**

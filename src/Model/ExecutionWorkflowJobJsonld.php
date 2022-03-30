@@ -31,7 +31,7 @@ class ExecutionWorkflowJobJsonld
     /**
      * 
      *
-     * @var string
+     * @var string|null
      */
     protected $workflow;
     /**
@@ -133,20 +133,20 @@ class ExecutionWorkflowJobJsonld
     /**
      * 
      *
-     * @return string
+     * @return string|null
      */
-    public function getWorkflow() : string
+    public function getWorkflow() : ?string
     {
         return $this->workflow;
     }
     /**
      * 
      *
-     * @param string $workflow
+     * @param string|null $workflow
      *
      * @return self
      */
-    public function setWorkflow(string $workflow) : self
+    public function setWorkflow(?string $workflow) : self
     {
         $this->workflow = $workflow;
         return $this;

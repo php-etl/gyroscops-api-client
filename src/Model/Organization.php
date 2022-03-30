@@ -43,12 +43,6 @@ class Organization
     /**
      * 
      *
-     * @var string
-     */
-    protected $organizationIdentifier;
-    /**
-     * 
-     *
      * @return string
      */
     public function getId() : string
@@ -170,27 +164,6 @@ class Organization
     public function setProjects(array $projects) : self
     {
         $this->projects = $projects;
-        return $this;
-    }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getOrganizationIdentifier() : string
-    {
-        return $this->organizationIdentifier;
-    }
-    /**
-     * 
-     *
-     * @param string $organizationIdentifier
-     *
-     * @return self
-     */
-    public function setOrganizationIdentifier(string $organizationIdentifier) : self
-    {
-        $this->organizationIdentifier = $organizationIdentifier;
         return $this;
     }
 }

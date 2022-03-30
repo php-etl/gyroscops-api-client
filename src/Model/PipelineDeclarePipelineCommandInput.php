@@ -25,6 +25,24 @@ class PipelineDeclarePipelineCommandInput
     /**
      * 
      *
+     * @var string|null
+     */
+    protected $organization;
+    /**
+     * 
+     *
+     * @var StepInput[]
+     */
+    protected $steps;
+    /**
+     * 
+     *
+     * @var AutoloadInput[]
+     */
+    protected $autoloads;
+    /**
+     * 
+     *
      * @return string
      */
     public function getLabel() : string
@@ -83,6 +101,69 @@ class PipelineDeclarePipelineCommandInput
     public function setProject(string $project) : self
     {
         $this->project = $project;
+        return $this;
+    }
+    /**
+     * 
+     *
+     * @return string|null
+     */
+    public function getOrganization() : ?string
+    {
+        return $this->organization;
+    }
+    /**
+     * 
+     *
+     * @param string|null $organization
+     *
+     * @return self
+     */
+    public function setOrganization(?string $organization) : self
+    {
+        $this->organization = $organization;
+        return $this;
+    }
+    /**
+     * 
+     *
+     * @return StepInput[]
+     */
+    public function getSteps() : array
+    {
+        return $this->steps;
+    }
+    /**
+     * 
+     *
+     * @param StepInput[] $steps
+     *
+     * @return self
+     */
+    public function setSteps(array $steps) : self
+    {
+        $this->steps = $steps;
+        return $this;
+    }
+    /**
+     * 
+     *
+     * @return AutoloadInput[]
+     */
+    public function getAutoloads() : array
+    {
+        return $this->autoloads;
+    }
+    /**
+     * 
+     *
+     * @param AutoloadInput[] $autoloads
+     *
+     * @return self
+     */
+    public function setAutoloads(array $autoloads) : self
+    {
+        $this->autoloads = $autoloads;
         return $this;
     }
 }

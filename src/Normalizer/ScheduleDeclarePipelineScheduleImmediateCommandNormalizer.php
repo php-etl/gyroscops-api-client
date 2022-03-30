@@ -49,7 +49,7 @@ class ScheduleDeclarePipelineScheduleImmediateCommandNormalizer implements Denor
             $object->setPipeline($data['pipeline']);
         }
         if (\array_key_exists('user', $data)) {
-            $object->setUser($this->denormalizer->denormalize($data['user'], 'Gyroscops\\Api\\Model\\User', 'json', $context));
+            $object->setUser($data['user']);
         }
         return $object;
     }
@@ -66,7 +66,7 @@ class ScheduleDeclarePipelineScheduleImmediateCommandNormalizer implements Denor
             $data['pipeline'] = $object->getPipeline();
         }
         if (null !== $object->getUser()) {
-            $data['user'] = $this->normalizer->normalize($object->getUser(), 'json', $context);
+            $data['user'] = $object->getUser();
         }
         return $data;
     }

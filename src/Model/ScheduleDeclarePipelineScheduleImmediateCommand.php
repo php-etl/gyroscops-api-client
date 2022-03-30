@@ -19,7 +19,7 @@ class ScheduleDeclarePipelineScheduleImmediateCommand
     /**
      * 
      *
-     * @var User
+     * @var mixed
      */
     protected $user;
     /**
@@ -67,20 +67,20 @@ class ScheduleDeclarePipelineScheduleImmediateCommand
     /**
      * 
      *
-     * @return User
+     * @return mixed
      */
-    public function getUser() : User
+    public function getUser()
     {
         return $this->user;
     }
     /**
      * 
      *
-     * @param User $user
+     * @param mixed $user
      *
      * @return self
      */
-    public function setUser(User $user) : self
+    public function setUser($user) : self
     {
         $this->user = $user;
         return $this;

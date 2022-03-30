@@ -49,43 +49,43 @@ class ExecutionJsonldRead
     /**
      * 
      *
-     * @var string|null
+     * @var \DateTime|null
      */
     protected $scheduledAt;
     /**
      * 
      *
-     * @var string|null
+     * @var \DateTime|null
      */
     protected $startedAt;
     /**
      * 
      *
-     * @var string|null
+     * @var \DateTime|null
      */
     protected $finishedAt;
     /**
      * 
      *
-     * @var string|null
+     * @var \DateTime|null
      */
     protected $interruptedAt;
     /**
      * 
      *
-     * @var string|null
+     * @var \DateTime|null
      */
     protected $resumedAt;
     /**
      * 
      *
-     * @var string|null
+     * @var \DateTime|null
      */
     protected $updatedAt;
     /**
      * 
      *
-     * @var string|null
+     * @var \DateTime|null
      */
     protected $terminatedAt;
     /**
@@ -262,20 +262,20 @@ class ExecutionJsonldRead
     /**
      * 
      *
-     * @return string|null
+     * @return \DateTime|null
      */
-    public function getScheduledAt() : ?string
+    public function getScheduledAt() : ?\DateTime
     {
         return $this->scheduledAt;
     }
     /**
      * 
      *
-     * @param string|null $scheduledAt
+     * @param \DateTime|null $scheduledAt
      *
      * @return self
      */
-    public function setScheduledAt(?string $scheduledAt) : self
+    public function setScheduledAt(?\DateTime $scheduledAt) : self
     {
         $this->scheduledAt = $scheduledAt;
         return $this;
@@ -283,20 +283,20 @@ class ExecutionJsonldRead
     /**
      * 
      *
-     * @return string|null
+     * @return \DateTime|null
      */
-    public function getStartedAt() : ?string
+    public function getStartedAt() : ?\DateTime
     {
         return $this->startedAt;
     }
     /**
      * 
      *
-     * @param string|null $startedAt
+     * @param \DateTime|null $startedAt
      *
      * @return self
      */
-    public function setStartedAt(?string $startedAt) : self
+    public function setStartedAt(?\DateTime $startedAt) : self
     {
         $this->startedAt = $startedAt;
         return $this;
@@ -304,20 +304,20 @@ class ExecutionJsonldRead
     /**
      * 
      *
-     * @return string|null
+     * @return \DateTime|null
      */
-    public function getFinishedAt() : ?string
+    public function getFinishedAt() : ?\DateTime
     {
         return $this->finishedAt;
     }
     /**
      * 
      *
-     * @param string|null $finishedAt
+     * @param \DateTime|null $finishedAt
      *
      * @return self
      */
-    public function setFinishedAt(?string $finishedAt) : self
+    public function setFinishedAt(?\DateTime $finishedAt) : self
     {
         $this->finishedAt = $finishedAt;
         return $this;
@@ -325,20 +325,20 @@ class ExecutionJsonldRead
     /**
      * 
      *
-     * @return string|null
+     * @return \DateTime|null
      */
-    public function getInterruptedAt() : ?string
+    public function getInterruptedAt() : ?\DateTime
     {
         return $this->interruptedAt;
     }
     /**
      * 
      *
-     * @param string|null $interruptedAt
+     * @param \DateTime|null $interruptedAt
      *
      * @return self
      */
-    public function setInterruptedAt(?string $interruptedAt) : self
+    public function setInterruptedAt(?\DateTime $interruptedAt) : self
     {
         $this->interruptedAt = $interruptedAt;
         return $this;
@@ -346,20 +346,20 @@ class ExecutionJsonldRead
     /**
      * 
      *
-     * @return string|null
+     * @return \DateTime|null
      */
-    public function getResumedAt() : ?string
+    public function getResumedAt() : ?\DateTime
     {
         return $this->resumedAt;
     }
     /**
      * 
      *
-     * @param string|null $resumedAt
+     * @param \DateTime|null $resumedAt
      *
      * @return self
      */
-    public function setResumedAt(?string $resumedAt) : self
+    public function setResumedAt(?\DateTime $resumedAt) : self
     {
         $this->resumedAt = $resumedAt;
         return $this;
@@ -367,20 +367,20 @@ class ExecutionJsonldRead
     /**
      * 
      *
-     * @return string|null
+     * @return \DateTime|null
      */
-    public function getUpdatedAt() : ?string
+    public function getUpdatedAt() : ?\DateTime
     {
         return $this->updatedAt;
     }
     /**
      * 
      *
-     * @param string|null $updatedAt
+     * @param \DateTime|null $updatedAt
      *
      * @return self
      */
-    public function setUpdatedAt(?string $updatedAt) : self
+    public function setUpdatedAt(?\DateTime $updatedAt) : self
     {
         $this->updatedAt = $updatedAt;
         return $this;
@@ -388,20 +388,20 @@ class ExecutionJsonldRead
     /**
      * 
      *
-     * @return string|null
+     * @return \DateTime|null
      */
-    public function getTerminatedAt() : ?string
+    public function getTerminatedAt() : ?\DateTime
     {
         return $this->terminatedAt;
     }
     /**
      * 
      *
-     * @param string|null $terminatedAt
+     * @param \DateTime|null $terminatedAt
      *
      * @return self
      */
-    public function setTerminatedAt(?string $terminatedAt) : self
+    public function setTerminatedAt(?\DateTime $terminatedAt) : self
     {
         $this->terminatedAt = $terminatedAt;
         return $this;

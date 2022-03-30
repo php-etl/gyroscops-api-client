@@ -55,43 +55,43 @@ class ExecutionReadNormalizer implements DenormalizerInterface, NormalizerInterf
             $object->setErrors($data['errors']);
         }
         if (\array_key_exists('scheduledAt', $data) && $data['scheduledAt'] !== null) {
-            $object->setScheduledAt($data['scheduledAt']);
+            $object->setScheduledAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['scheduledAt']));
         }
         elseif (\array_key_exists('scheduledAt', $data) && $data['scheduledAt'] === null) {
             $object->setScheduledAt(null);
         }
         if (\array_key_exists('startedAt', $data) && $data['startedAt'] !== null) {
-            $object->setStartedAt($data['startedAt']);
+            $object->setStartedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['startedAt']));
         }
         elseif (\array_key_exists('startedAt', $data) && $data['startedAt'] === null) {
             $object->setStartedAt(null);
         }
         if (\array_key_exists('finishedAt', $data) && $data['finishedAt'] !== null) {
-            $object->setFinishedAt($data['finishedAt']);
+            $object->setFinishedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['finishedAt']));
         }
         elseif (\array_key_exists('finishedAt', $data) && $data['finishedAt'] === null) {
             $object->setFinishedAt(null);
         }
         if (\array_key_exists('interruptedAt', $data) && $data['interruptedAt'] !== null) {
-            $object->setInterruptedAt($data['interruptedAt']);
+            $object->setInterruptedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['interruptedAt']));
         }
         elseif (\array_key_exists('interruptedAt', $data) && $data['interruptedAt'] === null) {
             $object->setInterruptedAt(null);
         }
         if (\array_key_exists('resumedAt', $data) && $data['resumedAt'] !== null) {
-            $object->setResumedAt($data['resumedAt']);
+            $object->setResumedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['resumedAt']));
         }
         elseif (\array_key_exists('resumedAt', $data) && $data['resumedAt'] === null) {
             $object->setResumedAt(null);
         }
         if (\array_key_exists('updatedAt', $data) && $data['updatedAt'] !== null) {
-            $object->setUpdatedAt($data['updatedAt']);
+            $object->setUpdatedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['updatedAt']));
         }
         elseif (\array_key_exists('updatedAt', $data) && $data['updatedAt'] === null) {
             $object->setUpdatedAt(null);
         }
         if (\array_key_exists('terminatedAt', $data) && $data['terminatedAt'] !== null) {
-            $object->setTerminatedAt($data['terminatedAt']);
+            $object->setTerminatedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['terminatedAt']));
         }
         elseif (\array_key_exists('terminatedAt', $data) && $data['terminatedAt'] === null) {
             $object->setTerminatedAt(null);
@@ -132,24 +132,24 @@ class ExecutionReadNormalizer implements DenormalizerInterface, NormalizerInterf
         $data['code'] = $object->getCode();
         $data['status'] = $object->getStatus();
         $data['errors'] = $object->getErrors();
-        $data['scheduledAt'] = $object->getScheduledAt();
+        $data['scheduledAt'] = $object->getScheduledAt()->format('Y-m-d\\TH:i:sP');
         if (null !== $object->getStartedAt()) {
-            $data['startedAt'] = $object->getStartedAt();
+            $data['startedAt'] = $object->getStartedAt()->format('Y-m-d\\TH:i:sP');
         }
         if (null !== $object->getFinishedAt()) {
-            $data['finishedAt'] = $object->getFinishedAt();
+            $data['finishedAt'] = $object->getFinishedAt()->format('Y-m-d\\TH:i:sP');
         }
         if (null !== $object->getInterruptedAt()) {
-            $data['interruptedAt'] = $object->getInterruptedAt();
+            $data['interruptedAt'] = $object->getInterruptedAt()->format('Y-m-d\\TH:i:sP');
         }
         if (null !== $object->getResumedAt()) {
-            $data['resumedAt'] = $object->getResumedAt();
+            $data['resumedAt'] = $object->getResumedAt()->format('Y-m-d\\TH:i:sP');
         }
         if (null !== $object->getUpdatedAt()) {
-            $data['updatedAt'] = $object->getUpdatedAt();
+            $data['updatedAt'] = $object->getUpdatedAt()->format('Y-m-d\\TH:i:sP');
         }
         if (null !== $object->getTerminatedAt()) {
-            $data['terminatedAt'] = $object->getTerminatedAt();
+            $data['terminatedAt'] = $object->getTerminatedAt()->format('Y-m-d\\TH:i:sP');
         }
         $data['reason'] = $object->getReason();
         $data['pipeline'] = $object->getPipeline();

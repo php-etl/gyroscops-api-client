@@ -61,12 +61,6 @@ class OrganizationJsonld
     /**
      * 
      *
-     * @var string
-     */
-    protected $organizationIdentifier;
-    /**
-     * 
-     *
      * @return mixed
      */
     public function getContext()
@@ -251,27 +245,6 @@ class OrganizationJsonld
     public function setProjects(array $projects) : self
     {
         $this->projects = $projects;
-        return $this;
-    }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getOrganizationIdentifier() : string
-    {
-        return $this->organizationIdentifier;
-    }
-    /**
-     * 
-     *
-     * @param string $organizationIdentifier
-     *
-     * @return self
-     */
-    public function setOrganizationIdentifier(string $organizationIdentifier) : self
-    {
-        $this->organizationIdentifier = $organizationIdentifier;
         return $this;
     }
 }

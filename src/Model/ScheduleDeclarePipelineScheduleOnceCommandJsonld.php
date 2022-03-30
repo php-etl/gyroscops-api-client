@@ -43,7 +43,7 @@ class ScheduleDeclarePipelineScheduleOnceCommandJsonld
     /**
      * 
      *
-     * @var UserJsonld
+     * @var UserIdJsonld
      */
     protected $user;
     /**
@@ -175,20 +175,20 @@ class ScheduleDeclarePipelineScheduleOnceCommandJsonld
     /**
      * 
      *
-     * @return UserJsonld
+     * @return UserIdJsonld
      */
-    public function getUser() : UserJsonld
+    public function getUser() : UserIdJsonld
     {
         return $this->user;
     }
     /**
      * 
      *
-     * @param UserJsonld $user
+     * @param UserIdJsonld $user
      *
      * @return self
      */
-    public function setUser(UserJsonld $user) : self
+    public function setUser(UserIdJsonld $user) : self
     {
         $this->user = $user;
         return $this;

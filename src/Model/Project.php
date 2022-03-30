@@ -37,12 +37,6 @@ class Project
     /**
      * 
      *
-     * @var string
-     */
-    protected $projectIdentifier;
-    /**
-     * 
-     *
      * @return string
      */
     public function getId() : string
@@ -143,27 +137,6 @@ class Project
     public function setUsers(array $users) : self
     {
         $this->users = $users;
-        return $this;
-    }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getProjectIdentifier() : string
-    {
-        return $this->projectIdentifier;
-    }
-    /**
-     * 
-     *
-     * @param string $projectIdentifier
-     *
-     * @return self
-     */
-    public function setProjectIdentifier(string $projectIdentifier) : self
-    {
-        $this->projectIdentifier = $projectIdentifier;
         return $this;
     }
 }

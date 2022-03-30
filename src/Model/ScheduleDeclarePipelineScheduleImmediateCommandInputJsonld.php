@@ -31,6 +31,12 @@ class ScheduleDeclarePipelineScheduleImmediateCommandInputJsonld
     /**
      * 
      *
+     * @var string
+     */
+    protected $organization;
+    /**
+     * 
+     *
      * @return mixed
      */
     public function getContext()
@@ -110,6 +116,27 @@ class ScheduleDeclarePipelineScheduleImmediateCommandInputJsonld
     public function setPipeline(string $pipeline) : self
     {
         $this->pipeline = $pipeline;
+        return $this;
+    }
+    /**
+     * 
+     *
+     * @return string
+     */
+    public function getOrganization() : string
+    {
+        return $this->organization;
+    }
+    /**
+     * 
+     *
+     * @param string $organization
+     *
+     * @return self
+     */
+    public function setOrganization(string $organization) : self
+    {
+        $this->organization = $organization;
         return $this;
     }
 }
