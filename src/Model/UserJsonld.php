@@ -97,6 +97,18 @@ class UserJsonld
     /**
      * 
      *
+     * @var string[]
+     */
+    protected $referralCodes;
+    /**
+     * 
+     *
+     * @var string[]
+     */
+    protected $acceptedReferralRequests;
+    /**
+     * 
+     *
      * @var string
      */
     protected $userIdentifier;
@@ -425,6 +437,48 @@ class UserJsonld
     public function setProjects(array $projects) : self
     {
         $this->projects = $projects;
+        return $this;
+    }
+    /**
+     * 
+     *
+     * @return string[]
+     */
+    public function getReferralCodes() : array
+    {
+        return $this->referralCodes;
+    }
+    /**
+     * 
+     *
+     * @param string[] $referralCodes
+     *
+     * @return self
+     */
+    public function setReferralCodes(array $referralCodes) : self
+    {
+        $this->referralCodes = $referralCodes;
+        return $this;
+    }
+    /**
+     * 
+     *
+     * @return string[]
+     */
+    public function getAcceptedReferralRequests() : array
+    {
+        return $this->acceptedReferralRequests;
+    }
+    /**
+     * 
+     *
+     * @param string[] $acceptedReferralRequests
+     *
+     * @return self
+     */
+    public function setAcceptedReferralRequests(array $acceptedReferralRequests) : self
+    {
+        $this->acceptedReferralRequests = $acceptedReferralRequests;
         return $this;
     }
     /**

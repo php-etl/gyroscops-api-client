@@ -94,6 +94,20 @@ class UserNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
             }
             $object->setProjects($values_3);
         }
+        if (\array_key_exists('referralCodes', $data)) {
+            $values_4 = array();
+            foreach ($data['referralCodes'] as $value_4) {
+                $values_4[] = $value_4;
+            }
+            $object->setReferralCodes($values_4);
+        }
+        if (\array_key_exists('acceptedReferralRequests', $data)) {
+            $values_5 = array();
+            foreach ($data['acceptedReferralRequests'] as $value_5) {
+                $values_5[] = $value_5;
+            }
+            $object->setAcceptedReferralRequests($values_5);
+        }
         if (\array_key_exists('userIdentifier', $data)) {
             $object->setUserIdentifier($data['userIdentifier']);
         }
@@ -101,11 +115,11 @@ class UserNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
             $object->setSalt($data['salt']);
         }
         if (\array_key_exists('project', $data)) {
-            $values_4 = array();
-            foreach ($data['project'] as $value_4) {
-                $values_4[] = $value_4;
+            $values_6 = array();
+            foreach ($data['project'] as $value_6) {
+                $values_6[] = $value_6;
             }
-            $object->setProject($values_4);
+            $object->setProject($values_6);
         }
         return $object;
     }

@@ -45,7 +45,7 @@ class ReferralRequestsGetResponse200Normalizer implements DenormalizerInterface,
         if (\array_key_exists('hydra:member', $data)) {
             $values = array();
             foreach ($data['hydra:member'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'Gyroscops\\Api\\Model\\ReferralRequestJsonld', 'json', $context);
+                $values[] = $this->denormalizer->denormalize($value, 'Gyroscops\\Api\\Model\\ReferralRequestJsonldReferralRequestRead', 'json', $context);
             }
             $object->setHydraMember($values);
         }

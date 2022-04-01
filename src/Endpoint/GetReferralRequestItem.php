@@ -36,12 +36,12 @@ class GetReferralRequestItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
      *
      * @throws \Gyroscops\Api\Exception\GetReferralRequestItemNotFoundException
      *
-     * @return null|\Gyroscops\Api\Model\ReferralRequest
+     * @return null|\Gyroscops\Api\Model\ReferralRequestReferralRequestRead
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ReferralRequest', 'json');
+            return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ReferralRequestReferralRequestRead', 'json');
         }
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\GetReferralRequestItemNotFoundException();

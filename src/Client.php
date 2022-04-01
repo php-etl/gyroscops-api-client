@@ -532,6 +532,60 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PostForgotPasswordToken($token, $requestBody), $fetch);
     }
     /**
+     * Retrieves the collection of ReferralCode resources.
+     *
+     * @param array $queryParameters {
+     *     @var int $page The collection page number
+     * }
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return null|\Gyroscops\Api\Model\ReferralCodeReferralCodeRead[]|\Psr\Http\Message\ResponseInterface
+     */
+    public function getReferralCodeCollection(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\GetReferralCodeCollection($queryParameters), $fetch);
+    }
+    /**
+     * Creates a ReferralCode resource.
+     *
+     * @param \Gyroscops\Api\Model\ReferralCodeJsonldReferralCodeWrite|\Gyroscops\Api\Model\ReferralCodeReferralCodeWrite $requestBody 
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     * @throws \Gyroscops\Api\Exception\PostReferralCodeCollectionBadRequestException
+     * @throws \Gyroscops\Api\Exception\PostReferralCodeCollectionUnprocessableEntityException
+     *
+     * @return null|\Gyroscops\Api\Model\ReferralCodeReferralCodeRead|\Psr\Http\Message\ResponseInterface
+     */
+    public function postReferralCodeCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PostReferralCodeCollection($requestBody), $fetch);
+    }
+    /**
+     * Removes the ReferralCode resource.
+     *
+     * @param string $id Resource identifier
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     * @throws \Gyroscops\Api\Exception\DeleteReferralCodeItemNotFoundException
+     *
+     * @return null|\Psr\Http\Message\ResponseInterface
+     */
+    public function deleteReferralCodeItem(string $id, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\DeleteReferralCodeItem($id), $fetch);
+    }
+    /**
+     * Retrieves a ReferralCode resource.
+     *
+     * @param string $id Resource identifier
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     * @throws \Gyroscops\Api\Exception\GetReferralCodeItemNotFoundException
+     *
+     * @return null|\Gyroscops\Api\Model\ReferralCodeReferralCodeRead|\Psr\Http\Message\ResponseInterface
+     */
+    public function getReferralCodeItem(string $id, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\GetReferralCodeItem($id), $fetch);
+    }
+    /**
      * Retrieves the collection of ReferralRequest resources.
      *
      * @param array $queryParameters {
@@ -539,7 +593,7 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * }
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return null|\Gyroscops\Api\Model\ReferralRequest[]|\Psr\Http\Message\ResponseInterface
+     * @return null|\Gyroscops\Api\Model\ReferralRequestReferralRequestRead[]|\Psr\Http\Message\ResponseInterface
      */
     public function getReferralRequestCollection(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
@@ -548,12 +602,12 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Creates a ReferralRequest resource.
      *
-     * @param \Gyroscops\Api\Model\ReferralRequestJsonld|\Gyroscops\Api\Model\ReferralRequest $requestBody 
+     * @param \Gyroscops\Api\Model\ReferralRequestReferralRequestInputJsonld|\Gyroscops\Api\Model\ReferralRequestReferralRequestInput $requestBody 
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Gyroscops\Api\Exception\PostReferralRequestCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostReferralRequestCollectionUnprocessableEntityException
      *
-     * @return null|\Gyroscops\Api\Model\ReferralRequest|\Psr\Http\Message\ResponseInterface
+     * @return null|\Gyroscops\Api\Model\ReferralRequestReferralRequestRead|\Psr\Http\Message\ResponseInterface
      */
     public function postReferralRequestCollection($requestBody, string $fetch = self::FETCH_OBJECT)
     {
@@ -566,27 +620,43 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Gyroscops\Api\Exception\GetReferralRequestItemNotFoundException
      *
-     * @return null|\Gyroscops\Api\Model\ReferralRequest|\Psr\Http\Message\ResponseInterface
+     * @return null|\Gyroscops\Api\Model\ReferralRequestReferralRequestRead|\Psr\Http\Message\ResponseInterface
      */
     public function getReferralRequestItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\GetReferralRequestItem($id), $fetch);
     }
     /**
-     * Updates the ReferralRequest resource.
+     * Accepts a referral request
      *
      * @param string $id Resource identifier
-     * @param \Gyroscops\Api\Model\ReferralRequest $requestBody 
+     * @param null $requestBody 
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     * @throws \Gyroscops\Api\Exception\PatchReferralReferralRequestItemBadRequestException
-     * @throws \Gyroscops\Api\Exception\PatchReferralReferralRequestItemUnprocessableEntityException
-     * @throws \Gyroscops\Api\Exception\PatchReferralReferralRequestItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\AcceptReferralRequestReferralRequestItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\AcceptReferralRequestReferralRequestItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\AcceptReferralRequestReferralRequestItemNotFoundException
      *
-     * @return null|\Gyroscops\Api\Model\ReferralRequest|\Psr\Http\Message\ResponseInterface
+     * @return null|\Gyroscops\Api\Model\ReferralRequestReferralRequestRead|\Psr\Http\Message\ResponseInterface
      */
-    public function patchReferralReferralRequestItem(string $id, \Gyroscops\Api\Model\ReferralRequest $requestBody, string $fetch = self::FETCH_OBJECT)
+    public function acceptReferralRequestReferralRequestItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PatchReferralReferralRequestItem($id, $requestBody), $fetch);
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\AcceptReferralRequestReferralRequestItem($id, $requestBody), $fetch);
+    }
+    /**
+     * Rejects a referral request
+     *
+     * @param string $id Resource identifier
+     * @param null $requestBody 
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     * @throws \Gyroscops\Api\Exception\RejectReferralRequestReferralRequestItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\RejectReferralRequestReferralRequestItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\RejectReferralRequestReferralRequestItemNotFoundException
+     *
+     * @return null|\Gyroscops\Api\Model\ReferralRequestReferralRequestRead|\Psr\Http\Message\ResponseInterface
+     */
+    public function rejectReferralRequestReferralRequestItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\RejectReferralRequestReferralRequestItem($id, $requestBody), $fetch);
     }
     /**
      * Retrieves a Action resource.

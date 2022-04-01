@@ -7,7 +7,7 @@ class ReferralRequestsGetResponse200
     /**
      * 
      *
-     * @var ReferralRequestJsonld[]
+     * @var ReferralRequestJsonldReferralRequestRead[]
      */
     protected $hydraMember;
     /**
@@ -31,7 +31,7 @@ class ReferralRequestsGetResponse200
     /**
      * 
      *
-     * @return ReferralRequestJsonld[]
+     * @return ReferralRequestJsonldReferralRequestRead[]
      */
     public function getHydraMember() : array
     {
@@ -40,7 +40,7 @@ class ReferralRequestsGetResponse200
     /**
      * 
      *
-     * @param ReferralRequestJsonld[] $hydraMember
+     * @param ReferralRequestJsonldReferralRequestRead[] $hydraMember
      *
      * @return self
      */
