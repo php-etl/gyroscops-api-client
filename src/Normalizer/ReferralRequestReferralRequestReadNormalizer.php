@@ -1,36 +1,49 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Normalizer;
 
-use Jane\Component\JsonSchemaRuntime\Reference;
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
-use Symfony\Component\Serializer\Exception\InvalidArgumentException;
+use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+
 class ReferralRequestReferralRequestReadNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+
     /**
+     * @param mixed      $data
+     * @param mixed      $type
+     * @param mixed|null $format
+     *
      * @return bool
      */
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return $type === 'Gyroscops\\Api\\Model\\ReferralRequestReferralRequestRead';
+        return 'Gyroscops\\Api\\Model\\ReferralRequestReferralRequestRead' === $type;
     }
+
     public function supportsNormalization($data, $format = null)
     {
-        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\ReferralRequestReferralRequestRead';
+        return \is_object($data) && 'Gyroscops\\Api\\Model\\ReferralRequestReferralRequestRead' === $data::class;
     }
+
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize($data, $class, $format = null, array $context = [])
     {
         if (isset($data['$ref'])) {
             return new Reference($data['$ref'], $context['document-origin']);
@@ -63,29 +76,32 @@ class ReferralRequestReferralRequestReadNormalizer implements DenormalizerInterf
         if (\array_key_exists('creationDate', $data)) {
             $object->setCreationDate(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['creationDate']));
         }
-        if (\array_key_exists('referralCode', $data) && $data['referralCode'] !== null) {
+        if (\array_key_exists('referralCode', $data) && null !== $data['referralCode']) {
             $object->setReferralCode($data['referralCode']);
-        }
-        elseif (\array_key_exists('referralCode', $data) && $data['referralCode'] === null) {
+        } elseif (\array_key_exists('referralCode', $data) && null === $data['referralCode']) {
             $object->setReferralCode(null);
         }
-        if (\array_key_exists('approver', $data) && $data['approver'] !== null) {
+        if (\array_key_exists('approver', $data) && null !== $data['approver']) {
             $object->setApprover($data['approver']);
-        }
-        elseif (\array_key_exists('approver', $data) && $data['approver'] === null) {
+        } elseif (\array_key_exists('approver', $data) && null === $data['approver']) {
             $object->setApprover(null);
         }
         if (\array_key_exists('status', $data)) {
             $object->setStatus($data['status']);
         }
+
         return $object;
     }
+
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize($object, $format = null, array $context = [])
     {
-        $data = array();
+        $data = [];
         $data['email'] = $object->getEmail();
         $data['firstName'] = $object->getFirstName();
         $data['lastName'] = $object->getLastName();
@@ -103,6 +119,7 @@ class ReferralRequestReferralRequestReadNormalizer implements DenormalizerInterf
         if (null !== $object->getStatus()) {
             $data['status'] = $object->getStatus();
         }
+
         return $data;
     }
 }

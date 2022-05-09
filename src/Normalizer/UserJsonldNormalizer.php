@@ -1,36 +1,49 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Normalizer;
 
-use Jane\Component\JsonSchemaRuntime\Reference;
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
-use Symfony\Component\Serializer\Exception\InvalidArgumentException;
+use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+
 class UserJsonldNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+
     /**
+     * @param mixed      $data
+     * @param mixed      $type
+     * @param mixed|null $format
+     *
      * @return bool
      */
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return $type === 'Gyroscops\\Api\\Model\\UserJsonld';
+        return 'Gyroscops\\Api\\Model\\UserJsonld' === $type;
     }
+
     public function supportsNormalization($data, $format = null)
     {
-        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\UserJsonld';
+        return \is_object($data) && 'Gyroscops\\Api\\Model\\UserJsonld' === $data::class;
     }
+
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize($data, $class, $format = null, array $context = [])
     {
         if (isset($data['$ref'])) {
             return new Reference($data['$ref'], $context['document-origin']);
@@ -73,7 +86,7 @@ class UserJsonldNormalizer implements DenormalizerInterface, NormalizerInterface
             $object->setEnabled($data['enabled']);
         }
         if (\array_key_exists('roles', $data)) {
-            $values = array();
+            $values = [];
             foreach ($data['roles'] as $value) {
                 $values[] = $value;
             }
@@ -83,35 +96,35 @@ class UserJsonldNormalizer implements DenormalizerInterface, NormalizerInterface
             $object->setOrganization($data['organization']);
         }
         if (\array_key_exists('authorizations', $data)) {
-            $values_1 = array();
+            $values_1 = [];
             foreach ($data['authorizations'] as $value_1) {
                 $values_1[] = $value_1;
             }
             $object->setAuthorizations($values_1);
         }
         if (\array_key_exists('additionalOrganizations', $data)) {
-            $values_2 = array();
+            $values_2 = [];
             foreach ($data['additionalOrganizations'] as $value_2) {
                 $values_2[] = $value_2;
             }
             $object->setAdditionalOrganizations($values_2);
         }
         if (\array_key_exists('projects', $data)) {
-            $values_3 = array();
+            $values_3 = [];
             foreach ($data['projects'] as $value_3) {
                 $values_3[] = $value_3;
             }
             $object->setProjects($values_3);
         }
         if (\array_key_exists('referralCodes', $data)) {
-            $values_4 = array();
+            $values_4 = [];
             foreach ($data['referralCodes'] as $value_4) {
                 $values_4[] = $value_4;
             }
             $object->setReferralCodes($values_4);
         }
         if (\array_key_exists('acceptedReferralRequests', $data)) {
-            $values_5 = array();
+            $values_5 = [];
             foreach ($data['acceptedReferralRequests'] as $value_5) {
                 $values_5[] = $value_5;
             }
@@ -124,20 +137,25 @@ class UserJsonldNormalizer implements DenormalizerInterface, NormalizerInterface
             $object->setSalt($data['salt']);
         }
         if (\array_key_exists('project', $data)) {
-            $values_6 = array();
+            $values_6 = [];
             foreach ($data['project'] as $value_6) {
                 $values_6[] = $value_6;
             }
             $object->setProject($values_6);
         }
+
         return $object;
     }
+
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize($object, $format = null, array $context = [])
     {
-        $data = array();
+        $data = [];
         $data['firstName'] = $object->getFirstName();
         $data['lastName'] = $object->getLastName();
         $data['username'] = $object->getUsername();
@@ -151,7 +169,7 @@ class UserJsonldNormalizer implements DenormalizerInterface, NormalizerInterface
             $data['enabled'] = $object->getEnabled();
         }
         if (null !== $object->getRoles()) {
-            $values = array();
+            $values = [];
             foreach ($object->getRoles() as $value) {
                 $values[] = $value;
             }
@@ -161,26 +179,27 @@ class UserJsonldNormalizer implements DenormalizerInterface, NormalizerInterface
             $data['organization'] = $object->getOrganization();
         }
         if (null !== $object->getAuthorizations()) {
-            $values_1 = array();
+            $values_1 = [];
             foreach ($object->getAuthorizations() as $value_1) {
                 $values_1[] = $value_1;
             }
             $data['authorizations'] = $values_1;
         }
         if (null !== $object->getProjects()) {
-            $values_2 = array();
+            $values_2 = [];
             foreach ($object->getProjects() as $value_2) {
                 $values_2[] = $value_2;
             }
             $data['projects'] = $values_2;
         }
         if (null !== $object->getProject()) {
-            $values_3 = array();
+            $values_3 = [];
             foreach ($object->getProject() as $value_3) {
                 $values_3[] = $value_3;
             }
             $data['project'] = $values_3;
         }
+
         return $data;
     }
 }
