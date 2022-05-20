@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Gyroscops\Api\Exception;
 
 class DeletePipelinePipelineItemNotFoundException extends NotFoundException

@@ -1,171 +1,250 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Gyroscops\Api\Model;
 
 class PipelineRead
 {
     /**
+     * 
+     *
      * @var bool
      */
     protected $isSoftDeleted;
     /**
+     * 
+     *
      * @var \DateTime|null
      */
     protected $compiledAt;
     /**
+     * 
+     *
      * @var string
      */
     protected $id;
     /**
+     * 
+     *
      * @var string
      */
     protected $code;
     /**
+     * 
+     *
      * @var string
      */
     protected $label;
     /**
+     * 
+     *
      * @var string
      */
     protected $runtimeType;
     /**
+     * 
+     *
      * @var string[]
      */
     protected $runtime;
     /**
+     * 
+     *
      * @var string[]
      */
     protected $autoload;
     /**
+     * 
+     *
      * @var string[]
      */
     protected $steps;
-
-    public function getIsSoftDeleted(): bool
+    /**
+     * 
+     *
+     * @return bool
+     */
+    public function getIsSoftDeleted() : bool
     {
         return $this->isSoftDeleted;
     }
-
-    public function setIsSoftDeleted(bool $isSoftDeleted): self
+    /**
+     * 
+     *
+     * @param bool $isSoftDeleted
+     *
+     * @return self
+     */
+    public function setIsSoftDeleted(bool $isSoftDeleted) : self
     {
         $this->isSoftDeleted = $isSoftDeleted;
-
         return $this;
     }
-
-    public function getCompiledAt(): ?\DateTime
+    /**
+     * 
+     *
+     * @return \DateTime|null
+     */
+    public function getCompiledAt() : ?\DateTime
     {
         return $this->compiledAt;
     }
-
-    public function setCompiledAt(?\DateTime $compiledAt): self
+    /**
+     * 
+     *
+     * @param \DateTime|null $compiledAt
+     *
+     * @return self
+     */
+    public function setCompiledAt(?\DateTime $compiledAt) : self
     {
         $this->compiledAt = $compiledAt;
-
         return $this;
     }
-
-    public function getId(): string
+    /**
+     * 
+     *
+     * @return string
+     */
+    public function getId() : string
     {
         return $this->id;
     }
-
-    public function setId(string $id): self
+    /**
+     * 
+     *
+     * @param string $id
+     *
+     * @return self
+     */
+    public function setId(string $id) : self
     {
         $this->id = $id;
-
         return $this;
     }
-
-    public function getCode(): string
+    /**
+     * 
+     *
+     * @return string
+     */
+    public function getCode() : string
     {
         return $this->code;
     }
-
-    public function setCode(string $code): self
+    /**
+     * 
+     *
+     * @param string $code
+     *
+     * @return self
+     */
+    public function setCode(string $code) : self
     {
         $this->code = $code;
-
         return $this;
     }
-
-    public function getLabel(): string
+    /**
+     * 
+     *
+     * @return string
+     */
+    public function getLabel() : string
     {
         return $this->label;
     }
-
-    public function setLabel(string $label): self
+    /**
+     * 
+     *
+     * @param string $label
+     *
+     * @return self
+     */
+    public function setLabel(string $label) : self
     {
         $this->label = $label;
-
         return $this;
     }
-
-    public function getRuntimeType(): string
+    /**
+     * 
+     *
+     * @return string
+     */
+    public function getRuntimeType() : string
     {
         return $this->runtimeType;
     }
-
-    public function setRuntimeType(string $runtimeType): self
+    /**
+     * 
+     *
+     * @param string $runtimeType
+     *
+     * @return self
+     */
+    public function setRuntimeType(string $runtimeType) : self
     {
         $this->runtimeType = $runtimeType;
-
         return $this;
     }
-
     /**
+     * 
+     *
      * @return string[]
      */
-    public function getRuntime(): array
+    public function getRuntime() : array
     {
         return $this->runtime;
     }
-
     /**
+     * 
+     *
      * @param string[] $runtime
+     *
+     * @return self
      */
-    public function setRuntime(array $runtime): self
+    public function setRuntime(array $runtime) : self
     {
         $this->runtime = $runtime;
-
         return $this;
     }
-
     /**
+     * 
+     *
      * @return string[]
      */
-    public function getAutoload(): array
+    public function getAutoload() : array
     {
         return $this->autoload;
     }
-
     /**
+     * 
+     *
      * @param string[] $autoload
+     *
+     * @return self
      */
-    public function setAutoload(array $autoload): self
+    public function setAutoload(array $autoload) : self
     {
         $this->autoload = $autoload;
-
         return $this;
     }
-
     /**
+     * 
+     *
      * @return string[]
      */
-    public function getSteps(): array
+    public function getSteps() : array
     {
         return $this->steps;
     }
-
     /**
+     * 
+     *
      * @param string[] $steps
+     *
+     * @return self
      */
-    public function setSteps(array $steps): self
+    public function setSteps(array $steps) : self
     {
         $this->steps = $steps;
-
         return $this;
     }
 }

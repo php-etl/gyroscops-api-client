@@ -1,14 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Gyroscops\Api\Endpoint;
 
 class DeleteUserAuthorizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
 {
-    use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $id;
-
     /**
      * Removes the UserAuthorization resource.
      *
@@ -18,26 +14,25 @@ class DeleteUserAuthorizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndp
     {
         $this->id = $id;
     }
-
-    public function getMethod(): string
+    use \Gyroscops\Api\Runtime\Client\EndpointTrait;
+    public function getMethod() : string
     {
         return 'DELETE';
     }
-
-    public function getUri(): string
+    public function getUri() : string
     {
-        return str_replace(['{id}'], [$this->id], '/authentication/user-authorizations/{id}');
+        return str_replace(array('{id}'), array($this->id), '/authentication/user-authorizations/{id}');
     }
-
-    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
+    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {
-        return [[], null];
+        return array(array(), null);
     }
-
     /**
      * {@inheritdoc}
      *
      * @throws \Gyroscops\Api\Exception\DeleteUserAuthorizationItemNotFoundException
+     *
+     * @return null
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -48,9 +43,8 @@ class DeleteUserAuthorizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndp
             throw new \Gyroscops\Api\Exception\DeleteUserAuthorizationItemNotFoundException();
         }
     }
-
-    public function getAuthenticationScopes(): array
+    public function getAuthenticationScopes() : array
     {
-        return ['apiKey'];
+        return array('apiKey');
     }
 }

@@ -1,44 +1,44 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Gyroscops\Api\Endpoint;
 
 class PostForgotPasswordToken extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
 {
-    use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $token;
-
+    /**
+     * 
+     *
+     * @param string $token 
+     * @param null|\stdClass $requestBody 
+     */
     public function __construct(string $token, ?\stdClass $requestBody = null)
     {
         $this->token = $token;
         $this->body = $requestBody;
     }
-
-    public function getMethod(): string
+    use \Gyroscops\Api\Runtime\Client\EndpointTrait;
+    public function getMethod() : string
     {
         return 'POST';
     }
-
-    public function getUri(): string
+    public function getUri() : string
     {
-        return str_replace(['{token}'], [$this->token], '/forgot_password/{token}');
+        return str_replace(array('{token}'), array($this->token), '/forgot_password/{token}');
     }
-
-    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
+    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {
         if ($this->body instanceof \stdClass) {
-            return [['Content-Type' => ['application/json']], json_encode($this->body)];
+            return array(array('Content-Type' => array('application/json')), json_encode($this->body));
         }
-
-        return [[], null];
+        return array(array(), null);
     }
-
     /**
      * {@inheritdoc}
      *
      * @throws \Gyroscops\Api\Exception\PostForgotPasswordTokenBadRequestException
      * @throws \Gyroscops\Api\Exception\PostForgotPasswordTokenNotFoundException
+     *
+     * @return null
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -52,9 +52,8 @@ class PostForgotPasswordToken extends \Gyroscops\Api\Runtime\Client\BaseEndpoint
             throw new \Gyroscops\Api\Exception\PostForgotPasswordTokenNotFoundException();
         }
     }
-
-    public function getAuthenticationScopes(): array
+    public function getAuthenticationScopes() : array
     {
-        return ['apiKey'];
+        return array('apiKey');
     }
 }

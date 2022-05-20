@@ -1,49 +1,36 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Gyroscops\Api\Normalizer;
 
-use Gyroscops\Api\Runtime\Normalizer\CheckArray;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-
 class AuthenticationOrganizationsIdAuthorizationsGetResponse200HydraViewNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
-
     /**
-     * @param mixed      $data
-     * @param mixed      $type
-     * @param mixed|null $format
-     *
      * @return bool
      */
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return 'Gyroscops\\Api\\Model\\AuthenticationOrganizationsIdAuthorizationsGetResponse200HydraView' === $type;
+        return $type === 'Gyroscops\\Api\\Model\\AuthenticationOrganizationsIdAuthorizationsGetResponse200HydraView';
     }
-
     public function supportsNormalization($data, $format = null)
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\AuthenticationOrganizationsIdAuthorizationsGetResponse200HydraView' === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\AuthenticationOrganizationsIdAuthorizationsGetResponse200HydraView';
     }
-
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
-    public function denormalize($data, $class, $format = null, array $context = [])
+    public function denormalize($data, $class, $format = null, array $context = array())
     {
         if (isset($data['$ref'])) {
             return new Reference($data['$ref'], $context['document-origin']);
@@ -73,19 +60,14 @@ class AuthenticationOrganizationsIdAuthorizationsGetResponse200HydraViewNormaliz
         if (\array_key_exists('hydra:next', $data)) {
             $object->setHydraNext($data['hydra:next']);
         }
-
         return $object;
     }
-
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize($object, $format = null, array $context = array())
     {
-        $data = [];
+        $data = array();
         if (null !== $object->getId()) {
             $data['@id'] = $object->getId();
         }
@@ -104,7 +86,6 @@ class AuthenticationOrganizationsIdAuthorizationsGetResponse200HydraViewNormaliz
         if (null !== $object->getHydraNext()) {
             $data['hydra:next'] = $object->getHydraNext();
         }
-
         return $data;
     }
 }

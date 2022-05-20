@@ -1,105 +1,169 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Gyroscops\Api\Model;
 
 class AuthenticationOrganizationsIdUsersGetResponse200HydraView
 {
     /**
+     * 
+     *
      * @var string
      */
     protected $id;
     /**
+     * 
+     *
      * @var string
      */
     protected $type;
     /**
+     * 
+     *
      * @var string
      */
     protected $hydraFirst;
     /**
+     * 
+     *
      * @var string
      */
     protected $hydraLast;
     /**
+     * 
+     *
      * @var string
      */
     protected $hydraPrevious;
     /**
+     * 
+     *
      * @var string
      */
     protected $hydraNext;
-
-    public function getId(): string
+    /**
+     * 
+     *
+     * @return string
+     */
+    public function getId() : string
     {
         return $this->id;
     }
-
-    public function setId(string $id): self
+    /**
+     * 
+     *
+     * @param string $id
+     *
+     * @return self
+     */
+    public function setId(string $id) : self
     {
         $this->id = $id;
-
         return $this;
     }
-
-    public function getType(): string
+    /**
+     * 
+     *
+     * @return string
+     */
+    public function getType() : string
     {
         return $this->type;
     }
-
-    public function setType(string $type): self
+    /**
+     * 
+     *
+     * @param string $type
+     *
+     * @return self
+     */
+    public function setType(string $type) : self
     {
         $this->type = $type;
-
         return $this;
     }
-
-    public function getHydraFirst(): string
+    /**
+     * 
+     *
+     * @return string
+     */
+    public function getHydraFirst() : string
     {
         return $this->hydraFirst;
     }
-
-    public function setHydraFirst(string $hydraFirst): self
+    /**
+     * 
+     *
+     * @param string $hydraFirst
+     *
+     * @return self
+     */
+    public function setHydraFirst(string $hydraFirst) : self
     {
         $this->hydraFirst = $hydraFirst;
-
         return $this;
     }
-
-    public function getHydraLast(): string
+    /**
+     * 
+     *
+     * @return string
+     */
+    public function getHydraLast() : string
     {
         return $this->hydraLast;
     }
-
-    public function setHydraLast(string $hydraLast): self
+    /**
+     * 
+     *
+     * @param string $hydraLast
+     *
+     * @return self
+     */
+    public function setHydraLast(string $hydraLast) : self
     {
         $this->hydraLast = $hydraLast;
-
         return $this;
     }
-
-    public function getHydraPrevious(): string
+    /**
+     * 
+     *
+     * @return string
+     */
+    public function getHydraPrevious() : string
     {
         return $this->hydraPrevious;
     }
-
-    public function setHydraPrevious(string $hydraPrevious): self
+    /**
+     * 
+     *
+     * @param string $hydraPrevious
+     *
+     * @return self
+     */
+    public function setHydraPrevious(string $hydraPrevious) : self
     {
         $this->hydraPrevious = $hydraPrevious;
-
         return $this;
     }
-
-    public function getHydraNext(): string
+    /**
+     * 
+     *
+     * @return string
+     */
+    public function getHydraNext() : string
     {
         return $this->hydraNext;
     }
-
-    public function setHydraNext(string $hydraNext): self
+    /**
+     * 
+     *
+     * @param string $hydraNext
+     *
+     * @return self
+     */
+    public function setHydraNext(string $hydraNext) : self
     {
         $this->hydraNext = $hydraNext;
-
         return $this;
     }
 }

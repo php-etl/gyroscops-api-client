@@ -1,16 +1,12 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Gyroscops\Api\Endpoint;
 
 class DeletePipelinePipelineItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
 {
-    use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $id;
-
     /**
-     * Deletes a pipeline.
+     * Deletes a pipeline
      *
      * @param string $id Resource identifier
      */
@@ -18,26 +14,25 @@ class DeletePipelinePipelineItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
     {
         $this->id = $id;
     }
-
-    public function getMethod(): string
+    use \Gyroscops\Api\Runtime\Client\EndpointTrait;
+    public function getMethod() : string
     {
         return 'DELETE';
     }
-
-    public function getUri(): string
+    public function getUri() : string
     {
-        return str_replace(['{id}'], [$this->id], '/runtime/pipelines/{id}');
+        return str_replace(array('{id}'), array($this->id), '/runtime/pipelines/{id}');
     }
-
-    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
+    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {
-        return [[], null];
+        return array(array(), null);
     }
-
     /**
      * {@inheritdoc}
      *
      * @throws \Gyroscops\Api\Exception\DeletePipelinePipelineItemNotFoundException
+     *
+     * @return null
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -48,9 +43,8 @@ class DeletePipelinePipelineItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
             throw new \Gyroscops\Api\Exception\DeletePipelinePipelineItemNotFoundException();
         }
     }
-
-    public function getAuthenticationScopes(): array
+    public function getAuthenticationScopes() : array
     {
-        return ['apiKey'];
+        return array('apiKey');
     }
 }

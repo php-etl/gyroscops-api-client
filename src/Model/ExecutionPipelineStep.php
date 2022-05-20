@@ -1,63 +1,88 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Gyroscops\Api\Model;
 
 class ExecutionPipelineStep
 {
     /**
+     * 
+     *
      * @var string
      */
     protected $id;
     /**
+     * 
+     *
      * @var AbstractPipeline
      */
     protected $pipeline;
     /**
+     * 
+     *
      * @var string[]
      */
     protected $metrics;
-
-    public function getId(): string
+    /**
+     * 
+     *
+     * @return string
+     */
+    public function getId() : string
     {
         return $this->id;
     }
-
-    public function setId(string $id): self
+    /**
+     * 
+     *
+     * @param string $id
+     *
+     * @return self
+     */
+    public function setId(string $id) : self
     {
         $this->id = $id;
-
         return $this;
     }
-
-    public function getPipeline(): AbstractPipeline
+    /**
+     * 
+     *
+     * @return AbstractPipeline
+     */
+    public function getPipeline() : AbstractPipeline
     {
         return $this->pipeline;
     }
-
-    public function setPipeline(AbstractPipeline $pipeline): self
+    /**
+     * 
+     *
+     * @param AbstractPipeline $pipeline
+     *
+     * @return self
+     */
+    public function setPipeline(AbstractPipeline $pipeline) : self
     {
         $this->pipeline = $pipeline;
-
         return $this;
     }
-
     /**
+     * 
+     *
      * @return string[]
      */
-    public function getMetrics(): array
+    public function getMetrics() : array
     {
         return $this->metrics;
     }
-
     /**
+     * 
+     *
      * @param string[] $metrics
+     *
+     * @return self
      */
-    public function setMetrics(array $metrics): self
+    public function setMetrics(array $metrics) : self
     {
         $this->metrics = $metrics;
-
         return $this;
     }
 }

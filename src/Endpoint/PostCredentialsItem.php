@@ -1,56 +1,52 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Gyroscops\Api\Endpoint;
 
 class PostCredentialsItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
 {
-    use \Gyroscops\Api\Runtime\Client\EndpointTrait;
-
+    /**
+     * 
+     *
+     * @param null|\Gyroscops\Api\Model\Credentials $requestBody 
+     */
     public function __construct(?\Gyroscops\Api\Model\Credentials $requestBody = null)
     {
         $this->body = $requestBody;
     }
-
-    public function getMethod(): string
+    use \Gyroscops\Api\Runtime\Client\EndpointTrait;
+    public function getMethod() : string
     {
         return 'POST';
     }
-
-    public function getUri(): string
+    public function getUri() : string
     {
         return '/authentication_token';
     }
-
-    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
+    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {
         if ($this->body instanceof \Gyroscops\Api\Model\Credentials) {
-            return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
+            return array(array('Content-Type' => array('application/json')), $serializer->serialize($this->body, 'json'));
         }
-
-        return [[], null];
+        return array(array(), null);
     }
-
-    public function getExtraHeaders(): array
+    public function getExtraHeaders() : array
     {
-        return ['Accept' => ['application/json']];
+        return array('Accept' => array('application/json'));
     }
-
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\Token|null
+     *
+     * @return null|\Gyroscops\Api\Model\Token
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Token', 'json');
         }
     }
-
-    public function getAuthenticationScopes(): array
+    public function getAuthenticationScopes() : array
     {
-        return ['apiKey'];
+        return array('apiKey');
     }
 }

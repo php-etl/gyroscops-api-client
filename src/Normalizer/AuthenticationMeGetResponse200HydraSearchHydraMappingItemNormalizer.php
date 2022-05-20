@@ -1,49 +1,36 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Gyroscops\Api\Normalizer;
 
-use Gyroscops\Api\Runtime\Normalizer\CheckArray;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-
 class AuthenticationMeGetResponse200HydraSearchHydraMappingItemNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
-
     /**
-     * @param mixed      $data
-     * @param mixed      $type
-     * @param mixed|null $format
-     *
      * @return bool
      */
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return 'Gyroscops\\Api\\Model\\AuthenticationMeGetResponse200HydraSearchHydraMappingItem' === $type;
+        return $type === 'Gyroscops\\Api\\Model\\AuthenticationMeGetResponse200HydraSearchHydraMappingItem';
     }
-
     public function supportsNormalization($data, $format = null)
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\AuthenticationMeGetResponse200HydraSearchHydraMappingItem' === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\AuthenticationMeGetResponse200HydraSearchHydraMappingItem';
     }
-
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
-    public function denormalize($data, $class, $format = null, array $context = [])
+    public function denormalize($data, $class, $format = null, array $context = array())
     {
         if (isset($data['$ref'])) {
             return new Reference($data['$ref'], $context['document-origin']);
@@ -61,27 +48,23 @@ class AuthenticationMeGetResponse200HydraSearchHydraMappingItemNormalizer implem
         if (\array_key_exists('variable', $data)) {
             $object->setVariable($data['variable']);
         }
-        if (\array_key_exists('property', $data) && null !== $data['property']) {
+        if (\array_key_exists('property', $data) && $data['property'] !== null) {
             $object->setProperty($data['property']);
-        } elseif (\array_key_exists('property', $data) && null === $data['property']) {
+        }
+        elseif (\array_key_exists('property', $data) && $data['property'] === null) {
             $object->setProperty(null);
         }
         if (\array_key_exists('required', $data)) {
             $object->setRequired($data['required']);
         }
-
         return $object;
     }
-
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize($object, $format = null, array $context = array())
     {
-        $data = [];
+        $data = array();
         if (null !== $object->getType()) {
             $data['@type'] = $object->getType();
         }
@@ -94,7 +77,6 @@ class AuthenticationMeGetResponse200HydraSearchHydraMappingItemNormalizer implem
         if (null !== $object->getRequired()) {
             $data['required'] = $object->getRequired();
         }
-
         return $data;
     }
 }

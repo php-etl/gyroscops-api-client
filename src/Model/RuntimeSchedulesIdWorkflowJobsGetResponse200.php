@@ -1,79 +1,115 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Gyroscops\Api\Model;
 
 class RuntimeSchedulesIdWorkflowJobsGetResponse200
 {
     /**
+     * 
+     *
      * @var WorkflowJobJsonldRead[]
      */
     protected $hydraMember;
     /**
+     * 
+     *
      * @var int
      */
     protected $hydraTotalItems;
     /**
+     * 
+     *
      * @var RuntimeSchedulesIdWorkflowJobsGetResponse200HydraView
      */
     protected $hydraView;
     /**
+     * 
+     *
      * @var RuntimeSchedulesIdWorkflowJobsGetResponse200HydraSearch
      */
     protected $hydraSearch;
-
     /**
+     * 
+     *
      * @return WorkflowJobJsonldRead[]
      */
-    public function getHydraMember(): array
+    public function getHydraMember() : array
     {
         return $this->hydraMember;
     }
-
     /**
+     * 
+     *
      * @param WorkflowJobJsonldRead[] $hydraMember
+     *
+     * @return self
      */
-    public function setHydraMember(array $hydraMember): self
+    public function setHydraMember(array $hydraMember) : self
     {
         $this->hydraMember = $hydraMember;
-
         return $this;
     }
-
-    public function getHydraTotalItems(): int
+    /**
+     * 
+     *
+     * @return int
+     */
+    public function getHydraTotalItems() : int
     {
         return $this->hydraTotalItems;
     }
-
-    public function setHydraTotalItems(int $hydraTotalItems): self
+    /**
+     * 
+     *
+     * @param int $hydraTotalItems
+     *
+     * @return self
+     */
+    public function setHydraTotalItems(int $hydraTotalItems) : self
     {
         $this->hydraTotalItems = $hydraTotalItems;
-
         return $this;
     }
-
-    public function getHydraView(): RuntimeSchedulesIdWorkflowJobsGetResponse200HydraView
+    /**
+     * 
+     *
+     * @return RuntimeSchedulesIdWorkflowJobsGetResponse200HydraView
+     */
+    public function getHydraView() : RuntimeSchedulesIdWorkflowJobsGetResponse200HydraView
     {
         return $this->hydraView;
     }
-
-    public function setHydraView(RuntimeSchedulesIdWorkflowJobsGetResponse200HydraView $hydraView): self
+    /**
+     * 
+     *
+     * @param RuntimeSchedulesIdWorkflowJobsGetResponse200HydraView $hydraView
+     *
+     * @return self
+     */
+    public function setHydraView(RuntimeSchedulesIdWorkflowJobsGetResponse200HydraView $hydraView) : self
     {
         $this->hydraView = $hydraView;
-
         return $this;
     }
-
-    public function getHydraSearch(): RuntimeSchedulesIdWorkflowJobsGetResponse200HydraSearch
+    /**
+     * 
+     *
+     * @return RuntimeSchedulesIdWorkflowJobsGetResponse200HydraSearch
+     */
+    public function getHydraSearch() : RuntimeSchedulesIdWorkflowJobsGetResponse200HydraSearch
     {
         return $this->hydraSearch;
     }
-
-    public function setHydraSearch(RuntimeSchedulesIdWorkflowJobsGetResponse200HydraSearch $hydraSearch): self
+    /**
+     * 
+     *
+     * @param RuntimeSchedulesIdWorkflowJobsGetResponse200HydraSearch $hydraSearch
+     *
+     * @return self
+     */
+    public function setHydraSearch(RuntimeSchedulesIdWorkflowJobsGetResponse200HydraSearch $hydraSearch) : self
     {
         $this->hydraSearch = $hydraSearch;
-
         return $this;
     }
 }

@@ -1,12 +1,9 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Gyroscops\Api\Runtime\Normalizer;
 
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-
 class ReferenceNormalizer implements NormalizerInterface
 {
     /**
@@ -16,10 +13,8 @@ class ReferenceNormalizer implements NormalizerInterface
     {
         $ref = [];
         $ref['$ref'] = (string) $object->getReferenceUri();
-
         return $ref;
     }
-
     /**
      * {@inheritdoc}
      */

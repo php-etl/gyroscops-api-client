@@ -1,49 +1,36 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Gyroscops\Api\Normalizer;
 
-use Gyroscops\Api\Runtime\Normalizer\CheckArray;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-
 class ExecutionPipelineJobNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
-
     /**
-     * @param mixed      $data
-     * @param mixed      $type
-     * @param mixed|null $format
-     *
      * @return bool
      */
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return 'Gyroscops\\Api\\Model\\ExecutionPipelineJob' === $type;
+        return $type === 'Gyroscops\\Api\\Model\\ExecutionPipelineJob';
     }
-
     public function supportsNormalization($data, $format = null)
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\ExecutionPipelineJob' === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\ExecutionPipelineJob';
     }
-
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
-    public function denormalize($data, $class, $format = null, array $context = [])
+    public function denormalize($data, $class, $format = null, array $context = array())
     {
         if (isset($data['$ref'])) {
             return new Reference($data['$ref'], $context['document-origin']);
@@ -55,43 +42,38 @@ class ExecutionPipelineJobNormalizer implements DenormalizerInterface, Normalize
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('job', $data) && null !== $data['job']) {
+        if (\array_key_exists('job', $data) && $data['job'] !== null) {
             $object->setJob($data['job']);
-        } elseif (\array_key_exists('job', $data) && null === $data['job']) {
+        }
+        elseif (\array_key_exists('job', $data) && $data['job'] === null) {
             $object->setJob(null);
         }
         if (\array_key_exists('id', $data)) {
             $object->setId($data['id']);
         }
         if (\array_key_exists('steps', $data)) {
-            $values = [];
+            $values = array();
             foreach ($data['steps'] as $value) {
                 $values[] = $value;
             }
             $object->setSteps($values);
         }
-
         return $object;
     }
-
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize($object, $format = null, array $context = array())
     {
-        $data = [];
+        $data = array();
         $data['job'] = $object->getJob();
         if (null !== $object->getSteps()) {
-            $values = [];
+            $values = array();
             foreach ($object->getSteps() as $value) {
                 $values[] = $value;
             }
             $data['steps'] = $values;
         }
-
         return $data;
     }
 }

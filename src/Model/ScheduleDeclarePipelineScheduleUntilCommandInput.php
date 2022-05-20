@@ -1,73 +1,115 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Gyroscops\Api\Model;
 
 class ScheduleDeclarePipelineScheduleUntilCommandInput
 {
     /**
+     * 
+     *
      * @var string
      */
     protected $pipeline;
     /**
+     * 
+     *
      * @var \DateTime
      */
     protected $start;
     /**
+     * 
+     *
      * @var string
      */
     protected $interval;
     /**
+     * 
+     *
      * @var \DateTime
      */
     protected $end;
-
-    public function getPipeline(): string
+    /**
+     * 
+     *
+     * @return string
+     */
+    public function getPipeline() : string
     {
         return $this->pipeline;
     }
-
-    public function setPipeline(string $pipeline): self
+    /**
+     * 
+     *
+     * @param string $pipeline
+     *
+     * @return self
+     */
+    public function setPipeline(string $pipeline) : self
     {
         $this->pipeline = $pipeline;
-
         return $this;
     }
-
-    public function getStart(): \DateTime
+    /**
+     * 
+     *
+     * @return \DateTime
+     */
+    public function getStart() : \DateTime
     {
         return $this->start;
     }
-
-    public function setStart(\DateTime $start): self
+    /**
+     * 
+     *
+     * @param \DateTime $start
+     *
+     * @return self
+     */
+    public function setStart(\DateTime $start) : self
     {
         $this->start = $start;
-
         return $this;
     }
-
-    public function getInterval(): string
+    /**
+     * 
+     *
+     * @return string
+     */
+    public function getInterval() : string
     {
         return $this->interval;
     }
-
-    public function setInterval(string $interval): self
+    /**
+     * 
+     *
+     * @param string $interval
+     *
+     * @return self
+     */
+    public function setInterval(string $interval) : self
     {
         $this->interval = $interval;
-
         return $this;
     }
-
-    public function getEnd(): \DateTime
+    /**
+     * 
+     *
+     * @return \DateTime
+     */
+    public function getEnd() : \DateTime
     {
         return $this->end;
     }
-
-    public function setEnd(\DateTime $end): self
+    /**
+     * 
+     *
+     * @param \DateTime $end
+     *
+     * @return self
+     */
+    public function setEnd(\DateTime $end) : self
     {
         $this->end = $end;
-
         return $this;
     }
 }

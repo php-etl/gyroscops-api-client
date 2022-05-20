@@ -1,207 +1,331 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Gyroscops\Api\Model;
 
 class Schedule
 {
     /**
+     * 
+     *
      * @var string
      */
     protected $id;
     /**
+     * 
+     *
      * @var string
      */
     protected $type = 'once';
     /**
+     * 
+     *
      * @var \DateTime|null
      */
     protected $startAt;
     /**
+     * 
+     *
      * @var string|null
      */
     protected $interval;
     /**
+     * 
+     *
      * @var \DateTime|null
      */
     protected $endAt;
     /**
+     * 
+     *
      * @var int|null
      */
     protected $recurrences;
     /**
+     * 
+     *
      * @var string[]
      */
     protected $executions;
     /**
+     * 
+     *
      * @var string|null
      */
     protected $pipeline;
     /**
+     * 
+     *
      * @var string|null
      */
     protected $workflow;
     /**
+     * 
+     *
      * @var string
      */
     protected $owner;
     /**
+     * 
+     *
      * @var string
      */
-    protected $project;
+    protected $workspace;
     /**
+     * 
+     *
      * @var string
      */
     protected $organization;
-
-    public function getId(): string
+    /**
+     * 
+     *
+     * @return string
+     */
+    public function getId() : string
     {
         return $this->id;
     }
-
-    public function setId(string $id): self
+    /**
+     * 
+     *
+     * @param string $id
+     *
+     * @return self
+     */
+    public function setId(string $id) : self
     {
         $this->id = $id;
-
         return $this;
     }
-
-    public function getType(): string
+    /**
+     * 
+     *
+     * @return string
+     */
+    public function getType() : string
     {
         return $this->type;
     }
-
-    public function setType(string $type): self
+    /**
+     * 
+     *
+     * @param string $type
+     *
+     * @return self
+     */
+    public function setType(string $type) : self
     {
         $this->type = $type;
-
         return $this;
     }
-
-    public function getStartAt(): ?\DateTime
+    /**
+     * 
+     *
+     * @return \DateTime|null
+     */
+    public function getStartAt() : ?\DateTime
     {
         return $this->startAt;
     }
-
-    public function setStartAt(?\DateTime $startAt): self
+    /**
+     * 
+     *
+     * @param \DateTime|null $startAt
+     *
+     * @return self
+     */
+    public function setStartAt(?\DateTime $startAt) : self
     {
         $this->startAt = $startAt;
-
         return $this;
     }
-
-    public function getInterval(): ?string
+    /**
+     * 
+     *
+     * @return string|null
+     */
+    public function getInterval() : ?string
     {
         return $this->interval;
     }
-
-    public function setInterval(?string $interval): self
+    /**
+     * 
+     *
+     * @param string|null $interval
+     *
+     * @return self
+     */
+    public function setInterval(?string $interval) : self
     {
         $this->interval = $interval;
-
         return $this;
     }
-
-    public function getEndAt(): ?\DateTime
+    /**
+     * 
+     *
+     * @return \DateTime|null
+     */
+    public function getEndAt() : ?\DateTime
     {
         return $this->endAt;
     }
-
-    public function setEndAt(?\DateTime $endAt): self
+    /**
+     * 
+     *
+     * @param \DateTime|null $endAt
+     *
+     * @return self
+     */
+    public function setEndAt(?\DateTime $endAt) : self
     {
         $this->endAt = $endAt;
-
         return $this;
     }
-
-    public function getRecurrences(): ?int
+    /**
+     * 
+     *
+     * @return int|null
+     */
+    public function getRecurrences() : ?int
     {
         return $this->recurrences;
     }
-
-    public function setRecurrences(?int $recurrences): self
+    /**
+     * 
+     *
+     * @param int|null $recurrences
+     *
+     * @return self
+     */
+    public function setRecurrences(?int $recurrences) : self
     {
         $this->recurrences = $recurrences;
-
         return $this;
     }
-
     /**
+     * 
+     *
      * @return string[]
      */
-    public function getExecutions(): array
+    public function getExecutions() : array
     {
         return $this->executions;
     }
-
     /**
+     * 
+     *
      * @param string[] $executions
+     *
+     * @return self
      */
-    public function setExecutions(array $executions): self
+    public function setExecutions(array $executions) : self
     {
         $this->executions = $executions;
-
         return $this;
     }
-
-    public function getPipeline(): ?string
+    /**
+     * 
+     *
+     * @return string|null
+     */
+    public function getPipeline() : ?string
     {
         return $this->pipeline;
     }
-
-    public function setPipeline(?string $pipeline): self
+    /**
+     * 
+     *
+     * @param string|null $pipeline
+     *
+     * @return self
+     */
+    public function setPipeline(?string $pipeline) : self
     {
         $this->pipeline = $pipeline;
-
         return $this;
     }
-
-    public function getWorkflow(): ?string
+    /**
+     * 
+     *
+     * @return string|null
+     */
+    public function getWorkflow() : ?string
     {
         return $this->workflow;
     }
-
-    public function setWorkflow(?string $workflow): self
+    /**
+     * 
+     *
+     * @param string|null $workflow
+     *
+     * @return self
+     */
+    public function setWorkflow(?string $workflow) : self
     {
         $this->workflow = $workflow;
-
         return $this;
     }
-
-    public function getOwner(): string
+    /**
+     * 
+     *
+     * @return string
+     */
+    public function getOwner() : string
     {
         return $this->owner;
     }
-
-    public function setOwner(string $owner): self
+    /**
+     * 
+     *
+     * @param string $owner
+     *
+     * @return self
+     */
+    public function setOwner(string $owner) : self
     {
         $this->owner = $owner;
-
         return $this;
     }
-
-    public function getProject(): string
+    /**
+     * 
+     *
+     * @return string
+     */
+    public function getWorkspace() : string
     {
-        return $this->project;
+        return $this->workspace;
     }
-
-    public function setProject(string $project): self
+    /**
+     * 
+     *
+     * @param string $workspace
+     *
+     * @return self
+     */
+    public function setWorkspace(string $workspace) : self
     {
-        $this->project = $project;
-
+        $this->workspace = $workspace;
         return $this;
     }
-
-    public function getOrganization(): string
+    /**
+     * 
+     *
+     * @return string
+     */
+    public function getOrganization() : string
     {
         return $this->organization;
     }
-
-    public function setOrganization(string $organization): self
+    /**
+     * 
+     *
+     * @param string $organization
+     *
+     * @return self
+     */
+    public function setOrganization(string $organization) : self
     {
         $this->organization = $organization;
-
         return $this;
     }
 }

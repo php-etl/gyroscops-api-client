@@ -1,14 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Gyroscops\Api\Endpoint;
 
 class GetScheduleItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
 {
-    use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $id;
-
     /**
      * Retrieves a Schedule resource.
      *
@@ -18,46 +14,41 @@ class GetScheduleItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impleme
     {
         $this->id = $id;
     }
-
-    public function getMethod(): string
+    use \Gyroscops\Api\Runtime\Client\EndpointTrait;
+    public function getMethod() : string
     {
         return 'GET';
     }
-
-    public function getUri(): string
+    public function getUri() : string
     {
-        return str_replace(['{id}'], [$this->id], '/runtime/schedules/{id}');
+        return str_replace(array('{id}'), array($this->id), '/runtime/schedules/{id}');
     }
-
-    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
+    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {
-        return [[], null];
+        return array(array(), null);
     }
-
-    public function getExtraHeaders(): array
+    public function getExtraHeaders() : array
     {
-        return ['Accept' => ['application/json']];
+        return array('Accept' => array('application/json'));
     }
-
     /**
      * {@inheritdoc}
      *
      * @throws \Gyroscops\Api\Exception\GetScheduleItemNotFoundException
      *
-     * @return \Gyroscops\Api\Model\Schedule|null
+     * @return null|\Gyroscops\Api\Model\Schedule
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Schedule', 'json');
         }
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\GetScheduleItemNotFoundException();
         }
     }
-
-    public function getAuthenticationScopes(): array
+    public function getAuthenticationScopes() : array
     {
-        return ['apiKey'];
+        return array('apiKey');
     }
 }

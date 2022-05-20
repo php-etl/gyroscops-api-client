@@ -1,49 +1,36 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Gyroscops\Api\Normalizer;
 
-use Gyroscops\Api\Runtime\Normalizer\CheckArray;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-
 class ScheduleJsonldNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
-
     /**
-     * @param mixed      $data
-     * @param mixed      $type
-     * @param mixed|null $format
-     *
      * @return bool
      */
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return 'Gyroscops\\Api\\Model\\ScheduleJsonld' === $type;
+        return $type === 'Gyroscops\\Api\\Model\\ScheduleJsonld';
     }
-
     public function supportsNormalization($data, $format = null)
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\ScheduleJsonld' === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\ScheduleJsonld';
     }
-
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
-    public function denormalize($data, $class, $format = null, array $context = [])
+    public function denormalize($data, $class, $format = null, array $context = array())
     {
         if (isset($data['$ref'])) {
             return new Reference($data['$ref'], $context['document-origin']);
@@ -70,65 +57,66 @@ class ScheduleJsonldNormalizer implements DenormalizerInterface, NormalizerInter
         if (\array_key_exists('type', $data)) {
             $object->setType2($data['type']);
         }
-        if (\array_key_exists('startAt', $data) && null !== $data['startAt']) {
+        if (\array_key_exists('startAt', $data) && $data['startAt'] !== null) {
             $object->setStartAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['startAt']));
-        } elseif (\array_key_exists('startAt', $data) && null === $data['startAt']) {
+        }
+        elseif (\array_key_exists('startAt', $data) && $data['startAt'] === null) {
             $object->setStartAt(null);
         }
-        if (\array_key_exists('interval', $data) && null !== $data['interval']) {
+        if (\array_key_exists('interval', $data) && $data['interval'] !== null) {
             $object->setInterval($data['interval']);
-        } elseif (\array_key_exists('interval', $data) && null === $data['interval']) {
+        }
+        elseif (\array_key_exists('interval', $data) && $data['interval'] === null) {
             $object->setInterval(null);
         }
-        if (\array_key_exists('endAt', $data) && null !== $data['endAt']) {
+        if (\array_key_exists('endAt', $data) && $data['endAt'] !== null) {
             $object->setEndAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['endAt']));
-        } elseif (\array_key_exists('endAt', $data) && null === $data['endAt']) {
+        }
+        elseif (\array_key_exists('endAt', $data) && $data['endAt'] === null) {
             $object->setEndAt(null);
         }
-        if (\array_key_exists('recurrences', $data) && null !== $data['recurrences']) {
+        if (\array_key_exists('recurrences', $data) && $data['recurrences'] !== null) {
             $object->setRecurrences($data['recurrences']);
-        } elseif (\array_key_exists('recurrences', $data) && null === $data['recurrences']) {
+        }
+        elseif (\array_key_exists('recurrences', $data) && $data['recurrences'] === null) {
             $object->setRecurrences(null);
         }
         if (\array_key_exists('executions', $data)) {
-            $values = [];
+            $values = array();
             foreach ($data['executions'] as $value) {
                 $values[] = $value;
             }
             $object->setExecutions($values);
         }
-        if (\array_key_exists('pipeline', $data) && null !== $data['pipeline']) {
+        if (\array_key_exists('pipeline', $data) && $data['pipeline'] !== null) {
             $object->setPipeline($data['pipeline']);
-        } elseif (\array_key_exists('pipeline', $data) && null === $data['pipeline']) {
+        }
+        elseif (\array_key_exists('pipeline', $data) && $data['pipeline'] === null) {
             $object->setPipeline(null);
         }
-        if (\array_key_exists('workflow', $data) && null !== $data['workflow']) {
+        if (\array_key_exists('workflow', $data) && $data['workflow'] !== null) {
             $object->setWorkflow($data['workflow']);
-        } elseif (\array_key_exists('workflow', $data) && null === $data['workflow']) {
+        }
+        elseif (\array_key_exists('workflow', $data) && $data['workflow'] === null) {
             $object->setWorkflow(null);
         }
         if (\array_key_exists('owner', $data)) {
             $object->setOwner($data['owner']);
         }
-        if (\array_key_exists('project', $data)) {
-            $object->setProject($data['project']);
+        if (\array_key_exists('workspace', $data)) {
+            $object->setWorkspace($data['workspace']);
         }
         if (\array_key_exists('organization', $data)) {
             $object->setOrganization($data['organization']);
         }
-
         return $object;
     }
-
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize($object, $format = null, array $context = array())
     {
-        $data = [];
+        $data = array();
         $data['id'] = $object->getId2();
         if (null !== $object->getType2()) {
             $data['type'] = $object->getType2();
@@ -146,7 +134,7 @@ class ScheduleJsonldNormalizer implements DenormalizerInterface, NormalizerInter
             $data['recurrences'] = $object->getRecurrences();
         }
         if (null !== $object->getExecutions()) {
-            $values = [];
+            $values = array();
             foreach ($object->getExecutions() as $value) {
                 $values[] = $value;
             }
@@ -159,9 +147,8 @@ class ScheduleJsonldNormalizer implements DenormalizerInterface, NormalizerInter
             $data['workflow'] = $object->getWorkflow();
         }
         $data['owner'] = $object->getOwner();
-        $data['project'] = $object->getProject();
+        $data['workspace'] = $object->getWorkspace();
         $data['organization'] = $object->getOrganization();
-
         return $data;
     }
 }

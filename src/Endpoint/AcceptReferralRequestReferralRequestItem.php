@@ -1,46 +1,38 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Gyroscops\Api\Endpoint;
 
 class AcceptReferralRequestReferralRequestItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
 {
-    use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $id;
-
     /**
-     * Accepts a referral request.
+     * Accepts a referral request
      *
-     * @param string $id          Resource identifier
-     * @param null   $requestBody
+     * @param string $id Resource identifier
+     * @param null $requestBody 
      */
     public function __construct(string $id, $requestBody = null)
     {
         $this->id = $id;
         $this->body = $requestBody;
     }
-
-    public function getMethod(): string
+    use \Gyroscops\Api\Runtime\Client\EndpointTrait;
+    public function getMethod() : string
     {
         return 'PATCH';
     }
-
-    public function getUri(): string
+    public function getUri() : string
     {
-        return str_replace(['{id}'], [$this->id], '/referral-requests/{id}/accept');
+        return str_replace(array('{id}'), array($this->id), '/referral/referral/requests/{id}/accept');
     }
-
-    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
+    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {
-        return [[], null];
+        return array(array(), null);
     }
-
-    public function getExtraHeaders(): array
+    public function getExtraHeaders() : array
     {
-        return ['Accept' => ['application/json']];
+        return array('Accept' => array('application/json'));
     }
-
     /**
      * {@inheritdoc}
      *
@@ -48,11 +40,11 @@ class AcceptReferralRequestReferralRequestItem extends \Gyroscops\Api\Runtime\Cl
      * @throws \Gyroscops\Api\Exception\AcceptReferralRequestReferralRequestItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\AcceptReferralRequestReferralRequestItemNotFoundException
      *
-     * @return \Gyroscops\Api\Model\ReferralRequestReferralRequestRead|null
+     * @return null|\Gyroscops\Api\Model\ReferralRequestReferralRequestRead
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ReferralRequestReferralRequestRead', 'json');
         }
         if (400 === $status) {
@@ -65,9 +57,8 @@ class AcceptReferralRequestReferralRequestItem extends \Gyroscops\Api\Runtime\Cl
             throw new \Gyroscops\Api\Exception\AcceptReferralRequestReferralRequestItemNotFoundException();
         }
     }
-
-    public function getAuthenticationScopes(): array
+    public function getAuthenticationScopes() : array
     {
-        return ['apiKey'];
+        return array('apiKey');
     }
 }

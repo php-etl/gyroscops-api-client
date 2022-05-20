@@ -1,255 +1,412 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Gyroscops\Api\Model;
 
 class ExecutionRead
 {
     /**
+     * 
+     *
      * @var string
      */
     protected $id;
     /**
+     * 
+     *
      * @var string
      */
     protected $code;
     /**
+     * 
+     *
      * @var string
      */
     protected $status = 'unknown';
     /**
+     * 
+     *
      * @var int
      */
     protected $errors;
     /**
+     * 
+     *
      * @var \DateTime|null
      */
     protected $scheduledAt;
     /**
+     * 
+     *
      * @var \DateTime|null
      */
     protected $startedAt;
     /**
+     * 
+     *
      * @var \DateTime|null
      */
     protected $finishedAt;
     /**
+     * 
+     *
      * @var \DateTime|null
      */
     protected $interruptedAt;
     /**
+     * 
+     *
      * @var \DateTime|null
      */
     protected $resumedAt;
     /**
+     * 
+     *
      * @var \DateTime|null
      */
     protected $updatedAt;
     /**
+     * 
+     *
      * @var \DateTime|null
      */
     protected $terminatedAt;
     /**
+     * 
+     *
      * @var string|null
      */
     protected $reason;
     /**
+     * 
+     *
      * @var string|null
      */
     protected $pipeline;
     /**
+     * 
+     *
      * @var string|null
      */
     protected $workflow;
     /**
+     * 
+     *
      * @var mixed|null
      */
     protected $action;
-
-    public function getId(): string
+    /**
+     * 
+     *
+     * @return string
+     */
+    public function getId() : string
     {
         return $this->id;
     }
-
-    public function setId(string $id): self
+    /**
+     * 
+     *
+     * @param string $id
+     *
+     * @return self
+     */
+    public function setId(string $id) : self
     {
         $this->id = $id;
-
         return $this;
     }
-
-    public function getCode(): string
+    /**
+     * 
+     *
+     * @return string
+     */
+    public function getCode() : string
     {
         return $this->code;
     }
-
-    public function setCode(string $code): self
+    /**
+     * 
+     *
+     * @param string $code
+     *
+     * @return self
+     */
+    public function setCode(string $code) : self
     {
         $this->code = $code;
-
         return $this;
     }
-
-    public function getStatus(): string
+    /**
+     * 
+     *
+     * @return string
+     */
+    public function getStatus() : string
     {
         return $this->status;
     }
-
-    public function setStatus(string $status): self
+    /**
+     * 
+     *
+     * @param string $status
+     *
+     * @return self
+     */
+    public function setStatus(string $status) : self
     {
         $this->status = $status;
-
         return $this;
     }
-
-    public function getErrors(): int
+    /**
+     * 
+     *
+     * @return int
+     */
+    public function getErrors() : int
     {
         return $this->errors;
     }
-
-    public function setErrors(int $errors): self
+    /**
+     * 
+     *
+     * @param int $errors
+     *
+     * @return self
+     */
+    public function setErrors(int $errors) : self
     {
         $this->errors = $errors;
-
         return $this;
     }
-
-    public function getScheduledAt(): ?\DateTime
+    /**
+     * 
+     *
+     * @return \DateTime|null
+     */
+    public function getScheduledAt() : ?\DateTime
     {
         return $this->scheduledAt;
     }
-
-    public function setScheduledAt(?\DateTime $scheduledAt): self
+    /**
+     * 
+     *
+     * @param \DateTime|null $scheduledAt
+     *
+     * @return self
+     */
+    public function setScheduledAt(?\DateTime $scheduledAt) : self
     {
         $this->scheduledAt = $scheduledAt;
-
         return $this;
     }
-
-    public function getStartedAt(): ?\DateTime
+    /**
+     * 
+     *
+     * @return \DateTime|null
+     */
+    public function getStartedAt() : ?\DateTime
     {
         return $this->startedAt;
     }
-
-    public function setStartedAt(?\DateTime $startedAt): self
+    /**
+     * 
+     *
+     * @param \DateTime|null $startedAt
+     *
+     * @return self
+     */
+    public function setStartedAt(?\DateTime $startedAt) : self
     {
         $this->startedAt = $startedAt;
-
         return $this;
     }
-
-    public function getFinishedAt(): ?\DateTime
+    /**
+     * 
+     *
+     * @return \DateTime|null
+     */
+    public function getFinishedAt() : ?\DateTime
     {
         return $this->finishedAt;
     }
-
-    public function setFinishedAt(?\DateTime $finishedAt): self
+    /**
+     * 
+     *
+     * @param \DateTime|null $finishedAt
+     *
+     * @return self
+     */
+    public function setFinishedAt(?\DateTime $finishedAt) : self
     {
         $this->finishedAt = $finishedAt;
-
         return $this;
     }
-
-    public function getInterruptedAt(): ?\DateTime
+    /**
+     * 
+     *
+     * @return \DateTime|null
+     */
+    public function getInterruptedAt() : ?\DateTime
     {
         return $this->interruptedAt;
     }
-
-    public function setInterruptedAt(?\DateTime $interruptedAt): self
+    /**
+     * 
+     *
+     * @param \DateTime|null $interruptedAt
+     *
+     * @return self
+     */
+    public function setInterruptedAt(?\DateTime $interruptedAt) : self
     {
         $this->interruptedAt = $interruptedAt;
-
         return $this;
     }
-
-    public function getResumedAt(): ?\DateTime
+    /**
+     * 
+     *
+     * @return \DateTime|null
+     */
+    public function getResumedAt() : ?\DateTime
     {
         return $this->resumedAt;
     }
-
-    public function setResumedAt(?\DateTime $resumedAt): self
+    /**
+     * 
+     *
+     * @param \DateTime|null $resumedAt
+     *
+     * @return self
+     */
+    public function setResumedAt(?\DateTime $resumedAt) : self
     {
         $this->resumedAt = $resumedAt;
-
         return $this;
     }
-
-    public function getUpdatedAt(): ?\DateTime
+    /**
+     * 
+     *
+     * @return \DateTime|null
+     */
+    public function getUpdatedAt() : ?\DateTime
     {
         return $this->updatedAt;
     }
-
-    public function setUpdatedAt(?\DateTime $updatedAt): self
+    /**
+     * 
+     *
+     * @param \DateTime|null $updatedAt
+     *
+     * @return self
+     */
+    public function setUpdatedAt(?\DateTime $updatedAt) : self
     {
         $this->updatedAt = $updatedAt;
-
         return $this;
     }
-
-    public function getTerminatedAt(): ?\DateTime
+    /**
+     * 
+     *
+     * @return \DateTime|null
+     */
+    public function getTerminatedAt() : ?\DateTime
     {
         return $this->terminatedAt;
     }
-
-    public function setTerminatedAt(?\DateTime $terminatedAt): self
+    /**
+     * 
+     *
+     * @param \DateTime|null $terminatedAt
+     *
+     * @return self
+     */
+    public function setTerminatedAt(?\DateTime $terminatedAt) : self
     {
         $this->terminatedAt = $terminatedAt;
-
         return $this;
     }
-
-    public function getReason(): ?string
+    /**
+     * 
+     *
+     * @return string|null
+     */
+    public function getReason() : ?string
     {
         return $this->reason;
     }
-
-    public function setReason(?string $reason): self
+    /**
+     * 
+     *
+     * @param string|null $reason
+     *
+     * @return self
+     */
+    public function setReason(?string $reason) : self
     {
         $this->reason = $reason;
-
         return $this;
     }
-
-    public function getPipeline(): ?string
+    /**
+     * 
+     *
+     * @return string|null
+     */
+    public function getPipeline() : ?string
     {
         return $this->pipeline;
     }
-
-    public function setPipeline(?string $pipeline): self
+    /**
+     * 
+     *
+     * @param string|null $pipeline
+     *
+     * @return self
+     */
+    public function setPipeline(?string $pipeline) : self
     {
         $this->pipeline = $pipeline;
-
         return $this;
     }
-
-    public function getWorkflow(): ?string
+    /**
+     * 
+     *
+     * @return string|null
+     */
+    public function getWorkflow() : ?string
     {
         return $this->workflow;
     }
-
-    public function setWorkflow(?string $workflow): self
+    /**
+     * 
+     *
+     * @param string|null $workflow
+     *
+     * @return self
+     */
+    public function setWorkflow(?string $workflow) : self
     {
         $this->workflow = $workflow;
-
         return $this;
     }
-
     /**
+     * 
+     *
      * @return mixed
      */
     public function getAction()
     {
         return $this->action;
     }
-
     /**
+     * 
+     *
      * @param mixed $action
+     *
+     * @return self
      */
-    public function setAction($action): self
+    public function setAction($action) : self
     {
         $this->action = $action;
-
         return $this;
     }
 }
