@@ -7,6 +7,12 @@ class ExecutionPipelineStepJsonld
     /**
      * 
      *
+     * @var mixed
+     */
+    protected $context;
+    /**
+     * 
+     *
      * @var string
      */
     protected $id;
@@ -16,12 +22,6 @@ class ExecutionPipelineStepJsonld
      * @var string
      */
     protected $type;
-    /**
-     * 
-     *
-     * @var mixed
-     */
-    protected $context;
     /**
      * 
      *
@@ -40,6 +40,27 @@ class ExecutionPipelineStepJsonld
      * @var string[]
      */
     protected $metrics;
+    /**
+     * 
+     *
+     * @return mixed
+     */
+    public function getContext()
+    {
+        return $this->context;
+    }
+    /**
+     * 
+     *
+     * @param mixed $context
+     *
+     * @return self
+     */
+    public function setContext($context) : self
+    {
+        $this->context = $context;
+        return $this;
+    }
     /**
      * 
      *
@@ -80,27 +101,6 @@ class ExecutionPipelineStepJsonld
     public function setType(string $type) : self
     {
         $this->type = $type;
-        return $this;
-    }
-    /**
-     * 
-     *
-     * @return mixed
-     */
-    public function getContext()
-    {
-        return $this->context;
-    }
-    /**
-     * 
-     *
-     * @param mixed $context
-     *
-     * @return self
-     */
-    public function setContext($context) : self
-    {
-        $this->context = $context;
         return $this;
     }
     /**

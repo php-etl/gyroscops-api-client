@@ -21,7 +21,7 @@ class ApiPipelineCompilationsUserGetSubresourcePipelineCompilationSubresource ex
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}'), array($this->id), '/runtime/pipeline-compilations/{id}/user');
+        return str_replace(array('{id}'), array($this->id), '/runtime/pipeline-compilation/{id}/user');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

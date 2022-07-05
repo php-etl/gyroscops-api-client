@@ -21,7 +21,7 @@ class GetExecutionPipelineJobItem extends \Gyroscops\Api\Runtime\Client\BaseEndp
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}'), array($this->id), '/runtime/execution-pipeline-jobs/{id}');
+        return str_replace(array('{id}'), array($this->id), '/runtime/execution-pipeline-job/{id}');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

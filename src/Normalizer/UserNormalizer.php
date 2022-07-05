@@ -94,6 +94,12 @@ class UserNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
             }
             $object->setWorkspaces($values_3);
         }
+        if (\array_key_exists('currentWorkspace', $data) && $data['currentWorkspace'] !== null) {
+            $object->setCurrentWorkspace($data['currentWorkspace']);
+        }
+        elseif (\array_key_exists('currentWorkspace', $data) && $data['currentWorkspace'] === null) {
+            $object->setCurrentWorkspace(null);
+        }
         if (\array_key_exists('referralCodes', $data)) {
             $values_4 = array();
             foreach ($data['referralCodes'] as $value_4) {
@@ -171,6 +177,9 @@ class UserNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
                 $values_3[] = $value_3;
             }
             $data['workspaces'] = $values_3;
+        }
+        if (null !== $object->getCurrentWorkspace()) {
+            $data['currentWorkspace'] = $object->getCurrentWorkspace();
         }
         if (null !== $object->getWorkspace()) {
             $values_4 = array();

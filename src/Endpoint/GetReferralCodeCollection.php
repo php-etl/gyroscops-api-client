@@ -22,7 +22,7 @@ class GetReferralCodeCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoi
     }
     public function getUri() : string
     {
-        return '/referral-codes';
+        return '/referral/codes';
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

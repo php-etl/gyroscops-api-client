@@ -21,7 +21,7 @@ class ApiWorkflowsWorkspaceGetSubresourceWorkflowSubresource extends \Gyroscops\
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}'), array($this->id), '/runtime/workflows/{id}/workspace');
+        return str_replace(array('{id}'), array($this->id), '/runtime/workflow/{id}/workspace');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

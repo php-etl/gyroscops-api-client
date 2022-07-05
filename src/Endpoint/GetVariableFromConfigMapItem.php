@@ -21,7 +21,7 @@ class GetVariableFromConfigMapItem extends \Gyroscops\Api\Runtime\Client\BaseEnd
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}'), array($this->id), '/variable-from-config-maps/{id}');
+        return str_replace(array('{id}'), array($this->id), '/environment/variable-from-config-map/{id}');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

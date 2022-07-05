@@ -21,7 +21,7 @@ class ApiSchedulesOwnerGetSubresourceScheduleSubresource extends \Gyroscops\Api\
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}'), array($this->id), '/runtime/schedules/{id}/owner');
+        return str_replace(array('{id}'), array($this->id), '/runtime/schedule/{id}/owner');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

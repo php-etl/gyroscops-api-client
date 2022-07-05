@@ -25,7 +25,7 @@ class ApiOrganizationsUsersGetSubresourceOrganizationSubresource extends \Gyrosc
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}'), array($this->id), '/authentication/organizations/{id}/users');
+        return str_replace(array('{id}'), array($this->id), '/authentication/organization/{id}/users');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

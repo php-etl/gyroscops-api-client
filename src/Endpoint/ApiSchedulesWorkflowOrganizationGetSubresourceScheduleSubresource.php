@@ -24,7 +24,7 @@ class ApiSchedulesWorkflowOrganizationGetSubresourceScheduleSubresource extends 
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}', '{workflow}'), array($this->id, $this->workflow), '/runtime/schedules/{id}/workflow/organization');
+        return str_replace(array('{id}', '{workflow}'), array($this->id, $this->workflow), '/runtime/schedule/{id}/workflow/organization');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

@@ -22,7 +22,7 @@ class GetPipelineCompilationCollection extends \Gyroscops\Api\Runtime\Client\Bas
     }
     public function getUri() : string
     {
-        return '/runtime/pipeline-compilations';
+        return '/runtime/pipelines/compilation';
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

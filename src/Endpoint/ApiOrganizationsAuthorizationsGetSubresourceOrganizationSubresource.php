@@ -25,7 +25,7 @@ class ApiOrganizationsAuthorizationsGetSubresourceOrganizationSubresource extend
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}'), array($this->id), '/authentication/organizations/{id}/authorizations');
+        return str_replace(array('{id}'), array($this->id), '/authentication/organization/{id}/authorizations');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

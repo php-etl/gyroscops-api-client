@@ -25,7 +25,7 @@ class ApiExecutionWorkflowsJobsGetSubresourceExecutionWorkflowSubresource extend
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}'), array($this->id), '/runtime/execution/execution-workflows/{id}/jobs');
+        return str_replace(array('{id}'), array($this->id), '/runtime/execution/execution-workflow/{id}/jobs');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

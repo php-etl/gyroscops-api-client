@@ -25,7 +25,7 @@ class ApiExecutionPipelineJobsStepsGetSubresourceExecutionPipelineJobSubresource
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}'), array($this->id), '/runtime/execution-pipeline-jobs/{id}/steps');
+        return str_replace(array('{id}'), array($this->id), '/runtime/execution-pipeline-job/{id}/steps');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

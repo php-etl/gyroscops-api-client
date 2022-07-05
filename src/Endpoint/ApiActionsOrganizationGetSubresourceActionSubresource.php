@@ -21,7 +21,7 @@ class ApiActionsOrganizationGetSubresourceActionSubresource extends \Gyroscops\A
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}'), array($this->id), '/runtime/actions/{id}/organization');
+        return str_replace(array('{id}'), array($this->id), '/runtime/action/{id}/organization');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

@@ -97,6 +97,12 @@ class UserJsonld
     /**
      * 
      *
+     * @var string|null
+     */
+    protected $currentWorkspace;
+    /**
+     * 
+     *
      * @var string[]
      */
     protected $referralCodes;
@@ -437,6 +443,27 @@ class UserJsonld
     public function setWorkspaces(array $workspaces) : self
     {
         $this->workspaces = $workspaces;
+        return $this;
+    }
+    /**
+     * 
+     *
+     * @return string|null
+     */
+    public function getCurrentWorkspace() : ?string
+    {
+        return $this->currentWorkspace;
+    }
+    /**
+     * 
+     *
+     * @param string|null $currentWorkspace
+     *
+     * @return self
+     */
+    public function setCurrentWorkspace(?string $currentWorkspace) : self
+    {
+        $this->currentWorkspace = $currentWorkspace;
         return $this;
     }
     /**

@@ -24,7 +24,7 @@ class ApiSchedulesWorkflowOwnerGetSubresourceScheduleSubresource extends \Gyrosc
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}', '{workflow}'), array($this->id, $this->workflow), '/runtime/schedules/{id}/workflow/owner');
+        return str_replace(array('{id}', '{workflow}'), array($this->id, $this->workflow), '/runtime/schedule/{id}/workflow/owner');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

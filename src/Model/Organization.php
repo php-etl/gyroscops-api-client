@@ -25,6 +25,12 @@ class Organization
     /**
      * 
      *
+     * @var string
+     */
+    protected $slug;
+    /**
+     * 
+     *
      * @var string[]
      */
     protected $users;
@@ -101,6 +107,27 @@ class Organization
     public function setName(string $name) : self
     {
         $this->name = $name;
+        return $this;
+    }
+    /**
+     * 
+     *
+     * @return string
+     */
+    public function getSlug() : string
+    {
+        return $this->slug;
+    }
+    /**
+     * 
+     *
+     * @param string $slug
+     *
+     * @return self
+     */
+    public function setSlug(string $slug) : self
+    {
+        $this->slug = $slug;
         return $this;
     }
     /**

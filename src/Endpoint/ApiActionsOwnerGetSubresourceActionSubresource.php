@@ -21,7 +21,7 @@ class ApiActionsOwnerGetSubresourceActionSubresource extends \Gyroscops\Api\Runt
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}'), array($this->id), '/runtime/actions/{id}/owner');
+        return str_replace(array('{id}'), array($this->id), '/runtime/action/{id}/owner');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

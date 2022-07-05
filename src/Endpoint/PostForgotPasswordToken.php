@@ -23,7 +23,7 @@ class PostForgotPasswordToken extends \Gyroscops\Api\Runtime\Client\BaseEndpoint
     }
     public function getUri() : string
     {
-        return str_replace(array('{token}'), array($this->token), '/forgot_password/{token}');
+        return str_replace(array('{token}'), array($this->token), '/authentication/forgot-password/{token}');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

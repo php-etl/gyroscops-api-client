@@ -21,7 +21,7 @@ class GetOnPremiseRequestItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}'), array($this->id), '/referral/on-premise-requests/{id}');
+        return str_replace(array('{id}'), array($this->id), '/referral/on-premise-request/{id}');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

@@ -28,7 +28,7 @@ class ApiSchedulesWorkflowJobsGetSubresourceScheduleSubresource extends \Gyrosco
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}', '{workflow}'), array($this->id, $this->workflow), '/runtime/schedules/{id}/workflow/jobs');
+        return str_replace(array('{id}', '{workflow}'), array($this->id, $this->workflow), '/runtime/schedule/{id}/workflow/jobs');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

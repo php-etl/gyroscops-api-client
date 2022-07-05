@@ -21,7 +21,7 @@ class ApiWorkflowsOrganizationGetSubresourceWorkflowSubresource extends \Gyrosco
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}'), array($this->id), '/runtime/workflows/{id}/organization');
+        return str_replace(array('{id}'), array($this->id), '/runtime/workflow/{id}/organization');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

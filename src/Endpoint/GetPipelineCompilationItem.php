@@ -21,7 +21,7 @@ class GetPipelineCompilationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}'), array($this->id), '/runtime/pipeline-compilations/{id}');
+        return str_replace(array('{id}'), array($this->id), '/runtimepipeline/compilation/{id}');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

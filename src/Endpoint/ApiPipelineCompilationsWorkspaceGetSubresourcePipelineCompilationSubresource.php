@@ -21,7 +21,7 @@ class ApiPipelineCompilationsWorkspaceGetSubresourcePipelineCompilationSubresour
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}'), array($this->id), '/runtime/pipeline-compilations/{id}/workspace');
+        return str_replace(array('{id}'), array($this->id), '/runtime/pipeline-compilation/{id}/workspace');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

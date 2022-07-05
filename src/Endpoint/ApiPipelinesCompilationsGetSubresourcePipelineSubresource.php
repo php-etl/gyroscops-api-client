@@ -25,7 +25,7 @@ class ApiPipelinesCompilationsGetSubresourcePipelineSubresource extends \Gyrosco
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}'), array($this->id), '/runtime/pipelines/{id}/compilations');
+        return str_replace(array('{id}'), array($this->id), '/runtime/pipeline/{id}/compilations');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

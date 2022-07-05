@@ -48,6 +48,9 @@ class CredentialsNormalizer implements DenormalizerInterface, NormalizerInterfac
         if (\array_key_exists('password', $data)) {
             $object->setPassword($data['password']);
         }
+        if (\array_key_exists('workspace', $data)) {
+            $object->setWorkspace($data['workspace']);
+        }
         return $object;
     }
     /**
@@ -61,6 +64,9 @@ class CredentialsNormalizer implements DenormalizerInterface, NormalizerInterfac
         }
         if (null !== $object->getPassword()) {
             $data['password'] = $object->getPassword();
+        }
+        if (null !== $object->getWorkspace()) {
+            $data['workspace'] = $object->getWorkspace();
         }
         return $data;
     }

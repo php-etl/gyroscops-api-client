@@ -22,7 +22,7 @@ class GetEnvironmentCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoin
     }
     public function getUri() : string
     {
-        return '/environments';
+        return '/environment/environments';
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

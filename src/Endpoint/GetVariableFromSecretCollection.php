@@ -22,7 +22,7 @@ class GetVariableFromSecretCollection extends \Gyroscops\Api\Runtime\Client\Base
     }
     public function getUri() : string
     {
-        return '/variable-from-secrets';
+        return '/environment/variable-from-secrets';
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

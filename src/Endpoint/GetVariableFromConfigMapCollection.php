@@ -22,7 +22,7 @@ class GetVariableFromConfigMapCollection extends \Gyroscops\Api\Runtime\Client\B
     }
     public function getUri() : string
     {
-        return '/variable-from-config-maps';
+        return '/environment/variable-from-config-maps';
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

@@ -42,14 +42,14 @@ class ExecutionPipelineJobJsonldNormalizer implements DenormalizerInterface, Nor
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
+        if (\array_key_exists('@context', $data)) {
+            $object->setContext($data['@context']);
+        }
         if (\array_key_exists('@id', $data)) {
             $object->setId($data['@id']);
         }
         if (\array_key_exists('@type', $data)) {
             $object->setType($data['@type']);
-        }
-        if (\array_key_exists('@context', $data)) {
-            $object->setContext($data['@context']);
         }
         if (\array_key_exists('job', $data) && $data['job'] !== null) {
             $object->setJob($data['job']);

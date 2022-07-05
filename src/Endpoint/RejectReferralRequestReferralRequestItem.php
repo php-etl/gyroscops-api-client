@@ -23,7 +23,7 @@ class RejectReferralRequestReferralRequestItem extends \Gyroscops\Api\Runtime\Cl
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}'), array($this->id), '/referral/referral/requests/{id}/reject');
+        return str_replace(array('{id}'), array($this->id), '/referral/referral-request/{id}/reject');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

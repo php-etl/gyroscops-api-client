@@ -25,7 +25,7 @@ class ApiExecutionPipelinesStepsGetSubresourceExecutionPipelineSubresource exten
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}'), array($this->id), '/runtime/execution/execution-pipelines/{id}/steps');
+        return str_replace(array('{id}'), array($this->id), '/runtime/execution/execution-pipeline/{id}/steps');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

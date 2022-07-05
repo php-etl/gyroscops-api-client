@@ -21,7 +21,7 @@ class GetReferralCodeItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}'), array($this->id), '/referral-codes/{id}');
+        return str_replace(array('{id}'), array($this->id), '/referral/code/{id}');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

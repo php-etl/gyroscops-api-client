@@ -21,7 +21,7 @@ class ApiPipelinesWorkspaceGetSubresourcePipelineSubresource extends \Gyroscops\
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}'), array($this->id), '/runtime/pipelines/{id}/workspace');
+        return str_replace(array('{id}'), array($this->id), '/runtime/pipeline/{id}/workspace');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

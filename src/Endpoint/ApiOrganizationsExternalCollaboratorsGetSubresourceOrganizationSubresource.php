@@ -25,7 +25,7 @@ class ApiOrganizationsExternalCollaboratorsGetSubresourceOrganizationSubresource
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}'), array($this->id), '/authentication/organizations/{id}/external-collaborators');
+        return str_replace(array('{id}'), array($this->id), '/authentication/organization/{id}/external-collaborators');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

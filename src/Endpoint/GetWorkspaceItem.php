@@ -21,7 +21,7 @@ class GetWorkspaceItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implem
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}'), array($this->id), '/authentication/workspaces/{id}');
+        return str_replace(array('{id}'), array($this->id), '/authentication/workspace/{id}');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

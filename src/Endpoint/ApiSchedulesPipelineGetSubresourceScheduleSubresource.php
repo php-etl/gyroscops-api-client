@@ -21,7 +21,7 @@ class ApiSchedulesPipelineGetSubresourceScheduleSubresource extends \Gyroscops\A
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}'), array($this->id), '/runtime/schedules/{id}/pipeline');
+        return str_replace(array('{id}'), array($this->id), '/runtime/schedule/{id}/pipeline');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

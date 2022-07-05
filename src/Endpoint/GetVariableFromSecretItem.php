@@ -21,7 +21,7 @@ class GetVariableFromSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoi
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}'), array($this->id), '/variable-from-secrets/{id}');
+        return str_replace(array('{id}'), array($this->id), '/environment/variable-from-secret/{id}');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

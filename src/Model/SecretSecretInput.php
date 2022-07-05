@@ -19,7 +19,7 @@ class SecretSecretInput
     /**
      * 
      *
-     * @var string[]
+     * @var SecretValueInput
      */
     protected $secrets;
     /**
@@ -67,20 +67,20 @@ class SecretSecretInput
     /**
      * 
      *
-     * @return string[]
+     * @return SecretValueInput
      */
-    public function getSecrets() : iterable
+    public function getSecrets() : SecretValueInput
     {
         return $this->secrets;
     }
     /**
      * 
      *
-     * @param string[] $secrets
+     * @param SecretValueInput $secrets
      *
      * @return self
      */
-    public function setSecrets(iterable $secrets) : self
+    public function setSecrets(SecretValueInput $secrets) : self
     {
         $this->secrets = $secrets;
         return $this;

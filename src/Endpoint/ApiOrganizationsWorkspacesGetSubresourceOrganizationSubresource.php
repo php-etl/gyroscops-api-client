@@ -25,7 +25,7 @@ class ApiOrganizationsWorkspacesGetSubresourceOrganizationSubresource extends \G
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}'), array($this->id), '/authentication/organizations/{id}/workspaces');
+        return str_replace(array('{id}'), array($this->id), '/authentication/organization/{id}/workspaces');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

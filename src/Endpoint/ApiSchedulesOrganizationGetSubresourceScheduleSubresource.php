@@ -21,7 +21,7 @@ class ApiSchedulesOrganizationGetSubresourceScheduleSubresource extends \Gyrosco
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}'), array($this->id), '/runtime/schedules/{id}/organization');
+        return str_replace(array('{id}'), array($this->id), '/runtime/schedule/{id}/organization');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

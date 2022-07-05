@@ -21,7 +21,7 @@ class ApiExecutionsOrganizationGetSubresourceExecutionSubresource extends \Gyros
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}'), array($this->id), '/runtime/executions/{id}/organization');
+        return str_replace(array('{id}'), array($this->id), '/runtime/execution/{id}/organization');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

@@ -6,7 +6,7 @@ class AddValueSecretCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoin
 {
     protected $id;
     /**
-     * Adds a new secret value to the secret storage
+     * Adds a new Secret value to the Secret storage
      *
      * @param string $id Secret resource code
      * @param null|\stdClass $requestBody 

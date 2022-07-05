@@ -64,6 +64,9 @@ class OrganizationJsonldNormalizer implements DenormalizerInterface, NormalizerI
         if (\array_key_exists('name', $data)) {
             $object->setName($data['name']);
         }
+        if (\array_key_exists('slug', $data)) {
+            $object->setSlug($data['slug']);
+        }
         if (\array_key_exists('users', $data)) {
             $values_1 = array();
             foreach ($data['users'] as $value_1) {
@@ -101,6 +104,7 @@ class OrganizationJsonldNormalizer implements DenormalizerInterface, NormalizerI
             $data['authorizations'] = $values;
         }
         $data['name'] = $object->getName();
+        $data['slug'] = $object->getSlug();
         if (null !== $object->getUsers()) {
             $values_1 = array();
             foreach ($object->getUsers() as $value_1) {

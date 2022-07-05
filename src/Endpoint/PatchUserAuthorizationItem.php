@@ -23,7 +23,7 @@ class PatchUserAuthorizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}'), array($this->id), '/authentication/user-authorizations/{id}');
+        return str_replace(array('{id}'), array($this->id), '/authentication/user-authorization/{id}');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

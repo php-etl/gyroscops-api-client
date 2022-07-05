@@ -24,7 +24,7 @@ class DeletePipelineStepPipelineItem extends \Gyroscops\Api\Runtime\Client\BaseE
     }
     public function getUri() : string
     {
-        return str_replace(array('{code}', '{id}'), array($this->code, $this->id), '/runtime/pipelines/{id}/steps/{code}');
+        return str_replace(array('{code}', '{id}'), array($this->code, $this->id), '/runtime/pipeline/{id}/step/{code}');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

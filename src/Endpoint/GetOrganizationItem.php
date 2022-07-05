@@ -21,7 +21,7 @@ class GetOrganizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}'), array($this->id), '/authentication/organizations/{id}');
+        return str_replace(array('{id}'), array($this->id), '/authentication/organization/{id}');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

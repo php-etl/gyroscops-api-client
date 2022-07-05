@@ -20,7 +20,7 @@ class PostForgotPassword extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impl
     }
     public function getUri() : string
     {
-        return '/forgot_password/';
+        return '/authentication/forgot-password/';
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

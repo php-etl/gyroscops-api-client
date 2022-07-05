@@ -20,7 +20,7 @@ class PostCredentialsItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
     }
     public function getUri() : string
     {
-        return '/authentication_token';
+        return '/authentication/token';
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

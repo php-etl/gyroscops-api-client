@@ -20,7 +20,7 @@ class PostReferralCodeCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpo
     }
     public function getUri() : string
     {
-        return '/referral-codes';
+        return '/referral/codes';
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

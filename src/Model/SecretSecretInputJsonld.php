@@ -37,7 +37,7 @@ class SecretSecretInputJsonld
     /**
      * 
      *
-     * @var string[]
+     * @var SecretValueInputJsonld
      */
     protected $secrets;
     /**
@@ -148,20 +148,20 @@ class SecretSecretInputJsonld
     /**
      * 
      *
-     * @return string[]
+     * @return SecretValueInputJsonld
      */
-    public function getSecrets() : iterable
+    public function getSecrets() : SecretValueInputJsonld
     {
         return $this->secrets;
     }
     /**
      * 
      *
-     * @param string[] $secrets
+     * @param SecretValueInputJsonld $secrets
      *
      * @return self
      */
-    public function setSecrets(iterable $secrets) : self
+    public function setSecrets(SecretValueInputJsonld $secrets) : self
     {
         $this->secrets = $secrets;
         return $this;

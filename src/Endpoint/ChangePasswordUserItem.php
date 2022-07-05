@@ -23,7 +23,7 @@ class ChangePasswordUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}'), array($this->id), '/authentication/users/{id}/change-password');
+        return str_replace(array('{id}'), array($this->id), '/authentication/user/{id}/change-password');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

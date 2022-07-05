@@ -19,6 +19,12 @@ class Credentials
     /**
      * 
      *
+     * @var string
+     */
+    protected $workspace;
+    /**
+     * 
+     *
      * @return string
      */
     public function getUsername() : string
@@ -56,6 +62,27 @@ class Credentials
     public function setPassword(string $password) : self
     {
         $this->password = $password;
+        return $this;
+    }
+    /**
+     * 
+     *
+     * @return string
+     */
+    public function getWorkspace() : string
+    {
+        return $this->workspace;
+    }
+    /**
+     * 
+     *
+     * @param string $workspace
+     *
+     * @return self
+     */
+    public function setWorkspace(string $workspace) : self
+    {
+        $this->workspace = $workspace;
         return $this;
     }
 }

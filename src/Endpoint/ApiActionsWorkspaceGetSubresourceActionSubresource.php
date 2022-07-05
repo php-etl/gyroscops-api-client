@@ -21,7 +21,7 @@ class ApiActionsWorkspaceGetSubresourceActionSubresource extends \Gyroscops\Api\
     }
     public function getUri() : string
     {
-        return str_replace(array('{id}'), array($this->id), '/runtime/actions/{id}/workspace');
+        return str_replace(array('{id}'), array($this->id), '/runtime/action/{id}/workspace');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

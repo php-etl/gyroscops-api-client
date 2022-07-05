@@ -58,11 +58,7 @@ class SecretSecretInputJsonldNormalizer implements DenormalizerInterface, Normal
             $object->setDescription($data['description']);
         }
         if (\array_key_exists('secrets', $data)) {
-            $values = new \ArrayObject(array(), \ArrayObject::ARRAY_AS_PROPS);
-            foreach ($data['secrets'] as $key => $value) {
-                $values[$key] = $value;
-            }
-            $object->setSecrets($values);
+            $object->setSecrets($this->denormalizer->denormalize($data['secrets'], 'Gyroscops\\Api\\Model\\SecretValueInputJsonld', 'json', $context));
         }
         return $object;
     }
@@ -79,11 +75,7 @@ class SecretSecretInputJsonldNormalizer implements DenormalizerInterface, Normal
             $data['description'] = $object->getDescription();
         }
         if (null !== $object->getSecrets()) {
-            $values = array();
-            foreach ($object->getSecrets() as $key => $value) {
-                $values[$key] = $value;
-            }
-            $data['secrets'] = $values;
+            $data['secrets'] = $this->normalizer->normalize($object->getSecrets(), 'json', $context);
         }
         return $data;
     }

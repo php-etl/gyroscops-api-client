@@ -45,35 +45,12 @@ class AbstractPipelineNormalizer implements DenormalizerInterface, NormalizerInt
         if (\array_key_exists('id', $data)) {
             $object->setId($data['id']);
         }
-        if (\array_key_exists('code', $data)) {
-            $object->setCode($data['code']);
-        }
-        if (\array_key_exists('label', $data)) {
-            $object->setLabel($data['label']);
-        }
-        if (\array_key_exists('runtimeType', $data)) {
-            $object->setRuntimeType($data['runtimeType']);
-        }
-        if (\array_key_exists('runtime', $data)) {
+        if (\array_key_exists('steps', $data)) {
             $values = array();
-            foreach ($data['runtime'] as $value) {
+            foreach ($data['steps'] as $value) {
                 $values[] = $value;
             }
-            $object->setRuntime($values);
-        }
-        if (\array_key_exists('autoload', $data)) {
-            $values_1 = array();
-            foreach ($data['autoload'] as $value_1) {
-                $values_1[] = $value_1;
-            }
-            $object->setAutoload($values_1);
-        }
-        if (\array_key_exists('steps', $data)) {
-            $values_2 = array();
-            foreach ($data['steps'] as $value_2) {
-                $values_2[] = $value_2;
-            }
-            $object->setSteps($values_2);
+            $object->setSteps($values);
         }
         return $object;
     }
@@ -83,26 +60,12 @@ class AbstractPipelineNormalizer implements DenormalizerInterface, NormalizerInt
     public function normalize($object, $format = null, array $context = array())
     {
         $data = array();
-        $data['id'] = $object->getId();
-        $data['code'] = $object->getCode();
-        $data['label'] = $object->getLabel();
-        $data['runtimeType'] = $object->getRuntimeType();
-        $values = array();
-        foreach ($object->getRuntime() as $value) {
-            $values[] = $value;
-        }
-        $data['runtime'] = $values;
-        $values_1 = array();
-        foreach ($object->getAutoload() as $value_1) {
-            $values_1[] = $value_1;
-        }
-        $data['autoload'] = $values_1;
         if (null !== $object->getSteps()) {
-            $values_2 = array();
-            foreach ($object->getSteps() as $value_2) {
-                $values_2[] = $value_2;
+            $values = array();
+            foreach ($object->getSteps() as $value) {
+                $values[] = $value;
             }
-            $data['steps'] = $values_2;
+            $data['steps'] = $values;
         }
         return $data;
     }
