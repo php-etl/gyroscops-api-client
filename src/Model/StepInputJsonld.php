@@ -37,7 +37,7 @@ class StepInputJsonld
     /**
      * 
      *
-     * @var string[]
+     * @var string[][]
      */
     protected $config;
     /**
@@ -154,20 +154,20 @@ class StepInputJsonld
     /**
      * 
      *
-     * @return string[]
+     * @return string[][]
      */
-    public function getConfig() : array
+    public function getConfig() : iterable
     {
         return $this->config;
     }
     /**
      * 
      *
-     * @param string[] $config
+     * @param string[][] $config
      *
      * @return self
      */
-    public function setConfig(array $config) : self
+    public function setConfig(iterable $config) : self
     {
         $this->config = $config;
         return $this;

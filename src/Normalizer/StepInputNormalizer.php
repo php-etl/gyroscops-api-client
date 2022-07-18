@@ -49,18 +49,22 @@ class StepInputNormalizer implements DenormalizerInterface, NormalizerInterface,
             $object->setLabel($data['label']);
         }
         if (\array_key_exists('config', $data)) {
-            $values = array();
-            foreach ($data['config'] as $value) {
-                $values[] = $value;
+            $values = new \ArrayObject(array(), \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['config'] as $key => $value) {
+                $values_1 = new \ArrayObject(array(), \ArrayObject::ARRAY_AS_PROPS);
+                foreach ($value as $key_1 => $value_1) {
+                    $values_1[$key_1] = $value_1;
+                }
+                $values[$key] = $values_1;
             }
             $object->setConfig($values);
         }
         if (\array_key_exists('probes', $data)) {
-            $values_1 = array();
-            foreach ($data['probes'] as $value_1) {
-                $values_1[] = $this->denormalizer->denormalize($value_1, 'Gyroscops\\Api\\Model\\Probe', 'json', $context);
+            $values_2 = array();
+            foreach ($data['probes'] as $value_2) {
+                $values_2[] = $this->denormalizer->denormalize($value_2, 'Gyroscops\\Api\\Model\\Probe', 'json', $context);
             }
-            $object->setProbes($values_1);
+            $object->setProbes($values_2);
         }
         return $object;
     }
@@ -78,17 +82,21 @@ class StepInputNormalizer implements DenormalizerInterface, NormalizerInterface,
         }
         if (null !== $object->getConfig()) {
             $values = array();
-            foreach ($object->getConfig() as $value) {
-                $values[] = $value;
+            foreach ($object->getConfig() as $key => $value) {
+                $values_1 = array();
+                foreach ($value as $key_1 => $value_1) {
+                    $values_1[$key_1] = $value_1;
+                }
+                $values[$key] = $values_1;
             }
             $data['config'] = $values;
         }
         if (null !== $object->getProbes()) {
-            $values_1 = array();
-            foreach ($object->getProbes() as $value_1) {
-                $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
+            $values_2 = array();
+            foreach ($object->getProbes() as $value_2) {
+                $values_2[] = $this->normalizer->normalize($value_2, 'json', $context);
             }
-            $data['probes'] = $values_1;
+            $data['probes'] = $values_2;
         }
         return $data;
     }

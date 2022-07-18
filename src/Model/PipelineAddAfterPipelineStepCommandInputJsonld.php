@@ -49,7 +49,7 @@ class PipelineAddAfterPipelineStepCommandInputJsonld
     /**
      * 
      *
-     * @var string[]
+     * @var string[][]
      */
     protected $configuration;
     /**
@@ -208,20 +208,20 @@ class PipelineAddAfterPipelineStepCommandInputJsonld
     /**
      * 
      *
-     * @return string[]
+     * @return string[][]
      */
-    public function getConfiguration() : array
+    public function getConfiguration() : iterable
     {
         return $this->configuration;
     }
     /**
      * 
      *
-     * @param string[] $configuration
+     * @param string[][] $configuration
      *
      * @return self
      */
-    public function setConfiguration(array $configuration) : self
+    public function setConfiguration(iterable $configuration) : self
     {
         $this->configuration = $configuration;
         return $this;
