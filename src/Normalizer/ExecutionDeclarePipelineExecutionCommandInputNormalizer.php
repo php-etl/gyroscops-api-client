@@ -2,35 +2,38 @@
 
 namespace Gyroscops\Api\Normalizer;
 
-use Jane\Component\JsonSchemaRuntime\Reference;
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
-use Symfony\Component\Serializer\Exception\InvalidArgumentException;
+use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+
 class ExecutionDeclarePipelineExecutionCommandInputNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+
     /**
      * @return bool
      */
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return $type === 'Gyroscops\\Api\\Model\\ExecutionDeclarePipelineExecutionCommandInput';
+        return 'Gyroscops\\Api\\Model\\ExecutionDeclarePipelineExecutionCommandInput' === $type;
     }
+
     public function supportsNormalization($data, $format = null)
     {
-        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\ExecutionDeclarePipelineExecutionCommandInput';
+        return is_object($data) && 'Gyroscops\\Api\\Model\\ExecutionDeclarePipelineExecutionCommandInput' === get_class($data);
     }
+
     /**
      * @return mixed
      */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize($data, $class, $format = null, array $context = [])
     {
         if (isset($data['$ref'])) {
             return new Reference($data['$ref'], $context['document-origin']);
@@ -48,20 +51,23 @@ class ExecutionDeclarePipelineExecutionCommandInputNormalizer implements Denorma
         if (\array_key_exists('pipeline', $data)) {
             $object->setPipeline($data['pipeline']);
         }
+
         return $object;
     }
+
     /**
      * @return array|string|int|float|bool|\ArrayObject|null
      */
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize($object, $format = null, array $context = [])
     {
-        $data = array();
+        $data = [];
         if (null !== $object->getSchedule()) {
             $data['schedule'] = $object->getSchedule();
         }
         if (null !== $object->getPipeline()) {
             $data['pipeline'] = $object->getPipeline();
         }
+
         return $data;
     }
 }

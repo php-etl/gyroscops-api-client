@@ -2,35 +2,38 @@
 
 namespace Gyroscops\Api\Normalizer;
 
-use Jane\Component\JsonSchemaRuntime\Reference;
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
-use Symfony\Component\Serializer\Exception\InvalidArgumentException;
+use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+
 class SecretSecretInputNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+
     /**
      * @return bool
      */
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return $type === 'Gyroscops\\Api\\Model\\SecretSecretInput';
+        return 'Gyroscops\\Api\\Model\\SecretSecretInput' === $type;
     }
+
     public function supportsNormalization($data, $format = null)
     {
-        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\SecretSecretInput';
+        return is_object($data) && 'Gyroscops\\Api\\Model\\SecretSecretInput' === get_class($data);
     }
+
     /**
      * @return mixed
      */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize($data, $class, $format = null, array $context = [])
     {
         if (isset($data['$ref'])) {
             return new Reference($data['$ref'], $context['document-origin']);
@@ -48,26 +51,37 @@ class SecretSecretInputNormalizer implements DenormalizerInterface, NormalizerIn
         if (\array_key_exists('description', $data)) {
             $object->setDescription($data['description']);
         }
-        if (\array_key_exists('secrets', $data)) {
-            $object->setSecrets($this->denormalizer->denormalize($data['secrets'], 'Gyroscops\\Api\\Model\\SecretValueInput', 'json', $context));
+        if (\array_key_exists('contents', $data)) {
+            $values = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['contents'] as $key => $value) {
+                $values[$key] = $value;
+            }
+            $object->setContents($values);
         }
+
         return $object;
     }
+
     /**
      * @return array|string|int|float|bool|\ArrayObject|null
      */
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize($object, $format = null, array $context = [])
     {
-        $data = array();
+        $data = [];
         if (null !== $object->getName()) {
             $data['name'] = $object->getName();
         }
         if (null !== $object->getDescription()) {
             $data['description'] = $object->getDescription();
         }
-        if (null !== $object->getSecrets()) {
-            $data['secrets'] = $this->normalizer->normalize($object->getSecrets(), 'json', $context);
+        if (null !== $object->getContents()) {
+            $values = [];
+            foreach ($object->getContents() as $key => $value) {
+                $values[$key] = $value;
+            }
+            $data['contents'] = $values;
         }
+
         return $data;
     }
 }

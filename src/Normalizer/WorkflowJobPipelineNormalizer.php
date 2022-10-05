@@ -2,35 +2,38 @@
 
 namespace Gyroscops\Api\Normalizer;
 
-use Jane\Component\JsonSchemaRuntime\Reference;
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
-use Symfony\Component\Serializer\Exception\InvalidArgumentException;
+use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+
 class WorkflowJobPipelineNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+
     /**
      * @return bool
      */
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return $type === 'Gyroscops\\Api\\Model\\WorkflowJobPipeline';
+        return 'Gyroscops\\Api\\Model\\WorkflowJobPipeline' === $type;
     }
+
     public function supportsNormalization($data, $format = null)
     {
-        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\WorkflowJobPipeline';
+        return is_object($data) && 'Gyroscops\\Api\\Model\\WorkflowJobPipeline' === get_class($data);
     }
+
     /**
      * @return mixed
      */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize($data, $class, $format = null, array $context = [])
     {
         if (isset($data['$ref'])) {
             return new Reference($data['$ref'], $context['document-origin']);
@@ -42,10 +45,9 @@ class WorkflowJobPipelineNormalizer implements DenormalizerInterface, Normalizer
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('job', $data) && $data['job'] !== null) {
+        if (\array_key_exists('job', $data) && null !== $data['job']) {
             $object->setJob($data['job']);
-        }
-        elseif (\array_key_exists('job', $data) && $data['job'] === null) {
+        } elseif (\array_key_exists('job', $data) && null === $data['job']) {
             $object->setJob(null);
         }
         if (\array_key_exists('id', $data)) {
@@ -61,56 +63,59 @@ class WorkflowJobPipelineNormalizer implements DenormalizerInterface, Normalizer
             $object->setRuntimeType($data['runtimeType']);
         }
         if (\array_key_exists('runtime', $data)) {
-            $values = array();
+            $values = [];
             foreach ($data['runtime'] as $value) {
                 $values[] = $value;
             }
             $object->setRuntime($values);
         }
         if (\array_key_exists('autoload', $data)) {
-            $values_1 = array();
+            $values_1 = [];
             foreach ($data['autoload'] as $value_1) {
                 $values_1[] = $value_1;
             }
             $object->setAutoload($values_1);
         }
         if (\array_key_exists('steps', $data)) {
-            $values_2 = array();
+            $values_2 = [];
             foreach ($data['steps'] as $value_2) {
                 $values_2[] = $value_2;
             }
             $object->setSteps($values_2);
         }
+
         return $object;
     }
+
     /**
      * @return array|string|int|float|bool|\ArrayObject|null
      */
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize($object, $format = null, array $context = [])
     {
-        $data = array();
+        $data = [];
         $data['job'] = $object->getJob();
         $data['id'] = $object->getId();
         $data['code'] = $object->getCode();
         $data['label'] = $object->getLabel();
         $data['runtimeType'] = $object->getRuntimeType();
-        $values = array();
+        $values = [];
         foreach ($object->getRuntime() as $value) {
             $values[] = $value;
         }
         $data['runtime'] = $values;
-        $values_1 = array();
+        $values_1 = [];
         foreach ($object->getAutoload() as $value_1) {
             $values_1[] = $value_1;
         }
         $data['autoload'] = $values_1;
         if (null !== $object->getSteps()) {
-            $values_2 = array();
+            $values_2 = [];
             foreach ($object->getSteps() as $value_2) {
                 $values_2[] = $value_2;
             }
             $data['steps'] = $values_2;
         }
+
         return $data;
     }
 }

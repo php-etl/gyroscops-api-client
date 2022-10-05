@@ -4,52 +4,59 @@ namespace Gyroscops\Api\Endpoint;
 
 class ScheduleOnceScheduleCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
 {
+    use \Gyroscops\Api\Runtime\Client\EndpointTrait;
+
     /**
-     * Schedule an immediate pipeline execution
+     * Schedule an immediate pipeline execution.
      *
-     * @param \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleOnceCommandInputJsonld|\Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleOnceCommandInput $requestBody 
+     * @param \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleOnceCommandInputJsonld|\Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleOnceCommandInput $requestBody
      */
     public function __construct($requestBody)
     {
         $this->body = $requestBody;
     }
-    use \Gyroscops\Api\Runtime\Client\EndpointTrait;
-    public function getMethod() : string
+
+    public function getMethod(): string
     {
         return 'POST';
     }
-    public function getUri() : string
+
+    public function getUri(): string
     {
         return '/runtime/schedule-once';
     }
-    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
+
+    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         if ($this->body instanceof \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleOnceCommandInputJsonld) {
-            return array(array('Content-Type' => array('application/ld+json')), $this->body);
+            return [['Content-Type' => ['application/ld+json']], $this->body];
         }
         if ($this->body instanceof \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleOnceCommandInput) {
-            return array(array('Content-Type' => array('application/json')), $serializer->serialize($this->body, 'json'));
+            return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
         }
         if ($this->body instanceof \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleOnceCommandInput) {
-            return array(array('Content-Type' => array('text/html')), $this->body);
+            return [['Content-Type' => ['text/html']], $this->body];
         }
-        return array(array(), null);
+
+        return [[], null];
     }
-    public function getExtraHeaders() : array
+
+    public function getExtraHeaders(): array
     {
-        return array('Accept' => array('application/json'));
+        return ['Accept' => ['application/json']];
     }
+
     /**
      * {@inheritdoc}
      *
      * @throws \Gyroscops\Api\Exception\ScheduleOnceScheduleCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\ScheduleOnceScheduleCollectionUnprocessableEntityException
      *
-     * @return null|\Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleOnceCommand
+     * @return \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleOnceCommand|null
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if (is_null($contentType) === false && (202 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (false === is_null($contentType) && (202 === $status && false !== mb_strpos($contentType, 'application/json'))) {
             return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ScheduleDeclarePipelineScheduleOnceCommand', 'json');
         }
         if (400 === $status) {
@@ -59,8 +66,9 @@ class ScheduleOnceScheduleCollection extends \Gyroscops\Api\Runtime\Client\BaseE
             throw new \Gyroscops\Api\Exception\ScheduleOnceScheduleCollectionUnprocessableEntityException();
         }
     }
-    public function getAuthenticationScopes() : array
+
+    public function getAuthenticationScopes(): array
     {
-        return array('apiKey');
+        return ['apiKey'];
     }
 }

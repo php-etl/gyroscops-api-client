@@ -5,165 +5,111 @@ namespace Gyroscops\Api\Model;
 class SecretSecretInputJsonld
 {
     /**
-     * 
-     *
      * @var mixed
      */
     protected $context;
     /**
-     * 
-     *
      * @var string
      */
     protected $id;
     /**
-     * 
-     *
      * @var string
      */
     protected $type;
     /**
-     * 
-     *
      * @var string
      */
     protected $name;
     /**
-     * 
-     *
      * @var string
      */
     protected $description;
     /**
-     * 
-     *
-     * @var SecretValueInputJsonld
+     * @var string[]
      */
-    protected $secrets;
+    protected $contents;
+
     /**
-     * 
-     *
      * @return mixed
      */
     public function getContext()
     {
         return $this->context;
     }
+
     /**
-     * 
-     *
      * @param mixed $context
-     *
-     * @return self
      */
-    public function setContext($context) : self
+    public function setContext($context): self
     {
         $this->context = $context;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getId() : string
+
+    public function getId(): string
     {
         return $this->id;
     }
-    /**
-     * 
-     *
-     * @param string $id
-     *
-     * @return self
-     */
-    public function setId(string $id) : self
+
+    public function setId(string $id): self
     {
         $this->id = $id;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getType() : string
+
+    public function getType(): string
     {
         return $this->type;
     }
-    /**
-     * 
-     *
-     * @param string $type
-     *
-     * @return self
-     */
-    public function setType(string $type) : self
+
+    public function setType(string $type): self
     {
         $this->type = $type;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getName() : string
+
+    public function getName(): string
     {
         return $this->name;
     }
-    /**
-     * 
-     *
-     * @param string $name
-     *
-     * @return self
-     */
-    public function setName(string $name) : self
+
+    public function setName(string $name): self
     {
         $this->name = $name;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getDescription() : string
+
+    public function getDescription(): string
     {
         return $this->description;
     }
-    /**
-     * 
-     *
-     * @param string $description
-     *
-     * @return self
-     */
-    public function setDescription(string $description) : self
+
+    public function setDescription(string $description): self
     {
         $this->description = $description;
+
         return $this;
     }
+
     /**
-     * 
-     *
-     * @return SecretValueInputJsonld
+     * @return string[]
      */
-    public function getSecrets() : SecretValueInputJsonld
+    public function getContents(): iterable
     {
-        return $this->secrets;
+        return $this->contents;
     }
+
     /**
-     * 
-     *
-     * @param SecretValueInputJsonld $secrets
-     *
-     * @return self
+     * @param string[] $contents
      */
-    public function setSecrets(SecretValueInputJsonld $secrets) : self
+    public function setContents(iterable $contents): self
     {
-        $this->secrets = $secrets;
+        $this->contents = $contents;
+
         return $this;
     }
 }

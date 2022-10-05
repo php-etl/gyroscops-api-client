@@ -4,7 +4,9 @@ namespace Gyroscops\Api\Endpoint;
 
 class DeleteOrganizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
 {
+    use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $id;
+
     /**
      * Removes the Organization resource.
      *
@@ -14,19 +16,22 @@ class DeleteOrganizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
     {
         $this->id = $id;
     }
-    use \Gyroscops\Api\Runtime\Client\EndpointTrait;
-    public function getMethod() : string
+
+    public function getMethod(): string
     {
         return 'DELETE';
     }
-    public function getUri() : string
+
+    public function getUri(): string
     {
-        return str_replace(array('{id}'), array($this->id), '/authentication/organization/{id}');
+        return str_replace(['{id}'], [$this->id], '/authentication/organization/{id}');
     }
-    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
+
+    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        return array(array(), null);
+        return [[], null];
     }
+
     /**
      * {@inheritdoc}
      *
@@ -43,8 +48,9 @@ class DeleteOrganizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
             throw new \Gyroscops\Api\Exception\DeleteOrganizationItemNotFoundException();
         }
     }
-    public function getAuthenticationScopes() : array
+
+    public function getAuthenticationScopes(): array
     {
-        return array('apiKey');
+        return ['apiKey'];
     }
 }

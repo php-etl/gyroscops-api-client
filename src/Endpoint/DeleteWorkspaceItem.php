@@ -4,7 +4,9 @@ namespace Gyroscops\Api\Endpoint;
 
 class DeleteWorkspaceItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
 {
+    use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $id;
+
     /**
      * Removes the Workspace resource.
      *
@@ -14,19 +16,22 @@ class DeleteWorkspaceItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
     {
         $this->id = $id;
     }
-    use \Gyroscops\Api\Runtime\Client\EndpointTrait;
-    public function getMethod() : string
+
+    public function getMethod(): string
     {
         return 'DELETE';
     }
-    public function getUri() : string
+
+    public function getUri(): string
     {
-        return str_replace(array('{id}'), array($this->id), '/authentication/workspace/{id}');
+        return str_replace(['{id}'], [$this->id], '/authentication/workspace/{id}');
     }
-    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
+
+    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        return array(array(), null);
+        return [[], null];
     }
+
     /**
      * {@inheritdoc}
      *
@@ -43,8 +48,9 @@ class DeleteWorkspaceItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
             throw new \Gyroscops\Api\Exception\DeleteWorkspaceItemNotFoundException();
         }
     }
-    public function getAuthenticationScopes() : array
+
+    public function getAuthenticationScopes(): array
     {
-        return array('apiKey');
+        return ['apiKey'];
     }
 }

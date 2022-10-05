@@ -5,192 +5,139 @@ namespace Gyroscops\Api\Model;
 class Organization
 {
     /**
-     * 
-     *
      * @var string
      */
     protected $id;
     /**
-     * 
-     *
      * @var string[]
      */
     protected $authorizations;
     /**
-     * 
-     *
      * @var string
      */
     protected $name;
     /**
-     * 
-     *
      * @var string
      */
     protected $slug;
     /**
-     * 
-     *
      * @var string[]
      */
     protected $users;
     /**
-     * 
-     *
      * @var string[]
      */
     protected $externalCollaborators;
     /**
-     * 
-     *
      * @var string[]
      */
     protected $workspaces;
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getId() : string
+
+    public function getId(): string
     {
         return $this->id;
     }
-    /**
-     * 
-     *
-     * @param string $id
-     *
-     * @return self
-     */
-    public function setId(string $id) : self
+
+    public function setId(string $id): self
     {
         $this->id = $id;
+
         return $this;
     }
+
     /**
-     * 
-     *
      * @return string[]
      */
-    public function getAuthorizations() : array
+    public function getAuthorizations(): array
     {
         return $this->authorizations;
     }
+
     /**
-     * 
-     *
      * @param string[] $authorizations
-     *
-     * @return self
      */
-    public function setAuthorizations(array $authorizations) : self
+    public function setAuthorizations(array $authorizations): self
     {
         $this->authorizations = $authorizations;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getName() : string
+
+    public function getName(): string
     {
         return $this->name;
     }
-    /**
-     * 
-     *
-     * @param string $name
-     *
-     * @return self
-     */
-    public function setName(string $name) : self
+
+    public function setName(string $name): self
     {
         $this->name = $name;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getSlug() : string
+
+    public function getSlug(): string
     {
         return $this->slug;
     }
-    /**
-     * 
-     *
-     * @param string $slug
-     *
-     * @return self
-     */
-    public function setSlug(string $slug) : self
+
+    public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
         return $this;
     }
+
     /**
-     * 
-     *
      * @return string[]
      */
-    public function getUsers() : array
+    public function getUsers(): array
     {
         return $this->users;
     }
+
     /**
-     * 
-     *
      * @param string[] $users
-     *
-     * @return self
      */
-    public function setUsers(array $users) : self
+    public function setUsers(array $users): self
     {
         $this->users = $users;
+
         return $this;
     }
+
     /**
-     * 
-     *
      * @return string[]
      */
-    public function getExternalCollaborators() : array
+    public function getExternalCollaborators(): array
     {
         return $this->externalCollaborators;
     }
+
     /**
-     * 
-     *
      * @param string[] $externalCollaborators
-     *
-     * @return self
      */
-    public function setExternalCollaborators(array $externalCollaborators) : self
+    public function setExternalCollaborators(array $externalCollaborators): self
     {
         $this->externalCollaborators = $externalCollaborators;
+
         return $this;
     }
+
     /**
-     * 
-     *
      * @return string[]
      */
-    public function getWorkspaces() : array
+    public function getWorkspaces(): array
     {
         return $this->workspaces;
     }
+
     /**
-     * 
-     *
      * @param string[] $workspaces
-     *
-     * @return self
      */
-    public function setWorkspaces(array $workspaces) : self
+    public function setWorkspaces(array $workspaces): self
     {
         $this->workspaces = $workspaces;
+
         return $this;
     }
 }

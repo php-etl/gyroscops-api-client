@@ -5,84 +5,57 @@ namespace Gyroscops\Api\Model;
 class SecretSecretInput
 {
     /**
-     * 
-     *
      * @var string
      */
     protected $name;
     /**
-     * 
-     *
      * @var string
      */
     protected $description;
     /**
-     * 
-     *
-     * @var SecretValueInput
+     * @var string[]
      */
-    protected $secrets;
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getName() : string
+    protected $contents;
+
+    public function getName(): string
     {
         return $this->name;
     }
-    /**
-     * 
-     *
-     * @param string $name
-     *
-     * @return self
-     */
-    public function setName(string $name) : self
+
+    public function setName(string $name): self
     {
         $this->name = $name;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getDescription() : string
+
+    public function getDescription(): string
     {
         return $this->description;
     }
-    /**
-     * 
-     *
-     * @param string $description
-     *
-     * @return self
-     */
-    public function setDescription(string $description) : self
+
+    public function setDescription(string $description): self
     {
         $this->description = $description;
+
         return $this;
     }
+
     /**
-     * 
-     *
-     * @return SecretValueInput
+     * @return string[]
      */
-    public function getSecrets() : SecretValueInput
+    public function getContents(): iterable
     {
-        return $this->secrets;
+        return $this->contents;
     }
+
     /**
-     * 
-     *
-     * @param SecretValueInput $secrets
-     *
-     * @return self
+     * @param string[] $contents
      */
-    public function setSecrets(SecretValueInput $secrets) : self
+    public function setContents(iterable $contents): self
     {
-        $this->secrets = $secrets;
+        $this->contents = $contents;
+
         return $this;
     }
 }

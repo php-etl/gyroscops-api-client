@@ -4,38 +4,44 @@ namespace Gyroscops\Api\Endpoint;
 
 class PatchUserAuthorizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
 {
+    use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $id;
+
     /**
      * Updates the UserAuthorization resource.
      *
      * @param string $id Resource identifier
-     * @param \Gyroscops\Api\Model\UserAuthorization $requestBody 
      */
     public function __construct(string $id, \Gyroscops\Api\Model\UserAuthorization $requestBody)
     {
         $this->id = $id;
         $this->body = $requestBody;
     }
-    use \Gyroscops\Api\Runtime\Client\EndpointTrait;
-    public function getMethod() : string
+
+    public function getMethod(): string
     {
         return 'PATCH';
     }
-    public function getUri() : string
+
+    public function getUri(): string
     {
-        return str_replace(array('{id}'), array($this->id), '/authentication/user-authorization/{id}');
+        return str_replace(['{id}'], [$this->id], '/authentication/user-authorization/{id}');
     }
-    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
+
+    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         if ($this->body instanceof \Gyroscops\Api\Model\UserAuthorization) {
-            return array(array('Content-Type' => array('application/merge-patch+json')), $this->body);
+            return [['Content-Type' => ['application/merge-patch+json']], $this->body];
         }
-        return array(array(), null);
+
+        return [[], null];
     }
-    public function getExtraHeaders() : array
+
+    public function getExtraHeaders(): array
     {
-        return array('Accept' => array('application/json'));
+        return ['Accept' => ['application/json']];
     }
+
     /**
      * {@inheritdoc}
      *
@@ -43,11 +49,11 @@ class PatchUserAuthorizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
      * @throws \Gyroscops\Api\Exception\PatchUserAuthorizationItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\PatchUserAuthorizationItemNotFoundException
      *
-     * @return null|\Gyroscops\Api\Model\UserAuthorization
+     * @return \Gyroscops\Api\Model\UserAuthorization|null
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (false === is_null($contentType) && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
             return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\UserAuthorization', 'json');
         }
         if (400 === $status) {
@@ -60,8 +66,9 @@ class PatchUserAuthorizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
             throw new \Gyroscops\Api\Exception\PatchUserAuthorizationItemNotFoundException();
         }
     }
-    public function getAuthenticationScopes() : array
+
+    public function getAuthenticationScopes(): array
     {
-        return array('apiKey');
+        return ['apiKey'];
     }
 }

@@ -4,32 +4,37 @@ namespace Gyroscops\Api\Endpoint;
 
 class DeletePipelineStepPipelineItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
 {
+    use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $code;
     protected $id;
+
     /**
-     * Removes a step from a pipeline
+     * Removes a step from a pipeline.
      *
      * @param string $code Step resource code
-     * @param string $id Resource identifier
+     * @param string $id   Resource identifier
      */
     public function __construct(string $code, string $id)
     {
         $this->code = $code;
         $this->id = $id;
     }
-    use \Gyroscops\Api\Runtime\Client\EndpointTrait;
-    public function getMethod() : string
+
+    public function getMethod(): string
     {
         return 'DELETE';
     }
-    public function getUri() : string
+
+    public function getUri(): string
     {
-        return str_replace(array('{code}', '{id}'), array($this->code, $this->id), '/runtime/pipeline/{id}/step/{code}');
+        return str_replace(['{code}', '{id}'], [$this->code, $this->id], '/runtime/pipeline/{id}/step/{code}');
     }
-    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
+
+    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        return array(array(), null);
+        return [[], null];
     }
+
     /**
      * {@inheritdoc}
      *
@@ -46,8 +51,9 @@ class DeletePipelineStepPipelineItem extends \Gyroscops\Api\Runtime\Client\BaseE
             throw new \Gyroscops\Api\Exception\DeletePipelineStepPipelineItemNotFoundException();
         }
     }
-    public function getAuthenticationScopes() : array
+
+    public function getAuthenticationScopes(): array
     {
-        return array('apiKey');
+        return ['apiKey'];
     }
 }

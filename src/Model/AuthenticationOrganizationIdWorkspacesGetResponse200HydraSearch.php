@@ -5,111 +5,73 @@ namespace Gyroscops\Api\Model;
 class AuthenticationOrganizationIdWorkspacesGetResponse200HydraSearch
 {
     /**
-     * 
-     *
      * @var string
      */
     protected $type;
     /**
-     * 
-     *
      * @var string
      */
     protected $hydraTemplate;
     /**
-     * 
-     *
      * @var string
      */
     protected $hydraVariableRepresentation;
     /**
-     * 
-     *
      * @var AuthenticationOrganizationIdWorkspacesGetResponse200HydraSearchHydraMappingItem[]
      */
     protected $hydraMapping;
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getType() : string
+
+    public function getType(): string
     {
         return $this->type;
     }
-    /**
-     * 
-     *
-     * @param string $type
-     *
-     * @return self
-     */
-    public function setType(string $type) : self
+
+    public function setType(string $type): self
     {
         $this->type = $type;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getHydraTemplate() : string
+
+    public function getHydraTemplate(): string
     {
         return $this->hydraTemplate;
     }
-    /**
-     * 
-     *
-     * @param string $hydraTemplate
-     *
-     * @return self
-     */
-    public function setHydraTemplate(string $hydraTemplate) : self
+
+    public function setHydraTemplate(string $hydraTemplate): self
     {
         $this->hydraTemplate = $hydraTemplate;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getHydraVariableRepresentation() : string
+
+    public function getHydraVariableRepresentation(): string
     {
         return $this->hydraVariableRepresentation;
     }
-    /**
-     * 
-     *
-     * @param string $hydraVariableRepresentation
-     *
-     * @return self
-     */
-    public function setHydraVariableRepresentation(string $hydraVariableRepresentation) : self
+
+    public function setHydraVariableRepresentation(string $hydraVariableRepresentation): self
     {
         $this->hydraVariableRepresentation = $hydraVariableRepresentation;
+
         return $this;
     }
+
     /**
-     * 
-     *
      * @return AuthenticationOrganizationIdWorkspacesGetResponse200HydraSearchHydraMappingItem[]
      */
-    public function getHydraMapping() : array
+    public function getHydraMapping(): array
     {
         return $this->hydraMapping;
     }
+
     /**
-     * 
-     *
      * @param AuthenticationOrganizationIdWorkspacesGetResponse200HydraSearchHydraMappingItem[] $hydraMapping
-     *
-     * @return self
      */
-    public function setHydraMapping(array $hydraMapping) : self
+    public function setHydraMapping(array $hydraMapping): self
     {
         $this->hydraMapping = $hydraMapping;
+
         return $this;
     }
 }

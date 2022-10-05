@@ -2,35 +2,38 @@
 
 namespace Gyroscops\Api\Normalizer;
 
-use Jane\Component\JsonSchemaRuntime\Reference;
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
-use Symfony\Component\Serializer\Exception\InvalidArgumentException;
+use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+
 class PipelineAddAfterPipelineStepCommandInputJsonldNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+
     /**
      * @return bool
      */
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return $type === 'Gyroscops\\Api\\Model\\PipelineAddAfterPipelineStepCommandInputJsonld';
+        return 'Gyroscops\\Api\\Model\\PipelineAddAfterPipelineStepCommandInputJsonld' === $type;
     }
+
     public function supportsNormalization($data, $format = null)
     {
-        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\PipelineAddAfterPipelineStepCommandInputJsonld';
+        return is_object($data) && 'Gyroscops\\Api\\Model\\PipelineAddAfterPipelineStepCommandInputJsonld' === get_class($data);
     }
+
     /**
      * @return mixed
      */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize($data, $class, $format = null, array $context = [])
     {
         if (isset($data['$ref'])) {
             return new Reference($data['$ref'], $context['document-origin']);
@@ -64,9 +67,9 @@ class PipelineAddAfterPipelineStepCommandInputJsonldNormalizer implements Denorm
             $object->setLabel($data['label']);
         }
         if (\array_key_exists('configuration', $data)) {
-            $values = new \ArrayObject(array(), \ArrayObject::ARRAY_AS_PROPS);
+            $values = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
             foreach ($data['configuration'] as $key => $value) {
-                $values_1 = new \ArrayObject(array(), \ArrayObject::ARRAY_AS_PROPS);
+                $values_1 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
                 foreach ($value as $key_1 => $value_1) {
                     $values_1[$key_1] = $value_1;
                 }
@@ -75,20 +78,22 @@ class PipelineAddAfterPipelineStepCommandInputJsonldNormalizer implements Denorm
             $object->setConfiguration($values);
         }
         if (\array_key_exists('probes', $data)) {
-            $values_2 = array();
+            $values_2 = [];
             foreach ($data['probes'] as $value_2) {
                 $values_2[] = $this->denormalizer->denormalize($value_2, 'Gyroscops\\Api\\Model\\ProbeJsonld', 'json', $context);
             }
             $object->setProbes($values_2);
         }
+
         return $object;
     }
+
     /**
      * @return array|string|int|float|bool|\ArrayObject|null
      */
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize($object, $format = null, array $context = [])
     {
-        $data = array();
+        $data = [];
         if (null !== $object->getPipeline()) {
             $data['pipeline'] = $object->getPipeline();
         }
@@ -102,9 +107,9 @@ class PipelineAddAfterPipelineStepCommandInputJsonldNormalizer implements Denorm
             $data['label'] = $object->getLabel();
         }
         if (null !== $object->getConfiguration()) {
-            $values = array();
+            $values = [];
             foreach ($object->getConfiguration() as $key => $value) {
-                $values_1 = array();
+                $values_1 = [];
                 foreach ($value as $key_1 => $value_1) {
                     $values_1[$key_1] = $value_1;
                 }
@@ -113,12 +118,13 @@ class PipelineAddAfterPipelineStepCommandInputJsonldNormalizer implements Denorm
             $data['configuration'] = $values;
         }
         if (null !== $object->getProbes()) {
-            $values_2 = array();
+            $values_2 = [];
             foreach ($object->getProbes() as $value_2) {
                 $values_2[] = $this->normalizer->normalize($value_2, 'json', $context);
             }
             $data['probes'] = $values_2;
         }
+
         return $data;
     }
 }

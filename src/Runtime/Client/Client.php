@@ -8,6 +8,7 @@ use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
 use Symfony\Component\Serializer\SerializerInterface;
+
 abstract class Client
 {
     public const FETCH_RESPONSE = 'response';
@@ -28,6 +29,7 @@ abstract class Client
      * @var StreamFactoryInterface
      */
     protected $streamFactory;
+
     public function __construct(ClientInterface $httpClient, RequestFactoryInterface $requestFactory, SerializerInterface $serializer, StreamFactoryInterface $streamFactory)
     {
         $this->httpClient = $httpClient;
@@ -35,12 +37,13 @@ abstract class Client
         $this->serializer = $serializer;
         $this->streamFactory = $streamFactory;
     }
+
     public function executeEndpoint(Endpoint $endpoint, string $fetch = self::FETCH_OBJECT)
     {
         [$bodyHeaders, $body] = $endpoint->getBody($this->serializer, $this->streamFactory);
         $queryString = $endpoint->getQueryString();
         $uriGlue = false === strpos($endpoint->getUri(), '?') ? '?' : '&';
-        $uri = $queryString !== '' ? $endpoint->getUri() . $uriGlue . $queryString : $endpoint->getUri();
+        $uri = '' !== $queryString ? $endpoint->getUri().$uriGlue.$queryString : $endpoint->getUri();
         $request = $this->requestFactory->createRequest($endpoint->getMethod(), $uri);
         if ($body) {
             if ($body instanceof StreamInterface) {
@@ -64,6 +67,7 @@ abstract class Client
             }
             $request = $request->withHeader(AuthenticationRegistry::SCOPES_HEADER, $scopes);
         }
+
         return $endpoint->parseResponse($this->httpClient->sendRequest($request), $this->serializer, $fetch);
     }
 }
