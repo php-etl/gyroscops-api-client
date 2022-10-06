@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Endpoint;
 
 class PostAkeneoInstanceCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
@@ -49,14 +51,14 @@ class PostAkeneoInstanceCollection extends \Gyroscops\Api\Runtime\Client\BaseEnd
     /**
      * {@inheritdoc}
      *
+     * @return \Gyroscops\Api\Model\AkeneoInstance|null
+     *
      * @throws \Gyroscops\Api\Exception\PostAkeneoInstanceCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostAkeneoInstanceCollectionUnprocessableEntityException
-     *
-     * @return \Gyroscops\Api\Model\AkeneoInstance|null
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if (false === is_null($contentType) && (201 === $status && false !== mb_strpos($contentType, 'application/json'))) {
+        if (false === (null === $contentType) && (201 === $status && false !== mb_strpos($contentType, 'application/json'))) {
             return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\AkeneoInstance', 'json');
         }
         if (400 === $status) {

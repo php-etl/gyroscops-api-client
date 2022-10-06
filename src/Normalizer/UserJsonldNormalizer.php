@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
@@ -17,20 +19,21 @@ class UserJsonldNormalizer implements DenormalizerInterface, NormalizerInterface
     use NormalizerAwareTrait;
     use CheckArray;
 
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+    public function supportsDenormalization($data, $type, $format = null): bool
     {
         return 'Gyroscops\\Api\\Model\\UserJsonld' === $type;
     }
 
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && 'Gyroscops\\Api\\Model\\UserJsonld' === get_class($data);
+        return \is_object($data) && 'Gyroscops\\Api\\Model\\UserJsonld' === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -187,6 +190,9 @@ class UserJsonldNormalizer implements DenormalizerInterface, NormalizerInterface
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

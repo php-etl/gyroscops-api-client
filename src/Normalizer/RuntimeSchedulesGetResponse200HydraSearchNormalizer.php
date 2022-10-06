@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
@@ -17,20 +19,21 @@ class RuntimeSchedulesGetResponse200HydraSearchNormalizer implements Denormalize
     use NormalizerAwareTrait;
     use CheckArray;
 
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+    public function supportsDenormalization($data, $type, $format = null): bool
     {
         return 'Gyroscops\\Api\\Model\\RuntimeSchedulesGetResponse200HydraSearch' === $type;
     }
 
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && 'Gyroscops\\Api\\Model\\RuntimeSchedulesGetResponse200HydraSearch' === get_class($data);
+        return \is_object($data) && 'Gyroscops\\Api\\Model\\RuntimeSchedulesGetResponse200HydraSearch' === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -74,6 +77,9 @@ class RuntimeSchedulesGetResponse200HydraSearchNormalizer implements Denormalize
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

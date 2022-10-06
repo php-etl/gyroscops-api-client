@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Endpoint;
 
 class PostReferralRequestCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
@@ -49,14 +51,14 @@ class PostReferralRequestCollection extends \Gyroscops\Api\Runtime\Client\BaseEn
     /**
      * {@inheritdoc}
      *
+     * @return \Gyroscops\Api\Model\ReferralRequestReferralRequestRead|null
+     *
      * @throws \Gyroscops\Api\Exception\PostReferralRequestCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostReferralRequestCollectionUnprocessableEntityException
-     *
-     * @return \Gyroscops\Api\Model\ReferralRequestReferralRequestRead|null
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if (false === is_null($contentType) && (201 === $status && false !== mb_strpos($contentType, 'application/json'))) {
+        if (false === (null === $contentType) && (201 === $status && false !== mb_strpos($contentType, 'application/json'))) {
             return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ReferralRequestReferralRequestRead', 'json');
         }
         if (400 === $status) {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Model;
 
 class RuntimePipelineStepProbesGetResponse200HydraSearch

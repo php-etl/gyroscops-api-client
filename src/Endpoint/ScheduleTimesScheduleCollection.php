@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Endpoint;
 
 class ScheduleTimesScheduleCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
@@ -49,14 +51,14 @@ class ScheduleTimesScheduleCollection extends \Gyroscops\Api\Runtime\Client\Base
     /**
      * {@inheritdoc}
      *
+     * @return \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleTimesCommand|null
+     *
      * @throws \Gyroscops\Api\Exception\ScheduleTimesScheduleCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\ScheduleTimesScheduleCollectionUnprocessableEntityException
-     *
-     * @return \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleTimesCommand|null
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if (false === is_null($contentType) && (202 === $status && false !== mb_strpos($contentType, 'application/json'))) {
+        if (false === (null === $contentType) && (202 === $status && false !== mb_strpos($contentType, 'application/json'))) {
             return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ScheduleDeclarePipelineScheduleTimesCommand', 'json');
         }
         if (400 === $status) {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Endpoint;
 
 class GetVariableFromConfigMapItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
@@ -40,13 +42,13 @@ class GetVariableFromConfigMapItem extends \Gyroscops\Api\Runtime\Client\BaseEnd
     /**
      * {@inheritdoc}
      *
-     * @throws \Gyroscops\Api\Exception\GetVariableFromConfigMapItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\VariableFromConfigMap|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetVariableFromConfigMapItemNotFoundException
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if (false === is_null($contentType) && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
+        if (false === (null === $contentType) && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
             return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\VariableFromConfigMap', 'json');
         }
         if (404 === $status) {

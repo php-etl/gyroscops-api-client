@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Endpoint;
 
 class PutSubscriptionItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
@@ -52,15 +54,15 @@ class PutSubscriptionItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
     /**
      * {@inheritdoc}
      *
+     * @return \Gyroscops\Api\Model\Subscription|null
+     *
      * @throws \Gyroscops\Api\Exception\PutSubscriptionItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PutSubscriptionItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\PutSubscriptionItemNotFoundException
-     *
-     * @return \Gyroscops\Api\Model\Subscription|null
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if (false === is_null($contentType) && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
+        if (false === (null === $contentType) && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
             return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Subscription', 'json');
         }
         if (400 === $status) {

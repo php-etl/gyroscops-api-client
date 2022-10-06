@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Endpoint;
 
 class DeleteWorkspaceItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
@@ -36,8 +38,6 @@ class DeleteWorkspaceItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
      * {@inheritdoc}
      *
      * @throws \Gyroscops\Api\Exception\DeleteWorkspaceItemNotFoundException
-     *
-     * @return null
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {

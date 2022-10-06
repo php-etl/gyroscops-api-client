@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Endpoint;
 
 class AddValueConfigMapCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
@@ -45,14 +47,14 @@ class AddValueConfigMapCollection extends \Gyroscops\Api\Runtime\Client\BaseEndp
     /**
      * {@inheritdoc}
      *
+     * @return \Gyroscops\Api\Model\ConfigMap[]|null
+     *
      * @throws \Gyroscops\Api\Exception\AddValueConfigMapCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\AddValueConfigMapCollectionUnprocessableEntityException
-     *
-     * @return \Gyroscops\Api\Model\ConfigMap[]|null
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if (false === is_null($contentType) && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
+        if (false === (null === $contentType) && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
             return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ConfigMap[]', 'json');
         }
         if (400 === $status) {

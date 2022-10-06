@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Endpoint;
 
 class GetExecutionWorkflowJobItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
@@ -40,13 +42,13 @@ class GetExecutionWorkflowJobItem extends \Gyroscops\Api\Runtime\Client\BaseEndp
     /**
      * {@inheritdoc}
      *
-     * @throws \Gyroscops\Api\Exception\GetExecutionWorkflowJobItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\ExecutionWorkflowJob|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetExecutionWorkflowJobItemNotFoundException
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if (false === is_null($contentType) && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
+        if (false === (null === $contentType) && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
             return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ExecutionWorkflowJob', 'json');
         }
         if (404 === $status) {

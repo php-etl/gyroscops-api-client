@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Endpoint;
 
 class PatchUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
@@ -45,15 +47,15 @@ class PatchUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implement
     /**
      * {@inheritdoc}
      *
+     * @return \Gyroscops\Api\Model\User|null
+     *
      * @throws \Gyroscops\Api\Exception\PatchUserItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PatchUserItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\PatchUserItemNotFoundException
-     *
-     * @return \Gyroscops\Api\Model\User|null
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if (false === is_null($contentType) && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
+        if (false === (null === $contentType) && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
             return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\User', 'json');
         }
         if (400 === $status) {

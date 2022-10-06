@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Endpoint;
 
 class PostVariableFromConfigMapCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
@@ -49,14 +51,14 @@ class PostVariableFromConfigMapCollection extends \Gyroscops\Api\Runtime\Client\
     /**
      * {@inheritdoc}
      *
+     * @return \Gyroscops\Api\Model\VariableFromConfigMap|null
+     *
      * @throws \Gyroscops\Api\Exception\PostVariableFromConfigMapCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostVariableFromConfigMapCollectionUnprocessableEntityException
-     *
-     * @return \Gyroscops\Api\Model\VariableFromConfigMap|null
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if (false === is_null($contentType) && (201 === $status && false !== mb_strpos($contentType, 'application/json'))) {
+        if (false === (null === $contentType) && (201 === $status && false !== mb_strpos($contentType, 'application/json'))) {
             return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\VariableFromConfigMap', 'json');
         }
         if (400 === $status) {

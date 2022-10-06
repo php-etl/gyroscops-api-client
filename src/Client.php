@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api;
 
 class Client extends \Gyroscops\Api\Runtime\Client\Client
@@ -7,9 +9,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\PostForgotPasswordBadRequestException
-     *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\PostForgotPasswordBadRequestException
      */
     public function postForgotPassword(?\stdClass $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -19,9 +21,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetForgotPasswordNotFoundException
-     *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetForgotPasswordNotFoundException
      */
     public function getForgotPassword(string $token, string $fetch = self::FETCH_OBJECT)
     {
@@ -31,10 +33,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\PostForgotPasswordTokenBadRequestException
      * @throws \Gyroscops\Api\Exception\PostForgotPasswordTokenNotFoundException
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
      */
     public function postForgotPasswordToken(string $token, ?\stdClass $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -57,9 +59,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\DeleteOfferItemNotFoundException
-     *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\DeleteOfferItemNotFoundException
      */
     public function deleteOfferItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -72,9 +74,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetOfferItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\Offer|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetOfferItemNotFoundException
      */
     public function getOfferItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -88,11 +90,11 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\Offer|null $requestBody
      * @param string                          $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\Offer|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\PatchOfferItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PatchOfferItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\PatchOfferItemNotFoundException
-     *
-     * @return \Gyroscops\Api\Model\Offer|\Psr\Http\Message\ResponseInterface|null
      */
     public function patchOfferItem(string $id, ?Model\Offer $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -106,11 +108,11 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\OfferJsonld|\Gyroscops\Api\Model\Offer|null $requestBody
      * @param string                                                           $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\Offer|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\PutOfferItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PutOfferItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\PutOfferItemNotFoundException
-     *
-     * @return \Gyroscops\Api\Model\Offer|\Psr\Http\Message\ResponseInterface|null
      */
     public function putOfferItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -158,9 +160,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\DeleteOrganizationItemNotFoundException
-     *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\DeleteOrganizationItemNotFoundException
      */
     public function deleteOrganizationItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -173,9 +175,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetOrganizationItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\Organization|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetOrganizationItemNotFoundException
      */
     public function getOrganizationItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -189,11 +191,11 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\Organization|null $requestBody
      * @param string                                 $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\Organization|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\PatchOrganizationItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PatchOrganizationItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\PatchOrganizationItemNotFoundException
-     *
-     * @return \Gyroscops\Api\Model\Organization|\Psr\Http\Message\ResponseInterface|null
      */
     public function patchOrganizationItem(string $id, ?Model\Organization $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -207,11 +209,11 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\OrganizationJsonld|\Gyroscops\Api\Model\Organization|null $requestBody
      * @param string                                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\Organization|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\PutOrganizationItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PutOrganizationItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\PutOrganizationItemNotFoundException
-     *
-     * @return \Gyroscops\Api\Model\Organization|\Psr\Http\Message\ResponseInterface|null
      */
     public function putOrganizationItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -313,10 +315,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\OrganizationJsonld|\Gyroscops\Api\Model\Organization|null $requestBody
      * @param string                                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\Organization|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\PostOrganizationCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostOrganizationCollectionUnprocessableEntityException
-     *
-     * @return \Gyroscops\Api\Model\Organization|\Psr\Http\Message\ResponseInterface|null
      */
     public function postOrganizationCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -329,9 +331,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\DeleteSubscriptionItemNotFoundException
-     *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\DeleteSubscriptionItemNotFoundException
      */
     public function deleteSubscriptionItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -344,9 +346,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetSubscriptionItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\Subscription|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetSubscriptionItemNotFoundException
      */
     public function getSubscriptionItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -360,11 +362,11 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\Subscription|null $requestBody
      * @param string                                 $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\Subscription|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\PatchSubscriptionItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PatchSubscriptionItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\PatchSubscriptionItemNotFoundException
-     *
-     * @return \Gyroscops\Api\Model\Subscription|\Psr\Http\Message\ResponseInterface|null
      */
     public function patchSubscriptionItem(string $id, ?Model\Subscription $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -377,10 +379,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\SubscriptionJsonld|\Gyroscops\Api\Model\Subscription|null $requestBody
      * @param string                                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\Subscription|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\PostSubscriptionCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostSubscriptionCollectionUnprocessableEntityException
-     *
-     * @return \Gyroscops\Api\Model\Subscription|\Psr\Http\Message\ResponseInterface|null
      */
     public function postSubscriptionCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -394,11 +396,11 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\SubscriptionJsonld|\Gyroscops\Api\Model\Subscription|null $requestBody
      * @param string                                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\Subscription|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\PutSubscriptionItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PutSubscriptionItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\PutSubscriptionItemNotFoundException
-     *
-     * @return \Gyroscops\Api\Model\Subscription|\Psr\Http\Message\ResponseInterface|null
      */
     public function putSubscriptionItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -493,9 +495,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\DeleteUserAuthorizationItemNotFoundException
-     *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\DeleteUserAuthorizationItemNotFoundException
      */
     public function deleteUserAuthorizationItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -508,9 +510,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetUserAuthorizationItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\UserAuthorization|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetUserAuthorizationItemNotFoundException
      */
     public function getUserAuthorizationItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -524,11 +526,11 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\UserAuthorization|null $requestBody
      * @param string                                      $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\UserAuthorization|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\PatchUserAuthorizationItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PatchUserAuthorizationItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\PatchUserAuthorizationItemNotFoundException
-     *
-     * @return \Gyroscops\Api\Model\UserAuthorization|\Psr\Http\Message\ResponseInterface|null
      */
     public function patchUserAuthorizationItem(string $id, ?Model\UserAuthorization $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -542,11 +544,11 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\UserAuthorizationJsonld|\Gyroscops\Api\Model\UserAuthorization|null $requestBody
      * @param string                                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\UserAuthorization|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\PutUserAuthorizationItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PutUserAuthorizationItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\PutUserAuthorizationItemNotFoundException
-     *
-     * @return \Gyroscops\Api\Model\UserAuthorization|\Psr\Http\Message\ResponseInterface|null
      */
     public function putUserAuthorizationItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -576,10 +578,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\UserAuthorizationJsonld|\Gyroscops\Api\Model\UserAuthorization|null $requestBody
      * @param string                                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\UserAuthorization|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\PostUserAuthorizationCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostUserAuthorizationCollectionUnprocessableEntityException
-     *
-     * @return \Gyroscops\Api\Model\UserAuthorization|\Psr\Http\Message\ResponseInterface|null
      */
     public function postUserAuthorizationCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -592,9 +594,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\DeleteUserItemNotFoundException
-     *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\DeleteUserItemNotFoundException
      */
     public function deleteUserItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -607,9 +609,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetUserItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\User|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetUserItemNotFoundException
      */
     public function getUserItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -623,11 +625,11 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\User|null $requestBody
      * @param string                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\User|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\PatchUserItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PatchUserItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\PatchUserItemNotFoundException
-     *
-     * @return \Gyroscops\Api\Model\User|\Psr\Http\Message\ResponseInterface|null
      */
     public function patchUserItem(string $id, ?Model\User $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -641,11 +643,11 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\UserJsonld|\Gyroscops\Api\Model\User|null $requestBody
      * @param string                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\User|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\PutUserItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PutUserItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\PutUserItemNotFoundException
-     *
-     * @return \Gyroscops\Api\Model\User|\Psr\Http\Message\ResponseInterface|null
      */
     public function putUserItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -677,11 +679,11 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\UserUserChangePasswordInput|null $requestBody
      * @param string                                                $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\User|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\ChangePasswordUserItemBadRequestException
      * @throws \Gyroscops\Api\Exception\ChangePasswordUserItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\ChangePasswordUserItemNotFoundException
-     *
-     * @return \Gyroscops\Api\Model\User|\Psr\Http\Message\ResponseInterface|null
      */
     public function changePasswordUserItem(string $id, ?Model\UserUserChangePasswordInput $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -711,10 +713,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\UserJsonld|\Gyroscops\Api\Model\User|null $requestBody
      * @param string                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\User|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\PostUserCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostUserCollectionUnprocessableEntityException
-     *
-     * @return \Gyroscops\Api\Model\User|\Psr\Http\Message\ResponseInterface|null
      */
     public function postUserCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -727,9 +729,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\DeleteWorkspaceItemNotFoundException
-     *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\DeleteWorkspaceItemNotFoundException
      */
     public function deleteWorkspaceItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -742,9 +744,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetWorkspaceItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\Workspace|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetWorkspaceItemNotFoundException
      */
     public function getWorkspaceItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -758,11 +760,11 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\Workspace|null $requestBody
      * @param string                              $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\Workspace|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\PatchWorkspaceItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PatchWorkspaceItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\PatchWorkspaceItemNotFoundException
-     *
-     * @return \Gyroscops\Api\Model\Workspace|\Psr\Http\Message\ResponseInterface|null
      */
     public function patchWorkspaceItem(string $id, ?Model\Workspace $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -776,11 +778,11 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\WorkspaceJsonld|\Gyroscops\Api\Model\Workspace|null $requestBody
      * @param string                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\Workspace|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\PutWorkspaceItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PutWorkspaceItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\PutWorkspaceItemNotFoundException
-     *
-     * @return \Gyroscops\Api\Model\Workspace|\Psr\Http\Message\ResponseInterface|null
      */
     public function putWorkspaceItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -846,10 +848,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\WorkspaceJsonld|\Gyroscops\Api\Model\Workspace|null $requestBody
      * @param string                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\Workspace|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\PostWorkspaceCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostWorkspaceCollectionUnprocessableEntityException
-     *
-     * @return \Gyroscops\Api\Model\Workspace|\Psr\Http\Message\ResponseInterface|null
      */
     public function postWorkspaceCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -862,10 +864,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\ConfigMapConfigMapInputJsonld|\Gyroscops\Api\Model\ConfigMapConfigMapInput|null $requestBody
      * @param string                                                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\ConfigMap|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\PostConfigMapCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostConfigMapCollectionUnprocessableEntityException
-     *
-     * @return \Gyroscops\Api\Model\ConfigMap|\Psr\Http\Message\ResponseInterface|null
      */
     public function postConfigMapCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -878,9 +880,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetConfigMapItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\ConfigMap|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetConfigMapItemNotFoundException
      */
     public function getConfigMapItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -893,10 +895,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Config Map resource code
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\ConfigMap[]|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\AddValueConfigMapCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\AddValueConfigMapCollectionUnprocessableEntityException
-     *
-     * @return \Gyroscops\Api\Model\ConfigMap[]|\Psr\Http\Message\ResponseInterface|null
      */
     public function addValueConfigMapCollection(string $id, ?\stdClass $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -926,10 +928,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\EnvironmentJsonld|\Gyroscops\Api\Model\Environment|null $requestBody
      * @param string                                                                       $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\Environment|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\PostEnvironmentCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostEnvironmentCollectionUnprocessableEntityException
-     *
-     * @return \Gyroscops\Api\Model\Environment|\Psr\Http\Message\ResponseInterface|null
      */
     public function postEnvironmentCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -942,9 +944,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetEnvironmentItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\Environment|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetEnvironmentItemNotFoundException
      */
     public function getEnvironmentItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -974,10 +976,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\SecretSecretInputJsonld|\Gyroscops\Api\Model\SecretSecretInput|null $requestBody
      * @param string                                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\Secret|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\PostSecretCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostSecretCollectionUnprocessableEntityException
-     *
-     * @return \Gyroscops\Api\Model\Secret|\Psr\Http\Message\ResponseInterface|null
      */
     public function postSecretCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -990,9 +992,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetSecretItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\Secret|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetSecretItemNotFoundException
      */
     public function getSecretItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -1005,10 +1007,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Secret resource code
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\Secret[]|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\AddValueSecretCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\AddValueSecretCollectionUnprocessableEntityException
-     *
-     * @return \Gyroscops\Api\Model\Secret[]|\Psr\Http\Message\ResponseInterface|null
      */
     public function addValueSecretCollection(string $id, ?\stdClass $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -1038,10 +1040,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\VariableFromConfigMapJsonld|\Gyroscops\Api\Model\VariableFromConfigMap|null $requestBody
      * @param string                                                                                           $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\VariableFromConfigMap|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\PostVariableFromConfigMapCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostVariableFromConfigMapCollectionUnprocessableEntityException
-     *
-     * @return \Gyroscops\Api\Model\VariableFromConfigMap|\Psr\Http\Message\ResponseInterface|null
      */
     public function postVariableFromConfigMapCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -1054,9 +1056,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetVariableFromConfigMapItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\VariableFromConfigMap|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetVariableFromConfigMapItemNotFoundException
      */
     public function getVariableFromConfigMapItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -1086,10 +1088,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\VariableFromSecretJsonld|\Gyroscops\Api\Model\VariableFromSecret|null $requestBody
      * @param string                                                                                     $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\VariableFromSecret|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\PostVariableFromSecretCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostVariableFromSecretCollectionUnprocessableEntityException
-     *
-     * @return \Gyroscops\Api\Model\VariableFromSecret|\Psr\Http\Message\ResponseInterface|null
      */
     public function postVariableFromSecretCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -1102,9 +1104,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetVariableFromSecretItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\VariableFromSecret|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetVariableFromSecretItemNotFoundException
      */
     public function getVariableFromSecretItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -1134,10 +1136,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\AkeneoInstanceAkeneoInstanceInputJsonld|\Gyroscops\Api\Model\AkeneoInstanceAkeneoInstanceInput|null $requestBody
      * @param string                                                                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\AkeneoInstance|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\PostAkeneoInstanceCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostAkeneoInstanceCollectionUnprocessableEntityException
-     *
-     * @return \Gyroscops\Api\Model\AkeneoInstance|\Psr\Http\Message\ResponseInterface|null
      */
     public function postAkeneoInstanceCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -1186,9 +1188,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetAkeneoInstanceItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\AkeneoInstance|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetAkeneoInstanceItemNotFoundException
      */
     public function getAkeneoInstanceItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -1218,10 +1220,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\AkeneoLinkedAccountAkeneoLinkedAccountsInputJsonld|\Gyroscops\Api\Model\AkeneoLinkedAccountAkeneoLinkedAccountsInput|null $requestBody
      * @param string                                                                                                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\AkeneoLinkedAccount|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\PostAkeneoLinkedAccountCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostAkeneoLinkedAccountCollectionUnprocessableEntityException
-     *
-     * @return \Gyroscops\Api\Model\AkeneoLinkedAccount|\Psr\Http\Message\ResponseInterface|null
      */
     public function postAkeneoLinkedAccountCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -1251,9 +1253,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetAkeneoLinkedAccountItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\AkeneoLinkedAccount|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetAkeneoLinkedAccountItemNotFoundException
      */
     public function getAkeneoLinkedAccountItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -1283,10 +1285,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\AkeneoOauthTokenOauthStateInputJsonld|\Gyroscops\Api\Model\AkeneoOauthTokenOauthStateInput|null $requestBody
      * @param string                                                                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\PostAkeneoOauthTokenCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostAkeneoOauthTokenCollectionUnprocessableEntityException
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
      */
     public function postAkeneoOauthTokenCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -1299,9 +1301,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetAkeneoOauthTokenItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\AkeneoOauthTokenRead|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetAkeneoOauthTokenItemNotFoundException
      */
     public function getAkeneoOauthTokenItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -1331,10 +1333,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBody|\Gyroscops\Api\Model\AkeneoOauthTokenOauthTokenInput[]|null $requestBody
      * @param string                                                                                                          $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\PutAkeneoOauthTokenAkeneoOauthTokenCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PutAkeneoOauthTokenAkeneoOauthTokenCollectionUnprocessableEntityException
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
      */
     public function putAkeneoOauthTokenAkeneoOauthTokenCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -1347,9 +1349,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\DeleteReferralCodeItemNotFoundException
-     *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\DeleteReferralCodeItemNotFoundException
      */
     public function deleteReferralCodeItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -1362,9 +1364,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetReferralCodeItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\ReferralCodeReferralCodeRead|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetReferralCodeItemNotFoundException
      */
     public function getReferralCodeItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -1394,10 +1396,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\ReferralCodeJsonldReferralCodeWrite|\Gyroscops\Api\Model\ReferralCodeReferralCodeWrite|null $requestBody
      * @param string                                                                                                           $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\ReferralCodeReferralCodeRead|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\PostReferralCodeCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostReferralCodeCollectionUnprocessableEntityException
-     *
-     * @return \Gyroscops\Api\Model\ReferralCodeReferralCodeRead|\Psr\Http\Message\ResponseInterface|null
      */
     public function postReferralCodeCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -1410,9 +1412,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetOnPremiseRequestItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\OnPremiseRequestOnPremiseRequestRead|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetOnPremiseRequestItemNotFoundException
      */
     public function getOnPremiseRequestItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -1442,10 +1444,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\OnPremiseRequestJsonldOnPremiseRequestWrite|\Gyroscops\Api\Model\OnPremiseRequestOnPremiseRequestWrite|null $requestBody
      * @param string                                                                                                                           $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\OnPremiseRequestOnPremiseRequestRead|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\PostOnPremiseRequestCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostOnPremiseRequestCollectionUnprocessableEntityException
-     *
-     * @return \Gyroscops\Api\Model\OnPremiseRequestOnPremiseRequestRead|\Psr\Http\Message\ResponseInterface|null
      */
     public function postOnPremiseRequestCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -1458,9 +1460,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetReferralRequestItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\ReferralRequestReferralRequestRead|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetReferralRequestItemNotFoundException
      */
     public function getReferralRequestItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -1474,11 +1476,11 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param null   $requestBody
      * @param string $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\ReferralRequestReferralRequestRead|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\AcceptReferralRequestReferralRequestItemBadRequestException
      * @throws \Gyroscops\Api\Exception\AcceptReferralRequestReferralRequestItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\AcceptReferralRequestReferralRequestItemNotFoundException
-     *
-     * @return \Gyroscops\Api\Model\ReferralRequestReferralRequestRead|\Psr\Http\Message\ResponseInterface|null
      */
     public function acceptReferralRequestReferralRequestItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -1492,11 +1494,11 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param null   $requestBody
      * @param string $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\ReferralRequestReferralRequestRead|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\RejectReferralRequestReferralRequestItemBadRequestException
      * @throws \Gyroscops\Api\Exception\RejectReferralRequestReferralRequestItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\RejectReferralRequestReferralRequestItemNotFoundException
-     *
-     * @return \Gyroscops\Api\Model\ReferralRequestReferralRequestRead|\Psr\Http\Message\ResponseInterface|null
      */
     public function rejectReferralRequestReferralRequestItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -1509,10 +1511,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\ReferralRequestReferralRequestInputJsonld|\Gyroscops\Api\Model\ReferralRequestReferralRequestInput|null $requestBody
      * @param string                                                                                                                       $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\ReferralRequestReferralRequestRead|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\PostReferralRequestCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostReferralRequestCollectionUnprocessableEntityException
-     *
-     * @return \Gyroscops\Api\Model\ReferralRequestReferralRequestRead|\Psr\Http\Message\ResponseInterface|null
      */
     public function postReferralRequestCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -1542,9 +1544,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetActionItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\ActionRead|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetActionItemNotFoundException
      */
     public function getActionItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -1613,9 +1615,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetExecutionPipelineJobItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\ExecutionPipelineJob|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetExecutionPipelineJobItemNotFoundException
      */
     public function getExecutionPipelineJobItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -1663,9 +1665,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetExecutionActionItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\ExecutionAction|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetExecutionActionItemNotFoundException
      */
     public function getExecutionActionItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -1776,9 +1778,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetExecutionPipelineStepItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\ExecutionPipelineStep|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetExecutionPipelineStepItemNotFoundException
      */
     public function getExecutionPipelineStepItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -1791,9 +1793,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetExecutionPipelineItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\ExecutionPipeline|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetExecutionPipelineItemNotFoundException
      */
     public function getExecutionPipelineItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -1806,9 +1808,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetExecutionWorkflowJobActionItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\ExecutionWorkflowJobAction|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetExecutionWorkflowJobActionItemNotFoundException
      */
     public function getExecutionWorkflowJobActionItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -1883,9 +1885,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetExecutionWorkflowJobItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\ExecutionWorkflowJob|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetExecutionWorkflowJobItemNotFoundException
      */
     public function getExecutionWorkflowJobItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -1898,9 +1900,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetExecutionWorkflowItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\ExecutionWorkflow|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetExecutionWorkflowItemNotFoundException
      */
     public function getExecutionWorkflowItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -1913,9 +1915,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetExecutionItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\ExecutionRead|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetExecutionItemNotFoundException
      */
     public function getExecutionItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -2042,10 +2044,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\ExecutionDeclarePipelineExecutionCommandInputJsonld|\Gyroscops\Api\Model\ExecutionDeclarePipelineExecutionCommandInput|null $requestBody
      * @param string                                                                                                                                           $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\DeclareExecutionExecutionCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\DeclareExecutionExecutionCollectionUnprocessableEntityException
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
      */
     public function declareExecutionExecutionCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -2058,10 +2060,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\ExecutionFinishPipelineExecutionCommandInputJsonld|\Gyroscops\Api\Model\ExecutionFinishPipelineExecutionCommandInput|null $requestBody
      * @param string                                                                                                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\FinishExecutionExecutionCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\FinishExecutionExecutionCollectionUnprocessableEntityException
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
      */
     public function finishExecutionExecutionCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -2074,10 +2076,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\ExecutionInterruptPipelineExecutionCommandInputJsonld|\Gyroscops\Api\Model\ExecutionInterruptPipelineExecutionCommandInput|null $requestBody
      * @param string                                                                                                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\InterruptExecutionExecutionCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\InterruptExecutionExecutionCollectionUnprocessableEntityException
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
      */
     public function interruptExecutionExecutionCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -2090,10 +2092,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\ExecutionResumePipelineExecutionCommandInputJsonld|\Gyroscops\Api\Model\ExecutionResumePipelineExecutionCommandInput|null $requestBody
      * @param string                                                                                                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\ResumeExecutionExecutionCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\ResumeExecutionExecutionCollectionUnprocessableEntityException
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
      */
     public function resumeExecutionExecutionCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -2106,10 +2108,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\ExecutionStartPipelineExecutionCommandInputJsonld|\Gyroscops\Api\Model\ExecutionStartPipelineExecutionCommandInput|null $requestBody
      * @param string                                                                                                                                       $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\StartExecutionExecutionCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\StartExecutionExecutionCollectionUnprocessableEntityException
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
      */
     public function startExecutionExecutionCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -2122,10 +2124,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\ExecutionTerminatePipelineExecutionCommandInputJsonld|\Gyroscops\Api\Model\ExecutionTerminatePipelineExecutionCommandInput|null $requestBody
      * @param string                                                                                                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\TerminateExecutionExecutionCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\TerminateExecutionExecutionCollectionUnprocessableEntityException
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
      */
     public function terminateExecutionExecutionCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -2138,10 +2140,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\ExecutionUpdatePipelineExecutionStateCommandInputJsonld|\Gyroscops\Api\Model\ExecutionUpdatePipelineExecutionStateCommandInput|null $requestBody
      * @param string                                                                                                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\UpdateExecutionStateExecutionCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\UpdateExecutionStateExecutionCollectionUnprocessableEntityException
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
      */
     public function updateExecutionStateExecutionCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -2210,9 +2212,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetPipelineStepProbeItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\PipelineStepProbe|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetPipelineStepProbeItemNotFoundException
      */
     public function getPipelineStepProbeItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -2225,9 +2227,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetPipelineStepItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\PipelineStep|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetPipelineStepItemNotFoundException
      */
     public function getPipelineStepItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -2275,9 +2277,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\DeletePipelinePipelineItemNotFoundException
-     *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\DeletePipelinePipelineItemNotFoundException
      */
     public function deletePipelinePipelineItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -2290,9 +2292,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetPipelineItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\PipelineRead|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetPipelineItemNotFoundException
      */
     public function getPipelineItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -2350,9 +2352,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\DeletePipelineStepPipelineItemNotFoundException
-     *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\DeletePipelineStepPipelineItemNotFoundException
      */
     public function deletePipelineStepPipelineItem(string $code, string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -2368,9 +2370,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id         Resource identifier
      * @param string $fetch      Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\RemovePipelineStepProbePipelineItemNotFoundException
-     *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\RemovePipelineStepProbePipelineItemNotFoundException
      */
     public function removePipelineStepProbePipelineItem(string $code, string $probeCode, string $probeLabel, string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -2415,10 +2417,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\PipelineDeclarePipelineCommandInputJsonld|\Gyroscops\Api\Model\PipelineDeclarePipelineCommandInput|null $requestBody
      * @param string                                                                                                                       $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\DeclarePipelinePipelineCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\DeclarePipelinePipelineCollectionUnprocessableEntityException
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
      */
     public function declarePipelinePipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -2431,10 +2433,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\PipelineAddPipelineComposerPSR4AutoloadCommandInputJsonld|\Gyroscops\Api\Model\PipelineAddPipelineComposerPSR4AutoloadCommandInput|null $requestBody
      * @param string                                                                                                                                                       $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\AddComposerPipelinePipelineCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\AddComposerPipelinePipelineCollectionUnprocessableEntityException
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
      */
     public function addComposerPipelinePipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -2464,10 +2466,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\PipelineCompilePipelineCommandInputJsonld|\Gyroscops\Api\Model\PipelineCompilePipelineCommandInput|null $requestBody
      * @param string                                                                                                                       $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\PipelineCompilationPipelineCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PipelineCompilationPipelineCollectionUnprocessableEntityException
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
      */
     public function pipelineCompilationPipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -2480,10 +2482,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\PipelineAddAfterPipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineAddAfterPipelineStepCommandInput|null $requestBody
      * @param string                                                                                                                                 $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\AddAfterPipelineStepPipelineCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\AddAfterPipelineStepPipelineCollectionUnprocessableEntityException
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
      */
     public function addAfterPipelineStepPipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -2496,10 +2498,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\PipelineAddBeforePipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineAddBeforePipelineStepCommandInput|null $requestBody
      * @param string                                                                                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\AddBeforePipelineStepPipelineCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\AddBeforePipelineStepPipelineCollectionUnprocessableEntityException
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
      */
     public function addBeforePipelineStepPipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -2512,10 +2514,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\PipelineAppendPipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineAppendPipelineStepCommandInput|null $requestBody
      * @param string                                                                                                                             $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\AppendPipelineStepPipelineCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\AppendPipelineStepPipelineCollectionUnprocessableEntityException
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
      */
     public function appendPipelineStepPipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -2528,10 +2530,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\PipelineMoveAfterPipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineMoveAfterPipelineStepCommandInput|null $requestBody
      * @param string                                                                                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\MoveAfterPipelineStepPipelineCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\MoveAfterPipelineStepPipelineCollectionUnprocessableEntityException
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
      */
     public function moveAfterPipelineStepPipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -2544,10 +2546,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\PipelineMoveBeforePipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineMoveBeforePipelineStepCommandInput|null $requestBody
      * @param string                                                                                                                                     $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\MoveBeforePipelineStepPipelineCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\MoveBeforePipelineStepPipelineCollectionUnprocessableEntityException
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
      */
     public function moveBeforePipelineStepPipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -2560,10 +2562,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\PipelineAddPipelineStepProbCommandInputJsonld|\Gyroscops\Api\Model\PipelineAddPipelineStepProbCommandInput|null $requestBody
      * @param string                                                                                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\AddPipelineStepProbePipelineCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\AddPipelineStepProbePipelineCollectionUnprocessableEntityException
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
      */
     public function addPipelineStepProbePipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -2576,10 +2578,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandInputJsonld|\Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandInput|null $requestBody
      * @param string                                                                                                                                 $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\ReorderPipelineStepsPipelineCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\ReorderPipelineStepsPipelineCollectionUnprocessableEntityException
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
      */
     public function reorderPipelineStepsPipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -2592,10 +2594,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\PipelineReplacePipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineReplacePipelineStepCommandInput|null $requestBody
      * @param string                                                                                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\ReplacePipelineStepPipelineCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\ReplacePipelineStepPipelineCollectionUnprocessableEntityException
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
      */
     public function replacePipelineStepPipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -2608,10 +2610,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleImmediateCommandInputJsonld|\Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleImmediateCommandInput|null $requestBody
      * @param string                                                                                                                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleImmediateCommand|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\ScheduleImmediateScheduleCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\ScheduleImmediateScheduleCollectionUnprocessableEntityException
-     *
-     * @return \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleImmediateCommand|\Psr\Http\Message\ResponseInterface|null
      */
     public function scheduleImmediateScheduleCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -2624,10 +2626,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleOnceCommandInputJsonld|\Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleOnceCommandInput|null $requestBody
      * @param string                                                                                                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleOnceCommand|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\ScheduleOnceScheduleCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\ScheduleOnceScheduleCollectionUnprocessableEntityException
-     *
-     * @return \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleOnceCommand|\Psr\Http\Message\ResponseInterface|null
      */
     public function scheduleOnceScheduleCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -2640,10 +2642,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleTimesCommandInputJsonld|\Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleTimesCommandInput|null $requestBody
      * @param string                                                                                                                                                 $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleTimesCommand|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\ScheduleTimesScheduleCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\ScheduleTimesScheduleCollectionUnprocessableEntityException
-     *
-     * @return \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleTimesCommand|\Psr\Http\Message\ResponseInterface|null
      */
     public function scheduleTimesScheduleCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -2656,10 +2658,10 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleUntilCommandInputJsonld|\Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleUntilCommandInput|null $requestBody
      * @param string                                                                                                                                                 $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
+     * @return \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleUntilCommand|\Psr\Http\Message\ResponseInterface|null
+     *
      * @throws \Gyroscops\Api\Exception\ScheduleUntilScheduleCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\ScheduleUntilScheduleCollectionUnprocessableEntityException
-     *
-     * @return \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleUntilCommand|\Psr\Http\Message\ResponseInterface|null
      */
     public function scheduleUntilScheduleCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -2672,9 +2674,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetScheduleItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\Schedule|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetScheduleItemNotFoundException
      */
     public function getScheduleItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -2848,9 +2850,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetWorkflowJobActionItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\WorkflowJobAction|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetWorkflowJobActionItemNotFoundException
      */
     public function getWorkflowJobActionItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -2863,9 +2865,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetWorkflowJobItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\WorkflowJobRead|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetWorkflowJobItemNotFoundException
      */
     public function getWorkflowJobItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -2878,9 +2880,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetWorkflowJobPipelineItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\WorkflowJobPipeline|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetWorkflowJobPipelineItemNotFoundException
      */
     public function getWorkflowJobPipelineItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -2893,9 +2895,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetWorkflowItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\WorkflowRead|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetWorkflowItemNotFoundException
      */
     public function getWorkflowItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -2982,9 +2984,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Gyroscops\Api\Exception\GetPipelineCompilationItemNotFoundException
-     *
      * @return \Gyroscops\Api\Model\PipelineCompilation|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetPipelineCompilationItemNotFoundException
      */
     public function getPipelineCompilationItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
@@ -2996,7 +2998,7 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
         if (null === $httpClient) {
             $httpClient = \Http\Discovery\Psr18ClientDiscovery::find();
             $plugins = [];
-            if (count($additionalPlugins) > 0) {
+            if (\count($additionalPlugins) > 0) {
                 $plugins = array_merge($plugins, $additionalPlugins);
             }
             $httpClient = new \Http\Client\Common\PluginClient($httpClient, $plugins);
@@ -3004,7 +3006,7 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
         $requestFactory = \Http\Discovery\Psr17FactoryDiscovery::findRequestFactory();
         $streamFactory = \Http\Discovery\Psr17FactoryDiscovery::findStreamFactory();
         $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new \Gyroscops\Api\Normalizer\JaneObjectNormalizer()];
-        if (count($additionalNormalizers) > 0) {
+        if (\count($additionalNormalizers) > 0) {
             $normalizers = array_merge($normalizers, $additionalNormalizers);
         }
         $serializer = new \Symfony\Component\Serializer\Serializer($normalizers, [new \Symfony\Component\Serializer\Encoder\JsonEncoder(new \Symfony\Component\Serializer\Encoder\JsonEncode(), new \Symfony\Component\Serializer\Encoder\JsonDecode(['json_decode_associative' => true]))]);

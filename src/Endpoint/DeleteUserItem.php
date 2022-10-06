@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Endpoint;
 
 class DeleteUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
@@ -36,8 +38,6 @@ class DeleteUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implemen
      * {@inheritdoc}
      *
      * @throws \Gyroscops\Api\Exception\DeleteUserItemNotFoundException
-     *
-     * @return null
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Endpoint;
 
 class PostForgotPassword extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
@@ -34,8 +36,6 @@ class PostForgotPassword extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impl
      * {@inheritdoc}
      *
      * @throws \Gyroscops\Api\Exception\PostForgotPasswordBadRequestException
-     *
-     * @return null
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {

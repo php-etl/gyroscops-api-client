@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Endpoint;
 
 class DeletePipelineStepPipelineItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
@@ -39,8 +41,6 @@ class DeletePipelineStepPipelineItem extends \Gyroscops\Api\Runtime\Client\BaseE
      * {@inheritdoc}
      *
      * @throws \Gyroscops\Api\Exception\DeletePipelineStepPipelineItemNotFoundException
-     *
-     * @return null
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Runtime\Client;
 
 use Symfony\Component\OptionsResolver\Options;

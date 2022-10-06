@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Endpoint;
 
 class ScheduleUntilScheduleCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
@@ -49,14 +51,14 @@ class ScheduleUntilScheduleCollection extends \Gyroscops\Api\Runtime\Client\Base
     /**
      * {@inheritdoc}
      *
+     * @return \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleUntilCommand|null
+     *
      * @throws \Gyroscops\Api\Exception\ScheduleUntilScheduleCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\ScheduleUntilScheduleCollectionUnprocessableEntityException
-     *
-     * @return \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleUntilCommand|null
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if (false === is_null($contentType) && (202 === $status && false !== mb_strpos($contentType, 'application/json'))) {
+        if (false === (null === $contentType) && (202 === $status && false !== mb_strpos($contentType, 'application/json'))) {
             return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ScheduleDeclarePipelineScheduleUntilCommand', 'json');
         }
         if (400 === $status) {

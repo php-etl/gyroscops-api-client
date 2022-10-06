@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Endpoint;
 
 class PutUserAuthorizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
@@ -52,15 +54,15 @@ class PutUserAuthorizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoin
     /**
      * {@inheritdoc}
      *
+     * @return \Gyroscops\Api\Model\UserAuthorization|null
+     *
      * @throws \Gyroscops\Api\Exception\PutUserAuthorizationItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PutUserAuthorizationItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\PutUserAuthorizationItemNotFoundException
-     *
-     * @return \Gyroscops\Api\Model\UserAuthorization|null
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if (false === is_null($contentType) && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
+        if (false === (null === $contentType) && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
             return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\UserAuthorization', 'json');
         }
         if (400 === $status) {
