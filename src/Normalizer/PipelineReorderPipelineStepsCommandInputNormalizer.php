@@ -45,15 +45,19 @@ class PipelineReorderPipelineStepsCommandInputNormalizer implements Denormalizer
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('pipeline', $data)) {
+        if (\array_key_exists('pipeline', $data) && null !== $data['pipeline']) {
             $object->setPipeline($data['pipeline']);
+        } elseif (\array_key_exists('pipeline', $data) && null === $data['pipeline']) {
+            $object->setPipeline(null);
         }
-        if (\array_key_exists('codes', $data)) {
+        if (\array_key_exists('codes', $data) && null !== $data['codes']) {
             $values = [];
             foreach ($data['codes'] as $value) {
                 $values[] = $value;
             }
             $object->setCodes($values);
+        } elseif (\array_key_exists('codes', $data) && null === $data['codes']) {
+            $object->setCodes(null);
         }
 
         return $object;

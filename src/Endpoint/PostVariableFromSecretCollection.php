@@ -9,9 +9,9 @@ class PostVariableFromSecretCollection extends \Gyroscops\Api\Runtime\Client\Bas
     /**
      * Creates a VariableFromSecret resource.
      *
-     * @param \Gyroscops\Api\Model\VariableFromSecretJsonld|\Gyroscops\Api\Model\VariableFromSecret $requestBody
+     * @param \Gyroscops\Api\Model\VariableFromSecretJsonld|\Gyroscops\Api\Model\VariableFromSecret|null $requestBody
      */
-    public function __construct($requestBody)
+    public function __construct($requestBody = null)
     {
         $this->body = $requestBody;
     }

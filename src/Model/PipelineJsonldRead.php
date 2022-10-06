@@ -5,19 +5,19 @@ namespace Gyroscops\Api\Model;
 class PipelineJsonldRead
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $context;
     /**
-     * @var bool
+     * @var bool|null
      */
     protected $isSoftDeleted;
     /**
@@ -25,52 +25,52 @@ class PipelineJsonldRead
      */
     protected $compiledAt;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id2;
     /**
-     * @var string
+     * @var string|null
      */
     protected $code;
     /**
-     * @var string
+     * @var string|null
      */
     protected $label;
     /**
-     * @var string
+     * @var string|null
      */
     protected $runtimeType;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $runtime;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $autoload;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $steps;
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
@@ -95,12 +95,12 @@ class PipelineJsonldRead
         return $this;
     }
 
-    public function getIsSoftDeleted(): bool
+    public function getIsSoftDeleted(): ?bool
     {
         return $this->isSoftDeleted;
     }
 
-    public function setIsSoftDeleted(bool $isSoftDeleted): self
+    public function setIsSoftDeleted(?bool $isSoftDeleted): self
     {
         $this->isSoftDeleted = $isSoftDeleted;
 
@@ -119,48 +119,48 @@ class PipelineJsonldRead
         return $this;
     }
 
-    public function getId2(): string
+    public function getId2(): ?string
     {
         return $this->id2;
     }
 
-    public function setId2(string $id2): self
+    public function setId2(?string $id2): self
     {
         $this->id2 = $id2;
 
         return $this;
     }
 
-    public function getCode(): string
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
-    public function setCode(string $code): self
+    public function setCode(?string $code): self
     {
         $this->code = $code;
 
         return $this;
     }
 
-    public function getLabel(): string
+    public function getLabel(): ?string
     {
         return $this->label;
     }
 
-    public function setLabel(string $label): self
+    public function setLabel(?string $label): self
     {
         $this->label = $label;
 
         return $this;
     }
 
-    public function getRuntimeType(): string
+    public function getRuntimeType(): ?string
     {
         return $this->runtimeType;
     }
 
-    public function setRuntimeType(string $runtimeType): self
+    public function setRuntimeType(?string $runtimeType): self
     {
         $this->runtimeType = $runtimeType;
 
@@ -168,17 +168,17 @@ class PipelineJsonldRead
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getRuntime(): array
+    public function getRuntime(): ?array
     {
         return $this->runtime;
     }
 
     /**
-     * @param string[] $runtime
+     * @param string[]|null $runtime
      */
-    public function setRuntime(array $runtime): self
+    public function setRuntime(?array $runtime): self
     {
         $this->runtime = $runtime;
 
@@ -186,17 +186,17 @@ class PipelineJsonldRead
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getAutoload(): array
+    public function getAutoload(): ?array
     {
         return $this->autoload;
     }
 
     /**
-     * @param string[] $autoload
+     * @param string[]|null $autoload
      */
-    public function setAutoload(array $autoload): self
+    public function setAutoload(?array $autoload): self
     {
         $this->autoload = $autoload;
 
@@ -204,17 +204,17 @@ class PipelineJsonldRead
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getSteps(): array
+    public function getSteps(): ?array
     {
         return $this->steps;
     }
 
     /**
-     * @param string[] $steps
+     * @param string[]|null $steps
      */
-    public function setSteps(array $steps): self
+    public function setSteps(?array $steps): self
     {
         $this->steps = $steps;
 

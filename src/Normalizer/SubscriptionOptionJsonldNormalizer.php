@@ -45,14 +45,20 @@ class SubscriptionOptionJsonldNormalizer implements DenormalizerInterface, Norma
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@id', $data)) {
+        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
             $object->setId($data['@id']);
+        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+            $object->setId(null);
         }
-        if (\array_key_exists('@type', $data)) {
+        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
             $object->setType($data['@type']);
+        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+            $object->setType(null);
         }
-        if (\array_key_exists('id', $data)) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId2($data['id']);
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+            $object->setId2(null);
         }
         if (\array_key_exists('subscription', $data) && null !== $data['subscription']) {
             $object->setSubscription($data['subscription']);
@@ -64,8 +70,10 @@ class SubscriptionOptionJsonldNormalizer implements DenormalizerInterface, Norma
         } elseif (\array_key_exists('option', $data) && null === $data['option']) {
             $object->setOption(null);
         }
-        if (\array_key_exists('price', $data)) {
+        if (\array_key_exists('price', $data) && null !== $data['price']) {
             $object->setPrice($this->denormalizer->denormalize($data['price'], 'Gyroscops\\Api\\Model\\PriceJsonld', 'json', $context));
+        } elseif (\array_key_exists('price', $data) && null === $data['price']) {
+            $object->setPrice(null);
         }
 
         return $object;

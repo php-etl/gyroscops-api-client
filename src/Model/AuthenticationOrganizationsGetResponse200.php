@@ -5,70 +5,70 @@ namespace Gyroscops\Api\Model;
 class AuthenticationOrganizationsGetResponse200
 {
     /**
-     * @var OrganizationJsonld[]
+     * @var OrganizationJsonld[]|null
      */
     protected $hydraMember;
     /**
-     * @var int
+     * @var int|null
      */
     protected $hydraTotalItems;
     /**
-     * @var AuthenticationOrganizationsGetResponse200HydraView
+     * @var AuthenticationOrganizationsGetResponse200HydraView|null
      */
     protected $hydraView;
     /**
-     * @var AuthenticationOrganizationsGetResponse200HydraSearch
+     * @var AuthenticationOrganizationsGetResponse200HydraSearch|null
      */
     protected $hydraSearch;
 
     /**
-     * @return OrganizationJsonld[]
+     * @return OrganizationJsonld[]|null
      */
-    public function getHydraMember(): array
+    public function getHydraMember(): ?array
     {
         return $this->hydraMember;
     }
 
     /**
-     * @param OrganizationJsonld[] $hydraMember
+     * @param OrganizationJsonld[]|null $hydraMember
      */
-    public function setHydraMember(array $hydraMember): self
+    public function setHydraMember(?array $hydraMember): self
     {
         $this->hydraMember = $hydraMember;
 
         return $this;
     }
 
-    public function getHydraTotalItems(): int
+    public function getHydraTotalItems(): ?int
     {
         return $this->hydraTotalItems;
     }
 
-    public function setHydraTotalItems(int $hydraTotalItems): self
+    public function setHydraTotalItems(?int $hydraTotalItems): self
     {
         $this->hydraTotalItems = $hydraTotalItems;
 
         return $this;
     }
 
-    public function getHydraView(): AuthenticationOrganizationsGetResponse200HydraView
+    public function getHydraView(): ?AuthenticationOrganizationsGetResponse200HydraView
     {
         return $this->hydraView;
     }
 
-    public function setHydraView(AuthenticationOrganizationsGetResponse200HydraView $hydraView): self
+    public function setHydraView(?AuthenticationOrganizationsGetResponse200HydraView $hydraView): self
     {
         $this->hydraView = $hydraView;
 
         return $this;
     }
 
-    public function getHydraSearch(): AuthenticationOrganizationsGetResponse200HydraSearch
+    public function getHydraSearch(): ?AuthenticationOrganizationsGetResponse200HydraSearch
     {
         return $this->hydraSearch;
     }
 
-    public function setHydraSearch(AuthenticationOrganizationsGetResponse200HydraSearch $hydraSearch): self
+    public function setHydraSearch(?AuthenticationOrganizationsGetResponse200HydraSearch $hydraSearch): self
     {
         $this->hydraSearch = $hydraSearch;
 

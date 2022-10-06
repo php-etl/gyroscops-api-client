@@ -45,26 +45,40 @@ class AkeneoLinkedAccountAkeneoLinkedAccountsInputJsonldNormalizer implements De
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data)) {
+        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
             $object->setContext($data['@context']);
+        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+            $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data)) {
+        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
             $object->setId($data['@id']);
+        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+            $object->setId(null);
         }
-        if (\array_key_exists('@type', $data)) {
+        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
             $object->setType($data['@type']);
+        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+            $object->setType(null);
         }
-        if (\array_key_exists('akeneoInstance', $data)) {
+        if (\array_key_exists('akeneoInstance', $data) && null !== $data['akeneoInstance']) {
             $object->setAkeneoInstance($data['akeneoInstance']);
+        } elseif (\array_key_exists('akeneoInstance', $data) && null === $data['akeneoInstance']) {
+            $object->setAkeneoInstance(null);
         }
-        if (\array_key_exists('tokenId', $data)) {
+        if (\array_key_exists('tokenId', $data) && null !== $data['tokenId']) {
             $object->setTokenId($data['tokenId']);
+        } elseif (\array_key_exists('tokenId', $data) && null === $data['tokenId']) {
+            $object->setTokenId(null);
         }
-        if (\array_key_exists('akeneoUserId', $data)) {
+        if (\array_key_exists('akeneoUserId', $data) && null !== $data['akeneoUserId']) {
             $object->setAkeneoUserId($data['akeneoUserId']);
+        } elseif (\array_key_exists('akeneoUserId', $data) && null === $data['akeneoUserId']) {
+            $object->setAkeneoUserId(null);
         }
-        if (\array_key_exists('token', $data)) {
+        if (\array_key_exists('token', $data) && null !== $data['token']) {
             $object->setToken($data['token']);
+        } elseif (\array_key_exists('token', $data) && null === $data['token']) {
+            $object->setToken(null);
         }
 
         return $object;

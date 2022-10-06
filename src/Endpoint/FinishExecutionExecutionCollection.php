@@ -9,9 +9,9 @@ class FinishExecutionExecutionCollection extends \Gyroscops\Api\Runtime\Client\B
     /**
      * Finishes a pipeline execution.
      *
-     * @param \Gyroscops\Api\Model\ExecutionFinishPipelineExecutionCommandInputJsonld|\Gyroscops\Api\Model\ExecutionFinishPipelineExecutionCommandInput $requestBody
+     * @param \Gyroscops\Api\Model\ExecutionFinishPipelineExecutionCommandInputJsonld|\Gyroscops\Api\Model\ExecutionFinishPipelineExecutionCommandInput|null $requestBody
      */
-    public function __construct($requestBody)
+    public function __construct($requestBody = null)
     {
         $this->body = $requestBody;
     }

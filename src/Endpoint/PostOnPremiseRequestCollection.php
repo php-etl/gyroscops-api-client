@@ -9,9 +9,9 @@ class PostOnPremiseRequestCollection extends \Gyroscops\Api\Runtime\Client\BaseE
     /**
      * Creates a OnPremiseRequest resource.
      *
-     * @param \Gyroscops\Api\Model\OnPremiseRequestJsonldOnPremiseRequestWrite|\Gyroscops\Api\Model\OnPremiseRequestOnPremiseRequestWrite $requestBody
+     * @param \Gyroscops\Api\Model\OnPremiseRequestJsonldOnPremiseRequestWrite|\Gyroscops\Api\Model\OnPremiseRequestOnPremiseRequestWrite|null $requestBody
      */
-    public function __construct($requestBody)
+    public function __construct($requestBody = null)
     {
         $this->body = $requestBody;
     }

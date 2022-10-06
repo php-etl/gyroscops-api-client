@@ -5,7 +5,7 @@ namespace Gyroscops\Api\Model;
 class UserAuthorization
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
@@ -21,20 +21,20 @@ class UserAuthorization
      */
     protected $organization;
     /**
-     * @var string
+     * @var string|null
      */
     protected $resource;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $authorizations;
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
@@ -77,12 +77,12 @@ class UserAuthorization
         return $this;
     }
 
-    public function getResource(): string
+    public function getResource(): ?string
     {
         return $this->resource;
     }
 
-    public function setResource(string $resource): self
+    public function setResource(?string $resource): self
     {
         $this->resource = $resource;
 
@@ -90,17 +90,17 @@ class UserAuthorization
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getAuthorizations(): array
+    public function getAuthorizations(): ?array
     {
         return $this->authorizations;
     }
 
     /**
-     * @param string[] $authorizations
+     * @param string[]|null $authorizations
      */
-    public function setAuthorizations(array $authorizations): self
+    public function setAuthorizations(?array $authorizations): self
     {
         $this->authorizations = $authorizations;
 

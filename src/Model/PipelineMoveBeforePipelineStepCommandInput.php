@@ -5,48 +5,48 @@ namespace Gyroscops\Api\Model;
 class PipelineMoveBeforePipelineStepCommandInput
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $pipeline;
     /**
-     * @var string
+     * @var string|null
      */
     protected $next;
     /**
-     * @var string
+     * @var string|null
      */
     protected $code;
 
-    public function getPipeline(): string
+    public function getPipeline(): ?string
     {
         return $this->pipeline;
     }
 
-    public function setPipeline(string $pipeline): self
+    public function setPipeline(?string $pipeline): self
     {
         $this->pipeline = $pipeline;
 
         return $this;
     }
 
-    public function getNext(): string
+    public function getNext(): ?string
     {
         return $this->next;
     }
 
-    public function setNext(string $next): self
+    public function setNext(?string $next): self
     {
         $this->next = $next;
 
         return $this;
     }
 
-    public function getCode(): string
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
-    public function setCode(string $code): self
+    public function setCode(?string $code): self
     {
         $this->code = $code;
 

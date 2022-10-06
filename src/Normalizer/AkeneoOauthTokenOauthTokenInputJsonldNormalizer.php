@@ -45,20 +45,30 @@ class AkeneoOauthTokenOauthTokenInputJsonldNormalizer implements DenormalizerInt
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@id', $data)) {
+        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
             $object->setId($data['@id']);
+        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+            $object->setId(null);
         }
-        if (\array_key_exists('@type', $data)) {
+        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
             $object->setType($data['@type']);
+        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+            $object->setType(null);
         }
-        if (\array_key_exists('url', $data)) {
+        if (\array_key_exists('url', $data) && null !== $data['url']) {
             $object->setUrl($data['url']);
+        } elseif (\array_key_exists('url', $data) && null === $data['url']) {
+            $object->setUrl(null);
         }
-        if (\array_key_exists('state', $data)) {
+        if (\array_key_exists('state', $data) && null !== $data['state']) {
             $object->setState($data['state']);
+        } elseif (\array_key_exists('state', $data) && null === $data['state']) {
+            $object->setState(null);
         }
-        if (\array_key_exists('code', $data)) {
+        if (\array_key_exists('code', $data) && null !== $data['code']) {
             $object->setCode($data['code']);
+        } elseif (\array_key_exists('code', $data) && null === $data['code']) {
+            $object->setCode(null);
         }
 
         return $object;

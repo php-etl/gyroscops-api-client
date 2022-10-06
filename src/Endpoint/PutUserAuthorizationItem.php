@@ -10,10 +10,10 @@ class PutUserAuthorizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoin
     /**
      * Replaces the UserAuthorization resource.
      *
-     * @param string                                                                              $id          Resource identifier
-     * @param \Gyroscops\Api\Model\UserAuthorizationJsonld|\Gyroscops\Api\Model\UserAuthorization $requestBody
+     * @param string                                                                                   $id          Resource identifier
+     * @param \Gyroscops\Api\Model\UserAuthorizationJsonld|\Gyroscops\Api\Model\UserAuthorization|null $requestBody
      */
-    public function __construct(string $id, $requestBody)
+    public function __construct(string $id, $requestBody = null)
     {
         $this->id = $id;
         $this->body = $requestBody;

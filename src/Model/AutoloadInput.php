@@ -5,20 +5,20 @@ namespace Gyroscops\Api\Model;
 class AutoloadInput
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $namespace;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $paths;
 
-    public function getNamespace(): string
+    public function getNamespace(): ?string
     {
         return $this->namespace;
     }
 
-    public function setNamespace(string $namespace): self
+    public function setNamespace(?string $namespace): self
     {
         $this->namespace = $namespace;
 
@@ -26,17 +26,17 @@ class AutoloadInput
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getPaths(): array
+    public function getPaths(): ?array
     {
         return $this->paths;
     }
 
     /**
-     * @param string[] $paths
+     * @param string[]|null $paths
      */
-    public function setPaths(array $paths): self
+    public function setPaths(?array $paths): self
     {
         $this->paths = $paths;
 

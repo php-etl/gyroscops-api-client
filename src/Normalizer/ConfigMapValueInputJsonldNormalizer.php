@@ -45,26 +45,40 @@ class ConfigMapValueInputJsonldNormalizer implements DenormalizerInterface, Norm
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data)) {
+        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
             $object->setContext($data['@context']);
+        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+            $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data)) {
+        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
             $object->setId($data['@id']);
+        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+            $object->setId(null);
         }
-        if (\array_key_exists('@type', $data)) {
+        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
             $object->setType($data['@type']);
+        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+            $object->setType(null);
         }
-        if (\array_key_exists('arrayCopy', $data)) {
+        if (\array_key_exists('arrayCopy', $data) && null !== $data['arrayCopy']) {
             $object->setArrayCopy($data['arrayCopy']);
+        } elseif (\array_key_exists('arrayCopy', $data) && null === $data['arrayCopy']) {
+            $object->setArrayCopy(null);
         }
-        if (\array_key_exists('flags', $data)) {
+        if (\array_key_exists('flags', $data) && null !== $data['flags']) {
             $object->setFlags($data['flags']);
+        } elseif (\array_key_exists('flags', $data) && null === $data['flags']) {
+            $object->setFlags(null);
         }
-        if (\array_key_exists('iterator', $data)) {
+        if (\array_key_exists('iterator', $data) && null !== $data['iterator']) {
             $object->setIterator($data['iterator']);
+        } elseif (\array_key_exists('iterator', $data) && null === $data['iterator']) {
+            $object->setIterator(null);
         }
-        if (\array_key_exists('iteratorClass', $data)) {
+        if (\array_key_exists('iteratorClass', $data) && null !== $data['iteratorClass']) {
             $object->setIteratorClass($data['iteratorClass']);
+        } elseif (\array_key_exists('iteratorClass', $data) && null === $data['iteratorClass']) {
+            $object->setIteratorClass(null);
         }
 
         return $object;

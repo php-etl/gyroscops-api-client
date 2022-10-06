@@ -45,25 +45,35 @@ class SecretNormalizer implements DenormalizerInterface, NormalizerInterface, De
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('id', $data)) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId($data['id']);
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+            $object->setId(null);
         }
-        if (\array_key_exists('name', $data)) {
+        if (\array_key_exists('name', $data) && null !== $data['name']) {
             $object->setName($data['name']);
+        } elseif (\array_key_exists('name', $data) && null === $data['name']) {
+            $object->setName(null);
         }
-        if (\array_key_exists('description', $data)) {
+        if (\array_key_exists('description', $data) && null !== $data['description']) {
             $object->setDescription($data['description']);
+        } elseif (\array_key_exists('description', $data) && null === $data['description']) {
+            $object->setDescription(null);
         }
-        if (\array_key_exists('organization', $data)) {
+        if (\array_key_exists('organization', $data) && null !== $data['organization']) {
             $object->setOrganization($data['organization']);
+        } elseif (\array_key_exists('organization', $data) && null === $data['organization']) {
+            $object->setOrganization(null);
         }
         if (\array_key_exists('workspace', $data) && null !== $data['workspace']) {
             $object->setWorkspace($data['workspace']);
         } elseif (\array_key_exists('workspace', $data) && null === $data['workspace']) {
             $object->setWorkspace(null);
         }
-        if (\array_key_exists('iterator', $data)) {
+        if (\array_key_exists('iterator', $data) && null !== $data['iterator']) {
             $object->setIterator($data['iterator']);
+        } elseif (\array_key_exists('iterator', $data) && null === $data['iterator']) {
+            $object->setIterator(null);
         }
 
         return $object;

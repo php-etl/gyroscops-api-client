@@ -45,11 +45,15 @@ class ExecutionUpdatePipelineExecutionStateCommandInputNormalizer implements Den
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('execution', $data)) {
+        if (\array_key_exists('execution', $data) && null !== $data['execution']) {
             $object->setExecution($data['execution']);
+        } elseif (\array_key_exists('execution', $data) && null === $data['execution']) {
+            $object->setExecution(null);
         }
-        if (\array_key_exists('stepsUpdates', $data)) {
+        if (\array_key_exists('stepsUpdates', $data) && null !== $data['stepsUpdates']) {
             $object->setStepsUpdates($this->denormalizer->denormalize($data['stepsUpdates'], 'Gyroscops\\Api\\Model\\UpdateList', 'json', $context));
+        } elseif (\array_key_exists('stepsUpdates', $data) && null === $data['stepsUpdates']) {
+            $object->setStepsUpdates(null);
         }
 
         return $object;

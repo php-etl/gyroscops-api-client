@@ -9,9 +9,9 @@ class UpdateExecutionStateExecutionCollection extends \Gyroscops\Api\Runtime\Cli
     /**
      * Updates a pipeline execution state.
      *
-     * @param \Gyroscops\Api\Model\ExecutionUpdatePipelineExecutionStateCommandInputJsonld|\Gyroscops\Api\Model\ExecutionUpdatePipelineExecutionStateCommandInput $requestBody
+     * @param \Gyroscops\Api\Model\ExecutionUpdatePipelineExecutionStateCommandInputJsonld|\Gyroscops\Api\Model\ExecutionUpdatePipelineExecutionStateCommandInput|null $requestBody
      */
-    public function __construct($requestBody)
+    public function __construct($requestBody = null)
     {
         $this->body = $requestBody;
     }

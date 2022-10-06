@@ -5,20 +5,20 @@ namespace Gyroscops\Api\Model;
 class PipelineReorderPipelineStepsCommandInput
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $pipeline;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $codes;
 
-    public function getPipeline(): string
+    public function getPipeline(): ?string
     {
         return $this->pipeline;
     }
 
-    public function setPipeline(string $pipeline): self
+    public function setPipeline(?string $pipeline): self
     {
         $this->pipeline = $pipeline;
 
@@ -26,17 +26,17 @@ class PipelineReorderPipelineStepsCommandInput
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getCodes(): array
+    public function getCodes(): ?array
     {
         return $this->codes;
     }
 
     /**
-     * @param string[] $codes
+     * @param string[]|null $codes
      */
-    public function setCodes(array $codes): self
+    public function setCodes(?array $codes): self
     {
         $this->codes = $codes;
 

@@ -5,43 +5,43 @@ namespace Gyroscops\Api\Model;
 class OrganizationJsonld
 {
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $context;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id2;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $authorizations;
     /**
-     * @var string
+     * @var string|null
      */
     protected $name;
     /**
-     * @var string
+     * @var string|null
      */
     protected $slug;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $users;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $externalCollaborators;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $workspaces;
 
@@ -63,36 +63,36 @@ class OrganizationJsonld
         return $this;
     }
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
         return $this;
     }
 
-    public function getId2(): string
+    public function getId2(): ?string
     {
         return $this->id2;
     }
 
-    public function setId2(string $id2): self
+    public function setId2(?string $id2): self
     {
         $this->id2 = $id2;
 
@@ -100,41 +100,41 @@ class OrganizationJsonld
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getAuthorizations(): array
+    public function getAuthorizations(): ?array
     {
         return $this->authorizations;
     }
 
     /**
-     * @param string[] $authorizations
+     * @param string[]|null $authorizations
      */
-    public function setAuthorizations(array $authorizations): self
+    public function setAuthorizations(?array $authorizations): self
     {
         $this->authorizations = $authorizations;
 
         return $this;
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    public function getSlug(): string
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
 
-    public function setSlug(string $slug): self
+    public function setSlug(?string $slug): self
     {
         $this->slug = $slug;
 
@@ -142,17 +142,17 @@ class OrganizationJsonld
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getUsers(): array
+    public function getUsers(): ?array
     {
         return $this->users;
     }
 
     /**
-     * @param string[] $users
+     * @param string[]|null $users
      */
-    public function setUsers(array $users): self
+    public function setUsers(?array $users): self
     {
         $this->users = $users;
 
@@ -160,17 +160,17 @@ class OrganizationJsonld
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getExternalCollaborators(): array
+    public function getExternalCollaborators(): ?array
     {
         return $this->externalCollaborators;
     }
 
     /**
-     * @param string[] $externalCollaborators
+     * @param string[]|null $externalCollaborators
      */
-    public function setExternalCollaborators(array $externalCollaborators): self
+    public function setExternalCollaborators(?array $externalCollaborators): self
     {
         $this->externalCollaborators = $externalCollaborators;
 
@@ -178,17 +178,17 @@ class OrganizationJsonld
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getWorkspaces(): array
+    public function getWorkspaces(): ?array
     {
         return $this->workspaces;
     }
 
     /**
-     * @param string[] $workspaces
+     * @param string[]|null $workspaces
      */
-    public function setWorkspaces(array $workspaces): self
+    public function setWorkspaces(?array $workspaces): self
     {
         $this->workspaces = $workspaces;
 

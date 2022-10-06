@@ -45,17 +45,25 @@ class ScheduleDeclarePipelineScheduleUntilCommandInputNormalizer implements Deno
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('pipeline', $data)) {
+        if (\array_key_exists('pipeline', $data) && null !== $data['pipeline']) {
             $object->setPipeline($data['pipeline']);
+        } elseif (\array_key_exists('pipeline', $data) && null === $data['pipeline']) {
+            $object->setPipeline(null);
         }
-        if (\array_key_exists('start', $data)) {
+        if (\array_key_exists('start', $data) && null !== $data['start']) {
             $object->setStart(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['start']));
+        } elseif (\array_key_exists('start', $data) && null === $data['start']) {
+            $object->setStart(null);
         }
-        if (\array_key_exists('interval', $data)) {
+        if (\array_key_exists('interval', $data) && null !== $data['interval']) {
             $object->setInterval($data['interval']);
+        } elseif (\array_key_exists('interval', $data) && null === $data['interval']) {
+            $object->setInterval(null);
         }
-        if (\array_key_exists('end', $data)) {
+        if (\array_key_exists('end', $data) && null !== $data['end']) {
             $object->setEnd(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['end']));
+        } elseif (\array_key_exists('end', $data) && null === $data['end']) {
+            $object->setEnd(null);
         }
 
         return $object;

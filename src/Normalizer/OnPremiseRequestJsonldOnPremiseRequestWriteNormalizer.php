@@ -45,26 +45,40 @@ class OnPremiseRequestJsonldOnPremiseRequestWriteNormalizer implements Denormali
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data)) {
+        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
             $object->setContext($data['@context']);
+        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+            $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data)) {
+        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
             $object->setId($data['@id']);
+        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+            $object->setId(null);
         }
-        if (\array_key_exists('@type', $data)) {
+        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
             $object->setType($data['@type']);
+        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+            $object->setType(null);
         }
-        if (\array_key_exists('firstName', $data)) {
+        if (\array_key_exists('firstName', $data) && null !== $data['firstName']) {
             $object->setFirstName($data['firstName']);
+        } elseif (\array_key_exists('firstName', $data) && null === $data['firstName']) {
+            $object->setFirstName(null);
         }
-        if (\array_key_exists('lastName', $data)) {
+        if (\array_key_exists('lastName', $data) && null !== $data['lastName']) {
             $object->setLastName($data['lastName']);
+        } elseif (\array_key_exists('lastName', $data) && null === $data['lastName']) {
+            $object->setLastName(null);
         }
-        if (\array_key_exists('email', $data)) {
+        if (\array_key_exists('email', $data) && null !== $data['email']) {
             $object->setEmail($data['email']);
+        } elseif (\array_key_exists('email', $data) && null === $data['email']) {
+            $object->setEmail(null);
         }
-        if (\array_key_exists('message', $data)) {
+        if (\array_key_exists('message', $data) && null !== $data['message']) {
             $object->setMessage($data['message']);
+        } elseif (\array_key_exists('message', $data) && null === $data['message']) {
+            $object->setMessage(null);
         }
 
         return $object;

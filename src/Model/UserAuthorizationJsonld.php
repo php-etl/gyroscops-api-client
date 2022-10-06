@@ -5,19 +5,19 @@ namespace Gyroscops\Api\Model;
 class UserAuthorizationJsonld
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $context;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id2;
     /**
@@ -33,32 +33,32 @@ class UserAuthorizationJsonld
      */
     protected $organization;
     /**
-     * @var string
+     * @var string|null
      */
     protected $resource;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $authorizations;
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
@@ -83,12 +83,12 @@ class UserAuthorizationJsonld
         return $this;
     }
 
-    public function getId2(): string
+    public function getId2(): ?string
     {
         return $this->id2;
     }
 
-    public function setId2(string $id2): self
+    public function setId2(?string $id2): self
     {
         $this->id2 = $id2;
 
@@ -131,12 +131,12 @@ class UserAuthorizationJsonld
         return $this;
     }
 
-    public function getResource(): string
+    public function getResource(): ?string
     {
         return $this->resource;
     }
 
-    public function setResource(string $resource): self
+    public function setResource(?string $resource): self
     {
         $this->resource = $resource;
 
@@ -144,17 +144,17 @@ class UserAuthorizationJsonld
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getAuthorizations(): array
+    public function getAuthorizations(): ?array
     {
         return $this->authorizations;
     }
 
     /**
-     * @param string[] $authorizations
+     * @param string[]|null $authorizations
      */
-    public function setAuthorizations(array $authorizations): self
+    public function setAuthorizations(?array $authorizations): self
     {
         $this->authorizations = $authorizations;
 

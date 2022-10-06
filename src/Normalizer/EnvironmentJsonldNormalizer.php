@@ -45,36 +45,54 @@ class EnvironmentJsonldNormalizer implements DenormalizerInterface, NormalizerIn
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data)) {
+        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
             $object->setContext($data['@context']);
+        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+            $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data)) {
+        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
             $object->setId($data['@id']);
+        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+            $object->setId(null);
         }
-        if (\array_key_exists('@type', $data)) {
+        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
             $object->setType($data['@type']);
+        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+            $object->setType(null);
         }
-        if (\array_key_exists('id', $data)) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId2($data['id']);
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+            $object->setId2(null);
         }
-        if (\array_key_exists('name', $data)) {
+        if (\array_key_exists('name', $data) && null !== $data['name']) {
             $object->setName($data['name']);
+        } elseif (\array_key_exists('name', $data) && null === $data['name']) {
+            $object->setName(null);
         }
-        if (\array_key_exists('description', $data)) {
+        if (\array_key_exists('description', $data) && null !== $data['description']) {
             $object->setDescription($data['description']);
+        } elseif (\array_key_exists('description', $data) && null === $data['description']) {
+            $object->setDescription(null);
         }
-        if (\array_key_exists('organization', $data)) {
+        if (\array_key_exists('organization', $data) && null !== $data['organization']) {
             $object->setOrganization($data['organization']);
+        } elseif (\array_key_exists('organization', $data) && null === $data['organization']) {
+            $object->setOrganization(null);
         }
-        if (\array_key_exists('workspace', $data)) {
+        if (\array_key_exists('workspace', $data) && null !== $data['workspace']) {
             $object->setWorkspace($data['workspace']);
+        } elseif (\array_key_exists('workspace', $data) && null === $data['workspace']) {
+            $object->setWorkspace(null);
         }
-        if (\array_key_exists('variables', $data)) {
+        if (\array_key_exists('variables', $data) && null !== $data['variables']) {
             $values = [];
             foreach ($data['variables'] as $value) {
                 $values[] = $this->denormalizer->denormalize($value, 'Gyroscops\\Api\\Model\\VariableJsonld', 'json', $context);
             }
             $object->setVariables($values);
+        } elseif (\array_key_exists('variables', $data) && null === $data['variables']) {
+            $object->setVariables(null);
         }
 
         return $object;

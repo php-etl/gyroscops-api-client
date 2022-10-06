@@ -9,9 +9,9 @@ class PostWorkspaceCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint
     /**
      * Creates a Workspace resource.
      *
-     * @param \Gyroscops\Api\Model\WorkspaceJsonld|\Gyroscops\Api\Model\Workspace $requestBody
+     * @param \Gyroscops\Api\Model\WorkspaceJsonld|\Gyroscops\Api\Model\Workspace|null $requestBody
      */
-    public function __construct($requestBody)
+    public function __construct($requestBody = null)
     {
         $this->body = $requestBody;
     }

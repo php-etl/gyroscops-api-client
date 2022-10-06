@@ -5,48 +5,48 @@ namespace Gyroscops\Api\Model;
 class ExecutionPipelineStepJsonld
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $context;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id2;
     /**
-     * @var AbstractPipelineJsonld
+     * @var AbstractPipelineJsonld|null
      */
     protected $pipeline;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $metrics;
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
@@ -71,24 +71,24 @@ class ExecutionPipelineStepJsonld
         return $this;
     }
 
-    public function getId2(): string
+    public function getId2(): ?string
     {
         return $this->id2;
     }
 
-    public function setId2(string $id2): self
+    public function setId2(?string $id2): self
     {
         $this->id2 = $id2;
 
         return $this;
     }
 
-    public function getPipeline(): AbstractPipelineJsonld
+    public function getPipeline(): ?AbstractPipelineJsonld
     {
         return $this->pipeline;
     }
 
-    public function setPipeline(AbstractPipelineJsonld $pipeline): self
+    public function setPipeline(?AbstractPipelineJsonld $pipeline): self
     {
         $this->pipeline = $pipeline;
 
@@ -96,17 +96,17 @@ class ExecutionPipelineStepJsonld
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getMetrics(): array
+    public function getMetrics(): ?array
     {
         return $this->metrics;
     }
 
     /**
-     * @param string[] $metrics
+     * @param string[]|null $metrics
      */
-    public function setMetrics(array $metrics): self
+    public function setMetrics(?array $metrics): self
     {
         $this->metrics = $metrics;
 

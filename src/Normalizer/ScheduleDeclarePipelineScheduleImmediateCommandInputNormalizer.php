@@ -45,11 +45,15 @@ class ScheduleDeclarePipelineScheduleImmediateCommandInputNormalizer implements 
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('pipeline', $data)) {
+        if (\array_key_exists('pipeline', $data) && null !== $data['pipeline']) {
             $object->setPipeline($data['pipeline']);
+        } elseif (\array_key_exists('pipeline', $data) && null === $data['pipeline']) {
+            $object->setPipeline(null);
         }
-        if (\array_key_exists('organization', $data)) {
+        if (\array_key_exists('organization', $data) && null !== $data['organization']) {
             $object->setOrganization($data['organization']);
+        } elseif (\array_key_exists('organization', $data) && null === $data['organization']) {
+            $object->setOrganization(null);
         }
 
         return $object;

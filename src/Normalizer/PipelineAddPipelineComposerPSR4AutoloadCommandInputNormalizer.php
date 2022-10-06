@@ -45,18 +45,24 @@ class PipelineAddPipelineComposerPSR4AutoloadCommandInputNormalizer implements D
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('pipeline', $data)) {
+        if (\array_key_exists('pipeline', $data) && null !== $data['pipeline']) {
             $object->setPipeline($data['pipeline']);
+        } elseif (\array_key_exists('pipeline', $data) && null === $data['pipeline']) {
+            $object->setPipeline(null);
         }
-        if (\array_key_exists('namespace', $data)) {
+        if (\array_key_exists('namespace', $data) && null !== $data['namespace']) {
             $object->setNamespace($data['namespace']);
+        } elseif (\array_key_exists('namespace', $data) && null === $data['namespace']) {
+            $object->setNamespace(null);
         }
-        if (\array_key_exists('paths', $data)) {
+        if (\array_key_exists('paths', $data) && null !== $data['paths']) {
             $values = [];
             foreach ($data['paths'] as $value) {
                 $values[] = $value;
             }
             $object->setPaths($values);
+        } elseif (\array_key_exists('paths', $data) && null === $data['paths']) {
+            $object->setPaths(null);
         }
 
         return $object;

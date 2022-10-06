@@ -45,26 +45,40 @@ class CurrencyJsonldNormalizer implements DenormalizerInterface, NormalizerInter
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data)) {
+        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
             $object->setContext($data['@context']);
+        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+            $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data)) {
+        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
             $object->setId($data['@id']);
+        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+            $object->setId(null);
         }
-        if (\array_key_exists('@type', $data)) {
+        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
             $object->setType($data['@type']);
+        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+            $object->setType(null);
         }
-        if (\array_key_exists('currencyCode', $data)) {
+        if (\array_key_exists('currencyCode', $data) && null !== $data['currencyCode']) {
             $object->setCurrencyCode($data['currencyCode']);
+        } elseif (\array_key_exists('currencyCode', $data) && null === $data['currencyCode']) {
+            $object->setCurrencyCode(null);
         }
-        if (\array_key_exists('numericCode', $data)) {
+        if (\array_key_exists('numericCode', $data) && null !== $data['numericCode']) {
             $object->setNumericCode($data['numericCode']);
+        } elseif (\array_key_exists('numericCode', $data) && null === $data['numericCode']) {
+            $object->setNumericCode(null);
         }
-        if (\array_key_exists('name', $data)) {
+        if (\array_key_exists('name', $data) && null !== $data['name']) {
             $object->setName($data['name']);
+        } elseif (\array_key_exists('name', $data) && null === $data['name']) {
+            $object->setName(null);
         }
-        if (\array_key_exists('defaultFractionDigits', $data)) {
+        if (\array_key_exists('defaultFractionDigits', $data) && null !== $data['defaultFractionDigits']) {
             $object->setDefaultFractionDigits($data['defaultFractionDigits']);
+        } elseif (\array_key_exists('defaultFractionDigits', $data) && null === $data['defaultFractionDigits']) {
+            $object->setDefaultFractionDigits(null);
         }
 
         return $object;

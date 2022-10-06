@@ -5,11 +5,11 @@ namespace Gyroscops\Api\Model;
 class EnvironmentSecretsGetResponse200HydraSearchHydraMappingItem
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
-     * @var string
+     * @var string|null
      */
     protected $variable;
     /**
@@ -17,28 +17,28 @@ class EnvironmentSecretsGetResponse200HydraSearchHydraMappingItem
      */
     protected $property;
     /**
-     * @var bool
+     * @var bool|null
      */
     protected $required;
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
         return $this;
     }
 
-    public function getVariable(): string
+    public function getVariable(): ?string
     {
         return $this->variable;
     }
 
-    public function setVariable(string $variable): self
+    public function setVariable(?string $variable): self
     {
         $this->variable = $variable;
 
@@ -57,12 +57,12 @@ class EnvironmentSecretsGetResponse200HydraSearchHydraMappingItem
         return $this;
     }
 
-    public function getRequired(): bool
+    public function getRequired(): ?bool
     {
         return $this->required;
     }
 
-    public function setRequired(bool $required): self
+    public function setRequired(?bool $required): self
     {
         $this->required = $required;
 

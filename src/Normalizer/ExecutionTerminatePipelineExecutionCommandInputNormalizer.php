@@ -45,11 +45,15 @@ class ExecutionTerminatePipelineExecutionCommandInputNormalizer implements Denor
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('execution', $data)) {
+        if (\array_key_exists('execution', $data) && null !== $data['execution']) {
             $object->setExecution($data['execution']);
+        } elseif (\array_key_exists('execution', $data) && null === $data['execution']) {
+            $object->setExecution(null);
         }
-        if (\array_key_exists('reason', $data)) {
+        if (\array_key_exists('reason', $data) && null !== $data['reason']) {
             $object->setReason($data['reason']);
+        } elseif (\array_key_exists('reason', $data) && null === $data['reason']) {
+            $object->setReason(null);
         }
 
         return $object;

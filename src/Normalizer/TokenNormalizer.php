@@ -45,8 +45,10 @@ class TokenNormalizer implements DenormalizerInterface, NormalizerInterface, Den
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('token', $data)) {
+        if (\array_key_exists('token', $data) && null !== $data['token']) {
             $object->setToken($data['token']);
+        } elseif (\array_key_exists('token', $data) && null === $data['token']) {
+            $object->setToken(null);
         }
 
         return $object;

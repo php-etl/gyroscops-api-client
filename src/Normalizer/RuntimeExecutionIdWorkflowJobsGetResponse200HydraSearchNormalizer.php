@@ -45,21 +45,29 @@ class RuntimeExecutionIdWorkflowJobsGetResponse200HydraSearchNormalizer implemen
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@type', $data)) {
+        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
             $object->setType($data['@type']);
+        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+            $object->setType(null);
         }
-        if (\array_key_exists('hydra:template', $data)) {
+        if (\array_key_exists('hydra:template', $data) && null !== $data['hydra:template']) {
             $object->setHydraTemplate($data['hydra:template']);
+        } elseif (\array_key_exists('hydra:template', $data) && null === $data['hydra:template']) {
+            $object->setHydraTemplate(null);
         }
-        if (\array_key_exists('hydra:variableRepresentation', $data)) {
+        if (\array_key_exists('hydra:variableRepresentation', $data) && null !== $data['hydra:variableRepresentation']) {
             $object->setHydraVariableRepresentation($data['hydra:variableRepresentation']);
+        } elseif (\array_key_exists('hydra:variableRepresentation', $data) && null === $data['hydra:variableRepresentation']) {
+            $object->setHydraVariableRepresentation(null);
         }
-        if (\array_key_exists('hydra:mapping', $data)) {
+        if (\array_key_exists('hydra:mapping', $data) && null !== $data['hydra:mapping']) {
             $values = [];
             foreach ($data['hydra:mapping'] as $value) {
                 $values[] = $this->denormalizer->denormalize($value, 'Gyroscops\\Api\\Model\\RuntimeExecutionIdWorkflowJobsGetResponse200HydraSearchHydraMappingItem', 'json', $context);
             }
             $object->setHydraMapping($values);
+        } elseif (\array_key_exists('hydra:mapping', $data) && null === $data['hydra:mapping']) {
+            $object->setHydraMapping(null);
         }
 
         return $object;

@@ -5,7 +5,7 @@ namespace Gyroscops\Api\Model;
 class AkeneoLinkedAccount
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
@@ -13,15 +13,15 @@ class AkeneoLinkedAccount
      */
     protected $user;
     /**
-     * @var string
+     * @var string|null
      */
     protected $tokenId;
     /**
-     * @var string
+     * @var string|null
      */
     protected $akeneoUserId;
     /**
-     * @var string
+     * @var string|null
      */
     protected $token;
     /**
@@ -29,12 +29,12 @@ class AkeneoLinkedAccount
      */
     protected $akeneoInstance;
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
@@ -53,36 +53,36 @@ class AkeneoLinkedAccount
         return $this;
     }
 
-    public function getTokenId(): string
+    public function getTokenId(): ?string
     {
         return $this->tokenId;
     }
 
-    public function setTokenId(string $tokenId): self
+    public function setTokenId(?string $tokenId): self
     {
         $this->tokenId = $tokenId;
 
         return $this;
     }
 
-    public function getAkeneoUserId(): string
+    public function getAkeneoUserId(): ?string
     {
         return $this->akeneoUserId;
     }
 
-    public function setAkeneoUserId(string $akeneoUserId): self
+    public function setAkeneoUserId(?string $akeneoUserId): self
     {
         $this->akeneoUserId = $akeneoUserId;
 
         return $this;
     }
 
-    public function getToken(): string
+    public function getToken(): ?string
     {
         return $this->token;
     }
 
-    public function setToken(string $token): self
+    public function setToken(?string $token): self
     {
         $this->token = $token;
 

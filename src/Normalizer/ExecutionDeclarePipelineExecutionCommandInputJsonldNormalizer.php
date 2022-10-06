@@ -45,20 +45,30 @@ class ExecutionDeclarePipelineExecutionCommandInputJsonldNormalizer implements D
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data)) {
+        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
             $object->setContext($data['@context']);
+        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+            $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data)) {
+        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
             $object->setId($data['@id']);
+        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+            $object->setId(null);
         }
-        if (\array_key_exists('@type', $data)) {
+        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
             $object->setType($data['@type']);
+        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+            $object->setType(null);
         }
-        if (\array_key_exists('schedule', $data)) {
+        if (\array_key_exists('schedule', $data) && null !== $data['schedule']) {
             $object->setSchedule($data['schedule']);
+        } elseif (\array_key_exists('schedule', $data) && null === $data['schedule']) {
+            $object->setSchedule(null);
         }
-        if (\array_key_exists('pipeline', $data)) {
+        if (\array_key_exists('pipeline', $data) && null !== $data['pipeline']) {
             $object->setPipeline($data['pipeline']);
+        } elseif (\array_key_exists('pipeline', $data) && null === $data['pipeline']) {
+            $object->setPipeline(null);
         }
 
         return $object;

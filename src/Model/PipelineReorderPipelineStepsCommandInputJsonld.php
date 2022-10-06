@@ -5,23 +5,23 @@ namespace Gyroscops\Api\Model;
 class PipelineReorderPipelineStepsCommandInputJsonld
 {
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $context;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
-     * @var string
+     * @var string|null
      */
     protected $pipeline;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $codes;
 
@@ -43,36 +43,36 @@ class PipelineReorderPipelineStepsCommandInputJsonld
         return $this;
     }
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
         return $this;
     }
 
-    public function getPipeline(): string
+    public function getPipeline(): ?string
     {
         return $this->pipeline;
     }
 
-    public function setPipeline(string $pipeline): self
+    public function setPipeline(?string $pipeline): self
     {
         $this->pipeline = $pipeline;
 
@@ -80,17 +80,17 @@ class PipelineReorderPipelineStepsCommandInputJsonld
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getCodes(): array
+    public function getCodes(): ?array
     {
         return $this->codes;
     }
 
     /**
-     * @param string[] $codes
+     * @param string[]|null $codes
      */
-    public function setCodes(array $codes): self
+    public function setCodes(?array $codes): self
     {
         $this->codes = $codes;
 

@@ -45,14 +45,20 @@ class ConfigMapConfigMapInputNormalizer implements DenormalizerInterface, Normal
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('name', $data)) {
+        if (\array_key_exists('name', $data) && null !== $data['name']) {
             $object->setName($data['name']);
+        } elseif (\array_key_exists('name', $data) && null === $data['name']) {
+            $object->setName(null);
         }
-        if (\array_key_exists('description', $data)) {
+        if (\array_key_exists('description', $data) && null !== $data['description']) {
             $object->setDescription($data['description']);
+        } elseif (\array_key_exists('description', $data) && null === $data['description']) {
+            $object->setDescription(null);
         }
-        if (\array_key_exists('configs', $data)) {
+        if (\array_key_exists('configs', $data) && null !== $data['configs']) {
             $object->setConfigs($this->denormalizer->denormalize($data['configs'], 'Gyroscops\\Api\\Model\\ConfigMapValueInput', 'json', $context));
+        } elseif (\array_key_exists('configs', $data) && null === $data['configs']) {
+            $object->setConfigs(null);
         }
 
         return $object;

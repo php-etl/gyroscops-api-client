@@ -5,23 +5,23 @@ namespace Gyroscops\Api\Model;
 class SubscriptionJsonld
 {
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $context;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id2;
     /**
-     * @var string
+     * @var string|null
      */
     protected $organization;
     /**
@@ -29,15 +29,15 @@ class SubscriptionJsonld
      */
     protected $offer;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $options;
     /**
-     * @var PriceJsonld
+     * @var PriceJsonld|null
      */
     protected $cost;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $periods;
 
@@ -59,48 +59,48 @@ class SubscriptionJsonld
         return $this;
     }
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
         return $this;
     }
 
-    public function getId2(): string
+    public function getId2(): ?string
     {
         return $this->id2;
     }
 
-    public function setId2(string $id2): self
+    public function setId2(?string $id2): self
     {
         $this->id2 = $id2;
 
         return $this;
     }
 
-    public function getOrganization(): string
+    public function getOrganization(): ?string
     {
         return $this->organization;
     }
 
-    public function setOrganization(string $organization): self
+    public function setOrganization(?string $organization): self
     {
         $this->organization = $organization;
 
@@ -120,29 +120,29 @@ class SubscriptionJsonld
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getOptions(): array
+    public function getOptions(): ?array
     {
         return $this->options;
     }
 
     /**
-     * @param string[] $options
+     * @param string[]|null $options
      */
-    public function setOptions(array $options): self
+    public function setOptions(?array $options): self
     {
         $this->options = $options;
 
         return $this;
     }
 
-    public function getCost(): PriceJsonld
+    public function getCost(): ?PriceJsonld
     {
         return $this->cost;
     }
 
-    public function setCost(PriceJsonld $cost): self
+    public function setCost(?PriceJsonld $cost): self
     {
         $this->cost = $cost;
 
@@ -150,17 +150,17 @@ class SubscriptionJsonld
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getPeriods(): iterable
+    public function getPeriods(): ?iterable
     {
         return $this->periods;
     }
 
     /**
-     * @param string[] $periods
+     * @param string[]|null $periods
      */
-    public function setPeriods(iterable $periods): self
+    public function setPeriods(?iterable $periods): self
     {
         $this->periods = $periods;
 

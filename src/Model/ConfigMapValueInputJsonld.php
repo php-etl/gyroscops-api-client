@@ -5,31 +5,31 @@ namespace Gyroscops\Api\Model;
 class ConfigMapValueInputJsonld
 {
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $context;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $arrayCopy;
     /**
-     * @var int
+     * @var int|null
      */
     protected $flags;
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $iterator;
     /**
-     * @var string
+     * @var string|null
      */
     protected $iteratorClass;
 
@@ -51,24 +51,24 @@ class ConfigMapValueInputJsonld
         return $this;
     }
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
@@ -93,12 +93,12 @@ class ConfigMapValueInputJsonld
         return $this;
     }
 
-    public function getFlags(): int
+    public function getFlags(): ?int
     {
         return $this->flags;
     }
 
-    public function setFlags(int $flags): self
+    public function setFlags(?int $flags): self
     {
         $this->flags = $flags;
 
@@ -123,12 +123,12 @@ class ConfigMapValueInputJsonld
         return $this;
     }
 
-    public function getIteratorClass(): string
+    public function getIteratorClass(): ?string
     {
         return $this->iteratorClass;
     }
 
-    public function setIteratorClass(string $iteratorClass): self
+    public function setIteratorClass(?string $iteratorClass): self
     {
         $this->iteratorClass = $iteratorClass;
 

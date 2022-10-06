@@ -45,14 +45,20 @@ class CredentialsNormalizer implements DenormalizerInterface, NormalizerInterfac
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('username', $data)) {
+        if (\array_key_exists('username', $data) && null !== $data['username']) {
             $object->setUsername($data['username']);
+        } elseif (\array_key_exists('username', $data) && null === $data['username']) {
+            $object->setUsername(null);
         }
-        if (\array_key_exists('password', $data)) {
+        if (\array_key_exists('password', $data) && null !== $data['password']) {
             $object->setPassword($data['password']);
+        } elseif (\array_key_exists('password', $data) && null === $data['password']) {
+            $object->setPassword(null);
         }
-        if (\array_key_exists('workspace', $data)) {
+        if (\array_key_exists('workspace', $data) && null !== $data['workspace']) {
             $object->setWorkspace($data['workspace']);
+        } elseif (\array_key_exists('workspace', $data) && null === $data['workspace']) {
+            $object->setWorkspace(null);
         }
 
         return $object;

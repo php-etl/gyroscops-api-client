@@ -45,14 +45,20 @@ class PipelineCompilationNormalizer implements DenormalizerInterface, Normalizer
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('id', $data)) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId($data['id']);
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+            $object->setId(null);
         }
-        if (\array_key_exists('createdAt', $data)) {
+        if (\array_key_exists('createdAt', $data) && null !== $data['createdAt']) {
             $object->setCreatedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['createdAt']));
+        } elseif (\array_key_exists('createdAt', $data) && null === $data['createdAt']) {
+            $object->setCreatedAt(null);
         }
-        if (\array_key_exists('pipeline', $data)) {
+        if (\array_key_exists('pipeline', $data) && null !== $data['pipeline']) {
             $object->setPipeline($data['pipeline']);
+        } elseif (\array_key_exists('pipeline', $data) && null === $data['pipeline']) {
+            $object->setPipeline(null);
         }
         if (\array_key_exists('workspace', $data) && null !== $data['workspace']) {
             $object->setWorkspace($data['workspace']);
@@ -64,8 +70,10 @@ class PipelineCompilationNormalizer implements DenormalizerInterface, Normalizer
         } elseif (\array_key_exists('organization', $data) && null === $data['organization']) {
             $object->setOrganization(null);
         }
-        if (\array_key_exists('owner', $data)) {
+        if (\array_key_exists('owner', $data) && null !== $data['owner']) {
             $object->setOwner($data['owner']);
+        } elseif (\array_key_exists('owner', $data) && null === $data['owner']) {
+            $object->setOwner(null);
         }
 
         return $object;

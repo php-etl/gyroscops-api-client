@@ -5,19 +5,19 @@ namespace Gyroscops\Api\Model;
 class ScheduleDeclarePipelineScheduleOnceCommand
 {
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $id;
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $pipeline;
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     protected $date;
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $user;
 
@@ -57,12 +57,12 @@ class ScheduleDeclarePipelineScheduleOnceCommand
         return $this;
     }
 
-    public function getDate(): \DateTime
+    public function getDate(): ?\DateTime
     {
         return $this->date;
     }
 
-    public function setDate(\DateTime $date): self
+    public function setDate(?\DateTime $date): self
     {
         $this->date = $date;
 

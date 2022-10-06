@@ -10,10 +10,10 @@ class PutOfferItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements
     /**
      * Replaces the Offer resource.
      *
-     * @param string                                                      $id          Resource identifier
-     * @param \Gyroscops\Api\Model\OfferJsonld|\Gyroscops\Api\Model\Offer $requestBody
+     * @param string                                                           $id          Resource identifier
+     * @param \Gyroscops\Api\Model\OfferJsonld|\Gyroscops\Api\Model\Offer|null $requestBody
      */
-    public function __construct(string $id, $requestBody)
+    public function __construct(string $id, $requestBody = null)
     {
         $this->id = $id;
         $this->body = $requestBody;

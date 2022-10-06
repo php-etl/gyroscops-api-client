@@ -50,8 +50,10 @@ class ExecutionActionNormalizer implements DenormalizerInterface, NormalizerInte
         } elseif (\array_key_exists('execution', $data) && null === $data['execution']) {
             $object->setExecution(null);
         }
-        if (\array_key_exists('id', $data)) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId($data['id']);
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+            $object->setId(null);
         }
 
         return $object;

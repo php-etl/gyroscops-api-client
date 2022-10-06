@@ -9,11 +9,11 @@ class VariableFromConfigMap
      */
     protected $configMap;
     /**
-     * @var string
+     * @var string|null
      */
     protected $item;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
@@ -21,7 +21,7 @@ class VariableFromConfigMap
      */
     protected $environment;
     /**
-     * @var string
+     * @var string|null
      */
     protected $name;
 
@@ -37,24 +37,24 @@ class VariableFromConfigMap
         return $this;
     }
 
-    public function getItem(): string
+    public function getItem(): ?string
     {
         return $this->item;
     }
 
-    public function setItem(string $item): self
+    public function setItem(?string $item): self
     {
         $this->item = $item;
 
         return $this;
     }
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
@@ -73,12 +73,12 @@ class VariableFromConfigMap
         return $this;
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 

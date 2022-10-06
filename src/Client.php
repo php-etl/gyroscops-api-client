@@ -84,9 +84,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Updates the Offer resource.
      *
-     * @param string                     $id          Resource identifier
-     * @param \Gyroscops\Api\Model\Offer $requestBody
-     * @param string                     $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param string                          $id          Resource identifier
+     * @param \Gyroscops\Api\Model\Offer|null $requestBody
+     * @param string                          $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\PatchOfferItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PatchOfferItemUnprocessableEntityException
@@ -94,7 +94,7 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      *
      * @return \Gyroscops\Api\Model\Offer|\Psr\Http\Message\ResponseInterface|null
      */
-    public function patchOfferItem(string $id, Model\Offer $requestBody, string $fetch = self::FETCH_OBJECT)
+    public function patchOfferItem(string $id, ?Model\Offer $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PatchOfferItem($id, $requestBody), $fetch);
     }
@@ -102,9 +102,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Replaces the Offer resource.
      *
-     * @param string                                                      $id          Resource identifier
-     * @param \Gyroscops\Api\Model\OfferJsonld|\Gyroscops\Api\Model\Offer $requestBody
-     * @param string                                                      $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param string                                                           $id          Resource identifier
+     * @param \Gyroscops\Api\Model\OfferJsonld|\Gyroscops\Api\Model\Offer|null $requestBody
+     * @param string                                                           $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\PutOfferItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PutOfferItemUnprocessableEntityException
@@ -112,7 +112,7 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      *
      * @return \Gyroscops\Api\Model\Offer|\Psr\Http\Message\ResponseInterface|null
      */
-    public function putOfferItem(string $id, $requestBody, string $fetch = self::FETCH_OBJECT)
+    public function putOfferItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PutOfferItem($id, $requestBody), $fetch);
     }
@@ -185,9 +185,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Updates the Organization resource.
      *
-     * @param string                            $id          Resource identifier
-     * @param \Gyroscops\Api\Model\Organization $requestBody
-     * @param string                            $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param string                                 $id          Resource identifier
+     * @param \Gyroscops\Api\Model\Organization|null $requestBody
+     * @param string                                 $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\PatchOrganizationItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PatchOrganizationItemUnprocessableEntityException
@@ -195,7 +195,7 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      *
      * @return \Gyroscops\Api\Model\Organization|\Psr\Http\Message\ResponseInterface|null
      */
-    public function patchOrganizationItem(string $id, Model\Organization $requestBody, string $fetch = self::FETCH_OBJECT)
+    public function patchOrganizationItem(string $id, ?Model\Organization $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PatchOrganizationItem($id, $requestBody), $fetch);
     }
@@ -203,9 +203,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Replaces the Organization resource.
      *
-     * @param string                                                                    $id          Resource identifier
-     * @param \Gyroscops\Api\Model\OrganizationJsonld|\Gyroscops\Api\Model\Organization $requestBody
-     * @param string                                                                    $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param string                                                                         $id          Resource identifier
+     * @param \Gyroscops\Api\Model\OrganizationJsonld|\Gyroscops\Api\Model\Organization|null $requestBody
+     * @param string                                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\PutOrganizationItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PutOrganizationItemUnprocessableEntityException
@@ -213,7 +213,7 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      *
      * @return \Gyroscops\Api\Model\Organization|\Psr\Http\Message\ResponseInterface|null
      */
-    public function putOrganizationItem(string $id, $requestBody, string $fetch = self::FETCH_OBJECT)
+    public function putOrganizationItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PutOrganizationItem($id, $requestBody), $fetch);
     }
@@ -310,15 +310,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Creates a Organization resource.
      *
-     * @param \Gyroscops\Api\Model\OrganizationJsonld|\Gyroscops\Api\Model\Organization $requestBody
-     * @param string                                                                    $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\OrganizationJsonld|\Gyroscops\Api\Model\Organization|null $requestBody
+     * @param string                                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\PostOrganizationCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostOrganizationCollectionUnprocessableEntityException
      *
      * @return \Gyroscops\Api\Model\Organization|\Psr\Http\Message\ResponseInterface|null
      */
-    public function postOrganizationCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function postOrganizationCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PostOrganizationCollection($requestBody), $fetch);
     }
@@ -356,9 +356,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Updates the Subscription resource.
      *
-     * @param string                            $id          Resource identifier
-     * @param \Gyroscops\Api\Model\Subscription $requestBody
-     * @param string                            $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param string                                 $id          Resource identifier
+     * @param \Gyroscops\Api\Model\Subscription|null $requestBody
+     * @param string                                 $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\PatchSubscriptionItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PatchSubscriptionItemUnprocessableEntityException
@@ -366,7 +366,7 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      *
      * @return \Gyroscops\Api\Model\Subscription|\Psr\Http\Message\ResponseInterface|null
      */
-    public function patchSubscriptionItem(string $id, Model\Subscription $requestBody, string $fetch = self::FETCH_OBJECT)
+    public function patchSubscriptionItem(string $id, ?Model\Subscription $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PatchSubscriptionItem($id, $requestBody), $fetch);
     }
@@ -374,15 +374,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Creates a Subscription resource.
      *
-     * @param \Gyroscops\Api\Model\SubscriptionJsonld|\Gyroscops\Api\Model\Subscription $requestBody
-     * @param string                                                                    $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\SubscriptionJsonld|\Gyroscops\Api\Model\Subscription|null $requestBody
+     * @param string                                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\PostSubscriptionCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostSubscriptionCollectionUnprocessableEntityException
      *
      * @return \Gyroscops\Api\Model\Subscription|\Psr\Http\Message\ResponseInterface|null
      */
-    public function postSubscriptionCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function postSubscriptionCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PostSubscriptionCollection($requestBody), $fetch);
     }
@@ -390,9 +390,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Replaces the Subscription resource.
      *
-     * @param string                                                                    $id          Resource identifier
-     * @param \Gyroscops\Api\Model\SubscriptionJsonld|\Gyroscops\Api\Model\Subscription $requestBody
-     * @param string                                                                    $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param string                                                                         $id          Resource identifier
+     * @param \Gyroscops\Api\Model\SubscriptionJsonld|\Gyroscops\Api\Model\Subscription|null $requestBody
+     * @param string                                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\PutSubscriptionItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PutSubscriptionItemUnprocessableEntityException
@@ -400,7 +400,7 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      *
      * @return \Gyroscops\Api\Model\Subscription|\Psr\Http\Message\ResponseInterface|null
      */
-    public function putSubscriptionItem(string $id, $requestBody, string $fetch = self::FETCH_OBJECT)
+    public function putSubscriptionItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PutSubscriptionItem($id, $requestBody), $fetch);
     }
@@ -520,9 +520,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Updates the UserAuthorization resource.
      *
-     * @param string                                 $id          Resource identifier
-     * @param \Gyroscops\Api\Model\UserAuthorization $requestBody
-     * @param string                                 $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param string                                      $id          Resource identifier
+     * @param \Gyroscops\Api\Model\UserAuthorization|null $requestBody
+     * @param string                                      $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\PatchUserAuthorizationItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PatchUserAuthorizationItemUnprocessableEntityException
@@ -530,7 +530,7 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      *
      * @return \Gyroscops\Api\Model\UserAuthorization|\Psr\Http\Message\ResponseInterface|null
      */
-    public function patchUserAuthorizationItem(string $id, Model\UserAuthorization $requestBody, string $fetch = self::FETCH_OBJECT)
+    public function patchUserAuthorizationItem(string $id, ?Model\UserAuthorization $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PatchUserAuthorizationItem($id, $requestBody), $fetch);
     }
@@ -538,9 +538,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Replaces the UserAuthorization resource.
      *
-     * @param string                                                                              $id          Resource identifier
-     * @param \Gyroscops\Api\Model\UserAuthorizationJsonld|\Gyroscops\Api\Model\UserAuthorization $requestBody
-     * @param string                                                                              $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param string                                                                                   $id          Resource identifier
+     * @param \Gyroscops\Api\Model\UserAuthorizationJsonld|\Gyroscops\Api\Model\UserAuthorization|null $requestBody
+     * @param string                                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\PutUserAuthorizationItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PutUserAuthorizationItemUnprocessableEntityException
@@ -548,7 +548,7 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      *
      * @return \Gyroscops\Api\Model\UserAuthorization|\Psr\Http\Message\ResponseInterface|null
      */
-    public function putUserAuthorizationItem(string $id, $requestBody, string $fetch = self::FETCH_OBJECT)
+    public function putUserAuthorizationItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PutUserAuthorizationItem($id, $requestBody), $fetch);
     }
@@ -573,15 +573,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Creates a UserAuthorization resource.
      *
-     * @param \Gyroscops\Api\Model\UserAuthorizationJsonld|\Gyroscops\Api\Model\UserAuthorization $requestBody
-     * @param string                                                                              $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\UserAuthorizationJsonld|\Gyroscops\Api\Model\UserAuthorization|null $requestBody
+     * @param string                                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\PostUserAuthorizationCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostUserAuthorizationCollectionUnprocessableEntityException
      *
      * @return \Gyroscops\Api\Model\UserAuthorization|\Psr\Http\Message\ResponseInterface|null
      */
-    public function postUserAuthorizationCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function postUserAuthorizationCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PostUserAuthorizationCollection($requestBody), $fetch);
     }
@@ -619,9 +619,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Updates the User resource.
      *
-     * @param string                    $id          Resource identifier
-     * @param \Gyroscops\Api\Model\User $requestBody
-     * @param string                    $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param string                         $id          Resource identifier
+     * @param \Gyroscops\Api\Model\User|null $requestBody
+     * @param string                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\PatchUserItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PatchUserItemUnprocessableEntityException
@@ -629,7 +629,7 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      *
      * @return \Gyroscops\Api\Model\User|\Psr\Http\Message\ResponseInterface|null
      */
-    public function patchUserItem(string $id, Model\User $requestBody, string $fetch = self::FETCH_OBJECT)
+    public function patchUserItem(string $id, ?Model\User $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PatchUserItem($id, $requestBody), $fetch);
     }
@@ -637,9 +637,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Replaces the User resource.
      *
-     * @param string                                                    $id          Resource identifier
-     * @param \Gyroscops\Api\Model\UserJsonld|\Gyroscops\Api\Model\User $requestBody
-     * @param string                                                    $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param string                                                         $id          Resource identifier
+     * @param \Gyroscops\Api\Model\UserJsonld|\Gyroscops\Api\Model\User|null $requestBody
+     * @param string                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\PutUserItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PutUserItemUnprocessableEntityException
@@ -647,7 +647,7 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      *
      * @return \Gyroscops\Api\Model\User|\Psr\Http\Message\ResponseInterface|null
      */
-    public function putUserItem(string $id, $requestBody, string $fetch = self::FETCH_OBJECT)
+    public function putUserItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PutUserItem($id, $requestBody), $fetch);
     }
@@ -673,9 +673,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Updates the User resource.
      *
-     * @param string                                           $id          Resource identifier
-     * @param \Gyroscops\Api\Model\UserUserChangePasswordInput $requestBody
-     * @param string                                           $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param string                                                $id          Resource identifier
+     * @param \Gyroscops\Api\Model\UserUserChangePasswordInput|null $requestBody
+     * @param string                                                $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\ChangePasswordUserItemBadRequestException
      * @throws \Gyroscops\Api\Exception\ChangePasswordUserItemUnprocessableEntityException
@@ -683,7 +683,7 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      *
      * @return \Gyroscops\Api\Model\User|\Psr\Http\Message\ResponseInterface|null
      */
-    public function changePasswordUserItem(string $id, Model\UserUserChangePasswordInput $requestBody, string $fetch = self::FETCH_OBJECT)
+    public function changePasswordUserItem(string $id, ?Model\UserUserChangePasswordInput $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\ChangePasswordUserItem($id, $requestBody), $fetch);
     }
@@ -708,15 +708,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Creates a User resource.
      *
-     * @param \Gyroscops\Api\Model\UserJsonld|\Gyroscops\Api\Model\User $requestBody
-     * @param string                                                    $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\UserJsonld|\Gyroscops\Api\Model\User|null $requestBody
+     * @param string                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\PostUserCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostUserCollectionUnprocessableEntityException
      *
      * @return \Gyroscops\Api\Model\User|\Psr\Http\Message\ResponseInterface|null
      */
-    public function postUserCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function postUserCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PostUserCollection($requestBody), $fetch);
     }
@@ -754,9 +754,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Updates the Workspace resource.
      *
-     * @param string                         $id          Resource identifier
-     * @param \Gyroscops\Api\Model\Workspace $requestBody
-     * @param string                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param string                              $id          Resource identifier
+     * @param \Gyroscops\Api\Model\Workspace|null $requestBody
+     * @param string                              $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\PatchWorkspaceItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PatchWorkspaceItemUnprocessableEntityException
@@ -764,7 +764,7 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      *
      * @return \Gyroscops\Api\Model\Workspace|\Psr\Http\Message\ResponseInterface|null
      */
-    public function patchWorkspaceItem(string $id, Model\Workspace $requestBody, string $fetch = self::FETCH_OBJECT)
+    public function patchWorkspaceItem(string $id, ?Model\Workspace $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PatchWorkspaceItem($id, $requestBody), $fetch);
     }
@@ -772,9 +772,9 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Replaces the Workspace resource.
      *
-     * @param string                                                              $id          Resource identifier
-     * @param \Gyroscops\Api\Model\WorkspaceJsonld|\Gyroscops\Api\Model\Workspace $requestBody
-     * @param string                                                              $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param string                                                                   $id          Resource identifier
+     * @param \Gyroscops\Api\Model\WorkspaceJsonld|\Gyroscops\Api\Model\Workspace|null $requestBody
+     * @param string                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\PutWorkspaceItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PutWorkspaceItemUnprocessableEntityException
@@ -782,7 +782,7 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      *
      * @return \Gyroscops\Api\Model\Workspace|\Psr\Http\Message\ResponseInterface|null
      */
-    public function putWorkspaceItem(string $id, $requestBody, string $fetch = self::FETCH_OBJECT)
+    public function putWorkspaceItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PutWorkspaceItem($id, $requestBody), $fetch);
     }
@@ -843,15 +843,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Creates a Workspace resource.
      *
-     * @param \Gyroscops\Api\Model\WorkspaceJsonld|\Gyroscops\Api\Model\Workspace $requestBody
-     * @param string                                                              $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\WorkspaceJsonld|\Gyroscops\Api\Model\Workspace|null $requestBody
+     * @param string                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\PostWorkspaceCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostWorkspaceCollectionUnprocessableEntityException
      *
      * @return \Gyroscops\Api\Model\Workspace|\Psr\Http\Message\ResponseInterface|null
      */
-    public function postWorkspaceCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function postWorkspaceCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PostWorkspaceCollection($requestBody), $fetch);
     }
@@ -859,15 +859,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Creates a ConfigMap resource.
      *
-     * @param \Gyroscops\Api\Model\ConfigMapConfigMapInputJsonld|\Gyroscops\Api\Model\ConfigMapConfigMapInput $requestBody
-     * @param string                                                                                          $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\ConfigMapConfigMapInputJsonld|\Gyroscops\Api\Model\ConfigMapConfigMapInput|null $requestBody
+     * @param string                                                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\PostConfigMapCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostConfigMapCollectionUnprocessableEntityException
      *
      * @return \Gyroscops\Api\Model\ConfigMap|\Psr\Http\Message\ResponseInterface|null
      */
-    public function postConfigMapCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function postConfigMapCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PostConfigMapCollection($requestBody), $fetch);
     }
@@ -923,15 +923,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Creates a Environment resource.
      *
-     * @param \Gyroscops\Api\Model\EnvironmentJsonld|\Gyroscops\Api\Model\Environment $requestBody
-     * @param string                                                                  $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\EnvironmentJsonld|\Gyroscops\Api\Model\Environment|null $requestBody
+     * @param string                                                                       $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\PostEnvironmentCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostEnvironmentCollectionUnprocessableEntityException
      *
      * @return \Gyroscops\Api\Model\Environment|\Psr\Http\Message\ResponseInterface|null
      */
-    public function postEnvironmentCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function postEnvironmentCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PostEnvironmentCollection($requestBody), $fetch);
     }
@@ -971,15 +971,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Creates a Secret resource.
      *
-     * @param \Gyroscops\Api\Model\SecretSecretInputJsonld|\Gyroscops\Api\Model\SecretSecretInput $requestBody
-     * @param string                                                                              $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\SecretSecretInputJsonld|\Gyroscops\Api\Model\SecretSecretInput|null $requestBody
+     * @param string                                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\PostSecretCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostSecretCollectionUnprocessableEntityException
      *
      * @return \Gyroscops\Api\Model\Secret|\Psr\Http\Message\ResponseInterface|null
      */
-    public function postSecretCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function postSecretCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PostSecretCollection($requestBody), $fetch);
     }
@@ -1035,15 +1035,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Creates a VariableFromConfigMap resource.
      *
-     * @param \Gyroscops\Api\Model\VariableFromConfigMapJsonld|\Gyroscops\Api\Model\VariableFromConfigMap $requestBody
-     * @param string                                                                                      $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\VariableFromConfigMapJsonld|\Gyroscops\Api\Model\VariableFromConfigMap|null $requestBody
+     * @param string                                                                                           $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\PostVariableFromConfigMapCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostVariableFromConfigMapCollectionUnprocessableEntityException
      *
      * @return \Gyroscops\Api\Model\VariableFromConfigMap|\Psr\Http\Message\ResponseInterface|null
      */
-    public function postVariableFromConfigMapCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function postVariableFromConfigMapCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PostVariableFromConfigMapCollection($requestBody), $fetch);
     }
@@ -1083,15 +1083,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Creates a VariableFromSecret resource.
      *
-     * @param \Gyroscops\Api\Model\VariableFromSecretJsonld|\Gyroscops\Api\Model\VariableFromSecret $requestBody
-     * @param string                                                                                $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\VariableFromSecretJsonld|\Gyroscops\Api\Model\VariableFromSecret|null $requestBody
+     * @param string                                                                                     $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\PostVariableFromSecretCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostVariableFromSecretCollectionUnprocessableEntityException
      *
      * @return \Gyroscops\Api\Model\VariableFromSecret|\Psr\Http\Message\ResponseInterface|null
      */
-    public function postVariableFromSecretCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function postVariableFromSecretCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PostVariableFromSecretCollection($requestBody), $fetch);
     }
@@ -1131,15 +1131,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Creates a AkeneoInstance resource.
      *
-     * @param \Gyroscops\Api\Model\AkeneoInstanceAkeneoInstanceInputJsonld|\Gyroscops\Api\Model\AkeneoInstanceAkeneoInstanceInput $requestBody
-     * @param string                                                                                                              $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\AkeneoInstanceAkeneoInstanceInputJsonld|\Gyroscops\Api\Model\AkeneoInstanceAkeneoInstanceInput|null $requestBody
+     * @param string                                                                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\PostAkeneoInstanceCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostAkeneoInstanceCollectionUnprocessableEntityException
      *
      * @return \Gyroscops\Api\Model\AkeneoInstance|\Psr\Http\Message\ResponseInterface|null
      */
-    public function postAkeneoInstanceCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function postAkeneoInstanceCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PostAkeneoInstanceCollection($requestBody), $fetch);
     }
@@ -1215,15 +1215,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Creates a AkeneoLinkedAccount resource.
      *
-     * @param \Gyroscops\Api\Model\AkeneoLinkedAccountAkeneoLinkedAccountsInputJsonld|\Gyroscops\Api\Model\AkeneoLinkedAccountAkeneoLinkedAccountsInput $requestBody
-     * @param string                                                                                                                                    $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\AkeneoLinkedAccountAkeneoLinkedAccountsInputJsonld|\Gyroscops\Api\Model\AkeneoLinkedAccountAkeneoLinkedAccountsInput|null $requestBody
+     * @param string                                                                                                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\PostAkeneoLinkedAccountCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostAkeneoLinkedAccountCollectionUnprocessableEntityException
      *
      * @return \Gyroscops\Api\Model\AkeneoLinkedAccount|\Psr\Http\Message\ResponseInterface|null
      */
-    public function postAkeneoLinkedAccountCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function postAkeneoLinkedAccountCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PostAkeneoLinkedAccountCollection($requestBody), $fetch);
     }
@@ -1280,15 +1280,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Generate an Akeneo OAuth state.
      *
-     * @param \Gyroscops\Api\Model\AkeneoOauthTokenOauthStateInputJsonld|\Gyroscops\Api\Model\AkeneoOauthTokenOauthStateInput $requestBody
-     * @param string                                                                                                          $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\AkeneoOauthTokenOauthStateInputJsonld|\Gyroscops\Api\Model\AkeneoOauthTokenOauthStateInput|null $requestBody
+     * @param string                                                                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\PostAkeneoOauthTokenCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostAkeneoOauthTokenCollectionUnprocessableEntityException
      *
      * @return \Psr\Http\Message\ResponseInterface|null
      */
-    public function postAkeneoOauthTokenCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function postAkeneoOauthTokenCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PostAkeneoOauthTokenCollection($requestBody), $fetch);
     }
@@ -1328,15 +1328,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Generate an Akeneo OAuth token.
      *
-     * @param \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBody|\Gyroscops\Api\Model\AkeneoOauthTokenOauthTokenInput[] $requestBody
-     * @param string                                                                                                     $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBody|\Gyroscops\Api\Model\AkeneoOauthTokenOauthTokenInput[]|null $requestBody
+     * @param string                                                                                                          $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\PutAkeneoOauthTokenAkeneoOauthTokenCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PutAkeneoOauthTokenAkeneoOauthTokenCollectionUnprocessableEntityException
      *
      * @return \Psr\Http\Message\ResponseInterface|null
      */
-    public function putAkeneoOauthTokenAkeneoOauthTokenCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function putAkeneoOauthTokenAkeneoOauthTokenCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PutAkeneoOauthTokenAkeneoOauthTokenCollection($requestBody), $fetch);
     }
@@ -1391,15 +1391,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Creates a ReferralCode resource.
      *
-     * @param \Gyroscops\Api\Model\ReferralCodeJsonldReferralCodeWrite|\Gyroscops\Api\Model\ReferralCodeReferralCodeWrite $requestBody
-     * @param string                                                                                                      $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\ReferralCodeJsonldReferralCodeWrite|\Gyroscops\Api\Model\ReferralCodeReferralCodeWrite|null $requestBody
+     * @param string                                                                                                           $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\PostReferralCodeCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostReferralCodeCollectionUnprocessableEntityException
      *
      * @return \Gyroscops\Api\Model\ReferralCodeReferralCodeRead|\Psr\Http\Message\ResponseInterface|null
      */
-    public function postReferralCodeCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function postReferralCodeCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PostReferralCodeCollection($requestBody), $fetch);
     }
@@ -1439,15 +1439,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Creates a OnPremiseRequest resource.
      *
-     * @param \Gyroscops\Api\Model\OnPremiseRequestJsonldOnPremiseRequestWrite|\Gyroscops\Api\Model\OnPremiseRequestOnPremiseRequestWrite $requestBody
-     * @param string                                                                                                                      $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\OnPremiseRequestJsonldOnPremiseRequestWrite|\Gyroscops\Api\Model\OnPremiseRequestOnPremiseRequestWrite|null $requestBody
+     * @param string                                                                                                                           $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\PostOnPremiseRequestCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostOnPremiseRequestCollectionUnprocessableEntityException
      *
      * @return \Gyroscops\Api\Model\OnPremiseRequestOnPremiseRequestRead|\Psr\Http\Message\ResponseInterface|null
      */
-    public function postOnPremiseRequestCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function postOnPremiseRequestCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PostOnPremiseRequestCollection($requestBody), $fetch);
     }
@@ -1506,15 +1506,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Creates a ReferralRequest resource.
      *
-     * @param \Gyroscops\Api\Model\ReferralRequestReferralRequestInputJsonld|\Gyroscops\Api\Model\ReferralRequestReferralRequestInput $requestBody
-     * @param string                                                                                                                  $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\ReferralRequestReferralRequestInputJsonld|\Gyroscops\Api\Model\ReferralRequestReferralRequestInput|null $requestBody
+     * @param string                                                                                                                       $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\PostReferralRequestCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostReferralRequestCollectionUnprocessableEntityException
      *
      * @return \Gyroscops\Api\Model\ReferralRequestReferralRequestRead|\Psr\Http\Message\ResponseInterface|null
      */
-    public function postReferralRequestCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function postReferralRequestCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PostReferralRequestCollection($requestBody), $fetch);
     }
@@ -2039,15 +2039,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Declares a pipeline execution.
      *
-     * @param \Gyroscops\Api\Model\ExecutionDeclarePipelineExecutionCommandInputJsonld|\Gyroscops\Api\Model\ExecutionDeclarePipelineExecutionCommandInput $requestBody
-     * @param string                                                                                                                                      $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\ExecutionDeclarePipelineExecutionCommandInputJsonld|\Gyroscops\Api\Model\ExecutionDeclarePipelineExecutionCommandInput|null $requestBody
+     * @param string                                                                                                                                           $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\DeclareExecutionExecutionCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\DeclareExecutionExecutionCollectionUnprocessableEntityException
      *
      * @return \Psr\Http\Message\ResponseInterface|null
      */
-    public function declareExecutionExecutionCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function declareExecutionExecutionCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\DeclareExecutionExecutionCollection($requestBody), $fetch);
     }
@@ -2055,15 +2055,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Finishes a pipeline execution.
      *
-     * @param \Gyroscops\Api\Model\ExecutionFinishPipelineExecutionCommandInputJsonld|\Gyroscops\Api\Model\ExecutionFinishPipelineExecutionCommandInput $requestBody
-     * @param string                                                                                                                                    $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\ExecutionFinishPipelineExecutionCommandInputJsonld|\Gyroscops\Api\Model\ExecutionFinishPipelineExecutionCommandInput|null $requestBody
+     * @param string                                                                                                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\FinishExecutionExecutionCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\FinishExecutionExecutionCollectionUnprocessableEntityException
      *
      * @return \Psr\Http\Message\ResponseInterface|null
      */
-    public function finishExecutionExecutionCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function finishExecutionExecutionCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\FinishExecutionExecutionCollection($requestBody), $fetch);
     }
@@ -2071,15 +2071,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Interrupts a pipeline execution.
      *
-     * @param \Gyroscops\Api\Model\ExecutionInterruptPipelineExecutionCommandInputJsonld|\Gyroscops\Api\Model\ExecutionInterruptPipelineExecutionCommandInput $requestBody
-     * @param string                                                                                                                                          $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\ExecutionInterruptPipelineExecutionCommandInputJsonld|\Gyroscops\Api\Model\ExecutionInterruptPipelineExecutionCommandInput|null $requestBody
+     * @param string                                                                                                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\InterruptExecutionExecutionCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\InterruptExecutionExecutionCollectionUnprocessableEntityException
      *
      * @return \Psr\Http\Message\ResponseInterface|null
      */
-    public function interruptExecutionExecutionCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function interruptExecutionExecutionCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\InterruptExecutionExecutionCollection($requestBody), $fetch);
     }
@@ -2087,15 +2087,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Resumes a pipeline execution.
      *
-     * @param \Gyroscops\Api\Model\ExecutionResumePipelineExecutionCommandInputJsonld|\Gyroscops\Api\Model\ExecutionResumePipelineExecutionCommandInput $requestBody
-     * @param string                                                                                                                                    $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\ExecutionResumePipelineExecutionCommandInputJsonld|\Gyroscops\Api\Model\ExecutionResumePipelineExecutionCommandInput|null $requestBody
+     * @param string                                                                                                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\ResumeExecutionExecutionCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\ResumeExecutionExecutionCollectionUnprocessableEntityException
      *
      * @return \Psr\Http\Message\ResponseInterface|null
      */
-    public function resumeExecutionExecutionCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function resumeExecutionExecutionCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\ResumeExecutionExecutionCollection($requestBody), $fetch);
     }
@@ -2103,15 +2103,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Starts a pipeline execution.
      *
-     * @param \Gyroscops\Api\Model\ExecutionStartPipelineExecutionCommandInputJsonld|\Gyroscops\Api\Model\ExecutionStartPipelineExecutionCommandInput $requestBody
-     * @param string                                                                                                                                  $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\ExecutionStartPipelineExecutionCommandInputJsonld|\Gyroscops\Api\Model\ExecutionStartPipelineExecutionCommandInput|null $requestBody
+     * @param string                                                                                                                                       $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\StartExecutionExecutionCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\StartExecutionExecutionCollectionUnprocessableEntityException
      *
      * @return \Psr\Http\Message\ResponseInterface|null
      */
-    public function startExecutionExecutionCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function startExecutionExecutionCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\StartExecutionExecutionCollection($requestBody), $fetch);
     }
@@ -2119,15 +2119,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Terminates a pipeline execution.
      *
-     * @param \Gyroscops\Api\Model\ExecutionTerminatePipelineExecutionCommandInputJsonld|\Gyroscops\Api\Model\ExecutionTerminatePipelineExecutionCommandInput $requestBody
-     * @param string                                                                                                                                          $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\ExecutionTerminatePipelineExecutionCommandInputJsonld|\Gyroscops\Api\Model\ExecutionTerminatePipelineExecutionCommandInput|null $requestBody
+     * @param string                                                                                                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\TerminateExecutionExecutionCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\TerminateExecutionExecutionCollectionUnprocessableEntityException
      *
      * @return \Psr\Http\Message\ResponseInterface|null
      */
-    public function terminateExecutionExecutionCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function terminateExecutionExecutionCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\TerminateExecutionExecutionCollection($requestBody), $fetch);
     }
@@ -2135,15 +2135,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Updates a pipeline execution state.
      *
-     * @param \Gyroscops\Api\Model\ExecutionUpdatePipelineExecutionStateCommandInputJsonld|\Gyroscops\Api\Model\ExecutionUpdatePipelineExecutionStateCommandInput $requestBody
-     * @param string                                                                                                                                              $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\ExecutionUpdatePipelineExecutionStateCommandInputJsonld|\Gyroscops\Api\Model\ExecutionUpdatePipelineExecutionStateCommandInput|null $requestBody
+     * @param string                                                                                                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\UpdateExecutionStateExecutionCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\UpdateExecutionStateExecutionCollectionUnprocessableEntityException
      *
      * @return \Psr\Http\Message\ResponseInterface|null
      */
-    public function updateExecutionStateExecutionCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function updateExecutionStateExecutionCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\UpdateExecutionStateExecutionCollection($requestBody), $fetch);
     }
@@ -2412,15 +2412,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Declares a docker pipeline.
      *
-     * @param \Gyroscops\Api\Model\PipelineDeclarePipelineCommandInputJsonld|\Gyroscops\Api\Model\PipelineDeclarePipelineCommandInput $requestBody
-     * @param string                                                                                                                  $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\PipelineDeclarePipelineCommandInputJsonld|\Gyroscops\Api\Model\PipelineDeclarePipelineCommandInput|null $requestBody
+     * @param string                                                                                                                       $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\DeclarePipelinePipelineCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\DeclarePipelinePipelineCollectionUnprocessableEntityException
      *
      * @return \Psr\Http\Message\ResponseInterface|null
      */
-    public function declarePipelinePipelineCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function declarePipelinePipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\DeclarePipelinePipelineCollection($requestBody), $fetch);
     }
@@ -2428,15 +2428,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Adds PSR4 autoload composer to a pipeline.
      *
-     * @param \Gyroscops\Api\Model\PipelineAddPipelineComposerPSR4AutoloadCommandInputJsonld|\Gyroscops\Api\Model\PipelineAddPipelineComposerPSR4AutoloadCommandInput $requestBody
-     * @param string                                                                                                                                                  $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\PipelineAddPipelineComposerPSR4AutoloadCommandInputJsonld|\Gyroscops\Api\Model\PipelineAddPipelineComposerPSR4AutoloadCommandInput|null $requestBody
+     * @param string                                                                                                                                                       $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\AddComposerPipelinePipelineCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\AddComposerPipelinePipelineCollectionUnprocessableEntityException
      *
      * @return \Psr\Http\Message\ResponseInterface|null
      */
-    public function addComposerPipelinePipelineCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function addComposerPipelinePipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\AddComposerPipelinePipelineCollection($requestBody), $fetch);
     }
@@ -2461,15 +2461,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Creates a pipeline compilation.
      *
-     * @param \Gyroscops\Api\Model\PipelineCompilePipelineCommandInputJsonld|\Gyroscops\Api\Model\PipelineCompilePipelineCommandInput $requestBody
-     * @param string                                                                                                                  $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\PipelineCompilePipelineCommandInputJsonld|\Gyroscops\Api\Model\PipelineCompilePipelineCommandInput|null $requestBody
+     * @param string                                                                                                                       $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\PipelineCompilationPipelineCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PipelineCompilationPipelineCollectionUnprocessableEntityException
      *
      * @return \Psr\Http\Message\ResponseInterface|null
      */
-    public function pipelineCompilationPipelineCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function pipelineCompilationPipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PipelineCompilationPipelineCollection($requestBody), $fetch);
     }
@@ -2477,15 +2477,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Adds a step after another one in a pipeline.
      *
-     * @param \Gyroscops\Api\Model\PipelineAddAfterPipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineAddAfterPipelineStepCommandInput $requestBody
-     * @param string                                                                                                                            $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\PipelineAddAfterPipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineAddAfterPipelineStepCommandInput|null $requestBody
+     * @param string                                                                                                                                 $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\AddAfterPipelineStepPipelineCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\AddAfterPipelineStepPipelineCollectionUnprocessableEntityException
      *
      * @return \Psr\Http\Message\ResponseInterface|null
      */
-    public function addAfterPipelineStepPipelineCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function addAfterPipelineStepPipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\AddAfterPipelineStepPipelineCollection($requestBody), $fetch);
     }
@@ -2493,15 +2493,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Adds a step before another one in a pipeline.
      *
-     * @param \Gyroscops\Api\Model\PipelineAddBeforePipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineAddBeforePipelineStepCommandInput $requestBody
-     * @param string                                                                                                                              $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\PipelineAddBeforePipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineAddBeforePipelineStepCommandInput|null $requestBody
+     * @param string                                                                                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\AddBeforePipelineStepPipelineCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\AddBeforePipelineStepPipelineCollectionUnprocessableEntityException
      *
      * @return \Psr\Http\Message\ResponseInterface|null
      */
-    public function addBeforePipelineStepPipelineCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function addBeforePipelineStepPipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\AddBeforePipelineStepPipelineCollection($requestBody), $fetch);
     }
@@ -2509,15 +2509,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Appends a step to a pipeline.
      *
-     * @param \Gyroscops\Api\Model\PipelineAppendPipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineAppendPipelineStepCommandInput $requestBody
-     * @param string                                                                                                                        $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\PipelineAppendPipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineAppendPipelineStepCommandInput|null $requestBody
+     * @param string                                                                                                                             $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\AppendPipelineStepPipelineCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\AppendPipelineStepPipelineCollectionUnprocessableEntityException
      *
      * @return \Psr\Http\Message\ResponseInterface|null
      */
-    public function appendPipelineStepPipelineCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function appendPipelineStepPipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\AppendPipelineStepPipelineCollection($requestBody), $fetch);
     }
@@ -2525,15 +2525,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Moves a step after another one in a pipeline.
      *
-     * @param \Gyroscops\Api\Model\PipelineMoveAfterPipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineMoveAfterPipelineStepCommandInput $requestBody
-     * @param string                                                                                                                              $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\PipelineMoveAfterPipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineMoveAfterPipelineStepCommandInput|null $requestBody
+     * @param string                                                                                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\MoveAfterPipelineStepPipelineCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\MoveAfterPipelineStepPipelineCollectionUnprocessableEntityException
      *
      * @return \Psr\Http\Message\ResponseInterface|null
      */
-    public function moveAfterPipelineStepPipelineCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function moveAfterPipelineStepPipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\MoveAfterPipelineStepPipelineCollection($requestBody), $fetch);
     }
@@ -2541,15 +2541,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Moves a step before another one in a pipeline.
      *
-     * @param \Gyroscops\Api\Model\PipelineMoveBeforePipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineMoveBeforePipelineStepCommandInput $requestBody
-     * @param string                                                                                                                                $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\PipelineMoveBeforePipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineMoveBeforePipelineStepCommandInput|null $requestBody
+     * @param string                                                                                                                                     $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\MoveBeforePipelineStepPipelineCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\MoveBeforePipelineStepPipelineCollectionUnprocessableEntityException
      *
      * @return \Psr\Http\Message\ResponseInterface|null
      */
-    public function moveBeforePipelineStepPipelineCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function moveBeforePipelineStepPipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\MoveBeforePipelineStepPipelineCollection($requestBody), $fetch);
     }
@@ -2557,15 +2557,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Adds a probe to a step.
      *
-     * @param \Gyroscops\Api\Model\PipelineAddPipelineStepProbCommandInputJsonld|\Gyroscops\Api\Model\PipelineAddPipelineStepProbCommandInput $requestBody
-     * @param string                                                                                                                          $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\PipelineAddPipelineStepProbCommandInputJsonld|\Gyroscops\Api\Model\PipelineAddPipelineStepProbCommandInput|null $requestBody
+     * @param string                                                                                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\AddPipelineStepProbePipelineCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\AddPipelineStepProbePipelineCollectionUnprocessableEntityException
      *
      * @return \Psr\Http\Message\ResponseInterface|null
      */
-    public function addPipelineStepProbePipelineCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function addPipelineStepProbePipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\AddPipelineStepProbePipelineCollection($requestBody), $fetch);
     }
@@ -2573,15 +2573,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Reorganizes the steps of a pipeline according to a given order.
      *
-     * @param \Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandInputJsonld|\Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandInput $requestBody
-     * @param string                                                                                                                            $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandInputJsonld|\Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandInput|null $requestBody
+     * @param string                                                                                                                                 $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\ReorderPipelineStepsPipelineCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\ReorderPipelineStepsPipelineCollectionUnprocessableEntityException
      *
      * @return \Psr\Http\Message\ResponseInterface|null
      */
-    public function reorderPipelineStepsPipelineCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function reorderPipelineStepsPipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\ReorderPipelineStepsPipelineCollection($requestBody), $fetch);
     }
@@ -2589,15 +2589,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Replaces a step by another one in a pipeline.
      *
-     * @param \Gyroscops\Api\Model\PipelineReplacePipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineReplacePipelineStepCommandInput $requestBody
-     * @param string                                                                                                                          $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\PipelineReplacePipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineReplacePipelineStepCommandInput|null $requestBody
+     * @param string                                                                                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\ReplacePipelineStepPipelineCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\ReplacePipelineStepPipelineCollectionUnprocessableEntityException
      *
      * @return \Psr\Http\Message\ResponseInterface|null
      */
-    public function replacePipelineStepPipelineCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function replacePipelineStepPipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\ReplacePipelineStepPipelineCollection($requestBody), $fetch);
     }
@@ -2605,15 +2605,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Schedule a pipeline execution immediately.
      *
-     * @param \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleImmediateCommandInputJsonld|\Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleImmediateCommandInput $requestBody
-     * @param string                                                                                                                                                    $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleImmediateCommandInputJsonld|\Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleImmediateCommandInput|null $requestBody
+     * @param string                                                                                                                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\ScheduleImmediateScheduleCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\ScheduleImmediateScheduleCollectionUnprocessableEntityException
      *
      * @return \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleImmediateCommand|\Psr\Http\Message\ResponseInterface|null
      */
-    public function scheduleImmediateScheduleCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function scheduleImmediateScheduleCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\ScheduleImmediateScheduleCollection($requestBody), $fetch);
     }
@@ -2621,15 +2621,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Schedule an immediate pipeline execution.
      *
-     * @param \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleOnceCommandInputJsonld|\Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleOnceCommandInput $requestBody
-     * @param string                                                                                                                                          $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleOnceCommandInputJsonld|\Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleOnceCommandInput|null $requestBody
+     * @param string                                                                                                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\ScheduleOnceScheduleCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\ScheduleOnceScheduleCollectionUnprocessableEntityException
      *
      * @return \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleOnceCommand|\Psr\Http\Message\ResponseInterface|null
      */
-    public function scheduleOnceScheduleCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function scheduleOnceScheduleCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\ScheduleOnceScheduleCollection($requestBody), $fetch);
     }
@@ -2637,15 +2637,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Schedule a recurring pipeline execution.
      *
-     * @param \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleTimesCommandInputJsonld|\Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleTimesCommandInput $requestBody
-     * @param string                                                                                                                                            $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleTimesCommandInputJsonld|\Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleTimesCommandInput|null $requestBody
+     * @param string                                                                                                                                                 $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\ScheduleTimesScheduleCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\ScheduleTimesScheduleCollectionUnprocessableEntityException
      *
      * @return \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleTimesCommand|\Psr\Http\Message\ResponseInterface|null
      */
-    public function scheduleTimesScheduleCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function scheduleTimesScheduleCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\ScheduleTimesScheduleCollection($requestBody), $fetch);
     }
@@ -2653,15 +2653,15 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Schedule a delayed pipeline execution.
      *
-     * @param \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleUntilCommandInputJsonld|\Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleUntilCommandInput $requestBody
-     * @param string                                                                                                                                            $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleUntilCommandInputJsonld|\Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleUntilCommandInput|null $requestBody
+     * @param string                                                                                                                                                 $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Gyroscops\Api\Exception\ScheduleUntilScheduleCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\ScheduleUntilScheduleCollectionUnprocessableEntityException
      *
      * @return \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleUntilCommand|\Psr\Http\Message\ResponseInterface|null
      */
-    public function scheduleUntilScheduleCollection($requestBody, string $fetch = self::FETCH_OBJECT)
+    public function scheduleUntilScheduleCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\ScheduleUntilScheduleCollection($requestBody), $fetch);
     }

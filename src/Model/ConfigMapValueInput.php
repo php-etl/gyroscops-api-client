@@ -5,19 +5,19 @@ namespace Gyroscops\Api\Model;
 class ConfigMapValueInput
 {
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $arrayCopy;
     /**
-     * @var int
+     * @var int|null
      */
     protected $flags;
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $iterator;
     /**
-     * @var string
+     * @var string|null
      */
     protected $iteratorClass;
 
@@ -39,12 +39,12 @@ class ConfigMapValueInput
         return $this;
     }
 
-    public function getFlags(): int
+    public function getFlags(): ?int
     {
         return $this->flags;
     }
 
-    public function setFlags(int $flags): self
+    public function setFlags(?int $flags): self
     {
         $this->flags = $flags;
 
@@ -69,12 +69,12 @@ class ConfigMapValueInput
         return $this;
     }
 
-    public function getIteratorClass(): string
+    public function getIteratorClass(): ?string
     {
         return $this->iteratorClass;
     }
 
-    public function setIteratorClass(string $iteratorClass): self
+    public function setIteratorClass(?string $iteratorClass): self
     {
         $this->iteratorClass = $iteratorClass;
 

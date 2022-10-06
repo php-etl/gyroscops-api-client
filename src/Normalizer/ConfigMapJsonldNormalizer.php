@@ -45,32 +45,50 @@ class ConfigMapJsonldNormalizer implements DenormalizerInterface, NormalizerInte
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@id', $data)) {
+        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
             $object->setId($data['@id']);
+        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+            $object->setId(null);
         }
-        if (\array_key_exists('@type', $data)) {
+        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
             $object->setType($data['@type']);
+        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+            $object->setType(null);
         }
-        if (\array_key_exists('@context', $data)) {
+        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
             $object->setContext($data['@context']);
+        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+            $object->setContext(null);
         }
-        if (\array_key_exists('id', $data)) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId2($data['id']);
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+            $object->setId2(null);
         }
-        if (\array_key_exists('name', $data)) {
+        if (\array_key_exists('name', $data) && null !== $data['name']) {
             $object->setName($data['name']);
+        } elseif (\array_key_exists('name', $data) && null === $data['name']) {
+            $object->setName(null);
         }
-        if (\array_key_exists('description', $data)) {
+        if (\array_key_exists('description', $data) && null !== $data['description']) {
             $object->setDescription($data['description']);
+        } elseif (\array_key_exists('description', $data) && null === $data['description']) {
+            $object->setDescription(null);
         }
-        if (\array_key_exists('organization', $data)) {
+        if (\array_key_exists('organization', $data) && null !== $data['organization']) {
             $object->setOrganization($data['organization']);
+        } elseif (\array_key_exists('organization', $data) && null === $data['organization']) {
+            $object->setOrganization(null);
         }
-        if (\array_key_exists('workspace', $data)) {
+        if (\array_key_exists('workspace', $data) && null !== $data['workspace']) {
             $object->setWorkspace($data['workspace']);
+        } elseif (\array_key_exists('workspace', $data) && null === $data['workspace']) {
+            $object->setWorkspace(null);
         }
-        if (\array_key_exists('iterator', $data)) {
+        if (\array_key_exists('iterator', $data) && null !== $data['iterator']) {
             $object->setIterator($this->denormalizer->denormalize($data['iterator'], 'Gyroscops\\Api\\Model\\TraversableJsonld', 'json', $context));
+        } elseif (\array_key_exists('iterator', $data) && null === $data['iterator']) {
+            $object->setIterator(null);
         }
 
         return $object;

@@ -45,33 +45,45 @@ class VariableFromSecretJsonldNormalizer implements DenormalizerInterface, Norma
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data)) {
+        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
             $object->setContext($data['@context']);
+        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+            $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data)) {
+        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
             $object->setId($data['@id']);
+        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+            $object->setId(null);
         }
-        if (\array_key_exists('@type', $data)) {
+        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
             $object->setType($data['@type']);
+        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+            $object->setType(null);
         }
         if (\array_key_exists('secret', $data) && null !== $data['secret']) {
             $object->setSecret($data['secret']);
         } elseif (\array_key_exists('secret', $data) && null === $data['secret']) {
             $object->setSecret(null);
         }
-        if (\array_key_exists('item', $data)) {
+        if (\array_key_exists('item', $data) && null !== $data['item']) {
             $object->setItem($data['item']);
+        } elseif (\array_key_exists('item', $data) && null === $data['item']) {
+            $object->setItem(null);
         }
-        if (\array_key_exists('id', $data)) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId2($data['id']);
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+            $object->setId2(null);
         }
         if (\array_key_exists('environment', $data) && null !== $data['environment']) {
             $object->setEnvironment($data['environment']);
         } elseif (\array_key_exists('environment', $data) && null === $data['environment']) {
             $object->setEnvironment(null);
         }
-        if (\array_key_exists('name', $data)) {
+        if (\array_key_exists('name', $data) && null !== $data['name']) {
             $object->setName($data['name']);
+        } elseif (\array_key_exists('name', $data) && null === $data['name']) {
+            $object->setName(null);
         }
 
         return $object;

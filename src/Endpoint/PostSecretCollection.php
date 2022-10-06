@@ -9,9 +9,9 @@ class PostSecretCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint im
     /**
      * Creates a Secret resource.
      *
-     * @param \Gyroscops\Api\Model\SecretSecretInputJsonld|\Gyroscops\Api\Model\SecretSecretInput $requestBody
+     * @param \Gyroscops\Api\Model\SecretSecretInputJsonld|\Gyroscops\Api\Model\SecretSecretInput|null $requestBody
      */
-    public function __construct($requestBody)
+    public function __construct($requestBody = null)
     {
         $this->body = $requestBody;
     }

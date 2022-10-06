@@ -10,10 +10,10 @@ class PutOrganizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
     /**
      * Replaces the Organization resource.
      *
-     * @param string                                                                    $id          Resource identifier
-     * @param \Gyroscops\Api\Model\OrganizationJsonld|\Gyroscops\Api\Model\Organization $requestBody
+     * @param string                                                                         $id          Resource identifier
+     * @param \Gyroscops\Api\Model\OrganizationJsonld|\Gyroscops\Api\Model\Organization|null $requestBody
      */
-    public function __construct(string $id, $requestBody)
+    public function __construct(string $id, $requestBody = null)
     {
         $this->id = $id;
         $this->body = $requestBody;

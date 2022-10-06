@@ -12,7 +12,7 @@ class PatchUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implement
      *
      * @param string $id Resource identifier
      */
-    public function __construct(string $id, \Gyroscops\Api\Model\User $requestBody)
+    public function __construct(string $id, ?\Gyroscops\Api\Model\User $requestBody = null)
     {
         $this->id = $id;
         $this->body = $requestBody;

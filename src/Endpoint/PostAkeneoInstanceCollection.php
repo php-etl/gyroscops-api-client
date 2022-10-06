@@ -9,9 +9,9 @@ class PostAkeneoInstanceCollection extends \Gyroscops\Api\Runtime\Client\BaseEnd
     /**
      * Creates a AkeneoInstance resource.
      *
-     * @param \Gyroscops\Api\Model\AkeneoInstanceAkeneoInstanceInputJsonld|\Gyroscops\Api\Model\AkeneoInstanceAkeneoInstanceInput $requestBody
+     * @param \Gyroscops\Api\Model\AkeneoInstanceAkeneoInstanceInputJsonld|\Gyroscops\Api\Model\AkeneoInstanceAkeneoInstanceInput|null $requestBody
      */
-    public function __construct($requestBody)
+    public function __construct($requestBody = null)
     {
         $this->body = $requestBody;
     }

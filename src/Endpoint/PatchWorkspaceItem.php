@@ -12,7 +12,7 @@ class PatchWorkspaceItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impl
      *
      * @param string $id Resource identifier
      */
-    public function __construct(string $id, \Gyroscops\Api\Model\Workspace $requestBody)
+    public function __construct(string $id, ?\Gyroscops\Api\Model\Workspace $requestBody = null)
     {
         $this->id = $id;
         $this->body = $requestBody;

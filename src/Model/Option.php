@@ -9,27 +9,27 @@ class Option
      */
     protected $offer;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $sku;
     /**
-     * @var string
+     * @var string|null
      */
     protected $name;
     /**
-     * @var string
+     * @var string|null
      */
     protected $slug;
     /**
-     * @var string
+     * @var string|null
      */
     protected $description;
     /**
-     * @var Price
+     * @var Price|null
      */
     protected $price;
 
@@ -45,72 +45,72 @@ class Option
         return $this;
     }
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getSku(): string
+    public function getSku(): ?string
     {
         return $this->sku;
     }
 
-    public function setSku(string $sku): self
+    public function setSku(?string $sku): self
     {
         $this->sku = $sku;
 
         return $this;
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    public function getSlug(): string
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
 
-    public function setSlug(string $slug): self
+    public function setSlug(?string $slug): self
     {
         $this->slug = $slug;
 
         return $this;
     }
 
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
         return $this;
     }
 
-    public function getPrice(): Price
+    public function getPrice(): ?Price
     {
         return $this->price;
     }
 
-    public function setPrice(Price $price): self
+    public function setPrice(?Price $price): self
     {
         $this->price = $price;
 

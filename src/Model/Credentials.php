@@ -5,48 +5,48 @@ namespace Gyroscops\Api\Model;
 class Credentials
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $username;
     /**
-     * @var string
+     * @var string|null
      */
     protected $password;
     /**
-     * @var string
+     * @var string|null
      */
     protected $workspace;
 
-    public function getUsername(): string
+    public function getUsername(): ?string
     {
         return $this->username;
     }
 
-    public function setUsername(string $username): self
+    public function setUsername(?string $username): self
     {
         $this->username = $username;
 
         return $this;
     }
 
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(?string $password): self
     {
         $this->password = $password;
 
         return $this;
     }
 
-    public function getWorkspace(): string
+    public function getWorkspace(): ?string
     {
         return $this->workspace;
     }
 
-    public function setWorkspace(string $workspace): self
+    public function setWorkspace(?string $workspace): self
     {
         $this->workspace = $workspace;
 

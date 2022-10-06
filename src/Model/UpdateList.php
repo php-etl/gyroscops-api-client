@@ -5,7 +5,7 @@ namespace Gyroscops\Api\Model;
 class UpdateList
 {
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $iterator;
 

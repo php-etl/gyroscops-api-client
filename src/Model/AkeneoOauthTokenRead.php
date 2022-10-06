@@ -5,40 +5,40 @@ namespace Gyroscops\Api\Model;
 class AkeneoOauthTokenRead
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $url;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $scopes;
     /**
-     * @var string
+     * @var string|null
      */
     protected $responseType = 'code';
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getUrl(): string
+    public function getUrl(): ?string
     {
         return $this->url;
     }
 
-    public function setUrl(string $url): self
+    public function setUrl(?string $url): self
     {
         $this->url = $url;
 
@@ -46,29 +46,29 @@ class AkeneoOauthTokenRead
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getScopes(): array
+    public function getScopes(): ?array
     {
         return $this->scopes;
     }
 
     /**
-     * @param string[] $scopes
+     * @param string[]|null $scopes
      */
-    public function setScopes(array $scopes): self
+    public function setScopes(?array $scopes): self
     {
         $this->scopes = $scopes;
 
         return $this;
     }
 
-    public function getResponseType(): string
+    public function getResponseType(): ?string
     {
         return $this->responseType;
     }
 
-    public function setResponseType(string $responseType): self
+    public function setResponseType(?string $responseType): self
     {
         $this->responseType = $responseType;
 

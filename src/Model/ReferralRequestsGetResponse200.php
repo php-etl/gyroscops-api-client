@@ -5,70 +5,70 @@ namespace Gyroscops\Api\Model;
 class ReferralRequestsGetResponse200
 {
     /**
-     * @var ReferralRequestJsonldReferralRequestRead[]
+     * @var ReferralRequestJsonldReferralRequestRead[]|null
      */
     protected $hydraMember;
     /**
-     * @var int
+     * @var int|null
      */
     protected $hydraTotalItems;
     /**
-     * @var ReferralRequestsGetResponse200HydraView
+     * @var ReferralRequestsGetResponse200HydraView|null
      */
     protected $hydraView;
     /**
-     * @var ReferralRequestsGetResponse200HydraSearch
+     * @var ReferralRequestsGetResponse200HydraSearch|null
      */
     protected $hydraSearch;
 
     /**
-     * @return ReferralRequestJsonldReferralRequestRead[]
+     * @return ReferralRequestJsonldReferralRequestRead[]|null
      */
-    public function getHydraMember(): array
+    public function getHydraMember(): ?array
     {
         return $this->hydraMember;
     }
 
     /**
-     * @param ReferralRequestJsonldReferralRequestRead[] $hydraMember
+     * @param ReferralRequestJsonldReferralRequestRead[]|null $hydraMember
      */
-    public function setHydraMember(array $hydraMember): self
+    public function setHydraMember(?array $hydraMember): self
     {
         $this->hydraMember = $hydraMember;
 
         return $this;
     }
 
-    public function getHydraTotalItems(): int
+    public function getHydraTotalItems(): ?int
     {
         return $this->hydraTotalItems;
     }
 
-    public function setHydraTotalItems(int $hydraTotalItems): self
+    public function setHydraTotalItems(?int $hydraTotalItems): self
     {
         $this->hydraTotalItems = $hydraTotalItems;
 
         return $this;
     }
 
-    public function getHydraView(): ReferralRequestsGetResponse200HydraView
+    public function getHydraView(): ?ReferralRequestsGetResponse200HydraView
     {
         return $this->hydraView;
     }
 
-    public function setHydraView(ReferralRequestsGetResponse200HydraView $hydraView): self
+    public function setHydraView(?ReferralRequestsGetResponse200HydraView $hydraView): self
     {
         $this->hydraView = $hydraView;
 
         return $this;
     }
 
-    public function getHydraSearch(): ReferralRequestsGetResponse200HydraSearch
+    public function getHydraSearch(): ?ReferralRequestsGetResponse200HydraSearch
     {
         return $this->hydraSearch;
     }
 
-    public function setHydraSearch(ReferralRequestsGetResponse200HydraSearch $hydraSearch): self
+    public function setHydraSearch(?ReferralRequestsGetResponse200HydraSearch $hydraSearch): self
     {
         $this->hydraSearch = $hydraSearch;
 

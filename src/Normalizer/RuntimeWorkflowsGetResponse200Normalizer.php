@@ -45,21 +45,29 @@ class RuntimeWorkflowsGetResponse200Normalizer implements DenormalizerInterface,
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('hydra:member', $data)) {
+        if (\array_key_exists('hydra:member', $data) && null !== $data['hydra:member']) {
             $values = [];
             foreach ($data['hydra:member'] as $value) {
                 $values[] = $this->denormalizer->denormalize($value, 'Gyroscops\\Api\\Model\\WorkflowJsonldRead', 'json', $context);
             }
             $object->setHydraMember($values);
+        } elseif (\array_key_exists('hydra:member', $data) && null === $data['hydra:member']) {
+            $object->setHydraMember(null);
         }
-        if (\array_key_exists('hydra:totalItems', $data)) {
+        if (\array_key_exists('hydra:totalItems', $data) && null !== $data['hydra:totalItems']) {
             $object->setHydraTotalItems($data['hydra:totalItems']);
+        } elseif (\array_key_exists('hydra:totalItems', $data) && null === $data['hydra:totalItems']) {
+            $object->setHydraTotalItems(null);
         }
-        if (\array_key_exists('hydra:view', $data)) {
+        if (\array_key_exists('hydra:view', $data) && null !== $data['hydra:view']) {
             $object->setHydraView($this->denormalizer->denormalize($data['hydra:view'], 'Gyroscops\\Api\\Model\\RuntimeWorkflowsGetResponse200HydraView', 'json', $context));
+        } elseif (\array_key_exists('hydra:view', $data) && null === $data['hydra:view']) {
+            $object->setHydraView(null);
         }
-        if (\array_key_exists('hydra:search', $data)) {
+        if (\array_key_exists('hydra:search', $data) && null !== $data['hydra:search']) {
             $object->setHydraSearch($this->denormalizer->denormalize($data['hydra:search'], 'Gyroscops\\Api\\Model\\RuntimeWorkflowsGetResponse200HydraSearch', 'json', $context));
+        } elseif (\array_key_exists('hydra:search', $data) && null === $data['hydra:search']) {
+            $object->setHydraSearch(null);
         }
 
         return $object;

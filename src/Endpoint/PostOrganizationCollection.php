@@ -9,9 +9,9 @@ class PostOrganizationCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpo
     /**
      * Creates a Organization resource.
      *
-     * @param \Gyroscops\Api\Model\OrganizationJsonld|\Gyroscops\Api\Model\Organization $requestBody
+     * @param \Gyroscops\Api\Model\OrganizationJsonld|\Gyroscops\Api\Model\Organization|null $requestBody
      */
-    public function __construct($requestBody)
+    public function __construct($requestBody = null)
     {
         $this->body = $requestBody;
     }

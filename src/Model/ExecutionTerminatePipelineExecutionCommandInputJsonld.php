@@ -5,23 +5,23 @@ namespace Gyroscops\Api\Model;
 class ExecutionTerminatePipelineExecutionCommandInputJsonld
 {
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $context;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
-     * @var string
+     * @var string|null
      */
     protected $execution;
     /**
-     * @var string
+     * @var string|null
      */
     protected $reason;
 
@@ -43,48 +43,48 @@ class ExecutionTerminatePipelineExecutionCommandInputJsonld
         return $this;
     }
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
         return $this;
     }
 
-    public function getExecution(): string
+    public function getExecution(): ?string
     {
         return $this->execution;
     }
 
-    public function setExecution(string $execution): self
+    public function setExecution(?string $execution): self
     {
         $this->execution = $execution;
 
         return $this;
     }
 
-    public function getReason(): string
+    public function getReason(): ?string
     {
         return $this->reason;
     }
 
-    public function setReason(string $reason): self
+    public function setReason(?string $reason): self
     {
         $this->reason = $reason;
 

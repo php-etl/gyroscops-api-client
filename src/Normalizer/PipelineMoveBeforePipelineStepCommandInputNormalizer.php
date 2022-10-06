@@ -45,14 +45,20 @@ class PipelineMoveBeforePipelineStepCommandInputNormalizer implements Denormaliz
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('pipeline', $data)) {
+        if (\array_key_exists('pipeline', $data) && null !== $data['pipeline']) {
             $object->setPipeline($data['pipeline']);
+        } elseif (\array_key_exists('pipeline', $data) && null === $data['pipeline']) {
+            $object->setPipeline(null);
         }
-        if (\array_key_exists('next', $data)) {
+        if (\array_key_exists('next', $data) && null !== $data['next']) {
             $object->setNext($data['next']);
+        } elseif (\array_key_exists('next', $data) && null === $data['next']) {
+            $object->setNext(null);
         }
-        if (\array_key_exists('code', $data)) {
+        if (\array_key_exists('code', $data) && null !== $data['code']) {
             $object->setCode($data['code']);
+        } elseif (\array_key_exists('code', $data) && null === $data['code']) {
+            $object->setCode(null);
         }
 
         return $object;

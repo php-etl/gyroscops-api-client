@@ -5,39 +5,39 @@ namespace Gyroscops\Api\Model;
 class PipelineReplacePipelineStepCommandInputJsonld
 {
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $context;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
-     * @var string
+     * @var string|null
      */
     protected $pipeline;
     /**
-     * @var string
+     * @var string|null
      */
     protected $former;
     /**
-     * @var string
+     * @var string|null
      */
     protected $code;
     /**
-     * @var string
+     * @var string|null
      */
     protected $label;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $configuration;
     /**
-     * @var ProbeJsonld[]
+     * @var ProbeJsonld[]|null
      */
     protected $probes;
 
@@ -59,72 +59,72 @@ class PipelineReplacePipelineStepCommandInputJsonld
         return $this;
     }
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
         return $this;
     }
 
-    public function getPipeline(): string
+    public function getPipeline(): ?string
     {
         return $this->pipeline;
     }
 
-    public function setPipeline(string $pipeline): self
+    public function setPipeline(?string $pipeline): self
     {
         $this->pipeline = $pipeline;
 
         return $this;
     }
 
-    public function getFormer(): string
+    public function getFormer(): ?string
     {
         return $this->former;
     }
 
-    public function setFormer(string $former): self
+    public function setFormer(?string $former): self
     {
         $this->former = $former;
 
         return $this;
     }
 
-    public function getCode(): string
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
-    public function setCode(string $code): self
+    public function setCode(?string $code): self
     {
         $this->code = $code;
 
         return $this;
     }
 
-    public function getLabel(): string
+    public function getLabel(): ?string
     {
         return $this->label;
     }
 
-    public function setLabel(string $label): self
+    public function setLabel(?string $label): self
     {
         $this->label = $label;
 
@@ -132,17 +132,17 @@ class PipelineReplacePipelineStepCommandInputJsonld
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getConfiguration(): array
+    public function getConfiguration(): ?array
     {
         return $this->configuration;
     }
 
     /**
-     * @param string[] $configuration
+     * @param string[]|null $configuration
      */
-    public function setConfiguration(array $configuration): self
+    public function setConfiguration(?array $configuration): self
     {
         $this->configuration = $configuration;
 
@@ -150,17 +150,17 @@ class PipelineReplacePipelineStepCommandInputJsonld
     }
 
     /**
-     * @return ProbeJsonld[]
+     * @return ProbeJsonld[]|null
      */
-    public function getProbes(): array
+    public function getProbes(): ?array
     {
         return $this->probes;
     }
 
     /**
-     * @param ProbeJsonld[] $probes
+     * @param ProbeJsonld[]|null $probes
      */
-    public function setProbes(array $probes): self
+    public function setProbes(?array $probes): self
     {
         $this->probes = $probes;
 

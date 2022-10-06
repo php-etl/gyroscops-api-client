@@ -5,27 +5,27 @@ namespace Gyroscops\Api\Model;
 class ScheduleDeclarePipelineScheduleTimesCommand
 {
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $id;
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $pipeline;
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     protected $start;
     /**
-     * @var string
+     * @var string|null
      */
     protected $interval;
     /**
-     * @var int
+     * @var int|null
      */
     protected $recurrences;
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $user;
 
@@ -65,36 +65,36 @@ class ScheduleDeclarePipelineScheduleTimesCommand
         return $this;
     }
 
-    public function getStart(): \DateTime
+    public function getStart(): ?\DateTime
     {
         return $this->start;
     }
 
-    public function setStart(\DateTime $start): self
+    public function setStart(?\DateTime $start): self
     {
         $this->start = $start;
 
         return $this;
     }
 
-    public function getInterval(): string
+    public function getInterval(): ?string
     {
         return $this->interval;
     }
 
-    public function setInterval(string $interval): self
+    public function setInterval(?string $interval): self
     {
         $this->interval = $interval;
 
         return $this;
     }
 
-    public function getRecurrences(): int
+    public function getRecurrences(): ?int
     {
         return $this->recurrences;
     }
 
-    public function setRecurrences(int $recurrences): self
+    public function setRecurrences(?int $recurrences): self
     {
         $this->recurrences = $recurrences;
 

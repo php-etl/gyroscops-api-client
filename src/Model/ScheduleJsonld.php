@@ -5,23 +5,23 @@ namespace Gyroscops\Api\Model;
 class ScheduleJsonld
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $context;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id2;
     /**
-     * @var string
+     * @var string|null
      */
     protected $type2 = 'once';
     /**
@@ -41,7 +41,7 @@ class ScheduleJsonld
      */
     protected $recurrences;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $executions;
     /**
@@ -53,36 +53,36 @@ class ScheduleJsonld
      */
     protected $workflow;
     /**
-     * @var string
+     * @var string|null
      */
     protected $owner;
     /**
-     * @var string
+     * @var string|null
      */
     protected $workspace;
     /**
-     * @var string
+     * @var string|null
      */
     protected $organization;
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
@@ -107,24 +107,24 @@ class ScheduleJsonld
         return $this;
     }
 
-    public function getId2(): string
+    public function getId2(): ?string
     {
         return $this->id2;
     }
 
-    public function setId2(string $id2): self
+    public function setId2(?string $id2): self
     {
         $this->id2 = $id2;
 
         return $this;
     }
 
-    public function getType2(): string
+    public function getType2(): ?string
     {
         return $this->type2;
     }
 
-    public function setType2(string $type2): self
+    public function setType2(?string $type2): self
     {
         $this->type2 = $type2;
 
@@ -180,17 +180,17 @@ class ScheduleJsonld
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getExecutions(): array
+    public function getExecutions(): ?array
     {
         return $this->executions;
     }
 
     /**
-     * @param string[] $executions
+     * @param string[]|null $executions
      */
-    public function setExecutions(array $executions): self
+    public function setExecutions(?array $executions): self
     {
         $this->executions = $executions;
 
@@ -221,36 +221,36 @@ class ScheduleJsonld
         return $this;
     }
 
-    public function getOwner(): string
+    public function getOwner(): ?string
     {
         return $this->owner;
     }
 
-    public function setOwner(string $owner): self
+    public function setOwner(?string $owner): self
     {
         $this->owner = $owner;
 
         return $this;
     }
 
-    public function getWorkspace(): string
+    public function getWorkspace(): ?string
     {
         return $this->workspace;
     }
 
-    public function setWorkspace(string $workspace): self
+    public function setWorkspace(?string $workspace): self
     {
         $this->workspace = $workspace;
 
         return $this;
     }
 
-    public function getOrganization(): string
+    public function getOrganization(): ?string
     {
         return $this->organization;
     }
 
-    public function setOrganization(string $organization): self
+    public function setOrganization(?string $organization): self
     {
         $this->organization = $organization;
 

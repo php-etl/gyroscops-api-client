@@ -5,24 +5,24 @@ namespace Gyroscops\Api\Model;
 class ExecutionWorkflow
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $jobs;
     /**
-     * @var string
+     * @var string|null
      */
     protected $execution;
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
@@ -30,29 +30,29 @@ class ExecutionWorkflow
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getJobs(): array
+    public function getJobs(): ?array
     {
         return $this->jobs;
     }
 
     /**
-     * @param string[] $jobs
+     * @param string[]|null $jobs
      */
-    public function setJobs(array $jobs): self
+    public function setJobs(?array $jobs): self
     {
         $this->jobs = $jobs;
 
         return $this;
     }
 
-    public function getExecution(): string
+    public function getExecution(): ?string
     {
         return $this->execution;
     }
 
-    public function setExecution(string $execution): self
+    public function setExecution(?string $execution): self
     {
         $this->execution = $execution;
 

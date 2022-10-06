@@ -7,66 +7,66 @@ class BigInteger
     /**
      * Returns the number of bits in the minimal two's-complement representation of this BigInteger, excluding a sign bit.
      *
-     * @var int
+     * @var int|null
      */
     protected $bitLength;
     /**
      * Returns the index of the rightmost (lowest-order) one bit in this BigInteger.
      *
-     * @var int
+     * @var int|null
      */
     protected $lowestSetBit;
     /**
      * Returns whether this number is even.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $even;
     /**
      * Returns whether this number is odd.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $odd;
     /**
-     * @var int
+     * @var int|null
      */
     protected $sign;
     /**
      * Checks if this number equals zero.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $zero;
     /**
      * Checks if this number is strictly negative.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $negative;
     /**
      * Checks if this number is negative or zero.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $negativeOrZero;
     /**
      * Checks if this number is strictly positive.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $positive;
     /**
      * Checks if this number is positive or zero.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $positiveOrZero;
 
     /**
      * Returns the number of bits in the minimal two's-complement representation of this BigInteger, excluding a sign bit.
      */
-    public function getBitLength(): int
+    public function getBitLength(): ?int
     {
         return $this->bitLength;
     }
@@ -74,7 +74,7 @@ class BigInteger
     /**
      * Returns the number of bits in the minimal two's-complement representation of this BigInteger, excluding a sign bit.
      */
-    public function setBitLength(int $bitLength): self
+    public function setBitLength(?int $bitLength): self
     {
         $this->bitLength = $bitLength;
 
@@ -84,7 +84,7 @@ class BigInteger
     /**
      * Returns the index of the rightmost (lowest-order) one bit in this BigInteger.
      */
-    public function getLowestSetBit(): int
+    public function getLowestSetBit(): ?int
     {
         return $this->lowestSetBit;
     }
@@ -92,7 +92,7 @@ class BigInteger
     /**
      * Returns the index of the rightmost (lowest-order) one bit in this BigInteger.
      */
-    public function setLowestSetBit(int $lowestSetBit): self
+    public function setLowestSetBit(?int $lowestSetBit): self
     {
         $this->lowestSetBit = $lowestSetBit;
 
@@ -102,7 +102,7 @@ class BigInteger
     /**
      * Returns whether this number is even.
      */
-    public function getEven(): bool
+    public function getEven(): ?bool
     {
         return $this->even;
     }
@@ -110,7 +110,7 @@ class BigInteger
     /**
      * Returns whether this number is even.
      */
-    public function setEven(bool $even): self
+    public function setEven(?bool $even): self
     {
         $this->even = $even;
 
@@ -120,7 +120,7 @@ class BigInteger
     /**
      * Returns whether this number is odd.
      */
-    public function getOdd(): bool
+    public function getOdd(): ?bool
     {
         return $this->odd;
     }
@@ -128,19 +128,19 @@ class BigInteger
     /**
      * Returns whether this number is odd.
      */
-    public function setOdd(bool $odd): self
+    public function setOdd(?bool $odd): self
     {
         $this->odd = $odd;
 
         return $this;
     }
 
-    public function getSign(): int
+    public function getSign(): ?int
     {
         return $this->sign;
     }
 
-    public function setSign(int $sign): self
+    public function setSign(?int $sign): self
     {
         $this->sign = $sign;
 
@@ -150,7 +150,7 @@ class BigInteger
     /**
      * Checks if this number equals zero.
      */
-    public function getZero(): bool
+    public function getZero(): ?bool
     {
         return $this->zero;
     }
@@ -158,7 +158,7 @@ class BigInteger
     /**
      * Checks if this number equals zero.
      */
-    public function setZero(bool $zero): self
+    public function setZero(?bool $zero): self
     {
         $this->zero = $zero;
 
@@ -168,7 +168,7 @@ class BigInteger
     /**
      * Checks if this number is strictly negative.
      */
-    public function getNegative(): bool
+    public function getNegative(): ?bool
     {
         return $this->negative;
     }
@@ -176,7 +176,7 @@ class BigInteger
     /**
      * Checks if this number is strictly negative.
      */
-    public function setNegative(bool $negative): self
+    public function setNegative(?bool $negative): self
     {
         $this->negative = $negative;
 
@@ -186,7 +186,7 @@ class BigInteger
     /**
      * Checks if this number is negative or zero.
      */
-    public function getNegativeOrZero(): bool
+    public function getNegativeOrZero(): ?bool
     {
         return $this->negativeOrZero;
     }
@@ -194,7 +194,7 @@ class BigInteger
     /**
      * Checks if this number is negative or zero.
      */
-    public function setNegativeOrZero(bool $negativeOrZero): self
+    public function setNegativeOrZero(?bool $negativeOrZero): self
     {
         $this->negativeOrZero = $negativeOrZero;
 
@@ -204,7 +204,7 @@ class BigInteger
     /**
      * Checks if this number is strictly positive.
      */
-    public function getPositive(): bool
+    public function getPositive(): ?bool
     {
         return $this->positive;
     }
@@ -212,7 +212,7 @@ class BigInteger
     /**
      * Checks if this number is strictly positive.
      */
-    public function setPositive(bool $positive): self
+    public function setPositive(?bool $positive): self
     {
         $this->positive = $positive;
 
@@ -222,7 +222,7 @@ class BigInteger
     /**
      * Checks if this number is positive or zero.
      */
-    public function getPositiveOrZero(): bool
+    public function getPositiveOrZero(): ?bool
     {
         return $this->positiveOrZero;
     }
@@ -230,7 +230,7 @@ class BigInteger
     /**
      * Checks if this number is positive or zero.
      */
-    public function setPositiveOrZero(bool $positiveOrZero): self
+    public function setPositiveOrZero(?bool $positiveOrZero): self
     {
         $this->positiveOrZero = $positiveOrZero;
 

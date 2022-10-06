@@ -5,23 +5,23 @@ namespace Gyroscops\Api\Model;
 class AutoloadInputJsonld
 {
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $context;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
-     * @var string
+     * @var string|null
      */
     protected $namespace;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $paths;
 
@@ -43,36 +43,36 @@ class AutoloadInputJsonld
         return $this;
     }
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
         return $this;
     }
 
-    public function getNamespace(): string
+    public function getNamespace(): ?string
     {
         return $this->namespace;
     }
 
-    public function setNamespace(string $namespace): self
+    public function setNamespace(?string $namespace): self
     {
         $this->namespace = $namespace;
 
@@ -80,17 +80,17 @@ class AutoloadInputJsonld
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getPaths(): array
+    public function getPaths(): ?array
     {
         return $this->paths;
     }
 
     /**
-     * @param string[] $paths
+     * @param string[]|null $paths
      */
-    public function setPaths(array $paths): self
+    public function setPaths(?array $paths): self
     {
         $this->paths = $paths;
 

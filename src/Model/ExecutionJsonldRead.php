@@ -5,31 +5,31 @@ namespace Gyroscops\Api\Model;
 class ExecutionJsonldRead
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $context;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id2;
     /**
-     * @var string
+     * @var string|null
      */
     protected $code;
     /**
-     * @var string
+     * @var string|null
      */
     protected $status = 'unknown';
     /**
-     * @var int
+     * @var int|null
      */
     protected $errors;
     /**
@@ -77,24 +77,24 @@ class ExecutionJsonldRead
      */
     protected $action;
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
@@ -119,48 +119,48 @@ class ExecutionJsonldRead
         return $this;
     }
 
-    public function getId2(): string
+    public function getId2(): ?string
     {
         return $this->id2;
     }
 
-    public function setId2(string $id2): self
+    public function setId2(?string $id2): self
     {
         $this->id2 = $id2;
 
         return $this;
     }
 
-    public function getCode(): string
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
-    public function setCode(string $code): self
+    public function setCode(?string $code): self
     {
         $this->code = $code;
 
         return $this;
     }
 
-    public function getStatus(): string
+    public function getStatus(): ?string
     {
         return $this->status;
     }
 
-    public function setStatus(string $status): self
+    public function setStatus(?string $status): self
     {
         $this->status = $status;
 
         return $this;
     }
 
-    public function getErrors(): int
+    public function getErrors(): ?int
     {
         return $this->errors;
     }
 
-    public function setErrors(int $errors): self
+    public function setErrors(?int $errors): self
     {
         $this->errors = $errors;
 

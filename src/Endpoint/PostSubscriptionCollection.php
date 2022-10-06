@@ -9,9 +9,9 @@ class PostSubscriptionCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpo
     /**
      * Creates a Subscription resource.
      *
-     * @param \Gyroscops\Api\Model\SubscriptionJsonld|\Gyroscops\Api\Model\Subscription $requestBody
+     * @param \Gyroscops\Api\Model\SubscriptionJsonld|\Gyroscops\Api\Model\Subscription|null $requestBody
      */
-    public function __construct($requestBody)
+    public function __construct($requestBody = null)
     {
         $this->body = $requestBody;
     }

@@ -12,7 +12,7 @@ class PatchSubscriptionItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
      *
      * @param string $id Resource identifier
      */
-    public function __construct(string $id, \Gyroscops\Api\Model\Subscription $requestBody)
+    public function __construct(string $id, ?\Gyroscops\Api\Model\Subscription $requestBody = null)
     {
         $this->id = $id;
         $this->body = $requestBody;

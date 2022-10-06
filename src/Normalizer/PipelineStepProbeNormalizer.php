@@ -45,20 +45,30 @@ class PipelineStepProbeNormalizer implements DenormalizerInterface, NormalizerIn
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('id', $data)) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId($data['id']);
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+            $object->setId(null);
         }
-        if (\array_key_exists('code', $data)) {
+        if (\array_key_exists('code', $data) && null !== $data['code']) {
             $object->setCode($data['code']);
+        } elseif (\array_key_exists('code', $data) && null === $data['code']) {
+            $object->setCode(null);
         }
-        if (\array_key_exists('order', $data)) {
+        if (\array_key_exists('order', $data) && null !== $data['order']) {
             $object->setOrder($data['order']);
+        } elseif (\array_key_exists('order', $data) && null === $data['order']) {
+            $object->setOrder(null);
         }
-        if (\array_key_exists('label', $data)) {
+        if (\array_key_exists('label', $data) && null !== $data['label']) {
             $object->setLabel($data['label']);
+        } elseif (\array_key_exists('label', $data) && null === $data['label']) {
+            $object->setLabel(null);
         }
-        if (\array_key_exists('step', $data)) {
+        if (\array_key_exists('step', $data) && null !== $data['step']) {
             $object->setStep($data['step']);
+        } elseif (\array_key_exists('step', $data) && null === $data['step']) {
+            $object->setStep(null);
         }
 
         return $object;

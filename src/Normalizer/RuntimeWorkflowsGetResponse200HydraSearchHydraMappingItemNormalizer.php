@@ -45,19 +45,25 @@ class RuntimeWorkflowsGetResponse200HydraSearchHydraMappingItemNormalizer implem
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@type', $data)) {
+        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
             $object->setType($data['@type']);
+        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+            $object->setType(null);
         }
-        if (\array_key_exists('variable', $data)) {
+        if (\array_key_exists('variable', $data) && null !== $data['variable']) {
             $object->setVariable($data['variable']);
+        } elseif (\array_key_exists('variable', $data) && null === $data['variable']) {
+            $object->setVariable(null);
         }
         if (\array_key_exists('property', $data) && null !== $data['property']) {
             $object->setProperty($data['property']);
         } elseif (\array_key_exists('property', $data) && null === $data['property']) {
             $object->setProperty(null);
         }
-        if (\array_key_exists('required', $data)) {
+        if (\array_key_exists('required', $data) && null !== $data['required']) {
             $object->setRequired($data['required']);
+        } elseif (\array_key_exists('required', $data) && null === $data['required']) {
+            $object->setRequired(null);
         }
 
         return $object;

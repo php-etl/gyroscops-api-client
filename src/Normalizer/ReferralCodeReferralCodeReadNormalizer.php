@@ -45,23 +45,29 @@ class ReferralCodeReferralCodeReadNormalizer implements DenormalizerInterface, N
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('id', $data)) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId($data['id']);
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+            $object->setId(null);
         }
         if (\array_key_exists('user', $data) && null !== $data['user']) {
             $object->setUser($data['user']);
         } elseif (\array_key_exists('user', $data) && null === $data['user']) {
             $object->setUser(null);
         }
-        if (\array_key_exists('code', $data)) {
+        if (\array_key_exists('code', $data) && null !== $data['code']) {
             $object->setCode($data['code']);
+        } elseif (\array_key_exists('code', $data) && null === $data['code']) {
+            $object->setCode(null);
         }
-        if (\array_key_exists('referralRequests', $data)) {
+        if (\array_key_exists('referralRequests', $data) && null !== $data['referralRequests']) {
             $values = [];
             foreach ($data['referralRequests'] as $value) {
                 $values[] = $value;
             }
             $object->setReferralRequests($values);
+        } elseif (\array_key_exists('referralRequests', $data) && null === $data['referralRequests']) {
+            $object->setReferralRequests(null);
         }
 
         return $object;

@@ -5,70 +5,70 @@ namespace Gyroscops\Api\Model;
 class GatewayAkeneoOauthTokenPutBody
 {
     /**
-     * @var AkeneoOauthTokenOauthTokenInputJsonld[]
+     * @var AkeneoOauthTokenOauthTokenInputJsonld[]|null
      */
     protected $hydraMember;
     /**
-     * @var int
+     * @var int|null
      */
     protected $hydraTotalItems;
     /**
-     * @var GatewayAkeneoOauthTokenPutBodyHydraView
+     * @var GatewayAkeneoOauthTokenPutBodyHydraView|null
      */
     protected $hydraView;
     /**
-     * @var GatewayAkeneoOauthTokenPutBodyHydraSearch
+     * @var GatewayAkeneoOauthTokenPutBodyHydraSearch|null
      */
     protected $hydraSearch;
 
     /**
-     * @return AkeneoOauthTokenOauthTokenInputJsonld[]
+     * @return AkeneoOauthTokenOauthTokenInputJsonld[]|null
      */
-    public function getHydraMember(): array
+    public function getHydraMember(): ?array
     {
         return $this->hydraMember;
     }
 
     /**
-     * @param AkeneoOauthTokenOauthTokenInputJsonld[] $hydraMember
+     * @param AkeneoOauthTokenOauthTokenInputJsonld[]|null $hydraMember
      */
-    public function setHydraMember(array $hydraMember): self
+    public function setHydraMember(?array $hydraMember): self
     {
         $this->hydraMember = $hydraMember;
 
         return $this;
     }
 
-    public function getHydraTotalItems(): int
+    public function getHydraTotalItems(): ?int
     {
         return $this->hydraTotalItems;
     }
 
-    public function setHydraTotalItems(int $hydraTotalItems): self
+    public function setHydraTotalItems(?int $hydraTotalItems): self
     {
         $this->hydraTotalItems = $hydraTotalItems;
 
         return $this;
     }
 
-    public function getHydraView(): GatewayAkeneoOauthTokenPutBodyHydraView
+    public function getHydraView(): ?GatewayAkeneoOauthTokenPutBodyHydraView
     {
         return $this->hydraView;
     }
 
-    public function setHydraView(GatewayAkeneoOauthTokenPutBodyHydraView $hydraView): self
+    public function setHydraView(?GatewayAkeneoOauthTokenPutBodyHydraView $hydraView): self
     {
         $this->hydraView = $hydraView;
 
         return $this;
     }
 
-    public function getHydraSearch(): GatewayAkeneoOauthTokenPutBodyHydraSearch
+    public function getHydraSearch(): ?GatewayAkeneoOauthTokenPutBodyHydraSearch
     {
         return $this->hydraSearch;
     }
 
-    public function setHydraSearch(GatewayAkeneoOauthTokenPutBodyHydraSearch $hydraSearch): self
+    public function setHydraSearch(?GatewayAkeneoOauthTokenPutBodyHydraSearch $hydraSearch): self
     {
         $this->hydraSearch = $hydraSearch;
 

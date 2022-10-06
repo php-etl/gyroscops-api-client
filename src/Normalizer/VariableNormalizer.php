@@ -45,14 +45,20 @@ class VariableNormalizer implements DenormalizerInterface, NormalizerInterface, 
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('id', $data)) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId($data['id']);
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+            $object->setId(null);
         }
-        if (\array_key_exists('environment', $data)) {
+        if (\array_key_exists('environment', $data) && null !== $data['environment']) {
             $object->setEnvironment($data['environment']);
+        } elseif (\array_key_exists('environment', $data) && null === $data['environment']) {
+            $object->setEnvironment(null);
         }
-        if (\array_key_exists('name', $data)) {
+        if (\array_key_exists('name', $data) && null !== $data['name']) {
             $object->setName($data['name']);
+        } elseif (\array_key_exists('name', $data) && null === $data['name']) {
+            $object->setName(null);
         }
 
         return $object;

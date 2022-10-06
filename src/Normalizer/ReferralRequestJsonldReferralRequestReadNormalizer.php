@@ -45,35 +45,55 @@ class ReferralRequestJsonldReferralRequestReadNormalizer implements Denormalizer
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data)) {
+        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
             $object->setContext($data['@context']);
+        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+            $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data)) {
+        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
             $object->setId($data['@id']);
+        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+            $object->setId(null);
         }
-        if (\array_key_exists('@type', $data)) {
+        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
             $object->setType($data['@type']);
+        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+            $object->setType(null);
         }
-        if (\array_key_exists('id', $data)) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId2($data['id']);
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+            $object->setId2(null);
         }
-        if (\array_key_exists('email', $data)) {
+        if (\array_key_exists('email', $data) && null !== $data['email']) {
             $object->setEmail($data['email']);
+        } elseif (\array_key_exists('email', $data) && null === $data['email']) {
+            $object->setEmail(null);
         }
-        if (\array_key_exists('firstName', $data)) {
+        if (\array_key_exists('firstName', $data) && null !== $data['firstName']) {
             $object->setFirstName($data['firstName']);
+        } elseif (\array_key_exists('firstName', $data) && null === $data['firstName']) {
+            $object->setFirstName(null);
         }
-        if (\array_key_exists('lastName', $data)) {
+        if (\array_key_exists('lastName', $data) && null !== $data['lastName']) {
             $object->setLastName($data['lastName']);
+        } elseif (\array_key_exists('lastName', $data) && null === $data['lastName']) {
+            $object->setLastName(null);
         }
-        if (\array_key_exists('userName', $data)) {
+        if (\array_key_exists('userName', $data) && null !== $data['userName']) {
             $object->setUserName($data['userName']);
+        } elseif (\array_key_exists('userName', $data) && null === $data['userName']) {
+            $object->setUserName(null);
         }
-        if (\array_key_exists('companyName', $data)) {
+        if (\array_key_exists('companyName', $data) && null !== $data['companyName']) {
             $object->setCompanyName($data['companyName']);
+        } elseif (\array_key_exists('companyName', $data) && null === $data['companyName']) {
+            $object->setCompanyName(null);
         }
-        if (\array_key_exists('creationDate', $data)) {
+        if (\array_key_exists('creationDate', $data) && null !== $data['creationDate']) {
             $object->setCreationDate(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['creationDate']));
+        } elseif (\array_key_exists('creationDate', $data) && null === $data['creationDate']) {
+            $object->setCreationDate(null);
         }
         if (\array_key_exists('referralCode', $data) && null !== $data['referralCode']) {
             $object->setReferralCode($data['referralCode']);
@@ -85,8 +105,10 @@ class ReferralRequestJsonldReferralRequestReadNormalizer implements Denormalizer
         } elseif (\array_key_exists('approver', $data) && null === $data['approver']) {
             $object->setApprover(null);
         }
-        if (\array_key_exists('status', $data)) {
+        if (\array_key_exists('status', $data) && null !== $data['status']) {
             $object->setStatus($data['status']);
+        } elseif (\array_key_exists('status', $data) && null === $data['status']) {
+            $object->setStatus(null);
         }
 
         return $object;

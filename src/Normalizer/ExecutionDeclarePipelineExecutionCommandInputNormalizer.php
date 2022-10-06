@@ -45,11 +45,15 @@ class ExecutionDeclarePipelineExecutionCommandInputNormalizer implements Denorma
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('schedule', $data)) {
+        if (\array_key_exists('schedule', $data) && null !== $data['schedule']) {
             $object->setSchedule($data['schedule']);
+        } elseif (\array_key_exists('schedule', $data) && null === $data['schedule']) {
+            $object->setSchedule(null);
         }
-        if (\array_key_exists('pipeline', $data)) {
+        if (\array_key_exists('pipeline', $data) && null !== $data['pipeline']) {
             $object->setPipeline($data['pipeline']);
+        } elseif (\array_key_exists('pipeline', $data) && null === $data['pipeline']) {
+            $object->setPipeline(null);
         }
 
         return $object;

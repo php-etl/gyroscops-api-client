@@ -5,77 +5,77 @@ namespace Gyroscops\Api\Model;
 class MoneyJsonld
 {
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $context;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
-     * @var BigDecimalJsonld
+     * @var BigDecimalJsonld|null
      */
     protected $amount;
     /**
-     * @var CurrencyJsonld
+     * @var CurrencyJsonld|null
      */
     protected $currency;
     /**
-     * @var ContextJsonld
+     * @var ContextJsonld|null
      */
     protected $context2;
     /**
-     * @var BigDecimalJsonld
+     * @var BigDecimalJsonld|null
      */
     protected $minorAmount;
     /**
-     * @var BigIntegerJsonld
+     * @var BigIntegerJsonld|null
      */
     protected $unscaledAmount;
     /**
      * Required by interface MoneyContainer.
      *
-     * @var BigNumberJsonld[]
+     * @var BigNumberJsonld[]|null
      */
     protected $amounts;
     /**
      * Returns the sign of this money.
      *
-     * @var int
+     * @var int|null
      */
     protected $sign;
     /**
      * Returns whether this money has zero value.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $zero;
     /**
      * Returns whether this money has a negative value.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $negative;
     /**
      * Returns whether this money has a negative or zero value.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $negativeOrZero;
     /**
      * Returns whether this money has a positive value.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $positive;
     /**
      * Returns whether this money has a positive or zero value.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $positiveOrZero;
 
@@ -97,84 +97,84 @@ class MoneyJsonld
         return $this;
     }
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
         return $this;
     }
 
-    public function getAmount(): BigDecimalJsonld
+    public function getAmount(): ?BigDecimalJsonld
     {
         return $this->amount;
     }
 
-    public function setAmount(BigDecimalJsonld $amount): self
+    public function setAmount(?BigDecimalJsonld $amount): self
     {
         $this->amount = $amount;
 
         return $this;
     }
 
-    public function getCurrency(): CurrencyJsonld
+    public function getCurrency(): ?CurrencyJsonld
     {
         return $this->currency;
     }
 
-    public function setCurrency(CurrencyJsonld $currency): self
+    public function setCurrency(?CurrencyJsonld $currency): self
     {
         $this->currency = $currency;
 
         return $this;
     }
 
-    public function getContext2(): ContextJsonld
+    public function getContext2(): ?ContextJsonld
     {
         return $this->context2;
     }
 
-    public function setContext2(ContextJsonld $context2): self
+    public function setContext2(?ContextJsonld $context2): self
     {
         $this->context2 = $context2;
 
         return $this;
     }
 
-    public function getMinorAmount(): BigDecimalJsonld
+    public function getMinorAmount(): ?BigDecimalJsonld
     {
         return $this->minorAmount;
     }
 
-    public function setMinorAmount(BigDecimalJsonld $minorAmount): self
+    public function setMinorAmount(?BigDecimalJsonld $minorAmount): self
     {
         $this->minorAmount = $minorAmount;
 
         return $this;
     }
 
-    public function getUnscaledAmount(): BigIntegerJsonld
+    public function getUnscaledAmount(): ?BigIntegerJsonld
     {
         return $this->unscaledAmount;
     }
 
-    public function setUnscaledAmount(BigIntegerJsonld $unscaledAmount): self
+    public function setUnscaledAmount(?BigIntegerJsonld $unscaledAmount): self
     {
         $this->unscaledAmount = $unscaledAmount;
 
@@ -184,9 +184,9 @@ class MoneyJsonld
     /**
      * Required by interface MoneyContainer.
      *
-     * @return BigNumberJsonld[]
+     * @return BigNumberJsonld[]|null
      */
-    public function getAmounts(): array
+    public function getAmounts(): ?array
     {
         return $this->amounts;
     }
@@ -194,9 +194,9 @@ class MoneyJsonld
     /**
      * Required by interface MoneyContainer.
      *
-     * @param BigNumberJsonld[] $amounts
+     * @param BigNumberJsonld[]|null $amounts
      */
-    public function setAmounts(array $amounts): self
+    public function setAmounts(?array $amounts): self
     {
         $this->amounts = $amounts;
 
@@ -206,7 +206,7 @@ class MoneyJsonld
     /**
      * Returns the sign of this money.
      */
-    public function getSign(): int
+    public function getSign(): ?int
     {
         return $this->sign;
     }
@@ -214,7 +214,7 @@ class MoneyJsonld
     /**
      * Returns the sign of this money.
      */
-    public function setSign(int $sign): self
+    public function setSign(?int $sign): self
     {
         $this->sign = $sign;
 
@@ -224,7 +224,7 @@ class MoneyJsonld
     /**
      * Returns whether this money has zero value.
      */
-    public function getZero(): bool
+    public function getZero(): ?bool
     {
         return $this->zero;
     }
@@ -232,7 +232,7 @@ class MoneyJsonld
     /**
      * Returns whether this money has zero value.
      */
-    public function setZero(bool $zero): self
+    public function setZero(?bool $zero): self
     {
         $this->zero = $zero;
 
@@ -242,7 +242,7 @@ class MoneyJsonld
     /**
      * Returns whether this money has a negative value.
      */
-    public function getNegative(): bool
+    public function getNegative(): ?bool
     {
         return $this->negative;
     }
@@ -250,7 +250,7 @@ class MoneyJsonld
     /**
      * Returns whether this money has a negative value.
      */
-    public function setNegative(bool $negative): self
+    public function setNegative(?bool $negative): self
     {
         $this->negative = $negative;
 
@@ -260,7 +260,7 @@ class MoneyJsonld
     /**
      * Returns whether this money has a negative or zero value.
      */
-    public function getNegativeOrZero(): bool
+    public function getNegativeOrZero(): ?bool
     {
         return $this->negativeOrZero;
     }
@@ -268,7 +268,7 @@ class MoneyJsonld
     /**
      * Returns whether this money has a negative or zero value.
      */
-    public function setNegativeOrZero(bool $negativeOrZero): self
+    public function setNegativeOrZero(?bool $negativeOrZero): self
     {
         $this->negativeOrZero = $negativeOrZero;
 
@@ -278,7 +278,7 @@ class MoneyJsonld
     /**
      * Returns whether this money has a positive value.
      */
-    public function getPositive(): bool
+    public function getPositive(): ?bool
     {
         return $this->positive;
     }
@@ -286,7 +286,7 @@ class MoneyJsonld
     /**
      * Returns whether this money has a positive value.
      */
-    public function setPositive(bool $positive): self
+    public function setPositive(?bool $positive): self
     {
         $this->positive = $positive;
 
@@ -296,7 +296,7 @@ class MoneyJsonld
     /**
      * Returns whether this money has a positive or zero value.
      */
-    public function getPositiveOrZero(): bool
+    public function getPositiveOrZero(): ?bool
     {
         return $this->positiveOrZero;
     }
@@ -304,7 +304,7 @@ class MoneyJsonld
     /**
      * Returns whether this money has a positive or zero value.
      */
-    public function setPositiveOrZero(bool $positiveOrZero): self
+    public function setPositiveOrZero(?bool $positiveOrZero): self
     {
         $this->positiveOrZero = $positiveOrZero;
 

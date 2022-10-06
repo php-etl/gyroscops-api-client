@@ -5,19 +5,19 @@ namespace Gyroscops\Api\Model;
 class ReferralCodeJsonldReferralCodeRead
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $context;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id2;
     /**
@@ -25,32 +25,32 @@ class ReferralCodeJsonldReferralCodeRead
      */
     protected $user;
     /**
-     * @var string
+     * @var string|null
      */
     protected $code;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $referralRequests;
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
@@ -75,12 +75,12 @@ class ReferralCodeJsonldReferralCodeRead
         return $this;
     }
 
-    public function getId2(): string
+    public function getId2(): ?string
     {
         return $this->id2;
     }
 
-    public function setId2(string $id2): self
+    public function setId2(?string $id2): self
     {
         $this->id2 = $id2;
 
@@ -99,12 +99,12 @@ class ReferralCodeJsonldReferralCodeRead
         return $this;
     }
 
-    public function getCode(): string
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
-    public function setCode(string $code): self
+    public function setCode(?string $code): self
     {
         $this->code = $code;
 
@@ -112,17 +112,17 @@ class ReferralCodeJsonldReferralCodeRead
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getReferralRequests(): array
+    public function getReferralRequests(): ?array
     {
         return $this->referralRequests;
     }
 
     /**
-     * @param string[] $referralRequests
+     * @param string[]|null $referralRequests
      */
-    public function setReferralRequests(array $referralRequests): self
+    public function setReferralRequests(?array $referralRequests): self
     {
         $this->referralRequests = $referralRequests;
 

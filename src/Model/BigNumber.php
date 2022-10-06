@@ -7,44 +7,44 @@ class BigNumber
     /**
      * Checks if this number equals zero.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $zero;
     /**
      * Checks if this number is strictly negative.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $negative;
     /**
      * Checks if this number is negative or zero.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $negativeOrZero;
     /**
      * Checks if this number is strictly positive.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $positive;
     /**
      * Checks if this number is positive or zero.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $positiveOrZero;
     /**
      * Returns the sign of this number.
      *
-     * @var int
+     * @var int|null
      */
     protected $sign;
 
     /**
      * Checks if this number equals zero.
      */
-    public function getZero(): bool
+    public function getZero(): ?bool
     {
         return $this->zero;
     }
@@ -52,7 +52,7 @@ class BigNumber
     /**
      * Checks if this number equals zero.
      */
-    public function setZero(bool $zero): self
+    public function setZero(?bool $zero): self
     {
         $this->zero = $zero;
 
@@ -62,7 +62,7 @@ class BigNumber
     /**
      * Checks if this number is strictly negative.
      */
-    public function getNegative(): bool
+    public function getNegative(): ?bool
     {
         return $this->negative;
     }
@@ -70,7 +70,7 @@ class BigNumber
     /**
      * Checks if this number is strictly negative.
      */
-    public function setNegative(bool $negative): self
+    public function setNegative(?bool $negative): self
     {
         $this->negative = $negative;
 
@@ -80,7 +80,7 @@ class BigNumber
     /**
      * Checks if this number is negative or zero.
      */
-    public function getNegativeOrZero(): bool
+    public function getNegativeOrZero(): ?bool
     {
         return $this->negativeOrZero;
     }
@@ -88,7 +88,7 @@ class BigNumber
     /**
      * Checks if this number is negative or zero.
      */
-    public function setNegativeOrZero(bool $negativeOrZero): self
+    public function setNegativeOrZero(?bool $negativeOrZero): self
     {
         $this->negativeOrZero = $negativeOrZero;
 
@@ -98,7 +98,7 @@ class BigNumber
     /**
      * Checks if this number is strictly positive.
      */
-    public function getPositive(): bool
+    public function getPositive(): ?bool
     {
         return $this->positive;
     }
@@ -106,7 +106,7 @@ class BigNumber
     /**
      * Checks if this number is strictly positive.
      */
-    public function setPositive(bool $positive): self
+    public function setPositive(?bool $positive): self
     {
         $this->positive = $positive;
 
@@ -116,7 +116,7 @@ class BigNumber
     /**
      * Checks if this number is positive or zero.
      */
-    public function getPositiveOrZero(): bool
+    public function getPositiveOrZero(): ?bool
     {
         return $this->positiveOrZero;
     }
@@ -124,7 +124,7 @@ class BigNumber
     /**
      * Checks if this number is positive or zero.
      */
-    public function setPositiveOrZero(bool $positiveOrZero): self
+    public function setPositiveOrZero(?bool $positiveOrZero): self
     {
         $this->positiveOrZero = $positiveOrZero;
 
@@ -134,7 +134,7 @@ class BigNumber
     /**
      * Returns the sign of this number.
      */
-    public function getSign(): int
+    public function getSign(): ?int
     {
         return $this->sign;
     }
@@ -142,7 +142,7 @@ class BigNumber
     /**
      * Returns the sign of this number.
      */
-    public function setSign(int $sign): self
+    public function setSign(?int $sign): self
     {
         $this->sign = $sign;
 

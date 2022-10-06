@@ -45,23 +45,35 @@ class AkeneoInstanceAkeneoInstanceInputJsonldNormalizer implements DenormalizerI
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data)) {
+        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
             $object->setContext($data['@context']);
+        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+            $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data)) {
+        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
             $object->setId($data['@id']);
+        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+            $object->setId(null);
         }
-        if (\array_key_exists('@type', $data)) {
+        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
             $object->setType($data['@type']);
+        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+            $object->setType(null);
         }
-        if (\array_key_exists('pimUrl', $data)) {
+        if (\array_key_exists('pimUrl', $data) && null !== $data['pimUrl']) {
             $object->setPimUrl($data['pimUrl']);
+        } elseif (\array_key_exists('pimUrl', $data) && null === $data['pimUrl']) {
+            $object->setPimUrl(null);
         }
-        if (\array_key_exists('organization', $data)) {
+        if (\array_key_exists('organization', $data) && null !== $data['organization']) {
             $object->setOrganization($data['organization']);
+        } elseif (\array_key_exists('organization', $data) && null === $data['organization']) {
+            $object->setOrganization(null);
         }
-        if (\array_key_exists('secret', $data)) {
+        if (\array_key_exists('secret', $data) && null !== $data['secret']) {
             $object->setSecret($this->denormalizer->denormalize($data['secret'], 'Gyroscops\\Api\\Model\\SecretInputJsonld', 'json', $context));
+        } elseif (\array_key_exists('secret', $data) && null === $data['secret']) {
+            $object->setSecret(null);
         }
 
         return $object;

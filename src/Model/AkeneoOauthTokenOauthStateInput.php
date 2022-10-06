@@ -5,20 +5,20 @@ namespace Gyroscops\Api\Model;
 class AkeneoOauthTokenOauthStateInput
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $url;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $scope;
 
-    public function getUrl(): string
+    public function getUrl(): ?string
     {
         return $this->url;
     }
 
-    public function setUrl(string $url): self
+    public function setUrl(?string $url): self
     {
         $this->url = $url;
 
@@ -26,17 +26,17 @@ class AkeneoOauthTokenOauthStateInput
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getScope(): array
+    public function getScope(): ?array
     {
         return $this->scope;
     }
 
     /**
-     * @param string[] $scope
+     * @param string[]|null $scope
      */
-    public function setScope(array $scope): self
+    public function setScope(?array $scope): self
     {
         $this->scope = $scope;
 

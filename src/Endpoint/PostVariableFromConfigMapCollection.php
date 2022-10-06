@@ -9,9 +9,9 @@ class PostVariableFromConfigMapCollection extends \Gyroscops\Api\Runtime\Client\
     /**
      * Creates a VariableFromConfigMap resource.
      *
-     * @param \Gyroscops\Api\Model\VariableFromConfigMapJsonld|\Gyroscops\Api\Model\VariableFromConfigMap $requestBody
+     * @param \Gyroscops\Api\Model\VariableFromConfigMapJsonld|\Gyroscops\Api\Model\VariableFromConfigMap|null $requestBody
      */
-    public function __construct($requestBody)
+    public function __construct($requestBody = null)
     {
         $this->body = $requestBody;
     }

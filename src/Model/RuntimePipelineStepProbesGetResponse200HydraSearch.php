@@ -5,52 +5,52 @@ namespace Gyroscops\Api\Model;
 class RuntimePipelineStepProbesGetResponse200HydraSearch
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
-     * @var string
+     * @var string|null
      */
     protected $hydraTemplate;
     /**
-     * @var string
+     * @var string|null
      */
     protected $hydraVariableRepresentation;
     /**
-     * @var RuntimePipelineStepProbesGetResponse200HydraSearchHydraMappingItem[]
+     * @var RuntimePipelineStepProbesGetResponse200HydraSearchHydraMappingItem[]|null
      */
     protected $hydraMapping;
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
         return $this;
     }
 
-    public function getHydraTemplate(): string
+    public function getHydraTemplate(): ?string
     {
         return $this->hydraTemplate;
     }
 
-    public function setHydraTemplate(string $hydraTemplate): self
+    public function setHydraTemplate(?string $hydraTemplate): self
     {
         $this->hydraTemplate = $hydraTemplate;
 
         return $this;
     }
 
-    public function getHydraVariableRepresentation(): string
+    public function getHydraVariableRepresentation(): ?string
     {
         return $this->hydraVariableRepresentation;
     }
 
-    public function setHydraVariableRepresentation(string $hydraVariableRepresentation): self
+    public function setHydraVariableRepresentation(?string $hydraVariableRepresentation): self
     {
         $this->hydraVariableRepresentation = $hydraVariableRepresentation;
 
@@ -58,17 +58,17 @@ class RuntimePipelineStepProbesGetResponse200HydraSearch
     }
 
     /**
-     * @return RuntimePipelineStepProbesGetResponse200HydraSearchHydraMappingItem[]
+     * @return RuntimePipelineStepProbesGetResponse200HydraSearchHydraMappingItem[]|null
      */
-    public function getHydraMapping(): array
+    public function getHydraMapping(): ?array
     {
         return $this->hydraMapping;
     }
 
     /**
-     * @param RuntimePipelineStepProbesGetResponse200HydraSearchHydraMappingItem[] $hydraMapping
+     * @param RuntimePipelineStepProbesGetResponse200HydraSearchHydraMappingItem[]|null $hydraMapping
      */
-    public function setHydraMapping(array $hydraMapping): self
+    public function setHydraMapping(?array $hydraMapping): self
     {
         $this->hydraMapping = $hydraMapping;
 

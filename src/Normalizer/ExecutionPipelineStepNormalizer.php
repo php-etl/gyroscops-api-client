@@ -45,18 +45,24 @@ class ExecutionPipelineStepNormalizer implements DenormalizerInterface, Normaliz
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('id', $data)) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId($data['id']);
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+            $object->setId(null);
         }
-        if (\array_key_exists('pipeline', $data)) {
+        if (\array_key_exists('pipeline', $data) && null !== $data['pipeline']) {
             $object->setPipeline($this->denormalizer->denormalize($data['pipeline'], 'Gyroscops\\Api\\Model\\AbstractPipeline', 'json', $context));
+        } elseif (\array_key_exists('pipeline', $data) && null === $data['pipeline']) {
+            $object->setPipeline(null);
         }
-        if (\array_key_exists('metrics', $data)) {
+        if (\array_key_exists('metrics', $data) && null !== $data['metrics']) {
             $values = [];
             foreach ($data['metrics'] as $value) {
                 $values[] = $value;
             }
             $object->setMetrics($values);
+        } elseif (\array_key_exists('metrics', $data) && null === $data['metrics']) {
+            $object->setMetrics(null);
         }
 
         return $object;

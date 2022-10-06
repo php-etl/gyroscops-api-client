@@ -5,23 +5,23 @@ namespace Gyroscops\Api\Model;
 class AkeneoOauthTokenOauthStateInputJsonld
 {
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $context;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
-     * @var string
+     * @var string|null
      */
     protected $url;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $scope;
 
@@ -43,36 +43,36 @@ class AkeneoOauthTokenOauthStateInputJsonld
         return $this;
     }
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
         return $this;
     }
 
-    public function getUrl(): string
+    public function getUrl(): ?string
     {
         return $this->url;
     }
 
-    public function setUrl(string $url): self
+    public function setUrl(?string $url): self
     {
         $this->url = $url;
 
@@ -80,17 +80,17 @@ class AkeneoOauthTokenOauthStateInputJsonld
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getScope(): array
+    public function getScope(): ?array
     {
         return $this->scope;
     }
 
     /**
-     * @param string[] $scope
+     * @param string[]|null $scope
      */
-    public function setScope(array $scope): self
+    public function setScope(?array $scope): self
     {
         $this->scope = $scope;
 

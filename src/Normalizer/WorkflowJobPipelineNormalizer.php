@@ -50,38 +50,52 @@ class WorkflowJobPipelineNormalizer implements DenormalizerInterface, Normalizer
         } elseif (\array_key_exists('job', $data) && null === $data['job']) {
             $object->setJob(null);
         }
-        if (\array_key_exists('id', $data)) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId($data['id']);
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+            $object->setId(null);
         }
-        if (\array_key_exists('code', $data)) {
+        if (\array_key_exists('code', $data) && null !== $data['code']) {
             $object->setCode($data['code']);
+        } elseif (\array_key_exists('code', $data) && null === $data['code']) {
+            $object->setCode(null);
         }
-        if (\array_key_exists('label', $data)) {
+        if (\array_key_exists('label', $data) && null !== $data['label']) {
             $object->setLabel($data['label']);
+        } elseif (\array_key_exists('label', $data) && null === $data['label']) {
+            $object->setLabel(null);
         }
-        if (\array_key_exists('runtimeType', $data)) {
+        if (\array_key_exists('runtimeType', $data) && null !== $data['runtimeType']) {
             $object->setRuntimeType($data['runtimeType']);
+        } elseif (\array_key_exists('runtimeType', $data) && null === $data['runtimeType']) {
+            $object->setRuntimeType(null);
         }
-        if (\array_key_exists('runtime', $data)) {
+        if (\array_key_exists('runtime', $data) && null !== $data['runtime']) {
             $values = [];
             foreach ($data['runtime'] as $value) {
                 $values[] = $value;
             }
             $object->setRuntime($values);
+        } elseif (\array_key_exists('runtime', $data) && null === $data['runtime']) {
+            $object->setRuntime(null);
         }
-        if (\array_key_exists('autoload', $data)) {
+        if (\array_key_exists('autoload', $data) && null !== $data['autoload']) {
             $values_1 = [];
             foreach ($data['autoload'] as $value_1) {
                 $values_1[] = $value_1;
             }
             $object->setAutoload($values_1);
+        } elseif (\array_key_exists('autoload', $data) && null === $data['autoload']) {
+            $object->setAutoload(null);
         }
-        if (\array_key_exists('steps', $data)) {
+        if (\array_key_exists('steps', $data) && null !== $data['steps']) {
             $values_2 = [];
             foreach ($data['steps'] as $value_2) {
                 $values_2[] = $value_2;
             }
             $object->setSteps($values_2);
+        } elseif (\array_key_exists('steps', $data) && null === $data['steps']) {
+            $object->setSteps(null);
         }
 
         return $object;

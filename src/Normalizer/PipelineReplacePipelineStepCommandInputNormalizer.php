@@ -45,31 +45,43 @@ class PipelineReplacePipelineStepCommandInputNormalizer implements DenormalizerI
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('pipeline', $data)) {
+        if (\array_key_exists('pipeline', $data) && null !== $data['pipeline']) {
             $object->setPipeline($data['pipeline']);
+        } elseif (\array_key_exists('pipeline', $data) && null === $data['pipeline']) {
+            $object->setPipeline(null);
         }
-        if (\array_key_exists('former', $data)) {
+        if (\array_key_exists('former', $data) && null !== $data['former']) {
             $object->setFormer($data['former']);
+        } elseif (\array_key_exists('former', $data) && null === $data['former']) {
+            $object->setFormer(null);
         }
-        if (\array_key_exists('code', $data)) {
+        if (\array_key_exists('code', $data) && null !== $data['code']) {
             $object->setCode($data['code']);
+        } elseif (\array_key_exists('code', $data) && null === $data['code']) {
+            $object->setCode(null);
         }
-        if (\array_key_exists('label', $data)) {
+        if (\array_key_exists('label', $data) && null !== $data['label']) {
             $object->setLabel($data['label']);
+        } elseif (\array_key_exists('label', $data) && null === $data['label']) {
+            $object->setLabel(null);
         }
-        if (\array_key_exists('configuration', $data)) {
+        if (\array_key_exists('configuration', $data) && null !== $data['configuration']) {
             $values = [];
             foreach ($data['configuration'] as $value) {
                 $values[] = $value;
             }
             $object->setConfiguration($values);
+        } elseif (\array_key_exists('configuration', $data) && null === $data['configuration']) {
+            $object->setConfiguration(null);
         }
-        if (\array_key_exists('probes', $data)) {
+        if (\array_key_exists('probes', $data) && null !== $data['probes']) {
             $values_1 = [];
             foreach ($data['probes'] as $value_1) {
                 $values_1[] = $this->denormalizer->denormalize($value_1, 'Gyroscops\\Api\\Model\\Probe', 'json', $context);
             }
             $object->setProbes($values_1);
+        } elseif (\array_key_exists('probes', $data) && null === $data['probes']) {
+            $object->setProbes(null);
         }
 
         return $object;

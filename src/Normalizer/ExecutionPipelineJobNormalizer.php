@@ -50,15 +50,19 @@ class ExecutionPipelineJobNormalizer implements DenormalizerInterface, Normalize
         } elseif (\array_key_exists('job', $data) && null === $data['job']) {
             $object->setJob(null);
         }
-        if (\array_key_exists('id', $data)) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId($data['id']);
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+            $object->setId(null);
         }
-        if (\array_key_exists('steps', $data)) {
+        if (\array_key_exists('steps', $data) && null !== $data['steps']) {
             $values = [];
             foreach ($data['steps'] as $value) {
                 $values[] = $value;
             }
             $object->setSteps($values);
+        } elseif (\array_key_exists('steps', $data) && null === $data['steps']) {
+            $object->setSteps(null);
         }
 
         return $object;

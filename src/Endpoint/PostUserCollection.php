@@ -9,9 +9,9 @@ class PostUserCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impl
     /**
      * Creates a User resource.
      *
-     * @param \Gyroscops\Api\Model\UserJsonld|\Gyroscops\Api\Model\User $requestBody
+     * @param \Gyroscops\Api\Model\UserJsonld|\Gyroscops\Api\Model\User|null $requestBody
      */
-    public function __construct($requestBody)
+    public function __construct($requestBody = null)
     {
         $this->body = $requestBody;
     }

@@ -7,32 +7,32 @@ class Currency
     /**
      * The currency code.
      *
-     * @var string
+     * @var string|null
      */
     protected $currencyCode;
     /**
      * The numeric currency code.
      *
-     * @var int
+     * @var int|null
      */
     protected $numericCode;
     /**
      * The name of the currency.
      *
-     * @var string
+     * @var string|null
      */
     protected $name;
     /**
      * The default number of fraction digits (typical scale) used with this currency.
      *
-     * @var int
+     * @var int|null
      */
     protected $defaultFractionDigits;
 
     /**
      * The currency code.
      */
-    public function getCurrencyCode(): string
+    public function getCurrencyCode(): ?string
     {
         return $this->currencyCode;
     }
@@ -40,7 +40,7 @@ class Currency
     /**
      * The currency code.
      */
-    public function setCurrencyCode(string $currencyCode): self
+    public function setCurrencyCode(?string $currencyCode): self
     {
         $this->currencyCode = $currencyCode;
 
@@ -50,7 +50,7 @@ class Currency
     /**
      * The numeric currency code.
      */
-    public function getNumericCode(): int
+    public function getNumericCode(): ?int
     {
         return $this->numericCode;
     }
@@ -58,7 +58,7 @@ class Currency
     /**
      * The numeric currency code.
      */
-    public function setNumericCode(int $numericCode): self
+    public function setNumericCode(?int $numericCode): self
     {
         $this->numericCode = $numericCode;
 
@@ -68,7 +68,7 @@ class Currency
     /**
      * The name of the currency.
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -76,7 +76,7 @@ class Currency
     /**
      * The name of the currency.
      */
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
@@ -86,7 +86,7 @@ class Currency
     /**
      * The default number of fraction digits (typical scale) used with this currency.
      */
-    public function getDefaultFractionDigits(): int
+    public function getDefaultFractionDigits(): ?int
     {
         return $this->defaultFractionDigits;
     }
@@ -94,7 +94,7 @@ class Currency
     /**
      * The default number of fraction digits (typical scale) used with this currency.
      */
-    public function setDefaultFractionDigits(int $defaultFractionDigits): self
+    public function setDefaultFractionDigits(?int $defaultFractionDigits): self
     {
         $this->defaultFractionDigits = $defaultFractionDigits;
 

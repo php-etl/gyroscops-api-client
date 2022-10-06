@@ -5,52 +5,52 @@ namespace Gyroscops\Api\Model;
 class RuntimeExecutionExecutionWorkflowIdJobsGetResponse200HydraSearch
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
-     * @var string
+     * @var string|null
      */
     protected $hydraTemplate;
     /**
-     * @var string
+     * @var string|null
      */
     protected $hydraVariableRepresentation;
     /**
-     * @var RuntimeExecutionExecutionWorkflowIdJobsGetResponse200HydraSearchHydraMappingItem[]
+     * @var RuntimeExecutionExecutionWorkflowIdJobsGetResponse200HydraSearchHydraMappingItem[]|null
      */
     protected $hydraMapping;
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
         return $this;
     }
 
-    public function getHydraTemplate(): string
+    public function getHydraTemplate(): ?string
     {
         return $this->hydraTemplate;
     }
 
-    public function setHydraTemplate(string $hydraTemplate): self
+    public function setHydraTemplate(?string $hydraTemplate): self
     {
         $this->hydraTemplate = $hydraTemplate;
 
         return $this;
     }
 
-    public function getHydraVariableRepresentation(): string
+    public function getHydraVariableRepresentation(): ?string
     {
         return $this->hydraVariableRepresentation;
     }
 
-    public function setHydraVariableRepresentation(string $hydraVariableRepresentation): self
+    public function setHydraVariableRepresentation(?string $hydraVariableRepresentation): self
     {
         $this->hydraVariableRepresentation = $hydraVariableRepresentation;
 
@@ -58,17 +58,17 @@ class RuntimeExecutionExecutionWorkflowIdJobsGetResponse200HydraSearch
     }
 
     /**
-     * @return RuntimeExecutionExecutionWorkflowIdJobsGetResponse200HydraSearchHydraMappingItem[]
+     * @return RuntimeExecutionExecutionWorkflowIdJobsGetResponse200HydraSearchHydraMappingItem[]|null
      */
-    public function getHydraMapping(): array
+    public function getHydraMapping(): ?array
     {
         return $this->hydraMapping;
     }
 
     /**
-     * @param RuntimeExecutionExecutionWorkflowIdJobsGetResponse200HydraSearchHydraMappingItem[] $hydraMapping
+     * @param RuntimeExecutionExecutionWorkflowIdJobsGetResponse200HydraSearchHydraMappingItem[]|null $hydraMapping
      */
-    public function setHydraMapping(array $hydraMapping): self
+    public function setHydraMapping(?array $hydraMapping): self
     {
         $this->hydraMapping = $hydraMapping;
 

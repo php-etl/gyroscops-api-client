@@ -5,77 +5,77 @@ namespace Gyroscops\Api\Model;
 class BigDecimalJsonld
 {
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $context;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
      * The scale (number of digits after the decimal point) of this decimal number.
      *
-     * @var int
+     * @var int|null
      */
     protected $scale;
     /**
-     * @var int
+     * @var int|null
      */
     protected $sign;
     /**
-     * @var BigIntegerJsonld
+     * @var BigIntegerJsonld|null
      */
     protected $unscaledValue;
     /**
      * Returns a string representing the integral part of this decimal number.
      *
-     * @var string
+     * @var string|null
      */
     protected $integralPart;
     /**
      * Returns a string representing the fractional part of this decimal number.
      *
-     * @var string
+     * @var string|null
      */
     protected $fractionalPart;
     /**
      * Returns whether this decimal number has a non-zero fractional part.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $nonZeroFractionalPart;
     /**
      * Checks if this number equals zero.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $zero;
     /**
      * Checks if this number is strictly negative.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $negative;
     /**
      * Checks if this number is negative or zero.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $negativeOrZero;
     /**
      * Checks if this number is strictly positive.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $positive;
     /**
      * Checks if this number is positive or zero.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $positiveOrZero;
 
@@ -97,24 +97,24 @@ class BigDecimalJsonld
         return $this;
     }
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
@@ -124,7 +124,7 @@ class BigDecimalJsonld
     /**
      * The scale (number of digits after the decimal point) of this decimal number.
      */
-    public function getScale(): int
+    public function getScale(): ?int
     {
         return $this->scale;
     }
@@ -132,31 +132,31 @@ class BigDecimalJsonld
     /**
      * The scale (number of digits after the decimal point) of this decimal number.
      */
-    public function setScale(int $scale): self
+    public function setScale(?int $scale): self
     {
         $this->scale = $scale;
 
         return $this;
     }
 
-    public function getSign(): int
+    public function getSign(): ?int
     {
         return $this->sign;
     }
 
-    public function setSign(int $sign): self
+    public function setSign(?int $sign): self
     {
         $this->sign = $sign;
 
         return $this;
     }
 
-    public function getUnscaledValue(): BigIntegerJsonld
+    public function getUnscaledValue(): ?BigIntegerJsonld
     {
         return $this->unscaledValue;
     }
 
-    public function setUnscaledValue(BigIntegerJsonld $unscaledValue): self
+    public function setUnscaledValue(?BigIntegerJsonld $unscaledValue): self
     {
         $this->unscaledValue = $unscaledValue;
 
@@ -166,7 +166,7 @@ class BigDecimalJsonld
     /**
      * Returns a string representing the integral part of this decimal number.
      */
-    public function getIntegralPart(): string
+    public function getIntegralPart(): ?string
     {
         return $this->integralPart;
     }
@@ -174,7 +174,7 @@ class BigDecimalJsonld
     /**
      * Returns a string representing the integral part of this decimal number.
      */
-    public function setIntegralPart(string $integralPart): self
+    public function setIntegralPart(?string $integralPart): self
     {
         $this->integralPart = $integralPart;
 
@@ -184,7 +184,7 @@ class BigDecimalJsonld
     /**
      * Returns a string representing the fractional part of this decimal number.
      */
-    public function getFractionalPart(): string
+    public function getFractionalPart(): ?string
     {
         return $this->fractionalPart;
     }
@@ -192,7 +192,7 @@ class BigDecimalJsonld
     /**
      * Returns a string representing the fractional part of this decimal number.
      */
-    public function setFractionalPart(string $fractionalPart): self
+    public function setFractionalPart(?string $fractionalPart): self
     {
         $this->fractionalPart = $fractionalPart;
 
@@ -202,7 +202,7 @@ class BigDecimalJsonld
     /**
      * Returns whether this decimal number has a non-zero fractional part.
      */
-    public function getNonZeroFractionalPart(): bool
+    public function getNonZeroFractionalPart(): ?bool
     {
         return $this->nonZeroFractionalPart;
     }
@@ -210,7 +210,7 @@ class BigDecimalJsonld
     /**
      * Returns whether this decimal number has a non-zero fractional part.
      */
-    public function setNonZeroFractionalPart(bool $nonZeroFractionalPart): self
+    public function setNonZeroFractionalPart(?bool $nonZeroFractionalPart): self
     {
         $this->nonZeroFractionalPart = $nonZeroFractionalPart;
 
@@ -220,7 +220,7 @@ class BigDecimalJsonld
     /**
      * Checks if this number equals zero.
      */
-    public function getZero(): bool
+    public function getZero(): ?bool
     {
         return $this->zero;
     }
@@ -228,7 +228,7 @@ class BigDecimalJsonld
     /**
      * Checks if this number equals zero.
      */
-    public function setZero(bool $zero): self
+    public function setZero(?bool $zero): self
     {
         $this->zero = $zero;
 
@@ -238,7 +238,7 @@ class BigDecimalJsonld
     /**
      * Checks if this number is strictly negative.
      */
-    public function getNegative(): bool
+    public function getNegative(): ?bool
     {
         return $this->negative;
     }
@@ -246,7 +246,7 @@ class BigDecimalJsonld
     /**
      * Checks if this number is strictly negative.
      */
-    public function setNegative(bool $negative): self
+    public function setNegative(?bool $negative): self
     {
         $this->negative = $negative;
 
@@ -256,7 +256,7 @@ class BigDecimalJsonld
     /**
      * Checks if this number is negative or zero.
      */
-    public function getNegativeOrZero(): bool
+    public function getNegativeOrZero(): ?bool
     {
         return $this->negativeOrZero;
     }
@@ -264,7 +264,7 @@ class BigDecimalJsonld
     /**
      * Checks if this number is negative or zero.
      */
-    public function setNegativeOrZero(bool $negativeOrZero): self
+    public function setNegativeOrZero(?bool $negativeOrZero): self
     {
         $this->negativeOrZero = $negativeOrZero;
 
@@ -274,7 +274,7 @@ class BigDecimalJsonld
     /**
      * Checks if this number is strictly positive.
      */
-    public function getPositive(): bool
+    public function getPositive(): ?bool
     {
         return $this->positive;
     }
@@ -282,7 +282,7 @@ class BigDecimalJsonld
     /**
      * Checks if this number is strictly positive.
      */
-    public function setPositive(bool $positive): self
+    public function setPositive(?bool $positive): self
     {
         $this->positive = $positive;
 
@@ -292,7 +292,7 @@ class BigDecimalJsonld
     /**
      * Checks if this number is positive or zero.
      */
-    public function getPositiveOrZero(): bool
+    public function getPositiveOrZero(): ?bool
     {
         return $this->positiveOrZero;
     }
@@ -300,7 +300,7 @@ class BigDecimalJsonld
     /**
      * Checks if this number is positive or zero.
      */
-    public function setPositiveOrZero(bool $positiveOrZero): self
+    public function setPositiveOrZero(?bool $positiveOrZero): self
     {
         $this->positiveOrZero = $positiveOrZero;
 

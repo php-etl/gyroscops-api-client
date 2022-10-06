@@ -45,17 +45,25 @@ class UserAuthorizationJsonldNormalizer implements DenormalizerInterface, Normal
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@id', $data)) {
+        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
             $object->setId($data['@id']);
+        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+            $object->setId(null);
         }
-        if (\array_key_exists('@type', $data)) {
+        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
             $object->setType($data['@type']);
+        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+            $object->setType(null);
         }
-        if (\array_key_exists('@context', $data)) {
+        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
             $object->setContext($data['@context']);
+        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+            $object->setContext(null);
         }
-        if (\array_key_exists('id', $data)) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId2($data['id']);
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+            $object->setId2(null);
         }
         if (\array_key_exists('user', $data) && null !== $data['user']) {
             $object->setUser($data['user']);
@@ -72,15 +80,19 @@ class UserAuthorizationJsonldNormalizer implements DenormalizerInterface, Normal
         } elseif (\array_key_exists('organization', $data) && null === $data['organization']) {
             $object->setOrganization(null);
         }
-        if (\array_key_exists('resource', $data)) {
+        if (\array_key_exists('resource', $data) && null !== $data['resource']) {
             $object->setResource($data['resource']);
+        } elseif (\array_key_exists('resource', $data) && null === $data['resource']) {
+            $object->setResource(null);
         }
-        if (\array_key_exists('authorizations', $data)) {
+        if (\array_key_exists('authorizations', $data) && null !== $data['authorizations']) {
             $values = [];
             foreach ($data['authorizations'] as $value) {
                 $values[] = $value;
             }
             $object->setAuthorizations($values);
+        } elseif (\array_key_exists('authorizations', $data) && null === $data['authorizations']) {
+            $object->setAuthorizations(null);
         }
 
         return $object;

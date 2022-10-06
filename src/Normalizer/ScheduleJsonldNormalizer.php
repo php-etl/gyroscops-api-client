@@ -45,20 +45,30 @@ class ScheduleJsonldNormalizer implements DenormalizerInterface, NormalizerInter
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@id', $data)) {
+        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
             $object->setId($data['@id']);
+        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+            $object->setId(null);
         }
-        if (\array_key_exists('@type', $data)) {
+        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
             $object->setType($data['@type']);
+        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+            $object->setType(null);
         }
-        if (\array_key_exists('@context', $data)) {
+        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
             $object->setContext($data['@context']);
+        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+            $object->setContext(null);
         }
-        if (\array_key_exists('id', $data)) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId2($data['id']);
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+            $object->setId2(null);
         }
-        if (\array_key_exists('type', $data)) {
+        if (\array_key_exists('type', $data) && null !== $data['type']) {
             $object->setType2($data['type']);
+        } elseif (\array_key_exists('type', $data) && null === $data['type']) {
+            $object->setType2(null);
         }
         if (\array_key_exists('startAt', $data) && null !== $data['startAt']) {
             $object->setStartAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['startAt']));
@@ -80,12 +90,14 @@ class ScheduleJsonldNormalizer implements DenormalizerInterface, NormalizerInter
         } elseif (\array_key_exists('recurrences', $data) && null === $data['recurrences']) {
             $object->setRecurrences(null);
         }
-        if (\array_key_exists('executions', $data)) {
+        if (\array_key_exists('executions', $data) && null !== $data['executions']) {
             $values = [];
             foreach ($data['executions'] as $value) {
                 $values[] = $value;
             }
             $object->setExecutions($values);
+        } elseif (\array_key_exists('executions', $data) && null === $data['executions']) {
+            $object->setExecutions(null);
         }
         if (\array_key_exists('pipeline', $data) && null !== $data['pipeline']) {
             $object->setPipeline($data['pipeline']);
@@ -97,14 +109,20 @@ class ScheduleJsonldNormalizer implements DenormalizerInterface, NormalizerInter
         } elseif (\array_key_exists('workflow', $data) && null === $data['workflow']) {
             $object->setWorkflow(null);
         }
-        if (\array_key_exists('owner', $data)) {
+        if (\array_key_exists('owner', $data) && null !== $data['owner']) {
             $object->setOwner($data['owner']);
+        } elseif (\array_key_exists('owner', $data) && null === $data['owner']) {
+            $object->setOwner(null);
         }
-        if (\array_key_exists('workspace', $data)) {
+        if (\array_key_exists('workspace', $data) && null !== $data['workspace']) {
             $object->setWorkspace($data['workspace']);
+        } elseif (\array_key_exists('workspace', $data) && null === $data['workspace']) {
+            $object->setWorkspace(null);
         }
-        if (\array_key_exists('organization', $data)) {
+        if (\array_key_exists('organization', $data) && null !== $data['organization']) {
             $object->setOrganization($data['organization']);
+        } elseif (\array_key_exists('organization', $data) && null === $data['organization']) {
+            $object->setOrganization(null);
         }
 
         return $object;

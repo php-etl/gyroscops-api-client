@@ -10,10 +10,10 @@ class PutUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements 
     /**
      * Replaces the User resource.
      *
-     * @param string                                                    $id          Resource identifier
-     * @param \Gyroscops\Api\Model\UserJsonld|\Gyroscops\Api\Model\User $requestBody
+     * @param string                                                         $id          Resource identifier
+     * @param \Gyroscops\Api\Model\UserJsonld|\Gyroscops\Api\Model\User|null $requestBody
      */
-    public function __construct(string $id, $requestBody)
+    public function __construct(string $id, $requestBody = null)
     {
         $this->id = $id;
         $this->body = $requestBody;

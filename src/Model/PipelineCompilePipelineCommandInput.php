@@ -5,16 +5,16 @@ namespace Gyroscops\Api\Model;
 class PipelineCompilePipelineCommandInput
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $pipeline;
 
-    public function getPipeline(): string
+    public function getPipeline(): ?string
     {
         return $this->pipeline;
     }
 
-    public function setPipeline(string $pipeline): self
+    public function setPipeline(?string $pipeline): self
     {
         $this->pipeline = $pipeline;
 

@@ -5,19 +5,19 @@ namespace Gyroscops\Api\Model;
 class Secret
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $name;
     /**
-     * @var string
+     * @var string|null
      */
     protected $description;
     /**
-     * @var string
+     * @var string|null
      */
     protected $organization;
     /**
@@ -25,52 +25,52 @@ class Secret
      */
     protected $workspace;
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $iterator;
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
         return $this;
     }
 
-    public function getOrganization(): string
+    public function getOrganization(): ?string
     {
         return $this->organization;
     }
 
-    public function setOrganization(string $organization): self
+    public function setOrganization(?string $organization): self
     {
         $this->organization = $organization;
 

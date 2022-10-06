@@ -45,8 +45,10 @@ class SubscriptionOptionNormalizer implements DenormalizerInterface, NormalizerI
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('id', $data)) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId($data['id']);
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+            $object->setId(null);
         }
         if (\array_key_exists('subscription', $data) && null !== $data['subscription']) {
             $object->setSubscription($data['subscription']);
@@ -58,8 +60,10 @@ class SubscriptionOptionNormalizer implements DenormalizerInterface, NormalizerI
         } elseif (\array_key_exists('option', $data) && null === $data['option']) {
             $object->setOption(null);
         }
-        if (\array_key_exists('price', $data)) {
+        if (\array_key_exists('price', $data) && null !== $data['price']) {
             $object->setPrice($this->denormalizer->denormalize($data['price'], 'Gyroscops\\Api\\Model\\Price', 'json', $context));
+        } elseif (\array_key_exists('price', $data) && null === $data['price']) {
+            $object->setPrice(null);
         }
 
         return $object;

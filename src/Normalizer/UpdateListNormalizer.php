@@ -45,8 +45,10 @@ class UpdateListNormalizer implements DenormalizerInterface, NormalizerInterface
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('iterator', $data)) {
+        if (\array_key_exists('iterator', $data) && null !== $data['iterator']) {
             $object->setIterator($data['iterator']);
+        } elseif (\array_key_exists('iterator', $data) && null === $data['iterator']) {
+            $object->setIterator(null);
         }
 
         return $object;

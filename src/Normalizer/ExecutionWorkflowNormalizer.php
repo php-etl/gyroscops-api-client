@@ -45,18 +45,24 @@ class ExecutionWorkflowNormalizer implements DenormalizerInterface, NormalizerIn
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('id', $data)) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId($data['id']);
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+            $object->setId(null);
         }
-        if (\array_key_exists('jobs', $data)) {
+        if (\array_key_exists('jobs', $data) && null !== $data['jobs']) {
             $values = [];
             foreach ($data['jobs'] as $value) {
                 $values[] = $value;
             }
             $object->setJobs($values);
+        } elseif (\array_key_exists('jobs', $data) && null === $data['jobs']) {
+            $object->setJobs(null);
         }
-        if (\array_key_exists('execution', $data)) {
+        if (\array_key_exists('execution', $data) && null !== $data['execution']) {
             $object->setExecution($data['execution']);
+        } elseif (\array_key_exists('execution', $data) && null === $data['execution']) {
+            $object->setExecution(null);
         }
 
         return $object;

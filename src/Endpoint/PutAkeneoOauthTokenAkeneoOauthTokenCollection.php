@@ -9,9 +9,9 @@ class PutAkeneoOauthTokenAkeneoOauthTokenCollection extends \Gyroscops\Api\Runti
     /**
      * Generate an Akeneo OAuth token.
      *
-     * @param \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBody|\Gyroscops\Api\Model\AkeneoOauthTokenOauthTokenInput[] $requestBody
+     * @param \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBody|\Gyroscops\Api\Model\AkeneoOauthTokenOauthTokenInput[]|null $requestBody
      */
-    public function __construct($requestBody)
+    public function __construct($requestBody = null)
     {
         $this->body = $requestBody;
     }

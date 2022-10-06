@@ -5,70 +5,70 @@ namespace Gyroscops\Api\Model;
 class GatewayAkeneoLinkedAccountAkeneoUserIdGetResponse200
 {
     /**
-     * @var AkeneoLinkedAccountJsonld[]
+     * @var AkeneoLinkedAccountJsonld[]|null
      */
     protected $hydraMember;
     /**
-     * @var int
+     * @var int|null
      */
     protected $hydraTotalItems;
     /**
-     * @var GatewayAkeneoLinkedAccountAkeneoUserIdGetResponse200HydraView
+     * @var GatewayAkeneoLinkedAccountAkeneoUserIdGetResponse200HydraView|null
      */
     protected $hydraView;
     /**
-     * @var GatewayAkeneoLinkedAccountAkeneoUserIdGetResponse200HydraSearch
+     * @var GatewayAkeneoLinkedAccountAkeneoUserIdGetResponse200HydraSearch|null
      */
     protected $hydraSearch;
 
     /**
-     * @return AkeneoLinkedAccountJsonld[]
+     * @return AkeneoLinkedAccountJsonld[]|null
      */
-    public function getHydraMember(): array
+    public function getHydraMember(): ?array
     {
         return $this->hydraMember;
     }
 
     /**
-     * @param AkeneoLinkedAccountJsonld[] $hydraMember
+     * @param AkeneoLinkedAccountJsonld[]|null $hydraMember
      */
-    public function setHydraMember(array $hydraMember): self
+    public function setHydraMember(?array $hydraMember): self
     {
         $this->hydraMember = $hydraMember;
 
         return $this;
     }
 
-    public function getHydraTotalItems(): int
+    public function getHydraTotalItems(): ?int
     {
         return $this->hydraTotalItems;
     }
 
-    public function setHydraTotalItems(int $hydraTotalItems): self
+    public function setHydraTotalItems(?int $hydraTotalItems): self
     {
         $this->hydraTotalItems = $hydraTotalItems;
 
         return $this;
     }
 
-    public function getHydraView(): GatewayAkeneoLinkedAccountAkeneoUserIdGetResponse200HydraView
+    public function getHydraView(): ?GatewayAkeneoLinkedAccountAkeneoUserIdGetResponse200HydraView
     {
         return $this->hydraView;
     }
 
-    public function setHydraView(GatewayAkeneoLinkedAccountAkeneoUserIdGetResponse200HydraView $hydraView): self
+    public function setHydraView(?GatewayAkeneoLinkedAccountAkeneoUserIdGetResponse200HydraView $hydraView): self
     {
         $this->hydraView = $hydraView;
 
         return $this;
     }
 
-    public function getHydraSearch(): GatewayAkeneoLinkedAccountAkeneoUserIdGetResponse200HydraSearch
+    public function getHydraSearch(): ?GatewayAkeneoLinkedAccountAkeneoUserIdGetResponse200HydraSearch
     {
         return $this->hydraSearch;
     }
 
-    public function setHydraSearch(GatewayAkeneoLinkedAccountAkeneoUserIdGetResponse200HydraSearch $hydraSearch): self
+    public function setHydraSearch(?GatewayAkeneoLinkedAccountAkeneoUserIdGetResponse200HydraSearch $hydraSearch): self
     {
         $this->hydraSearch = $hydraSearch;
 

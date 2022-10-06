@@ -5,7 +5,7 @@ namespace Gyroscops\Api\Model;
 class ReferralCodeReferralCodeRead
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
@@ -13,20 +13,20 @@ class ReferralCodeReferralCodeRead
      */
     protected $user;
     /**
-     * @var string
+     * @var string|null
      */
     protected $code;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $referralRequests;
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
@@ -45,12 +45,12 @@ class ReferralCodeReferralCodeRead
         return $this;
     }
 
-    public function getCode(): string
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
-    public function setCode(string $code): self
+    public function setCode(?string $code): self
     {
         $this->code = $code;
 
@@ -58,17 +58,17 @@ class ReferralCodeReferralCodeRead
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getReferralRequests(): array
+    public function getReferralRequests(): ?array
     {
         return $this->referralRequests;
     }
 
     /**
-     * @param string[] $referralRequests
+     * @param string[]|null $referralRequests
      */
-    public function setReferralRequests(array $referralRequests): self
+    public function setReferralRequests(?array $referralRequests): self
     {
         $this->referralRequests = $referralRequests;
 

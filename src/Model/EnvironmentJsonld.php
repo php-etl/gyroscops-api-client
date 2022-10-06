@@ -5,39 +5,39 @@ namespace Gyroscops\Api\Model;
 class EnvironmentJsonld
 {
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $context;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id2;
     /**
-     * @var string
+     * @var string|null
      */
     protected $name;
     /**
-     * @var string
+     * @var string|null
      */
     protected $description;
     /**
-     * @var string
+     * @var string|null
      */
     protected $organization;
     /**
-     * @var string
+     * @var string|null
      */
     protected $workspace;
     /**
-     * @var VariableJsonld[]
+     * @var VariableJsonld[]|null
      */
     protected $variables;
 
@@ -59,84 +59,84 @@ class EnvironmentJsonld
         return $this;
     }
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
         return $this;
     }
 
-    public function getId2(): string
+    public function getId2(): ?string
     {
         return $this->id2;
     }
 
-    public function setId2(string $id2): self
+    public function setId2(?string $id2): self
     {
         $this->id2 = $id2;
 
         return $this;
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
         return $this;
     }
 
-    public function getOrganization(): string
+    public function getOrganization(): ?string
     {
         return $this->organization;
     }
 
-    public function setOrganization(string $organization): self
+    public function setOrganization(?string $organization): self
     {
         $this->organization = $organization;
 
         return $this;
     }
 
-    public function getWorkspace(): string
+    public function getWorkspace(): ?string
     {
         return $this->workspace;
     }
 
-    public function setWorkspace(string $workspace): self
+    public function setWorkspace(?string $workspace): self
     {
         $this->workspace = $workspace;
 
@@ -144,17 +144,17 @@ class EnvironmentJsonld
     }
 
     /**
-     * @return VariableJsonld[]
+     * @return VariableJsonld[]|null
      */
-    public function getVariables(): array
+    public function getVariables(): ?array
     {
         return $this->variables;
     }
 
     /**
-     * @param VariableJsonld[] $variables
+     * @param VariableJsonld[]|null $variables
      */
-    public function setVariables(array $variables): self
+    public function setVariables(?array $variables): self
     {
         $this->variables = $variables;
 

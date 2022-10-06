@@ -10,10 +10,10 @@ class PutWorkspaceItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implem
     /**
      * Replaces the Workspace resource.
      *
-     * @param string                                                              $id          Resource identifier
-     * @param \Gyroscops\Api\Model\WorkspaceJsonld|\Gyroscops\Api\Model\Workspace $requestBody
+     * @param string                                                                   $id          Resource identifier
+     * @param \Gyroscops\Api\Model\WorkspaceJsonld|\Gyroscops\Api\Model\Workspace|null $requestBody
      */
-    public function __construct(string $id, $requestBody)
+    public function __construct(string $id, $requestBody = null)
     {
         $this->id = $id;
         $this->body = $requestBody;

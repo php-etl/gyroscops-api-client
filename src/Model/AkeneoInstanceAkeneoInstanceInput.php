@@ -5,48 +5,48 @@ namespace Gyroscops\Api\Model;
 class AkeneoInstanceAkeneoInstanceInput
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $pimUrl;
     /**
-     * @var string
+     * @var string|null
      */
     protected $organization;
     /**
-     * @var SecretInput
+     * @var SecretInput|null
      */
     protected $secret;
 
-    public function getPimUrl(): string
+    public function getPimUrl(): ?string
     {
         return $this->pimUrl;
     }
 
-    public function setPimUrl(string $pimUrl): self
+    public function setPimUrl(?string $pimUrl): self
     {
         $this->pimUrl = $pimUrl;
 
         return $this;
     }
 
-    public function getOrganization(): string
+    public function getOrganization(): ?string
     {
         return $this->organization;
     }
 
-    public function setOrganization(string $organization): self
+    public function setOrganization(?string $organization): self
     {
         $this->organization = $organization;
 
         return $this;
     }
 
-    public function getSecret(): SecretInput
+    public function getSecret(): ?SecretInput
     {
         return $this->secret;
     }
 
-    public function setSecret(SecretInput $secret): self
+    public function setSecret(?SecretInput $secret): self
     {
         $this->secret = $secret;
 

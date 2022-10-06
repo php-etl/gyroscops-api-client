@@ -5,19 +5,19 @@ namespace Gyroscops\Api\Model;
 class AkeneoLinkedAccountJsonld
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $context;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id2;
     /**
@@ -25,15 +25,15 @@ class AkeneoLinkedAccountJsonld
      */
     protected $user;
     /**
-     * @var string
+     * @var string|null
      */
     protected $tokenId;
     /**
-     * @var string
+     * @var string|null
      */
     protected $akeneoUserId;
     /**
-     * @var string
+     * @var string|null
      */
     protected $token;
     /**
@@ -41,24 +41,24 @@ class AkeneoLinkedAccountJsonld
      */
     protected $akeneoInstance;
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
@@ -83,12 +83,12 @@ class AkeneoLinkedAccountJsonld
         return $this;
     }
 
-    public function getId2(): string
+    public function getId2(): ?string
     {
         return $this->id2;
     }
 
-    public function setId2(string $id2): self
+    public function setId2(?string $id2): self
     {
         $this->id2 = $id2;
 
@@ -107,36 +107,36 @@ class AkeneoLinkedAccountJsonld
         return $this;
     }
 
-    public function getTokenId(): string
+    public function getTokenId(): ?string
     {
         return $this->tokenId;
     }
 
-    public function setTokenId(string $tokenId): self
+    public function setTokenId(?string $tokenId): self
     {
         $this->tokenId = $tokenId;
 
         return $this;
     }
 
-    public function getAkeneoUserId(): string
+    public function getAkeneoUserId(): ?string
     {
         return $this->akeneoUserId;
     }
 
-    public function setAkeneoUserId(string $akeneoUserId): self
+    public function setAkeneoUserId(?string $akeneoUserId): self
     {
         $this->akeneoUserId = $akeneoUserId;
 
         return $this;
     }
 
-    public function getToken(): string
+    public function getToken(): ?string
     {
         return $this->token;
     }
 
-    public function setToken(string $token): self
+    public function setToken(?string $token): self
     {
         $this->token = $token;
 

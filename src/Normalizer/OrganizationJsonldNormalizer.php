@@ -45,51 +45,71 @@ class OrganizationJsonldNormalizer implements DenormalizerInterface, NormalizerI
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data)) {
+        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
             $object->setContext($data['@context']);
+        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+            $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data)) {
+        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
             $object->setId($data['@id']);
+        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+            $object->setId(null);
         }
-        if (\array_key_exists('@type', $data)) {
+        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
             $object->setType($data['@type']);
+        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+            $object->setType(null);
         }
-        if (\array_key_exists('id', $data)) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId2($data['id']);
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+            $object->setId2(null);
         }
-        if (\array_key_exists('authorizations', $data)) {
+        if (\array_key_exists('authorizations', $data) && null !== $data['authorizations']) {
             $values = [];
             foreach ($data['authorizations'] as $value) {
                 $values[] = $value;
             }
             $object->setAuthorizations($values);
+        } elseif (\array_key_exists('authorizations', $data) && null === $data['authorizations']) {
+            $object->setAuthorizations(null);
         }
-        if (\array_key_exists('name', $data)) {
+        if (\array_key_exists('name', $data) && null !== $data['name']) {
             $object->setName($data['name']);
+        } elseif (\array_key_exists('name', $data) && null === $data['name']) {
+            $object->setName(null);
         }
-        if (\array_key_exists('slug', $data)) {
+        if (\array_key_exists('slug', $data) && null !== $data['slug']) {
             $object->setSlug($data['slug']);
+        } elseif (\array_key_exists('slug', $data) && null === $data['slug']) {
+            $object->setSlug(null);
         }
-        if (\array_key_exists('users', $data)) {
+        if (\array_key_exists('users', $data) && null !== $data['users']) {
             $values_1 = [];
             foreach ($data['users'] as $value_1) {
                 $values_1[] = $value_1;
             }
             $object->setUsers($values_1);
+        } elseif (\array_key_exists('users', $data) && null === $data['users']) {
+            $object->setUsers(null);
         }
-        if (\array_key_exists('externalCollaborators', $data)) {
+        if (\array_key_exists('externalCollaborators', $data) && null !== $data['externalCollaborators']) {
             $values_2 = [];
             foreach ($data['externalCollaborators'] as $value_2) {
                 $values_2[] = $value_2;
             }
             $object->setExternalCollaborators($values_2);
+        } elseif (\array_key_exists('externalCollaborators', $data) && null === $data['externalCollaborators']) {
+            $object->setExternalCollaborators(null);
         }
-        if (\array_key_exists('workspaces', $data)) {
+        if (\array_key_exists('workspaces', $data) && null !== $data['workspaces']) {
             $values_3 = [];
             foreach ($data['workspaces'] as $value_3) {
                 $values_3[] = $value_3;
             }
             $object->setWorkspaces($values_3);
+        } elseif (\array_key_exists('workspaces', $data) && null === $data['workspaces']) {
+            $object->setWorkspaces(null);
         }
 
         return $object;

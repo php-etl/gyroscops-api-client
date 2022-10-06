@@ -9,9 +9,9 @@ class PostAkeneoOauthTokenCollection extends \Gyroscops\Api\Runtime\Client\BaseE
     /**
      * Generate an Akeneo OAuth state.
      *
-     * @param \Gyroscops\Api\Model\AkeneoOauthTokenOauthStateInputJsonld|\Gyroscops\Api\Model\AkeneoOauthTokenOauthStateInput $requestBody
+     * @param \Gyroscops\Api\Model\AkeneoOauthTokenOauthStateInputJsonld|\Gyroscops\Api\Model\AkeneoOauthTokenOauthStateInput|null $requestBody
      */
-    public function __construct($requestBody)
+    public function __construct($requestBody = null)
     {
         $this->body = $requestBody;
     }

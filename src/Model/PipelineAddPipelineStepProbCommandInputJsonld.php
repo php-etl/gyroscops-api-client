@@ -5,27 +5,27 @@ namespace Gyroscops\Api\Model;
 class PipelineAddPipelineStepProbCommandInputJsonld
 {
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $context;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id2;
     /**
-     * @var string
+     * @var string|null
      */
     protected $code;
     /**
-     * @var ProbeJsonld
+     * @var ProbeJsonld|null
      */
     protected $probe;
 
@@ -47,60 +47,60 @@ class PipelineAddPipelineStepProbCommandInputJsonld
         return $this;
     }
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
         return $this;
     }
 
-    public function getId2(): string
+    public function getId2(): ?string
     {
         return $this->id2;
     }
 
-    public function setId2(string $id2): self
+    public function setId2(?string $id2): self
     {
         $this->id2 = $id2;
 
         return $this;
     }
 
-    public function getCode(): string
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
-    public function setCode(string $code): self
+    public function setCode(?string $code): self
     {
         $this->code = $code;
 
         return $this;
     }
 
-    public function getProbe(): ProbeJsonld
+    public function getProbe(): ?ProbeJsonld
     {
         return $this->probe;
     }
 
-    public function setProbe(ProbeJsonld $probe): self
+    public function setProbe(?ProbeJsonld $probe): self
     {
         $this->probe = $probe;
 

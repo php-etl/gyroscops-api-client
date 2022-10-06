@@ -5,15 +5,15 @@ namespace Gyroscops\Api\Model;
 class ScheduleDeclarePipelineScheduleImmediateCommand
 {
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $id;
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $pipeline;
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $user;
 

@@ -9,9 +9,9 @@ class PostEnvironmentCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoi
     /**
      * Creates a Environment resource.
      *
-     * @param \Gyroscops\Api\Model\EnvironmentJsonld|\Gyroscops\Api\Model\Environment $requestBody
+     * @param \Gyroscops\Api\Model\EnvironmentJsonld|\Gyroscops\Api\Model\Environment|null $requestBody
      */
-    public function __construct($requestBody)
+    public function __construct($requestBody = null)
     {
         $this->body = $requestBody;
     }

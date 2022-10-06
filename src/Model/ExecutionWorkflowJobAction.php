@@ -9,7 +9,7 @@ class ExecutionWorkflowJobAction
      */
     protected $job;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
 
@@ -25,12 +25,12 @@ class ExecutionWorkflowJobAction
         return $this;
     }
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 

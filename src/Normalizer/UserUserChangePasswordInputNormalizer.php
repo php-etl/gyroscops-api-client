@@ -45,14 +45,20 @@ class UserUserChangePasswordInputNormalizer implements DenormalizerInterface, No
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('currentPassword', $data)) {
+        if (\array_key_exists('currentPassword', $data) && null !== $data['currentPassword']) {
             $object->setCurrentPassword($data['currentPassword']);
+        } elseif (\array_key_exists('currentPassword', $data) && null === $data['currentPassword']) {
+            $object->setCurrentPassword(null);
         }
-        if (\array_key_exists('newPassword', $data)) {
+        if (\array_key_exists('newPassword', $data) && null !== $data['newPassword']) {
             $object->setNewPassword($data['newPassword']);
+        } elseif (\array_key_exists('newPassword', $data) && null === $data['newPassword']) {
+            $object->setNewPassword(null);
         }
-        if (\array_key_exists('confirmPassword', $data)) {
+        if (\array_key_exists('confirmPassword', $data) && null !== $data['confirmPassword']) {
             $object->setConfirmPassword($data['confirmPassword']);
+        } elseif (\array_key_exists('confirmPassword', $data) && null === $data['confirmPassword']) {
+            $object->setConfirmPassword(null);
         }
 
         return $object;

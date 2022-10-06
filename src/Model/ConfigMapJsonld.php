@@ -5,60 +5,60 @@ namespace Gyroscops\Api\Model;
 class ConfigMapJsonld
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $context;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id2;
     /**
-     * @var string
+     * @var string|null
      */
     protected $name;
     /**
-     * @var string
+     * @var string|null
      */
     protected $description;
     /**
-     * @var string
+     * @var string|null
      */
     protected $organization;
     /**
-     * @var string
+     * @var string|null
      */
     protected $workspace;
     /**
-     * @var TraversableJsonld
+     * @var TraversableJsonld|null
      */
     protected $iterator;
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
@@ -83,72 +83,72 @@ class ConfigMapJsonld
         return $this;
     }
 
-    public function getId2(): string
+    public function getId2(): ?string
     {
         return $this->id2;
     }
 
-    public function setId2(string $id2): self
+    public function setId2(?string $id2): self
     {
         $this->id2 = $id2;
 
         return $this;
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
         return $this;
     }
 
-    public function getOrganization(): string
+    public function getOrganization(): ?string
     {
         return $this->organization;
     }
 
-    public function setOrganization(string $organization): self
+    public function setOrganization(?string $organization): self
     {
         $this->organization = $organization;
 
         return $this;
     }
 
-    public function getWorkspace(): string
+    public function getWorkspace(): ?string
     {
         return $this->workspace;
     }
 
-    public function setWorkspace(string $workspace): self
+    public function setWorkspace(?string $workspace): self
     {
         $this->workspace = $workspace;
 
         return $this;
     }
 
-    public function getIterator(): TraversableJsonld
+    public function getIterator(): ?TraversableJsonld
     {
         return $this->iterator;
     }
 
-    public function setIterator(TraversableJsonld $iterator): self
+    public function setIterator(?TraversableJsonld $iterator): self
     {
         $this->iterator = $iterator;
 

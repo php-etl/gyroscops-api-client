@@ -45,14 +45,20 @@ class PipelineAddPipelineStepProbCommandInputNormalizer implements DenormalizerI
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('id', $data)) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId($data['id']);
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+            $object->setId(null);
         }
-        if (\array_key_exists('code', $data)) {
+        if (\array_key_exists('code', $data) && null !== $data['code']) {
             $object->setCode($data['code']);
+        } elseif (\array_key_exists('code', $data) && null === $data['code']) {
+            $object->setCode(null);
         }
-        if (\array_key_exists('probe', $data)) {
+        if (\array_key_exists('probe', $data) && null !== $data['probe']) {
             $object->setProbe($this->denormalizer->denormalize($data['probe'], 'Gyroscops\\Api\\Model\\Probe', 'json', $context));
+        } elseif (\array_key_exists('probe', $data) && null === $data['probe']) {
+            $object->setProbe(null);
         }
 
         return $object;

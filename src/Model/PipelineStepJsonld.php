@@ -5,64 +5,64 @@ namespace Gyroscops\Api\Model;
 class PipelineStepJsonld
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $context;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id2;
     /**
-     * @var string
+     * @var string|null
      */
     protected $code;
     /**
-     * @var int
+     * @var int|null
      */
     protected $order;
     /**
-     * @var string
+     * @var string|null
      */
     protected $label;
     /**
-     * @var AbstractPipelineJsonld
+     * @var AbstractPipelineJsonld|null
      */
     protected $pipeline;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $probes;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $configuration;
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
@@ -87,60 +87,60 @@ class PipelineStepJsonld
         return $this;
     }
 
-    public function getId2(): string
+    public function getId2(): ?string
     {
         return $this->id2;
     }
 
-    public function setId2(string $id2): self
+    public function setId2(?string $id2): self
     {
         $this->id2 = $id2;
 
         return $this;
     }
 
-    public function getCode(): string
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
-    public function setCode(string $code): self
+    public function setCode(?string $code): self
     {
         $this->code = $code;
 
         return $this;
     }
 
-    public function getOrder(): int
+    public function getOrder(): ?int
     {
         return $this->order;
     }
 
-    public function setOrder(int $order): self
+    public function setOrder(?int $order): self
     {
         $this->order = $order;
 
         return $this;
     }
 
-    public function getLabel(): string
+    public function getLabel(): ?string
     {
         return $this->label;
     }
 
-    public function setLabel(string $label): self
+    public function setLabel(?string $label): self
     {
         $this->label = $label;
 
         return $this;
     }
 
-    public function getPipeline(): AbstractPipelineJsonld
+    public function getPipeline(): ?AbstractPipelineJsonld
     {
         return $this->pipeline;
     }
 
-    public function setPipeline(AbstractPipelineJsonld $pipeline): self
+    public function setPipeline(?AbstractPipelineJsonld $pipeline): self
     {
         $this->pipeline = $pipeline;
 
@@ -148,17 +148,17 @@ class PipelineStepJsonld
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getProbes(): array
+    public function getProbes(): ?array
     {
         return $this->probes;
     }
 
     /**
-     * @param string[] $probes
+     * @param string[]|null $probes
      */
-    public function setProbes(array $probes): self
+    public function setProbes(?array $probes): self
     {
         $this->probes = $probes;
 
@@ -166,17 +166,17 @@ class PipelineStepJsonld
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getConfiguration(): array
+    public function getConfiguration(): ?array
     {
         return $this->configuration;
     }
 
     /**
-     * @param string[] $configuration
+     * @param string[]|null $configuration
      */
-    public function setConfiguration(array $configuration): self
+    public function setConfiguration(?array $configuration): self
     {
         $this->configuration = $configuration;
 

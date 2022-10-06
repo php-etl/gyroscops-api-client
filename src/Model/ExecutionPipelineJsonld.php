@@ -5,15 +5,15 @@ namespace Gyroscops\Api\Model;
 class ExecutionPipelineJsonld
 {
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $context;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
@@ -21,11 +21,11 @@ class ExecutionPipelineJsonld
      */
     protected $execution;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id2;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $steps;
 
@@ -47,24 +47,24 @@ class ExecutionPipelineJsonld
         return $this;
     }
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
@@ -83,12 +83,12 @@ class ExecutionPipelineJsonld
         return $this;
     }
 
-    public function getId2(): string
+    public function getId2(): ?string
     {
         return $this->id2;
     }
 
-    public function setId2(string $id2): self
+    public function setId2(?string $id2): self
     {
         $this->id2 = $id2;
 
@@ -96,17 +96,17 @@ class ExecutionPipelineJsonld
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getSteps(): array
+    public function getSteps(): ?array
     {
         return $this->steps;
     }
 
     /**
-     * @param string[] $steps
+     * @param string[]|null $steps
      */
-    public function setSteps(array $steps): self
+    public function setSteps(?array $steps): self
     {
         $this->steps = $steps;
 

@@ -9,9 +9,9 @@ class PostConfigMapCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint
     /**
      * Creates a ConfigMap resource.
      *
-     * @param \Gyroscops\Api\Model\ConfigMapConfigMapInputJsonld|\Gyroscops\Api\Model\ConfigMapConfigMapInput $requestBody
+     * @param \Gyroscops\Api\Model\ConfigMapConfigMapInputJsonld|\Gyroscops\Api\Model\ConfigMapConfigMapInput|null $requestBody
      */
-    public function __construct($requestBody)
+    public function __construct($requestBody = null)
     {
         $this->body = $requestBody;
     }

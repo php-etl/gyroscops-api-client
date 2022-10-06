@@ -50,8 +50,10 @@ class ExecutionWorkflowJobActionNormalizer implements DenormalizerInterface, Nor
         } elseif (\array_key_exists('job', $data) && null === $data['job']) {
             $object->setJob(null);
         }
-        if (\array_key_exists('id', $data)) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId($data['id']);
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+            $object->setId(null);
         }
 
         return $object;

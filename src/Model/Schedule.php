@@ -5,11 +5,11 @@ namespace Gyroscops\Api\Model;
 class Schedule
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $type = 'once';
     /**
@@ -29,7 +29,7 @@ class Schedule
      */
     protected $recurrences;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $executions;
     /**
@@ -41,36 +41,36 @@ class Schedule
      */
     protected $workflow;
     /**
-     * @var string
+     * @var string|null
      */
     protected $owner;
     /**
-     * @var string
+     * @var string|null
      */
     protected $workspace;
     /**
-     * @var string
+     * @var string|null
      */
     protected $organization;
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
@@ -126,17 +126,17 @@ class Schedule
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getExecutions(): array
+    public function getExecutions(): ?array
     {
         return $this->executions;
     }
 
     /**
-     * @param string[] $executions
+     * @param string[]|null $executions
      */
-    public function setExecutions(array $executions): self
+    public function setExecutions(?array $executions): self
     {
         $this->executions = $executions;
 
@@ -167,36 +167,36 @@ class Schedule
         return $this;
     }
 
-    public function getOwner(): string
+    public function getOwner(): ?string
     {
         return $this->owner;
     }
 
-    public function setOwner(string $owner): self
+    public function setOwner(?string $owner): self
     {
         $this->owner = $owner;
 
         return $this;
     }
 
-    public function getWorkspace(): string
+    public function getWorkspace(): ?string
     {
         return $this->workspace;
     }
 
-    public function setWorkspace(string $workspace): self
+    public function setWorkspace(?string $workspace): self
     {
         $this->workspace = $workspace;
 
         return $this;
     }
 
-    public function getOrganization(): string
+    public function getOrganization(): ?string
     {
         return $this->organization;
     }
 
-    public function setOrganization(string $organization): self
+    public function setOrganization(?string $organization): self
     {
         $this->organization = $organization;
 

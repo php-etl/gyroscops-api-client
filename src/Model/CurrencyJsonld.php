@@ -5,39 +5,39 @@ namespace Gyroscops\Api\Model;
 class CurrencyJsonld
 {
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $context;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
      * The currency code.
      *
-     * @var string
+     * @var string|null
      */
     protected $currencyCode;
     /**
      * The numeric currency code.
      *
-     * @var int
+     * @var int|null
      */
     protected $numericCode;
     /**
      * The name of the currency.
      *
-     * @var string
+     * @var string|null
      */
     protected $name;
     /**
      * The default number of fraction digits (typical scale) used with this currency.
      *
-     * @var int
+     * @var int|null
      */
     protected $defaultFractionDigits;
 
@@ -59,24 +59,24 @@ class CurrencyJsonld
         return $this;
     }
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
@@ -86,7 +86,7 @@ class CurrencyJsonld
     /**
      * The currency code.
      */
-    public function getCurrencyCode(): string
+    public function getCurrencyCode(): ?string
     {
         return $this->currencyCode;
     }
@@ -94,7 +94,7 @@ class CurrencyJsonld
     /**
      * The currency code.
      */
-    public function setCurrencyCode(string $currencyCode): self
+    public function setCurrencyCode(?string $currencyCode): self
     {
         $this->currencyCode = $currencyCode;
 
@@ -104,7 +104,7 @@ class CurrencyJsonld
     /**
      * The numeric currency code.
      */
-    public function getNumericCode(): int
+    public function getNumericCode(): ?int
     {
         return $this->numericCode;
     }
@@ -112,7 +112,7 @@ class CurrencyJsonld
     /**
      * The numeric currency code.
      */
-    public function setNumericCode(int $numericCode): self
+    public function setNumericCode(?int $numericCode): self
     {
         $this->numericCode = $numericCode;
 
@@ -122,7 +122,7 @@ class CurrencyJsonld
     /**
      * The name of the currency.
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -130,7 +130,7 @@ class CurrencyJsonld
     /**
      * The name of the currency.
      */
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
@@ -140,7 +140,7 @@ class CurrencyJsonld
     /**
      * The default number of fraction digits (typical scale) used with this currency.
      */
-    public function getDefaultFractionDigits(): int
+    public function getDefaultFractionDigits(): ?int
     {
         return $this->defaultFractionDigits;
     }
@@ -148,7 +148,7 @@ class CurrencyJsonld
     /**
      * The default number of fraction digits (typical scale) used with this currency.
      */
-    public function setDefaultFractionDigits(int $defaultFractionDigits): self
+    public function setDefaultFractionDigits(?int $defaultFractionDigits): self
     {
         $this->defaultFractionDigits = $defaultFractionDigits;
 

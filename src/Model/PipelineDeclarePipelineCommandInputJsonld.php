@@ -5,27 +5,27 @@ namespace Gyroscops\Api\Model;
 class PipelineDeclarePipelineCommandInputJsonld
 {
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $context;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
-     * @var string
+     * @var string|null
      */
     protected $label;
     /**
-     * @var string
+     * @var string|null
      */
     protected $code;
     /**
-     * @var string
+     * @var string|null
      */
     protected $workspace;
     /**
@@ -33,11 +33,11 @@ class PipelineDeclarePipelineCommandInputJsonld
      */
     protected $organization;
     /**
-     * @var StepInputJsonld[]
+     * @var StepInputJsonld[]|null
      */
     protected $steps;
     /**
-     * @var AutoloadInputJsonld[]
+     * @var AutoloadInputJsonld[]|null
      */
     protected $autoloads;
 
@@ -59,60 +59,60 @@ class PipelineDeclarePipelineCommandInputJsonld
         return $this;
     }
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
         return $this;
     }
 
-    public function getLabel(): string
+    public function getLabel(): ?string
     {
         return $this->label;
     }
 
-    public function setLabel(string $label): self
+    public function setLabel(?string $label): self
     {
         $this->label = $label;
 
         return $this;
     }
 
-    public function getCode(): string
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
-    public function setCode(string $code): self
+    public function setCode(?string $code): self
     {
         $this->code = $code;
 
         return $this;
     }
 
-    public function getWorkspace(): string
+    public function getWorkspace(): ?string
     {
         return $this->workspace;
     }
 
-    public function setWorkspace(string $workspace): self
+    public function setWorkspace(?string $workspace): self
     {
         $this->workspace = $workspace;
 
@@ -132,17 +132,17 @@ class PipelineDeclarePipelineCommandInputJsonld
     }
 
     /**
-     * @return StepInputJsonld[]
+     * @return StepInputJsonld[]|null
      */
-    public function getSteps(): array
+    public function getSteps(): ?array
     {
         return $this->steps;
     }
 
     /**
-     * @param StepInputJsonld[] $steps
+     * @param StepInputJsonld[]|null $steps
      */
-    public function setSteps(array $steps): self
+    public function setSteps(?array $steps): self
     {
         $this->steps = $steps;
 
@@ -150,17 +150,17 @@ class PipelineDeclarePipelineCommandInputJsonld
     }
 
     /**
-     * @return AutoloadInputJsonld[]
+     * @return AutoloadInputJsonld[]|null
      */
-    public function getAutoloads(): array
+    public function getAutoloads(): ?array
     {
         return $this->autoloads;
     }
 
     /**
-     * @param AutoloadInputJsonld[] $autoloads
+     * @param AutoloadInputJsonld[]|null $autoloads
      */
-    public function setAutoloads(array $autoloads): self
+    public function setAutoloads(?array $autoloads): self
     {
         $this->autoloads = $autoloads;
 

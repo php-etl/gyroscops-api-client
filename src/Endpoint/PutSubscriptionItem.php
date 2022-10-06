@@ -10,10 +10,10 @@ class PutSubscriptionItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
     /**
      * Replaces the Subscription resource.
      *
-     * @param string                                                                    $id          Resource identifier
-     * @param \Gyroscops\Api\Model\SubscriptionJsonld|\Gyroscops\Api\Model\Subscription $requestBody
+     * @param string                                                                         $id          Resource identifier
+     * @param \Gyroscops\Api\Model\SubscriptionJsonld|\Gyroscops\Api\Model\Subscription|null $requestBody
      */
-    public function __construct(string $id, $requestBody)
+    public function __construct(string $id, $requestBody = null)
     {
         $this->id = $id;
         $this->body = $requestBody;

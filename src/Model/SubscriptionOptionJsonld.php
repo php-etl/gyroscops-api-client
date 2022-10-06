@@ -5,15 +5,15 @@ namespace Gyroscops\Api\Model;
 class SubscriptionOptionJsonld
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id2;
     /**
@@ -25,40 +25,40 @@ class SubscriptionOptionJsonld
      */
     protected $option;
     /**
-     * @var PriceJsonld
+     * @var PriceJsonld|null
      */
     protected $price;
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
         return $this;
     }
 
-    public function getId2(): string
+    public function getId2(): ?string
     {
         return $this->id2;
     }
 
-    public function setId2(string $id2): self
+    public function setId2(?string $id2): self
     {
         $this->id2 = $id2;
 
@@ -89,12 +89,12 @@ class SubscriptionOptionJsonld
         return $this;
     }
 
-    public function getPrice(): PriceJsonld
+    public function getPrice(): ?PriceJsonld
     {
         return $this->price;
     }
 
-    public function setPrice(PriceJsonld $price): self
+    public function setPrice(?PriceJsonld $price): self
     {
         $this->price = $price;
 

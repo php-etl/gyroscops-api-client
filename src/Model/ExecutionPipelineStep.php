@@ -5,36 +5,36 @@ namespace Gyroscops\Api\Model;
 class ExecutionPipelineStep
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var AbstractPipeline
+     * @var AbstractPipeline|null
      */
     protected $pipeline;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $metrics;
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getPipeline(): AbstractPipeline
+    public function getPipeline(): ?AbstractPipeline
     {
         return $this->pipeline;
     }
 
-    public function setPipeline(AbstractPipeline $pipeline): self
+    public function setPipeline(?AbstractPipeline $pipeline): self
     {
         $this->pipeline = $pipeline;
 
@@ -42,17 +42,17 @@ class ExecutionPipelineStep
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getMetrics(): array
+    public function getMetrics(): ?array
     {
         return $this->metrics;
     }
 
     /**
-     * @param string[] $metrics
+     * @param string[]|null $metrics
      */
-    public function setMetrics(array $metrics): self
+    public function setMetrics(?array $metrics): self
     {
         $this->metrics = $metrics;
 

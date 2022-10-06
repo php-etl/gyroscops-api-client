@@ -45,11 +45,15 @@ class ScheduleDeclarePipelineScheduleOnceCommandInputNormalizer implements Denor
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('pipeline', $data)) {
+        if (\array_key_exists('pipeline', $data) && null !== $data['pipeline']) {
             $object->setPipeline($data['pipeline']);
+        } elseif (\array_key_exists('pipeline', $data) && null === $data['pipeline']) {
+            $object->setPipeline(null);
         }
-        if (\array_key_exists('date', $data)) {
+        if (\array_key_exists('date', $data) && null !== $data['date']) {
             $object->setDate(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['date']));
+        } elseif (\array_key_exists('date', $data) && null === $data['date']) {
+            $object->setDate(null);
         }
 
         return $object;

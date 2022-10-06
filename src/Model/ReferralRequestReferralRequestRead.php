@@ -5,31 +5,31 @@ namespace Gyroscops\Api\Model;
 class ReferralRequestReferralRequestRead
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $email;
     /**
-     * @var string
+     * @var string|null
      */
     protected $firstName;
     /**
-     * @var string
+     * @var string|null
      */
     protected $lastName;
     /**
-     * @var string
+     * @var string|null
      */
     protected $userName;
     /**
-     * @var string
+     * @var string|null
      */
     protected $companyName;
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     protected $creationDate;
     /**
@@ -41,88 +41,88 @@ class ReferralRequestReferralRequestRead
      */
     protected $approver;
     /**
-     * @var string
+     * @var string|null
      */
     protected $status = 'pending';
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
         return $this;
     }
 
-    public function getFirstName(): string
+    public function getFirstName(): ?string
     {
         return $this->firstName;
     }
 
-    public function setFirstName(string $firstName): self
+    public function setFirstName(?string $firstName): self
     {
         $this->firstName = $firstName;
 
         return $this;
     }
 
-    public function getLastName(): string
+    public function getLastName(): ?string
     {
         return $this->lastName;
     }
 
-    public function setLastName(string $lastName): self
+    public function setLastName(?string $lastName): self
     {
         $this->lastName = $lastName;
 
         return $this;
     }
 
-    public function getUserName(): string
+    public function getUserName(): ?string
     {
         return $this->userName;
     }
 
-    public function setUserName(string $userName): self
+    public function setUserName(?string $userName): self
     {
         $this->userName = $userName;
 
         return $this;
     }
 
-    public function getCompanyName(): string
+    public function getCompanyName(): ?string
     {
         return $this->companyName;
     }
 
-    public function setCompanyName(string $companyName): self
+    public function setCompanyName(?string $companyName): self
     {
         $this->companyName = $companyName;
 
         return $this;
     }
 
-    public function getCreationDate(): \DateTime
+    public function getCreationDate(): ?\DateTime
     {
         return $this->creationDate;
     }
 
-    public function setCreationDate(\DateTime $creationDate): self
+    public function setCreationDate(?\DateTime $creationDate): self
     {
         $this->creationDate = $creationDate;
 
@@ -153,12 +153,12 @@ class ReferralRequestReferralRequestRead
         return $this;
     }
 
-    public function getStatus(): string
+    public function getStatus(): ?string
     {
         return $this->status;
     }
 
-    public function setStatus(string $status): self
+    public function setStatus(?string $status): self
     {
         $this->status = $status;
 

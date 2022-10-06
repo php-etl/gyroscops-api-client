@@ -45,18 +45,24 @@ class SecretSecretInputNormalizer implements DenormalizerInterface, NormalizerIn
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('name', $data)) {
+        if (\array_key_exists('name', $data) && null !== $data['name']) {
             $object->setName($data['name']);
+        } elseif (\array_key_exists('name', $data) && null === $data['name']) {
+            $object->setName(null);
         }
-        if (\array_key_exists('description', $data)) {
+        if (\array_key_exists('description', $data) && null !== $data['description']) {
             $object->setDescription($data['description']);
+        } elseif (\array_key_exists('description', $data) && null === $data['description']) {
+            $object->setDescription(null);
         }
-        if (\array_key_exists('contents', $data)) {
+        if (\array_key_exists('contents', $data) && null !== $data['contents']) {
             $values = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
             foreach ($data['contents'] as $key => $value) {
                 $values[$key] = $value;
             }
             $object->setContents($values);
+        } elseif (\array_key_exists('contents', $data) && null === $data['contents']) {
+            $object->setContents(null);
         }
 
         return $object;

@@ -5,27 +5,27 @@ namespace Gyroscops\Api\Model;
 class SecretInputJsonld
 {
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $context;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
-     * @var string
+     * @var string|null
      */
     protected $name;
     /**
-     * @var string
+     * @var string|null
      */
     protected $description;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $contents;
 
@@ -47,48 +47,48 @@ class SecretInputJsonld
         return $this;
     }
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
         return $this;
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
@@ -96,17 +96,17 @@ class SecretInputJsonld
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getContents(): iterable
+    public function getContents(): ?iterable
     {
         return $this->contents;
     }
 
     /**
-     * @param string[] $contents
+     * @param string[]|null $contents
      */
-    public function setContents(iterable $contents): self
+    public function setContents(?iterable $contents): self
     {
         $this->contents = $contents;
 

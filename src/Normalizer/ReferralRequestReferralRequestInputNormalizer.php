@@ -45,23 +45,35 @@ class ReferralRequestReferralRequestInputNormalizer implements DenormalizerInter
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('email', $data)) {
+        if (\array_key_exists('email', $data) && null !== $data['email']) {
             $object->setEmail($data['email']);
+        } elseif (\array_key_exists('email', $data) && null === $data['email']) {
+            $object->setEmail(null);
         }
-        if (\array_key_exists('firstName', $data)) {
+        if (\array_key_exists('firstName', $data) && null !== $data['firstName']) {
             $object->setFirstName($data['firstName']);
+        } elseif (\array_key_exists('firstName', $data) && null === $data['firstName']) {
+            $object->setFirstName(null);
         }
-        if (\array_key_exists('lastName', $data)) {
+        if (\array_key_exists('lastName', $data) && null !== $data['lastName']) {
             $object->setLastName($data['lastName']);
+        } elseif (\array_key_exists('lastName', $data) && null === $data['lastName']) {
+            $object->setLastName(null);
         }
-        if (\array_key_exists('username', $data)) {
+        if (\array_key_exists('username', $data) && null !== $data['username']) {
             $object->setUsername($data['username']);
+        } elseif (\array_key_exists('username', $data) && null === $data['username']) {
+            $object->setUsername(null);
         }
-        if (\array_key_exists('companyName', $data)) {
+        if (\array_key_exists('companyName', $data) && null !== $data['companyName']) {
             $object->setCompanyName($data['companyName']);
+        } elseif (\array_key_exists('companyName', $data) && null === $data['companyName']) {
+            $object->setCompanyName(null);
         }
-        if (\array_key_exists('referralCode', $data)) {
+        if (\array_key_exists('referralCode', $data) && null !== $data['referralCode']) {
             $object->setReferralCode($data['referralCode']);
+        } elseif (\array_key_exists('referralCode', $data) && null === $data['referralCode']) {
+            $object->setReferralCode(null);
         }
 
         return $object;

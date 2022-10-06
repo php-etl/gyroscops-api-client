@@ -5,32 +5,32 @@ namespace Gyroscops\Api\Model;
 class ExecutionDeclarePipelineExecutionCommandInput
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $schedule;
     /**
-     * @var string
+     * @var string|null
      */
     protected $pipeline;
 
-    public function getSchedule(): string
+    public function getSchedule(): ?string
     {
         return $this->schedule;
     }
 
-    public function setSchedule(string $schedule): self
+    public function setSchedule(?string $schedule): self
     {
         $this->schedule = $schedule;
 
         return $this;
     }
 
-    public function getPipeline(): string
+    public function getPipeline(): ?string
     {
         return $this->pipeline;
     }
 
-    public function setPipeline(string $pipeline): self
+    public function setPipeline(?string $pipeline): self
     {
         $this->pipeline = $pipeline;
 

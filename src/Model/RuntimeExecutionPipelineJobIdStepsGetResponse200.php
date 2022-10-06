@@ -5,70 +5,70 @@ namespace Gyroscops\Api\Model;
 class RuntimeExecutionPipelineJobIdStepsGetResponse200
 {
     /**
-     * @var ExecutionPipelineStepJsonld[]
+     * @var ExecutionPipelineStepJsonld[]|null
      */
     protected $hydraMember;
     /**
-     * @var int
+     * @var int|null
      */
     protected $hydraTotalItems;
     /**
-     * @var RuntimeExecutionPipelineJobIdStepsGetResponse200HydraView
+     * @var RuntimeExecutionPipelineJobIdStepsGetResponse200HydraView|null
      */
     protected $hydraView;
     /**
-     * @var RuntimeExecutionPipelineJobIdStepsGetResponse200HydraSearch
+     * @var RuntimeExecutionPipelineJobIdStepsGetResponse200HydraSearch|null
      */
     protected $hydraSearch;
 
     /**
-     * @return ExecutionPipelineStepJsonld[]
+     * @return ExecutionPipelineStepJsonld[]|null
      */
-    public function getHydraMember(): array
+    public function getHydraMember(): ?array
     {
         return $this->hydraMember;
     }
 
     /**
-     * @param ExecutionPipelineStepJsonld[] $hydraMember
+     * @param ExecutionPipelineStepJsonld[]|null $hydraMember
      */
-    public function setHydraMember(array $hydraMember): self
+    public function setHydraMember(?array $hydraMember): self
     {
         $this->hydraMember = $hydraMember;
 
         return $this;
     }
 
-    public function getHydraTotalItems(): int
+    public function getHydraTotalItems(): ?int
     {
         return $this->hydraTotalItems;
     }
 
-    public function setHydraTotalItems(int $hydraTotalItems): self
+    public function setHydraTotalItems(?int $hydraTotalItems): self
     {
         $this->hydraTotalItems = $hydraTotalItems;
 
         return $this;
     }
 
-    public function getHydraView(): RuntimeExecutionPipelineJobIdStepsGetResponse200HydraView
+    public function getHydraView(): ?RuntimeExecutionPipelineJobIdStepsGetResponse200HydraView
     {
         return $this->hydraView;
     }
 
-    public function setHydraView(RuntimeExecutionPipelineJobIdStepsGetResponse200HydraView $hydraView): self
+    public function setHydraView(?RuntimeExecutionPipelineJobIdStepsGetResponse200HydraView $hydraView): self
     {
         $this->hydraView = $hydraView;
 
         return $this;
     }
 
-    public function getHydraSearch(): RuntimeExecutionPipelineJobIdStepsGetResponse200HydraSearch
+    public function getHydraSearch(): ?RuntimeExecutionPipelineJobIdStepsGetResponse200HydraSearch
     {
         return $this->hydraSearch;
     }
 
-    public function setHydraSearch(RuntimeExecutionPipelineJobIdStepsGetResponse200HydraSearch $hydraSearch): self
+    public function setHydraSearch(?RuntimeExecutionPipelineJobIdStepsGetResponse200HydraSearch $hydraSearch): self
     {
         $this->hydraSearch = $hydraSearch;
 

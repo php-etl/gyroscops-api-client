@@ -45,20 +45,30 @@ class ContextJsonldNormalizer implements DenormalizerInterface, NormalizerInterf
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data)) {
+        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
             $object->setContext($data['@context']);
+        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+            $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data)) {
+        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
             $object->setId($data['@id']);
+        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+            $object->setId(null);
         }
-        if (\array_key_exists('@type', $data)) {
+        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
             $object->setType($data['@type']);
+        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+            $object->setType(null);
         }
-        if (\array_key_exists('step', $data)) {
+        if (\array_key_exists('step', $data) && null !== $data['step']) {
             $object->setStep($data['step']);
+        } elseif (\array_key_exists('step', $data) && null === $data['step']) {
+            $object->setStep(null);
         }
-        if (\array_key_exists('fixedScale', $data)) {
+        if (\array_key_exists('fixedScale', $data) && null !== $data['fixedScale']) {
             $object->setFixedScale($data['fixedScale']);
+        } elseif (\array_key_exists('fixedScale', $data) && null === $data['fixedScale']) {
+            $object->setFixedScale(null);
         }
 
         return $object;

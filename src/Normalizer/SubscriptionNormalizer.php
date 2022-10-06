@@ -45,33 +45,43 @@ class SubscriptionNormalizer implements DenormalizerInterface, NormalizerInterfa
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('id', $data)) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId($data['id']);
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+            $object->setId(null);
         }
-        if (\array_key_exists('organization', $data)) {
+        if (\array_key_exists('organization', $data) && null !== $data['organization']) {
             $object->setOrganization($data['organization']);
+        } elseif (\array_key_exists('organization', $data) && null === $data['organization']) {
+            $object->setOrganization(null);
         }
         if (\array_key_exists('offer', $data) && null !== $data['offer']) {
             $object->setOffer($data['offer']);
         } elseif (\array_key_exists('offer', $data) && null === $data['offer']) {
             $object->setOffer(null);
         }
-        if (\array_key_exists('options', $data)) {
+        if (\array_key_exists('options', $data) && null !== $data['options']) {
             $values = [];
             foreach ($data['options'] as $value) {
                 $values[] = $value;
             }
             $object->setOptions($values);
+        } elseif (\array_key_exists('options', $data) && null === $data['options']) {
+            $object->setOptions(null);
         }
-        if (\array_key_exists('cost', $data)) {
+        if (\array_key_exists('cost', $data) && null !== $data['cost']) {
             $object->setCost($this->denormalizer->denormalize($data['cost'], 'Gyroscops\\Api\\Model\\Price', 'json', $context));
+        } elseif (\array_key_exists('cost', $data) && null === $data['cost']) {
+            $object->setCost(null);
         }
-        if (\array_key_exists('periods', $data)) {
+        if (\array_key_exists('periods', $data) && null !== $data['periods']) {
             $values_1 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
             foreach ($data['periods'] as $key => $value_1) {
                 $values_1[$key] = $value_1;
             }
             $object->setPeriods($values_1);
+        } elseif (\array_key_exists('periods', $data) && null === $data['periods']) {
+            $object->setPeriods(null);
         }
 
         return $object;

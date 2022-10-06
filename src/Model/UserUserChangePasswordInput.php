@@ -5,48 +5,48 @@ namespace Gyroscops\Api\Model;
 class UserUserChangePasswordInput
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $currentPassword;
     /**
-     * @var string
+     * @var string|null
      */
     protected $newPassword;
     /**
-     * @var string
+     * @var string|null
      */
     protected $confirmPassword;
 
-    public function getCurrentPassword(): string
+    public function getCurrentPassword(): ?string
     {
         return $this->currentPassword;
     }
 
-    public function setCurrentPassword(string $currentPassword): self
+    public function setCurrentPassword(?string $currentPassword): self
     {
         $this->currentPassword = $currentPassword;
 
         return $this;
     }
 
-    public function getNewPassword(): string
+    public function getNewPassword(): ?string
     {
         return $this->newPassword;
     }
 
-    public function setNewPassword(string $newPassword): self
+    public function setNewPassword(?string $newPassword): self
     {
         $this->newPassword = $newPassword;
 
         return $this;
     }
 
-    public function getConfirmPassword(): string
+    public function getConfirmPassword(): ?string
     {
         return $this->confirmPassword;
     }
 
-    public function setConfirmPassword(string $confirmPassword): self
+    public function setConfirmPassword(?string $confirmPassword): self
     {
         $this->confirmPassword = $confirmPassword;
 

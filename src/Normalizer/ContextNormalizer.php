@@ -45,11 +45,15 @@ class ContextNormalizer implements DenormalizerInterface, NormalizerInterface, D
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('step', $data)) {
+        if (\array_key_exists('step', $data) && null !== $data['step']) {
             $object->setStep($data['step']);
+        } elseif (\array_key_exists('step', $data) && null === $data['step']) {
+            $object->setStep(null);
         }
-        if (\array_key_exists('fixedScale', $data)) {
+        if (\array_key_exists('fixedScale', $data) && null !== $data['fixedScale']) {
             $object->setFixedScale($data['fixedScale']);
+        } elseif (\array_key_exists('fixedScale', $data) && null === $data['fixedScale']) {
+            $object->setFixedScale(null);
         }
 
         return $object;

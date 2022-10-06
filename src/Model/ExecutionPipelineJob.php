@@ -9,11 +9,11 @@ class ExecutionPipelineJob
      */
     protected $job;
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $steps;
 
@@ -29,12 +29,12 @@ class ExecutionPipelineJob
         return $this;
     }
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
@@ -42,17 +42,17 @@ class ExecutionPipelineJob
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getSteps(): array
+    public function getSteps(): ?array
     {
         return $this->steps;
     }
 
     /**
-     * @param string[] $steps
+     * @param string[]|null $steps
      */
-    public function setSteps(array $steps): self
+    public function setSteps(?array $steps): self
     {
         $this->steps = $steps;
 

@@ -5,51 +5,51 @@ namespace Gyroscops\Api\Model;
 class User
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $firstName;
     /**
-     * @var string
+     * @var string|null
      */
     protected $lastName;
     /**
-     * @var string
+     * @var string|null
      */
     protected $username;
     /**
-     * @var string
+     * @var string|null
      */
     protected $email;
     /**
-     * @var string
+     * @var string|null
      */
     protected $password;
     /**
-     * @var bool
+     * @var bool|null
      */
     protected $enabled;
     /**
-     * @var string[][]
+     * @var string[][]|null
      */
     protected $roles;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $authorizations;
     /**
-     * @var string
+     * @var string|null
      */
     protected $organization;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $additionalOrganizations;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $workspaces;
     /**
@@ -57,104 +57,104 @@ class User
      */
     protected $currentWorkspace;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $referralCodes;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $acceptedReferralRequests;
     /**
-     * @var string
+     * @var string|null
      */
     protected $userIdentifier;
     /**
-     * @var string
+     * @var string|null
      */
     protected $salt;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $workspace;
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getFirstName(): string
+    public function getFirstName(): ?string
     {
         return $this->firstName;
     }
 
-    public function setFirstName(string $firstName): self
+    public function setFirstName(?string $firstName): self
     {
         $this->firstName = $firstName;
 
         return $this;
     }
 
-    public function getLastName(): string
+    public function getLastName(): ?string
     {
         return $this->lastName;
     }
 
-    public function setLastName(string $lastName): self
+    public function setLastName(?string $lastName): self
     {
         $this->lastName = $lastName;
 
         return $this;
     }
 
-    public function getUsername(): string
+    public function getUsername(): ?string
     {
         return $this->username;
     }
 
-    public function setUsername(string $username): self
+    public function setUsername(?string $username): self
     {
         $this->username = $username;
 
         return $this;
     }
 
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
         return $this;
     }
 
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(?string $password): self
     {
         $this->password = $password;
 
         return $this;
     }
 
-    public function getEnabled(): bool
+    public function getEnabled(): ?bool
     {
         return $this->enabled;
     }
 
-    public function setEnabled(bool $enabled): self
+    public function setEnabled(?bool $enabled): self
     {
         $this->enabled = $enabled;
 
@@ -162,17 +162,17 @@ class User
     }
 
     /**
-     * @return string[][]
+     * @return string[][]|null
      */
-    public function getRoles(): array
+    public function getRoles(): ?array
     {
         return $this->roles;
     }
 
     /**
-     * @param string[][] $roles
+     * @param string[][]|null $roles
      */
-    public function setRoles(array $roles): self
+    public function setRoles(?array $roles): self
     {
         $this->roles = $roles;
 
@@ -180,29 +180,29 @@ class User
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getAuthorizations(): array
+    public function getAuthorizations(): ?array
     {
         return $this->authorizations;
     }
 
     /**
-     * @param string[] $authorizations
+     * @param string[]|null $authorizations
      */
-    public function setAuthorizations(array $authorizations): self
+    public function setAuthorizations(?array $authorizations): self
     {
         $this->authorizations = $authorizations;
 
         return $this;
     }
 
-    public function getOrganization(): string
+    public function getOrganization(): ?string
     {
         return $this->organization;
     }
 
-    public function setOrganization(string $organization): self
+    public function setOrganization(?string $organization): self
     {
         $this->organization = $organization;
 
@@ -210,17 +210,17 @@ class User
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getAdditionalOrganizations(): array
+    public function getAdditionalOrganizations(): ?array
     {
         return $this->additionalOrganizations;
     }
 
     /**
-     * @param string[] $additionalOrganizations
+     * @param string[]|null $additionalOrganizations
      */
-    public function setAdditionalOrganizations(array $additionalOrganizations): self
+    public function setAdditionalOrganizations(?array $additionalOrganizations): self
     {
         $this->additionalOrganizations = $additionalOrganizations;
 
@@ -228,17 +228,17 @@ class User
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getWorkspaces(): array
+    public function getWorkspaces(): ?array
     {
         return $this->workspaces;
     }
 
     /**
-     * @param string[] $workspaces
+     * @param string[]|null $workspaces
      */
-    public function setWorkspaces(array $workspaces): self
+    public function setWorkspaces(?array $workspaces): self
     {
         $this->workspaces = $workspaces;
 
@@ -258,17 +258,17 @@ class User
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getReferralCodes(): array
+    public function getReferralCodes(): ?array
     {
         return $this->referralCodes;
     }
 
     /**
-     * @param string[] $referralCodes
+     * @param string[]|null $referralCodes
      */
-    public function setReferralCodes(array $referralCodes): self
+    public function setReferralCodes(?array $referralCodes): self
     {
         $this->referralCodes = $referralCodes;
 
@@ -276,41 +276,41 @@ class User
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getAcceptedReferralRequests(): array
+    public function getAcceptedReferralRequests(): ?array
     {
         return $this->acceptedReferralRequests;
     }
 
     /**
-     * @param string[] $acceptedReferralRequests
+     * @param string[]|null $acceptedReferralRequests
      */
-    public function setAcceptedReferralRequests(array $acceptedReferralRequests): self
+    public function setAcceptedReferralRequests(?array $acceptedReferralRequests): self
     {
         $this->acceptedReferralRequests = $acceptedReferralRequests;
 
         return $this;
     }
 
-    public function getUserIdentifier(): string
+    public function getUserIdentifier(): ?string
     {
         return $this->userIdentifier;
     }
 
-    public function setUserIdentifier(string $userIdentifier): self
+    public function setUserIdentifier(?string $userIdentifier): self
     {
         $this->userIdentifier = $userIdentifier;
 
         return $this;
     }
 
-    public function getSalt(): string
+    public function getSalt(): ?string
     {
         return $this->salt;
     }
 
-    public function setSalt(string $salt): self
+    public function setSalt(?string $salt): self
     {
         $this->salt = $salt;
 
@@ -318,17 +318,17 @@ class User
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getWorkspace(): array
+    public function getWorkspace(): ?array
     {
         return $this->workspace;
     }
 
     /**
-     * @param string[] $workspace
+     * @param string[]|null $workspace
      */
-    public function setWorkspace(array $workspace): self
+    public function setWorkspace(?array $workspace): self
     {
         $this->workspace = $workspace;
 

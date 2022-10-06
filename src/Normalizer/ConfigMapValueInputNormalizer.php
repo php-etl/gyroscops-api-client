@@ -45,17 +45,25 @@ class ConfigMapValueInputNormalizer implements DenormalizerInterface, Normalizer
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('arrayCopy', $data)) {
+        if (\array_key_exists('arrayCopy', $data) && null !== $data['arrayCopy']) {
             $object->setArrayCopy($data['arrayCopy']);
+        } elseif (\array_key_exists('arrayCopy', $data) && null === $data['arrayCopy']) {
+            $object->setArrayCopy(null);
         }
-        if (\array_key_exists('flags', $data)) {
+        if (\array_key_exists('flags', $data) && null !== $data['flags']) {
             $object->setFlags($data['flags']);
+        } elseif (\array_key_exists('flags', $data) && null === $data['flags']) {
+            $object->setFlags(null);
         }
-        if (\array_key_exists('iterator', $data)) {
+        if (\array_key_exists('iterator', $data) && null !== $data['iterator']) {
             $object->setIterator($data['iterator']);
+        } elseif (\array_key_exists('iterator', $data) && null === $data['iterator']) {
+            $object->setIterator(null);
         }
-        if (\array_key_exists('iteratorClass', $data)) {
+        if (\array_key_exists('iteratorClass', $data) && null !== $data['iteratorClass']) {
             $object->setIteratorClass($data['iteratorClass']);
+        } elseif (\array_key_exists('iteratorClass', $data) && null === $data['iteratorClass']) {
+            $object->setIteratorClass(null);
         }
 
         return $object;

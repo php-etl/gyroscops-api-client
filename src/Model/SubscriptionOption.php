@@ -5,7 +5,7 @@ namespace Gyroscops\Api\Model;
 class SubscriptionOption
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
@@ -17,16 +17,16 @@ class SubscriptionOption
      */
     protected $option;
     /**
-     * @var Price
+     * @var Price|null
      */
     protected $price;
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
@@ -57,12 +57,12 @@ class SubscriptionOption
         return $this;
     }
 
-    public function getPrice(): Price
+    public function getPrice(): ?Price
     {
         return $this->price;
     }
 
-    public function setPrice(Price $price): self
+    public function setPrice(?Price $price): self
     {
         $this->price = $price;
 

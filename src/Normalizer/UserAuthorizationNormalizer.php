@@ -45,8 +45,10 @@ class UserAuthorizationNormalizer implements DenormalizerInterface, NormalizerIn
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('id', $data)) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId($data['id']);
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+            $object->setId(null);
         }
         if (\array_key_exists('user', $data) && null !== $data['user']) {
             $object->setUser($data['user']);
@@ -63,15 +65,19 @@ class UserAuthorizationNormalizer implements DenormalizerInterface, NormalizerIn
         } elseif (\array_key_exists('organization', $data) && null === $data['organization']) {
             $object->setOrganization(null);
         }
-        if (\array_key_exists('resource', $data)) {
+        if (\array_key_exists('resource', $data) && null !== $data['resource']) {
             $object->setResource($data['resource']);
+        } elseif (\array_key_exists('resource', $data) && null === $data['resource']) {
+            $object->setResource(null);
         }
-        if (\array_key_exists('authorizations', $data)) {
+        if (\array_key_exists('authorizations', $data) && null !== $data['authorizations']) {
             $values = [];
             foreach ($data['authorizations'] as $value) {
                 $values[] = $value;
             }
             $object->setAuthorizations($values);
+        } elseif (\array_key_exists('authorizations', $data) && null === $data['authorizations']) {
+            $object->setAuthorizations(null);
         }
 
         return $object;

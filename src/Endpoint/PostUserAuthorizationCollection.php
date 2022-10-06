@@ -9,9 +9,9 @@ class PostUserAuthorizationCollection extends \Gyroscops\Api\Runtime\Client\Base
     /**
      * Creates a UserAuthorization resource.
      *
-     * @param \Gyroscops\Api\Model\UserAuthorizationJsonld|\Gyroscops\Api\Model\UserAuthorization $requestBody
+     * @param \Gyroscops\Api\Model\UserAuthorizationJsonld|\Gyroscops\Api\Model\UserAuthorization|null $requestBody
      */
-    public function __construct($requestBody)
+    public function __construct($requestBody = null)
     {
         $this->body = $requestBody;
     }

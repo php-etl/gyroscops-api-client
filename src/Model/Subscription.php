@@ -5,11 +5,11 @@ namespace Gyroscops\Api\Model;
 class Subscription
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $organization;
     /**
@@ -17,36 +17,36 @@ class Subscription
      */
     protected $offer;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $options;
     /**
-     * @var Price
+     * @var Price|null
      */
     protected $cost;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $periods;
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getOrganization(): string
+    public function getOrganization(): ?string
     {
         return $this->organization;
     }
 
-    public function setOrganization(string $organization): self
+    public function setOrganization(?string $organization): self
     {
         $this->organization = $organization;
 
@@ -66,29 +66,29 @@ class Subscription
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getOptions(): array
+    public function getOptions(): ?array
     {
         return $this->options;
     }
 
     /**
-     * @param string[] $options
+     * @param string[]|null $options
      */
-    public function setOptions(array $options): self
+    public function setOptions(?array $options): self
     {
         $this->options = $options;
 
         return $this;
     }
 
-    public function getCost(): Price
+    public function getCost(): ?Price
     {
         return $this->cost;
     }
 
-    public function setCost(Price $cost): self
+    public function setCost(?Price $cost): self
     {
         $this->cost = $cost;
 
@@ -96,17 +96,17 @@ class Subscription
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getPeriods(): iterable
+    public function getPeriods(): ?iterable
     {
         return $this->periods;
     }
 
     /**
-     * @param string[] $periods
+     * @param string[]|null $periods
      */
-    public function setPeriods(iterable $periods): self
+    public function setPeriods(?iterable $periods): self
     {
         $this->periods = $periods;
 

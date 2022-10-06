@@ -5,15 +5,15 @@ namespace Gyroscops\Api\Model;
 class PipelineCompilation
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     protected $createdAt;
     /**
-     * @var string
+     * @var string|null
      */
     protected $pipeline;
     /**
@@ -25,40 +25,40 @@ class PipelineCompilation
      */
     protected $organization;
     /**
-     * @var string
+     * @var string|null
      */
     protected $owner;
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getCreatedAt(): \DateTime
+    public function getCreatedAt(): ?\DateTime
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTime $createdAt): self
+    public function setCreatedAt(?\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getPipeline(): string
+    public function getPipeline(): ?string
     {
         return $this->pipeline;
     }
 
-    public function setPipeline(string $pipeline): self
+    public function setPipeline(?string $pipeline): self
     {
         $this->pipeline = $pipeline;
 
@@ -89,12 +89,12 @@ class PipelineCompilation
         return $this;
     }
 
-    public function getOwner(): string
+    public function getOwner(): ?string
     {
         return $this->owner;
     }
 
-    public function setOwner(string $owner): self
+    public function setOwner(?string $owner): self
     {
         $this->owner = $owner;
 

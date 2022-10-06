@@ -45,27 +45,39 @@ class PipelineAddPipelineComposerPSR4AutoloadCommandInputJsonldNormalizer implem
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data)) {
+        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
             $object->setContext($data['@context']);
+        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+            $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data)) {
+        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
             $object->setId($data['@id']);
+        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+            $object->setId(null);
         }
-        if (\array_key_exists('@type', $data)) {
+        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
             $object->setType($data['@type']);
+        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+            $object->setType(null);
         }
-        if (\array_key_exists('pipeline', $data)) {
+        if (\array_key_exists('pipeline', $data) && null !== $data['pipeline']) {
             $object->setPipeline($data['pipeline']);
+        } elseif (\array_key_exists('pipeline', $data) && null === $data['pipeline']) {
+            $object->setPipeline(null);
         }
-        if (\array_key_exists('namespace', $data)) {
+        if (\array_key_exists('namespace', $data) && null !== $data['namespace']) {
             $object->setNamespace($data['namespace']);
+        } elseif (\array_key_exists('namespace', $data) && null === $data['namespace']) {
+            $object->setNamespace(null);
         }
-        if (\array_key_exists('paths', $data)) {
+        if (\array_key_exists('paths', $data) && null !== $data['paths']) {
             $values = [];
             foreach ($data['paths'] as $value) {
                 $values[] = $value;
             }
             $object->setPaths($values);
+        } elseif (\array_key_exists('paths', $data) && null === $data['paths']) {
+            $object->setPaths(null);
         }
 
         return $object;

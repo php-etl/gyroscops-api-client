@@ -12,7 +12,7 @@ class ChangePasswordUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
      *
      * @param string $id Resource identifier
      */
-    public function __construct(string $id, \Gyroscops\Api\Model\UserUserChangePasswordInput $requestBody)
+    public function __construct(string $id, ?\Gyroscops\Api\Model\UserUserChangePasswordInput $requestBody = null)
     {
         $this->id = $id;
         $this->body = $requestBody;

@@ -45,23 +45,35 @@ class BigNumberNormalizer implements DenormalizerInterface, NormalizerInterface,
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('zero', $data)) {
+        if (\array_key_exists('zero', $data) && null !== $data['zero']) {
             $object->setZero($data['zero']);
+        } elseif (\array_key_exists('zero', $data) && null === $data['zero']) {
+            $object->setZero(null);
         }
-        if (\array_key_exists('negative', $data)) {
+        if (\array_key_exists('negative', $data) && null !== $data['negative']) {
             $object->setNegative($data['negative']);
+        } elseif (\array_key_exists('negative', $data) && null === $data['negative']) {
+            $object->setNegative(null);
         }
-        if (\array_key_exists('negativeOrZero', $data)) {
+        if (\array_key_exists('negativeOrZero', $data) && null !== $data['negativeOrZero']) {
             $object->setNegativeOrZero($data['negativeOrZero']);
+        } elseif (\array_key_exists('negativeOrZero', $data) && null === $data['negativeOrZero']) {
+            $object->setNegativeOrZero(null);
         }
-        if (\array_key_exists('positive', $data)) {
+        if (\array_key_exists('positive', $data) && null !== $data['positive']) {
             $object->setPositive($data['positive']);
+        } elseif (\array_key_exists('positive', $data) && null === $data['positive']) {
+            $object->setPositive(null);
         }
-        if (\array_key_exists('positiveOrZero', $data)) {
+        if (\array_key_exists('positiveOrZero', $data) && null !== $data['positiveOrZero']) {
             $object->setPositiveOrZero($data['positiveOrZero']);
+        } elseif (\array_key_exists('positiveOrZero', $data) && null === $data['positiveOrZero']) {
+            $object->setPositiveOrZero(null);
         }
-        if (\array_key_exists('sign', $data)) {
+        if (\array_key_exists('sign', $data) && null !== $data['sign']) {
             $object->setSign($data['sign']);
+        } elseif (\array_key_exists('sign', $data) && null === $data['sign']) {
+            $object->setSign(null);
         }
 
         return $object;

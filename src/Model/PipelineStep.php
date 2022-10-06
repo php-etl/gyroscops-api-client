@@ -5,88 +5,88 @@ namespace Gyroscops\Api\Model;
 class PipelineStep
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * @var string
+     * @var string|null
      */
     protected $code;
     /**
-     * @var int
+     * @var int|null
      */
     protected $order;
     /**
-     * @var string
+     * @var string|null
      */
     protected $label;
     /**
-     * @var AbstractPipeline
+     * @var AbstractPipeline|null
      */
     protected $pipeline;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $probes;
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $configuration;
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getCode(): string
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
-    public function setCode(string $code): self
+    public function setCode(?string $code): self
     {
         $this->code = $code;
 
         return $this;
     }
 
-    public function getOrder(): int
+    public function getOrder(): ?int
     {
         return $this->order;
     }
 
-    public function setOrder(int $order): self
+    public function setOrder(?int $order): self
     {
         $this->order = $order;
 
         return $this;
     }
 
-    public function getLabel(): string
+    public function getLabel(): ?string
     {
         return $this->label;
     }
 
-    public function setLabel(string $label): self
+    public function setLabel(?string $label): self
     {
         $this->label = $label;
 
         return $this;
     }
 
-    public function getPipeline(): AbstractPipeline
+    public function getPipeline(): ?AbstractPipeline
     {
         return $this->pipeline;
     }
 
-    public function setPipeline(AbstractPipeline $pipeline): self
+    public function setPipeline(?AbstractPipeline $pipeline): self
     {
         $this->pipeline = $pipeline;
 
@@ -94,17 +94,17 @@ class PipelineStep
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getProbes(): array
+    public function getProbes(): ?array
     {
         return $this->probes;
     }
 
     /**
-     * @param string[] $probes
+     * @param string[]|null $probes
      */
-    public function setProbes(array $probes): self
+    public function setProbes(?array $probes): self
     {
         $this->probes = $probes;
 
@@ -112,17 +112,17 @@ class PipelineStep
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getConfiguration(): array
+    public function getConfiguration(): ?array
     {
         return $this->configuration;
     }
 
     /**
-     * @param string[] $configuration
+     * @param string[]|null $configuration
      */
-    public function setConfiguration(array $configuration): self
+    public function setConfiguration(?array $configuration): self
     {
         $this->configuration = $configuration;
 
