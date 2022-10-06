@@ -1,115 +1,79 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Model;
 
 class EnvironmentVariableFromConfigMapsGetResponse200
 {
     /**
-     * 
-     *
-     * @var VariableFromConfigMapJsonld[]
+     * @var VariableFromConfigMapJsonld[]|null
      */
     protected $hydraMember;
     /**
-     * 
-     *
-     * @var int
+     * @var int|null
      */
     protected $hydraTotalItems;
     /**
-     * 
-     *
-     * @var EnvironmentVariableFromConfigMapsGetResponse200HydraView
+     * @var EnvironmentVariableFromConfigMapsGetResponse200HydraView|null
      */
     protected $hydraView;
     /**
-     * 
-     *
-     * @var EnvironmentVariableFromConfigMapsGetResponse200HydraSearch
+     * @var EnvironmentVariableFromConfigMapsGetResponse200HydraSearch|null
      */
     protected $hydraSearch;
+
     /**
-     * 
-     *
-     * @return VariableFromConfigMapJsonld[]
+     * @return VariableFromConfigMapJsonld[]|null
      */
-    public function getHydraMember() : array
+    public function getHydraMember(): ?array
     {
         return $this->hydraMember;
     }
+
     /**
-     * 
-     *
-     * @param VariableFromConfigMapJsonld[] $hydraMember
-     *
-     * @return self
+     * @param VariableFromConfigMapJsonld[]|null $hydraMember
      */
-    public function setHydraMember(array $hydraMember) : self
+    public function setHydraMember(?array $hydraMember): self
     {
         $this->hydraMember = $hydraMember;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return int
-     */
-    public function getHydraTotalItems() : int
+
+    public function getHydraTotalItems(): ?int
     {
         return $this->hydraTotalItems;
     }
-    /**
-     * 
-     *
-     * @param int $hydraTotalItems
-     *
-     * @return self
-     */
-    public function setHydraTotalItems(int $hydraTotalItems) : self
+
+    public function setHydraTotalItems(?int $hydraTotalItems): self
     {
         $this->hydraTotalItems = $hydraTotalItems;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return EnvironmentVariableFromConfigMapsGetResponse200HydraView
-     */
-    public function getHydraView() : EnvironmentVariableFromConfigMapsGetResponse200HydraView
+
+    public function getHydraView(): ?EnvironmentVariableFromConfigMapsGetResponse200HydraView
     {
         return $this->hydraView;
     }
-    /**
-     * 
-     *
-     * @param EnvironmentVariableFromConfigMapsGetResponse200HydraView $hydraView
-     *
-     * @return self
-     */
-    public function setHydraView(EnvironmentVariableFromConfigMapsGetResponse200HydraView $hydraView) : self
+
+    public function setHydraView(?EnvironmentVariableFromConfigMapsGetResponse200HydraView $hydraView): self
     {
         $this->hydraView = $hydraView;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return EnvironmentVariableFromConfigMapsGetResponse200HydraSearch
-     */
-    public function getHydraSearch() : EnvironmentVariableFromConfigMapsGetResponse200HydraSearch
+
+    public function getHydraSearch(): ?EnvironmentVariableFromConfigMapsGetResponse200HydraSearch
     {
         return $this->hydraSearch;
     }
-    /**
-     * 
-     *
-     * @param EnvironmentVariableFromConfigMapsGetResponse200HydraSearch $hydraSearch
-     *
-     * @return self
-     */
-    public function setHydraSearch(EnvironmentVariableFromConfigMapsGetResponse200HydraSearch $hydraSearch) : self
+
+    public function setHydraSearch(?EnvironmentVariableFromConfigMapsGetResponse200HydraSearch $hydraSearch): self
     {
         $this->hydraSearch = $hydraSearch;
+
         return $this;
     }
 }

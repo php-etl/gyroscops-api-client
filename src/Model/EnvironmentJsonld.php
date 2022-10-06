@@ -1,250 +1,165 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Model;
 
 class EnvironmentJsonld
 {
     /**
-     * 
-     *
-     * @var mixed
+     * @var mixed|null
      */
     protected $context;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $id2;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $name;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $description;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $organization;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $workspace;
     /**
-     * 
-     *
-     * @var VariableJsonld[]
+     * @var VariableJsonld[]|null
      */
     protected $variables;
+
     /**
-     * 
-     *
      * @return mixed
      */
     public function getContext()
     {
         return $this->context;
     }
+
     /**
-     * 
-     *
      * @param mixed $context
-     *
-     * @return self
      */
-    public function setContext($context) : self
+    public function setContext($context): self
     {
         $this->context = $context;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getId() : string
+
+    public function getId(): ?string
     {
         return $this->id;
     }
-    /**
-     * 
-     *
-     * @param string $id
-     *
-     * @return self
-     */
-    public function setId(string $id) : self
+
+    public function setId(?string $id): self
     {
         $this->id = $id;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getType() : string
+
+    public function getType(): ?string
     {
         return $this->type;
     }
-    /**
-     * 
-     *
-     * @param string $type
-     *
-     * @return self
-     */
-    public function setType(string $type) : self
+
+    public function setType(?string $type): self
     {
         $this->type = $type;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getId2() : string
+
+    public function getId2(): ?string
     {
         return $this->id2;
     }
-    /**
-     * 
-     *
-     * @param string $id2
-     *
-     * @return self
-     */
-    public function setId2(string $id2) : self
+
+    public function setId2(?string $id2): self
     {
         $this->id2 = $id2;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getName() : string
+
+    public function getName(): ?string
     {
         return $this->name;
     }
-    /**
-     * 
-     *
-     * @param string $name
-     *
-     * @return self
-     */
-    public function setName(string $name) : self
+
+    public function setName(?string $name): self
     {
         $this->name = $name;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getDescription() : string
+
+    public function getDescription(): ?string
     {
         return $this->description;
     }
-    /**
-     * 
-     *
-     * @param string $description
-     *
-     * @return self
-     */
-    public function setDescription(string $description) : self
+
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getOrganization() : string
+
+    public function getOrganization(): ?string
     {
         return $this->organization;
     }
-    /**
-     * 
-     *
-     * @param string $organization
-     *
-     * @return self
-     */
-    public function setOrganization(string $organization) : self
+
+    public function setOrganization(?string $organization): self
     {
         $this->organization = $organization;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getWorkspace() : string
+
+    public function getWorkspace(): ?string
     {
         return $this->workspace;
     }
-    /**
-     * 
-     *
-     * @param string $workspace
-     *
-     * @return self
-     */
-    public function setWorkspace(string $workspace) : self
+
+    public function setWorkspace(?string $workspace): self
     {
         $this->workspace = $workspace;
+
         return $this;
     }
+
     /**
-     * 
-     *
-     * @return VariableJsonld[]
+     * @return VariableJsonld[]|null
      */
-    public function getVariables() : array
+    public function getVariables(): ?array
     {
         return $this->variables;
     }
+
     /**
-     * 
-     *
-     * @param VariableJsonld[] $variables
-     *
-     * @return self
+     * @param VariableJsonld[]|null $variables
      */
-    public function setVariables(array $variables) : self
+    public function setVariables(?array $variables): self
     {
         $this->variables = $variables;
+
         return $this;
     }
 }

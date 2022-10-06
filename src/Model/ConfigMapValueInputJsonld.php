@@ -1,196 +1,139 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Model;
 
 class ConfigMapValueInputJsonld
 {
     /**
-     * 
-     *
-     * @var mixed
+     * @var mixed|null
      */
     protected $context;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
-     * 
-     *
-     * @var mixed
+     * @var mixed|null
      */
     protected $arrayCopy;
     /**
-     * 
-     *
-     * @var int
+     * @var int|null
      */
     protected $flags;
     /**
-     * 
-     *
-     * @var mixed
+     * @var mixed|null
      */
     protected $iterator;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $iteratorClass;
+
     /**
-     * 
-     *
      * @return mixed
      */
     public function getContext()
     {
         return $this->context;
     }
+
     /**
-     * 
-     *
      * @param mixed $context
-     *
-     * @return self
      */
-    public function setContext($context) : self
+    public function setContext($context): self
     {
         $this->context = $context;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getId() : string
+
+    public function getId(): ?string
     {
         return $this->id;
     }
-    /**
-     * 
-     *
-     * @param string $id
-     *
-     * @return self
-     */
-    public function setId(string $id) : self
+
+    public function setId(?string $id): self
     {
         $this->id = $id;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getType() : string
+
+    public function getType(): ?string
     {
         return $this->type;
     }
-    /**
-     * 
-     *
-     * @param string $type
-     *
-     * @return self
-     */
-    public function setType(string $type) : self
+
+    public function setType(?string $type): self
     {
         $this->type = $type;
+
         return $this;
     }
+
     /**
-     * 
-     *
      * @return mixed
      */
     public function getArrayCopy()
     {
         return $this->arrayCopy;
     }
+
     /**
-     * 
-     *
      * @param mixed $arrayCopy
-     *
-     * @return self
      */
-    public function setArrayCopy($arrayCopy) : self
+    public function setArrayCopy($arrayCopy): self
     {
         $this->arrayCopy = $arrayCopy;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return int
-     */
-    public function getFlags() : int
+
+    public function getFlags(): ?int
     {
         return $this->flags;
     }
-    /**
-     * 
-     *
-     * @param int $flags
-     *
-     * @return self
-     */
-    public function setFlags(int $flags) : self
+
+    public function setFlags(?int $flags): self
     {
         $this->flags = $flags;
+
         return $this;
     }
+
     /**
-     * 
-     *
      * @return mixed
      */
     public function getIterator()
     {
         return $this->iterator;
     }
+
     /**
-     * 
-     *
      * @param mixed $iterator
-     *
-     * @return self
      */
-    public function setIterator($iterator) : self
+    public function setIterator($iterator): self
     {
         $this->iterator = $iterator;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getIteratorClass() : string
+
+    public function getIteratorClass(): ?string
     {
         return $this->iteratorClass;
     }
-    /**
-     * 
-     *
-     * @param string $iteratorClass
-     *
-     * @return self
-     */
-    public function setIteratorClass(string $iteratorClass) : self
+
+    public function setIteratorClass(?string $iteratorClass): self
     {
         $this->iteratorClass = $iteratorClass;
+
         return $this;
     }
 }

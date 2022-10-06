@@ -1,250 +1,159 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Model;
 
 class ReferralRequestReferralRequestInputJsonld
 {
     /**
-     * 
-     *
-     * @var mixed
+     * @var mixed|null
      */
     protected $context;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $email;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $firstName;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $lastName;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
-    protected $userName;
+    protected $username;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $companyName;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $referralCode;
+
     /**
-     * 
-     *
      * @return mixed
      */
     public function getContext()
     {
         return $this->context;
     }
+
     /**
-     * 
-     *
      * @param mixed $context
-     *
-     * @return self
      */
-    public function setContext($context) : self
+    public function setContext($context): self
     {
         $this->context = $context;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getId() : string
+
+    public function getId(): ?string
     {
         return $this->id;
     }
-    /**
-     * 
-     *
-     * @param string $id
-     *
-     * @return self
-     */
-    public function setId(string $id) : self
+
+    public function setId(?string $id): self
     {
         $this->id = $id;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getType() : string
+
+    public function getType(): ?string
     {
         return $this->type;
     }
-    /**
-     * 
-     *
-     * @param string $type
-     *
-     * @return self
-     */
-    public function setType(string $type) : self
+
+    public function setType(?string $type): self
     {
         $this->type = $type;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getEmail() : string
+
+    public function getEmail(): ?string
     {
         return $this->email;
     }
-    /**
-     * 
-     *
-     * @param string $email
-     *
-     * @return self
-     */
-    public function setEmail(string $email) : self
+
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getFirstName() : string
+
+    public function getFirstName(): ?string
     {
         return $this->firstName;
     }
-    /**
-     * 
-     *
-     * @param string $firstName
-     *
-     * @return self
-     */
-    public function setFirstName(string $firstName) : self
+
+    public function setFirstName(?string $firstName): self
     {
         $this->firstName = $firstName;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getLastName() : string
+
+    public function getLastName(): ?string
     {
         return $this->lastName;
     }
-    /**
-     * 
-     *
-     * @param string $lastName
-     *
-     * @return self
-     */
-    public function setLastName(string $lastName) : self
+
+    public function setLastName(?string $lastName): self
     {
         $this->lastName = $lastName;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getUserName() : string
+
+    public function getUsername(): ?string
     {
-        return $this->userName;
+        return $this->username;
     }
-    /**
-     * 
-     *
-     * @param string $userName
-     *
-     * @return self
-     */
-    public function setUserName(string $userName) : self
+
+    public function setUsername(?string $username): self
     {
-        $this->userName = $userName;
+        $this->username = $username;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getCompanyName() : string
+
+    public function getCompanyName(): ?string
     {
         return $this->companyName;
     }
-    /**
-     * 
-     *
-     * @param string $companyName
-     *
-     * @return self
-     */
-    public function setCompanyName(string $companyName) : self
+
+    public function setCompanyName(?string $companyName): self
     {
         $this->companyName = $companyName;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getReferralCode() : string
+
+    public function getReferralCode(): ?string
     {
         return $this->referralCode;
     }
-    /**
-     * 
-     *
-     * @param string $referralCode
-     *
-     * @return self
-     */
-    public function setReferralCode(string $referralCode) : self
+
+    public function setReferralCode(?string $referralCode): self
     {
         $this->referralCode = $referralCode;
+
         return $this;
     }
 }

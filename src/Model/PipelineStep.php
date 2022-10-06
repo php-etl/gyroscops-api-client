@@ -1,196 +1,133 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Model;
 
 class PipelineStep
 {
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $code;
     /**
-     * 
-     *
-     * @var int
+     * @var int|null
      */
     protected $order;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $label;
     /**
-     * 
-     *
-     * @var AbstractPipeline
+     * @var AbstractPipeline|null
      */
     protected $pipeline;
     /**
-     * 
-     *
-     * @var string[]
+     * @var string[]|null
      */
     protected $probes;
     /**
-     * 
-     *
-     * @var string[]
+     * @var string[]|null
      */
     protected $configuration;
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getId() : string
+
+    public function getId(): ?string
     {
         return $this->id;
     }
-    /**
-     * 
-     *
-     * @param string $id
-     *
-     * @return self
-     */
-    public function setId(string $id) : self
+
+    public function setId(?string $id): self
     {
         $this->id = $id;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getCode() : string
+
+    public function getCode(): ?string
     {
         return $this->code;
     }
-    /**
-     * 
-     *
-     * @param string $code
-     *
-     * @return self
-     */
-    public function setCode(string $code) : self
+
+    public function setCode(?string $code): self
     {
         $this->code = $code;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return int
-     */
-    public function getOrder() : int
+
+    public function getOrder(): ?int
     {
         return $this->order;
     }
-    /**
-     * 
-     *
-     * @param int $order
-     *
-     * @return self
-     */
-    public function setOrder(int $order) : self
+
+    public function setOrder(?int $order): self
     {
         $this->order = $order;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getLabel() : string
+
+    public function getLabel(): ?string
     {
         return $this->label;
     }
-    /**
-     * 
-     *
-     * @param string $label
-     *
-     * @return self
-     */
-    public function setLabel(string $label) : self
+
+    public function setLabel(?string $label): self
     {
         $this->label = $label;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return AbstractPipeline
-     */
-    public function getPipeline() : AbstractPipeline
+
+    public function getPipeline(): ?AbstractPipeline
     {
         return $this->pipeline;
     }
-    /**
-     * 
-     *
-     * @param AbstractPipeline $pipeline
-     *
-     * @return self
-     */
-    public function setPipeline(AbstractPipeline $pipeline) : self
+
+    public function setPipeline(?AbstractPipeline $pipeline): self
     {
         $this->pipeline = $pipeline;
+
         return $this;
     }
+
     /**
-     * 
-     *
-     * @return string[]
+     * @return string[]|null
      */
-    public function getProbes() : array
+    public function getProbes(): ?array
     {
         return $this->probes;
     }
+
     /**
-     * 
-     *
-     * @param string[] $probes
-     *
-     * @return self
+     * @param string[]|null $probes
      */
-    public function setProbes(array $probes) : self
+    public function setProbes(?array $probes): self
     {
         $this->probes = $probes;
+
         return $this;
     }
+
     /**
-     * 
-     *
-     * @return string[]
+     * @return string[]|null
      */
-    public function getConfiguration() : array
+    public function getConfiguration(): ?array
     {
         return $this->configuration;
     }
+
     /**
-     * 
-     *
-     * @param string[] $configuration
-     *
-     * @return self
+     * @param string[]|null $configuration
      */
-    public function setConfiguration(array $configuration) : self
+    public function setConfiguration(?array $configuration): self
     {
         $this->configuration = $configuration;
+
         return $this;
     }
 }

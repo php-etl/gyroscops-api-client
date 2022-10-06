@@ -1,61 +1,41 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Model;
 
 class WorkflowJobAction
 {
     /**
-     * 
-     *
      * @var string|null
      */
     protected $job;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $id;
-    /**
-     * 
-     *
-     * @return string|null
-     */
-    public function getJob() : ?string
+
+    public function getJob(): ?string
     {
         return $this->job;
     }
-    /**
-     * 
-     *
-     * @param string|null $job
-     *
-     * @return self
-     */
-    public function setJob(?string $job) : self
+
+    public function setJob(?string $job): self
     {
         $this->job = $job;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getId() : string
+
+    public function getId(): ?string
     {
         return $this->id;
     }
-    /**
-     * 
-     *
-     * @param string $id
-     *
-     * @return self
-     */
-    public function setId(string $id) : self
+
+    public function setId(?string $id): self
     {
         $this->id = $id;
+
         return $this;
     }
 }

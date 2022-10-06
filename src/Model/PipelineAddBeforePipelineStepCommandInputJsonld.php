@@ -1,250 +1,171 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Model;
 
 class PipelineAddBeforePipelineStepCommandInputJsonld
 {
     /**
-     * 
-     *
-     * @var mixed
+     * @var mixed|null
      */
     protected $context;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $pipeline;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $next;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $code;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $label;
     /**
-     * 
-     *
-     * @var string[][]
+     * @var string[][]|null
      */
     protected $configuration;
     /**
-     * 
-     *
-     * @var ProbeJsonld[]
+     * @var ProbeJsonld[]|null
      */
     protected $probes;
+
     /**
-     * 
-     *
      * @return mixed
      */
     public function getContext()
     {
         return $this->context;
     }
+
     /**
-     * 
-     *
      * @param mixed $context
-     *
-     * @return self
      */
-    public function setContext($context) : self
+    public function setContext($context): self
     {
         $this->context = $context;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getId() : string
+
+    public function getId(): ?string
     {
         return $this->id;
     }
-    /**
-     * 
-     *
-     * @param string $id
-     *
-     * @return self
-     */
-    public function setId(string $id) : self
+
+    public function setId(?string $id): self
     {
         $this->id = $id;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getType() : string
+
+    public function getType(): ?string
     {
         return $this->type;
     }
-    /**
-     * 
-     *
-     * @param string $type
-     *
-     * @return self
-     */
-    public function setType(string $type) : self
+
+    public function setType(?string $type): self
     {
         $this->type = $type;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getPipeline() : string
+
+    public function getPipeline(): ?string
     {
         return $this->pipeline;
     }
-    /**
-     * 
-     *
-     * @param string $pipeline
-     *
-     * @return self
-     */
-    public function setPipeline(string $pipeline) : self
+
+    public function setPipeline(?string $pipeline): self
     {
         $this->pipeline = $pipeline;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getNext() : string
+
+    public function getNext(): ?string
     {
         return $this->next;
     }
-    /**
-     * 
-     *
-     * @param string $next
-     *
-     * @return self
-     */
-    public function setNext(string $next) : self
+
+    public function setNext(?string $next): self
     {
         $this->next = $next;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getCode() : string
+
+    public function getCode(): ?string
     {
         return $this->code;
     }
-    /**
-     * 
-     *
-     * @param string $code
-     *
-     * @return self
-     */
-    public function setCode(string $code) : self
+
+    public function setCode(?string $code): self
     {
         $this->code = $code;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getLabel() : string
+
+    public function getLabel(): ?string
     {
         return $this->label;
     }
-    /**
-     * 
-     *
-     * @param string $label
-     *
-     * @return self
-     */
-    public function setLabel(string $label) : self
+
+    public function setLabel(?string $label): self
     {
         $this->label = $label;
+
         return $this;
     }
+
     /**
-     * 
-     *
-     * @return string[][]
+     * @return string[][]|null
      */
-    public function getConfiguration() : iterable
+    public function getConfiguration(): ?iterable
     {
         return $this->configuration;
     }
+
     /**
-     * 
-     *
-     * @param string[][] $configuration
-     *
-     * @return self
+     * @param string[][]|null $configuration
      */
-    public function setConfiguration(iterable $configuration) : self
+    public function setConfiguration(?iterable $configuration): self
     {
         $this->configuration = $configuration;
+
         return $this;
     }
+
     /**
-     * 
-     *
-     * @return ProbeJsonld[]
+     * @return ProbeJsonld[]|null
      */
-    public function getProbes() : array
+    public function getProbes(): ?array
     {
         return $this->probes;
     }
+
     /**
-     * 
-     *
-     * @param ProbeJsonld[] $probes
-     *
-     * @return self
+     * @param ProbeJsonld[]|null $probes
      */
-    public function setProbes(array $probes) : self
+    public function setProbes(?array $probes): self
     {
         $this->probes = $probes;
+
         return $this;
     }
 }

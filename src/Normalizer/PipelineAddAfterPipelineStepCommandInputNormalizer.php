@@ -1,36 +1,42 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Normalizer;
 
-use Jane\Component\JsonSchemaRuntime\Reference;
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
-use Symfony\Component\Serializer\Exception\InvalidArgumentException;
+use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+
 class PipelineAddAfterPipelineStepCommandInputNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+
+    public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === 'Gyroscops\\Api\\Model\\PipelineAddAfterPipelineStepCommandInput';
+        return 'Gyroscops\\Api\\Model\\PipelineAddAfterPipelineStepCommandInput' === $type;
     }
-    public function supportsNormalization($data, $format = null)
+
+    public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\PipelineAddAfterPipelineStepCommandInput';
+        return \is_object($data) && 'Gyroscops\\Api\\Model\\PipelineAddAfterPipelineStepCommandInput' === $data::class;
     }
+
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize($data, $class, $format = null, array $context = [])
     {
         if (isset($data['$ref'])) {
             return new Reference($data['$ref'], $context['document-origin']);
@@ -42,44 +48,61 @@ class PipelineAddAfterPipelineStepCommandInputNormalizer implements Denormalizer
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('pipeline', $data)) {
+        if (\array_key_exists('pipeline', $data) && null !== $data['pipeline']) {
             $object->setPipeline($data['pipeline']);
+        } elseif (\array_key_exists('pipeline', $data) && null === $data['pipeline']) {
+            $object->setPipeline(null);
         }
-        if (\array_key_exists('previous', $data)) {
+        if (\array_key_exists('previous', $data) && null !== $data['previous']) {
             $object->setPrevious($data['previous']);
+        } elseif (\array_key_exists('previous', $data) && null === $data['previous']) {
+            $object->setPrevious(null);
         }
-        if (\array_key_exists('code', $data)) {
+        if (\array_key_exists('code', $data) && null !== $data['code']) {
             $object->setCode($data['code']);
+        } elseif (\array_key_exists('code', $data) && null === $data['code']) {
+            $object->setCode(null);
         }
-        if (\array_key_exists('label', $data)) {
+        if (\array_key_exists('label', $data) && null !== $data['label']) {
             $object->setLabel($data['label']);
+        } elseif (\array_key_exists('label', $data) && null === $data['label']) {
+            $object->setLabel(null);
         }
-        if (\array_key_exists('configuration', $data)) {
-            $values = new \ArrayObject(array(), \ArrayObject::ARRAY_AS_PROPS);
+        if (\array_key_exists('configuration', $data) && null !== $data['configuration']) {
+            $values = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
             foreach ($data['configuration'] as $key => $value) {
-                $values_1 = new \ArrayObject(array(), \ArrayObject::ARRAY_AS_PROPS);
+                $values_1 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
                 foreach ($value as $key_1 => $value_1) {
                     $values_1[$key_1] = $value_1;
                 }
                 $values[$key] = $values_1;
             }
             $object->setConfiguration($values);
+        } elseif (\array_key_exists('configuration', $data) && null === $data['configuration']) {
+            $object->setConfiguration(null);
         }
-        if (\array_key_exists('probes', $data)) {
-            $values_2 = array();
+        if (\array_key_exists('probes', $data) && null !== $data['probes']) {
+            $values_2 = [];
             foreach ($data['probes'] as $value_2) {
                 $values_2[] = $this->denormalizer->denormalize($value_2, 'Gyroscops\\Api\\Model\\Probe', 'json', $context);
             }
             $object->setProbes($values_2);
+        } elseif (\array_key_exists('probes', $data) && null === $data['probes']) {
+            $object->setProbes(null);
         }
+
         return $object;
     }
+
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize($object, $format = null, array $context = [])
     {
-        $data = array();
+        $data = [];
         if (null !== $object->getPipeline()) {
             $data['pipeline'] = $object->getPipeline();
         }
@@ -93,9 +116,9 @@ class PipelineAddAfterPipelineStepCommandInputNormalizer implements Denormalizer
             $data['label'] = $object->getLabel();
         }
         if (null !== $object->getConfiguration()) {
-            $values = array();
+            $values = [];
             foreach ($object->getConfiguration() as $key => $value) {
-                $values_1 = array();
+                $values_1 = [];
                 foreach ($value as $key_1 => $value_1) {
                     $values_1[$key_1] = $value_1;
                 }
@@ -104,12 +127,13 @@ class PipelineAddAfterPipelineStepCommandInputNormalizer implements Denormalizer
             $data['configuration'] = $values;
         }
         if (null !== $object->getProbes()) {
-            $values_2 = array();
+            $values_2 = [];
             foreach ($object->getProbes() as $value_2) {
                 $values_2[] = $this->normalizer->normalize($value_2, 'json', $context);
             }
             $data['probes'] = $values_2;
         }
+
         return $data;
     }
 }

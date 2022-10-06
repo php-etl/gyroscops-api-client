@@ -1,61 +1,47 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Model;
 
 class PipelineReorderPipelineStepsCommandInput
 {
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $pipeline;
     /**
-     * 
-     *
-     * @var string[]
+     * @var string[]|null
      */
     protected $codes;
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getPipeline() : string
+
+    public function getPipeline(): ?string
     {
         return $this->pipeline;
     }
-    /**
-     * 
-     *
-     * @param string $pipeline
-     *
-     * @return self
-     */
-    public function setPipeline(string $pipeline) : self
+
+    public function setPipeline(?string $pipeline): self
     {
         $this->pipeline = $pipeline;
+
         return $this;
     }
+
     /**
-     * 
-     *
-     * @return string[]
+     * @return string[]|null
      */
-    public function getCodes() : array
+    public function getCodes(): ?array
     {
         return $this->codes;
     }
+
     /**
-     * 
-     *
-     * @param string[] $codes
-     *
-     * @return self
+     * @param string[]|null $codes
      */
-    public function setCodes(array $codes) : self
+    public function setCodes(?array $codes): self
     {
         $this->codes = $codes;
+
         return $this;
     }
 }

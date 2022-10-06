@@ -1,61 +1,41 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Model;
 
 class ScheduleDeclarePipelineScheduleImmediateCommandInput
 {
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $pipeline;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $organization;
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getPipeline() : string
+
+    public function getPipeline(): ?string
     {
         return $this->pipeline;
     }
-    /**
-     * 
-     *
-     * @param string $pipeline
-     *
-     * @return self
-     */
-    public function setPipeline(string $pipeline) : self
+
+    public function setPipeline(?string $pipeline): self
     {
         $this->pipeline = $pipeline;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getOrganization() : string
+
+    public function getOrganization(): ?string
     {
         return $this->organization;
     }
-    /**
-     * 
-     *
-     * @param string $organization
-     *
-     * @return self
-     */
-    public function setOrganization(string $organization) : self
+
+    public function setOrganization(?string $organization): self
     {
         $this->organization = $organization;
+
         return $this;
     }
 }

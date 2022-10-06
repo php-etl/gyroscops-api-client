@@ -1,115 +1,79 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Model;
 
 class AuthenticationWorkspaceIdUsersGetResponse200
 {
     /**
-     * 
-     *
-     * @var UserJsonld[]
+     * @var UserJsonld[]|null
      */
     protected $hydraMember;
     /**
-     * 
-     *
-     * @var int
+     * @var int|null
      */
     protected $hydraTotalItems;
     /**
-     * 
-     *
-     * @var AuthenticationWorkspaceIdUsersGetResponse200HydraView
+     * @var AuthenticationWorkspaceIdUsersGetResponse200HydraView|null
      */
     protected $hydraView;
     /**
-     * 
-     *
-     * @var AuthenticationWorkspaceIdUsersGetResponse200HydraSearch
+     * @var AuthenticationWorkspaceIdUsersGetResponse200HydraSearch|null
      */
     protected $hydraSearch;
+
     /**
-     * 
-     *
-     * @return UserJsonld[]
+     * @return UserJsonld[]|null
      */
-    public function getHydraMember() : array
+    public function getHydraMember(): ?array
     {
         return $this->hydraMember;
     }
+
     /**
-     * 
-     *
-     * @param UserJsonld[] $hydraMember
-     *
-     * @return self
+     * @param UserJsonld[]|null $hydraMember
      */
-    public function setHydraMember(array $hydraMember) : self
+    public function setHydraMember(?array $hydraMember): self
     {
         $this->hydraMember = $hydraMember;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return int
-     */
-    public function getHydraTotalItems() : int
+
+    public function getHydraTotalItems(): ?int
     {
         return $this->hydraTotalItems;
     }
-    /**
-     * 
-     *
-     * @param int $hydraTotalItems
-     *
-     * @return self
-     */
-    public function setHydraTotalItems(int $hydraTotalItems) : self
+
+    public function setHydraTotalItems(?int $hydraTotalItems): self
     {
         $this->hydraTotalItems = $hydraTotalItems;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return AuthenticationWorkspaceIdUsersGetResponse200HydraView
-     */
-    public function getHydraView() : AuthenticationWorkspaceIdUsersGetResponse200HydraView
+
+    public function getHydraView(): ?AuthenticationWorkspaceIdUsersGetResponse200HydraView
     {
         return $this->hydraView;
     }
-    /**
-     * 
-     *
-     * @param AuthenticationWorkspaceIdUsersGetResponse200HydraView $hydraView
-     *
-     * @return self
-     */
-    public function setHydraView(AuthenticationWorkspaceIdUsersGetResponse200HydraView $hydraView) : self
+
+    public function setHydraView(?AuthenticationWorkspaceIdUsersGetResponse200HydraView $hydraView): self
     {
         $this->hydraView = $hydraView;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return AuthenticationWorkspaceIdUsersGetResponse200HydraSearch
-     */
-    public function getHydraSearch() : AuthenticationWorkspaceIdUsersGetResponse200HydraSearch
+
+    public function getHydraSearch(): ?AuthenticationWorkspaceIdUsersGetResponse200HydraSearch
     {
         return $this->hydraSearch;
     }
-    /**
-     * 
-     *
-     * @param AuthenticationWorkspaceIdUsersGetResponse200HydraSearch $hydraSearch
-     *
-     * @return self
-     */
-    public function setHydraSearch(AuthenticationWorkspaceIdUsersGetResponse200HydraSearch $hydraSearch) : self
+
+    public function setHydraSearch(?AuthenticationWorkspaceIdUsersGetResponse200HydraSearch $hydraSearch): self
     {
         $this->hydraSearch = $hydraSearch;
+
         return $this;
     }
 }

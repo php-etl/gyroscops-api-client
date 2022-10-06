@@ -1,169 +1,117 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Model;
 
 class PipelineDeclarePipelineCommandInput
 {
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $label;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $code;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $workspace;
     /**
-     * 
-     *
      * @var string|null
      */
     protected $organization;
     /**
-     * 
-     *
-     * @var StepInput[]
+     * @var StepInput[]|null
      */
     protected $steps;
     /**
-     * 
-     *
-     * @var AutoloadInput[]
+     * @var AutoloadInput[]|null
      */
     protected $autoloads;
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getLabel() : string
+
+    public function getLabel(): ?string
     {
         return $this->label;
     }
-    /**
-     * 
-     *
-     * @param string $label
-     *
-     * @return self
-     */
-    public function setLabel(string $label) : self
+
+    public function setLabel(?string $label): self
     {
         $this->label = $label;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getCode() : string
+
+    public function getCode(): ?string
     {
         return $this->code;
     }
-    /**
-     * 
-     *
-     * @param string $code
-     *
-     * @return self
-     */
-    public function setCode(string $code) : self
+
+    public function setCode(?string $code): self
     {
         $this->code = $code;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getWorkspace() : string
+
+    public function getWorkspace(): ?string
     {
         return $this->workspace;
     }
-    /**
-     * 
-     *
-     * @param string $workspace
-     *
-     * @return self
-     */
-    public function setWorkspace(string $workspace) : self
+
+    public function setWorkspace(?string $workspace): self
     {
         $this->workspace = $workspace;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string|null
-     */
-    public function getOrganization() : ?string
+
+    public function getOrganization(): ?string
     {
         return $this->organization;
     }
-    /**
-     * 
-     *
-     * @param string|null $organization
-     *
-     * @return self
-     */
-    public function setOrganization(?string $organization) : self
+
+    public function setOrganization(?string $organization): self
     {
         $this->organization = $organization;
+
         return $this;
     }
+
     /**
-     * 
-     *
-     * @return StepInput[]
+     * @return StepInput[]|null
      */
-    public function getSteps() : array
+    public function getSteps(): ?array
     {
         return $this->steps;
     }
+
     /**
-     * 
-     *
-     * @param StepInput[] $steps
-     *
-     * @return self
+     * @param StepInput[]|null $steps
      */
-    public function setSteps(array $steps) : self
+    public function setSteps(?array $steps): self
     {
         $this->steps = $steps;
+
         return $this;
     }
+
     /**
-     * 
-     *
-     * @return AutoloadInput[]
+     * @return AutoloadInput[]|null
      */
-    public function getAutoloads() : array
+    public function getAutoloads(): ?array
     {
         return $this->autoloads;
     }
+
     /**
-     * 
-     *
-     * @param AutoloadInput[] $autoloads
-     *
-     * @return self
+     * @param AutoloadInput[]|null $autoloads
      */
-    public function setAutoloads(array $autoloads) : self
+    public function setAutoloads(?array $autoloads): self
     {
         $this->autoloads = $autoloads;
+
         return $this;
     }
 }

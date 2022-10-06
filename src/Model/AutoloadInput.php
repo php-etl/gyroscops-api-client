@@ -1,61 +1,47 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Model;
 
 class AutoloadInput
 {
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $namespace;
     /**
-     * 
-     *
-     * @var string[]
+     * @var string[]|null
      */
     protected $paths;
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getNamespace() : string
+
+    public function getNamespace(): ?string
     {
         return $this->namespace;
     }
-    /**
-     * 
-     *
-     * @param string $namespace
-     *
-     * @return self
-     */
-    public function setNamespace(string $namespace) : self
+
+    public function setNamespace(?string $namespace): self
     {
         $this->namespace = $namespace;
+
         return $this;
     }
+
     /**
-     * 
-     *
-     * @return string[]
+     * @return string[]|null
      */
-    public function getPaths() : array
+    public function getPaths(): ?array
     {
         return $this->paths;
     }
+
     /**
-     * 
-     *
-     * @param string[] $paths
-     *
-     * @return self
+     * @param string[]|null $paths
      */
-    public function setPaths(array $paths) : self
+    public function setPaths(?array $paths): self
     {
         $this->paths = $paths;
+
         return $this;
     }
 }

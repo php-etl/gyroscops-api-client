@@ -1,36 +1,42 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Normalizer;
 
-use Jane\Component\JsonSchemaRuntime\Reference;
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
-use Symfony\Component\Serializer\Exception\InvalidArgumentException;
+use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+
 class ConfigMapValueInputNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+
+    public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === 'Gyroscops\\Api\\Model\\ConfigMapValueInput';
+        return 'Gyroscops\\Api\\Model\\ConfigMapValueInput' === $type;
     }
-    public function supportsNormalization($data, $format = null)
+
+    public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\ConfigMapValueInput';
+        return \is_object($data) && 'Gyroscops\\Api\\Model\\ConfigMapValueInput' === $data::class;
     }
+
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize($data, $class, $format = null, array $context = [])
     {
         if (isset($data['$ref'])) {
             return new Reference($data['$ref'], $context['document-origin']);
@@ -42,32 +48,46 @@ class ConfigMapValueInputNormalizer implements DenormalizerInterface, Normalizer
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('arrayCopy', $data)) {
+        if (\array_key_exists('arrayCopy', $data) && null !== $data['arrayCopy']) {
             $object->setArrayCopy($data['arrayCopy']);
+        } elseif (\array_key_exists('arrayCopy', $data) && null === $data['arrayCopy']) {
+            $object->setArrayCopy(null);
         }
-        if (\array_key_exists('flags', $data)) {
+        if (\array_key_exists('flags', $data) && null !== $data['flags']) {
             $object->setFlags($data['flags']);
+        } elseif (\array_key_exists('flags', $data) && null === $data['flags']) {
+            $object->setFlags(null);
         }
-        if (\array_key_exists('iterator', $data)) {
+        if (\array_key_exists('iterator', $data) && null !== $data['iterator']) {
             $object->setIterator($data['iterator']);
+        } elseif (\array_key_exists('iterator', $data) && null === $data['iterator']) {
+            $object->setIterator(null);
         }
-        if (\array_key_exists('iteratorClass', $data)) {
+        if (\array_key_exists('iteratorClass', $data) && null !== $data['iteratorClass']) {
             $object->setIteratorClass($data['iteratorClass']);
+        } elseif (\array_key_exists('iteratorClass', $data) && null === $data['iteratorClass']) {
+            $object->setIteratorClass(null);
         }
+
         return $object;
     }
+
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize($object, $format = null, array $context = [])
     {
-        $data = array();
+        $data = [];
         if (null !== $object->getFlags()) {
             $data['flags'] = $object->getFlags();
         }
         if (null !== $object->getIteratorClass()) {
             $data['iteratorClass'] = $object->getIteratorClass();
         }
+
         return $data;
     }
 }

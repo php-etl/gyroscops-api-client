@@ -1,115 +1,79 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Model;
 
 class RuntimePipelineStepProbesGetResponse200HydraSearch
 {
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $type;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $hydraTemplate;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $hydraVariableRepresentation;
     /**
-     * 
-     *
-     * @var RuntimePipelineStepProbesGetResponse200HydraSearchHydraMappingItem[]
+     * @var RuntimePipelineStepProbesGetResponse200HydraSearchHydraMappingItem[]|null
      */
     protected $hydraMapping;
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getType() : string
+
+    public function getType(): ?string
     {
         return $this->type;
     }
-    /**
-     * 
-     *
-     * @param string $type
-     *
-     * @return self
-     */
-    public function setType(string $type) : self
+
+    public function setType(?string $type): self
     {
         $this->type = $type;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getHydraTemplate() : string
+
+    public function getHydraTemplate(): ?string
     {
         return $this->hydraTemplate;
     }
-    /**
-     * 
-     *
-     * @param string $hydraTemplate
-     *
-     * @return self
-     */
-    public function setHydraTemplate(string $hydraTemplate) : self
+
+    public function setHydraTemplate(?string $hydraTemplate): self
     {
         $this->hydraTemplate = $hydraTemplate;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getHydraVariableRepresentation() : string
+
+    public function getHydraVariableRepresentation(): ?string
     {
         return $this->hydraVariableRepresentation;
     }
-    /**
-     * 
-     *
-     * @param string $hydraVariableRepresentation
-     *
-     * @return self
-     */
-    public function setHydraVariableRepresentation(string $hydraVariableRepresentation) : self
+
+    public function setHydraVariableRepresentation(?string $hydraVariableRepresentation): self
     {
         $this->hydraVariableRepresentation = $hydraVariableRepresentation;
+
         return $this;
     }
+
     /**
-     * 
-     *
-     * @return RuntimePipelineStepProbesGetResponse200HydraSearchHydraMappingItem[]
+     * @return RuntimePipelineStepProbesGetResponse200HydraSearchHydraMappingItem[]|null
      */
-    public function getHydraMapping() : array
+    public function getHydraMapping(): ?array
     {
         return $this->hydraMapping;
     }
+
     /**
-     * 
-     *
-     * @param RuntimePipelineStepProbesGetResponse200HydraSearchHydraMappingItem[] $hydraMapping
-     *
-     * @return self
+     * @param RuntimePipelineStepProbesGetResponse200HydraSearchHydraMappingItem[]|null $hydraMapping
      */
-    public function setHydraMapping(array $hydraMapping) : self
+    public function setHydraMapping(?array $hydraMapping): self
     {
         $this->hydraMapping = $hydraMapping;
+
         return $this;
     }
 }

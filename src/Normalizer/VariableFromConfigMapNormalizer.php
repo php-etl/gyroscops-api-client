@@ -1,36 +1,42 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Normalizer;
 
-use Jane\Component\JsonSchemaRuntime\Reference;
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
-use Symfony\Component\Serializer\Exception\InvalidArgumentException;
+use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+
 class VariableFromConfigMapNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+
+    public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === 'Gyroscops\\Api\\Model\\VariableFromConfigMap';
+        return 'Gyroscops\\Api\\Model\\VariableFromConfigMap' === $type;
     }
-    public function supportsNormalization($data, $format = null)
+
+    public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\VariableFromConfigMap';
+        return \is_object($data) && 'Gyroscops\\Api\\Model\\VariableFromConfigMap' === $data::class;
     }
+
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize($data, $class, $format = null, array $context = [])
     {
         if (isset($data['$ref'])) {
             return new Reference($data['$ref'], $context['document-origin']);
@@ -42,35 +48,44 @@ class VariableFromConfigMapNormalizer implements DenormalizerInterface, Normaliz
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('configMap', $data) && $data['configMap'] !== null) {
+        if (\array_key_exists('configMap', $data) && null !== $data['configMap']) {
             $object->setConfigMap($data['configMap']);
-        }
-        elseif (\array_key_exists('configMap', $data) && $data['configMap'] === null) {
+        } elseif (\array_key_exists('configMap', $data) && null === $data['configMap']) {
             $object->setConfigMap(null);
         }
-        if (\array_key_exists('item', $data)) {
+        if (\array_key_exists('item', $data) && null !== $data['item']) {
             $object->setItem($data['item']);
+        } elseif (\array_key_exists('item', $data) && null === $data['item']) {
+            $object->setItem(null);
         }
-        if (\array_key_exists('id', $data)) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId($data['id']);
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+            $object->setId(null);
         }
-        if (\array_key_exists('environment', $data) && $data['environment'] !== null) {
+        if (\array_key_exists('environment', $data) && null !== $data['environment']) {
             $object->setEnvironment($data['environment']);
-        }
-        elseif (\array_key_exists('environment', $data) && $data['environment'] === null) {
+        } elseif (\array_key_exists('environment', $data) && null === $data['environment']) {
             $object->setEnvironment(null);
         }
-        if (\array_key_exists('name', $data)) {
+        if (\array_key_exists('name', $data) && null !== $data['name']) {
             $object->setName($data['name']);
+        } elseif (\array_key_exists('name', $data) && null === $data['name']) {
+            $object->setName(null);
         }
+
         return $object;
     }
+
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize($object, $format = null, array $context = [])
     {
-        $data = array();
+        $data = [];
         if (null !== $object->getConfigMap()) {
             $data['configMap'] = $object->getConfigMap();
         }
@@ -83,6 +98,7 @@ class VariableFromConfigMapNormalizer implements DenormalizerInterface, Normaliz
         if (null !== $object->getName()) {
             $data['name'] = $object->getName();
         }
+
         return $data;
     }
 }

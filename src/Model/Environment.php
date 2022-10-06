@@ -1,169 +1,111 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Model;
 
 class Environment
 {
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $name;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $description;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $organization;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $workspace;
     /**
-     * 
-     *
-     * @var Variable[]
+     * @var Variable[]|null
      */
     protected $variables;
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getId() : string
+
+    public function getId(): ?string
     {
         return $this->id;
     }
-    /**
-     * 
-     *
-     * @param string $id
-     *
-     * @return self
-     */
-    public function setId(string $id) : self
+
+    public function setId(?string $id): self
     {
         $this->id = $id;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getName() : string
+
+    public function getName(): ?string
     {
         return $this->name;
     }
-    /**
-     * 
-     *
-     * @param string $name
-     *
-     * @return self
-     */
-    public function setName(string $name) : self
+
+    public function setName(?string $name): self
     {
         $this->name = $name;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getDescription() : string
+
+    public function getDescription(): ?string
     {
         return $this->description;
     }
-    /**
-     * 
-     *
-     * @param string $description
-     *
-     * @return self
-     */
-    public function setDescription(string $description) : self
+
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getOrganization() : string
+
+    public function getOrganization(): ?string
     {
         return $this->organization;
     }
-    /**
-     * 
-     *
-     * @param string $organization
-     *
-     * @return self
-     */
-    public function setOrganization(string $organization) : self
+
+    public function setOrganization(?string $organization): self
     {
         $this->organization = $organization;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getWorkspace() : string
+
+    public function getWorkspace(): ?string
     {
         return $this->workspace;
     }
-    /**
-     * 
-     *
-     * @param string $workspace
-     *
-     * @return self
-     */
-    public function setWorkspace(string $workspace) : self
+
+    public function setWorkspace(?string $workspace): self
     {
         $this->workspace = $workspace;
+
         return $this;
     }
+
     /**
-     * 
-     *
-     * @return Variable[]
+     * @return Variable[]|null
      */
-    public function getVariables() : array
+    public function getVariables(): ?array
     {
         return $this->variables;
     }
+
     /**
-     * 
-     *
-     * @param Variable[] $variables
-     *
-     * @return self
+     * @param Variable[]|null $variables
      */
-    public function setVariables(array $variables) : self
+    public function setVariables(?array $variables): self
     {
         $this->variables = $variables;
+
         return $this;
     }
 }

@@ -1,250 +1,171 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Model;
 
 class PipelineRead
 {
     /**
-     * 
-     *
-     * @var bool
+     * @var bool|null
      */
     protected $isSoftDeleted;
     /**
-     * 
-     *
      * @var \DateTime|null
      */
     protected $compiledAt;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $id;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $code;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $label;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $runtimeType;
     /**
-     * 
-     *
-     * @var string[]
+     * @var string[]|null
      */
     protected $runtime;
     /**
-     * 
-     *
-     * @var string[]
+     * @var string[]|null
      */
     protected $autoload;
     /**
-     * 
-     *
-     * @var string[]
+     * @var string[]|null
      */
     protected $steps;
-    /**
-     * 
-     *
-     * @return bool
-     */
-    public function getIsSoftDeleted() : bool
+
+    public function getIsSoftDeleted(): ?bool
     {
         return $this->isSoftDeleted;
     }
-    /**
-     * 
-     *
-     * @param bool $isSoftDeleted
-     *
-     * @return self
-     */
-    public function setIsSoftDeleted(bool $isSoftDeleted) : self
+
+    public function setIsSoftDeleted(?bool $isSoftDeleted): self
     {
         $this->isSoftDeleted = $isSoftDeleted;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return \DateTime|null
-     */
-    public function getCompiledAt() : ?\DateTime
+
+    public function getCompiledAt(): ?\DateTime
     {
         return $this->compiledAt;
     }
-    /**
-     * 
-     *
-     * @param \DateTime|null $compiledAt
-     *
-     * @return self
-     */
-    public function setCompiledAt(?\DateTime $compiledAt) : self
+
+    public function setCompiledAt(?\DateTime $compiledAt): self
     {
         $this->compiledAt = $compiledAt;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getId() : string
+
+    public function getId(): ?string
     {
         return $this->id;
     }
-    /**
-     * 
-     *
-     * @param string $id
-     *
-     * @return self
-     */
-    public function setId(string $id) : self
+
+    public function setId(?string $id): self
     {
         $this->id = $id;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getCode() : string
+
+    public function getCode(): ?string
     {
         return $this->code;
     }
-    /**
-     * 
-     *
-     * @param string $code
-     *
-     * @return self
-     */
-    public function setCode(string $code) : self
+
+    public function setCode(?string $code): self
     {
         $this->code = $code;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getLabel() : string
+
+    public function getLabel(): ?string
     {
         return $this->label;
     }
-    /**
-     * 
-     *
-     * @param string $label
-     *
-     * @return self
-     */
-    public function setLabel(string $label) : self
+
+    public function setLabel(?string $label): self
     {
         $this->label = $label;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getRuntimeType() : string
+
+    public function getRuntimeType(): ?string
     {
         return $this->runtimeType;
     }
-    /**
-     * 
-     *
-     * @param string $runtimeType
-     *
-     * @return self
-     */
-    public function setRuntimeType(string $runtimeType) : self
+
+    public function setRuntimeType(?string $runtimeType): self
     {
         $this->runtimeType = $runtimeType;
+
         return $this;
     }
+
     /**
-     * 
-     *
-     * @return string[]
+     * @return string[]|null
      */
-    public function getRuntime() : array
+    public function getRuntime(): ?array
     {
         return $this->runtime;
     }
+
     /**
-     * 
-     *
-     * @param string[] $runtime
-     *
-     * @return self
+     * @param string[]|null $runtime
      */
-    public function setRuntime(array $runtime) : self
+    public function setRuntime(?array $runtime): self
     {
         $this->runtime = $runtime;
+
         return $this;
     }
+
     /**
-     * 
-     *
-     * @return string[]
+     * @return string[]|null
      */
-    public function getAutoload() : array
+    public function getAutoload(): ?array
     {
         return $this->autoload;
     }
+
     /**
-     * 
-     *
-     * @param string[] $autoload
-     *
-     * @return self
+     * @param string[]|null $autoload
      */
-    public function setAutoload(array $autoload) : self
+    public function setAutoload(?array $autoload): self
     {
         $this->autoload = $autoload;
+
         return $this;
     }
+
     /**
-     * 
-     *
-     * @return string[]
+     * @return string[]|null
      */
-    public function getSteps() : array
+    public function getSteps(): ?array
     {
         return $this->steps;
     }
+
     /**
-     * 
-     *
-     * @param string[] $steps
-     *
-     * @return self
+     * @param string[]|null $steps
      */
-    public function setSteps(array $steps) : self
+    public function setSteps(?array $steps): self
     {
         $this->steps = $steps;
+
         return $this;
     }
 }

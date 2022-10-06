@@ -1,115 +1,73 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Model;
 
 class OnPremiseRequestOnPremiseRequestWrite
 {
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $firstName;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $lastName;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $email;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $message;
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getFirstName() : string
+
+    public function getFirstName(): ?string
     {
         return $this->firstName;
     }
-    /**
-     * 
-     *
-     * @param string $firstName
-     *
-     * @return self
-     */
-    public function setFirstName(string $firstName) : self
+
+    public function setFirstName(?string $firstName): self
     {
         $this->firstName = $firstName;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getLastName() : string
+
+    public function getLastName(): ?string
     {
         return $this->lastName;
     }
-    /**
-     * 
-     *
-     * @param string $lastName
-     *
-     * @return self
-     */
-    public function setLastName(string $lastName) : self
+
+    public function setLastName(?string $lastName): self
     {
         $this->lastName = $lastName;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getEmail() : string
+
+    public function getEmail(): ?string
     {
         return $this->email;
     }
-    /**
-     * 
-     *
-     * @param string $email
-     *
-     * @return self
-     */
-    public function setEmail(string $email) : self
+
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getMessage() : string
+
+    public function getMessage(): ?string
     {
         return $this->message;
     }
-    /**
-     * 
-     *
-     * @param string $message
-     *
-     * @return self
-     */
-    public function setMessage(string $message) : self
+
+    public function setMessage(?string $message): self
     {
         $this->message = $message;
+
         return $this;
     }
 }

@@ -1,115 +1,85 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gyroscops\Api\Model;
 
 class StepInput
 {
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $code;
     /**
-     * 
-     *
-     * @var string
+     * @var string|null
      */
     protected $label;
     /**
-     * 
-     *
-     * @var string[][]
+     * @var string[][]|null
      */
     protected $config;
     /**
-     * 
-     *
-     * @var Probe[]
+     * @var Probe[]|null
      */
     protected $probes;
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getCode() : string
+
+    public function getCode(): ?string
     {
         return $this->code;
     }
-    /**
-     * 
-     *
-     * @param string $code
-     *
-     * @return self
-     */
-    public function setCode(string $code) : self
+
+    public function setCode(?string $code): self
     {
         $this->code = $code;
+
         return $this;
     }
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getLabel() : string
+
+    public function getLabel(): ?string
     {
         return $this->label;
     }
-    /**
-     * 
-     *
-     * @param string $label
-     *
-     * @return self
-     */
-    public function setLabel(string $label) : self
+
+    public function setLabel(?string $label): self
     {
         $this->label = $label;
+
         return $this;
     }
+
     /**
-     * 
-     *
-     * @return string[][]
+     * @return string[][]|null
      */
-    public function getConfig() : iterable
+    public function getConfig(): ?iterable
     {
         return $this->config;
     }
+
     /**
-     * 
-     *
-     * @param string[][] $config
-     *
-     * @return self
+     * @param string[][]|null $config
      */
-    public function setConfig(iterable $config) : self
+    public function setConfig(?iterable $config): self
     {
         $this->config = $config;
+
         return $this;
     }
+
     /**
-     * 
-     *
-     * @return Probe[]
+     * @return Probe[]|null
      */
-    public function getProbes() : array
+    public function getProbes(): ?array
     {
         return $this->probes;
     }
+
     /**
-     * 
-     *
-     * @param Probe[] $probes
-     *
-     * @return self
+     * @param Probe[]|null $probes
      */
-    public function setProbes(array $probes) : self
+    public function setProbes(?array $probes): self
     {
         $this->probes = $probes;
+
         return $this;
     }
 }
