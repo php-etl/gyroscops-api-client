@@ -27,19 +27,15 @@ class ExecutionWorkflowNormalizer implements DenormalizerInterface, NormalizerIn
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\ExecutionWorkflow' === $type;
+        return $type === \Gyroscops\Api\Model\ExecutionWorkflow::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\ExecutionWorkflow' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\ExecutionWorkflow::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,23 +50,23 @@ class ExecutionWorkflowNormalizer implements DenormalizerInterface, NormalizerIn
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('id', $data) && null !== $data['id']) {
+        if (\array_key_exists('id', $data) && $data['id'] !== null) {
             $object->setId($data['id']);
-        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('jobs', $data) && null !== $data['jobs']) {
+        if (\array_key_exists('jobs', $data) && $data['jobs'] !== null) {
             $values = [];
             foreach ($data['jobs'] as $value) {
                 $values[] = $value;
             }
             $object->setJobs($values);
-        } elseif (\array_key_exists('jobs', $data) && null === $data['jobs']) {
+        } elseif (\array_key_exists('jobs', $data) && $data['jobs'] === null) {
             $object->setJobs(null);
         }
-        if (\array_key_exists('execution', $data) && null !== $data['execution']) {
+        if (\array_key_exists('execution', $data) && $data['execution'] !== null) {
             $object->setExecution($data['execution']);
-        } elseif (\array_key_exists('execution', $data) && null === $data['execution']) {
+        } elseif (\array_key_exists('execution', $data) && $data['execution'] === null) {
             $object->setExecution(null);
         }
 
@@ -78,9 +74,6 @@ class ExecutionWorkflowNormalizer implements DenormalizerInterface, NormalizerIn
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

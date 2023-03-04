@@ -77,6 +77,10 @@ class UserJsonld
      */
     protected $currentWorkspace;
     /**
+     * @var string|null
+     */
+    protected $currentOrganization;
+    /**
      * @var string[]|null
      */
     protected $referralCodes;
@@ -105,10 +109,7 @@ class UserJsonld
         return $this->context;
     }
 
-    /**
-     * @param mixed $context
-     */
-    public function setContext($context): self
+    public function setContext(mixed $context): self
     {
         $this->context = $context;
 
@@ -315,6 +316,18 @@ class UserJsonld
     public function setCurrentWorkspace(?string $currentWorkspace): self
     {
         $this->currentWorkspace = $currentWorkspace;
+
+        return $this;
+    }
+
+    public function getCurrentOrganization(): ?string
+    {
+        return $this->currentOrganization;
+    }
+
+    public function setCurrentOrganization(?string $currentOrganization): self
+    {
+        $this->currentOrganization = $currentOrganization;
 
         return $this;
     }

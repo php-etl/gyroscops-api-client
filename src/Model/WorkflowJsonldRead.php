@@ -13,10 +13,6 @@ namespace Gyroscops\Api\Model;
 class WorkflowJsonldRead
 {
     /**
-     * @var mixed|null
-     */
-    protected $context;
-    /**
      * @var string|null
      */
     protected $id;
@@ -24,6 +20,10 @@ class WorkflowJsonldRead
      * @var string|null
      */
     protected $type;
+    /**
+     * @var mixed|null
+     */
+    protected $context;
     /**
      * @var string|null
      */
@@ -40,24 +40,6 @@ class WorkflowJsonldRead
      * @var WorkflowJobJsonldRead[]|null
      */
     protected $jobs;
-
-    /**
-     * @return mixed
-     */
-    public function getContext()
-    {
-        return $this->context;
-    }
-
-    /**
-     * @param mixed $context
-     */
-    public function setContext($context): self
-    {
-        $this->context = $context;
-
-        return $this;
-    }
 
     public function getId(): ?string
     {
@@ -79,6 +61,21 @@ class WorkflowJsonldRead
     public function setType(?string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContext()
+    {
+        return $this->context;
+    }
+
+    public function setContext(mixed $context): self
+    {
+        $this->context = $context;
 
         return $this;
     }

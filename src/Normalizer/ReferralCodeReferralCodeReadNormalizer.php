@@ -27,19 +27,15 @@ class ReferralCodeReferralCodeReadNormalizer implements DenormalizerInterface, N
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\ReferralCodeReferralCodeRead' === $type;
+        return $type === \Gyroscops\Api\Model\ReferralCodeReferralCodeRead::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\ReferralCodeReferralCodeRead' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\ReferralCodeReferralCodeRead::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,28 +50,28 @@ class ReferralCodeReferralCodeReadNormalizer implements DenormalizerInterface, N
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('id', $data) && null !== $data['id']) {
+        if (\array_key_exists('id', $data) && $data['id'] !== null) {
             $object->setId($data['id']);
-        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('user', $data) && null !== $data['user']) {
+        if (\array_key_exists('user', $data) && $data['user'] !== null) {
             $object->setUser($data['user']);
-        } elseif (\array_key_exists('user', $data) && null === $data['user']) {
+        } elseif (\array_key_exists('user', $data) && $data['user'] === null) {
             $object->setUser(null);
         }
-        if (\array_key_exists('code', $data) && null !== $data['code']) {
+        if (\array_key_exists('code', $data) && $data['code'] !== null) {
             $object->setCode($data['code']);
-        } elseif (\array_key_exists('code', $data) && null === $data['code']) {
+        } elseif (\array_key_exists('code', $data) && $data['code'] === null) {
             $object->setCode(null);
         }
-        if (\array_key_exists('referralRequests', $data) && null !== $data['referralRequests']) {
+        if (\array_key_exists('referralRequests', $data) && $data['referralRequests'] !== null) {
             $values = [];
             foreach ($data['referralRequests'] as $value) {
                 $values[] = $value;
             }
             $object->setReferralRequests($values);
-        } elseif (\array_key_exists('referralRequests', $data) && null === $data['referralRequests']) {
+        } elseif (\array_key_exists('referralRequests', $data) && $data['referralRequests'] === null) {
             $object->setReferralRequests(null);
         }
 
@@ -83,9 +79,6 @@ class ReferralCodeReferralCodeReadNormalizer implements DenormalizerInterface, N
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

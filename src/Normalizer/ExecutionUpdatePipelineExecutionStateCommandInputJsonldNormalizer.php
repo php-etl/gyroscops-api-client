@@ -27,19 +27,15 @@ class ExecutionUpdatePipelineExecutionStateCommandInputJsonldNormalizer implemen
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\ExecutionUpdatePipelineExecutionStateCommandInputJsonld' === $type;
+        return $type === \Gyroscops\Api\Model\ExecutionUpdatePipelineExecutionStateCommandInputJsonld::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\ExecutionUpdatePipelineExecutionStateCommandInputJsonld' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\ExecutionUpdatePipelineExecutionStateCommandInputJsonld::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,29 +50,24 @@ class ExecutionUpdatePipelineExecutionStateCommandInputJsonldNormalizer implemen
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
+        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
             $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
             $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
+        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
+        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
             $object->setType(null);
         }
-        if (\array_key_exists('execution', $data) && null !== $data['execution']) {
-            $object->setExecution($data['execution']);
-        } elseif (\array_key_exists('execution', $data) && null === $data['execution']) {
-            $object->setExecution(null);
-        }
-        if (\array_key_exists('stepsUpdates', $data) && null !== $data['stepsUpdates']) {
-            $object->setStepsUpdates($this->denormalizer->denormalize($data['stepsUpdates'], 'Gyroscops\\Api\\Model\\UpdateListJsonld', 'json', $context));
-        } elseif (\array_key_exists('stepsUpdates', $data) && null === $data['stepsUpdates']) {
+        if (\array_key_exists('stepsUpdates', $data) && $data['stepsUpdates'] !== null) {
+            $object->setStepsUpdates($this->denormalizer->denormalize($data['stepsUpdates'], \Gyroscops\Api\Model\UpdateListJsonld::class, 'json', $context));
+        } elseif (\array_key_exists('stepsUpdates', $data) && $data['stepsUpdates'] === null) {
             $object->setStepsUpdates(null);
         }
 
@@ -84,20 +75,12 @@ class ExecutionUpdatePipelineExecutionStateCommandInputJsonldNormalizer implemen
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getExecution()) {
-            $data['execution'] = $object->getExecution();
-        }
-        if (null !== $object->getStepsUpdates()) {
-            $data['stepsUpdates'] = $this->normalizer->normalize($object->getStepsUpdates(), 'json', $context);
-        }
+        $data['stepsUpdates'] = $this->normalizer->normalize($object->getStepsUpdates(), 'json', $context);
 
         return $data;
     }

@@ -27,19 +27,15 @@ class ExecutionUpdatePipelineExecutionStateCommandInputNormalizer implements Den
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\ExecutionUpdatePipelineExecutionStateCommandInput' === $type;
+        return $type === \Gyroscops\Api\Model\ExecutionUpdatePipelineExecutionStateCommandInput::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\ExecutionUpdatePipelineExecutionStateCommandInput' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\ExecutionUpdatePipelineExecutionStateCommandInput::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,14 +50,9 @@ class ExecutionUpdatePipelineExecutionStateCommandInputNormalizer implements Den
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('execution', $data) && null !== $data['execution']) {
-            $object->setExecution($data['execution']);
-        } elseif (\array_key_exists('execution', $data) && null === $data['execution']) {
-            $object->setExecution(null);
-        }
-        if (\array_key_exists('stepsUpdates', $data) && null !== $data['stepsUpdates']) {
-            $object->setStepsUpdates($this->denormalizer->denormalize($data['stepsUpdates'], 'Gyroscops\\Api\\Model\\UpdateList', 'json', $context));
-        } elseif (\array_key_exists('stepsUpdates', $data) && null === $data['stepsUpdates']) {
+        if (\array_key_exists('stepsUpdates', $data) && $data['stepsUpdates'] !== null) {
+            $object->setStepsUpdates($this->denormalizer->denormalize($data['stepsUpdates'], \Gyroscops\Api\Model\UpdateList::class, 'json', $context));
+        } elseif (\array_key_exists('stepsUpdates', $data) && $data['stepsUpdates'] === null) {
             $object->setStepsUpdates(null);
         }
 
@@ -69,20 +60,12 @@ class ExecutionUpdatePipelineExecutionStateCommandInputNormalizer implements Den
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getExecution()) {
-            $data['execution'] = $object->getExecution();
-        }
-        if (null !== $object->getStepsUpdates()) {
-            $data['stepsUpdates'] = $this->normalizer->normalize($object->getStepsUpdates(), 'json', $context);
-        }
+        $data['stepsUpdates'] = $this->normalizer->normalize($object->getStepsUpdates(), 'json', $context);
 
         return $data;
     }

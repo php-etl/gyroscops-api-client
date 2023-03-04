@@ -15,27 +15,11 @@ class PipelineAddPipelineComposerPSR4AutoloadCommandInput
     /**
      * @var string|null
      */
-    protected $pipeline;
-    /**
-     * @var string|null
-     */
     protected $namespace;
     /**
      * @var string[]|null
      */
     protected $paths;
-
-    public function getPipeline(): ?string
-    {
-        return $this->pipeline;
-    }
-
-    public function setPipeline(?string $pipeline): self
-    {
-        $this->pipeline = $pipeline;
-
-        return $this;
-    }
 
     public function getNamespace(): ?string
     {

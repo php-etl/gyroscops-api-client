@@ -27,19 +27,15 @@ class RuntimePipelinesGetResponse200Normalizer implements DenormalizerInterface,
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\RuntimePipelinesGetResponse200' === $type;
+        return $type === \Gyroscops\Api\Model\RuntimePipelinesGetResponse200::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\RuntimePipelinesGetResponse200' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\RuntimePipelinesGetResponse200::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,28 +50,28 @@ class RuntimePipelinesGetResponse200Normalizer implements DenormalizerInterface,
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('hydra:member', $data) && null !== $data['hydra:member']) {
+        if (\array_key_exists('hydra:member', $data) && $data['hydra:member'] !== null) {
             $values = [];
             foreach ($data['hydra:member'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'Gyroscops\\Api\\Model\\PipelineJsonldRead', 'json', $context);
+                $values[] = $this->denormalizer->denormalize($value, \Gyroscops\Api\Model\PipelineJsonldRead::class, 'json', $context);
             }
             $object->setHydraMember($values);
-        } elseif (\array_key_exists('hydra:member', $data) && null === $data['hydra:member']) {
+        } elseif (\array_key_exists('hydra:member', $data) && $data['hydra:member'] === null) {
             $object->setHydraMember(null);
         }
-        if (\array_key_exists('hydra:totalItems', $data) && null !== $data['hydra:totalItems']) {
+        if (\array_key_exists('hydra:totalItems', $data) && $data['hydra:totalItems'] !== null) {
             $object->setHydraTotalItems($data['hydra:totalItems']);
-        } elseif (\array_key_exists('hydra:totalItems', $data) && null === $data['hydra:totalItems']) {
+        } elseif (\array_key_exists('hydra:totalItems', $data) && $data['hydra:totalItems'] === null) {
             $object->setHydraTotalItems(null);
         }
-        if (\array_key_exists('hydra:view', $data) && null !== $data['hydra:view']) {
-            $object->setHydraView($this->denormalizer->denormalize($data['hydra:view'], 'Gyroscops\\Api\\Model\\RuntimePipelinesGetResponse200HydraView', 'json', $context));
-        } elseif (\array_key_exists('hydra:view', $data) && null === $data['hydra:view']) {
+        if (\array_key_exists('hydra:view', $data) && $data['hydra:view'] !== null) {
+            $object->setHydraView($this->denormalizer->denormalize($data['hydra:view'], \Gyroscops\Api\Model\RuntimePipelinesGetResponse200HydraView::class, 'json', $context));
+        } elseif (\array_key_exists('hydra:view', $data) && $data['hydra:view'] === null) {
             $object->setHydraView(null);
         }
-        if (\array_key_exists('hydra:search', $data) && null !== $data['hydra:search']) {
-            $object->setHydraSearch($this->denormalizer->denormalize($data['hydra:search'], 'Gyroscops\\Api\\Model\\RuntimePipelinesGetResponse200HydraSearch', 'json', $context));
-        } elseif (\array_key_exists('hydra:search', $data) && null === $data['hydra:search']) {
+        if (\array_key_exists('hydra:search', $data) && $data['hydra:search'] !== null) {
+            $object->setHydraSearch($this->denormalizer->denormalize($data['hydra:search'], \Gyroscops\Api\Model\RuntimePipelinesGetResponse200HydraSearch::class, 'json', $context));
+        } elseif (\array_key_exists('hydra:search', $data) && $data['hydra:search'] === null) {
             $object->setHydraSearch(null);
         }
 
@@ -83,9 +79,6 @@ class RuntimePipelinesGetResponse200Normalizer implements DenormalizerInterface,
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

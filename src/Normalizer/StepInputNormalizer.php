@@ -27,19 +27,15 @@ class StepInputNormalizer implements DenormalizerInterface, NormalizerInterface,
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\StepInput' === $type;
+        return $type === \Gyroscops\Api\Model\StepInput::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\StepInput' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\StepInput::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,36 +50,36 @@ class StepInputNormalizer implements DenormalizerInterface, NormalizerInterface,
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('code', $data) && null !== $data['code']) {
+        if (\array_key_exists('code', $data) && $data['code'] !== null) {
             $object->setCode($data['code']);
-        } elseif (\array_key_exists('code', $data) && null === $data['code']) {
+        } elseif (\array_key_exists('code', $data) && $data['code'] === null) {
             $object->setCode(null);
         }
-        if (\array_key_exists('label', $data) && null !== $data['label']) {
+        if (\array_key_exists('label', $data) && $data['label'] !== null) {
             $object->setLabel($data['label']);
-        } elseif (\array_key_exists('label', $data) && null === $data['label']) {
+        } elseif (\array_key_exists('label', $data) && $data['label'] === null) {
             $object->setLabel(null);
         }
-        if (\array_key_exists('config', $data) && null !== $data['config']) {
+        if (\array_key_exists('configuration', $data) && $data['configuration'] !== null) {
             $values = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-            foreach ($data['config'] as $key => $value) {
+            foreach ($data['configuration'] as $key => $value) {
                 $values_1 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
                 foreach ($value as $key_1 => $value_1) {
                     $values_1[$key_1] = $value_1;
                 }
                 $values[$key] = $values_1;
             }
-            $object->setConfig($values);
-        } elseif (\array_key_exists('config', $data) && null === $data['config']) {
-            $object->setConfig(null);
+            $object->setConfiguration($values);
+        } elseif (\array_key_exists('configuration', $data) && $data['configuration'] === null) {
+            $object->setConfiguration(null);
         }
-        if (\array_key_exists('probes', $data) && null !== $data['probes']) {
+        if (\array_key_exists('probes', $data) && $data['probes'] !== null) {
             $values_2 = [];
             foreach ($data['probes'] as $value_2) {
-                $values_2[] = $this->denormalizer->denormalize($value_2, 'Gyroscops\\Api\\Model\\Probe', 'json', $context);
+                $values_2[] = $this->denormalizer->denormalize($value_2, \Gyroscops\Api\Model\Probe::class, 'json', $context);
             }
             $object->setProbes($values_2);
-        } elseif (\array_key_exists('probes', $data) && null === $data['probes']) {
+        } elseif (\array_key_exists('probes', $data) && $data['probes'] === null) {
             $object->setProbes(null);
         }
 
@@ -91,31 +87,22 @@ class StepInputNormalizer implements DenormalizerInterface, NormalizerInterface,
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getCode()) {
-            $data['code'] = $object->getCode();
-        }
-        if (null !== $object->getLabel()) {
-            $data['label'] = $object->getLabel();
-        }
-        if (null !== $object->getConfig()) {
-            $values = [];
-            foreach ($object->getConfig() as $key => $value) {
-                $values_1 = [];
-                foreach ($value as $key_1 => $value_1) {
-                    $values_1[$key_1] = $value_1;
-                }
-                $values[$key] = $values_1;
+        $data['code'] = $object->getCode();
+        $data['label'] = $object->getLabel();
+        $values = [];
+        foreach ($object->getConfiguration() as $key => $value) {
+            $values_1 = [];
+            foreach ($value as $key_1 => $value_1) {
+                $values_1[$key_1] = $value_1;
             }
-            $data['config'] = $values;
+            $values[$key] = $values_1;
         }
+        $data['configuration'] = $values;
         if (null !== $object->getProbes()) {
             $values_2 = [];
             foreach ($object->getProbes() as $value_2) {

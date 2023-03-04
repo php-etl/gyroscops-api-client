@@ -13,10 +13,6 @@ namespace Gyroscops\Api\Model;
 class WorkflowJobPipelineJsonld
 {
     /**
-     * @var mixed|null
-     */
-    protected $context;
-    /**
      * @var string|null
      */
     protected $id;
@@ -24,6 +20,10 @@ class WorkflowJobPipelineJsonld
      * @var string|null
      */
     protected $type;
+    /**
+     * @var mixed|null
+     */
+    protected $context;
     /**
      * @var string|null
      */
@@ -55,25 +55,19 @@ class WorkflowJobPipelineJsonld
     /**
      * @var string[]|null
      */
+    protected $packages;
+    /**
+     * @var string[]|null
+     */
+    protected $repositories;
+    /**
+     * @var string[]|null
+     */
+    protected $auths;
+    /**
+     * @var string[]|null
+     */
     protected $steps;
-
-    /**
-     * @return mixed
-     */
-    public function getContext()
-    {
-        return $this->context;
-    }
-
-    /**
-     * @param mixed $context
-     */
-    public function setContext($context): self
-    {
-        $this->context = $context;
-
-        return $this;
-    }
 
     public function getId(): ?string
     {
@@ -95,6 +89,21 @@ class WorkflowJobPipelineJsonld
     public function setType(?string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContext()
+    {
+        return $this->context;
+    }
+
+    public function setContext(mixed $context): self
+    {
+        $this->context = $context;
 
         return $this;
     }
@@ -191,6 +200,60 @@ class WorkflowJobPipelineJsonld
     public function setAutoload(?array $autoload): self
     {
         $this->autoload = $autoload;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getPackages(): ?array
+    {
+        return $this->packages;
+    }
+
+    /**
+     * @param string[]|null $packages
+     */
+    public function setPackages(?array $packages): self
+    {
+        $this->packages = $packages;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getRepositories(): ?array
+    {
+        return $this->repositories;
+    }
+
+    /**
+     * @param string[]|null $repositories
+     */
+    public function setRepositories(?array $repositories): self
+    {
+        $this->repositories = $repositories;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getAuths(): ?array
+    {
+        return $this->auths;
+    }
+
+    /**
+     * @param string[]|null $auths
+     */
+    public function setAuths(?array $auths): self
+    {
+        $this->auths = $auths;
 
         return $this;
     }

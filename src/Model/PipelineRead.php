@@ -21,10 +21,6 @@ class PipelineRead
      */
     protected $compiledAt;
     /**
-     * @var string[]|null
-     */
-    protected $steps;
-    /**
      * @var string|null
      */
     protected $id;
@@ -48,6 +44,22 @@ class PipelineRead
      * @var string[]|null
      */
     protected $autoload;
+    /**
+     * @var string[]|null
+     */
+    protected $packages;
+    /**
+     * @var string[]|null
+     */
+    protected $repositories;
+    /**
+     * @var string[]|null
+     */
+    protected $auths;
+    /**
+     * @var string[]|null
+     */
+    protected $steps;
 
     public function getIsSoftDeleted(): ?bool
     {
@@ -69,24 +81,6 @@ class PipelineRead
     public function setCompiledAt(?\DateTime $compiledAt): self
     {
         $this->compiledAt = $compiledAt;
-
-        return $this;
-    }
-
-    /**
-     * @return string[]|null
-     */
-    public function getSteps(): ?array
-    {
-        return $this->steps;
-    }
-
-    /**
-     * @param string[]|null $steps
-     */
-    public function setSteps(?array $steps): self
-    {
-        $this->steps = $steps;
 
         return $this;
     }
@@ -171,6 +165,78 @@ class PipelineRead
     public function setAutoload(?array $autoload): self
     {
         $this->autoload = $autoload;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getPackages(): ?array
+    {
+        return $this->packages;
+    }
+
+    /**
+     * @param string[]|null $packages
+     */
+    public function setPackages(?array $packages): self
+    {
+        $this->packages = $packages;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getRepositories(): ?array
+    {
+        return $this->repositories;
+    }
+
+    /**
+     * @param string[]|null $repositories
+     */
+    public function setRepositories(?array $repositories): self
+    {
+        $this->repositories = $repositories;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getAuths(): ?array
+    {
+        return $this->auths;
+    }
+
+    /**
+     * @param string[]|null $auths
+     */
+    public function setAuths(?array $auths): self
+    {
+        $this->auths = $auths;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getSteps(): ?array
+    {
+        return $this->steps;
+    }
+
+    /**
+     * @param string[]|null $steps
+     */
+    public function setSteps(?array $steps): self
+    {
+        $this->steps = $steps;
 
         return $this;
     }

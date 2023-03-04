@@ -23,7 +23,7 @@ class StepInput
     /**
      * @var string[][]|null
      */
-    protected $config;
+    protected $configuration;
     /**
      * @var Probe[]|null
      */
@@ -56,17 +56,17 @@ class StepInput
     /**
      * @return string[][]|null
      */
-    public function getConfig(): ?iterable
+    public function getConfiguration(): ?iterable
     {
-        return $this->config;
+        return $this->configuration;
     }
 
     /**
-     * @param string[][]|null $config
+     * @param string[][]|null $configuration
      */
-    public function setConfig(?iterable $config): self
+    public function setConfiguration(?iterable $configuration): self
     {
-        $this->config = $config;
+        $this->configuration = $configuration;
 
         return $this;
     }

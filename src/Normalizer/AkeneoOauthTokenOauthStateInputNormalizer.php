@@ -27,19 +27,15 @@ class AkeneoOauthTokenOauthStateInputNormalizer implements DenormalizerInterface
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\AkeneoOauthTokenOauthStateInput' === $type;
+        return $type === \Gyroscops\Api\Model\AkeneoOauthTokenOauthStateInput::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\AkeneoOauthTokenOauthStateInput' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\AkeneoOauthTokenOauthStateInput::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,18 +50,18 @@ class AkeneoOauthTokenOauthStateInputNormalizer implements DenormalizerInterface
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('url', $data) && null !== $data['url']) {
+        if (\array_key_exists('url', $data) && $data['url'] !== null) {
             $object->setUrl($data['url']);
-        } elseif (\array_key_exists('url', $data) && null === $data['url']) {
+        } elseif (\array_key_exists('url', $data) && $data['url'] === null) {
             $object->setUrl(null);
         }
-        if (\array_key_exists('scope', $data) && null !== $data['scope']) {
+        if (\array_key_exists('scope', $data) && $data['scope'] !== null) {
             $values = [];
             foreach ($data['scope'] as $value) {
                 $values[] = $value;
             }
             $object->setScope($values);
-        } elseif (\array_key_exists('scope', $data) && null === $data['scope']) {
+        } elseif (\array_key_exists('scope', $data) && $data['scope'] === null) {
             $object->setScope(null);
         }
 
@@ -73,9 +69,6 @@ class AkeneoOauthTokenOauthStateInputNormalizer implements DenormalizerInterface
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

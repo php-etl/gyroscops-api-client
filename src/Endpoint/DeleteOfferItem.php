@@ -43,6 +43,8 @@ class DeleteOfferItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impleme
     /**
      * {@inheritdoc}
      *
+     * @return null
+     *
      * @throws \Gyroscops\Api\Exception\DeleteOfferItemNotFoundException
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)

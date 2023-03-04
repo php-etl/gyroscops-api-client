@@ -33,7 +33,7 @@ class AkeneoInstanceAkeneoInstanceInputJsonld
      */
     protected $organization;
     /**
-     * @var SecretInputJsonld|null
+     * @var CreateSecretInputJsonld|null
      */
     protected $secret;
 
@@ -45,10 +45,7 @@ class AkeneoInstanceAkeneoInstanceInputJsonld
         return $this->context;
     }
 
-    /**
-     * @param mixed $context
-     */
-    public function setContext($context): self
+    public function setContext(mixed $context): self
     {
         $this->context = $context;
 
@@ -103,12 +100,12 @@ class AkeneoInstanceAkeneoInstanceInputJsonld
         return $this;
     }
 
-    public function getSecret(): ?SecretInputJsonld
+    public function getSecret(): ?CreateSecretInputJsonld
     {
         return $this->secret;
     }
 
-    public function setSecret(?SecretInputJsonld $secret): self
+    public function setSecret(?CreateSecretInputJsonld $secret): self
     {
         $this->secret = $secret;
 

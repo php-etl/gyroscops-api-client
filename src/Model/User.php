@@ -65,6 +65,10 @@ class User
      */
     protected $currentWorkspace;
     /**
+     * @var string|null
+     */
+    protected $currentOrganization;
+    /**
      * @var string[]|null
      */
     protected $referralCodes;
@@ -261,6 +265,18 @@ class User
     public function setCurrentWorkspace(?string $currentWorkspace): self
     {
         $this->currentWorkspace = $currentWorkspace;
+
+        return $this;
+    }
+
+    public function getCurrentOrganization(): ?string
+    {
+        return $this->currentOrganization;
+    }
+
+    public function setCurrentOrganization(?string $currentOrganization): self
+    {
+        $this->currentOrganization = $currentOrganization;
 
         return $this;
     }

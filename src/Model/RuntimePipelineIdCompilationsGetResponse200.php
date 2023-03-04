@@ -13,7 +13,7 @@ namespace Gyroscops\Api\Model;
 class RuntimePipelineIdCompilationsGetResponse200
 {
     /**
-     * @var PipelineCompilationJsonld[]|null
+     * @var CompilationJsonld[]|null
      */
     protected $hydraMember;
     /**
@@ -30,7 +30,7 @@ class RuntimePipelineIdCompilationsGetResponse200
     protected $hydraSearch;
 
     /**
-     * @return PipelineCompilationJsonld[]|null
+     * @return CompilationJsonld[]|null
      */
     public function getHydraMember(): ?array
     {
@@ -38,7 +38,7 @@ class RuntimePipelineIdCompilationsGetResponse200
     }
 
     /**
-     * @param PipelineCompilationJsonld[]|null $hydraMember
+     * @param CompilationJsonld[]|null $hydraMember
      */
     public function setHydraMember(?array $hydraMember): self
     {

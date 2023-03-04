@@ -27,19 +27,15 @@ class ReferralCodeReferralCodeWriteNormalizer implements DenormalizerInterface, 
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\ReferralCodeReferralCodeWrite' === $type;
+        return $type === \Gyroscops\Api\Model\ReferralCodeReferralCodeWrite::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\ReferralCodeReferralCodeWrite' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\ReferralCodeReferralCodeWrite::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,9 +50,9 @@ class ReferralCodeReferralCodeWriteNormalizer implements DenormalizerInterface, 
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('user', $data) && null !== $data['user']) {
+        if (\array_key_exists('user', $data) && $data['user'] !== null) {
             $object->setUser($data['user']);
-        } elseif (\array_key_exists('user', $data) && null === $data['user']) {
+        } elseif (\array_key_exists('user', $data) && $data['user'] === null) {
             $object->setUser(null);
         }
 
@@ -64,9 +60,6 @@ class ReferralCodeReferralCodeWriteNormalizer implements DenormalizerInterface, 
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

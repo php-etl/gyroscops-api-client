@@ -93,7 +93,6 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * Updates the Offer resource.
      *
      * @param string                          $id          Resource identifier
-     * @param \Gyroscops\Api\Model\Offer|null $requestBody
      * @param string                          $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Gyroscops\Api\Model\Offer|\Psr\Http\Message\ResponseInterface|null
@@ -194,7 +193,6 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * Updates the Organization resource.
      *
      * @param string                                 $id          Resource identifier
-     * @param \Gyroscops\Api\Model\Organization|null $requestBody
      * @param string                                 $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Gyroscops\Api\Model\Organization|\Psr\Http\Message\ResponseInterface|null
@@ -365,7 +363,6 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * Updates the Subscription resource.
      *
      * @param string                                 $id          Resource identifier
-     * @param \Gyroscops\Api\Model\Subscription|null $requestBody
      * @param string                                 $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Gyroscops\Api\Model\Subscription|\Psr\Http\Message\ResponseInterface|null
@@ -475,9 +472,7 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     }
 
     /**
-     * @param \Gyroscops\Api\Model\Credentials|null $requestBody
      * @param string                                $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
      * @return \Gyroscops\Api\Model\Token|\Psr\Http\Message\ResponseInterface|null
      */
     public function postCredentialsItem(?Model\Credentials $requestBody = null, string $fetch = self::FETCH_OBJECT)
@@ -529,7 +524,6 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * Updates the UserAuthorization resource.
      *
      * @param string                                      $id          Resource identifier
-     * @param \Gyroscops\Api\Model\UserAuthorization|null $requestBody
      * @param string                                      $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Gyroscops\Api\Model\UserAuthorization|\Psr\Http\Message\ResponseInterface|null
@@ -628,7 +622,6 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * Updates the User resource.
      *
      * @param string                         $id          Resource identifier
-     * @param \Gyroscops\Api\Model\User|null $requestBody
      * @param string                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Gyroscops\Api\Model\User|\Psr\Http\Message\ResponseInterface|null
@@ -682,7 +675,6 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * Updates the User resource.
      *
      * @param string                                                $id          Resource identifier
-     * @param \Gyroscops\Api\Model\UserUserChangePasswordInput|null $requestBody
      * @param string                                                $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Gyroscops\Api\Model\User|\Psr\Http\Message\ResponseInterface|null
@@ -763,7 +755,6 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      * Updates the Workspace resource.
      *
      * @param string                              $id          Resource identifier
-     * @param \Gyroscops\Api\Model\Workspace|null $requestBody
      * @param string                              $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Gyroscops\Api\Model\Workspace|\Psr\Http\Message\ResponseInterface|null
@@ -865,54 +856,107 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     }
 
     /**
-     * Creates a ConfigMap resource.
+     * Creates a Configuration resource.
      *
-     * @param \Gyroscops\Api\Model\ConfigMapConfigMapInputJsonld|\Gyroscops\Api\Model\ConfigMapConfigMapInput|null $requestBody
-     * @param string                                                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\ConfigurationCreateConfigurationInputJsonld|\Gyroscops\Api\Model\ConfigurationCreateConfigurationInput|null $requestBody
+     * @param string                                                                                                                           $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Gyroscops\Api\Model\ConfigMap|\Psr\Http\Message\ResponseInterface|null
+     * @return \Gyroscops\Api\Model\Configuration|\Psr\Http\Message\ResponseInterface|null
      *
-     * @throws \Gyroscops\Api\Exception\PostConfigMapCollectionBadRequestException
-     * @throws \Gyroscops\Api\Exception\PostConfigMapCollectionUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\PostConfigurationCollectionBadRequestException
+     * @throws \Gyroscops\Api\Exception\PostConfigurationCollectionUnprocessableEntityException
      */
-    public function postConfigMapCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
+    public function postConfigurationCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PostConfigMapCollection($requestBody), $fetch);
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PostConfigurationCollection($requestBody), $fetch);
     }
 
     /**
-     * Retrieves a ConfigMap resource.
+     * Removes the Configuration resource.
      *
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Gyroscops\Api\Model\ConfigMap|\Psr\Http\Message\ResponseInterface|null
+     * @return \Psr\Http\Message\ResponseInterface|null
      *
-     * @throws \Gyroscops\Api\Exception\GetConfigMapItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\DeleteConfigurationItemNotFoundException
      */
-    public function getConfigMapItem(string $id, string $fetch = self::FETCH_OBJECT)
+    public function deleteConfigurationItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\GetConfigMapItem($id), $fetch);
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\DeleteConfigurationItem($id), $fetch);
     }
 
     /**
-     * Adds a new Config Map value to the Config Map storage.
+     * Retrieves a Configuration resource.
      *
-     * @param string $id    Config Map resource code
+     * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Gyroscops\Api\Model\ConfigMap[]|\Psr\Http\Message\ResponseInterface|null
+     * @return \Gyroscops\Api\Model\Configuration|\Psr\Http\Message\ResponseInterface|null
      *
-     * @throws \Gyroscops\Api\Exception\AddValueConfigMapCollectionBadRequestException
-     * @throws \Gyroscops\Api\Exception\AddValueConfigMapCollectionUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\GetConfigurationItemNotFoundException
      */
-    public function addValueConfigMapCollection(string $id, ?\stdClass $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    public function getConfigurationItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\AddValueConfigMapCollection($id, $requestBody), $fetch);
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\GetConfigurationItem($id), $fetch);
     }
 
     /**
-     * Retrieves the collection of ConfigMap resources.
+     * Replaces the Configuration resource.
+     *
+     * @param string                                                                                   $id          Resource identifier
+     * @param \Gyroscops\Api\Model\ConfigurationJsonldEdit|\Gyroscops\Api\Model\ConfigurationEdit|null $requestBody
+     * @param string                                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Gyroscops\Api\Model\Configuration|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\EditConfigurationItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\EditConfigurationItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\EditConfigurationItemNotFoundException
+     */
+    public function editConfigurationItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\EditConfigurationItem($id, $requestBody), $fetch);
+    }
+
+    /**
+     * Change the configuration values inside an existing configurations storage.
+     *
+     * @param string                                                                                                                                     $id          Resource identifier
+     * @param \Gyroscops\Api\Model\ConfigurationChangeConfigurationValueInputJsonld|\Gyroscops\Api\Model\ConfigurationChangeConfigurationValueInput|null $requestBody
+     * @param string                                                                                                                                     $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Gyroscops\Api\Model\Configuration|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\ChangeValuesConfigurationItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\ChangeValuesConfigurationItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\ChangeValuesConfigurationItemNotFoundException
+     */
+    public function changeValuesConfigurationItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\ChangeValuesConfigurationItem($id, $requestBody), $fetch);
+    }
+
+    /**
+     * Remove some configuration values inside an existing configurations storage.
+     *
+     * @param string                                                                                                                                     $id          Resource identifier
+     * @param \Gyroscops\Api\Model\ConfigurationRemoveConfigurationValueInputJsonld|\Gyroscops\Api\Model\ConfigurationRemoveConfigurationValueInput|null $requestBody
+     * @param string                                                                                                                                     $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Gyroscops\Api\Model\Configuration|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\RemoveValuesConfigurationItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\RemoveValuesConfigurationItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\RemoveValuesConfigurationItemNotFoundException
+     */
+    public function removeValuesConfigurationItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\RemoveValuesConfigurationItem($id, $requestBody), $fetch);
+    }
+
+    /**
+     * Retrieves the collection of Configuration resources.
      *
      * @param array $queryParameters {
      *
@@ -921,20 +965,20 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Gyroscops\Api\Model\ConfigMap[]|\Psr\Http\Message\ResponseInterface|null
+     * @return \Gyroscops\Api\Model\Configuration[]|\Psr\Http\Message\ResponseInterface|null
      */
-    public function getConfigMapCollection(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function getConfigurationCollection(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\GetConfigMapCollection($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\GetConfigurationCollection($queryParameters), $fetch);
     }
 
     /**
      * Creates a Environment resource.
      *
-     * @param \Gyroscops\Api\Model\EnvironmentJsonld|\Gyroscops\Api\Model\Environment|null $requestBody
-     * @param string                                                                       $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\EnvironmentCreateEnvironmentInputJsonld|\Gyroscops\Api\Model\EnvironmentCreateEnvironmentInput|null $requestBody
+     * @param string                                                                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Gyroscops\Api\Model\Environment|\Psr\Http\Message\ResponseInterface|null
+     * @return \Gyroscops\Api\Model\EnvironmentRead|\Psr\Http\Message\ResponseInterface|null
      *
      * @throws \Gyroscops\Api\Exception\PostEnvironmentCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostEnvironmentCollectionUnprocessableEntityException
@@ -945,18 +989,107 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     }
 
     /**
+     * Removes the Environment resource.
+     *
+     * @param string $id    Resource identifier
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\DeleteEnvironmentItemNotFoundException
+     */
+    public function deleteEnvironmentItem(string $id, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\DeleteEnvironmentItem($id), $fetch);
+    }
+
+    /**
      * Retrieves a Environment resource.
      *
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Gyroscops\Api\Model\Environment|\Psr\Http\Message\ResponseInterface|null
+     * @return \Gyroscops\Api\Model\EnvironmentRead|\Psr\Http\Message\ResponseInterface|null
      *
      * @throws \Gyroscops\Api\Exception\GetEnvironmentItemNotFoundException
      */
     public function getEnvironmentItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\GetEnvironmentItem($id), $fetch);
+    }
+
+    /**
+     * Replaces the Environment resource.
+     *
+     * @param string                                                                                 $id          Resource identifier
+     * @param \Gyroscops\Api\Model\EnvironmentJsonldWrite|\Gyroscops\Api\Model\EnvironmentWrite|null $requestBody
+     * @param string                                                                                 $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Gyroscops\Api\Model\EnvironmentRead|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\EditEnvironmentItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\EditEnvironmentItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\EditEnvironmentItemNotFoundException
+     */
+    public function editEnvironmentItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\EditEnvironmentItem($id, $requestBody), $fetch);
+    }
+
+    /**
+     * Add variables from an existing configuration storage.
+     *
+     * @param string                                                                                                                                                         $configuration Configuration identifier
+     * @param string                                                                                                                                                         $id            Resource identifier
+     * @param \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConfigurationInputJsonld|\Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConfigurationInput|null $requestBody
+     * @param string                                                                                                                                                         $fetch         Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Gyroscops\Api\Model\EnvironmentRead|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\AddVariablesFromConfigurationEnvironmentItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\AddVariablesFromConfigurationEnvironmentItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\AddVariablesFromConfigurationEnvironmentItemNotFoundException
+     */
+    public function addVariablesFromConfigurationEnvironmentItem(string $configuration, string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\AddVariablesFromConfigurationEnvironmentItem($configuration, $id, $requestBody), $fetch);
+    }
+
+    /**
+     * Add variables with a constant value.
+     *
+     * @param string                                                                                                                                               $id          Resource identifier
+     * @param \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConstantInputJsonld|\Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConstantInput|null $requestBody
+     * @param string                                                                                                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Gyroscops\Api\Model\EnvironmentRead|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\AddVariablesFromConstantEnvironmentItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\AddVariablesFromConstantEnvironmentItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\AddVariablesFromConstantEnvironmentItemNotFoundException
+     */
+    public function addVariablesFromConstantEnvironmentItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\AddVariablesFromConstantEnvironmentItem($id, $requestBody), $fetch);
+    }
+
+    /**
+     * Add variables from an existing secret storage.
+     *
+     * @param string                                                                                                                                           $secret      Secret identifier
+     * @param string                                                                                                                                           $id          Resource identifier
+     * @param \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromSecretInputJsonld|\Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromSecretInput|null $requestBody
+     * @param string                                                                                                                                           $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Gyroscops\Api\Model\EnvironmentRead|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\AddVariablesFromSecretEnvironmentItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\AddVariablesFromSecretEnvironmentItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\AddVariablesFromSecretEnvironmentItemNotFoundException
+     */
+    public function addVariablesFromSecretEnvironmentItem(string $secret, string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\AddVariablesFromSecretEnvironmentItem($secret, $id, $requestBody), $fetch);
     }
 
     /**
@@ -969,7 +1102,7 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Gyroscops\Api\Model\Environment[]|\Psr\Http\Message\ResponseInterface|null
+     * @return \Gyroscops\Api\Model\EnvironmentRead[]|\Psr\Http\Message\ResponseInterface|null
      */
     public function getEnvironmentCollection(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
@@ -977,10 +1110,28 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     }
 
     /**
+     * Retrieves a Environment resource.
+     *
+     * @param string $id              Environment identifier
+     * @param array  $queryParameters {
+     *
+     *     @var int $page The collection page number
+     * }
+     *
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Gyroscops\Api\Model\VariableRead[]|\Psr\Http\Message\ResponseInterface|null
+     */
+    public function apiEnvironmentsVariablesGetSubresourceEnvironmentSubresource(string $id, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\ApiEnvironmentsVariablesGetSubresourceEnvironmentSubresource($id, $queryParameters), $fetch);
+    }
+
+    /**
      * Creates a Secret resource.
      *
-     * @param \Gyroscops\Api\Model\SecretSecretInputJsonld|\Gyroscops\Api\Model\SecretSecretInput|null $requestBody
-     * @param string                                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\SecretCreateSecretInputJsonld|\Gyroscops\Api\Model\SecretCreateSecretInput|null $requestBody
+     * @param string                                                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Gyroscops\Api\Model\Secret|\Psr\Http\Message\ResponseInterface|null
      *
@@ -990,6 +1141,21 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     public function postSecretCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PostSecretCollection($requestBody), $fetch);
+    }
+
+    /**
+     * Removes the Secret resource.
+     *
+     * @param string $id    Resource identifier
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\DeleteSecretItemNotFoundException
+     */
+    public function deleteSecretItem(string $id, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\DeleteSecretItem($id), $fetch);
     }
 
     /**
@@ -1008,19 +1174,57 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     }
 
     /**
-     * Adds a new Secret value to the Secret storage.
+     * Replaces the Secret resource.
      *
-     * @param string $id    Secret resource code
-     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param string                                                                     $id          Resource identifier
+     * @param \Gyroscops\Api\Model\SecretJsonldEdit|\Gyroscops\Api\Model\SecretEdit|null $requestBody
+     * @param string                                                                     $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Gyroscops\Api\Model\Secret[]|\Psr\Http\Message\ResponseInterface|null
+     * @return \Gyroscops\Api\Model\Secret|\Psr\Http\Message\ResponseInterface|null
      *
-     * @throws \Gyroscops\Api\Exception\AddValueSecretCollectionBadRequestException
-     * @throws \Gyroscops\Api\Exception\AddValueSecretCollectionUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\EditSecretItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\EditSecretItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\EditSecretItemNotFoundException
      */
-    public function addValueSecretCollection(string $id, ?\stdClass $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    public function editSecretItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\AddValueSecretCollection($id, $requestBody), $fetch);
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\EditSecretItem($id, $requestBody), $fetch);
+    }
+
+    /**
+     * Change the secret values values inside an existing secrets storage.
+     *
+     * @param string                                                                                                         $id          Resource identifier
+     * @param \Gyroscops\Api\Model\SecretChangeSecretValueInputJsonld|\Gyroscops\Api\Model\SecretChangeSecretValueInput|null $requestBody
+     * @param string                                                                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Gyroscops\Api\Model\Secret|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\ChangeValuesSecretItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\ChangeValuesSecretItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\ChangeValuesSecretItemNotFoundException
+     */
+    public function changeValuesSecretItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\ChangeValuesSecretItem($id, $requestBody), $fetch);
+    }
+
+    /**
+     * Remove some secret values inside an existing secrets storage.
+     *
+     * @param string                                                                                                         $id          Resource identifier
+     * @param \Gyroscops\Api\Model\SecretRemoveSecretValueInputJsonld|\Gyroscops\Api\Model\SecretRemoveSecretValueInput|null $requestBody
+     * @param string                                                                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Gyroscops\Api\Model\Secret|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\RemoveValuesSecretItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\RemoveValuesSecretItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\RemoveValuesSecretItemNotFoundException
+     */
+    public function removeValuesSecretItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\RemoveValuesSecretItem($id, $requestBody), $fetch);
     }
 
     /**
@@ -1041,99 +1245,51 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     }
 
     /**
-     * Creates a VariableFromConfigMap resource.
-     *
-     * @param \Gyroscops\Api\Model\VariableFromConfigMapJsonld|\Gyroscops\Api\Model\VariableFromConfigMap|null $requestBody
-     * @param string                                                                                           $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @return \Gyroscops\Api\Model\VariableFromConfigMap|\Psr\Http\Message\ResponseInterface|null
-     *
-     * @throws \Gyroscops\Api\Exception\PostVariableFromConfigMapCollectionBadRequestException
-     * @throws \Gyroscops\Api\Exception\PostVariableFromConfigMapCollectionUnprocessableEntityException
-     */
-    public function postVariableFromConfigMapCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PostVariableFromConfigMapCollection($requestBody), $fetch);
-    }
-
-    /**
-     * Retrieves a VariableFromConfigMap resource.
+     * Removes the VariableFromConfiguration resource.
      *
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Gyroscops\Api\Model\VariableFromConfigMap|\Psr\Http\Message\ResponseInterface|null
+     * @return \Psr\Http\Message\ResponseInterface|null
      *
-     * @throws \Gyroscops\Api\Exception\GetVariableFromConfigMapItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\DeleteVariableFromConfigurationItemNotFoundException
      */
-    public function getVariableFromConfigMapItem(string $id, string $fetch = self::FETCH_OBJECT)
+    public function deleteVariableFromConfigurationItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\GetVariableFromConfigMapItem($id), $fetch);
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\DeleteVariableFromConfigurationItem($id), $fetch);
     }
 
     /**
-     * Retrieves the collection of VariableFromConfigMap resources.
-     *
-     * @param array $queryParameters {
-     *
-     *     @var int $page The collection page number
-     * }
-     *
-     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @return \Gyroscops\Api\Model\VariableFromConfigMap[]|\Psr\Http\Message\ResponseInterface|null
-     */
-    public function getVariableFromConfigMapCollection(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\GetVariableFromConfigMapCollection($queryParameters), $fetch);
-    }
-
-    /**
-     * Creates a VariableFromSecret resource.
-     *
-     * @param \Gyroscops\Api\Model\VariableFromSecretJsonld|\Gyroscops\Api\Model\VariableFromSecret|null $requestBody
-     * @param string                                                                                     $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @return \Gyroscops\Api\Model\VariableFromSecret|\Psr\Http\Message\ResponseInterface|null
-     *
-     * @throws \Gyroscops\Api\Exception\PostVariableFromSecretCollectionBadRequestException
-     * @throws \Gyroscops\Api\Exception\PostVariableFromSecretCollectionUnprocessableEntityException
-     */
-    public function postVariableFromSecretCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PostVariableFromSecretCollection($requestBody), $fetch);
-    }
-
-    /**
-     * Retrieves a VariableFromSecret resource.
+     * Retrieves a VariableFromConfiguration resource.
      *
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Gyroscops\Api\Model\VariableFromSecret|\Psr\Http\Message\ResponseInterface|null
+     * @return \Gyroscops\Api\Model\VariableFromConfigurationRead|\Psr\Http\Message\ResponseInterface|null
      *
-     * @throws \Gyroscops\Api\Exception\GetVariableFromSecretItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\GetVariableFromConfigurationItemNotFoundException
      */
-    public function getVariableFromSecretItem(string $id, string $fetch = self::FETCH_OBJECT)
+    public function getVariableFromConfigurationItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\GetVariableFromSecretItem($id), $fetch);
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\GetVariableFromConfigurationItem($id), $fetch);
     }
 
     /**
-     * Retrieves the collection of VariableFromSecret resources.
+     * Replaces the VariableFromConfiguration resource.
      *
-     * @param array $queryParameters {
+     * @param string                                                                   $id          Resource identifier
+     * @param \Gyroscops\Api\Model\VariableFromConfigurationJsonldWrite|\stdClass|null $requestBody
+     * @param string                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     *     @var int $page The collection page number
-     * }
+     * @return \Gyroscops\Api\Model\VariableFromConfigurationRead|\Psr\Http\Message\ResponseInterface|null
      *
-     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @return \Gyroscops\Api\Model\VariableFromSecret[]|\Psr\Http\Message\ResponseInterface|null
+     * @throws \Gyroscops\Api\Exception\EditVariableFromConfigurationItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\EditVariableFromConfigurationItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\EditVariableFromConfigurationItemNotFoundException
      */
-    public function getVariableFromSecretCollection(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function editVariableFromConfigurationItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\GetVariableFromSecretCollection($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\EditVariableFromConfigurationItem($id, $requestBody), $fetch);
     }
 
     /**
@@ -1616,6 +1772,109 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     }
 
     /**
+     * Creates a pipeline compilation.
+     *
+     * @param \Gyroscops\Api\Model\CompilationCompilePipelineCommandInputJsonld|\Gyroscops\Api\Model\CompilationCompilePipelineCommandInput|null $requestBody
+     * @param string                                                                                                                             $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Gyroscops\Api\Model\CompilationCompilePipelineCommand|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\PostCompilationCollectionBadRequestException
+     * @throws \Gyroscops\Api\Exception\PostCompilationCollectionUnprocessableEntityException
+     */
+    public function postCompilationCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PostCompilationCollection($requestBody), $fetch);
+    }
+
+    /**
+     * Retrieves a Compilation resource.
+     *
+     * @param string $id    Resource identifier
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Gyroscops\Api\Model\Compilation|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetCompilationItemNotFoundException
+     */
+    public function getCompilationItem(string $id, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\GetCompilationItem($id), $fetch);
+    }
+
+    /**
+     * Retrieves a Compilation resource.
+     *
+     * @param string $id    Compilation identifier
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Gyroscops\Api\Model\Organization|\Psr\Http\Message\ResponseInterface|null
+     */
+    public function apiCompilationsOrganizationGetSubresourceCompilationSubresource(string $id, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\ApiCompilationsOrganizationGetSubresourceCompilationSubresource($id), $fetch);
+    }
+
+    /**
+     * Retrieves a Compilation resource.
+     *
+     * @param string $id    Compilation identifier
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Gyroscops\Api\Model\User|\Psr\Http\Message\ResponseInterface|null
+     */
+    public function apiCompilationsUserGetSubresourceCompilationSubresource(string $id, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\ApiCompilationsUserGetSubresourceCompilationSubresource($id), $fetch);
+    }
+
+    /**
+     * Retrieves a Compilation resource.
+     *
+     * @param string $id    Compilation identifier
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Gyroscops\Api\Model\Workspace|\Psr\Http\Message\ResponseInterface|null
+     */
+    public function apiCompilationsWorkspaceGetSubresourceCompilationSubresource(string $id, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\ApiCompilationsWorkspaceGetSubresourceCompilationSubresource($id), $fetch);
+    }
+
+    /**
+     * Retrieves the collection of Compilation resources.
+     *
+     * @param array $queryParameters {
+     *
+     *     @var int $page The collection page number
+     * }
+     *
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Gyroscops\Api\Model\Compilation[]|\Psr\Http\Message\ResponseInterface|null
+     */
+    public function getCompilationCollection(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\GetCompilationCollection($queryParameters), $fetch);
+    }
+
+    /**
+     * Declares a pipeline execution.
+     *
+     * @param \Gyroscops\Api\Model\ExecutionDeclarePipelineExecutionCommandInputJsonld|\Gyroscops\Api\Model\ExecutionDeclarePipelineExecutionCommandInput|null $requestBody
+     * @param string                                                                                                                                           $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\DeclareExecutionExecutionCollectionBadRequestException
+     * @throws \Gyroscops\Api\Exception\DeclareExecutionExecutionCollectionUnprocessableEntityException
+     */
+    public function declareExecutionExecutionCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\DeclareExecutionExecutionCollection($requestBody), $fetch);
+    }
+
+    /**
      * Retrieves a ExecutionPipelineJob resource.
      *
      * @param string $id    Resource identifier
@@ -1944,6 +2203,42 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     }
 
     /**
+     * Finishes a pipeline execution.
+     *
+     * @param string                                                                                 $id          Resource identifier
+     * @param \Gyroscops\Api\Model\ExecutionFinishPipelineExecutionCommandInputJsonld|\stdClass|null $requestBody
+     * @param string                                                                                 $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\FinishExecutionExecutionItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\FinishExecutionExecutionItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\FinishExecutionExecutionItemNotFoundException
+     */
+    public function finishExecutionExecutionItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\FinishExecutionExecutionItem($id, $requestBody), $fetch);
+    }
+
+    /**
+     * Interrupts a pipeline execution.
+     *
+     * @param string                                                                                    $id          Resource identifier
+     * @param \Gyroscops\Api\Model\ExecutionInterruptPipelineExecutionCommandInputJsonld|\stdClass|null $requestBody
+     * @param string                                                                                    $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\InterruptExecutionExecutionItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\InterruptExecutionExecutionItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\InterruptExecutionExecutionItemNotFoundException
+     */
+    public function interruptExecutionExecutionItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\InterruptExecutionExecutionItem($id, $requestBody), $fetch);
+    }
+
+    /**
      * Retrieves a Execution resource.
      *
      * @param string $id    Execution identifier
@@ -1980,6 +2275,78 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     public function apiExecutionsPipelineGetSubresourceExecutionSubresource(string $id, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\ApiExecutionsPipelineGetSubresourceExecutionSubresource($id), $fetch);
+    }
+
+    /**
+     * Resumes a pipeline execution.
+     *
+     * @param string                                                                                 $id          Resource identifier
+     * @param \Gyroscops\Api\Model\ExecutionResumePipelineExecutionCommandInputJsonld|\stdClass|null $requestBody
+     * @param string                                                                                 $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\ResumeExecutionExecutionItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\ResumeExecutionExecutionItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\ResumeExecutionExecutionItemNotFoundException
+     */
+    public function resumeExecutionExecutionItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\ResumeExecutionExecutionItem($id, $requestBody), $fetch);
+    }
+
+    /**
+     * Starts a pipeline execution.
+     *
+     * @param string                                                                                $id          Resource identifier
+     * @param \Gyroscops\Api\Model\ExecutionStartPipelineExecutionCommandInputJsonld|\stdClass|null $requestBody
+     * @param string                                                                                $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\StartExecutionExecutionItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\StartExecutionExecutionItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\StartExecutionExecutionItemNotFoundException
+     */
+    public function startExecutionExecutionItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\StartExecutionExecutionItem($id, $requestBody), $fetch);
+    }
+
+    /**
+     * Terminates a pipeline execution.
+     *
+     * @param string                                                                                                                                               $id          Resource identifier
+     * @param \Gyroscops\Api\Model\ExecutionTerminatePipelineExecutionCommandInputJsonld|\Gyroscops\Api\Model\ExecutionTerminatePipelineExecutionCommandInput|null $requestBody
+     * @param string                                                                                                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\TerminateExecutionExecutionItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\TerminateExecutionExecutionItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\TerminateExecutionExecutionItemNotFoundException
+     */
+    public function terminateExecutionExecutionItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\TerminateExecutionExecutionItem($id, $requestBody), $fetch);
+    }
+
+    /**
+     * Updates a pipeline execution state.
+     *
+     * @param string                                                                                                                                                   $id          Resource identifier
+     * @param \Gyroscops\Api\Model\ExecutionUpdatePipelineExecutionStateCommandInputJsonld|\Gyroscops\Api\Model\ExecutionUpdatePipelineExecutionStateCommandInput|null $requestBody
+     * @param string                                                                                                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\UpdateExecutionStateExecutionItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\UpdateExecutionStateExecutionItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\UpdateExecutionStateExecutionItemNotFoundException
+     */
+    public function updateExecutionStateExecutionItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\UpdateExecutionStateExecutionItem($id, $requestBody), $fetch);
     }
 
     /**
@@ -2045,154 +2412,19 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     }
 
     /**
-     * Declares a pipeline execution.
+     * Declares a docker pipeline.
      *
-     * @param \Gyroscops\Api\Model\ExecutionDeclarePipelineExecutionCommandInputJsonld|\Gyroscops\Api\Model\ExecutionDeclarePipelineExecutionCommandInput|null $requestBody
-     * @param string                                                                                                                                           $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
-     *
-     * @throws \Gyroscops\Api\Exception\DeclareExecutionExecutionCollectionBadRequestException
-     * @throws \Gyroscops\Api\Exception\DeclareExecutionExecutionCollectionUnprocessableEntityException
-     */
-    public function declareExecutionExecutionCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\DeclareExecutionExecutionCollection($requestBody), $fetch);
-    }
-
-    /**
-     * Finishes a pipeline execution.
-     *
-     * @param \Gyroscops\Api\Model\ExecutionFinishPipelineExecutionCommandInputJsonld|\Gyroscops\Api\Model\ExecutionFinishPipelineExecutionCommandInput|null $requestBody
-     * @param string                                                                                                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\PipelineDeclarePipelineCommandInputJsonld|\Gyroscops\Api\Model\PipelineDeclarePipelineCommandInput|null $requestBody
+     * @param string                                                                                                                       $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Psr\Http\Message\ResponseInterface|null
      *
-     * @throws \Gyroscops\Api\Exception\FinishExecutionExecutionCollectionBadRequestException
-     * @throws \Gyroscops\Api\Exception\FinishExecutionExecutionCollectionUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\DeclarePipelinePipelineCollectionBadRequestException
+     * @throws \Gyroscops\Api\Exception\DeclarePipelinePipelineCollectionUnprocessableEntityException
      */
-    public function finishExecutionExecutionCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
+    public function declarePipelinePipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\FinishExecutionExecutionCollection($requestBody), $fetch);
-    }
-
-    /**
-     * Interrupts a pipeline execution.
-     *
-     * @param \Gyroscops\Api\Model\ExecutionInterruptPipelineExecutionCommandInputJsonld|\Gyroscops\Api\Model\ExecutionInterruptPipelineExecutionCommandInput|null $requestBody
-     * @param string                                                                                                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
-     *
-     * @throws \Gyroscops\Api\Exception\InterruptExecutionExecutionCollectionBadRequestException
-     * @throws \Gyroscops\Api\Exception\InterruptExecutionExecutionCollectionUnprocessableEntityException
-     */
-    public function interruptExecutionExecutionCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\InterruptExecutionExecutionCollection($requestBody), $fetch);
-    }
-
-    /**
-     * Resumes a pipeline execution.
-     *
-     * @param \Gyroscops\Api\Model\ExecutionResumePipelineExecutionCommandInputJsonld|\Gyroscops\Api\Model\ExecutionResumePipelineExecutionCommandInput|null $requestBody
-     * @param string                                                                                                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
-     *
-     * @throws \Gyroscops\Api\Exception\ResumeExecutionExecutionCollectionBadRequestException
-     * @throws \Gyroscops\Api\Exception\ResumeExecutionExecutionCollectionUnprocessableEntityException
-     */
-    public function resumeExecutionExecutionCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\ResumeExecutionExecutionCollection($requestBody), $fetch);
-    }
-
-    /**
-     * Starts a pipeline execution.
-     *
-     * @param \Gyroscops\Api\Model\ExecutionStartPipelineExecutionCommandInputJsonld|\Gyroscops\Api\Model\ExecutionStartPipelineExecutionCommandInput|null $requestBody
-     * @param string                                                                                                                                       $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
-     *
-     * @throws \Gyroscops\Api\Exception\StartExecutionExecutionCollectionBadRequestException
-     * @throws \Gyroscops\Api\Exception\StartExecutionExecutionCollectionUnprocessableEntityException
-     */
-    public function startExecutionExecutionCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\StartExecutionExecutionCollection($requestBody), $fetch);
-    }
-
-    /**
-     * Terminates a pipeline execution.
-     *
-     * @param \Gyroscops\Api\Model\ExecutionTerminatePipelineExecutionCommandInputJsonld|\Gyroscops\Api\Model\ExecutionTerminatePipelineExecutionCommandInput|null $requestBody
-     * @param string                                                                                                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
-     *
-     * @throws \Gyroscops\Api\Exception\TerminateExecutionExecutionCollectionBadRequestException
-     * @throws \Gyroscops\Api\Exception\TerminateExecutionExecutionCollectionUnprocessableEntityException
-     */
-    public function terminateExecutionExecutionCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\TerminateExecutionExecutionCollection($requestBody), $fetch);
-    }
-
-    /**
-     * Updates a pipeline execution state.
-     *
-     * @param \Gyroscops\Api\Model\ExecutionUpdatePipelineExecutionStateCommandInputJsonld|\Gyroscops\Api\Model\ExecutionUpdatePipelineExecutionStateCommandInput|null $requestBody
-     * @param string                                                                                                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
-     *
-     * @throws \Gyroscops\Api\Exception\UpdateExecutionStateExecutionCollectionBadRequestException
-     * @throws \Gyroscops\Api\Exception\UpdateExecutionStateExecutionCollectionUnprocessableEntityException
-     */
-    public function updateExecutionStateExecutionCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\UpdateExecutionStateExecutionCollection($requestBody), $fetch);
-    }
-
-    /**
-     * Retrieves a PipelineCompilation resource.
-     *
-     * @param string $id    PipelineCompilation identifier
-     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @return \Gyroscops\Api\Model\Organization|\Psr\Http\Message\ResponseInterface|null
-     */
-    public function apiPipelineCompilationsOrganizationGetSubresourcePipelineCompilationSubresource(string $id, string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\ApiPipelineCompilationsOrganizationGetSubresourcePipelineCompilationSubresource($id), $fetch);
-    }
-
-    /**
-     * Retrieves a PipelineCompilation resource.
-     *
-     * @param string $id    PipelineCompilation identifier
-     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @return \Gyroscops\Api\Model\User|\Psr\Http\Message\ResponseInterface|null
-     */
-    public function apiPipelineCompilationsUserGetSubresourcePipelineCompilationSubresource(string $id, string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\ApiPipelineCompilationsUserGetSubresourcePipelineCompilationSubresource($id), $fetch);
-    }
-
-    /**
-     * Retrieves a PipelineCompilation resource.
-     *
-     * @param string $id    PipelineCompilation identifier
-     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @return \Gyroscops\Api\Model\Workspace|\Psr\Http\Message\ResponseInterface|null
-     */
-    public function apiPipelineCompilationsWorkspaceGetSubresourcePipelineCompilationSubresource(string $id, string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\ApiPipelineCompilationsWorkspaceGetSubresourcePipelineCompilationSubresource($id), $fetch);
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\DeclarePipelinePipelineCollection($requestBody), $fetch);
     }
 
     /**
@@ -2308,6 +2540,78 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     }
 
     /**
+     * Adds a composer auth to a pipeline.
+     *
+     * @param string                                                                                                                                       $id          Resource identifier
+     * @param \Gyroscops\Api\Model\PipelineAddPipelineComposerAuthCommandInputJsonld|\Gyroscops\Api\Model\PipelineAddPipelineComposerAuthCommandInput|null $requestBody
+     * @param string                                                                                                                                       $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\AddComposerAuthPipelinePipelineItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\AddComposerAuthPipelinePipelineItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\AddComposerAuthPipelinePipelineItemNotFoundException
+     */
+    public function addComposerAuthPipelinePipelineItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\AddComposerAuthPipelinePipelineItem($id, $requestBody), $fetch);
+    }
+
+    /**
+     * Adds PSR4 autoload composer to a pipeline.
+     *
+     * @param string                                                                                                                                                       $id          Resource identifier
+     * @param \Gyroscops\Api\Model\PipelineAddPipelineComposerPSR4AutoloadCommandInputJsonld|\Gyroscops\Api\Model\PipelineAddPipelineComposerPSR4AutoloadCommandInput|null $requestBody
+     * @param string                                                                                                                                                       $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\AddComposerAutoloadPipelinePipelineItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\AddComposerAutoloadPipelinePipelineItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\AddComposerAutoloadPipelinePipelineItemNotFoundException
+     */
+    public function addComposerAutoloadPipelinePipelineItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\AddComposerAutoloadPipelinePipelineItem($id, $requestBody), $fetch);
+    }
+
+    /**
+     * Adds a composer package to a pipeline.
+     *
+     * @param string                                                                                                                                             $id          Resource identifier
+     * @param \Gyroscops\Api\Model\PipelineAddPipelineComposerPackageCommandInputJsonld|\Gyroscops\Api\Model\PipelineAddPipelineComposerPackageCommandInput|null $requestBody
+     * @param string                                                                                                                                             $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\AddComposerPackagePipelinePipelineItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\AddComposerPackagePipelinePipelineItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\AddComposerPackagePipelinePipelineItemNotFoundException
+     */
+    public function addComposerPackagePipelinePipelineItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\AddComposerPackagePipelinePipelineItem($id, $requestBody), $fetch);
+    }
+
+    /**
+     * Adds a composer repository to a pipeline.
+     *
+     * @param string                                                                                                                                                   $id          Resource identifier
+     * @param \Gyroscops\Api\Model\PipelineAddPipelineComposerRepositoryCommandInputJsonld|\Gyroscops\Api\Model\PipelineAddPipelineComposerRepositoryCommandInput|null $requestBody
+     * @param string                                                                                                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\AddComposerRepositoryPipelinePipelineItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\AddComposerRepositoryPipelinePipelineItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\AddComposerRepositoryPipelinePipelineItemNotFoundException
+     */
+    public function addComposerRepositoryPipelinePipelineItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\AddComposerRepositoryPipelinePipelineItem($id, $requestBody), $fetch);
+    }
+
+    /**
      * Retrieves a Pipeline resource.
      *
      * @param string $id              Pipeline identifier
@@ -2318,11 +2622,29 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Gyroscops\Api\Model\PipelineCompilation[]|\Psr\Http\Message\ResponseInterface|null
+     * @return \Gyroscops\Api\Model\Compilation[]|\Psr\Http\Message\ResponseInterface|null
      */
     public function apiPipelinesCompilationsGetSubresourcePipelineSubresource(string $id, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\ApiPipelinesCompilationsGetSubresourcePipelineSubresource($id, $queryParameters), $fetch);
+    }
+
+    /**
+     * Creates a pipeline compilation.
+     *
+     * @param string                                                                                                                       $id          Resource identifier
+     * @param \Gyroscops\Api\Model\PipelineCompilePipelineCommandInputJsonld|\Gyroscops\Api\Model\PipelineCompilePipelineCommandInput|null $requestBody
+     * @param string                                                                                                                       $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\PipelineCompilationPipelineItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\PipelineCompilationPipelineItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\PipelineCompilationPipelineItemNotFoundException
+     */
+    public function pipelineCompilationPipelineItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PipelineCompilationPipelineItem($id, $requestBody), $fetch);
     }
 
     /**
@@ -2352,6 +2674,96 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     }
 
     /**
+     * Removes a composer auth from a pipeline.
+     *
+     * @param string                                                                                                                                             $id          Resource identifier
+     * @param \Gyroscops\Api\Model\PipelineRemovePipelineComposerAuthCommandInputJsonld|\Gyroscops\Api\Model\PipelineRemovePipelineComposerAuthCommandInput|null $requestBody
+     * @param string                                                                                                                                             $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\RemoveComposerAuthPipelinePipelineItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\RemoveComposerAuthPipelinePipelineItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\RemoveComposerAuthPipelinePipelineItemNotFoundException
+     */
+    public function removeComposerAuthPipelinePipelineItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\RemoveComposerAuthPipelinePipelineItem($id, $requestBody), $fetch);
+    }
+
+    /**
+     * Removes PSR4 autoload composer from a pipeline.
+     *
+     * @param string                                                                                                                                                             $id          Resource identifier
+     * @param \Gyroscops\Api\Model\PipelineRemovePipelineComposerPSR4AutoloadCommandInputJsonld|\Gyroscops\Api\Model\PipelineRemovePipelineComposerPSR4AutoloadCommandInput|null $requestBody
+     * @param string                                                                                                                                                             $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\RemoveComposerAutoloadPipelinePipelineItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\RemoveComposerAutoloadPipelinePipelineItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\RemoveComposerAutoloadPipelinePipelineItemNotFoundException
+     */
+    public function removeComposerAutoloadPipelinePipelineItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\RemoveComposerAutoloadPipelinePipelineItem($id, $requestBody), $fetch);
+    }
+
+    /**
+     * Removes a composer package from a pipeline.
+     *
+     * @param string                                                                                                                                                   $id          Resource identifier
+     * @param \Gyroscops\Api\Model\PipelineRemovePipelineComposerPackageCommandInputJsonld|\Gyroscops\Api\Model\PipelineRemovePipelineComposerPackageCommandInput|null $requestBody
+     * @param string                                                                                                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\RemoveComposerPackagePipelinePipelineItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\RemoveComposerPackagePipelinePipelineItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\RemoveComposerPackagePipelinePipelineItemNotFoundException
+     */
+    public function removeComposerPackagePipelinePipelineItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\RemoveComposerPackagePipelinePipelineItem($id, $requestBody), $fetch);
+    }
+
+    /**
+     * Adds a repository from a pipeline.
+     *
+     * @param string                                                                                                                                                         $id          Resource identifier
+     * @param \Gyroscops\Api\Model\PipelineRemovePipelineComposerRepositoryCommandInputJsonld|\Gyroscops\Api\Model\PipelineRemovePipelineComposerRepositoryCommandInput|null $requestBody
+     * @param string                                                                                                                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\RemoveComposerRepositoryPipelinePipelineItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\RemoveComposerRepositoryPipelinePipelineItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\RemoveComposerRepositoryPipelinePipelineItemNotFoundException
+     */
+    public function removeComposerRepositoryPipelinePipelineItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\RemoveComposerRepositoryPipelinePipelineItem($id, $requestBody), $fetch);
+    }
+
+    /**
+     * Appends a step to a pipeline.
+     *
+     * @param string                                                                                                                             $id          Resource identifier
+     * @param \Gyroscops\Api\Model\PipelineAppendPipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineAppendPipelineStepCommandInput|null $requestBody
+     * @param string                                                                                                                             $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\AppendPipelineStepPipelineItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\AppendPipelineStepPipelineItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\AppendPipelineStepPipelineItemNotFoundException
+     */
+    public function appendPipelineStepPipelineItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\AppendPipelineStepPipelineItem($id, $requestBody), $fetch);
+    }
+
+    /**
      * Removes a step from a pipeline.
      *
      * @param string $code  Step resource code
@@ -2368,21 +2780,128 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     }
 
     /**
+     * Adds a step after another one in a pipeline.
+     *
+     * @param string                                                                                                                                 $id          Resource identifier
+     * @param \Gyroscops\Api\Model\PipelineAddAfterPipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineAddAfterPipelineStepCommandInput|null $requestBody
+     * @param string                                                                                                                                 $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\AddAfterPipelineStepPipelineItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\AddAfterPipelineStepPipelineItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\AddAfterPipelineStepPipelineItemNotFoundException
+     */
+    public function addAfterPipelineStepPipelineItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\AddAfterPipelineStepPipelineItem($id, $requestBody), $fetch);
+    }
+
+    /**
+     * Adds a step before another one in a pipeline.
+     *
+     * @param string                                                                                                                                   $id          Resource identifier
+     * @param \Gyroscops\Api\Model\PipelineAddBeforePipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineAddBeforePipelineStepCommandInput|null $requestBody
+     * @param string                                                                                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\AddBeforePipelineStepPipelineItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\AddBeforePipelineStepPipelineItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\AddBeforePipelineStepPipelineItemNotFoundException
+     */
+    public function addBeforePipelineStepPipelineItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\AddBeforePipelineStepPipelineItem($id, $requestBody), $fetch);
+    }
+
+    /**
+     * Moves a step after another one in a pipeline.
+     *
+     * @param string                                                                                                                                   $id          Resource identifier
+     * @param \Gyroscops\Api\Model\PipelineMoveAfterPipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineMoveAfterPipelineStepCommandInput|null $requestBody
+     * @param string                                                                                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\MoveAfterPipelineStepPipelineItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\MoveAfterPipelineStepPipelineItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\MoveAfterPipelineStepPipelineItemNotFoundException
+     */
+    public function moveAfterPipelineStepPipelineItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\MoveAfterPipelineStepPipelineItem($id, $requestBody), $fetch);
+    }
+
+    /**
+     * Moves a step before another one in a pipeline.
+     *
+     * @param string                                                                                                                                     $id          Resource identifier
+     * @param \Gyroscops\Api\Model\PipelineMoveBeforePipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineMoveBeforePipelineStepCommandInput|null $requestBody
+     * @param string                                                                                                                                     $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\MoveBeforePipelineStepPipelineItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\MoveBeforePipelineStepPipelineItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\MoveBeforePipelineStepPipelineItemNotFoundException
+     */
+    public function moveBeforePipelineStepPipelineItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\MoveBeforePipelineStepPipelineItem($id, $requestBody), $fetch);
+    }
+
+    /**
+     * Adds a probe to a step.
+     *
+     * @param string                                                                                                                               $id          Resource identifier
+     * @param \Gyroscops\Api\Model\PipelineAddPipelineStepProbCommandInputJsonld|\Gyroscops\Api\Model\PipelineAddPipelineStepProbCommandInput|null $requestBody
+     * @param string                                                                                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\AddPipelineStepProbePipelineItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\AddPipelineStepProbePipelineItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\AddPipelineStepProbePipelineItemNotFoundException
+     */
+    public function addPipelineStepProbePipelineItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\AddPipelineStepProbePipelineItem($id, $requestBody), $fetch);
+    }
+
+    /**
      * Removes a probe from a step.
      *
-     * @param string $code       Step resource code
-     * @param string $probeCode  Probe resource code
-     * @param string $probeLabel Probe resource code
-     * @param string $id         Resource identifier
-     * @param string $fetch      Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param string $code      Step resource code
+     * @param string $probeCode Probe resource code
+     * @param string $id        Resource identifier
+     * @param string $fetch     Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Psr\Http\Message\ResponseInterface|null
      *
      * @throws \Gyroscops\Api\Exception\RemovePipelineStepProbePipelineItemNotFoundException
      */
-    public function removePipelineStepProbePipelineItem(string $code, string $probeCode, string $probeLabel, string $id, string $fetch = self::FETCH_OBJECT)
+    public function removePipelineStepProbePipelineItem(string $code, string $probeCode, string $id, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\RemovePipelineStepProbePipelineItem($code, $probeCode, $probeLabel, $id), $fetch);
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\RemovePipelineStepProbePipelineItem($code, $probeCode, $id), $fetch);
+    }
+
+    /**
+     * Replaces a step by another one in a pipeline.
+     *
+     * @param string                                                                                                                               $id          Resource identifier
+     * @param \Gyroscops\Api\Model\PipelineReplacePipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineReplacePipelineStepCommandInput|null $requestBody
+     * @param string                                                                                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\ReplacePipelineStepPipelineItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\ReplacePipelineStepPipelineItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\ReplacePipelineStepPipelineItemNotFoundException
+     */
+    public function replacePipelineStepPipelineItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\ReplacePipelineStepPipelineItem($id, $requestBody), $fetch);
     }
 
     /**
@@ -2401,6 +2920,24 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     public function apiPipelinesStepsGetSubresourcePipelineSubresource(string $id, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\ApiPipelinesStepsGetSubresourcePipelineSubresource($id, $queryParameters), $fetch);
+    }
+
+    /**
+     * Reorganizes the steps of a pipeline according to a given order.
+     *
+     * @param string                                                                                                                                 $id          Resource identifier
+     * @param \Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandInputJsonld|\Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandInput|null $requestBody
+     * @param string                                                                                                                                 $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\ReorderPipelineStepsPipelineItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\ReorderPipelineStepsPipelineItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\ReorderPipelineStepsPipelineItemNotFoundException
+     */
+    public function reorderPipelineStepsPipelineItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\ReorderPipelineStepsPipelineItem($id, $requestBody), $fetch);
     }
 
     /**
@@ -2436,260 +2973,24 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     }
 
     /**
-     * Declares a docker pipeline.
+    In order to differentiate the different types of schedules, we have set up a field named "type" :
+     * 1 => Immediate
+     * 2 => Once
+     * 3 => Times
+     * 4 => Until.
+
      *
-     * @param \Gyroscops\Api\Model\PipelineDeclarePipelineCommandInputJsonld|\Gyroscops\Api\Model\PipelineDeclarePipelineCommandInput|null $requestBody
-     * @param string                                                                                                                       $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleCommandInputJsonld|\Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleCommandInput|null $requestBody
+     * @param string                                                                                                                                       $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Psr\Http\Message\ResponseInterface|null
      *
-     * @throws \Gyroscops\Api\Exception\DeclarePipelinePipelineCollectionBadRequestException
-     * @throws \Gyroscops\Api\Exception\DeclarePipelinePipelineCollectionUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\PostScheduleCollectionBadRequestException
+     * @throws \Gyroscops\Api\Exception\PostScheduleCollectionUnprocessableEntityException
      */
-    public function declarePipelinePipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
+    public function postScheduleCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\DeclarePipelinePipelineCollection($requestBody), $fetch);
-    }
-
-    /**
-     * Adds PSR4 autoload composer to a pipeline.
-     *
-     * @param \Gyroscops\Api\Model\PipelineAddPipelineComposerPSR4AutoloadCommandInputJsonld|\Gyroscops\Api\Model\PipelineAddPipelineComposerPSR4AutoloadCommandInput|null $requestBody
-     * @param string                                                                                                                                                       $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
-     *
-     * @throws \Gyroscops\Api\Exception\AddComposerPipelinePipelineCollectionBadRequestException
-     * @throws \Gyroscops\Api\Exception\AddComposerPipelinePipelineCollectionUnprocessableEntityException
-     */
-    public function addComposerPipelinePipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\AddComposerPipelinePipelineCollection($requestBody), $fetch);
-    }
-
-    /**
-     * Retrieves the collection of PipelineCompilation resources.
-     *
-     * @param array $queryParameters {
-     *
-     *     @var int $page The collection page number
-     * }
-     *
-     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @return \Gyroscops\Api\Model\PipelineCompilation[]|\Psr\Http\Message\ResponseInterface|null
-     */
-    public function getPipelineCompilationCollection(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\GetPipelineCompilationCollection($queryParameters), $fetch);
-    }
-
-    /**
-     * Creates a pipeline compilation.
-     *
-     * @param \Gyroscops\Api\Model\PipelineCompilePipelineCommandInputJsonld|\Gyroscops\Api\Model\PipelineCompilePipelineCommandInput|null $requestBody
-     * @param string                                                                                                                       $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
-     *
-     * @throws \Gyroscops\Api\Exception\PipelineCompilationPipelineCollectionBadRequestException
-     * @throws \Gyroscops\Api\Exception\PipelineCompilationPipelineCollectionUnprocessableEntityException
-     */
-    public function pipelineCompilationPipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PipelineCompilationPipelineCollection($requestBody), $fetch);
-    }
-
-    /**
-     * Adds a step after another one in a pipeline.
-     *
-     * @param \Gyroscops\Api\Model\PipelineAddAfterPipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineAddAfterPipelineStepCommandInput|null $requestBody
-     * @param string                                                                                                                                 $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
-     *
-     * @throws \Gyroscops\Api\Exception\AddAfterPipelineStepPipelineCollectionBadRequestException
-     * @throws \Gyroscops\Api\Exception\AddAfterPipelineStepPipelineCollectionUnprocessableEntityException
-     */
-    public function addAfterPipelineStepPipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\AddAfterPipelineStepPipelineCollection($requestBody), $fetch);
-    }
-
-    /**
-     * Adds a step before another one in a pipeline.
-     *
-     * @param \Gyroscops\Api\Model\PipelineAddBeforePipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineAddBeforePipelineStepCommandInput|null $requestBody
-     * @param string                                                                                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
-     *
-     * @throws \Gyroscops\Api\Exception\AddBeforePipelineStepPipelineCollectionBadRequestException
-     * @throws \Gyroscops\Api\Exception\AddBeforePipelineStepPipelineCollectionUnprocessableEntityException
-     */
-    public function addBeforePipelineStepPipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\AddBeforePipelineStepPipelineCollection($requestBody), $fetch);
-    }
-
-    /**
-     * Appends a step to a pipeline.
-     *
-     * @param \Gyroscops\Api\Model\PipelineAppendPipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineAppendPipelineStepCommandInput|null $requestBody
-     * @param string                                                                                                                             $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
-     *
-     * @throws \Gyroscops\Api\Exception\AppendPipelineStepPipelineCollectionBadRequestException
-     * @throws \Gyroscops\Api\Exception\AppendPipelineStepPipelineCollectionUnprocessableEntityException
-     */
-    public function appendPipelineStepPipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\AppendPipelineStepPipelineCollection($requestBody), $fetch);
-    }
-
-    /**
-     * Moves a step after another one in a pipeline.
-     *
-     * @param \Gyroscops\Api\Model\PipelineMoveAfterPipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineMoveAfterPipelineStepCommandInput|null $requestBody
-     * @param string                                                                                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
-     *
-     * @throws \Gyroscops\Api\Exception\MoveAfterPipelineStepPipelineCollectionBadRequestException
-     * @throws \Gyroscops\Api\Exception\MoveAfterPipelineStepPipelineCollectionUnprocessableEntityException
-     */
-    public function moveAfterPipelineStepPipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\MoveAfterPipelineStepPipelineCollection($requestBody), $fetch);
-    }
-
-    /**
-     * Moves a step before another one in a pipeline.
-     *
-     * @param \Gyroscops\Api\Model\PipelineMoveBeforePipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineMoveBeforePipelineStepCommandInput|null $requestBody
-     * @param string                                                                                                                                     $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
-     *
-     * @throws \Gyroscops\Api\Exception\MoveBeforePipelineStepPipelineCollectionBadRequestException
-     * @throws \Gyroscops\Api\Exception\MoveBeforePipelineStepPipelineCollectionUnprocessableEntityException
-     */
-    public function moveBeforePipelineStepPipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\MoveBeforePipelineStepPipelineCollection($requestBody), $fetch);
-    }
-
-    /**
-     * Adds a probe to a step.
-     *
-     * @param \Gyroscops\Api\Model\PipelineAddPipelineStepProbCommandInputJsonld|\Gyroscops\Api\Model\PipelineAddPipelineStepProbCommandInput|null $requestBody
-     * @param string                                                                                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
-     *
-     * @throws \Gyroscops\Api\Exception\AddPipelineStepProbePipelineCollectionBadRequestException
-     * @throws \Gyroscops\Api\Exception\AddPipelineStepProbePipelineCollectionUnprocessableEntityException
-     */
-    public function addPipelineStepProbePipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\AddPipelineStepProbePipelineCollection($requestBody), $fetch);
-    }
-
-    /**
-     * Reorganizes the steps of a pipeline according to a given order.
-     *
-     * @param \Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandInputJsonld|\Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandInput|null $requestBody
-     * @param string                                                                                                                                 $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
-     *
-     * @throws \Gyroscops\Api\Exception\ReorderPipelineStepsPipelineCollectionBadRequestException
-     * @throws \Gyroscops\Api\Exception\ReorderPipelineStepsPipelineCollectionUnprocessableEntityException
-     */
-    public function reorderPipelineStepsPipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\ReorderPipelineStepsPipelineCollection($requestBody), $fetch);
-    }
-
-    /**
-     * Replaces a step by another one in a pipeline.
-     *
-     * @param \Gyroscops\Api\Model\PipelineReplacePipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineReplacePipelineStepCommandInput|null $requestBody
-     * @param string                                                                                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
-     *
-     * @throws \Gyroscops\Api\Exception\ReplacePipelineStepPipelineCollectionBadRequestException
-     * @throws \Gyroscops\Api\Exception\ReplacePipelineStepPipelineCollectionUnprocessableEntityException
-     */
-    public function replacePipelineStepPipelineCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\ReplacePipelineStepPipelineCollection($requestBody), $fetch);
-    }
-
-    /**
-     * Schedule a pipeline execution immediately.
-     *
-     * @param \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleImmediateCommandInputJsonld|\Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleImmediateCommandInput|null $requestBody
-     * @param string                                                                                                                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @return \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleImmediateCommand|\Psr\Http\Message\ResponseInterface|null
-     *
-     * @throws \Gyroscops\Api\Exception\ScheduleImmediateScheduleCollectionBadRequestException
-     * @throws \Gyroscops\Api\Exception\ScheduleImmediateScheduleCollectionUnprocessableEntityException
-     */
-    public function scheduleImmediateScheduleCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\ScheduleImmediateScheduleCollection($requestBody), $fetch);
-    }
-
-    /**
-     * Schedule an immediate pipeline execution.
-     *
-     * @param \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleOnceCommandInputJsonld|\Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleOnceCommandInput|null $requestBody
-     * @param string                                                                                                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @return \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleOnceCommand|\Psr\Http\Message\ResponseInterface|null
-     *
-     * @throws \Gyroscops\Api\Exception\ScheduleOnceScheduleCollectionBadRequestException
-     * @throws \Gyroscops\Api\Exception\ScheduleOnceScheduleCollectionUnprocessableEntityException
-     */
-    public function scheduleOnceScheduleCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\ScheduleOnceScheduleCollection($requestBody), $fetch);
-    }
-
-    /**
-     * Schedule a recurring pipeline execution.
-     *
-     * @param \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleTimesCommandInputJsonld|\Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleTimesCommandInput|null $requestBody
-     * @param string                                                                                                                                                 $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @return \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleTimesCommand|\Psr\Http\Message\ResponseInterface|null
-     *
-     * @throws \Gyroscops\Api\Exception\ScheduleTimesScheduleCollectionBadRequestException
-     * @throws \Gyroscops\Api\Exception\ScheduleTimesScheduleCollectionUnprocessableEntityException
-     */
-    public function scheduleTimesScheduleCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\ScheduleTimesScheduleCollection($requestBody), $fetch);
-    }
-
-    /**
-     * Schedule a delayed pipeline execution.
-     *
-     * @param \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleUntilCommandInputJsonld|\Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleUntilCommandInput|null $requestBody
-     * @param string                                                                                                                                                 $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @return \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleUntilCommand|\Psr\Http\Message\ResponseInterface|null
-     *
-     * @throws \Gyroscops\Api\Exception\ScheduleUntilScheduleCollectionBadRequestException
-     * @throws \Gyroscops\Api\Exception\ScheduleUntilScheduleCollectionUnprocessableEntityException
-     */
-    public function scheduleUntilScheduleCollection($requestBody = null, string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\ScheduleUntilScheduleCollection($requestBody), $fetch);
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\PostScheduleCollection($requestBody), $fetch);
     }
 
     /**
@@ -2914,6 +3215,41 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     }
 
     /**
+     * Retrieves the collection of WorkflowJobPipeline resources.
+     *
+     * @param array $queryParameters {
+     *
+     *     @var int $page The collection page number
+     * }
+     *
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Gyroscops\Api\Model\WorkflowJobPipeline[]|\Psr\Http\Message\ResponseInterface|null
+     */
+    public function getWorkflowJobPipelineCollection(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\GetWorkflowJobPipelineCollection($queryParameters), $fetch);
+    }
+
+    /**
+     * Retrieves a WorkflowJobPipeline resource.
+     *
+     * @param string $id              WorkflowJobPipeline identifier
+     * @param array  $queryParameters {
+     *
+     *     @var int $page The collection page number
+     * }
+     *
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Gyroscops\Api\Model\PipelineStep[]|\Psr\Http\Message\ResponseInterface|null
+     */
+    public function apiWorkflowJobPipelinesStepsGetSubresourceWorkflowJobPipelineSubresource(string $id, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\ApiWorkflowJobPipelinesStepsGetSubresourceWorkflowJobPipelineSubresource($id, $queryParameters), $fetch);
+    }
+
+    /**
      * Retrieves a Workflow resource.
      *
      * @param string $id    Resource identifier
@@ -3003,18 +3339,99 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     }
 
     /**
-     * Retrieves a PipelineCompilation resource.
+     * Removes the VariableFromConstant resource.
      *
      * @param string $id    Resource identifier
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Gyroscops\Api\Model\PipelineCompilation|\Psr\Http\Message\ResponseInterface|null
+     * @return \Psr\Http\Message\ResponseInterface|null
      *
-     * @throws \Gyroscops\Api\Exception\GetPipelineCompilationItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\DeleteVariableFromConstantItemNotFoundException
      */
-    public function getPipelineCompilationItem(string $id, string $fetch = self::FETCH_OBJECT)
+    public function deleteVariableFromConstantItem(string $id, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\GetPipelineCompilationItem($id), $fetch);
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\DeleteVariableFromConstantItem($id), $fetch);
+    }
+
+    /**
+     * Retrieves a VariableFromConstant resource.
+     *
+     * @param string $id    Resource identifier
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Gyroscops\Api\Model\VariableFromConstantRead|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetVariableFromConstantItemNotFoundException
+     */
+    public function getVariableFromConstantItem(string $id, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\GetVariableFromConstantItem($id), $fetch);
+    }
+
+    /**
+     * Replaces the VariableFromConstant resource.
+     *
+     * @param string                                                              $id          Resource identifier
+     * @param \Gyroscops\Api\Model\VariableFromConstantJsonldWrite|\stdClass|null $requestBody
+     * @param string                                                              $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Gyroscops\Api\Model\VariableFromConstantRead|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\EditVariableFromConstantItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\EditVariableFromConstantItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\EditVariableFromConstantItemNotFoundException
+     */
+    public function editVariableFromConstantItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\EditVariableFromConstantItem($id, $requestBody), $fetch);
+    }
+
+    /**
+     * Removes the VariableFromSecret resource.
+     *
+     * @param string $id    Resource identifier
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\DeleteVariableFromSecretItemNotFoundException
+     */
+    public function deleteVariableFromSecretItem(string $id, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\DeleteVariableFromSecretItem($id), $fetch);
+    }
+
+    /**
+     * Retrieves a VariableFromSecret resource.
+     *
+     * @param string $id    Resource identifier
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Gyroscops\Api\Model\VariableFromSecretRead|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\GetVariableFromSecretItemNotFoundException
+     */
+    public function getVariableFromSecretItem(string $id, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\GetVariableFromSecretItem($id), $fetch);
+    }
+
+    /**
+     * Replaces the VariableFromSecret resource.
+     *
+     * @param string                                                            $id          Resource identifier
+     * @param \Gyroscops\Api\Model\VariableFromSecretJsonldWrite|\stdClass|null $requestBody
+     * @param string                                                            $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Gyroscops\Api\Model\VariableFromSecretRead|\Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws \Gyroscops\Api\Exception\EditVariableFromSecretItemBadRequestException
+     * @throws \Gyroscops\Api\Exception\EditVariableFromSecretItemUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\EditVariableFromSecretItemNotFoundException
+     */
+    public function editVariableFromSecretItem(string $id, $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Gyroscops\Api\Endpoint\EditVariableFromSecretItem($id, $requestBody), $fetch);
     }
 
     public static function create($httpClient = null, array $additionalPlugins = [], array $additionalNormalizers = [])
@@ -3022,7 +3439,7 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
         if (null === $httpClient) {
             $httpClient = \Http\Discovery\Psr18ClientDiscovery::find();
             $plugins = [];
-            if (\count($additionalPlugins) > 0) {
+            if (count($additionalPlugins) > 0) {
                 $plugins = array_merge($plugins, $additionalPlugins);
             }
             $httpClient = new \Http\Client\Common\PluginClient($httpClient, $plugins);
@@ -3030,7 +3447,7 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
         $requestFactory = \Http\Discovery\Psr17FactoryDiscovery::findRequestFactory();
         $streamFactory = \Http\Discovery\Psr17FactoryDiscovery::findStreamFactory();
         $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new \Gyroscops\Api\Normalizer\JaneObjectNormalizer()];
-        if (\count($additionalNormalizers) > 0) {
+        if (count($additionalNormalizers) > 0) {
             $normalizers = array_merge($normalizers, $additionalNormalizers);
         }
         $serializer = new \Symfony\Component\Serializer\Serializer($normalizers, [new \Symfony\Component\Serializer\Encoder\JsonEncoder(new \Symfony\Component\Serializer\Encoder\JsonEncode(), new \Symfony\Component\Serializer\Encoder\JsonDecode(['json_decode_associative' => true]))]);

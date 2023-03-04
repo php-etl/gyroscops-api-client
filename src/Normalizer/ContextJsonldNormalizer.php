@@ -27,19 +27,15 @@ class ContextJsonldNormalizer implements DenormalizerInterface, NormalizerInterf
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\ContextJsonld' === $type;
+        return $type === \Gyroscops\Api\Model\ContextJsonld::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\ContextJsonld' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\ContextJsonld::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,29 +50,29 @@ class ContextJsonldNormalizer implements DenormalizerInterface, NormalizerInterf
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
+        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
             $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
             $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
+        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
+        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
             $object->setType(null);
         }
-        if (\array_key_exists('step', $data) && null !== $data['step']) {
+        if (\array_key_exists('step', $data) && $data['step'] !== null) {
             $object->setStep($data['step']);
-        } elseif (\array_key_exists('step', $data) && null === $data['step']) {
+        } elseif (\array_key_exists('step', $data) && $data['step'] === null) {
             $object->setStep(null);
         }
-        if (\array_key_exists('fixedScale', $data) && null !== $data['fixedScale']) {
+        if (\array_key_exists('fixedScale', $data) && $data['fixedScale'] !== null) {
             $object->setFixedScale($data['fixedScale']);
-        } elseif (\array_key_exists('fixedScale', $data) && null === $data['fixedScale']) {
+        } elseif (\array_key_exists('fixedScale', $data) && $data['fixedScale'] === null) {
             $object->setFixedScale(null);
         }
 
@@ -84,13 +80,12 @@ class ContextJsonldNormalizer implements DenormalizerInterface, NormalizerInterf
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
-        return [];
+        $data = [];
+
+        return $data;
     }
 }

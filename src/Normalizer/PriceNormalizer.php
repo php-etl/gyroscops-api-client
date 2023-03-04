@@ -27,19 +27,15 @@ class PriceNormalizer implements DenormalizerInterface, NormalizerInterface, Den
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\Price' === $type;
+        return $type === \Gyroscops\Api\Model\Price::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\Price' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\Price::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,9 +50,9 @@ class PriceNormalizer implements DenormalizerInterface, NormalizerInterface, Den
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('price', $data) && null !== $data['price']) {
+        if (\array_key_exists('price', $data) && $data['price'] !== null) {
             $object->setPrice($data['price']);
-        } elseif (\array_key_exists('price', $data) && null === $data['price']) {
+        } elseif (\array_key_exists('price', $data) && $data['price'] === null) {
             $object->setPrice(null);
         }
 
@@ -64,9 +60,6 @@ class PriceNormalizer implements DenormalizerInterface, NormalizerInterface, Den
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

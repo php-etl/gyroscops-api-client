@@ -15,22 +15,19 @@ class RemovePipelineStepProbePipelineItem extends \Gyroscops\Api\Runtime\Client\
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $code;
     protected $probe_code;
-    protected $probe_label;
     protected $id;
 
     /**
      * Removes a probe from a step.
      *
-     * @param string $code       Step resource code
-     * @param string $probeCode  Probe resource code
-     * @param string $probeLabel Probe resource code
-     * @param string $id         Resource identifier
+     * @param string $code      Step resource code
+     * @param string $probeCode Probe resource code
+     * @param string $id        Resource identifier
      */
-    public function __construct(string $code, string $probeCode, string $probeLabel, string $id)
+    public function __construct(string $code, string $probeCode, string $id)
     {
         $this->code = $code;
         $this->probe_code = $probeCode;
-        $this->probe_label = $probeLabel;
         $this->id = $id;
     }
 
@@ -41,7 +38,7 @@ class RemovePipelineStepProbePipelineItem extends \Gyroscops\Api\Runtime\Client\
 
     public function getUri(): string
     {
-        return str_replace(['{code}', '{probe_code}', '{probe_label}', '{id}'], [$this->code, $this->probe_code, $this->probe_label, $this->id], '/runtime/pipeline/{id}/step/{code}/probes/{probeCode}/{probeLabel}');
+        return str_replace(['{code}', '{probe_code}', '{id}'], [$this->code, $this->probe_code, $this->id], '/runtime/pipeline/{id}/step/{code}/probe/{probeCode}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
@@ -51,6 +48,8 @@ class RemovePipelineStepProbePipelineItem extends \Gyroscops\Api\Runtime\Client\
 
     /**
      * {@inheritdoc}
+     *
+     * @return null
      *
      * @throws \Gyroscops\Api\Exception\RemovePipelineStepProbePipelineItemNotFoundException
      */

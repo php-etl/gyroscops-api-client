@@ -27,19 +27,15 @@ class ExecutionWorkflowJsonldNormalizer implements DenormalizerInterface, Normal
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\ExecutionWorkflowJsonld' === $type;
+        return $type === \Gyroscops\Api\Model\ExecutionWorkflowJsonld::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\ExecutionWorkflowJsonld' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\ExecutionWorkflowJsonld::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,38 +50,38 @@ class ExecutionWorkflowJsonldNormalizer implements DenormalizerInterface, Normal
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
-            $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
-            $object->setContext(null);
-        }
-        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
+        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
+        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
             $object->setType(null);
         }
-        if (\array_key_exists('id', $data) && null !== $data['id']) {
+        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
+            $object->setContext($data['@context']);
+        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
+            $object->setContext(null);
+        }
+        if (\array_key_exists('id', $data) && $data['id'] !== null) {
             $object->setId2($data['id']);
-        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId2(null);
         }
-        if (\array_key_exists('jobs', $data) && null !== $data['jobs']) {
+        if (\array_key_exists('jobs', $data) && $data['jobs'] !== null) {
             $values = [];
             foreach ($data['jobs'] as $value) {
                 $values[] = $value;
             }
             $object->setJobs($values);
-        } elseif (\array_key_exists('jobs', $data) && null === $data['jobs']) {
+        } elseif (\array_key_exists('jobs', $data) && $data['jobs'] === null) {
             $object->setJobs(null);
         }
-        if (\array_key_exists('execution', $data) && null !== $data['execution']) {
+        if (\array_key_exists('execution', $data) && $data['execution'] !== null) {
             $object->setExecution($data['execution']);
-        } elseif (\array_key_exists('execution', $data) && null === $data['execution']) {
+        } elseif (\array_key_exists('execution', $data) && $data['execution'] === null) {
             $object->setExecution(null);
         }
 
@@ -93,9 +89,6 @@ class ExecutionWorkflowJsonldNormalizer implements DenormalizerInterface, Normal
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

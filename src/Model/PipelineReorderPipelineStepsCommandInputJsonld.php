@@ -25,10 +25,6 @@ class PipelineReorderPipelineStepsCommandInputJsonld
      */
     protected $type;
     /**
-     * @var string|null
-     */
-    protected $pipeline;
-    /**
      * @var string[]|null
      */
     protected $codes;
@@ -41,10 +37,7 @@ class PipelineReorderPipelineStepsCommandInputJsonld
         return $this->context;
     }
 
-    /**
-     * @param mixed $context
-     */
-    public function setContext($context): self
+    public function setContext(mixed $context): self
     {
         $this->context = $context;
 
@@ -71,18 +64,6 @@ class PipelineReorderPipelineStepsCommandInputJsonld
     public function setType(?string $type): self
     {
         $this->type = $type;
-
-        return $this;
-    }
-
-    public function getPipeline(): ?string
-    {
-        return $this->pipeline;
-    }
-
-    public function setPipeline(?string $pipeline): self
-    {
-        $this->pipeline = $pipeline;
 
         return $this;
     }

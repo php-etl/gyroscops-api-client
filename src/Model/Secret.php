@@ -23,6 +23,10 @@ class Secret
     /**
      * @var string|null
      */
+    protected $slug;
+    /**
+     * @var string|null
+     */
     protected $description;
     /**
      * @var string|null
@@ -32,6 +36,10 @@ class Secret
      * @var string|null
      */
     protected $workspace;
+    /**
+     * @var string[]|null
+     */
+    protected $contents;
     /**
      * @var mixed|null
      */
@@ -57,6 +65,18 @@ class Secret
     public function setName(?string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
@@ -98,6 +118,24 @@ class Secret
     }
 
     /**
+     * @return string[]|null
+     */
+    public function getContents(): ?iterable
+    {
+        return $this->contents;
+    }
+
+    /**
+     * @param string[]|null $contents
+     */
+    public function setContents(?iterable $contents): self
+    {
+        $this->contents = $contents;
+
+        return $this;
+    }
+
+    /**
      * @return mixed
      */
     public function getIterator()
@@ -105,10 +143,7 @@ class Secret
         return $this->iterator;
     }
 
-    /**
-     * @param mixed $iterator
-     */
-    public function setIterator($iterator): self
+    public function setIterator(mixed $iterator): self
     {
         $this->iterator = $iterator;
 

@@ -72,18 +72,6 @@ class ExecutionJsonldRead
      * @var string|null
      */
     protected $reason;
-    /**
-     * @var string|null
-     */
-    protected $pipeline;
-    /**
-     * @var string|null
-     */
-    protected $workflow;
-    /**
-     * @var mixed|null
-     */
-    protected $action;
 
     public function getId(): ?string
     {
@@ -117,10 +105,7 @@ class ExecutionJsonldRead
         return $this->context;
     }
 
-    /**
-     * @param mixed $context
-     */
-    public function setContext($context): self
+    public function setContext(mixed $context): self
     {
         $this->context = $context;
 
@@ -267,48 +252,6 @@ class ExecutionJsonldRead
     public function setReason(?string $reason): self
     {
         $this->reason = $reason;
-
-        return $this;
-    }
-
-    public function getPipeline(): ?string
-    {
-        return $this->pipeline;
-    }
-
-    public function setPipeline(?string $pipeline): self
-    {
-        $this->pipeline = $pipeline;
-
-        return $this;
-    }
-
-    public function getWorkflow(): ?string
-    {
-        return $this->workflow;
-    }
-
-    public function setWorkflow(?string $workflow): self
-    {
-        $this->workflow = $workflow;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAction()
-    {
-        return $this->action;
-    }
-
-    /**
-     * @param mixed $action
-     */
-    public function setAction($action): self
-    {
-        $this->action = $action;
 
         return $this;
     }

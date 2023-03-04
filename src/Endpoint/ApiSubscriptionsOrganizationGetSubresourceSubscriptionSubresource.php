@@ -52,8 +52,8 @@ class ApiSubscriptionsOrganizationGetSubresourceSubscriptionSubresource extends 
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Organization', 'json');
+        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+            return $serializer->deserialize($body, \Gyroscops\Api\Model\Organization::class, 'json');
         }
     }
 

@@ -27,19 +27,15 @@ class PipelineReorderPipelineStepsCommandInputJsonldNormalizer implements Denorm
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\PipelineReorderPipelineStepsCommandInputJsonld' === $type;
+        return $type === \Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandInputJsonld::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\PipelineReorderPipelineStepsCommandInputJsonld' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandInputJsonld::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,33 +50,28 @@ class PipelineReorderPipelineStepsCommandInputJsonldNormalizer implements Denorm
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
+        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
             $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
             $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
+        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
+        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
             $object->setType(null);
         }
-        if (\array_key_exists('pipeline', $data) && null !== $data['pipeline']) {
-            $object->setPipeline($data['pipeline']);
-        } elseif (\array_key_exists('pipeline', $data) && null === $data['pipeline']) {
-            $object->setPipeline(null);
-        }
-        if (\array_key_exists('codes', $data) && null !== $data['codes']) {
+        if (\array_key_exists('codes', $data) && $data['codes'] !== null) {
             $values = [];
             foreach ($data['codes'] as $value) {
                 $values[] = $value;
             }
             $object->setCodes($values);
-        } elseif (\array_key_exists('codes', $data) && null === $data['codes']) {
+        } elseif (\array_key_exists('codes', $data) && $data['codes'] === null) {
             $object->setCodes(null);
         }
 
@@ -88,24 +79,16 @@ class PipelineReorderPipelineStepsCommandInputJsonldNormalizer implements Denorm
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getPipeline()) {
-            $data['pipeline'] = $object->getPipeline();
+        $values = [];
+        foreach ($object->getCodes() as $value) {
+            $values[] = $value;
         }
-        if (null !== $object->getCodes()) {
-            $values = [];
-            foreach ($object->getCodes() as $value) {
-                $values[] = $value;
-            }
-            $data['codes'] = $values;
-        }
+        $data['codes'] = $values;
 
         return $data;
     }

@@ -27,19 +27,15 @@ class OfferNormalizer implements DenormalizerInterface, NormalizerInterface, Den
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\Offer' === $type;
+        return $type === \Gyroscops\Api\Model\Offer::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\Offer' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\Offer::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,43 +50,43 @@ class OfferNormalizer implements DenormalizerInterface, NormalizerInterface, Den
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('options', $data) && null !== $data['options']) {
+        if (\array_key_exists('options', $data) && $data['options'] !== null) {
             $values = [];
             foreach ($data['options'] as $value) {
                 $values[] = $value;
             }
             $object->setOptions($values);
-        } elseif (\array_key_exists('options', $data) && null === $data['options']) {
+        } elseif (\array_key_exists('options', $data) && $data['options'] === null) {
             $object->setOptions(null);
         }
-        if (\array_key_exists('id', $data) && null !== $data['id']) {
+        if (\array_key_exists('id', $data) && $data['id'] !== null) {
             $object->setId($data['id']);
-        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('sku', $data) && null !== $data['sku']) {
+        if (\array_key_exists('sku', $data) && $data['sku'] !== null) {
             $object->setSku($data['sku']);
-        } elseif (\array_key_exists('sku', $data) && null === $data['sku']) {
+        } elseif (\array_key_exists('sku', $data) && $data['sku'] === null) {
             $object->setSku(null);
         }
-        if (\array_key_exists('name', $data) && null !== $data['name']) {
+        if (\array_key_exists('name', $data) && $data['name'] !== null) {
             $object->setName($data['name']);
-        } elseif (\array_key_exists('name', $data) && null === $data['name']) {
+        } elseif (\array_key_exists('name', $data) && $data['name'] === null) {
             $object->setName(null);
         }
-        if (\array_key_exists('slug', $data) && null !== $data['slug']) {
+        if (\array_key_exists('slug', $data) && $data['slug'] !== null) {
             $object->setSlug($data['slug']);
-        } elseif (\array_key_exists('slug', $data) && null === $data['slug']) {
+        } elseif (\array_key_exists('slug', $data) && $data['slug'] === null) {
             $object->setSlug(null);
         }
-        if (\array_key_exists('description', $data) && null !== $data['description']) {
+        if (\array_key_exists('description', $data) && $data['description'] !== null) {
             $object->setDescription($data['description']);
-        } elseif (\array_key_exists('description', $data) && null === $data['description']) {
+        } elseif (\array_key_exists('description', $data) && $data['description'] === null) {
             $object->setDescription(null);
         }
-        if (\array_key_exists('price', $data) && null !== $data['price']) {
-            $object->setPrice($this->denormalizer->denormalize($data['price'], 'Gyroscops\\Api\\Model\\Price', 'json', $context));
-        } elseif (\array_key_exists('price', $data) && null === $data['price']) {
+        if (\array_key_exists('price', $data) && $data['price'] !== null) {
+            $object->setPrice($this->denormalizer->denormalize($data['price'], \Gyroscops\Api\Model\Price::class, 'json', $context));
+        } elseif (\array_key_exists('price', $data) && $data['price'] === null) {
             $object->setPrice(null);
         }
 
@@ -98,9 +94,6 @@ class OfferNormalizer implements DenormalizerInterface, NormalizerInterface, Den
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

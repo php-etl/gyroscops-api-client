@@ -27,19 +27,15 @@ class OrganizationNormalizer implements DenormalizerInterface, NormalizerInterfa
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\Organization' === $type;
+        return $type === \Gyroscops\Api\Model\Organization::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\Organization' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\Organization::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,55 +50,55 @@ class OrganizationNormalizer implements DenormalizerInterface, NormalizerInterfa
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('id', $data) && null !== $data['id']) {
+        if (\array_key_exists('id', $data) && $data['id'] !== null) {
             $object->setId($data['id']);
-        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('authorizations', $data) && null !== $data['authorizations']) {
+        if (\array_key_exists('authorizations', $data) && $data['authorizations'] !== null) {
             $values = [];
             foreach ($data['authorizations'] as $value) {
                 $values[] = $value;
             }
             $object->setAuthorizations($values);
-        } elseif (\array_key_exists('authorizations', $data) && null === $data['authorizations']) {
+        } elseif (\array_key_exists('authorizations', $data) && $data['authorizations'] === null) {
             $object->setAuthorizations(null);
         }
-        if (\array_key_exists('name', $data) && null !== $data['name']) {
+        if (\array_key_exists('name', $data) && $data['name'] !== null) {
             $object->setName($data['name']);
-        } elseif (\array_key_exists('name', $data) && null === $data['name']) {
+        } elseif (\array_key_exists('name', $data) && $data['name'] === null) {
             $object->setName(null);
         }
-        if (\array_key_exists('slug', $data) && null !== $data['slug']) {
+        if (\array_key_exists('slug', $data) && $data['slug'] !== null) {
             $object->setSlug($data['slug']);
-        } elseif (\array_key_exists('slug', $data) && null === $data['slug']) {
+        } elseif (\array_key_exists('slug', $data) && $data['slug'] === null) {
             $object->setSlug(null);
         }
-        if (\array_key_exists('users', $data) && null !== $data['users']) {
+        if (\array_key_exists('users', $data) && $data['users'] !== null) {
             $values_1 = [];
             foreach ($data['users'] as $value_1) {
                 $values_1[] = $value_1;
             }
             $object->setUsers($values_1);
-        } elseif (\array_key_exists('users', $data) && null === $data['users']) {
+        } elseif (\array_key_exists('users', $data) && $data['users'] === null) {
             $object->setUsers(null);
         }
-        if (\array_key_exists('externalCollaborators', $data) && null !== $data['externalCollaborators']) {
+        if (\array_key_exists('externalCollaborators', $data) && $data['externalCollaborators'] !== null) {
             $values_2 = [];
             foreach ($data['externalCollaborators'] as $value_2) {
                 $values_2[] = $value_2;
             }
             $object->setExternalCollaborators($values_2);
-        } elseif (\array_key_exists('externalCollaborators', $data) && null === $data['externalCollaborators']) {
+        } elseif (\array_key_exists('externalCollaborators', $data) && $data['externalCollaborators'] === null) {
             $object->setExternalCollaborators(null);
         }
-        if (\array_key_exists('workspaces', $data) && null !== $data['workspaces']) {
+        if (\array_key_exists('workspaces', $data) && $data['workspaces'] !== null) {
             $values_3 = [];
             foreach ($data['workspaces'] as $value_3) {
                 $values_3[] = $value_3;
             }
             $object->setWorkspaces($values_3);
-        } elseif (\array_key_exists('workspaces', $data) && null === $data['workspaces']) {
+        } elseif (\array_key_exists('workspaces', $data) && $data['workspaces'] === null) {
             $object->setWorkspaces(null);
         }
 
@@ -110,9 +106,6 @@ class OrganizationNormalizer implements DenormalizerInterface, NormalizerInterfa
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

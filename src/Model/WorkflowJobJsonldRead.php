@@ -13,10 +13,6 @@ namespace Gyroscops\Api\Model;
 class WorkflowJobJsonldRead
 {
     /**
-     * @var mixed|null
-     */
-    protected $context;
-    /**
      * @var string|null
      */
     protected $id;
@@ -24,6 +20,10 @@ class WorkflowJobJsonldRead
      * @var string|null
      */
     protected $type;
+    /**
+     * @var mixed|null
+     */
+    protected $context;
     /**
      * @var mixed|null
      */
@@ -36,24 +36,6 @@ class WorkflowJobJsonldRead
      * @var mixed|null
      */
     protected $action;
-
-    /**
-     * @return mixed
-     */
-    public function getContext()
-    {
-        return $this->context;
-    }
-
-    /**
-     * @param mixed $context
-     */
-    public function setContext($context): self
-    {
-        $this->context = $context;
-
-        return $this;
-    }
 
     public function getId(): ?string
     {
@@ -82,15 +64,27 @@ class WorkflowJobJsonldRead
     /**
      * @return mixed
      */
+    public function getContext()
+    {
+        return $this->context;
+    }
+
+    public function setContext(mixed $context): self
+    {
+        $this->context = $context;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getWorkflow()
     {
         return $this->workflow;
     }
 
-    /**
-     * @param mixed $workflow
-     */
-    public function setWorkflow($workflow): self
+    public function setWorkflow(mixed $workflow): self
     {
         $this->workflow = $workflow;
 
@@ -105,10 +99,7 @@ class WorkflowJobJsonldRead
         return $this->pipeline;
     }
 
-    /**
-     * @param mixed $pipeline
-     */
-    public function setPipeline($pipeline): self
+    public function setPipeline(mixed $pipeline): self
     {
         $this->pipeline = $pipeline;
 
@@ -123,10 +114,7 @@ class WorkflowJobJsonldRead
         return $this->action;
     }
 
-    /**
-     * @param mixed $action
-     */
-    public function setAction($action): self
+    public function setAction(mixed $action): self
     {
         $this->action = $action;
 

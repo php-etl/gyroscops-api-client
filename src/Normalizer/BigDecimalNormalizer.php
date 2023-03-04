@@ -27,19 +27,15 @@ class BigDecimalNormalizer implements DenormalizerInterface, NormalizerInterface
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\BigDecimal' === $type;
+        return $type === \Gyroscops\Api\Model\BigDecimal::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\BigDecimal' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\BigDecimal::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,59 +50,59 @@ class BigDecimalNormalizer implements DenormalizerInterface, NormalizerInterface
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('scale', $data) && null !== $data['scale']) {
+        if (\array_key_exists('scale', $data) && $data['scale'] !== null) {
             $object->setScale($data['scale']);
-        } elseif (\array_key_exists('scale', $data) && null === $data['scale']) {
+        } elseif (\array_key_exists('scale', $data) && $data['scale'] === null) {
             $object->setScale(null);
         }
-        if (\array_key_exists('sign', $data) && null !== $data['sign']) {
+        if (\array_key_exists('sign', $data) && $data['sign'] !== null) {
             $object->setSign($data['sign']);
-        } elseif (\array_key_exists('sign', $data) && null === $data['sign']) {
+        } elseif (\array_key_exists('sign', $data) && $data['sign'] === null) {
             $object->setSign(null);
         }
-        if (\array_key_exists('unscaledValue', $data) && null !== $data['unscaledValue']) {
-            $object->setUnscaledValue($this->denormalizer->denormalize($data['unscaledValue'], 'Gyroscops\\Api\\Model\\BigInteger', 'json', $context));
-        } elseif (\array_key_exists('unscaledValue', $data) && null === $data['unscaledValue']) {
+        if (\array_key_exists('unscaledValue', $data) && $data['unscaledValue'] !== null) {
+            $object->setUnscaledValue($this->denormalizer->denormalize($data['unscaledValue'], \Gyroscops\Api\Model\BigInteger::class, 'json', $context));
+        } elseif (\array_key_exists('unscaledValue', $data) && $data['unscaledValue'] === null) {
             $object->setUnscaledValue(null);
         }
-        if (\array_key_exists('integralPart', $data) && null !== $data['integralPart']) {
+        if (\array_key_exists('integralPart', $data) && $data['integralPart'] !== null) {
             $object->setIntegralPart($data['integralPart']);
-        } elseif (\array_key_exists('integralPart', $data) && null === $data['integralPart']) {
+        } elseif (\array_key_exists('integralPart', $data) && $data['integralPart'] === null) {
             $object->setIntegralPart(null);
         }
-        if (\array_key_exists('fractionalPart', $data) && null !== $data['fractionalPart']) {
+        if (\array_key_exists('fractionalPart', $data) && $data['fractionalPart'] !== null) {
             $object->setFractionalPart($data['fractionalPart']);
-        } elseif (\array_key_exists('fractionalPart', $data) && null === $data['fractionalPart']) {
+        } elseif (\array_key_exists('fractionalPart', $data) && $data['fractionalPart'] === null) {
             $object->setFractionalPart(null);
         }
-        if (\array_key_exists('nonZeroFractionalPart', $data) && null !== $data['nonZeroFractionalPart']) {
+        if (\array_key_exists('nonZeroFractionalPart', $data) && $data['nonZeroFractionalPart'] !== null) {
             $object->setNonZeroFractionalPart($data['nonZeroFractionalPart']);
-        } elseif (\array_key_exists('nonZeroFractionalPart', $data) && null === $data['nonZeroFractionalPart']) {
+        } elseif (\array_key_exists('nonZeroFractionalPart', $data) && $data['nonZeroFractionalPart'] === null) {
             $object->setNonZeroFractionalPart(null);
         }
-        if (\array_key_exists('zero', $data) && null !== $data['zero']) {
+        if (\array_key_exists('zero', $data) && $data['zero'] !== null) {
             $object->setZero($data['zero']);
-        } elseif (\array_key_exists('zero', $data) && null === $data['zero']) {
+        } elseif (\array_key_exists('zero', $data) && $data['zero'] === null) {
             $object->setZero(null);
         }
-        if (\array_key_exists('negative', $data) && null !== $data['negative']) {
+        if (\array_key_exists('negative', $data) && $data['negative'] !== null) {
             $object->setNegative($data['negative']);
-        } elseif (\array_key_exists('negative', $data) && null === $data['negative']) {
+        } elseif (\array_key_exists('negative', $data) && $data['negative'] === null) {
             $object->setNegative(null);
         }
-        if (\array_key_exists('negativeOrZero', $data) && null !== $data['negativeOrZero']) {
+        if (\array_key_exists('negativeOrZero', $data) && $data['negativeOrZero'] !== null) {
             $object->setNegativeOrZero($data['negativeOrZero']);
-        } elseif (\array_key_exists('negativeOrZero', $data) && null === $data['negativeOrZero']) {
+        } elseif (\array_key_exists('negativeOrZero', $data) && $data['negativeOrZero'] === null) {
             $object->setNegativeOrZero(null);
         }
-        if (\array_key_exists('positive', $data) && null !== $data['positive']) {
+        if (\array_key_exists('positive', $data) && $data['positive'] !== null) {
             $object->setPositive($data['positive']);
-        } elseif (\array_key_exists('positive', $data) && null === $data['positive']) {
+        } elseif (\array_key_exists('positive', $data) && $data['positive'] === null) {
             $object->setPositive(null);
         }
-        if (\array_key_exists('positiveOrZero', $data) && null !== $data['positiveOrZero']) {
+        if (\array_key_exists('positiveOrZero', $data) && $data['positiveOrZero'] !== null) {
             $object->setPositiveOrZero($data['positiveOrZero']);
-        } elseif (\array_key_exists('positiveOrZero', $data) && null === $data['positiveOrZero']) {
+        } elseif (\array_key_exists('positiveOrZero', $data) && $data['positiveOrZero'] === null) {
             $object->setPositiveOrZero(null);
         }
 
@@ -114,9 +110,6 @@ class BigDecimalNormalizer implements DenormalizerInterface, NormalizerInterface
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

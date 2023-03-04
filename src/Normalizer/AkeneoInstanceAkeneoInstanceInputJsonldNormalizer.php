@@ -27,19 +27,15 @@ class AkeneoInstanceAkeneoInstanceInputJsonldNormalizer implements DenormalizerI
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\AkeneoInstanceAkeneoInstanceInputJsonld' === $type;
+        return $type === \Gyroscops\Api\Model\AkeneoInstanceAkeneoInstanceInputJsonld::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\AkeneoInstanceAkeneoInstanceInputJsonld' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\AkeneoInstanceAkeneoInstanceInputJsonld::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,34 +50,34 @@ class AkeneoInstanceAkeneoInstanceInputJsonldNormalizer implements DenormalizerI
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
+        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
             $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
             $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
+        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
+        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
             $object->setType(null);
         }
-        if (\array_key_exists('pimUrl', $data) && null !== $data['pimUrl']) {
+        if (\array_key_exists('pimUrl', $data) && $data['pimUrl'] !== null) {
             $object->setPimUrl($data['pimUrl']);
-        } elseif (\array_key_exists('pimUrl', $data) && null === $data['pimUrl']) {
+        } elseif (\array_key_exists('pimUrl', $data) && $data['pimUrl'] === null) {
             $object->setPimUrl(null);
         }
-        if (\array_key_exists('organization', $data) && null !== $data['organization']) {
+        if (\array_key_exists('organization', $data) && $data['organization'] !== null) {
             $object->setOrganization($data['organization']);
-        } elseif (\array_key_exists('organization', $data) && null === $data['organization']) {
+        } elseif (\array_key_exists('organization', $data) && $data['organization'] === null) {
             $object->setOrganization(null);
         }
-        if (\array_key_exists('secret', $data) && null !== $data['secret']) {
-            $object->setSecret($this->denormalizer->denormalize($data['secret'], 'Gyroscops\\Api\\Model\\SecretInputJsonld', 'json', $context));
-        } elseif (\array_key_exists('secret', $data) && null === $data['secret']) {
+        if (\array_key_exists('secret', $data) && $data['secret'] !== null) {
+            $object->setSecret($this->denormalizer->denormalize($data['secret'], \Gyroscops\Api\Model\CreateSecretInputJsonld::class, 'json', $context));
+        } elseif (\array_key_exists('secret', $data) && $data['secret'] === null) {
             $object->setSecret(null);
         }
 
@@ -89,9 +85,6 @@ class AkeneoInstanceAkeneoInstanceInputJsonldNormalizer implements DenormalizerI
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

@@ -13,10 +13,6 @@ namespace Gyroscops\Api\Model;
 class PipelineJsonldRead
 {
     /**
-     * @var mixed|null
-     */
-    protected $context;
-    /**
      * @var string|null
      */
     protected $id;
@@ -25,6 +21,10 @@ class PipelineJsonldRead
      */
     protected $type;
     /**
+     * @var mixed|null
+     */
+    protected $context;
+    /**
      * @var bool|null
      */
     protected $isSoftDeleted;
@@ -32,10 +32,6 @@ class PipelineJsonldRead
      * @var \DateTime|null
      */
     protected $compiledAt;
-    /**
-     * @var string[]|null
-     */
-    protected $steps;
     /**
      * @var string|null
      */
@@ -60,24 +56,22 @@ class PipelineJsonldRead
      * @var string[]|null
      */
     protected $autoload;
-
     /**
-     * @return mixed
+     * @var string[]|null
      */
-    public function getContext()
-    {
-        return $this->context;
-    }
-
+    protected $packages;
     /**
-     * @param mixed $context
+     * @var string[]|null
      */
-    public function setContext($context): self
-    {
-        $this->context = $context;
-
-        return $this;
-    }
+    protected $repositories;
+    /**
+     * @var string[]|null
+     */
+    protected $auths;
+    /**
+     * @var string[]|null
+     */
+    protected $steps;
 
     public function getId(): ?string
     {
@@ -103,6 +97,21 @@ class PipelineJsonldRead
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getContext()
+    {
+        return $this->context;
+    }
+
+    public function setContext(mixed $context): self
+    {
+        $this->context = $context;
+
+        return $this;
+    }
+
     public function getIsSoftDeleted(): ?bool
     {
         return $this->isSoftDeleted;
@@ -123,24 +132,6 @@ class PipelineJsonldRead
     public function setCompiledAt(?\DateTime $compiledAt): self
     {
         $this->compiledAt = $compiledAt;
-
-        return $this;
-    }
-
-    /**
-     * @return string[]|null
-     */
-    public function getSteps(): ?array
-    {
-        return $this->steps;
-    }
-
-    /**
-     * @param string[]|null $steps
-     */
-    public function setSteps(?array $steps): self
-    {
-        $this->steps = $steps;
 
         return $this;
     }
@@ -225,6 +216,78 @@ class PipelineJsonldRead
     public function setAutoload(?array $autoload): self
     {
         $this->autoload = $autoload;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getPackages(): ?array
+    {
+        return $this->packages;
+    }
+
+    /**
+     * @param string[]|null $packages
+     */
+    public function setPackages(?array $packages): self
+    {
+        $this->packages = $packages;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getRepositories(): ?array
+    {
+        return $this->repositories;
+    }
+
+    /**
+     * @param string[]|null $repositories
+     */
+    public function setRepositories(?array $repositories): self
+    {
+        $this->repositories = $repositories;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getAuths(): ?array
+    {
+        return $this->auths;
+    }
+
+    /**
+     * @param string[]|null $auths
+     */
+    public function setAuths(?array $auths): self
+    {
+        $this->auths = $auths;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getSteps(): ?array
+    {
+        return $this->steps;
+    }
+
+    /**
+     * @param string[]|null $steps
+     */
+    public function setSteps(?array $steps): self
+    {
+        $this->steps = $steps;
 
         return $this;
     }

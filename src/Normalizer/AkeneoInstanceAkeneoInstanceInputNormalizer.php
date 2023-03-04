@@ -27,19 +27,15 @@ class AkeneoInstanceAkeneoInstanceInputNormalizer implements DenormalizerInterfa
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\AkeneoInstanceAkeneoInstanceInput' === $type;
+        return $type === \Gyroscops\Api\Model\AkeneoInstanceAkeneoInstanceInput::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\AkeneoInstanceAkeneoInstanceInput' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\AkeneoInstanceAkeneoInstanceInput::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,19 +50,19 @@ class AkeneoInstanceAkeneoInstanceInputNormalizer implements DenormalizerInterfa
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('pimUrl', $data) && null !== $data['pimUrl']) {
+        if (\array_key_exists('pimUrl', $data) && $data['pimUrl'] !== null) {
             $object->setPimUrl($data['pimUrl']);
-        } elseif (\array_key_exists('pimUrl', $data) && null === $data['pimUrl']) {
+        } elseif (\array_key_exists('pimUrl', $data) && $data['pimUrl'] === null) {
             $object->setPimUrl(null);
         }
-        if (\array_key_exists('organization', $data) && null !== $data['organization']) {
+        if (\array_key_exists('organization', $data) && $data['organization'] !== null) {
             $object->setOrganization($data['organization']);
-        } elseif (\array_key_exists('organization', $data) && null === $data['organization']) {
+        } elseif (\array_key_exists('organization', $data) && $data['organization'] === null) {
             $object->setOrganization(null);
         }
-        if (\array_key_exists('secret', $data) && null !== $data['secret']) {
-            $object->setSecret($this->denormalizer->denormalize($data['secret'], 'Gyroscops\\Api\\Model\\SecretInput', 'json', $context));
-        } elseif (\array_key_exists('secret', $data) && null === $data['secret']) {
+        if (\array_key_exists('secret', $data) && $data['secret'] !== null) {
+            $object->setSecret($this->denormalizer->denormalize($data['secret'], \Gyroscops\Api\Model\CreateSecretInput::class, 'json', $context));
+        } elseif (\array_key_exists('secret', $data) && $data['secret'] === null) {
             $object->setSecret(null);
         }
 
@@ -74,9 +70,6 @@ class AkeneoInstanceAkeneoInstanceInputNormalizer implements DenormalizerInterfa
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

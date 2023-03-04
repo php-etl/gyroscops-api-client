@@ -27,19 +27,15 @@ class CurrencyJsonldNormalizer implements DenormalizerInterface, NormalizerInter
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\CurrencyJsonld' === $type;
+        return $type === \Gyroscops\Api\Model\CurrencyJsonld::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\CurrencyJsonld' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\CurrencyJsonld::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,39 +50,39 @@ class CurrencyJsonldNormalizer implements DenormalizerInterface, NormalizerInter
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
+        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
             $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
             $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
+        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
+        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
             $object->setType(null);
         }
-        if (\array_key_exists('currencyCode', $data) && null !== $data['currencyCode']) {
+        if (\array_key_exists('currencyCode', $data) && $data['currencyCode'] !== null) {
             $object->setCurrencyCode($data['currencyCode']);
-        } elseif (\array_key_exists('currencyCode', $data) && null === $data['currencyCode']) {
+        } elseif (\array_key_exists('currencyCode', $data) && $data['currencyCode'] === null) {
             $object->setCurrencyCode(null);
         }
-        if (\array_key_exists('numericCode', $data) && null !== $data['numericCode']) {
+        if (\array_key_exists('numericCode', $data) && $data['numericCode'] !== null) {
             $object->setNumericCode($data['numericCode']);
-        } elseif (\array_key_exists('numericCode', $data) && null === $data['numericCode']) {
+        } elseif (\array_key_exists('numericCode', $data) && $data['numericCode'] === null) {
             $object->setNumericCode(null);
         }
-        if (\array_key_exists('name', $data) && null !== $data['name']) {
+        if (\array_key_exists('name', $data) && $data['name'] !== null) {
             $object->setName($data['name']);
-        } elseif (\array_key_exists('name', $data) && null === $data['name']) {
+        } elseif (\array_key_exists('name', $data) && $data['name'] === null) {
             $object->setName(null);
         }
-        if (\array_key_exists('defaultFractionDigits', $data) && null !== $data['defaultFractionDigits']) {
+        if (\array_key_exists('defaultFractionDigits', $data) && $data['defaultFractionDigits'] !== null) {
             $object->setDefaultFractionDigits($data['defaultFractionDigits']);
-        } elseif (\array_key_exists('defaultFractionDigits', $data) && null === $data['defaultFractionDigits']) {
+        } elseif (\array_key_exists('defaultFractionDigits', $data) && $data['defaultFractionDigits'] === null) {
             $object->setDefaultFractionDigits(null);
         }
 
@@ -94,9 +90,6 @@ class CurrencyJsonldNormalizer implements DenormalizerInterface, NormalizerInter
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

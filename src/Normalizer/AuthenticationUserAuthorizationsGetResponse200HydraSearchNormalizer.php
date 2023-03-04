@@ -27,19 +27,15 @@ class AuthenticationUserAuthorizationsGetResponse200HydraSearchNormalizer implem
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\AuthenticationUserAuthorizationsGetResponse200HydraSearch' === $type;
+        return $type === \Gyroscops\Api\Model\AuthenticationUserAuthorizationsGetResponse200HydraSearch::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\AuthenticationUserAuthorizationsGetResponse200HydraSearch' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\AuthenticationUserAuthorizationsGetResponse200HydraSearch::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,28 +50,28 @@ class AuthenticationUserAuthorizationsGetResponse200HydraSearchNormalizer implem
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
+        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
             $object->setType(null);
         }
-        if (\array_key_exists('hydra:template', $data) && null !== $data['hydra:template']) {
+        if (\array_key_exists('hydra:template', $data) && $data['hydra:template'] !== null) {
             $object->setHydraTemplate($data['hydra:template']);
-        } elseif (\array_key_exists('hydra:template', $data) && null === $data['hydra:template']) {
+        } elseif (\array_key_exists('hydra:template', $data) && $data['hydra:template'] === null) {
             $object->setHydraTemplate(null);
         }
-        if (\array_key_exists('hydra:variableRepresentation', $data) && null !== $data['hydra:variableRepresentation']) {
+        if (\array_key_exists('hydra:variableRepresentation', $data) && $data['hydra:variableRepresentation'] !== null) {
             $object->setHydraVariableRepresentation($data['hydra:variableRepresentation']);
-        } elseif (\array_key_exists('hydra:variableRepresentation', $data) && null === $data['hydra:variableRepresentation']) {
+        } elseif (\array_key_exists('hydra:variableRepresentation', $data) && $data['hydra:variableRepresentation'] === null) {
             $object->setHydraVariableRepresentation(null);
         }
-        if (\array_key_exists('hydra:mapping', $data) && null !== $data['hydra:mapping']) {
+        if (\array_key_exists('hydra:mapping', $data) && $data['hydra:mapping'] !== null) {
             $values = [];
             foreach ($data['hydra:mapping'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'Gyroscops\\Api\\Model\\AuthenticationUserAuthorizationsGetResponse200HydraSearchHydraMappingItem', 'json', $context);
+                $values[] = $this->denormalizer->denormalize($value, \Gyroscops\Api\Model\AuthenticationUserAuthorizationsGetResponse200HydraSearchHydraMappingItem::class, 'json', $context);
             }
             $object->setHydraMapping($values);
-        } elseif (\array_key_exists('hydra:mapping', $data) && null === $data['hydra:mapping']) {
+        } elseif (\array_key_exists('hydra:mapping', $data) && $data['hydra:mapping'] === null) {
             $object->setHydraMapping(null);
         }
 
@@ -83,9 +79,6 @@ class AuthenticationUserAuthorizationsGetResponse200HydraSearchNormalizer implem
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

@@ -27,19 +27,15 @@ class PipelineStepProbeNormalizer implements DenormalizerInterface, NormalizerIn
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\PipelineStepProbe' === $type;
+        return $type === \Gyroscops\Api\Model\PipelineStepProbe::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\PipelineStepProbe' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\PipelineStepProbe::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,29 +50,29 @@ class PipelineStepProbeNormalizer implements DenormalizerInterface, NormalizerIn
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('id', $data) && null !== $data['id']) {
+        if (\array_key_exists('id', $data) && $data['id'] !== null) {
             $object->setId($data['id']);
-        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('code', $data) && null !== $data['code']) {
+        if (\array_key_exists('code', $data) && $data['code'] !== null) {
             $object->setCode($data['code']);
-        } elseif (\array_key_exists('code', $data) && null === $data['code']) {
+        } elseif (\array_key_exists('code', $data) && $data['code'] === null) {
             $object->setCode(null);
         }
-        if (\array_key_exists('order', $data) && null !== $data['order']) {
+        if (\array_key_exists('order', $data) && $data['order'] !== null) {
             $object->setOrder($data['order']);
-        } elseif (\array_key_exists('order', $data) && null === $data['order']) {
+        } elseif (\array_key_exists('order', $data) && $data['order'] === null) {
             $object->setOrder(null);
         }
-        if (\array_key_exists('label', $data) && null !== $data['label']) {
+        if (\array_key_exists('label', $data) && $data['label'] !== null) {
             $object->setLabel($data['label']);
-        } elseif (\array_key_exists('label', $data) && null === $data['label']) {
+        } elseif (\array_key_exists('label', $data) && $data['label'] === null) {
             $object->setLabel(null);
         }
-        if (\array_key_exists('step', $data) && null !== $data['step']) {
+        if (\array_key_exists('step', $data) && $data['step'] !== null) {
             $object->setStep($data['step']);
-        } elseif (\array_key_exists('step', $data) && null === $data['step']) {
+        } elseif (\array_key_exists('step', $data) && $data['step'] === null) {
             $object->setStep(null);
         }
 
@@ -84,9 +80,6 @@ class PipelineStepProbeNormalizer implements DenormalizerInterface, NormalizerIn
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

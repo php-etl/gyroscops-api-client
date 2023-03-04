@@ -13,6 +13,10 @@ namespace Gyroscops\Api\Model;
 class SecretJsonld
 {
     /**
+     * @var mixed|null
+     */
+    protected $context;
+    /**
      * @var string|null
      */
     protected $id;
@@ -21,10 +25,6 @@ class SecretJsonld
      */
     protected $type;
     /**
-     * @var mixed|null
-     */
-    protected $context;
-    /**
      * @var string|null
      */
     protected $id2;
@@ -32,6 +32,10 @@ class SecretJsonld
      * @var string|null
      */
     protected $name;
+    /**
+     * @var string|null
+     */
+    protected $slug;
     /**
      * @var string|null
      */
@@ -45,9 +49,28 @@ class SecretJsonld
      */
     protected $workspace;
     /**
+     * @var string[]|null
+     */
+    protected $contents;
+    /**
      * @var TraversableJsonld|null
      */
     protected $iterator;
+
+    /**
+     * @return mixed
+     */
+    public function getContext()
+    {
+        return $this->context;
+    }
+
+    public function setContext(mixed $context): self
+    {
+        $this->context = $context;
+
+        return $this;
+    }
 
     public function getId(): ?string
     {
@@ -73,24 +96,6 @@ class SecretJsonld
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getContext()
-    {
-        return $this->context;
-    }
-
-    /**
-     * @param mixed $context
-     */
-    public function setContext($context): self
-    {
-        $this->context = $context;
-
-        return $this;
-    }
-
     public function getId2(): ?string
     {
         return $this->id2;
@@ -111,6 +116,18 @@ class SecretJsonld
     public function setName(?string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
@@ -147,6 +164,24 @@ class SecretJsonld
     public function setWorkspace(?string $workspace): self
     {
         $this->workspace = $workspace;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getContents(): ?iterable
+    {
+        return $this->contents;
+    }
+
+    /**
+     * @param string[]|null $contents
+     */
+    public function setContents(?iterable $contents): self
+    {
+        $this->contents = $contents;
 
         return $this;
     }

@@ -27,19 +27,15 @@ class CredentialsNormalizer implements DenormalizerInterface, NormalizerInterfac
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\Credentials' === $type;
+        return $type === \Gyroscops\Api\Model\Credentials::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\Credentials' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\Credentials::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,19 +50,19 @@ class CredentialsNormalizer implements DenormalizerInterface, NormalizerInterfac
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('username', $data) && null !== $data['username']) {
+        if (\array_key_exists('username', $data) && $data['username'] !== null) {
             $object->setUsername($data['username']);
-        } elseif (\array_key_exists('username', $data) && null === $data['username']) {
+        } elseif (\array_key_exists('username', $data) && $data['username'] === null) {
             $object->setUsername(null);
         }
-        if (\array_key_exists('password', $data) && null !== $data['password']) {
+        if (\array_key_exists('password', $data) && $data['password'] !== null) {
             $object->setPassword($data['password']);
-        } elseif (\array_key_exists('password', $data) && null === $data['password']) {
+        } elseif (\array_key_exists('password', $data) && $data['password'] === null) {
             $object->setPassword(null);
         }
-        if (\array_key_exists('workspace', $data) && null !== $data['workspace']) {
+        if (\array_key_exists('workspace', $data) && $data['workspace'] !== null) {
             $object->setWorkspace($data['workspace']);
-        } elseif (\array_key_exists('workspace', $data) && null === $data['workspace']) {
+        } elseif (\array_key_exists('workspace', $data) && $data['workspace'] === null) {
             $object->setWorkspace(null);
         }
 
@@ -74,9 +70,6 @@ class CredentialsNormalizer implements DenormalizerInterface, NormalizerInterfac
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

@@ -21,7 +21,7 @@ class AkeneoInstanceAkeneoInstanceInput
      */
     protected $organization;
     /**
-     * @var SecretInput|null
+     * @var CreateSecretInput|null
      */
     protected $secret;
 
@@ -49,12 +49,12 @@ class AkeneoInstanceAkeneoInstanceInput
         return $this;
     }
 
-    public function getSecret(): ?SecretInput
+    public function getSecret(): ?CreateSecretInput
     {
         return $this->secret;
     }
 
-    public function setSecret(?SecretInput $secret): self
+    public function setSecret(?CreateSecretInput $secret): self
     {
         $this->secret = $secret;
 

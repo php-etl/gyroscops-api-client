@@ -13,7 +13,7 @@ namespace Gyroscops\Api\Model;
 class EnvironmentEnvironmentsGetResponse200
 {
     /**
-     * @var EnvironmentJsonld[]|null
+     * @var EnvironmentJsonldRead[]|null
      */
     protected $hydraMember;
     /**
@@ -30,7 +30,7 @@ class EnvironmentEnvironmentsGetResponse200
     protected $hydraSearch;
 
     /**
-     * @return EnvironmentJsonld[]|null
+     * @return EnvironmentJsonldRead[]|null
      */
     public function getHydraMember(): ?array
     {
@@ -38,7 +38,7 @@ class EnvironmentEnvironmentsGetResponse200
     }
 
     /**
-     * @param EnvironmentJsonld[]|null $hydraMember
+     * @param EnvironmentJsonldRead[]|null $hydraMember
      */
     public function setHydraMember(?array $hydraMember): self
     {

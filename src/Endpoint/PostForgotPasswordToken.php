@@ -34,7 +34,7 @@ class PostForgotPasswordToken extends \Gyroscops\Api\Runtime\Client\BaseEndpoint
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         if ($this->body instanceof \stdClass) {
-            return [['Content-Type' => ['application/json']], json_encode($this->body)];
+            return [['Content-Type' => ['application/json']], json_encode($this->body, JSON_THROW_ON_ERROR)];
         }
 
         return [[], null];
@@ -42,6 +42,8 @@ class PostForgotPasswordToken extends \Gyroscops\Api\Runtime\Client\BaseEndpoint
 
     /**
      * {@inheritdoc}
+     *
+     * @return null
      *
      * @throws \Gyroscops\Api\Exception\PostForgotPasswordTokenBadRequestException
      * @throws \Gyroscops\Api\Exception\PostForgotPasswordTokenNotFoundException

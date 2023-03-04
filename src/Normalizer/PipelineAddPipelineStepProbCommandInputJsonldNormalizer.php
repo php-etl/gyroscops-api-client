@@ -27,19 +27,15 @@ class PipelineAddPipelineStepProbCommandInputJsonldNormalizer implements Denorma
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\PipelineAddPipelineStepProbCommandInputJsonld' === $type;
+        return $type === \Gyroscops\Api\Model\PipelineAddPipelineStepProbCommandInputJsonld::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\PipelineAddPipelineStepProbCommandInputJsonld' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\PipelineAddPipelineStepProbCommandInputJsonld::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,34 +50,24 @@ class PipelineAddPipelineStepProbCommandInputJsonldNormalizer implements Denorma
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
+        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
             $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
             $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
+        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
+        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
             $object->setType(null);
         }
-        if (\array_key_exists('id', $data) && null !== $data['id']) {
-            $object->setId2($data['id']);
-        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
-            $object->setId2(null);
-        }
-        if (\array_key_exists('code', $data) && null !== $data['code']) {
-            $object->setCode($data['code']);
-        } elseif (\array_key_exists('code', $data) && null === $data['code']) {
-            $object->setCode(null);
-        }
-        if (\array_key_exists('probe', $data) && null !== $data['probe']) {
-            $object->setProbe($this->denormalizer->denormalize($data['probe'], 'Gyroscops\\Api\\Model\\ProbeJsonld', 'json', $context));
-        } elseif (\array_key_exists('probe', $data) && null === $data['probe']) {
+        if (\array_key_exists('probe', $data) && $data['probe'] !== null) {
+            $object->setProbe($this->denormalizer->denormalize($data['probe'], \Gyroscops\Api\Model\ProbeJsonld::class, 'json', $context));
+        } elseif (\array_key_exists('probe', $data) && $data['probe'] === null) {
             $object->setProbe(null);
         }
 
@@ -89,23 +75,12 @@ class PipelineAddPipelineStepProbCommandInputJsonldNormalizer implements Denorma
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getId2()) {
-            $data['id'] = $object->getId2();
-        }
-        if (null !== $object->getCode()) {
-            $data['code'] = $object->getCode();
-        }
-        if (null !== $object->getProbe()) {
-            $data['probe'] = $this->normalizer->normalize($object->getProbe(), 'json', $context);
-        }
+        $data['probe'] = $this->normalizer->normalize($object->getProbe(), 'json', $context);
 
         return $data;
     }

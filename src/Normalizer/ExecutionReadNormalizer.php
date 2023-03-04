@@ -27,19 +27,15 @@ class ExecutionReadNormalizer implements DenormalizerInterface, NormalizerInterf
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\ExecutionRead' === $type;
+        return $type === \Gyroscops\Api\Model\ExecutionRead::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\ExecutionRead' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\ExecutionRead::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,89 +50,71 @@ class ExecutionReadNormalizer implements DenormalizerInterface, NormalizerInterf
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('id', $data) && null !== $data['id']) {
+        if (\array_key_exists('id', $data) && $data['id'] !== null) {
             $object->setId($data['id']);
-        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('code', $data) && null !== $data['code']) {
+        if (\array_key_exists('code', $data) && $data['code'] !== null) {
             $object->setCode($data['code']);
-        } elseif (\array_key_exists('code', $data) && null === $data['code']) {
+        } elseif (\array_key_exists('code', $data) && $data['code'] === null) {
             $object->setCode(null);
         }
-        if (\array_key_exists('status', $data) && null !== $data['status']) {
+        if (\array_key_exists('status', $data) && $data['status'] !== null) {
             $object->setStatus($data['status']);
-        } elseif (\array_key_exists('status', $data) && null === $data['status']) {
+        } elseif (\array_key_exists('status', $data) && $data['status'] === null) {
             $object->setStatus(null);
         }
-        if (\array_key_exists('errors', $data) && null !== $data['errors']) {
+        if (\array_key_exists('errors', $data) && $data['errors'] !== null) {
             $object->setErrors($data['errors']);
-        } elseif (\array_key_exists('errors', $data) && null === $data['errors']) {
+        } elseif (\array_key_exists('errors', $data) && $data['errors'] === null) {
             $object->setErrors(null);
         }
-        if (\array_key_exists('scheduledAt', $data) && null !== $data['scheduledAt']) {
+        if (\array_key_exists('scheduledAt', $data) && $data['scheduledAt'] !== null) {
             $object->setScheduledAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['scheduledAt']));
-        } elseif (\array_key_exists('scheduledAt', $data) && null === $data['scheduledAt']) {
+        } elseif (\array_key_exists('scheduledAt', $data) && $data['scheduledAt'] === null) {
             $object->setScheduledAt(null);
         }
-        if (\array_key_exists('startedAt', $data) && null !== $data['startedAt']) {
+        if (\array_key_exists('startedAt', $data) && $data['startedAt'] !== null) {
             $object->setStartedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['startedAt']));
-        } elseif (\array_key_exists('startedAt', $data) && null === $data['startedAt']) {
+        } elseif (\array_key_exists('startedAt', $data) && $data['startedAt'] === null) {
             $object->setStartedAt(null);
         }
-        if (\array_key_exists('finishedAt', $data) && null !== $data['finishedAt']) {
+        if (\array_key_exists('finishedAt', $data) && $data['finishedAt'] !== null) {
             $object->setFinishedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['finishedAt']));
-        } elseif (\array_key_exists('finishedAt', $data) && null === $data['finishedAt']) {
+        } elseif (\array_key_exists('finishedAt', $data) && $data['finishedAt'] === null) {
             $object->setFinishedAt(null);
         }
-        if (\array_key_exists('interruptedAt', $data) && null !== $data['interruptedAt']) {
+        if (\array_key_exists('interruptedAt', $data) && $data['interruptedAt'] !== null) {
             $object->setInterruptedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['interruptedAt']));
-        } elseif (\array_key_exists('interruptedAt', $data) && null === $data['interruptedAt']) {
+        } elseif (\array_key_exists('interruptedAt', $data) && $data['interruptedAt'] === null) {
             $object->setInterruptedAt(null);
         }
-        if (\array_key_exists('resumedAt', $data) && null !== $data['resumedAt']) {
+        if (\array_key_exists('resumedAt', $data) && $data['resumedAt'] !== null) {
             $object->setResumedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['resumedAt']));
-        } elseif (\array_key_exists('resumedAt', $data) && null === $data['resumedAt']) {
+        } elseif (\array_key_exists('resumedAt', $data) && $data['resumedAt'] === null) {
             $object->setResumedAt(null);
         }
-        if (\array_key_exists('updatedAt', $data) && null !== $data['updatedAt']) {
+        if (\array_key_exists('updatedAt', $data) && $data['updatedAt'] !== null) {
             $object->setUpdatedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['updatedAt']));
-        } elseif (\array_key_exists('updatedAt', $data) && null === $data['updatedAt']) {
+        } elseif (\array_key_exists('updatedAt', $data) && $data['updatedAt'] === null) {
             $object->setUpdatedAt(null);
         }
-        if (\array_key_exists('terminatedAt', $data) && null !== $data['terminatedAt']) {
+        if (\array_key_exists('terminatedAt', $data) && $data['terminatedAt'] !== null) {
             $object->setTerminatedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['terminatedAt']));
-        } elseif (\array_key_exists('terminatedAt', $data) && null === $data['terminatedAt']) {
+        } elseif (\array_key_exists('terminatedAt', $data) && $data['terminatedAt'] === null) {
             $object->setTerminatedAt(null);
         }
-        if (\array_key_exists('reason', $data) && null !== $data['reason']) {
+        if (\array_key_exists('reason', $data) && $data['reason'] !== null) {
             $object->setReason($data['reason']);
-        } elseif (\array_key_exists('reason', $data) && null === $data['reason']) {
+        } elseif (\array_key_exists('reason', $data) && $data['reason'] === null) {
             $object->setReason(null);
-        }
-        if (\array_key_exists('pipeline', $data) && null !== $data['pipeline']) {
-            $object->setPipeline($data['pipeline']);
-        } elseif (\array_key_exists('pipeline', $data) && null === $data['pipeline']) {
-            $object->setPipeline(null);
-        }
-        if (\array_key_exists('workflow', $data) && null !== $data['workflow']) {
-            $object->setWorkflow($data['workflow']);
-        } elseif (\array_key_exists('workflow', $data) && null === $data['workflow']) {
-            $object->setWorkflow(null);
-        }
-        if (\array_key_exists('action', $data) && null !== $data['action']) {
-            $object->setAction($data['action']);
-        } elseif (\array_key_exists('action', $data) && null === $data['action']) {
-            $object->setAction(null);
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
@@ -166,9 +144,6 @@ class ExecutionReadNormalizer implements DenormalizerInterface, NormalizerInterf
             $data['terminatedAt'] = $object->getTerminatedAt()->format('Y-m-d\\TH:i:sP');
         }
         $data['reason'] = $object->getReason();
-        $data['pipeline'] = $object->getPipeline();
-        $data['workflow'] = $object->getWorkflow();
-        $data['action'] = $object->getAction();
 
         return $data;
     }

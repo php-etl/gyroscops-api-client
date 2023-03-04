@@ -33,14 +33,6 @@ class PipelineDeclarePipelineCommandInputJsonld
      */
     protected $code;
     /**
-     * @var string|null
-     */
-    protected $workspace;
-    /**
-     * @var string|null
-     */
-    protected $organization;
-    /**
      * @var StepInputJsonld[]|null
      */
     protected $steps;
@@ -48,6 +40,18 @@ class PipelineDeclarePipelineCommandInputJsonld
      * @var AutoloadInputJsonld[]|null
      */
     protected $autoloads;
+    /**
+     * @var string[]|null
+     */
+    protected $packages;
+    /**
+     * @var AddPipelineComposerRepositoryCommandInputJsonld[]|null
+     */
+    protected $repositories;
+    /**
+     * @var AddPipelineComposerAuthCommandInputJsonld[]|null
+     */
+    protected $auths;
 
     /**
      * @return mixed
@@ -57,10 +61,7 @@ class PipelineDeclarePipelineCommandInputJsonld
         return $this->context;
     }
 
-    /**
-     * @param mixed $context
-     */
-    public function setContext($context): self
+    public function setContext(mixed $context): self
     {
         $this->context = $context;
 
@@ -115,30 +116,6 @@ class PipelineDeclarePipelineCommandInputJsonld
         return $this;
     }
 
-    public function getWorkspace(): ?string
-    {
-        return $this->workspace;
-    }
-
-    public function setWorkspace(?string $workspace): self
-    {
-        $this->workspace = $workspace;
-
-        return $this;
-    }
-
-    public function getOrganization(): ?string
-    {
-        return $this->organization;
-    }
-
-    public function setOrganization(?string $organization): self
-    {
-        $this->organization = $organization;
-
-        return $this;
-    }
-
     /**
      * @return StepInputJsonld[]|null
      */
@@ -171,6 +148,60 @@ class PipelineDeclarePipelineCommandInputJsonld
     public function setAutoloads(?array $autoloads): self
     {
         $this->autoloads = $autoloads;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getPackages(): ?iterable
+    {
+        return $this->packages;
+    }
+
+    /**
+     * @param string[]|null $packages
+     */
+    public function setPackages(?iterable $packages): self
+    {
+        $this->packages = $packages;
+
+        return $this;
+    }
+
+    /**
+     * @return AddPipelineComposerRepositoryCommandInputJsonld[]|null
+     */
+    public function getRepositories(): ?array
+    {
+        return $this->repositories;
+    }
+
+    /**
+     * @param AddPipelineComposerRepositoryCommandInputJsonld[]|null $repositories
+     */
+    public function setRepositories(?array $repositories): self
+    {
+        $this->repositories = $repositories;
+
+        return $this;
+    }
+
+    /**
+     * @return AddPipelineComposerAuthCommandInputJsonld[]|null
+     */
+    public function getAuths(): ?array
+    {
+        return $this->auths;
+    }
+
+    /**
+     * @param AddPipelineComposerAuthCommandInputJsonld[]|null $auths
+     */
+    public function setAuths(?array $auths): self
+    {
+        $this->auths = $auths;
 
         return $this;
     }

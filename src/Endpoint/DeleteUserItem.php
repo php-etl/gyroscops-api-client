@@ -43,6 +43,8 @@ class DeleteUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implemen
     /**
      * {@inheritdoc}
      *
+     * @return null
+     *
      * @throws \Gyroscops\Api\Exception\DeleteUserItemNotFoundException
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)

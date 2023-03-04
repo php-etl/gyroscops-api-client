@@ -38,9 +38,9 @@ abstract class BaseEndpoint implements Endpoint
     public function getQueryString(): string
     {
         $optionsResolved = $this->getQueryOptionsResolver()->resolve($this->queryParameters);
-        $optionsResolved = array_map(fn ($value) => null !== $value ? $value : '', $optionsResolved);
+        $optionsResolved = array_map(fn($value) => $value ?? '', $optionsResolved);
 
-        return http_build_query($optionsResolved, '', '&', \PHP_QUERY_RFC3986);
+        return http_build_query($optionsResolved, '', '&', PHP_QUERY_RFC3986);
     }
 
     public function getHeaders(array $baseHeaders = []): array
@@ -73,7 +73,7 @@ abstract class BaseEndpoint implements Endpoint
             $bodyBuilder->addResource($key, $value);
         }
 
-        return [['Content-Type' => ['multipart/form-data; boundary="'.($bodyBuilder->getBoundary().'"')]], $bodyBuilder->build()];
+        return [['Content-Type' => ['multipart/form-data; boundary="' . ($bodyBuilder->getBoundary() . '"')]], $bodyBuilder->build()];
     }
 
     protected function getFormOptionsResolver(): OptionsResolver

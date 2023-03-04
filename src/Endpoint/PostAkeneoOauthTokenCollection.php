@@ -57,13 +57,15 @@ class PostAkeneoOauthTokenCollection extends \Gyroscops\Api\Runtime\Client\BaseE
     /**
      * {@inheritdoc}
      *
+     * @return null
+     *
      * @throws \Gyroscops\Api\Exception\PostAkeneoOauthTokenCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostAkeneoOauthTokenCollectionUnprocessableEntityException
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (201 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return json_decode($body);
+        if (is_null($contentType) === false && (201 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+            return json_decode($body, null, 512, JSON_THROW_ON_ERROR);
         }
         if (400 === $status) {
             throw new \Gyroscops\Api\Exception\PostAkeneoOauthTokenCollectionBadRequestException();

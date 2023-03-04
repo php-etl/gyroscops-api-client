@@ -27,19 +27,15 @@ class UpdateListJsonldNormalizer implements DenormalizerInterface, NormalizerInt
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\UpdateListJsonld' === $type;
+        return $type === \Gyroscops\Api\Model\UpdateListJsonld::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\UpdateListJsonld' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\UpdateListJsonld::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,24 +50,24 @@ class UpdateListJsonldNormalizer implements DenormalizerInterface, NormalizerInt
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
+        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
             $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
             $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
+        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
+        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
             $object->setType(null);
         }
-        if (\array_key_exists('iterator', $data) && null !== $data['iterator']) {
-            $object->setIterator($this->denormalizer->denormalize($data['iterator'], 'Gyroscops\\Api\\Model\\TraversableJsonld', 'json', $context));
-        } elseif (\array_key_exists('iterator', $data) && null === $data['iterator']) {
+        if (\array_key_exists('iterator', $data) && $data['iterator'] !== null) {
+            $object->setIterator($this->denormalizer->denormalize($data['iterator'], \Gyroscops\Api\Model\TraversableJsonld::class, 'json', $context));
+        } elseif (\array_key_exists('iterator', $data) && $data['iterator'] === null) {
             $object->setIterator(null);
         }
 
@@ -79,9 +75,6 @@ class UpdateListJsonldNormalizer implements DenormalizerInterface, NormalizerInt
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

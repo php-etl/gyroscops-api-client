@@ -24,10 +24,6 @@ class ExecutionInterruptPipelineExecutionCommandInputJsonld
      * @var string|null
      */
     protected $type;
-    /**
-     * @var string|null
-     */
-    protected $execution;
 
     /**
      * @return mixed
@@ -37,10 +33,7 @@ class ExecutionInterruptPipelineExecutionCommandInputJsonld
         return $this->context;
     }
 
-    /**
-     * @param mixed $context
-     */
-    public function setContext($context): self
+    public function setContext(mixed $context): self
     {
         $this->context = $context;
 
@@ -67,18 +60,6 @@ class ExecutionInterruptPipelineExecutionCommandInputJsonld
     public function setType(?string $type): self
     {
         $this->type = $type;
-
-        return $this;
-    }
-
-    public function getExecution(): ?string
-    {
-        return $this->execution;
-    }
-
-    public function setExecution(?string $execution): self
-    {
-        $this->execution = $execution;
 
         return $this;
     }

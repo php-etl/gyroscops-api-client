@@ -27,19 +27,15 @@ class PipelineJsonldReadNormalizer implements DenormalizerInterface, NormalizerI
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\PipelineJsonldRead' === $type;
+        return $type === \Gyroscops\Api\Model\PipelineJsonldRead::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\PipelineJsonldRead' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\PipelineJsonldRead::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,86 +50,110 @@ class PipelineJsonldReadNormalizer implements DenormalizerInterface, NormalizerI
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
-            $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
-            $object->setContext(null);
-        }
-        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
+        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
+        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
             $object->setType(null);
         }
-        if (\array_key_exists('isSoftDeleted', $data) && null !== $data['isSoftDeleted']) {
+        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
+            $object->setContext($data['@context']);
+        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
+            $object->setContext(null);
+        }
+        if (\array_key_exists('isSoftDeleted', $data) && $data['isSoftDeleted'] !== null) {
             $object->setIsSoftDeleted($data['isSoftDeleted']);
-        } elseif (\array_key_exists('isSoftDeleted', $data) && null === $data['isSoftDeleted']) {
+        } elseif (\array_key_exists('isSoftDeleted', $data) && $data['isSoftDeleted'] === null) {
             $object->setIsSoftDeleted(null);
         }
-        if (\array_key_exists('compiledAt', $data) && null !== $data['compiledAt']) {
+        if (\array_key_exists('compiledAt', $data) && $data['compiledAt'] !== null) {
             $object->setCompiledAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['compiledAt']));
-        } elseif (\array_key_exists('compiledAt', $data) && null === $data['compiledAt']) {
+        } elseif (\array_key_exists('compiledAt', $data) && $data['compiledAt'] === null) {
             $object->setCompiledAt(null);
         }
-        if (\array_key_exists('steps', $data) && null !== $data['steps']) {
-            $values = [];
-            foreach ($data['steps'] as $value) {
-                $values[] = $value;
-            }
-            $object->setSteps($values);
-        } elseif (\array_key_exists('steps', $data) && null === $data['steps']) {
-            $object->setSteps(null);
-        }
-        if (\array_key_exists('id', $data) && null !== $data['id']) {
+        if (\array_key_exists('id', $data) && $data['id'] !== null) {
             $object->setId2($data['id']);
-        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId2(null);
         }
-        if (\array_key_exists('code', $data) && null !== $data['code']) {
+        if (\array_key_exists('code', $data) && $data['code'] !== null) {
             $object->setCode($data['code']);
-        } elseif (\array_key_exists('code', $data) && null === $data['code']) {
+        } elseif (\array_key_exists('code', $data) && $data['code'] === null) {
             $object->setCode(null);
         }
-        if (\array_key_exists('label', $data) && null !== $data['label']) {
+        if (\array_key_exists('label', $data) && $data['label'] !== null) {
             $object->setLabel($data['label']);
-        } elseif (\array_key_exists('label', $data) && null === $data['label']) {
+        } elseif (\array_key_exists('label', $data) && $data['label'] === null) {
             $object->setLabel(null);
         }
-        if (\array_key_exists('runtimeType', $data) && null !== $data['runtimeType']) {
+        if (\array_key_exists('runtimeType', $data) && $data['runtimeType'] !== null) {
             $object->setRuntimeType($data['runtimeType']);
-        } elseif (\array_key_exists('runtimeType', $data) && null === $data['runtimeType']) {
+        } elseif (\array_key_exists('runtimeType', $data) && $data['runtimeType'] === null) {
             $object->setRuntimeType(null);
         }
-        if (\array_key_exists('runtime', $data) && null !== $data['runtime']) {
-            $values_1 = [];
-            foreach ($data['runtime'] as $value_1) {
-                $values_1[] = $value_1;
+        if (\array_key_exists('runtime', $data) && $data['runtime'] !== null) {
+            $values = [];
+            foreach ($data['runtime'] as $value) {
+                $values[] = $value;
             }
-            $object->setRuntime($values_1);
-        } elseif (\array_key_exists('runtime', $data) && null === $data['runtime']) {
+            $object->setRuntime($values);
+        } elseif (\array_key_exists('runtime', $data) && $data['runtime'] === null) {
             $object->setRuntime(null);
         }
-        if (\array_key_exists('autoload', $data) && null !== $data['autoload']) {
+        if (\array_key_exists('autoload', $data) && $data['autoload'] !== null) {
+            $values_1 = [];
+            foreach ($data['autoload'] as $value_1) {
+                $values_1[] = $value_1;
+            }
+            $object->setAutoload($values_1);
+        } elseif (\array_key_exists('autoload', $data) && $data['autoload'] === null) {
+            $object->setAutoload(null);
+        }
+        if (\array_key_exists('packages', $data) && $data['packages'] !== null) {
             $values_2 = [];
-            foreach ($data['autoload'] as $value_2) {
+            foreach ($data['packages'] as $value_2) {
                 $values_2[] = $value_2;
             }
-            $object->setAutoload($values_2);
-        } elseif (\array_key_exists('autoload', $data) && null === $data['autoload']) {
-            $object->setAutoload(null);
+            $object->setPackages($values_2);
+        } elseif (\array_key_exists('packages', $data) && $data['packages'] === null) {
+            $object->setPackages(null);
+        }
+        if (\array_key_exists('repositories', $data) && $data['repositories'] !== null) {
+            $values_3 = [];
+            foreach ($data['repositories'] as $value_3) {
+                $values_3[] = $value_3;
+            }
+            $object->setRepositories($values_3);
+        } elseif (\array_key_exists('repositories', $data) && $data['repositories'] === null) {
+            $object->setRepositories(null);
+        }
+        if (\array_key_exists('auths', $data) && $data['auths'] !== null) {
+            $values_4 = [];
+            foreach ($data['auths'] as $value_4) {
+                $values_4[] = $value_4;
+            }
+            $object->setAuths($values_4);
+        } elseif (\array_key_exists('auths', $data) && $data['auths'] === null) {
+            $object->setAuths(null);
+        }
+        if (\array_key_exists('steps', $data) && $data['steps'] !== null) {
+            $values_5 = [];
+            foreach ($data['steps'] as $value_5) {
+                $values_5[] = $value_5;
+            }
+            $object->setSteps($values_5);
+        } elseif (\array_key_exists('steps', $data) && $data['steps'] === null) {
+            $object->setSteps(null);
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
@@ -145,27 +165,41 @@ class PipelineJsonldReadNormalizer implements DenormalizerInterface, NormalizerI
         if (null !== $object->getCompiledAt()) {
             $data['compiledAt'] = $object->getCompiledAt()->format('Y-m-d\\TH:i:sP');
         }
-        if (null !== $object->getSteps()) {
-            $values = [];
-            foreach ($object->getSteps() as $value) {
-                $values[] = $value;
-            }
-            $data['steps'] = $values;
-        }
         $data['id'] = $object->getId2();
         $data['code'] = $object->getCode();
         $data['label'] = $object->getLabel();
         $data['runtimeType'] = $object->getRuntimeType();
-        $values_1 = [];
-        foreach ($object->getRuntime() as $value_1) {
-            $values_1[] = $value_1;
+        if (null !== $object->getRuntime()) {
+            $values = [];
+            foreach ($object->getRuntime() as $value) {
+                $values[] = $value;
+            }
+            $data['runtime'] = $values;
         }
-        $data['runtime'] = $values_1;
+        if (null !== $object->getPackages()) {
+            $values_1 = [];
+            foreach ($object->getPackages() as $value_1) {
+                $values_1[] = $value_1;
+            }
+            $data['packages'] = $values_1;
+        }
         $values_2 = [];
-        foreach ($object->getAutoload() as $value_2) {
+        foreach ($object->getRepositories() as $value_2) {
             $values_2[] = $value_2;
         }
-        $data['autoload'] = $values_2;
+        $data['repositories'] = $values_2;
+        $values_3 = [];
+        foreach ($object->getAuths() as $value_3) {
+            $values_3[] = $value_3;
+        }
+        $data['auths'] = $values_3;
+        if (null !== $object->getSteps()) {
+            $values_4 = [];
+            foreach ($object->getSteps() as $value_4) {
+                $values_4[] = $value_4;
+            }
+            $data['steps'] = $values_4;
+        }
 
         return $data;
     }

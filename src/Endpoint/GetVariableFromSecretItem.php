@@ -32,7 +32,7 @@ class GetVariableFromSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoi
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/environment/variable-from-secret/{id}');
+        return str_replace(['{id}'], [$this->id], '/variables-from-secret/{id}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
@@ -48,14 +48,14 @@ class GetVariableFromSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoi
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\VariableFromSecret|null
+     * @return \Gyroscops\Api\Model\VariableFromSecretRead|null
      *
      * @throws \Gyroscops\Api\Exception\GetVariableFromSecretItemNotFoundException
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\VariableFromSecret', 'json');
+        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+            return $serializer->deserialize($body, \Gyroscops\Api\Model\VariableFromSecretRead::class, 'json');
         }
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\GetVariableFromSecretItemNotFoundException();

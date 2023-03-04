@@ -31,7 +31,7 @@ class DeclareExecutionExecutionCollection extends \Gyroscops\Api\Runtime\Client\
 
     public function getUri(): string
     {
-        return '/runtime/executions/declare';
+        return '/runtime/execution';
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
@@ -57,13 +57,15 @@ class DeclareExecutionExecutionCollection extends \Gyroscops\Api\Runtime\Client\
     /**
      * {@inheritdoc}
      *
+     * @return null
+     *
      * @throws \Gyroscops\Api\Exception\DeclareExecutionExecutionCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\DeclareExecutionExecutionCollectionUnprocessableEntityException
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (202 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return json_decode($body);
+        if (is_null($contentType) === false && (202 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+            return json_decode($body, null, 512, JSON_THROW_ON_ERROR);
         }
         if (400 === $status) {
             throw new \Gyroscops\Api\Exception\DeclareExecutionExecutionCollectionBadRequestException();

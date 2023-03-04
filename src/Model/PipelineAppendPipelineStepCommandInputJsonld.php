@@ -27,10 +27,6 @@ class PipelineAppendPipelineStepCommandInputJsonld
     /**
      * @var string|null
      */
-    protected $pipeline;
-    /**
-     * @var string|null
-     */
     protected $code;
     /**
      * @var string|null
@@ -53,10 +49,7 @@ class PipelineAppendPipelineStepCommandInputJsonld
         return $this->context;
     }
 
-    /**
-     * @param mixed $context
-     */
-    public function setContext($context): self
+    public function setContext(mixed $context): self
     {
         $this->context = $context;
 
@@ -83,18 +76,6 @@ class PipelineAppendPipelineStepCommandInputJsonld
     public function setType(?string $type): self
     {
         $this->type = $type;
-
-        return $this;
-    }
-
-    public function getPipeline(): ?string
-    {
-        return $this->pipeline;
-    }
-
-    public function setPipeline(?string $pipeline): self
-    {
-        $this->pipeline = $pipeline;
 
         return $this;
     }

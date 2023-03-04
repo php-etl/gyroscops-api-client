@@ -27,19 +27,15 @@ class AutoloadInputNormalizer implements DenormalizerInterface, NormalizerInterf
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\AutoloadInput' === $type;
+        return $type === \Gyroscops\Api\Model\AutoloadInput::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\AutoloadInput' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\AutoloadInput::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,18 +50,18 @@ class AutoloadInputNormalizer implements DenormalizerInterface, NormalizerInterf
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('namespace', $data) && null !== $data['namespace']) {
+        if (\array_key_exists('namespace', $data) && $data['namespace'] !== null) {
             $object->setNamespace($data['namespace']);
-        } elseif (\array_key_exists('namespace', $data) && null === $data['namespace']) {
+        } elseif (\array_key_exists('namespace', $data) && $data['namespace'] === null) {
             $object->setNamespace(null);
         }
-        if (\array_key_exists('paths', $data) && null !== $data['paths']) {
+        if (\array_key_exists('paths', $data) && $data['paths'] !== null) {
             $values = [];
             foreach ($data['paths'] as $value) {
                 $values[] = $value;
             }
             $object->setPaths($values);
-        } elseif (\array_key_exists('paths', $data) && null === $data['paths']) {
+        } elseif (\array_key_exists('paths', $data) && $data['paths'] === null) {
             $object->setPaths(null);
         }
 
@@ -73,24 +69,17 @@ class AutoloadInputNormalizer implements DenormalizerInterface, NormalizerInterf
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getNamespace()) {
-            $data['namespace'] = $object->getNamespace();
+        $data['namespace'] = $object->getNamespace();
+        $values = [];
+        foreach ($object->getPaths() as $value) {
+            $values[] = $value;
         }
-        if (null !== $object->getPaths()) {
-            $values = [];
-            foreach ($object->getPaths() as $value) {
-                $values[] = $value;
-            }
-            $data['paths'] = $values;
-        }
+        $data['paths'] = $values;
 
         return $data;
     }

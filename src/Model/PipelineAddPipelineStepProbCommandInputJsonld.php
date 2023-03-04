@@ -25,14 +25,6 @@ class PipelineAddPipelineStepProbCommandInputJsonld
      */
     protected $type;
     /**
-     * @var string|null
-     */
-    protected $id2;
-    /**
-     * @var string|null
-     */
-    protected $code;
-    /**
      * @var ProbeJsonld|null
      */
     protected $probe;
@@ -45,10 +37,7 @@ class PipelineAddPipelineStepProbCommandInputJsonld
         return $this->context;
     }
 
-    /**
-     * @param mixed $context
-     */
-    public function setContext($context): self
+    public function setContext(mixed $context): self
     {
         $this->context = $context;
 
@@ -75,30 +64,6 @@ class PipelineAddPipelineStepProbCommandInputJsonld
     public function setType(?string $type): self
     {
         $this->type = $type;
-
-        return $this;
-    }
-
-    public function getId2(): ?string
-    {
-        return $this->id2;
-    }
-
-    public function setId2(?string $id2): self
-    {
-        $this->id2 = $id2;
-
-        return $this;
-    }
-
-    public function getCode(): ?string
-    {
-        return $this->code;
-    }
-
-    public function setCode(?string $code): self
-    {
-        $this->code = $code;
 
         return $this;
     }

@@ -17,7 +17,7 @@ class PostSecretCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint im
     /**
      * Creates a Secret resource.
      *
-     * @param \Gyroscops\Api\Model\SecretSecretInputJsonld|\Gyroscops\Api\Model\SecretSecretInput|null $requestBody
+     * @param \Gyroscops\Api\Model\SecretCreateSecretInputJsonld|\Gyroscops\Api\Model\SecretCreateSecretInput|null $requestBody
      */
     public function __construct($requestBody = null)
     {
@@ -36,13 +36,13 @@ class PostSecretCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint im
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\SecretSecretInputJsonld) {
+        if ($this->body instanceof \Gyroscops\Api\Model\SecretCreateSecretInputJsonld) {
             return [['Content-Type' => ['application/ld+json']], $this->body];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\SecretSecretInput) {
+        if ($this->body instanceof \Gyroscops\Api\Model\SecretCreateSecretInput) {
             return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\SecretSecretInput) {
+        if ($this->body instanceof \Gyroscops\Api\Model\SecretCreateSecretInput) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -64,8 +64,8 @@ class PostSecretCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint im
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (201 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Secret', 'json');
+        if (is_null($contentType) === false && (201 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+            return $serializer->deserialize($body, \Gyroscops\Api\Model\Secret::class, 'json');
         }
         if (400 === $status) {
             throw new \Gyroscops\Api\Exception\PostSecretCollectionBadRequestException();

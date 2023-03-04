@@ -43,6 +43,8 @@ class DeleteUserAuthorizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndp
     /**
      * {@inheritdoc}
      *
+     * @return null
+     *
      * @throws \Gyroscops\Api\Exception\DeleteUserAuthorizationItemNotFoundException
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)

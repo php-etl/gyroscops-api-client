@@ -27,19 +27,15 @@ class PipelineMoveAfterPipelineStepCommandInputNormalizer implements Denormalize
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\PipelineMoveAfterPipelineStepCommandInput' === $type;
+        return $type === \Gyroscops\Api\Model\PipelineMoveAfterPipelineStepCommandInput::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\PipelineMoveAfterPipelineStepCommandInput' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\PipelineMoveAfterPipelineStepCommandInput::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,19 +50,9 @@ class PipelineMoveAfterPipelineStepCommandInputNormalizer implements Denormalize
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('pipeline', $data) && null !== $data['pipeline']) {
-            $object->setPipeline($data['pipeline']);
-        } elseif (\array_key_exists('pipeline', $data) && null === $data['pipeline']) {
-            $object->setPipeline(null);
-        }
-        if (\array_key_exists('previous', $data) && null !== $data['previous']) {
-            $object->setPrevious($data['previous']);
-        } elseif (\array_key_exists('previous', $data) && null === $data['previous']) {
-            $object->setPrevious(null);
-        }
-        if (\array_key_exists('code', $data) && null !== $data['code']) {
+        if (\array_key_exists('code', $data) && $data['code'] !== null) {
             $object->setCode($data['code']);
-        } elseif (\array_key_exists('code', $data) && null === $data['code']) {
+        } elseif (\array_key_exists('code', $data) && $data['code'] === null) {
             $object->setCode(null);
         }
 
@@ -74,23 +60,12 @@ class PipelineMoveAfterPipelineStepCommandInputNormalizer implements Denormalize
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getPipeline()) {
-            $data['pipeline'] = $object->getPipeline();
-        }
-        if (null !== $object->getPrevious()) {
-            $data['previous'] = $object->getPrevious();
-        }
-        if (null !== $object->getCode()) {
-            $data['code'] = $object->getCode();
-        }
+        $data['code'] = $object->getCode();
 
         return $data;
     }

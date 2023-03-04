@@ -27,19 +27,15 @@ class ExecutionPipelineStepNormalizer implements DenormalizerInterface, Normaliz
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\ExecutionPipelineStep' === $type;
+        return $type === \Gyroscops\Api\Model\ExecutionPipelineStep::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\ExecutionPipelineStep' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\ExecutionPipelineStep::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,23 +50,23 @@ class ExecutionPipelineStepNormalizer implements DenormalizerInterface, Normaliz
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('id', $data) && null !== $data['id']) {
+        if (\array_key_exists('id', $data) && $data['id'] !== null) {
             $object->setId($data['id']);
-        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('pipeline', $data) && null !== $data['pipeline']) {
-            $object->setPipeline($this->denormalizer->denormalize($data['pipeline'], 'Gyroscops\\Api\\Model\\AbstractPipeline', 'json', $context));
-        } elseif (\array_key_exists('pipeline', $data) && null === $data['pipeline']) {
+        if (\array_key_exists('pipeline', $data) && $data['pipeline'] !== null) {
+            $object->setPipeline($this->denormalizer->denormalize($data['pipeline'], \Gyroscops\Api\Model\AbstractPipeline::class, 'json', $context));
+        } elseif (\array_key_exists('pipeline', $data) && $data['pipeline'] === null) {
             $object->setPipeline(null);
         }
-        if (\array_key_exists('metrics', $data) && null !== $data['metrics']) {
+        if (\array_key_exists('metrics', $data) && $data['metrics'] !== null) {
             $values = [];
             foreach ($data['metrics'] as $value) {
                 $values[] = $value;
             }
             $object->setMetrics($values);
-        } elseif (\array_key_exists('metrics', $data) && null === $data['metrics']) {
+        } elseif (\array_key_exists('metrics', $data) && $data['metrics'] === null) {
             $object->setMetrics(null);
         }
 
@@ -78,9 +74,6 @@ class ExecutionPipelineStepNormalizer implements DenormalizerInterface, Normaliz
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

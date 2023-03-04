@@ -27,10 +27,6 @@ class ExecutionTerminatePipelineExecutionCommandInputJsonld
     /**
      * @var string|null
      */
-    protected $execution;
-    /**
-     * @var string|null
-     */
     protected $reason;
 
     /**
@@ -41,10 +37,7 @@ class ExecutionTerminatePipelineExecutionCommandInputJsonld
         return $this->context;
     }
 
-    /**
-     * @param mixed $context
-     */
-    public function setContext($context): self
+    public function setContext(mixed $context): self
     {
         $this->context = $context;
 
@@ -71,18 +64,6 @@ class ExecutionTerminatePipelineExecutionCommandInputJsonld
     public function setType(?string $type): self
     {
         $this->type = $type;
-
-        return $this;
-    }
-
-    public function getExecution(): ?string
-    {
-        return $this->execution;
-    }
-
-    public function setExecution(?string $execution): self
-    {
-        $this->execution = $execution;
 
         return $this;
     }

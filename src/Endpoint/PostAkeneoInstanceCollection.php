@@ -64,8 +64,8 @@ class PostAkeneoInstanceCollection extends \Gyroscops\Api\Runtime\Client\BaseEnd
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (201 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\AkeneoInstance', 'json');
+        if (is_null($contentType) === false && (201 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+            return $serializer->deserialize($body, \Gyroscops\Api\Model\AkeneoInstance::class, 'json');
         }
         if (400 === $status) {
             throw new \Gyroscops\Api\Exception\PostAkeneoInstanceCollectionBadRequestException();

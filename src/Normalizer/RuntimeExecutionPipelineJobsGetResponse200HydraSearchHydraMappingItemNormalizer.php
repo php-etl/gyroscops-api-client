@@ -27,19 +27,15 @@ class RuntimeExecutionPipelineJobsGetResponse200HydraSearchHydraMappingItemNorma
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\RuntimeExecutionPipelineJobsGetResponse200HydraSearchHydraMappingItem' === $type;
+        return $type === \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsGetResponse200HydraSearchHydraMappingItem::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\RuntimeExecutionPipelineJobsGetResponse200HydraSearchHydraMappingItem' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsGetResponse200HydraSearchHydraMappingItem::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,24 +50,24 @@ class RuntimeExecutionPipelineJobsGetResponse200HydraSearchHydraMappingItemNorma
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
+        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
             $object->setType(null);
         }
-        if (\array_key_exists('variable', $data) && null !== $data['variable']) {
+        if (\array_key_exists('variable', $data) && $data['variable'] !== null) {
             $object->setVariable($data['variable']);
-        } elseif (\array_key_exists('variable', $data) && null === $data['variable']) {
+        } elseif (\array_key_exists('variable', $data) && $data['variable'] === null) {
             $object->setVariable(null);
         }
-        if (\array_key_exists('property', $data) && null !== $data['property']) {
+        if (\array_key_exists('property', $data) && $data['property'] !== null) {
             $object->setProperty($data['property']);
-        } elseif (\array_key_exists('property', $data) && null === $data['property']) {
+        } elseif (\array_key_exists('property', $data) && $data['property'] === null) {
             $object->setProperty(null);
         }
-        if (\array_key_exists('required', $data) && null !== $data['required']) {
+        if (\array_key_exists('required', $data) && $data['required'] !== null) {
             $object->setRequired($data['required']);
-        } elseif (\array_key_exists('required', $data) && null === $data['required']) {
+        } elseif (\array_key_exists('required', $data) && $data['required'] === null) {
             $object->setRequired(null);
         }
 
@@ -79,9 +75,6 @@ class RuntimeExecutionPipelineJobsGetResponse200HydraSearchHydraMappingItemNorma
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

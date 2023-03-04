@@ -27,19 +27,15 @@ class SubscriptionOptionNormalizer implements DenormalizerInterface, NormalizerI
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\SubscriptionOption' === $type;
+        return $type === \Gyroscops\Api\Model\SubscriptionOption::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\SubscriptionOption' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\SubscriptionOption::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,24 +50,24 @@ class SubscriptionOptionNormalizer implements DenormalizerInterface, NormalizerI
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('id', $data) && null !== $data['id']) {
+        if (\array_key_exists('id', $data) && $data['id'] !== null) {
             $object->setId($data['id']);
-        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('subscription', $data) && null !== $data['subscription']) {
+        if (\array_key_exists('subscription', $data) && $data['subscription'] !== null) {
             $object->setSubscription($data['subscription']);
-        } elseif (\array_key_exists('subscription', $data) && null === $data['subscription']) {
+        } elseif (\array_key_exists('subscription', $data) && $data['subscription'] === null) {
             $object->setSubscription(null);
         }
-        if (\array_key_exists('option', $data) && null !== $data['option']) {
+        if (\array_key_exists('option', $data) && $data['option'] !== null) {
             $object->setOption($data['option']);
-        } elseif (\array_key_exists('option', $data) && null === $data['option']) {
+        } elseif (\array_key_exists('option', $data) && $data['option'] === null) {
             $object->setOption(null);
         }
-        if (\array_key_exists('price', $data) && null !== $data['price']) {
-            $object->setPrice($this->denormalizer->denormalize($data['price'], 'Gyroscops\\Api\\Model\\Price', 'json', $context));
-        } elseif (\array_key_exists('price', $data) && null === $data['price']) {
+        if (\array_key_exists('price', $data) && $data['price'] !== null) {
+            $object->setPrice($this->denormalizer->denormalize($data['price'], \Gyroscops\Api\Model\Price::class, 'json', $context));
+        } elseif (\array_key_exists('price', $data) && $data['price'] === null) {
             $object->setPrice(null);
         }
 
@@ -79,9 +75,6 @@ class SubscriptionOptionNormalizer implements DenormalizerInterface, NormalizerI
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

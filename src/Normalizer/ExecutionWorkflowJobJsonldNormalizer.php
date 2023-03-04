@@ -27,19 +27,15 @@ class ExecutionWorkflowJobJsonldNormalizer implements DenormalizerInterface, Nor
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\ExecutionWorkflowJobJsonld' === $type;
+        return $type === \Gyroscops\Api\Model\ExecutionWorkflowJobJsonld::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\ExecutionWorkflowJobJsonld' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\ExecutionWorkflowJobJsonld::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,39 +50,39 @@ class ExecutionWorkflowJobJsonldNormalizer implements DenormalizerInterface, Nor
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
+        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
+        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
             $object->setType(null);
         }
-        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
+        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
             $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
             $object->setContext(null);
         }
-        if (\array_key_exists('id', $data) && null !== $data['id']) {
+        if (\array_key_exists('id', $data) && $data['id'] !== null) {
             $object->setId2($data['id']);
-        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId2(null);
         }
-        if (\array_key_exists('workflow', $data) && null !== $data['workflow']) {
+        if (\array_key_exists('workflow', $data) && $data['workflow'] !== null) {
             $object->setWorkflow($data['workflow']);
-        } elseif (\array_key_exists('workflow', $data) && null === $data['workflow']) {
+        } elseif (\array_key_exists('workflow', $data) && $data['workflow'] === null) {
             $object->setWorkflow(null);
         }
-        if (\array_key_exists('pipeline', $data) && null !== $data['pipeline']) {
+        if (\array_key_exists('pipeline', $data) && $data['pipeline'] !== null) {
             $object->setPipeline($data['pipeline']);
-        } elseif (\array_key_exists('pipeline', $data) && null === $data['pipeline']) {
+        } elseif (\array_key_exists('pipeline', $data) && $data['pipeline'] === null) {
             $object->setPipeline(null);
         }
-        if (\array_key_exists('action', $data) && null !== $data['action']) {
+        if (\array_key_exists('action', $data) && $data['action'] !== null) {
             $object->setAction($data['action']);
-        } elseif (\array_key_exists('action', $data) && null === $data['action']) {
+        } elseif (\array_key_exists('action', $data) && $data['action'] === null) {
             $object->setAction(null);
         }
 
@@ -94,9 +90,6 @@ class ExecutionWorkflowJobJsonldNormalizer implements DenormalizerInterface, Nor
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

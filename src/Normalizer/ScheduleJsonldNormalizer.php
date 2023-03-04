@@ -27,19 +27,15 @@ class ScheduleJsonldNormalizer implements DenormalizerInterface, NormalizerInter
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\ScheduleJsonld' === $type;
+        return $type === \Gyroscops\Api\Model\ScheduleJsonld::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\ScheduleJsonld' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\ScheduleJsonld::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,83 +50,83 @@ class ScheduleJsonldNormalizer implements DenormalizerInterface, NormalizerInter
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
+        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
+        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
             $object->setType(null);
         }
-        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
+        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
             $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
             $object->setContext(null);
         }
-        if (\array_key_exists('id', $data) && null !== $data['id']) {
+        if (\array_key_exists('id', $data) && $data['id'] !== null) {
             $object->setId2($data['id']);
-        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId2(null);
         }
-        if (\array_key_exists('type', $data) && null !== $data['type']) {
+        if (\array_key_exists('type', $data) && $data['type'] !== null) {
             $object->setType2($data['type']);
-        } elseif (\array_key_exists('type', $data) && null === $data['type']) {
+        } elseif (\array_key_exists('type', $data) && $data['type'] === null) {
             $object->setType2(null);
         }
-        if (\array_key_exists('startAt', $data) && null !== $data['startAt']) {
+        if (\array_key_exists('startAt', $data) && $data['startAt'] !== null) {
             $object->setStartAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['startAt']));
-        } elseif (\array_key_exists('startAt', $data) && null === $data['startAt']) {
+        } elseif (\array_key_exists('startAt', $data) && $data['startAt'] === null) {
             $object->setStartAt(null);
         }
-        if (\array_key_exists('interval', $data) && null !== $data['interval']) {
+        if (\array_key_exists('interval', $data) && $data['interval'] !== null) {
             $object->setInterval($data['interval']);
-        } elseif (\array_key_exists('interval', $data) && null === $data['interval']) {
+        } elseif (\array_key_exists('interval', $data) && $data['interval'] === null) {
             $object->setInterval(null);
         }
-        if (\array_key_exists('endAt', $data) && null !== $data['endAt']) {
+        if (\array_key_exists('endAt', $data) && $data['endAt'] !== null) {
             $object->setEndAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['endAt']));
-        } elseif (\array_key_exists('endAt', $data) && null === $data['endAt']) {
+        } elseif (\array_key_exists('endAt', $data) && $data['endAt'] === null) {
             $object->setEndAt(null);
         }
-        if (\array_key_exists('recurrences', $data) && null !== $data['recurrences']) {
+        if (\array_key_exists('recurrences', $data) && $data['recurrences'] !== null) {
             $object->setRecurrences($data['recurrences']);
-        } elseif (\array_key_exists('recurrences', $data) && null === $data['recurrences']) {
+        } elseif (\array_key_exists('recurrences', $data) && $data['recurrences'] === null) {
             $object->setRecurrences(null);
         }
-        if (\array_key_exists('executions', $data) && null !== $data['executions']) {
+        if (\array_key_exists('executions', $data) && $data['executions'] !== null) {
             $values = [];
             foreach ($data['executions'] as $value) {
                 $values[] = $value;
             }
             $object->setExecutions($values);
-        } elseif (\array_key_exists('executions', $data) && null === $data['executions']) {
+        } elseif (\array_key_exists('executions', $data) && $data['executions'] === null) {
             $object->setExecutions(null);
         }
-        if (\array_key_exists('pipeline', $data) && null !== $data['pipeline']) {
+        if (\array_key_exists('pipeline', $data) && $data['pipeline'] !== null) {
             $object->setPipeline($data['pipeline']);
-        } elseif (\array_key_exists('pipeline', $data) && null === $data['pipeline']) {
+        } elseif (\array_key_exists('pipeline', $data) && $data['pipeline'] === null) {
             $object->setPipeline(null);
         }
-        if (\array_key_exists('workflow', $data) && null !== $data['workflow']) {
+        if (\array_key_exists('workflow', $data) && $data['workflow'] !== null) {
             $object->setWorkflow($data['workflow']);
-        } elseif (\array_key_exists('workflow', $data) && null === $data['workflow']) {
+        } elseif (\array_key_exists('workflow', $data) && $data['workflow'] === null) {
             $object->setWorkflow(null);
         }
-        if (\array_key_exists('owner', $data) && null !== $data['owner']) {
+        if (\array_key_exists('owner', $data) && $data['owner'] !== null) {
             $object->setOwner($data['owner']);
-        } elseif (\array_key_exists('owner', $data) && null === $data['owner']) {
+        } elseif (\array_key_exists('owner', $data) && $data['owner'] === null) {
             $object->setOwner(null);
         }
-        if (\array_key_exists('workspace', $data) && null !== $data['workspace']) {
+        if (\array_key_exists('workspace', $data) && $data['workspace'] !== null) {
             $object->setWorkspace($data['workspace']);
-        } elseif (\array_key_exists('workspace', $data) && null === $data['workspace']) {
+        } elseif (\array_key_exists('workspace', $data) && $data['workspace'] === null) {
             $object->setWorkspace(null);
         }
-        if (\array_key_exists('organization', $data) && null !== $data['organization']) {
+        if (\array_key_exists('organization', $data) && $data['organization'] !== null) {
             $object->setOrganization($data['organization']);
-        } elseif (\array_key_exists('organization', $data) && null === $data['organization']) {
+        } elseif (\array_key_exists('organization', $data) && $data['organization'] === null) {
             $object->setOrganization(null);
         }
 
@@ -138,9 +134,6 @@ class ScheduleJsonldNormalizer implements DenormalizerInterface, NormalizerInter
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

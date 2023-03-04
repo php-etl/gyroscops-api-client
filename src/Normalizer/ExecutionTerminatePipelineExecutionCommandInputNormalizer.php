@@ -27,19 +27,15 @@ class ExecutionTerminatePipelineExecutionCommandInputNormalizer implements Denor
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\ExecutionTerminatePipelineExecutionCommandInput' === $type;
+        return $type === \Gyroscops\Api\Model\ExecutionTerminatePipelineExecutionCommandInput::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\ExecutionTerminatePipelineExecutionCommandInput' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\ExecutionTerminatePipelineExecutionCommandInput::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,14 +50,9 @@ class ExecutionTerminatePipelineExecutionCommandInputNormalizer implements Denor
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('execution', $data) && null !== $data['execution']) {
-            $object->setExecution($data['execution']);
-        } elseif (\array_key_exists('execution', $data) && null === $data['execution']) {
-            $object->setExecution(null);
-        }
-        if (\array_key_exists('reason', $data) && null !== $data['reason']) {
+        if (\array_key_exists('reason', $data) && $data['reason'] !== null) {
             $object->setReason($data['reason']);
-        } elseif (\array_key_exists('reason', $data) && null === $data['reason']) {
+        } elseif (\array_key_exists('reason', $data) && $data['reason'] === null) {
             $object->setReason(null);
         }
 
@@ -69,20 +60,12 @@ class ExecutionTerminatePipelineExecutionCommandInputNormalizer implements Denor
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getExecution()) {
-            $data['execution'] = $object->getExecution();
-        }
-        if (null !== $object->getReason()) {
-            $data['reason'] = $object->getReason();
-        }
+        $data['reason'] = $object->getReason();
 
         return $data;
     }

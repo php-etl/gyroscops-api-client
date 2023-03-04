@@ -35,7 +35,7 @@ class StepInputJsonld
     /**
      * @var string[][]|null
      */
-    protected $config;
+    protected $configuration;
     /**
      * @var ProbeJsonld[]|null
      */
@@ -49,10 +49,7 @@ class StepInputJsonld
         return $this->context;
     }
 
-    /**
-     * @param mixed $context
-     */
-    public function setContext($context): self
+    public function setContext(mixed $context): self
     {
         $this->context = $context;
 
@@ -110,17 +107,17 @@ class StepInputJsonld
     /**
      * @return string[][]|null
      */
-    public function getConfig(): ?iterable
+    public function getConfiguration(): ?iterable
     {
-        return $this->config;
+        return $this->configuration;
     }
 
     /**
-     * @param string[][]|null $config
+     * @param string[][]|null $configuration
      */
-    public function setConfig(?iterable $config): self
+    public function setConfiguration(?iterable $configuration): self
     {
-        $this->config = $config;
+        $this->configuration = $configuration;
 
         return $this;
     }

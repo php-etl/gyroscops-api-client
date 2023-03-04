@@ -21,14 +21,6 @@ class PipelineDeclarePipelineCommandInput
      */
     protected $code;
     /**
-     * @var string|null
-     */
-    protected $workspace;
-    /**
-     * @var string|null
-     */
-    protected $organization;
-    /**
      * @var StepInput[]|null
      */
     protected $steps;
@@ -36,6 +28,18 @@ class PipelineDeclarePipelineCommandInput
      * @var AutoloadInput[]|null
      */
     protected $autoloads;
+    /**
+     * @var string[]|null
+     */
+    protected $packages;
+    /**
+     * @var AddPipelineComposerRepositoryCommandInput[]|null
+     */
+    protected $repositories;
+    /**
+     * @var AddPipelineComposerAuthCommandInput[]|null
+     */
+    protected $auths;
 
     public function getLabel(): ?string
     {
@@ -57,30 +61,6 @@ class PipelineDeclarePipelineCommandInput
     public function setCode(?string $code): self
     {
         $this->code = $code;
-
-        return $this;
-    }
-
-    public function getWorkspace(): ?string
-    {
-        return $this->workspace;
-    }
-
-    public function setWorkspace(?string $workspace): self
-    {
-        $this->workspace = $workspace;
-
-        return $this;
-    }
-
-    public function getOrganization(): ?string
-    {
-        return $this->organization;
-    }
-
-    public function setOrganization(?string $organization): self
-    {
-        $this->organization = $organization;
 
         return $this;
     }
@@ -117,6 +97,60 @@ class PipelineDeclarePipelineCommandInput
     public function setAutoloads(?array $autoloads): self
     {
         $this->autoloads = $autoloads;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getPackages(): ?iterable
+    {
+        return $this->packages;
+    }
+
+    /**
+     * @param string[]|null $packages
+     */
+    public function setPackages(?iterable $packages): self
+    {
+        $this->packages = $packages;
+
+        return $this;
+    }
+
+    /**
+     * @return AddPipelineComposerRepositoryCommandInput[]|null
+     */
+    public function getRepositories(): ?array
+    {
+        return $this->repositories;
+    }
+
+    /**
+     * @param AddPipelineComposerRepositoryCommandInput[]|null $repositories
+     */
+    public function setRepositories(?array $repositories): self
+    {
+        $this->repositories = $repositories;
+
+        return $this;
+    }
+
+    /**
+     * @return AddPipelineComposerAuthCommandInput[]|null
+     */
+    public function getAuths(): ?array
+    {
+        return $this->auths;
+    }
+
+    /**
+     * @param AddPipelineComposerAuthCommandInput[]|null $auths
+     */
+    public function setAuths(?array $auths): self
+    {
+        $this->auths = $auths;
 
         return $this;
     }

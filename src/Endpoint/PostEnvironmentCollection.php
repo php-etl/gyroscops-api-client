@@ -17,7 +17,7 @@ class PostEnvironmentCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoi
     /**
      * Creates a Environment resource.
      *
-     * @param \Gyroscops\Api\Model\EnvironmentJsonld|\Gyroscops\Api\Model\Environment|null $requestBody
+     * @param \Gyroscops\Api\Model\EnvironmentCreateEnvironmentInputJsonld|\Gyroscops\Api\Model\EnvironmentCreateEnvironmentInput|null $requestBody
      */
     public function __construct($requestBody = null)
     {
@@ -36,13 +36,13 @@ class PostEnvironmentCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoi
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\EnvironmentJsonld) {
+        if ($this->body instanceof \Gyroscops\Api\Model\EnvironmentCreateEnvironmentInputJsonld) {
             return [['Content-Type' => ['application/ld+json']], $this->body];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\Environment) {
+        if ($this->body instanceof \Gyroscops\Api\Model\EnvironmentCreateEnvironmentInput) {
             return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\Environment) {
+        if ($this->body instanceof \Gyroscops\Api\Model\EnvironmentCreateEnvironmentInput) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -57,15 +57,15 @@ class PostEnvironmentCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoi
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\Environment|null
+     * @return \Gyroscops\Api\Model\EnvironmentRead|null
      *
      * @throws \Gyroscops\Api\Exception\PostEnvironmentCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostEnvironmentCollectionUnprocessableEntityException
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (201 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Environment', 'json');
+        if (is_null($contentType) === false && (201 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+            return $serializer->deserialize($body, \Gyroscops\Api\Model\EnvironmentRead::class, 'json');
         }
         if (400 === $status) {
             throw new \Gyroscops\Api\Exception\PostEnvironmentCollectionBadRequestException();

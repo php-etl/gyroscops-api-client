@@ -27,19 +27,15 @@ class AkeneoOauthTokenOauthTokenInputJsonldNormalizer implements DenormalizerInt
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\AkeneoOauthTokenOauthTokenInputJsonld' === $type;
+        return $type === \Gyroscops\Api\Model\AkeneoOauthTokenOauthTokenInputJsonld::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\AkeneoOauthTokenOauthTokenInputJsonld' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\AkeneoOauthTokenOauthTokenInputJsonld::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,29 +50,29 @@ class AkeneoOauthTokenOauthTokenInputJsonldNormalizer implements DenormalizerInt
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
+        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
+        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
             $object->setType(null);
         }
-        if (\array_key_exists('url', $data) && null !== $data['url']) {
+        if (\array_key_exists('url', $data) && $data['url'] !== null) {
             $object->setUrl($data['url']);
-        } elseif (\array_key_exists('url', $data) && null === $data['url']) {
+        } elseif (\array_key_exists('url', $data) && $data['url'] === null) {
             $object->setUrl(null);
         }
-        if (\array_key_exists('state', $data) && null !== $data['state']) {
+        if (\array_key_exists('state', $data) && $data['state'] !== null) {
             $object->setState($data['state']);
-        } elseif (\array_key_exists('state', $data) && null === $data['state']) {
+        } elseif (\array_key_exists('state', $data) && $data['state'] === null) {
             $object->setState(null);
         }
-        if (\array_key_exists('code', $data) && null !== $data['code']) {
+        if (\array_key_exists('code', $data) && $data['code'] !== null) {
             $object->setCode($data['code']);
-        } elseif (\array_key_exists('code', $data) && null === $data['code']) {
+        } elseif (\array_key_exists('code', $data) && $data['code'] === null) {
             $object->setCode(null);
         }
 
@@ -84,9 +80,6 @@ class AkeneoOauthTokenOauthTokenInputJsonldNormalizer implements DenormalizerInt
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

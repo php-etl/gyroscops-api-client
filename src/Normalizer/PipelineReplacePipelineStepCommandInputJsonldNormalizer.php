@@ -27,19 +27,15 @@ class PipelineReplacePipelineStepCommandInputJsonldNormalizer implements Denorma
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\PipelineReplacePipelineStepCommandInputJsonld' === $type;
+        return $type === \Gyroscops\Api\Model\PipelineReplacePipelineStepCommandInputJsonld::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\PipelineReplacePipelineStepCommandInputJsonld' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\PipelineReplacePipelineStepCommandInputJsonld::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,57 +50,47 @@ class PipelineReplacePipelineStepCommandInputJsonldNormalizer implements Denorma
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
+        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
             $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
             $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
+        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
+        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
             $object->setType(null);
         }
-        if (\array_key_exists('pipeline', $data) && null !== $data['pipeline']) {
-            $object->setPipeline($data['pipeline']);
-        } elseif (\array_key_exists('pipeline', $data) && null === $data['pipeline']) {
-            $object->setPipeline(null);
-        }
-        if (\array_key_exists('former', $data) && null !== $data['former']) {
-            $object->setFormer($data['former']);
-        } elseif (\array_key_exists('former', $data) && null === $data['former']) {
-            $object->setFormer(null);
-        }
-        if (\array_key_exists('code', $data) && null !== $data['code']) {
+        if (\array_key_exists('code', $data) && $data['code'] !== null) {
             $object->setCode($data['code']);
-        } elseif (\array_key_exists('code', $data) && null === $data['code']) {
+        } elseif (\array_key_exists('code', $data) && $data['code'] === null) {
             $object->setCode(null);
         }
-        if (\array_key_exists('label', $data) && null !== $data['label']) {
+        if (\array_key_exists('label', $data) && $data['label'] !== null) {
             $object->setLabel($data['label']);
-        } elseif (\array_key_exists('label', $data) && null === $data['label']) {
+        } elseif (\array_key_exists('label', $data) && $data['label'] === null) {
             $object->setLabel(null);
         }
-        if (\array_key_exists('configuration', $data) && null !== $data['configuration']) {
+        if (\array_key_exists('configuration', $data) && $data['configuration'] !== null) {
             $values = [];
             foreach ($data['configuration'] as $value) {
                 $values[] = $value;
             }
             $object->setConfiguration($values);
-        } elseif (\array_key_exists('configuration', $data) && null === $data['configuration']) {
+        } elseif (\array_key_exists('configuration', $data) && $data['configuration'] === null) {
             $object->setConfiguration(null);
         }
-        if (\array_key_exists('probes', $data) && null !== $data['probes']) {
+        if (\array_key_exists('probes', $data) && $data['probes'] !== null) {
             $values_1 = [];
             foreach ($data['probes'] as $value_1) {
-                $values_1[] = $this->denormalizer->denormalize($value_1, 'Gyroscops\\Api\\Model\\ProbeJsonld', 'json', $context);
+                $values_1[] = $this->denormalizer->denormalize($value_1, \Gyroscops\Api\Model\ProbeJsonld::class, 'json', $context);
             }
             $object->setProbes($values_1);
-        } elseif (\array_key_exists('probes', $data) && null === $data['probes']) {
+        } elseif (\array_key_exists('probes', $data) && $data['probes'] === null) {
             $object->setProbes(null);
         }
 
@@ -112,33 +98,18 @@ class PipelineReplacePipelineStepCommandInputJsonldNormalizer implements Denorma
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getPipeline()) {
-            $data['pipeline'] = $object->getPipeline();
+        $data['code'] = $object->getCode();
+        $data['label'] = $object->getLabel();
+        $values = [];
+        foreach ($object->getConfiguration() as $value) {
+            $values[] = $value;
         }
-        if (null !== $object->getFormer()) {
-            $data['former'] = $object->getFormer();
-        }
-        if (null !== $object->getCode()) {
-            $data['code'] = $object->getCode();
-        }
-        if (null !== $object->getLabel()) {
-            $data['label'] = $object->getLabel();
-        }
-        if (null !== $object->getConfiguration()) {
-            $values = [];
-            foreach ($object->getConfiguration() as $value) {
-                $values[] = $value;
-            }
-            $data['configuration'] = $values;
-        }
+        $data['configuration'] = $values;
         if (null !== $object->getProbes()) {
             $values_1 = [];
             foreach ($object->getProbes() as $value_1) {

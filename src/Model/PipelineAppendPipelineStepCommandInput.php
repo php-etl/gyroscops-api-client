@@ -15,10 +15,6 @@ class PipelineAppendPipelineStepCommandInput
     /**
      * @var string|null
      */
-    protected $pipeline;
-    /**
-     * @var string|null
-     */
     protected $code;
     /**
      * @var string|null
@@ -32,18 +28,6 @@ class PipelineAppendPipelineStepCommandInput
      * @var Probe[]|null
      */
     protected $probes;
-
-    public function getPipeline(): ?string
-    {
-        return $this->pipeline;
-    }
-
-    public function setPipeline(?string $pipeline): self
-    {
-        $this->pipeline = $pipeline;
-
-        return $this;
-    }
 
     public function getCode(): ?string
     {

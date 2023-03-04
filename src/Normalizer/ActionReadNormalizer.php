@@ -27,19 +27,15 @@ class ActionReadNormalizer implements DenormalizerInterface, NormalizerInterface
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return 'Gyroscops\\Api\\Model\\ActionRead' === $type;
+        return $type === \Gyroscops\Api\Model\ActionRead::class;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return \is_object($data) && 'Gyroscops\\Api\\Model\\ActionRead' === $data::class;
+        return is_object($data) && $data::class === \Gyroscops\Api\Model\ActionRead::class;
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,9 +50,9 @@ class ActionReadNormalizer implements DenormalizerInterface, NormalizerInterface
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('id', $data) && null !== $data['id']) {
+        if (\array_key_exists('id', $data) && $data['id'] !== null) {
             $object->setId($data['id']);
-        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId(null);
         }
 
@@ -64,9 +60,6 @@ class ActionReadNormalizer implements DenormalizerInterface, NormalizerInterface
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
