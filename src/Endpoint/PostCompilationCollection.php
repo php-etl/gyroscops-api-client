@@ -17,7 +17,7 @@ class PostCompilationCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoi
     /**
      * Creates a pipeline compilation.
      *
-     * @param \Gyroscops\Api\Model\CompilationCompilePipelineCommandInputJsonld|\Gyroscops\Api\Model\CompilationCompilePipelineCommandInput|null $requestBody
+     * @param \Gyroscops\Api\Model\CompilationCompilePipelineCommandInputJsonld|\stdClass|null $requestBody
      */
     public function __construct($requestBody = null)
     {
@@ -39,10 +39,10 @@ class PostCompilationCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoi
         if ($this->body instanceof \Gyroscops\Api\Model\CompilationCompilePipelineCommandInputJsonld) {
             return [['Content-Type' => ['application/ld+json']], $this->body];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\CompilationCompilePipelineCommandInput) {
-            return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
+        if ($this->body instanceof \stdClass) {
+            return [['Content-Type' => ['application/json']], json_encode($this->body, JSON_THROW_ON_ERROR)];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\CompilationCompilePipelineCommandInput) {
+        if ($this->body instanceof \stdClass) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 

@@ -23,6 +23,10 @@ class Credentials
     /**
      * @var string|null
      */
+    protected $organization;
+    /**
+     * @var string|null
+     */
     protected $workspace;
 
     public function getUsername(): ?string
@@ -45,6 +49,18 @@ class Credentials
     public function setPassword(?string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function getOrganization(): ?string
+    {
+        return $this->organization;
+    }
+
+    public function setOrganization(?string $organization): self
+    {
+        $this->organization = $organization;
 
         return $this;
     }

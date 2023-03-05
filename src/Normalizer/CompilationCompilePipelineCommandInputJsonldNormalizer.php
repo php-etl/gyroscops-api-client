@@ -65,11 +65,6 @@ class CompilationCompilePipelineCommandInputJsonldNormalizer implements Denormal
         } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
             $object->setType(null);
         }
-        if (\array_key_exists('pipeline', $data) && $data['pipeline'] !== null) {
-            $object->setPipeline($data['pipeline']);
-        } elseif (\array_key_exists('pipeline', $data) && $data['pipeline'] === null) {
-            $object->setPipeline(null);
-        }
 
         return $object;
     }
@@ -80,7 +75,6 @@ class CompilationCompilePipelineCommandInputJsonldNormalizer implements Denormal
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        $data['pipeline'] = $object->getPipeline();
 
         return $data;
     }

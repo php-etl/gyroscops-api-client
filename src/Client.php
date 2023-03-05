@@ -1774,8 +1774,8 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Creates a pipeline compilation.
      *
-     * @param \Gyroscops\Api\Model\CompilationCompilePipelineCommandInputJsonld|\Gyroscops\Api\Model\CompilationCompilePipelineCommandInput|null $requestBody
-     * @param string                                                                                                                             $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Gyroscops\Api\Model\CompilationCompilePipelineCommandInputJsonld|\stdClass|null $requestBody
+     * @param string                                                                           $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Gyroscops\Api\Model\CompilationCompilePipelineCommand|\Psr\Http\Message\ResponseInterface|null
      *
@@ -2630,11 +2630,11 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     }
 
     /**
-     * Creates a pipeline compilation.
+     * Launches a pipeline compilation.
      *
-     * @param string                                                                                                                       $id          Resource identifier
-     * @param \Gyroscops\Api\Model\PipelineCompilePipelineCommandInputJsonld|\Gyroscops\Api\Model\PipelineCompilePipelineCommandInput|null $requestBody
-     * @param string                                                                                                                       $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param string                                                                        $id          Resource identifier
+     * @param \Gyroscops\Api\Model\PipelineCompilePipelineCommandInputJsonld|\stdClass|null $requestBody
+     * @param string                                                                        $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Psr\Http\Message\ResponseInterface|null
      *

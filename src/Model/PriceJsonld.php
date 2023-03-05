@@ -37,10 +37,7 @@ class PriceJsonld
         return $this->context;
     }
 
-    /**
-     * @param mixed $context
-     */
-    public function setContext($context): self
+    public function setContext(mixed $context): self
     {
         $this->context = $context;
 
@@ -79,10 +76,7 @@ class PriceJsonld
         return $this->price;
     }
 
-    /**
-     * @param mixed $price
-     */
-    public function setPrice($price): self
+    public function setPrice(mixed $price): self
     {
         $this->price = $price;
 

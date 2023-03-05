@@ -33,10 +33,7 @@ class WorkflowJobRead
         return $this->workflow;
     }
 
-    /**
-     * @param mixed $workflow
-     */
-    public function setWorkflow($workflow): self
+    public function setWorkflow(mixed $workflow): self
     {
         $this->workflow = $workflow;
 
@@ -51,10 +48,7 @@ class WorkflowJobRead
         return $this->pipeline;
     }
 
-    /**
-     * @param mixed $pipeline
-     */
-    public function setPipeline($pipeline): self
+    public function setPipeline(mixed $pipeline): self
     {
         $this->pipeline = $pipeline;
 
@@ -69,10 +63,7 @@ class WorkflowJobRead
         return $this->action;
     }
 
-    /**
-     * @param mixed $action
-     */
-    public function setAction($action): self
+    public function setAction(mixed $action): self
     {
         $this->action = $action;
 

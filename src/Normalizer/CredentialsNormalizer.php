@@ -60,6 +60,11 @@ class CredentialsNormalizer implements DenormalizerInterface, NormalizerInterfac
         } elseif (\array_key_exists('password', $data) && $data['password'] === null) {
             $object->setPassword(null);
         }
+        if (\array_key_exists('organization', $data) && $data['organization'] !== null) {
+            $object->setOrganization($data['organization']);
+        } elseif (\array_key_exists('organization', $data) && $data['organization'] === null) {
+            $object->setOrganization(null);
+        }
         if (\array_key_exists('workspace', $data) && $data['workspace'] !== null) {
             $object->setWorkspace($data['workspace']);
         } elseif (\array_key_exists('workspace', $data) && $data['workspace'] === null) {
@@ -75,11 +80,10 @@ class CredentialsNormalizer implements DenormalizerInterface, NormalizerInterfac
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getUsername()) {
-            $data['username'] = $object->getUsername();
-        }
-        if (null !== $object->getPassword()) {
-            $data['password'] = $object->getPassword();
+        $data['username'] = $object->getUsername();
+        $data['password'] = $object->getPassword();
+        if (null !== $object->getOrganization()) {
+            $data['organization'] = $object->getOrganization();
         }
         if (null !== $object->getWorkspace()) {
             $data['workspace'] = $object->getWorkspace();

@@ -24,10 +24,6 @@ class CompilationCompilePipelineCommandInputJsonld
      * @var string|null
      */
     protected $type;
-    /**
-     * @var string|null
-     */
-    protected $pipeline;
 
     /**
      * @return mixed
@@ -64,18 +60,6 @@ class CompilationCompilePipelineCommandInputJsonld
     public function setType(?string $type): self
     {
         $this->type = $type;
-
-        return $this;
-    }
-
-    public function getPipeline(): ?string
-    {
-        return $this->pipeline;
-    }
-
-    public function setPipeline(?string $pipeline): self
-    {
-        $this->pipeline = $pipeline;
 
         return $this;
     }

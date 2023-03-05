@@ -25,10 +25,7 @@ class UpdateList
         return $this->iterator;
     }
 
-    /**
-     * @param mixed $iterator
-     */
-    public function setIterator($iterator): self
+    public function setIterator(mixed $iterator): self
     {
         $this->iterator = $iterator;
 

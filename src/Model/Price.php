@@ -25,10 +25,7 @@ class Price
         return $this->price;
     }
 
-    /**
-     * @param mixed $price
-     */
-    public function setPrice($price): self
+    public function setPrice(mixed $price): self
     {
         $this->price = $price;
 

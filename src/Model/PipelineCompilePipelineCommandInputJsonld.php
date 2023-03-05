@@ -24,10 +24,6 @@ class PipelineCompilePipelineCommandInputJsonld
      * @var string|null
      */
     protected $type;
-    /**
-     * @var string|null
-     */
-    protected $pipeline;
 
     /**
      * @return mixed
@@ -37,10 +33,7 @@ class PipelineCompilePipelineCommandInputJsonld
         return $this->context;
     }
 
-    /**
-     * @param mixed $context
-     */
-    public function setContext($context): self
+    public function setContext(mixed $context): self
     {
         $this->context = $context;
 
@@ -67,18 +60,6 @@ class PipelineCompilePipelineCommandInputJsonld
     public function setType(?string $type): self
     {
         $this->type = $type;
-
-        return $this;
-    }
-
-    public function getPipeline(): ?string
-    {
-        return $this->pipeline;
-    }
-
-    public function setPipeline(?string $pipeline): self
-    {
-        $this->pipeline = $pipeline;
 
         return $this;
     }

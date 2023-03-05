@@ -16,10 +16,10 @@ class PipelineCompilationPipelineItem extends \Gyroscops\Api\Runtime\Client\Base
     protected $id;
 
     /**
-     * Creates a pipeline compilation.
+     * Launches a pipeline compilation.
      *
-     * @param string                                                                                                                       $id          Resource identifier
-     * @param \Gyroscops\Api\Model\PipelineCompilePipelineCommandInputJsonld|\Gyroscops\Api\Model\PipelineCompilePipelineCommandInput|null $requestBody
+     * @param string                                                                        $id          Resource identifier
+     * @param \Gyroscops\Api\Model\PipelineCompilePipelineCommandInputJsonld|\stdClass|null $requestBody
      */
     public function __construct(string $id, $requestBody = null)
     {
@@ -42,10 +42,10 @@ class PipelineCompilationPipelineItem extends \Gyroscops\Api\Runtime\Client\Base
         if ($this->body instanceof \Gyroscops\Api\Model\PipelineCompilePipelineCommandInputJsonld) {
             return [['Content-Type' => ['application/ld+json']], $this->body];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineCompilePipelineCommandInput) {
-            return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
+        if ($this->body instanceof \stdClass) {
+            return [['Content-Type' => ['application/json']], json_encode($this->body, JSON_THROW_ON_ERROR)];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineCompilePipelineCommandInput) {
+        if ($this->body instanceof \stdClass) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
