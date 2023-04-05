@@ -17,7 +17,7 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.2",
-        "jane-php/open-api-runtime": "^7.2"
+        "jane-php/open-api-runtime": "^7.4"
     },
     "autoload": {
         "psr-4": {
@@ -25,10 +25,8 @@
         }
     },
     "require-dev": {
-        "jane-php/open-api-3": "^7.2",
-        "phpunit/phpunit": "^9.5 || ^10.0",
+        "jane-php/open-api-3": "^7.4",
         "phpstan/phpstan": "^1.10",
-        "infection/infection": "^0.26.18",
         "friendsofphp/php-cs-fixer": "^3.11",
         "rector/rector": "^0.15.19"
     },
@@ -41,8 +39,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "0.2.x-dev",
-            "dev-feature/qualityflow-improvments": "0.2.x-dev"
+            "dev-main": "0.2.x-dev"
         }
     }
 }
