@@ -27,15 +27,19 @@ class TokenNormalizer implements DenormalizerInterface, NormalizerInterface, Den
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\Token::class;
+        return \Gyroscops\Api\Model\Token::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\Token::class;
+        return \is_object($data) && \Gyroscops\Api\Model\Token::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,9 +54,9 @@ class TokenNormalizer implements DenormalizerInterface, NormalizerInterface, Den
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('token', $data) && $data['token'] !== null) {
+        if (\array_key_exists('token', $data) && null !== $data['token']) {
             $object->setToken($data['token']);
-        } elseif (\array_key_exists('token', $data) && $data['token'] === null) {
+        } elseif (\array_key_exists('token', $data) && null === $data['token']) {
             $object->setToken(null);
         }
 
@@ -60,12 +64,13 @@ class TokenNormalizer implements DenormalizerInterface, NormalizerInterface, Den
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
-        $data = [];
-
-        return $data;
+        return [];
     }
 }

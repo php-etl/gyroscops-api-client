@@ -54,7 +54,7 @@ class GetCompilationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impl
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
             return $serializer->deserialize($body, \Gyroscops\Api\Model\Compilation::class, 'json');
         }
         if (404 === $status) {

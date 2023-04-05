@@ -27,15 +27,19 @@ class SecretRemoveSecretValueInputNormalizer implements DenormalizerInterface, N
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\SecretRemoveSecretValueInput::class;
+        return \Gyroscops\Api\Model\SecretRemoveSecretValueInput::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\SecretRemoveSecretValueInput::class;
+        return \is_object($data) && \Gyroscops\Api\Model\SecretRemoveSecretValueInput::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,33 +54,33 @@ class SecretRemoveSecretValueInputNormalizer implements DenormalizerInterface, N
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('id', $data) && $data['id'] !== null) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId($data['id']);
-        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
             $object->setId(null);
         }
-        if (\array_key_exists('contents', $data) && $data['contents'] !== null) {
+        if (\array_key_exists('contents', $data) && null !== $data['contents']) {
             $values = [];
             foreach ($data['contents'] as $value) {
                 $values[] = $value;
             }
             $object->setContents($values);
-        } elseif (\array_key_exists('contents', $data) && $data['contents'] === null) {
+        } elseif (\array_key_exists('contents', $data) && null === $data['contents']) {
             $object->setContents(null);
         }
-        if (\array_key_exists('organization', $data) && $data['organization'] !== null) {
+        if (\array_key_exists('organization', $data) && null !== $data['organization']) {
             $object->setOrganization($data['organization']);
-        } elseif (\array_key_exists('organization', $data) && $data['organization'] === null) {
+        } elseif (\array_key_exists('organization', $data) && null === $data['organization']) {
             $object->setOrganization(null);
         }
-        if (\array_key_exists('workspace', $data) && $data['workspace'] !== null) {
+        if (\array_key_exists('workspace', $data) && null !== $data['workspace']) {
             $object->setWorkspace($data['workspace']);
-        } elseif (\array_key_exists('workspace', $data) && $data['workspace'] === null) {
+        } elseif (\array_key_exists('workspace', $data) && null === $data['workspace']) {
             $object->setWorkspace(null);
         }
-        if (\array_key_exists('iterator', $data) && $data['iterator'] !== null) {
+        if (\array_key_exists('iterator', $data) && null !== $data['iterator']) {
             $object->setIterator($data['iterator']);
-        } elseif (\array_key_exists('iterator', $data) && $data['iterator'] === null) {
+        } elseif (\array_key_exists('iterator', $data) && null === $data['iterator']) {
             $object->setIterator(null);
         }
 
@@ -84,6 +88,9 @@ class SecretRemoveSecretValueInputNormalizer implements DenormalizerInterface, N
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

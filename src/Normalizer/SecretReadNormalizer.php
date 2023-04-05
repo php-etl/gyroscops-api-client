@@ -27,15 +27,19 @@ class SecretReadNormalizer implements DenormalizerInterface, NormalizerInterface
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\SecretRead::class;
+        return \Gyroscops\Api\Model\SecretRead::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\SecretRead::class;
+        return \is_object($data) && \Gyroscops\Api\Model\SecretRead::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,33 +54,33 @@ class SecretReadNormalizer implements DenormalizerInterface, NormalizerInterface
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('id', $data) && $data['id'] !== null) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId($data['id']);
-        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
             $object->setId(null);
         }
-        if (\array_key_exists('name', $data) && $data['name'] !== null) {
+        if (\array_key_exists('name', $data) && null !== $data['name']) {
             $object->setName($data['name']);
-        } elseif (\array_key_exists('name', $data) && $data['name'] === null) {
+        } elseif (\array_key_exists('name', $data) && null === $data['name']) {
             $object->setName(null);
         }
-        if (\array_key_exists('description', $data) && $data['description'] !== null) {
+        if (\array_key_exists('description', $data) && null !== $data['description']) {
             $object->setDescription($data['description']);
-        } elseif (\array_key_exists('description', $data) && $data['description'] === null) {
+        } elseif (\array_key_exists('description', $data) && null === $data['description']) {
             $object->setDescription(null);
         }
-        if (\array_key_exists('contents', $data) && $data['contents'] !== null) {
+        if (\array_key_exists('contents', $data) && null !== $data['contents']) {
             $values = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
             foreach ($data['contents'] as $key => $value) {
                 $values[$key] = $value;
             }
             $object->setContents($values);
-        } elseif (\array_key_exists('contents', $data) && $data['contents'] === null) {
+        } elseif (\array_key_exists('contents', $data) && null === $data['contents']) {
             $object->setContents(null);
         }
-        if (\array_key_exists('iterator', $data) && $data['iterator'] !== null) {
+        if (\array_key_exists('iterator', $data) && null !== $data['iterator']) {
             $object->setIterator($data['iterator']);
-        } elseif (\array_key_exists('iterator', $data) && $data['iterator'] === null) {
+        } elseif (\array_key_exists('iterator', $data) && null === $data['iterator']) {
             $object->setIterator(null);
         }
 
@@ -84,6 +88,9 @@ class SecretReadNormalizer implements DenormalizerInterface, NormalizerInterface
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

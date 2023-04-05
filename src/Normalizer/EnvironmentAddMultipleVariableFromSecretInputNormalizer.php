@@ -27,15 +27,19 @@ class EnvironmentAddMultipleVariableFromSecretInputNormalizer implements Denorma
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromSecretInput::class;
+        return \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromSecretInput::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromSecretInput::class;
+        return \is_object($data) && \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromSecretInput::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,18 +54,18 @@ class EnvironmentAddMultipleVariableFromSecretInputNormalizer implements Denorma
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('variables', $data) && $data['variables'] !== null) {
+        if (\array_key_exists('variables', $data) && null !== $data['variables']) {
             $values = [];
             foreach ($data['variables'] as $value) {
                 $values[] = $this->denormalizer->denormalize($value, \Gyroscops\Api\Model\VariableFromSecretInput::class, 'json', $context);
             }
             $object->setVariables($values);
-        } elseif (\array_key_exists('variables', $data) && $data['variables'] === null) {
+        } elseif (\array_key_exists('variables', $data) && null === $data['variables']) {
             $object->setVariables(null);
         }
-        if (\array_key_exists('iterator', $data) && $data['iterator'] !== null) {
+        if (\array_key_exists('iterator', $data) && null !== $data['iterator']) {
             $object->setIterator($data['iterator']);
-        } elseif (\array_key_exists('iterator', $data) && $data['iterator'] === null) {
+        } elseif (\array_key_exists('iterator', $data) && null === $data['iterator']) {
             $object->setIterator(null);
         }
 
@@ -69,6 +73,9 @@ class EnvironmentAddMultipleVariableFromSecretInputNormalizer implements Denorma
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

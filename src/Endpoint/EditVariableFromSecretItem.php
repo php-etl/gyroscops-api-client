@@ -43,7 +43,7 @@ class EditVariableFromSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
             return [['Content-Type' => ['application/ld+json']], $this->body];
         }
         if ($this->body instanceof \stdClass) {
-            return [['Content-Type' => ['application/json']], json_encode($this->body, JSON_THROW_ON_ERROR)];
+            return [['Content-Type' => ['application/json']], json_encode($this->body, \JSON_THROW_ON_ERROR)];
         }
         if ($this->body instanceof \stdClass) {
             return [['Content-Type' => ['text/html']], $this->body];
@@ -68,7 +68,7 @@ class EditVariableFromSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
             return $serializer->deserialize($body, \Gyroscops\Api\Model\VariableFromSecretRead::class, 'json');
         }
         if (400 === $status) {

@@ -60,16 +60,14 @@ class UpdateExecutionStateExecutionItem extends \Gyroscops\Api\Runtime\Client\Ba
     /**
      * {@inheritdoc}
      *
-     * @return null
-     *
      * @throws \Gyroscops\Api\Exception\UpdateExecutionStateExecutionItemBadRequestException
      * @throws \Gyroscops\Api\Exception\UpdateExecutionStateExecutionItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\UpdateExecutionStateExecutionItemNotFoundException
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if (is_null($contentType) === false && (202 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return json_decode($body, null, 512, JSON_THROW_ON_ERROR);
+        if ((null === $contentType) === false && (202 === $status && false !== mb_strpos($contentType, 'application/json'))) {
+            return json_decode($body, null, 512, \JSON_THROW_ON_ERROR);
         }
         if (400 === $status) {
             throw new \Gyroscops\Api\Exception\UpdateExecutionStateExecutionItemBadRequestException();

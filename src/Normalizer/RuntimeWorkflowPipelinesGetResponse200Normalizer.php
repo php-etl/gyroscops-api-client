@@ -27,15 +27,19 @@ class RuntimeWorkflowPipelinesGetResponse200Normalizer implements DenormalizerIn
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\RuntimeWorkflowPipelinesGetResponse200::class;
+        return \Gyroscops\Api\Model\RuntimeWorkflowPipelinesGetResponse200::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\RuntimeWorkflowPipelinesGetResponse200::class;
+        return \is_object($data) && \Gyroscops\Api\Model\RuntimeWorkflowPipelinesGetResponse200::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,28 +54,28 @@ class RuntimeWorkflowPipelinesGetResponse200Normalizer implements DenormalizerIn
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('hydra:member', $data) && $data['hydra:member'] !== null) {
+        if (\array_key_exists('hydra:member', $data) && null !== $data['hydra:member']) {
             $values = [];
             foreach ($data['hydra:member'] as $value) {
                 $values[] = $this->denormalizer->denormalize($value, \Gyroscops\Api\Model\WorkflowJobPipelineJsonld::class, 'json', $context);
             }
             $object->setHydraMember($values);
-        } elseif (\array_key_exists('hydra:member', $data) && $data['hydra:member'] === null) {
+        } elseif (\array_key_exists('hydra:member', $data) && null === $data['hydra:member']) {
             $object->setHydraMember(null);
         }
-        if (\array_key_exists('hydra:totalItems', $data) && $data['hydra:totalItems'] !== null) {
+        if (\array_key_exists('hydra:totalItems', $data) && null !== $data['hydra:totalItems']) {
             $object->setHydraTotalItems($data['hydra:totalItems']);
-        } elseif (\array_key_exists('hydra:totalItems', $data) && $data['hydra:totalItems'] === null) {
+        } elseif (\array_key_exists('hydra:totalItems', $data) && null === $data['hydra:totalItems']) {
             $object->setHydraTotalItems(null);
         }
-        if (\array_key_exists('hydra:view', $data) && $data['hydra:view'] !== null) {
+        if (\array_key_exists('hydra:view', $data) && null !== $data['hydra:view']) {
             $object->setHydraView($this->denormalizer->denormalize($data['hydra:view'], \Gyroscops\Api\Model\RuntimeWorkflowPipelinesGetResponse200HydraView::class, 'json', $context));
-        } elseif (\array_key_exists('hydra:view', $data) && $data['hydra:view'] === null) {
+        } elseif (\array_key_exists('hydra:view', $data) && null === $data['hydra:view']) {
             $object->setHydraView(null);
         }
-        if (\array_key_exists('hydra:search', $data) && $data['hydra:search'] !== null) {
+        if (\array_key_exists('hydra:search', $data) && null !== $data['hydra:search']) {
             $object->setHydraSearch($this->denormalizer->denormalize($data['hydra:search'], \Gyroscops\Api\Model\RuntimeWorkflowPipelinesGetResponse200HydraSearch::class, 'json', $context));
-        } elseif (\array_key_exists('hydra:search', $data) && $data['hydra:search'] === null) {
+        } elseif (\array_key_exists('hydra:search', $data) && null === $data['hydra:search']) {
             $object->setHydraSearch(null);
         }
 
@@ -79,6 +83,9 @@ class RuntimeWorkflowPipelinesGetResponse200Normalizer implements DenormalizerIn
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

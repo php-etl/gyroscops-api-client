@@ -92,8 +92,8 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Updates the Offer resource.
      *
-     * @param string                          $id          Resource identifier
-     * @param string                          $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param string $id    Resource identifier
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Gyroscops\Api\Model\Offer|\Psr\Http\Message\ResponseInterface|null
      *
@@ -192,8 +192,8 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Updates the Organization resource.
      *
-     * @param string                                 $id          Resource identifier
-     * @param string                                 $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param string $id    Resource identifier
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Gyroscops\Api\Model\Organization|\Psr\Http\Message\ResponseInterface|null
      *
@@ -362,8 +362,8 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Updates the Subscription resource.
      *
-     * @param string                                 $id          Resource identifier
-     * @param string                                 $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param string $id    Resource identifier
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Gyroscops\Api\Model\Subscription|\Psr\Http\Message\ResponseInterface|null
      *
@@ -472,7 +472,8 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     }
 
     /**
-     * @param string                                $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     *
      * @return \Gyroscops\Api\Model\Token|\Psr\Http\Message\ResponseInterface|null
      */
     public function postCredentialsItem(?Model\Credentials $requestBody = null, string $fetch = self::FETCH_OBJECT)
@@ -523,8 +524,8 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Updates the UserAuthorization resource.
      *
-     * @param string                                      $id          Resource identifier
-     * @param string                                      $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param string $id    Resource identifier
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Gyroscops\Api\Model\UserAuthorization|\Psr\Http\Message\ResponseInterface|null
      *
@@ -621,8 +622,8 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Updates the User resource.
      *
-     * @param string                         $id          Resource identifier
-     * @param string                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param string $id    Resource identifier
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Gyroscops\Api\Model\User|\Psr\Http\Message\ResponseInterface|null
      *
@@ -674,8 +675,8 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Updates the User resource.
      *
-     * @param string                                                $id          Resource identifier
-     * @param string                                                $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param string $id    Resource identifier
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Gyroscops\Api\Model\User|\Psr\Http\Message\ResponseInterface|null
      *
@@ -754,8 +755,8 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     /**
      * Updates the Workspace resource.
      *
-     * @param string                              $id          Resource identifier
-     * @param string                              $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param string $id    Resource identifier
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Gyroscops\Api\Model\Workspace|\Psr\Http\Message\ResponseInterface|null
      *
@@ -2973,12 +2974,11 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
     }
 
     /**
-    In order to differentiate the different types of schedules, we have set up a field named "type" :
+     * In order to differentiate the different types of schedules, we have set up a field named "type" :
      * 1 => Immediate
      * 2 => Once
      * 3 => Times
      * 4 => Until.
-
      *
      * @param \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleCommandInputJsonld|\Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleCommandInput|null $requestBody
      * @param string                                                                                                                                       $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
@@ -3439,7 +3439,7 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
         if (null === $httpClient) {
             $httpClient = \Http\Discovery\Psr18ClientDiscovery::find();
             $plugins = [];
-            if (count($additionalPlugins) > 0) {
+            if (\count($additionalPlugins) > 0) {
                 $plugins = array_merge($plugins, $additionalPlugins);
             }
             $httpClient = new \Http\Client\Common\PluginClient($httpClient, $plugins);
@@ -3447,7 +3447,7 @@ class Client extends \Gyroscops\Api\Runtime\Client\Client
         $requestFactory = \Http\Discovery\Psr17FactoryDiscovery::findRequestFactory();
         $streamFactory = \Http\Discovery\Psr17FactoryDiscovery::findStreamFactory();
         $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new \Gyroscops\Api\Normalizer\JaneObjectNormalizer()];
-        if (count($additionalNormalizers) > 0) {
+        if (\count($additionalNormalizers) > 0) {
             $normalizers = array_merge($normalizers, $additionalNormalizers);
         }
         $serializer = new \Symfony\Component\Serializer\Serializer($normalizers, [new \Symfony\Component\Serializer\Encoder\JsonEncoder(new \Symfony\Component\Serializer\Encoder\JsonEncode(), new \Symfony\Component\Serializer\Encoder\JsonDecode(['json_decode_associative' => true]))]);

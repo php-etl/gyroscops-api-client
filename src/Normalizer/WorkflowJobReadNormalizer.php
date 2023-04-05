@@ -27,15 +27,19 @@ class WorkflowJobReadNormalizer implements DenormalizerInterface, NormalizerInte
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\WorkflowJobRead::class;
+        return \Gyroscops\Api\Model\WorkflowJobRead::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\WorkflowJobRead::class;
+        return \is_object($data) && \Gyroscops\Api\Model\WorkflowJobRead::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,19 +54,19 @@ class WorkflowJobReadNormalizer implements DenormalizerInterface, NormalizerInte
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('workflow', $data) && $data['workflow'] !== null) {
+        if (\array_key_exists('workflow', $data) && null !== $data['workflow']) {
             $object->setWorkflow($data['workflow']);
-        } elseif (\array_key_exists('workflow', $data) && $data['workflow'] === null) {
+        } elseif (\array_key_exists('workflow', $data) && null === $data['workflow']) {
             $object->setWorkflow(null);
         }
-        if (\array_key_exists('pipeline', $data) && $data['pipeline'] !== null) {
+        if (\array_key_exists('pipeline', $data) && null !== $data['pipeline']) {
             $object->setPipeline($data['pipeline']);
-        } elseif (\array_key_exists('pipeline', $data) && $data['pipeline'] === null) {
+        } elseif (\array_key_exists('pipeline', $data) && null === $data['pipeline']) {
             $object->setPipeline(null);
         }
-        if (\array_key_exists('action', $data) && $data['action'] !== null) {
+        if (\array_key_exists('action', $data) && null !== $data['action']) {
             $object->setAction($data['action']);
-        } elseif (\array_key_exists('action', $data) && $data['action'] === null) {
+        } elseif (\array_key_exists('action', $data) && null === $data['action']) {
             $object->setAction(null);
         }
 
@@ -70,6 +74,9 @@ class WorkflowJobReadNormalizer implements DenormalizerInterface, NormalizerInte
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

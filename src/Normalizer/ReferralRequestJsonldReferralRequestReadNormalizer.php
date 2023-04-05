@@ -27,15 +27,19 @@ class ReferralRequestJsonldReferralRequestReadNormalizer implements Denormalizer
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\ReferralRequestJsonldReferralRequestRead::class;
+        return \Gyroscops\Api\Model\ReferralRequestJsonldReferralRequestRead::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\ReferralRequestJsonldReferralRequestRead::class;
+        return \is_object($data) && \Gyroscops\Api\Model\ReferralRequestJsonldReferralRequestRead::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,69 +54,69 @@ class ReferralRequestJsonldReferralRequestReadNormalizer implements Denormalizer
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
+        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
             $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
+        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
             $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
+        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
+        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
+        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
+        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
             $object->setType(null);
         }
-        if (\array_key_exists('id', $data) && $data['id'] !== null) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId2($data['id']);
-        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
             $object->setId2(null);
         }
-        if (\array_key_exists('email', $data) && $data['email'] !== null) {
+        if (\array_key_exists('email', $data) && null !== $data['email']) {
             $object->setEmail($data['email']);
-        } elseif (\array_key_exists('email', $data) && $data['email'] === null) {
+        } elseif (\array_key_exists('email', $data) && null === $data['email']) {
             $object->setEmail(null);
         }
-        if (\array_key_exists('firstName', $data) && $data['firstName'] !== null) {
+        if (\array_key_exists('firstName', $data) && null !== $data['firstName']) {
             $object->setFirstName($data['firstName']);
-        } elseif (\array_key_exists('firstName', $data) && $data['firstName'] === null) {
+        } elseif (\array_key_exists('firstName', $data) && null === $data['firstName']) {
             $object->setFirstName(null);
         }
-        if (\array_key_exists('lastName', $data) && $data['lastName'] !== null) {
+        if (\array_key_exists('lastName', $data) && null !== $data['lastName']) {
             $object->setLastName($data['lastName']);
-        } elseif (\array_key_exists('lastName', $data) && $data['lastName'] === null) {
+        } elseif (\array_key_exists('lastName', $data) && null === $data['lastName']) {
             $object->setLastName(null);
         }
-        if (\array_key_exists('userName', $data) && $data['userName'] !== null) {
+        if (\array_key_exists('userName', $data) && null !== $data['userName']) {
             $object->setUserName($data['userName']);
-        } elseif (\array_key_exists('userName', $data) && $data['userName'] === null) {
+        } elseif (\array_key_exists('userName', $data) && null === $data['userName']) {
             $object->setUserName(null);
         }
-        if (\array_key_exists('companyName', $data) && $data['companyName'] !== null) {
+        if (\array_key_exists('companyName', $data) && null !== $data['companyName']) {
             $object->setCompanyName($data['companyName']);
-        } elseif (\array_key_exists('companyName', $data) && $data['companyName'] === null) {
+        } elseif (\array_key_exists('companyName', $data) && null === $data['companyName']) {
             $object->setCompanyName(null);
         }
-        if (\array_key_exists('creationDate', $data) && $data['creationDate'] !== null) {
+        if (\array_key_exists('creationDate', $data) && null !== $data['creationDate']) {
             $object->setCreationDate(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['creationDate']));
-        } elseif (\array_key_exists('creationDate', $data) && $data['creationDate'] === null) {
+        } elseif (\array_key_exists('creationDate', $data) && null === $data['creationDate']) {
             $object->setCreationDate(null);
         }
-        if (\array_key_exists('referralCode', $data) && $data['referralCode'] !== null) {
+        if (\array_key_exists('referralCode', $data) && null !== $data['referralCode']) {
             $object->setReferralCode($data['referralCode']);
-        } elseif (\array_key_exists('referralCode', $data) && $data['referralCode'] === null) {
+        } elseif (\array_key_exists('referralCode', $data) && null === $data['referralCode']) {
             $object->setReferralCode(null);
         }
-        if (\array_key_exists('approver', $data) && $data['approver'] !== null) {
+        if (\array_key_exists('approver', $data) && null !== $data['approver']) {
             $object->setApprover($data['approver']);
-        } elseif (\array_key_exists('approver', $data) && $data['approver'] === null) {
+        } elseif (\array_key_exists('approver', $data) && null === $data['approver']) {
             $object->setApprover(null);
         }
-        if (\array_key_exists('status', $data) && $data['status'] !== null) {
+        if (\array_key_exists('status', $data) && null !== $data['status']) {
             $object->setStatus($data['status']);
-        } elseif (\array_key_exists('status', $data) && $data['status'] === null) {
+        } elseif (\array_key_exists('status', $data) && null === $data['status']) {
             $object->setStatus(null);
         }
 
@@ -120,6 +124,9 @@ class ReferralRequestJsonldReferralRequestReadNormalizer implements Denormalizer
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

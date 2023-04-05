@@ -27,15 +27,19 @@ class BigIntegerJsonldNormalizer implements DenormalizerInterface, NormalizerInt
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\BigIntegerJsonld::class;
+        return \Gyroscops\Api\Model\BigIntegerJsonld::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\BigIntegerJsonld::class;
+        return \is_object($data) && \Gyroscops\Api\Model\BigIntegerJsonld::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,69 +54,69 @@ class BigIntegerJsonldNormalizer implements DenormalizerInterface, NormalizerInt
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
+        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
             $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
+        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
             $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
+        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
+        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
+        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
+        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
             $object->setType(null);
         }
-        if (\array_key_exists('bitLength', $data) && $data['bitLength'] !== null) {
+        if (\array_key_exists('bitLength', $data) && null !== $data['bitLength']) {
             $object->setBitLength($data['bitLength']);
-        } elseif (\array_key_exists('bitLength', $data) && $data['bitLength'] === null) {
+        } elseif (\array_key_exists('bitLength', $data) && null === $data['bitLength']) {
             $object->setBitLength(null);
         }
-        if (\array_key_exists('lowestSetBit', $data) && $data['lowestSetBit'] !== null) {
+        if (\array_key_exists('lowestSetBit', $data) && null !== $data['lowestSetBit']) {
             $object->setLowestSetBit($data['lowestSetBit']);
-        } elseif (\array_key_exists('lowestSetBit', $data) && $data['lowestSetBit'] === null) {
+        } elseif (\array_key_exists('lowestSetBit', $data) && null === $data['lowestSetBit']) {
             $object->setLowestSetBit(null);
         }
-        if (\array_key_exists('even', $data) && $data['even'] !== null) {
+        if (\array_key_exists('even', $data) && null !== $data['even']) {
             $object->setEven($data['even']);
-        } elseif (\array_key_exists('even', $data) && $data['even'] === null) {
+        } elseif (\array_key_exists('even', $data) && null === $data['even']) {
             $object->setEven(null);
         }
-        if (\array_key_exists('odd', $data) && $data['odd'] !== null) {
+        if (\array_key_exists('odd', $data) && null !== $data['odd']) {
             $object->setOdd($data['odd']);
-        } elseif (\array_key_exists('odd', $data) && $data['odd'] === null) {
+        } elseif (\array_key_exists('odd', $data) && null === $data['odd']) {
             $object->setOdd(null);
         }
-        if (\array_key_exists('sign', $data) && $data['sign'] !== null) {
+        if (\array_key_exists('sign', $data) && null !== $data['sign']) {
             $object->setSign($data['sign']);
-        } elseif (\array_key_exists('sign', $data) && $data['sign'] === null) {
+        } elseif (\array_key_exists('sign', $data) && null === $data['sign']) {
             $object->setSign(null);
         }
-        if (\array_key_exists('zero', $data) && $data['zero'] !== null) {
+        if (\array_key_exists('zero', $data) && null !== $data['zero']) {
             $object->setZero($data['zero']);
-        } elseif (\array_key_exists('zero', $data) && $data['zero'] === null) {
+        } elseif (\array_key_exists('zero', $data) && null === $data['zero']) {
             $object->setZero(null);
         }
-        if (\array_key_exists('negative', $data) && $data['negative'] !== null) {
+        if (\array_key_exists('negative', $data) && null !== $data['negative']) {
             $object->setNegative($data['negative']);
-        } elseif (\array_key_exists('negative', $data) && $data['negative'] === null) {
+        } elseif (\array_key_exists('negative', $data) && null === $data['negative']) {
             $object->setNegative(null);
         }
-        if (\array_key_exists('negativeOrZero', $data) && $data['negativeOrZero'] !== null) {
+        if (\array_key_exists('negativeOrZero', $data) && null !== $data['negativeOrZero']) {
             $object->setNegativeOrZero($data['negativeOrZero']);
-        } elseif (\array_key_exists('negativeOrZero', $data) && $data['negativeOrZero'] === null) {
+        } elseif (\array_key_exists('negativeOrZero', $data) && null === $data['negativeOrZero']) {
             $object->setNegativeOrZero(null);
         }
-        if (\array_key_exists('positive', $data) && $data['positive'] !== null) {
+        if (\array_key_exists('positive', $data) && null !== $data['positive']) {
             $object->setPositive($data['positive']);
-        } elseif (\array_key_exists('positive', $data) && $data['positive'] === null) {
+        } elseif (\array_key_exists('positive', $data) && null === $data['positive']) {
             $object->setPositive(null);
         }
-        if (\array_key_exists('positiveOrZero', $data) && $data['positiveOrZero'] !== null) {
+        if (\array_key_exists('positiveOrZero', $data) && null !== $data['positiveOrZero']) {
             $object->setPositiveOrZero($data['positiveOrZero']);
-        } elseif (\array_key_exists('positiveOrZero', $data) && $data['positiveOrZero'] === null) {
+        } elseif (\array_key_exists('positiveOrZero', $data) && null === $data['positiveOrZero']) {
             $object->setPositiveOrZero(null);
         }
 
@@ -120,12 +124,13 @@ class BigIntegerJsonldNormalizer implements DenormalizerInterface, NormalizerInt
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
-        $data = [];
-
-        return $data;
+        return [];
     }
 }

@@ -27,15 +27,19 @@ class CurrencyNormalizer implements DenormalizerInterface, NormalizerInterface, 
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\Currency::class;
+        return \Gyroscops\Api\Model\Currency::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\Currency::class;
+        return \is_object($data) && \Gyroscops\Api\Model\Currency::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,24 +54,24 @@ class CurrencyNormalizer implements DenormalizerInterface, NormalizerInterface, 
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('currencyCode', $data) && $data['currencyCode'] !== null) {
+        if (\array_key_exists('currencyCode', $data) && null !== $data['currencyCode']) {
             $object->setCurrencyCode($data['currencyCode']);
-        } elseif (\array_key_exists('currencyCode', $data) && $data['currencyCode'] === null) {
+        } elseif (\array_key_exists('currencyCode', $data) && null === $data['currencyCode']) {
             $object->setCurrencyCode(null);
         }
-        if (\array_key_exists('numericCode', $data) && $data['numericCode'] !== null) {
+        if (\array_key_exists('numericCode', $data) && null !== $data['numericCode']) {
             $object->setNumericCode($data['numericCode']);
-        } elseif (\array_key_exists('numericCode', $data) && $data['numericCode'] === null) {
+        } elseif (\array_key_exists('numericCode', $data) && null === $data['numericCode']) {
             $object->setNumericCode(null);
         }
-        if (\array_key_exists('name', $data) && $data['name'] !== null) {
+        if (\array_key_exists('name', $data) && null !== $data['name']) {
             $object->setName($data['name']);
-        } elseif (\array_key_exists('name', $data) && $data['name'] === null) {
+        } elseif (\array_key_exists('name', $data) && null === $data['name']) {
             $object->setName(null);
         }
-        if (\array_key_exists('defaultFractionDigits', $data) && $data['defaultFractionDigits'] !== null) {
+        if (\array_key_exists('defaultFractionDigits', $data) && null !== $data['defaultFractionDigits']) {
             $object->setDefaultFractionDigits($data['defaultFractionDigits']);
-        } elseif (\array_key_exists('defaultFractionDigits', $data) && $data['defaultFractionDigits'] === null) {
+        } elseif (\array_key_exists('defaultFractionDigits', $data) && null === $data['defaultFractionDigits']) {
             $object->setDefaultFractionDigits(null);
         }
 
@@ -75,6 +79,9 @@ class CurrencyNormalizer implements DenormalizerInterface, NormalizerInterface, 
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

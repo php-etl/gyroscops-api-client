@@ -43,8 +43,6 @@ class DeleteVariableFromConfigurationItem extends \Gyroscops\Api\Runtime\Client\
     /**
      * {@inheritdoc}
      *
-     * @return null
-     *
      * @throws \Gyroscops\Api\Exception\DeleteVariableFromConfigurationItemNotFoundException
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)

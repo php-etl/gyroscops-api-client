@@ -27,15 +27,19 @@ class ExecutionTerminatePipelineExecutionCommandInputNormalizer implements Denor
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\ExecutionTerminatePipelineExecutionCommandInput::class;
+        return \Gyroscops\Api\Model\ExecutionTerminatePipelineExecutionCommandInput::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\ExecutionTerminatePipelineExecutionCommandInput::class;
+        return \is_object($data) && \Gyroscops\Api\Model\ExecutionTerminatePipelineExecutionCommandInput::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,9 +54,9 @@ class ExecutionTerminatePipelineExecutionCommandInputNormalizer implements Denor
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('reason', $data) && $data['reason'] !== null) {
+        if (\array_key_exists('reason', $data) && null !== $data['reason']) {
             $object->setReason($data['reason']);
-        } elseif (\array_key_exists('reason', $data) && $data['reason'] === null) {
+        } elseif (\array_key_exists('reason', $data) && null === $data['reason']) {
             $object->setReason(null);
         }
 
@@ -60,6 +64,9 @@ class ExecutionTerminatePipelineExecutionCommandInputNormalizer implements Denor
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

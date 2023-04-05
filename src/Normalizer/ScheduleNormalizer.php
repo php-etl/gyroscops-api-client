@@ -27,15 +27,19 @@ class ScheduleNormalizer implements DenormalizerInterface, NormalizerInterface, 
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\Schedule::class;
+        return \Gyroscops\Api\Model\Schedule::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\Schedule::class;
+        return \is_object($data) && \Gyroscops\Api\Model\Schedule::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,68 +54,68 @@ class ScheduleNormalizer implements DenormalizerInterface, NormalizerInterface, 
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('id', $data) && $data['id'] !== null) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId($data['id']);
-        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
             $object->setId(null);
         }
-        if (\array_key_exists('type', $data) && $data['type'] !== null) {
+        if (\array_key_exists('type', $data) && null !== $data['type']) {
             $object->setType($data['type']);
-        } elseif (\array_key_exists('type', $data) && $data['type'] === null) {
+        } elseif (\array_key_exists('type', $data) && null === $data['type']) {
             $object->setType(null);
         }
-        if (\array_key_exists('startAt', $data) && $data['startAt'] !== null) {
+        if (\array_key_exists('startAt', $data) && null !== $data['startAt']) {
             $object->setStartAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['startAt']));
-        } elseif (\array_key_exists('startAt', $data) && $data['startAt'] === null) {
+        } elseif (\array_key_exists('startAt', $data) && null === $data['startAt']) {
             $object->setStartAt(null);
         }
-        if (\array_key_exists('interval', $data) && $data['interval'] !== null) {
+        if (\array_key_exists('interval', $data) && null !== $data['interval']) {
             $object->setInterval($data['interval']);
-        } elseif (\array_key_exists('interval', $data) && $data['interval'] === null) {
+        } elseif (\array_key_exists('interval', $data) && null === $data['interval']) {
             $object->setInterval(null);
         }
-        if (\array_key_exists('endAt', $data) && $data['endAt'] !== null) {
+        if (\array_key_exists('endAt', $data) && null !== $data['endAt']) {
             $object->setEndAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['endAt']));
-        } elseif (\array_key_exists('endAt', $data) && $data['endAt'] === null) {
+        } elseif (\array_key_exists('endAt', $data) && null === $data['endAt']) {
             $object->setEndAt(null);
         }
-        if (\array_key_exists('recurrences', $data) && $data['recurrences'] !== null) {
+        if (\array_key_exists('recurrences', $data) && null !== $data['recurrences']) {
             $object->setRecurrences($data['recurrences']);
-        } elseif (\array_key_exists('recurrences', $data) && $data['recurrences'] === null) {
+        } elseif (\array_key_exists('recurrences', $data) && null === $data['recurrences']) {
             $object->setRecurrences(null);
         }
-        if (\array_key_exists('executions', $data) && $data['executions'] !== null) {
+        if (\array_key_exists('executions', $data) && null !== $data['executions']) {
             $values = [];
             foreach ($data['executions'] as $value) {
                 $values[] = $value;
             }
             $object->setExecutions($values);
-        } elseif (\array_key_exists('executions', $data) && $data['executions'] === null) {
+        } elseif (\array_key_exists('executions', $data) && null === $data['executions']) {
             $object->setExecutions(null);
         }
-        if (\array_key_exists('pipeline', $data) && $data['pipeline'] !== null) {
+        if (\array_key_exists('pipeline', $data) && null !== $data['pipeline']) {
             $object->setPipeline($data['pipeline']);
-        } elseif (\array_key_exists('pipeline', $data) && $data['pipeline'] === null) {
+        } elseif (\array_key_exists('pipeline', $data) && null === $data['pipeline']) {
             $object->setPipeline(null);
         }
-        if (\array_key_exists('workflow', $data) && $data['workflow'] !== null) {
+        if (\array_key_exists('workflow', $data) && null !== $data['workflow']) {
             $object->setWorkflow($data['workflow']);
-        } elseif (\array_key_exists('workflow', $data) && $data['workflow'] === null) {
+        } elseif (\array_key_exists('workflow', $data) && null === $data['workflow']) {
             $object->setWorkflow(null);
         }
-        if (\array_key_exists('owner', $data) && $data['owner'] !== null) {
+        if (\array_key_exists('owner', $data) && null !== $data['owner']) {
             $object->setOwner($data['owner']);
-        } elseif (\array_key_exists('owner', $data) && $data['owner'] === null) {
+        } elseif (\array_key_exists('owner', $data) && null === $data['owner']) {
             $object->setOwner(null);
         }
-        if (\array_key_exists('workspace', $data) && $data['workspace'] !== null) {
+        if (\array_key_exists('workspace', $data) && null !== $data['workspace']) {
             $object->setWorkspace($data['workspace']);
-        } elseif (\array_key_exists('workspace', $data) && $data['workspace'] === null) {
+        } elseif (\array_key_exists('workspace', $data) && null === $data['workspace']) {
             $object->setWorkspace(null);
         }
-        if (\array_key_exists('organization', $data) && $data['organization'] !== null) {
+        if (\array_key_exists('organization', $data) && null !== $data['organization']) {
             $object->setOrganization($data['organization']);
-        } elseif (\array_key_exists('organization', $data) && $data['organization'] === null) {
+        } elseif (\array_key_exists('organization', $data) && null === $data['organization']) {
             $object->setOrganization(null);
         }
 
@@ -119,6 +123,9 @@ class ScheduleNormalizer implements DenormalizerInterface, NormalizerInterface, 
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

@@ -27,15 +27,19 @@ class ExecutionDeclarePipelineExecutionCommandInputJsonldNormalizer implements D
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\ExecutionDeclarePipelineExecutionCommandInputJsonld::class;
+        return \Gyroscops\Api\Model\ExecutionDeclarePipelineExecutionCommandInputJsonld::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\ExecutionDeclarePipelineExecutionCommandInputJsonld::class;
+        return \is_object($data) && \Gyroscops\Api\Model\ExecutionDeclarePipelineExecutionCommandInputJsonld::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,29 +54,29 @@ class ExecutionDeclarePipelineExecutionCommandInputJsonldNormalizer implements D
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
+        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
             $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
+        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
             $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
+        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
+        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
+        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
+        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
             $object->setType(null);
         }
-        if (\array_key_exists('schedule', $data) && $data['schedule'] !== null) {
+        if (\array_key_exists('schedule', $data) && null !== $data['schedule']) {
             $object->setSchedule($data['schedule']);
-        } elseif (\array_key_exists('schedule', $data) && $data['schedule'] === null) {
+        } elseif (\array_key_exists('schedule', $data) && null === $data['schedule']) {
             $object->setSchedule(null);
         }
-        if (\array_key_exists('pipeline', $data) && $data['pipeline'] !== null) {
+        if (\array_key_exists('pipeline', $data) && null !== $data['pipeline']) {
             $object->setPipeline($data['pipeline']);
-        } elseif (\array_key_exists('pipeline', $data) && $data['pipeline'] === null) {
+        } elseif (\array_key_exists('pipeline', $data) && null === $data['pipeline']) {
             $object->setPipeline(null);
         }
 
@@ -80,6 +84,9 @@ class ExecutionDeclarePipelineExecutionCommandInputJsonldNormalizer implements D
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

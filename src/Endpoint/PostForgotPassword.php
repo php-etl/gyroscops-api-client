@@ -32,7 +32,7 @@ class PostForgotPassword extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impl
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         if ($this->body instanceof \stdClass) {
-            return [['Content-Type' => ['application/json']], json_encode($this->body, JSON_THROW_ON_ERROR)];
+            return [['Content-Type' => ['application/json']], json_encode($this->body, \JSON_THROW_ON_ERROR)];
         }
 
         return [[], null];
@@ -40,8 +40,6 @@ class PostForgotPassword extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impl
 
     /**
      * {@inheritdoc}
-     *
-     * @return null
      *
      * @throws \Gyroscops\Api\Exception\PostForgotPasswordBadRequestException
      */

@@ -27,15 +27,19 @@ class VariableFromSecretInputNormalizer implements DenormalizerInterface, Normal
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\VariableFromSecretInput::class;
+        return \Gyroscops\Api\Model\VariableFromSecretInput::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\VariableFromSecretInput::class;
+        return \is_object($data) && \Gyroscops\Api\Model\VariableFromSecretInput::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,14 +54,14 @@ class VariableFromSecretInputNormalizer implements DenormalizerInterface, Normal
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('name', $data) && $data['name'] !== null) {
+        if (\array_key_exists('name', $data) && null !== $data['name']) {
             $object->setName($data['name']);
-        } elseif (\array_key_exists('name', $data) && $data['name'] === null) {
+        } elseif (\array_key_exists('name', $data) && null === $data['name']) {
             $object->setName(null);
         }
-        if (\array_key_exists('from', $data) && $data['from'] !== null) {
+        if (\array_key_exists('from', $data) && null !== $data['from']) {
             $object->setFrom($data['from']);
-        } elseif (\array_key_exists('from', $data) && $data['from'] === null) {
+        } elseif (\array_key_exists('from', $data) && null === $data['from']) {
             $object->setFrom(null);
         }
 
@@ -65,6 +69,9 @@ class VariableFromSecretInputNormalizer implements DenormalizerInterface, Normal
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

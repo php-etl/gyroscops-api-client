@@ -43,7 +43,7 @@ class InterruptExecutionExecutionItem extends \Gyroscops\Api\Runtime\Client\Base
             return [['Content-Type' => ['application/ld+json']], $this->body];
         }
         if ($this->body instanceof \stdClass) {
-            return [['Content-Type' => ['application/json']], json_encode($this->body, JSON_THROW_ON_ERROR)];
+            return [['Content-Type' => ['application/json']], json_encode($this->body, \JSON_THROW_ON_ERROR)];
         }
         if ($this->body instanceof \stdClass) {
             return [['Content-Type' => ['text/html']], $this->body];
@@ -60,16 +60,14 @@ class InterruptExecutionExecutionItem extends \Gyroscops\Api\Runtime\Client\Base
     /**
      * {@inheritdoc}
      *
-     * @return null
-     *
      * @throws \Gyroscops\Api\Exception\InterruptExecutionExecutionItemBadRequestException
      * @throws \Gyroscops\Api\Exception\InterruptExecutionExecutionItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\InterruptExecutionExecutionItemNotFoundException
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if (is_null($contentType) === false && (202 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return json_decode($body, null, 512, JSON_THROW_ON_ERROR);
+        if ((null === $contentType) === false && (202 === $status && false !== mb_strpos($contentType, 'application/json'))) {
+            return json_decode($body, null, 512, \JSON_THROW_ON_ERROR);
         }
         if (400 === $status) {
             throw new \Gyroscops\Api\Exception\InterruptExecutionExecutionItemBadRequestException();

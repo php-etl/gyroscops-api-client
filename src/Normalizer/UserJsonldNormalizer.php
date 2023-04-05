@@ -27,15 +27,19 @@ class UserJsonldNormalizer implements DenormalizerInterface, NormalizerInterface
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\UserJsonld::class;
+        return \Gyroscops\Api\Model\UserJsonld::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\UserJsonld::class;
+        return \is_object($data) && \Gyroscops\Api\Model\UserJsonld::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,57 +54,57 @@ class UserJsonldNormalizer implements DenormalizerInterface, NormalizerInterface
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
+        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
             $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
+        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
             $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
+        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
+        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
+        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
+        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
             $object->setType(null);
         }
-        if (\array_key_exists('id', $data) && $data['id'] !== null) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId2($data['id']);
-        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
             $object->setId2(null);
         }
-        if (\array_key_exists('firstName', $data) && $data['firstName'] !== null) {
+        if (\array_key_exists('firstName', $data) && null !== $data['firstName']) {
             $object->setFirstName($data['firstName']);
-        } elseif (\array_key_exists('firstName', $data) && $data['firstName'] === null) {
+        } elseif (\array_key_exists('firstName', $data) && null === $data['firstName']) {
             $object->setFirstName(null);
         }
-        if (\array_key_exists('lastName', $data) && $data['lastName'] !== null) {
+        if (\array_key_exists('lastName', $data) && null !== $data['lastName']) {
             $object->setLastName($data['lastName']);
-        } elseif (\array_key_exists('lastName', $data) && $data['lastName'] === null) {
+        } elseif (\array_key_exists('lastName', $data) && null === $data['lastName']) {
             $object->setLastName(null);
         }
-        if (\array_key_exists('username', $data) && $data['username'] !== null) {
+        if (\array_key_exists('username', $data) && null !== $data['username']) {
             $object->setUsername($data['username']);
-        } elseif (\array_key_exists('username', $data) && $data['username'] === null) {
+        } elseif (\array_key_exists('username', $data) && null === $data['username']) {
             $object->setUsername(null);
         }
-        if (\array_key_exists('email', $data) && $data['email'] !== null) {
+        if (\array_key_exists('email', $data) && null !== $data['email']) {
             $object->setEmail($data['email']);
-        } elseif (\array_key_exists('email', $data) && $data['email'] === null) {
+        } elseif (\array_key_exists('email', $data) && null === $data['email']) {
             $object->setEmail(null);
         }
-        if (\array_key_exists('password', $data) && $data['password'] !== null) {
+        if (\array_key_exists('password', $data) && null !== $data['password']) {
             $object->setPassword($data['password']);
-        } elseif (\array_key_exists('password', $data) && $data['password'] === null) {
+        } elseif (\array_key_exists('password', $data) && null === $data['password']) {
             $object->setPassword(null);
         }
-        if (\array_key_exists('enabled', $data) && $data['enabled'] !== null) {
+        if (\array_key_exists('enabled', $data) && null !== $data['enabled']) {
             $object->setEnabled($data['enabled']);
-        } elseif (\array_key_exists('enabled', $data) && $data['enabled'] === null) {
+        } elseif (\array_key_exists('enabled', $data) && null === $data['enabled']) {
             $object->setEnabled(null);
         }
-        if (\array_key_exists('roles', $data) && $data['roles'] !== null) {
+        if (\array_key_exists('roles', $data) && null !== $data['roles']) {
             $values = [];
             foreach ($data['roles'] as $value) {
                 $values_1 = [];
@@ -110,86 +114,86 @@ class UserJsonldNormalizer implements DenormalizerInterface, NormalizerInterface
                 $values[] = $values_1;
             }
             $object->setRoles($values);
-        } elseif (\array_key_exists('roles', $data) && $data['roles'] === null) {
+        } elseif (\array_key_exists('roles', $data) && null === $data['roles']) {
             $object->setRoles(null);
         }
-        if (\array_key_exists('authorizations', $data) && $data['authorizations'] !== null) {
+        if (\array_key_exists('authorizations', $data) && null !== $data['authorizations']) {
             $values_2 = [];
             foreach ($data['authorizations'] as $value_2) {
                 $values_2[] = $value_2;
             }
             $object->setAuthorizations($values_2);
-        } elseif (\array_key_exists('authorizations', $data) && $data['authorizations'] === null) {
+        } elseif (\array_key_exists('authorizations', $data) && null === $data['authorizations']) {
             $object->setAuthorizations(null);
         }
-        if (\array_key_exists('organization', $data) && $data['organization'] !== null) {
+        if (\array_key_exists('organization', $data) && null !== $data['organization']) {
             $object->setOrganization($data['organization']);
-        } elseif (\array_key_exists('organization', $data) && $data['organization'] === null) {
+        } elseif (\array_key_exists('organization', $data) && null === $data['organization']) {
             $object->setOrganization(null);
         }
-        if (\array_key_exists('additionalOrganizations', $data) && $data['additionalOrganizations'] !== null) {
+        if (\array_key_exists('additionalOrganizations', $data) && null !== $data['additionalOrganizations']) {
             $values_3 = [];
             foreach ($data['additionalOrganizations'] as $value_3) {
                 $values_3[] = $value_3;
             }
             $object->setAdditionalOrganizations($values_3);
-        } elseif (\array_key_exists('additionalOrganizations', $data) && $data['additionalOrganizations'] === null) {
+        } elseif (\array_key_exists('additionalOrganizations', $data) && null === $data['additionalOrganizations']) {
             $object->setAdditionalOrganizations(null);
         }
-        if (\array_key_exists('workspaces', $data) && $data['workspaces'] !== null) {
+        if (\array_key_exists('workspaces', $data) && null !== $data['workspaces']) {
             $values_4 = [];
             foreach ($data['workspaces'] as $value_4) {
                 $values_4[] = $value_4;
             }
             $object->setWorkspaces($values_4);
-        } elseif (\array_key_exists('workspaces', $data) && $data['workspaces'] === null) {
+        } elseif (\array_key_exists('workspaces', $data) && null === $data['workspaces']) {
             $object->setWorkspaces(null);
         }
-        if (\array_key_exists('currentWorkspace', $data) && $data['currentWorkspace'] !== null) {
+        if (\array_key_exists('currentWorkspace', $data) && null !== $data['currentWorkspace']) {
             $object->setCurrentWorkspace($data['currentWorkspace']);
-        } elseif (\array_key_exists('currentWorkspace', $data) && $data['currentWorkspace'] === null) {
+        } elseif (\array_key_exists('currentWorkspace', $data) && null === $data['currentWorkspace']) {
             $object->setCurrentWorkspace(null);
         }
-        if (\array_key_exists('currentOrganization', $data) && $data['currentOrganization'] !== null) {
+        if (\array_key_exists('currentOrganization', $data) && null !== $data['currentOrganization']) {
             $object->setCurrentOrganization($data['currentOrganization']);
-        } elseif (\array_key_exists('currentOrganization', $data) && $data['currentOrganization'] === null) {
+        } elseif (\array_key_exists('currentOrganization', $data) && null === $data['currentOrganization']) {
             $object->setCurrentOrganization(null);
         }
-        if (\array_key_exists('referralCodes', $data) && $data['referralCodes'] !== null) {
+        if (\array_key_exists('referralCodes', $data) && null !== $data['referralCodes']) {
             $values_5 = [];
             foreach ($data['referralCodes'] as $value_5) {
                 $values_5[] = $value_5;
             }
             $object->setReferralCodes($values_5);
-        } elseif (\array_key_exists('referralCodes', $data) && $data['referralCodes'] === null) {
+        } elseif (\array_key_exists('referralCodes', $data) && null === $data['referralCodes']) {
             $object->setReferralCodes(null);
         }
-        if (\array_key_exists('acceptedReferralRequests', $data) && $data['acceptedReferralRequests'] !== null) {
+        if (\array_key_exists('acceptedReferralRequests', $data) && null !== $data['acceptedReferralRequests']) {
             $values_6 = [];
             foreach ($data['acceptedReferralRequests'] as $value_6) {
                 $values_6[] = $value_6;
             }
             $object->setAcceptedReferralRequests($values_6);
-        } elseif (\array_key_exists('acceptedReferralRequests', $data) && $data['acceptedReferralRequests'] === null) {
+        } elseif (\array_key_exists('acceptedReferralRequests', $data) && null === $data['acceptedReferralRequests']) {
             $object->setAcceptedReferralRequests(null);
         }
-        if (\array_key_exists('userIdentifier', $data) && $data['userIdentifier'] !== null) {
+        if (\array_key_exists('userIdentifier', $data) && null !== $data['userIdentifier']) {
             $object->setUserIdentifier($data['userIdentifier']);
-        } elseif (\array_key_exists('userIdentifier', $data) && $data['userIdentifier'] === null) {
+        } elseif (\array_key_exists('userIdentifier', $data) && null === $data['userIdentifier']) {
             $object->setUserIdentifier(null);
         }
-        if (\array_key_exists('salt', $data) && $data['salt'] !== null) {
+        if (\array_key_exists('salt', $data) && null !== $data['salt']) {
             $object->setSalt($data['salt']);
-        } elseif (\array_key_exists('salt', $data) && $data['salt'] === null) {
+        } elseif (\array_key_exists('salt', $data) && null === $data['salt']) {
             $object->setSalt(null);
         }
-        if (\array_key_exists('workspace', $data) && $data['workspace'] !== null) {
+        if (\array_key_exists('workspace', $data) && null !== $data['workspace']) {
             $values_7 = [];
             foreach ($data['workspace'] as $value_7) {
                 $values_7[] = $value_7;
             }
             $object->setWorkspace($values_7);
-        } elseif (\array_key_exists('workspace', $data) && $data['workspace'] === null) {
+        } elseif (\array_key_exists('workspace', $data) && null === $data['workspace']) {
             $object->setWorkspace(null);
         }
 
@@ -197,6 +201,9 @@ class UserJsonldNormalizer implements DenormalizerInterface, NormalizerInterface
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

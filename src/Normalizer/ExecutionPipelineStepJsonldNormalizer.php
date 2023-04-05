@@ -27,15 +27,19 @@ class ExecutionPipelineStepJsonldNormalizer implements DenormalizerInterface, No
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\ExecutionPipelineStepJsonld::class;
+        return \Gyroscops\Api\Model\ExecutionPipelineStepJsonld::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\ExecutionPipelineStepJsonld::class;
+        return \is_object($data) && \Gyroscops\Api\Model\ExecutionPipelineStepJsonld::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,38 +54,38 @@ class ExecutionPipelineStepJsonldNormalizer implements DenormalizerInterface, No
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
+        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
+        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
+        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
+        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
             $object->setType(null);
         }
-        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
+        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
             $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
+        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
             $object->setContext(null);
         }
-        if (\array_key_exists('id', $data) && $data['id'] !== null) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId2($data['id']);
-        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
             $object->setId2(null);
         }
-        if (\array_key_exists('pipeline', $data) && $data['pipeline'] !== null) {
+        if (\array_key_exists('pipeline', $data) && null !== $data['pipeline']) {
             $object->setPipeline($this->denormalizer->denormalize($data['pipeline'], \Gyroscops\Api\Model\AbstractPipelineJsonld::class, 'json', $context));
-        } elseif (\array_key_exists('pipeline', $data) && $data['pipeline'] === null) {
+        } elseif (\array_key_exists('pipeline', $data) && null === $data['pipeline']) {
             $object->setPipeline(null);
         }
-        if (\array_key_exists('metrics', $data) && $data['metrics'] !== null) {
+        if (\array_key_exists('metrics', $data) && null !== $data['metrics']) {
             $values = [];
             foreach ($data['metrics'] as $value) {
                 $values[] = $value;
             }
             $object->setMetrics($values);
-        } elseif (\array_key_exists('metrics', $data) && $data['metrics'] === null) {
+        } elseif (\array_key_exists('metrics', $data) && null === $data['metrics']) {
             $object->setMetrics(null);
         }
 
@@ -89,6 +93,9 @@ class ExecutionPipelineStepJsonldNormalizer implements DenormalizerInterface, No
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

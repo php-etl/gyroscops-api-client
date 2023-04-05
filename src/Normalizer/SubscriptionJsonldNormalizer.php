@@ -27,15 +27,19 @@ class SubscriptionJsonldNormalizer implements DenormalizerInterface, NormalizerI
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\SubscriptionJsonld::class;
+        return \Gyroscops\Api\Model\SubscriptionJsonld::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\SubscriptionJsonld::class;
+        return \is_object($data) && \Gyroscops\Api\Model\SubscriptionJsonld::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,57 +54,57 @@ class SubscriptionJsonldNormalizer implements DenormalizerInterface, NormalizerI
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
+        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
             $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
+        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
             $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
+        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
+        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
+        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
+        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
             $object->setType(null);
         }
-        if (\array_key_exists('id', $data) && $data['id'] !== null) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId2($data['id']);
-        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
             $object->setId2(null);
         }
-        if (\array_key_exists('organization', $data) && $data['organization'] !== null) {
+        if (\array_key_exists('organization', $data) && null !== $data['organization']) {
             $object->setOrganization($data['organization']);
-        } elseif (\array_key_exists('organization', $data) && $data['organization'] === null) {
+        } elseif (\array_key_exists('organization', $data) && null === $data['organization']) {
             $object->setOrganization(null);
         }
-        if (\array_key_exists('offer', $data) && $data['offer'] !== null) {
+        if (\array_key_exists('offer', $data) && null !== $data['offer']) {
             $object->setOffer($data['offer']);
-        } elseif (\array_key_exists('offer', $data) && $data['offer'] === null) {
+        } elseif (\array_key_exists('offer', $data) && null === $data['offer']) {
             $object->setOffer(null);
         }
-        if (\array_key_exists('options', $data) && $data['options'] !== null) {
+        if (\array_key_exists('options', $data) && null !== $data['options']) {
             $values = [];
             foreach ($data['options'] as $value) {
                 $values[] = $value;
             }
             $object->setOptions($values);
-        } elseif (\array_key_exists('options', $data) && $data['options'] === null) {
+        } elseif (\array_key_exists('options', $data) && null === $data['options']) {
             $object->setOptions(null);
         }
-        if (\array_key_exists('cost', $data) && $data['cost'] !== null) {
+        if (\array_key_exists('cost', $data) && null !== $data['cost']) {
             $object->setCost($this->denormalizer->denormalize($data['cost'], \Gyroscops\Api\Model\PriceJsonld::class, 'json', $context));
-        } elseif (\array_key_exists('cost', $data) && $data['cost'] === null) {
+        } elseif (\array_key_exists('cost', $data) && null === $data['cost']) {
             $object->setCost(null);
         }
-        if (\array_key_exists('periods', $data) && $data['periods'] !== null) {
+        if (\array_key_exists('periods', $data) && null !== $data['periods']) {
             $values_1 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
             foreach ($data['periods'] as $key => $value_1) {
                 $values_1[$key] = $value_1;
             }
             $object->setPeriods($values_1);
-        } elseif (\array_key_exists('periods', $data) && $data['periods'] === null) {
+        } elseif (\array_key_exists('periods', $data) && null === $data['periods']) {
             $object->setPeriods(null);
         }
 
@@ -108,6 +112,9 @@ class SubscriptionJsonldNormalizer implements DenormalizerInterface, NormalizerI
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

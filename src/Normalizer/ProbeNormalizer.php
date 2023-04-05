@@ -27,15 +27,19 @@ class ProbeNormalizer implements DenormalizerInterface, NormalizerInterface, Den
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\Probe::class;
+        return \Gyroscops\Api\Model\Probe::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\Probe::class;
+        return \is_object($data) && \Gyroscops\Api\Model\Probe::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,14 +54,14 @@ class ProbeNormalizer implements DenormalizerInterface, NormalizerInterface, Den
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('code', $data) && $data['code'] !== null) {
+        if (\array_key_exists('code', $data) && null !== $data['code']) {
             $object->setCode($data['code']);
-        } elseif (\array_key_exists('code', $data) && $data['code'] === null) {
+        } elseif (\array_key_exists('code', $data) && null === $data['code']) {
             $object->setCode(null);
         }
-        if (\array_key_exists('label', $data) && $data['label'] !== null) {
+        if (\array_key_exists('label', $data) && null !== $data['label']) {
             $object->setLabel($data['label']);
-        } elseif (\array_key_exists('label', $data) && $data['label'] === null) {
+        } elseif (\array_key_exists('label', $data) && null === $data['label']) {
             $object->setLabel(null);
         }
 
@@ -65,6 +69,9 @@ class ProbeNormalizer implements DenormalizerInterface, NormalizerInterface, Den
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

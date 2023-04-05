@@ -27,15 +27,19 @@ class PipelineAddPipelineComposerAuthCommandInputNormalizer implements Denormali
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\PipelineAddPipelineComposerAuthCommandInput::class;
+        return \Gyroscops\Api\Model\PipelineAddPipelineComposerAuthCommandInput::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\PipelineAddPipelineComposerAuthCommandInput::class;
+        return \is_object($data) && \Gyroscops\Api\Model\PipelineAddPipelineComposerAuthCommandInput::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,14 +54,14 @@ class PipelineAddPipelineComposerAuthCommandInputNormalizer implements Denormali
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('url', $data) && $data['url'] !== null) {
+        if (\array_key_exists('url', $data) && null !== $data['url']) {
             $object->setUrl($data['url']);
-        } elseif (\array_key_exists('url', $data) && $data['url'] === null) {
+        } elseif (\array_key_exists('url', $data) && null === $data['url']) {
             $object->setUrl(null);
         }
-        if (\array_key_exists('token', $data) && $data['token'] !== null) {
+        if (\array_key_exists('token', $data) && null !== $data['token']) {
             $object->setToken($data['token']);
-        } elseif (\array_key_exists('token', $data) && $data['token'] === null) {
+        } elseif (\array_key_exists('token', $data) && null === $data['token']) {
             $object->setToken(null);
         }
 
@@ -65,6 +69,9 @@ class PipelineAddPipelineComposerAuthCommandInputNormalizer implements Denormali
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

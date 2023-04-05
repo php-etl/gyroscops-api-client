@@ -27,15 +27,19 @@ class OnPremiseRequestJsonldOnPremiseRequestReadNormalizer implements Denormaliz
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\OnPremiseRequestJsonldOnPremiseRequestRead::class;
+        return \Gyroscops\Api\Model\OnPremiseRequestJsonldOnPremiseRequestRead::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\OnPremiseRequestJsonldOnPremiseRequestRead::class;
+        return \is_object($data) && \Gyroscops\Api\Model\OnPremiseRequestJsonldOnPremiseRequestRead::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,49 +54,49 @@ class OnPremiseRequestJsonldOnPremiseRequestReadNormalizer implements Denormaliz
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
+        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
+        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
+        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
+        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
             $object->setType(null);
         }
-        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
+        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
             $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
+        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
             $object->setContext(null);
         }
-        if (\array_key_exists('id', $data) && $data['id'] !== null) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId2($data['id']);
-        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
             $object->setId2(null);
         }
-        if (\array_key_exists('firstName', $data) && $data['firstName'] !== null) {
+        if (\array_key_exists('firstName', $data) && null !== $data['firstName']) {
             $object->setFirstName($data['firstName']);
-        } elseif (\array_key_exists('firstName', $data) && $data['firstName'] === null) {
+        } elseif (\array_key_exists('firstName', $data) && null === $data['firstName']) {
             $object->setFirstName(null);
         }
-        if (\array_key_exists('lastName', $data) && $data['lastName'] !== null) {
+        if (\array_key_exists('lastName', $data) && null !== $data['lastName']) {
             $object->setLastName($data['lastName']);
-        } elseif (\array_key_exists('lastName', $data) && $data['lastName'] === null) {
+        } elseif (\array_key_exists('lastName', $data) && null === $data['lastName']) {
             $object->setLastName(null);
         }
-        if (\array_key_exists('email', $data) && $data['email'] !== null) {
+        if (\array_key_exists('email', $data) && null !== $data['email']) {
             $object->setEmail($data['email']);
-        } elseif (\array_key_exists('email', $data) && $data['email'] === null) {
+        } elseif (\array_key_exists('email', $data) && null === $data['email']) {
             $object->setEmail(null);
         }
-        if (\array_key_exists('message', $data) && $data['message'] !== null) {
+        if (\array_key_exists('message', $data) && null !== $data['message']) {
             $object->setMessage($data['message']);
-        } elseif (\array_key_exists('message', $data) && $data['message'] === null) {
+        } elseif (\array_key_exists('message', $data) && null === $data['message']) {
             $object->setMessage(null);
         }
-        if (\array_key_exists('createdAt', $data) && $data['createdAt'] !== null) {
+        if (\array_key_exists('createdAt', $data) && null !== $data['createdAt']) {
             $object->setCreatedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['createdAt']));
-        } elseif (\array_key_exists('createdAt', $data) && $data['createdAt'] === null) {
+        } elseif (\array_key_exists('createdAt', $data) && null === $data['createdAt']) {
             $object->setCreatedAt(null);
         }
 
@@ -100,6 +104,9 @@ class OnPremiseRequestJsonldOnPremiseRequestReadNormalizer implements Denormaliz
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
