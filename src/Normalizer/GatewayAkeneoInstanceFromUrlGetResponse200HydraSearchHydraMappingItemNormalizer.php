@@ -27,15 +27,19 @@ class GatewayAkeneoInstanceFromUrlGetResponse200HydraSearchHydraMappingItemNorma
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\GatewayAkeneoInstanceFromUrlGetResponse200HydraSearchHydraMappingItem::class;
+        return \Gyroscops\Api\Model\GatewayAkeneoInstanceFromUrlGetResponse200HydraSearchHydraMappingItem::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\GatewayAkeneoInstanceFromUrlGetResponse200HydraSearchHydraMappingItem::class;
+        return \is_object($data) && \Gyroscops\Api\Model\GatewayAkeneoInstanceFromUrlGetResponse200HydraSearchHydraMappingItem::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,24 +54,24 @@ class GatewayAkeneoInstanceFromUrlGetResponse200HydraSearchHydraMappingItemNorma
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
+        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
+        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
             $object->setType(null);
         }
-        if (\array_key_exists('variable', $data) && $data['variable'] !== null) {
+        if (\array_key_exists('variable', $data) && null !== $data['variable']) {
             $object->setVariable($data['variable']);
-        } elseif (\array_key_exists('variable', $data) && $data['variable'] === null) {
+        } elseif (\array_key_exists('variable', $data) && null === $data['variable']) {
             $object->setVariable(null);
         }
-        if (\array_key_exists('property', $data) && $data['property'] !== null) {
+        if (\array_key_exists('property', $data) && null !== $data['property']) {
             $object->setProperty($data['property']);
-        } elseif (\array_key_exists('property', $data) && $data['property'] === null) {
+        } elseif (\array_key_exists('property', $data) && null === $data['property']) {
             $object->setProperty(null);
         }
-        if (\array_key_exists('required', $data) && $data['required'] !== null) {
+        if (\array_key_exists('required', $data) && null !== $data['required']) {
             $object->setRequired($data['required']);
-        } elseif (\array_key_exists('required', $data) && $data['required'] === null) {
+        } elseif (\array_key_exists('required', $data) && null === $data['required']) {
             $object->setRequired(null);
         }
 
@@ -75,6 +79,9 @@ class GatewayAkeneoInstanceFromUrlGetResponse200HydraSearchHydraMappingItemNorma
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

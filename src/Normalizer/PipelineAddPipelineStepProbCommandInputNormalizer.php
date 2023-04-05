@@ -27,15 +27,19 @@ class PipelineAddPipelineStepProbCommandInputNormalizer implements DenormalizerI
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\PipelineAddPipelineStepProbCommandInput::class;
+        return \Gyroscops\Api\Model\PipelineAddPipelineStepProbCommandInput::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\PipelineAddPipelineStepProbCommandInput::class;
+        return \is_object($data) && \Gyroscops\Api\Model\PipelineAddPipelineStepProbCommandInput::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,9 +54,9 @@ class PipelineAddPipelineStepProbCommandInputNormalizer implements DenormalizerI
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('probe', $data) && $data['probe'] !== null) {
+        if (\array_key_exists('probe', $data) && null !== $data['probe']) {
             $object->setProbe($this->denormalizer->denormalize($data['probe'], \Gyroscops\Api\Model\Probe::class, 'json', $context));
-        } elseif (\array_key_exists('probe', $data) && $data['probe'] === null) {
+        } elseif (\array_key_exists('probe', $data) && null === $data['probe']) {
             $object->setProbe(null);
         }
 
@@ -60,6 +64,9 @@ class PipelineAddPipelineStepProbCommandInputNormalizer implements DenormalizerI
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

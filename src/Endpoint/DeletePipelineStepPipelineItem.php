@@ -46,8 +46,6 @@ class DeletePipelineStepPipelineItem extends \Gyroscops\Api\Runtime\Client\BaseE
     /**
      * {@inheritdoc}
      *
-     * @return null
-     *
      * @throws \Gyroscops\Api\Exception\DeletePipelineStepPipelineItemNotFoundException
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)

@@ -27,15 +27,19 @@ class UserAuthorizationNormalizer implements DenormalizerInterface, NormalizerIn
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\UserAuthorization::class;
+        return \Gyroscops\Api\Model\UserAuthorization::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\UserAuthorization::class;
+        return \is_object($data) && \Gyroscops\Api\Model\UserAuthorization::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,38 +54,38 @@ class UserAuthorizationNormalizer implements DenormalizerInterface, NormalizerIn
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('id', $data) && $data['id'] !== null) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId($data['id']);
-        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
             $object->setId(null);
         }
-        if (\array_key_exists('user', $data) && $data['user'] !== null) {
+        if (\array_key_exists('user', $data) && null !== $data['user']) {
             $object->setUser($data['user']);
-        } elseif (\array_key_exists('user', $data) && $data['user'] === null) {
+        } elseif (\array_key_exists('user', $data) && null === $data['user']) {
             $object->setUser(null);
         }
-        if (\array_key_exists('workspace', $data) && $data['workspace'] !== null) {
+        if (\array_key_exists('workspace', $data) && null !== $data['workspace']) {
             $object->setWorkspace($data['workspace']);
-        } elseif (\array_key_exists('workspace', $data) && $data['workspace'] === null) {
+        } elseif (\array_key_exists('workspace', $data) && null === $data['workspace']) {
             $object->setWorkspace(null);
         }
-        if (\array_key_exists('organization', $data) && $data['organization'] !== null) {
+        if (\array_key_exists('organization', $data) && null !== $data['organization']) {
             $object->setOrganization($data['organization']);
-        } elseif (\array_key_exists('organization', $data) && $data['organization'] === null) {
+        } elseif (\array_key_exists('organization', $data) && null === $data['organization']) {
             $object->setOrganization(null);
         }
-        if (\array_key_exists('resource', $data) && $data['resource'] !== null) {
+        if (\array_key_exists('resource', $data) && null !== $data['resource']) {
             $object->setResource($data['resource']);
-        } elseif (\array_key_exists('resource', $data) && $data['resource'] === null) {
+        } elseif (\array_key_exists('resource', $data) && null === $data['resource']) {
             $object->setResource(null);
         }
-        if (\array_key_exists('authorizations', $data) && $data['authorizations'] !== null) {
+        if (\array_key_exists('authorizations', $data) && null !== $data['authorizations']) {
             $values = [];
             foreach ($data['authorizations'] as $value) {
                 $values[] = $value;
             }
             $object->setAuthorizations($values);
-        } elseif (\array_key_exists('authorizations', $data) && $data['authorizations'] === null) {
+        } elseif (\array_key_exists('authorizations', $data) && null === $data['authorizations']) {
             $object->setAuthorizations(null);
         }
 
@@ -89,6 +93,9 @@ class UserAuthorizationNormalizer implements DenormalizerInterface, NormalizerIn
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

@@ -27,15 +27,19 @@ class ScheduleDeclarePipelineScheduleCommandInputNormalizer implements Denormali
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleCommandInput::class;
+        return \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleCommandInput::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleCommandInput::class;
+        return \is_object($data) && \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleCommandInput::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,39 +54,39 @@ class ScheduleDeclarePipelineScheduleCommandInputNormalizer implements Denormali
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('pipeline', $data) && $data['pipeline'] !== null) {
+        if (\array_key_exists('pipeline', $data) && null !== $data['pipeline']) {
             $object->setPipeline($data['pipeline']);
-        } elseif (\array_key_exists('pipeline', $data) && $data['pipeline'] === null) {
+        } elseif (\array_key_exists('pipeline', $data) && null === $data['pipeline']) {
             $object->setPipeline(null);
         }
-        if (\array_key_exists('type', $data) && $data['type'] !== null) {
+        if (\array_key_exists('type', $data) && null !== $data['type']) {
             $object->setType($data['type']);
-        } elseif (\array_key_exists('type', $data) && $data['type'] === null) {
+        } elseif (\array_key_exists('type', $data) && null === $data['type']) {
             $object->setType(null);
         }
-        if (\array_key_exists('date', $data) && $data['date'] !== null) {
+        if (\array_key_exists('date', $data) && null !== $data['date']) {
             $object->setDate(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['date']));
-        } elseif (\array_key_exists('date', $data) && $data['date'] === null) {
+        } elseif (\array_key_exists('date', $data) && null === $data['date']) {
             $object->setDate(null);
         }
-        if (\array_key_exists('start', $data) && $data['start'] !== null) {
+        if (\array_key_exists('start', $data) && null !== $data['start']) {
             $object->setStart(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['start']));
-        } elseif (\array_key_exists('start', $data) && $data['start'] === null) {
+        } elseif (\array_key_exists('start', $data) && null === $data['start']) {
             $object->setStart(null);
         }
-        if (\array_key_exists('interval', $data) && $data['interval'] !== null) {
+        if (\array_key_exists('interval', $data) && null !== $data['interval']) {
             $object->setInterval($data['interval']);
-        } elseif (\array_key_exists('interval', $data) && $data['interval'] === null) {
+        } elseif (\array_key_exists('interval', $data) && null === $data['interval']) {
             $object->setInterval(null);
         }
-        if (\array_key_exists('recurrences', $data) && $data['recurrences'] !== null) {
+        if (\array_key_exists('recurrences', $data) && null !== $data['recurrences']) {
             $object->setRecurrences($data['recurrences']);
-        } elseif (\array_key_exists('recurrences', $data) && $data['recurrences'] === null) {
+        } elseif (\array_key_exists('recurrences', $data) && null === $data['recurrences']) {
             $object->setRecurrences(null);
         }
-        if (\array_key_exists('end', $data) && $data['end'] !== null) {
+        if (\array_key_exists('end', $data) && null !== $data['end']) {
             $object->setEnd(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['end']));
-        } elseif (\array_key_exists('end', $data) && $data['end'] === null) {
+        } elseif (\array_key_exists('end', $data) && null === $data['end']) {
             $object->setEnd(null);
         }
 
@@ -90,6 +94,9 @@ class ScheduleDeclarePipelineScheduleCommandInputNormalizer implements Denormali
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

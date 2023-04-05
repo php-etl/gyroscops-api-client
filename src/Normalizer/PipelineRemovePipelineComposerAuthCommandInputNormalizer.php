@@ -27,15 +27,19 @@ class PipelineRemovePipelineComposerAuthCommandInputNormalizer implements Denorm
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\PipelineRemovePipelineComposerAuthCommandInput::class;
+        return \Gyroscops\Api\Model\PipelineRemovePipelineComposerAuthCommandInput::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\PipelineRemovePipelineComposerAuthCommandInput::class;
+        return \is_object($data) && \Gyroscops\Api\Model\PipelineRemovePipelineComposerAuthCommandInput::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,9 +54,9 @@ class PipelineRemovePipelineComposerAuthCommandInputNormalizer implements Denorm
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('url', $data) && $data['url'] !== null) {
+        if (\array_key_exists('url', $data) && null !== $data['url']) {
             $object->setUrl($data['url']);
-        } elseif (\array_key_exists('url', $data) && $data['url'] === null) {
+        } elseif (\array_key_exists('url', $data) && null === $data['url']) {
             $object->setUrl(null);
         }
 
@@ -60,6 +64,9 @@ class PipelineRemovePipelineComposerAuthCommandInputNormalizer implements Denorm
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

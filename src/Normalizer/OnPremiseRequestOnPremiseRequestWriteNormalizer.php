@@ -27,15 +27,19 @@ class OnPremiseRequestOnPremiseRequestWriteNormalizer implements DenormalizerInt
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\OnPremiseRequestOnPremiseRequestWrite::class;
+        return \Gyroscops\Api\Model\OnPremiseRequestOnPremiseRequestWrite::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\OnPremiseRequestOnPremiseRequestWrite::class;
+        return \is_object($data) && \Gyroscops\Api\Model\OnPremiseRequestOnPremiseRequestWrite::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,24 +54,24 @@ class OnPremiseRequestOnPremiseRequestWriteNormalizer implements DenormalizerInt
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('firstName', $data) && $data['firstName'] !== null) {
+        if (\array_key_exists('firstName', $data) && null !== $data['firstName']) {
             $object->setFirstName($data['firstName']);
-        } elseif (\array_key_exists('firstName', $data) && $data['firstName'] === null) {
+        } elseif (\array_key_exists('firstName', $data) && null === $data['firstName']) {
             $object->setFirstName(null);
         }
-        if (\array_key_exists('lastName', $data) && $data['lastName'] !== null) {
+        if (\array_key_exists('lastName', $data) && null !== $data['lastName']) {
             $object->setLastName($data['lastName']);
-        } elseif (\array_key_exists('lastName', $data) && $data['lastName'] === null) {
+        } elseif (\array_key_exists('lastName', $data) && null === $data['lastName']) {
             $object->setLastName(null);
         }
-        if (\array_key_exists('email', $data) && $data['email'] !== null) {
+        if (\array_key_exists('email', $data) && null !== $data['email']) {
             $object->setEmail($data['email']);
-        } elseif (\array_key_exists('email', $data) && $data['email'] === null) {
+        } elseif (\array_key_exists('email', $data) && null === $data['email']) {
             $object->setEmail(null);
         }
-        if (\array_key_exists('message', $data) && $data['message'] !== null) {
+        if (\array_key_exists('message', $data) && null !== $data['message']) {
             $object->setMessage($data['message']);
-        } elseif (\array_key_exists('message', $data) && $data['message'] === null) {
+        } elseif (\array_key_exists('message', $data) && null === $data['message']) {
             $object->setMessage(null);
         }
 
@@ -75,6 +79,9 @@ class OnPremiseRequestOnPremiseRequestWriteNormalizer implements DenormalizerInt
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

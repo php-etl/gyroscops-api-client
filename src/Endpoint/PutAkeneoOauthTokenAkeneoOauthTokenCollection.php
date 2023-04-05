@@ -39,10 +39,10 @@ class PutAkeneoOauthTokenAkeneoOauthTokenCollection extends \Gyroscops\Api\Runti
         if ($this->body instanceof \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBody) {
             return [['Content-Type' => ['application/ld+json']], $this->body];
         }
-        if (is_array($this->body) and isset($this->body[0]) and $this->body[0] instanceof \Gyroscops\Api\Model\AkeneoOauthTokenOauthTokenInput) {
+        if (\is_array($this->body) && isset($this->body[0]) && $this->body[0] instanceof \Gyroscops\Api\Model\AkeneoOauthTokenOauthTokenInput) {
             return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
         }
-        if (is_array($this->body) and isset($this->body[0]) and $this->body[0] instanceof \Gyroscops\Api\Model\AkeneoOauthTokenOauthTokenInput) {
+        if (\is_array($this->body) && isset($this->body[0]) && $this->body[0] instanceof \Gyroscops\Api\Model\AkeneoOauthTokenOauthTokenInput) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -57,15 +57,13 @@ class PutAkeneoOauthTokenAkeneoOauthTokenCollection extends \Gyroscops\Api\Runti
     /**
      * {@inheritdoc}
      *
-     * @return null
-     *
      * @throws \Gyroscops\Api\Exception\PutAkeneoOauthTokenAkeneoOauthTokenCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PutAkeneoOauthTokenAkeneoOauthTokenCollectionUnprocessableEntityException
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return json_decode($body, null, 512, JSON_THROW_ON_ERROR);
+        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
+            return json_decode($body, null, 512, \JSON_THROW_ON_ERROR);
         }
         if (400 === $status) {
             throw new \Gyroscops\Api\Exception\PutAkeneoOauthTokenAkeneoOauthTokenCollectionBadRequestException();

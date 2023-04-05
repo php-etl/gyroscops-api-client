@@ -15,12 +15,11 @@ class PostScheduleCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
 
     /**
-    In order to differentiate the different types of schedules, we have set up a field named "type" :
+     * In order to differentiate the different types of schedules, we have set up a field named "type" :
      * 1 => Immediate
      * 2 => Once
      * 3 => Times
      * 4 => Until.
-
      *
      * @param \Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleCommandInputJsonld|\Gyroscops\Api\Model\ScheduleDeclarePipelineScheduleCommandInput|null $requestBody
      */
@@ -62,15 +61,13 @@ class PostScheduleCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
     /**
      * {@inheritdoc}
      *
-     * @return null
-     *
      * @throws \Gyroscops\Api\Exception\PostScheduleCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostScheduleCollectionUnprocessableEntityException
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if (is_null($contentType) === false && (202 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return json_decode($body, null, 512, JSON_THROW_ON_ERROR);
+        if ((null === $contentType) === false && (202 === $status && false !== mb_strpos($contentType, 'application/json'))) {
+            return json_decode($body, null, 512, \JSON_THROW_ON_ERROR);
         }
         if (400 === $status) {
             throw new \Gyroscops\Api\Exception\PostScheduleCollectionBadRequestException();

@@ -27,15 +27,19 @@ class UpdateListNormalizer implements DenormalizerInterface, NormalizerInterface
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\UpdateList::class;
+        return \Gyroscops\Api\Model\UpdateList::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\UpdateList::class;
+        return \is_object($data) && \Gyroscops\Api\Model\UpdateList::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,9 +54,9 @@ class UpdateListNormalizer implements DenormalizerInterface, NormalizerInterface
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('iterator', $data) && $data['iterator'] !== null) {
+        if (\array_key_exists('iterator', $data) && null !== $data['iterator']) {
             $object->setIterator($data['iterator']);
-        } elseif (\array_key_exists('iterator', $data) && $data['iterator'] === null) {
+        } elseif (\array_key_exists('iterator', $data) && null === $data['iterator']) {
             $object->setIterator(null);
         }
 
@@ -60,6 +64,9 @@ class UpdateListNormalizer implements DenormalizerInterface, NormalizerInterface
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

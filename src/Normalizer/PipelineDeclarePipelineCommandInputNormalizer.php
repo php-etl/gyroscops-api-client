@@ -27,15 +27,19 @@ class PipelineDeclarePipelineCommandInputNormalizer implements DenormalizerInter
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\PipelineDeclarePipelineCommandInput::class;
+        return \Gyroscops\Api\Model\PipelineDeclarePipelineCommandInput::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\PipelineDeclarePipelineCommandInput::class;
+        return \is_object($data) && \Gyroscops\Api\Model\PipelineDeclarePipelineCommandInput::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,59 +54,59 @@ class PipelineDeclarePipelineCommandInputNormalizer implements DenormalizerInter
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('label', $data) && $data['label'] !== null) {
+        if (\array_key_exists('label', $data) && null !== $data['label']) {
             $object->setLabel($data['label']);
-        } elseif (\array_key_exists('label', $data) && $data['label'] === null) {
+        } elseif (\array_key_exists('label', $data) && null === $data['label']) {
             $object->setLabel(null);
         }
-        if (\array_key_exists('code', $data) && $data['code'] !== null) {
+        if (\array_key_exists('code', $data) && null !== $data['code']) {
             $object->setCode($data['code']);
-        } elseif (\array_key_exists('code', $data) && $data['code'] === null) {
+        } elseif (\array_key_exists('code', $data) && null === $data['code']) {
             $object->setCode(null);
         }
-        if (\array_key_exists('steps', $data) && $data['steps'] !== null) {
+        if (\array_key_exists('steps', $data) && null !== $data['steps']) {
             $values = [];
             foreach ($data['steps'] as $value) {
                 $values[] = $this->denormalizer->denormalize($value, \Gyroscops\Api\Model\StepInput::class, 'json', $context);
             }
             $object->setSteps($values);
-        } elseif (\array_key_exists('steps', $data) && $data['steps'] === null) {
+        } elseif (\array_key_exists('steps', $data) && null === $data['steps']) {
             $object->setSteps(null);
         }
-        if (\array_key_exists('autoloads', $data) && $data['autoloads'] !== null) {
+        if (\array_key_exists('autoloads', $data) && null !== $data['autoloads']) {
             $values_1 = [];
             foreach ($data['autoloads'] as $value_1) {
                 $values_1[] = $this->denormalizer->denormalize($value_1, \Gyroscops\Api\Model\AutoloadInput::class, 'json', $context);
             }
             $object->setAutoloads($values_1);
-        } elseif (\array_key_exists('autoloads', $data) && $data['autoloads'] === null) {
+        } elseif (\array_key_exists('autoloads', $data) && null === $data['autoloads']) {
             $object->setAutoloads(null);
         }
-        if (\array_key_exists('packages', $data) && $data['packages'] !== null) {
+        if (\array_key_exists('packages', $data) && null !== $data['packages']) {
             $values_2 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
             foreach ($data['packages'] as $key => $value_2) {
                 $values_2[$key] = $value_2;
             }
             $object->setPackages($values_2);
-        } elseif (\array_key_exists('packages', $data) && $data['packages'] === null) {
+        } elseif (\array_key_exists('packages', $data) && null === $data['packages']) {
             $object->setPackages(null);
         }
-        if (\array_key_exists('repositories', $data) && $data['repositories'] !== null) {
+        if (\array_key_exists('repositories', $data) && null !== $data['repositories']) {
             $values_3 = [];
             foreach ($data['repositories'] as $value_3) {
                 $values_3[] = $this->denormalizer->denormalize($value_3, \Gyroscops\Api\Model\AddPipelineComposerRepositoryCommandInput::class, 'json', $context);
             }
             $object->setRepositories($values_3);
-        } elseif (\array_key_exists('repositories', $data) && $data['repositories'] === null) {
+        } elseif (\array_key_exists('repositories', $data) && null === $data['repositories']) {
             $object->setRepositories(null);
         }
-        if (\array_key_exists('auths', $data) && $data['auths'] !== null) {
+        if (\array_key_exists('auths', $data) && null !== $data['auths']) {
             $values_4 = [];
             foreach ($data['auths'] as $value_4) {
                 $values_4[] = $this->denormalizer->denormalize($value_4, \Gyroscops\Api\Model\AddPipelineComposerAuthCommandInput::class, 'json', $context);
             }
             $object->setAuths($values_4);
-        } elseif (\array_key_exists('auths', $data) && $data['auths'] === null) {
+        } elseif (\array_key_exists('auths', $data) && null === $data['auths']) {
             $object->setAuths(null);
         }
 
@@ -110,6 +114,9 @@ class PipelineDeclarePipelineCommandInputNormalizer implements DenormalizerInter
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

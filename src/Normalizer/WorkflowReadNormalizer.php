@@ -27,15 +27,19 @@ class WorkflowReadNormalizer implements DenormalizerInterface, NormalizerInterfa
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\WorkflowRead::class;
+        return \Gyroscops\Api\Model\WorkflowRead::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\WorkflowRead::class;
+        return \is_object($data) && \Gyroscops\Api\Model\WorkflowRead::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,28 +54,28 @@ class WorkflowReadNormalizer implements DenormalizerInterface, NormalizerInterfa
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('id', $data) && $data['id'] !== null) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId($data['id']);
-        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
             $object->setId(null);
         }
-        if (\array_key_exists('code', $data) && $data['code'] !== null) {
+        if (\array_key_exists('code', $data) && null !== $data['code']) {
             $object->setCode($data['code']);
-        } elseif (\array_key_exists('code', $data) && $data['code'] === null) {
+        } elseif (\array_key_exists('code', $data) && null === $data['code']) {
             $object->setCode(null);
         }
-        if (\array_key_exists('label', $data) && $data['label'] !== null) {
+        if (\array_key_exists('label', $data) && null !== $data['label']) {
             $object->setLabel($data['label']);
-        } elseif (\array_key_exists('label', $data) && $data['label'] === null) {
+        } elseif (\array_key_exists('label', $data) && null === $data['label']) {
             $object->setLabel(null);
         }
-        if (\array_key_exists('jobs', $data) && $data['jobs'] !== null) {
+        if (\array_key_exists('jobs', $data) && null !== $data['jobs']) {
             $values = [];
             foreach ($data['jobs'] as $value) {
                 $values[] = $this->denormalizer->denormalize($value, \Gyroscops\Api\Model\WorkflowJobRead::class, 'json', $context);
             }
             $object->setJobs($values);
-        } elseif (\array_key_exists('jobs', $data) && $data['jobs'] === null) {
+        } elseif (\array_key_exists('jobs', $data) && null === $data['jobs']) {
             $object->setJobs(null);
         }
 
@@ -79,6 +83,9 @@ class WorkflowReadNormalizer implements DenormalizerInterface, NormalizerInterfa
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

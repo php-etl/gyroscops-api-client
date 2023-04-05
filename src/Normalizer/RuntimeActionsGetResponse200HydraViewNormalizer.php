@@ -27,15 +27,19 @@ class RuntimeActionsGetResponse200HydraViewNormalizer implements DenormalizerInt
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\RuntimeActionsGetResponse200HydraView::class;
+        return \Gyroscops\Api\Model\RuntimeActionsGetResponse200HydraView::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\RuntimeActionsGetResponse200HydraView::class;
+        return \is_object($data) && \Gyroscops\Api\Model\RuntimeActionsGetResponse200HydraView::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,34 +54,34 @@ class RuntimeActionsGetResponse200HydraViewNormalizer implements DenormalizerInt
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
+        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
+        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
+        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
+        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
             $object->setType(null);
         }
-        if (\array_key_exists('hydra:first', $data) && $data['hydra:first'] !== null) {
+        if (\array_key_exists('hydra:first', $data) && null !== $data['hydra:first']) {
             $object->setHydraFirst($data['hydra:first']);
-        } elseif (\array_key_exists('hydra:first', $data) && $data['hydra:first'] === null) {
+        } elseif (\array_key_exists('hydra:first', $data) && null === $data['hydra:first']) {
             $object->setHydraFirst(null);
         }
-        if (\array_key_exists('hydra:last', $data) && $data['hydra:last'] !== null) {
+        if (\array_key_exists('hydra:last', $data) && null !== $data['hydra:last']) {
             $object->setHydraLast($data['hydra:last']);
-        } elseif (\array_key_exists('hydra:last', $data) && $data['hydra:last'] === null) {
+        } elseif (\array_key_exists('hydra:last', $data) && null === $data['hydra:last']) {
             $object->setHydraLast(null);
         }
-        if (\array_key_exists('hydra:previous', $data) && $data['hydra:previous'] !== null) {
+        if (\array_key_exists('hydra:previous', $data) && null !== $data['hydra:previous']) {
             $object->setHydraPrevious($data['hydra:previous']);
-        } elseif (\array_key_exists('hydra:previous', $data) && $data['hydra:previous'] === null) {
+        } elseif (\array_key_exists('hydra:previous', $data) && null === $data['hydra:previous']) {
             $object->setHydraPrevious(null);
         }
-        if (\array_key_exists('hydra:next', $data) && $data['hydra:next'] !== null) {
+        if (\array_key_exists('hydra:next', $data) && null !== $data['hydra:next']) {
             $object->setHydraNext($data['hydra:next']);
-        } elseif (\array_key_exists('hydra:next', $data) && $data['hydra:next'] === null) {
+        } elseif (\array_key_exists('hydra:next', $data) && null === $data['hydra:next']) {
             $object->setHydraNext(null);
         }
 
@@ -85,6 +89,9 @@ class RuntimeActionsGetResponse200HydraViewNormalizer implements DenormalizerInt
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

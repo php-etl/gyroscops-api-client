@@ -27,15 +27,19 @@ class AkeneoLinkedAccountJsonldNormalizer implements DenormalizerInterface, Norm
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\AkeneoLinkedAccountJsonld::class;
+        return \Gyroscops\Api\Model\AkeneoLinkedAccountJsonld::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\AkeneoLinkedAccountJsonld::class;
+        return \is_object($data) && \Gyroscops\Api\Model\AkeneoLinkedAccountJsonld::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,49 +54,49 @@ class AkeneoLinkedAccountJsonldNormalizer implements DenormalizerInterface, Norm
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
+        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
+        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
+        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
+        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
             $object->setType(null);
         }
-        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
+        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
             $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
+        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
             $object->setContext(null);
         }
-        if (\array_key_exists('id', $data) && $data['id'] !== null) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId2($data['id']);
-        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
             $object->setId2(null);
         }
-        if (\array_key_exists('user', $data) && $data['user'] !== null) {
+        if (\array_key_exists('user', $data) && null !== $data['user']) {
             $object->setUser($data['user']);
-        } elseif (\array_key_exists('user', $data) && $data['user'] === null) {
+        } elseif (\array_key_exists('user', $data) && null === $data['user']) {
             $object->setUser(null);
         }
-        if (\array_key_exists('tokenId', $data) && $data['tokenId'] !== null) {
+        if (\array_key_exists('tokenId', $data) && null !== $data['tokenId']) {
             $object->setTokenId($data['tokenId']);
-        } elseif (\array_key_exists('tokenId', $data) && $data['tokenId'] === null) {
+        } elseif (\array_key_exists('tokenId', $data) && null === $data['tokenId']) {
             $object->setTokenId(null);
         }
-        if (\array_key_exists('akeneoUserId', $data) && $data['akeneoUserId'] !== null) {
+        if (\array_key_exists('akeneoUserId', $data) && null !== $data['akeneoUserId']) {
             $object->setAkeneoUserId($data['akeneoUserId']);
-        } elseif (\array_key_exists('akeneoUserId', $data) && $data['akeneoUserId'] === null) {
+        } elseif (\array_key_exists('akeneoUserId', $data) && null === $data['akeneoUserId']) {
             $object->setAkeneoUserId(null);
         }
-        if (\array_key_exists('token', $data) && $data['token'] !== null) {
+        if (\array_key_exists('token', $data) && null !== $data['token']) {
             $object->setToken($data['token']);
-        } elseif (\array_key_exists('token', $data) && $data['token'] === null) {
+        } elseif (\array_key_exists('token', $data) && null === $data['token']) {
             $object->setToken(null);
         }
-        if (\array_key_exists('akeneoInstance', $data) && $data['akeneoInstance'] !== null) {
+        if (\array_key_exists('akeneoInstance', $data) && null !== $data['akeneoInstance']) {
             $object->setAkeneoInstance($data['akeneoInstance']);
-        } elseif (\array_key_exists('akeneoInstance', $data) && $data['akeneoInstance'] === null) {
+        } elseif (\array_key_exists('akeneoInstance', $data) && null === $data['akeneoInstance']) {
             $object->setAkeneoInstance(null);
         }
 
@@ -100,6 +104,9 @@ class AkeneoLinkedAccountJsonldNormalizer implements DenormalizerInterface, Norm
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

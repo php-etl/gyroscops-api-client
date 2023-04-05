@@ -68,14 +68,14 @@ abstract class Client
         [$bodyHeaders, $body] = $endpoint->getBody($this->serializer, $this->streamFactory);
         $queryString = $endpoint->getQueryString();
         $uriGlue = !str_contains($endpoint->getUri(), '?') ? '?' : '&';
-        $uri = $queryString !== '' ? $endpoint->getUri() . $uriGlue . $queryString : $endpoint->getUri();
+        $uri = '' !== $queryString ? $endpoint->getUri().$uriGlue.$queryString : $endpoint->getUri();
         $request = $this->requestFactory->createRequest($endpoint->getMethod(), $uri);
         if ($body) {
             if ($body instanceof StreamInterface) {
                 $request = $request->withBody($body);
-            } elseif (is_resource($body)) {
+            } elseif (\is_resource($body)) {
                 $request = $request->withBody($this->streamFactory->createStreamFromResource($body));
-            } elseif (strlen((string) $body) <= 4000 && @file_exists($body)) {
+            } elseif (\strlen((string) $body) <= 4000 && @file_exists($body)) {
                 // more than 4096 chars will trigger an error
                 $request = $request->withBody($this->streamFactory->createStreamFromFile($body));
             } else {
@@ -85,7 +85,7 @@ abstract class Client
         foreach ($endpoint->getHeaders($bodyHeaders) as $name => $value) {
             $request = $request->withHeader($name, $value);
         }
-        if (count($endpoint->getAuthenticationScopes()) > 0) {
+        if (\count($endpoint->getAuthenticationScopes()) > 0) {
             $scopes = [];
             foreach ($endpoint->getAuthenticationScopes() as $scope) {
                 $scopes[] = $scope;

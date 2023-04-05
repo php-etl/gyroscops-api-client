@@ -27,15 +27,19 @@ class MoneyNormalizer implements DenormalizerInterface, NormalizerInterface, Den
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\Money::class;
+        return \Gyroscops\Api\Model\Money::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\Money::class;
+        return \is_object($data) && \Gyroscops\Api\Model\Money::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,68 +54,68 @@ class MoneyNormalizer implements DenormalizerInterface, NormalizerInterface, Den
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('amount', $data) && $data['amount'] !== null) {
+        if (\array_key_exists('amount', $data) && null !== $data['amount']) {
             $object->setAmount($this->denormalizer->denormalize($data['amount'], \Gyroscops\Api\Model\BigDecimal::class, 'json', $context));
-        } elseif (\array_key_exists('amount', $data) && $data['amount'] === null) {
+        } elseif (\array_key_exists('amount', $data) && null === $data['amount']) {
             $object->setAmount(null);
         }
-        if (\array_key_exists('currency', $data) && $data['currency'] !== null) {
+        if (\array_key_exists('currency', $data) && null !== $data['currency']) {
             $object->setCurrency($this->denormalizer->denormalize($data['currency'], \Gyroscops\Api\Model\Currency::class, 'json', $context));
-        } elseif (\array_key_exists('currency', $data) && $data['currency'] === null) {
+        } elseif (\array_key_exists('currency', $data) && null === $data['currency']) {
             $object->setCurrency(null);
         }
-        if (\array_key_exists('context', $data) && $data['context'] !== null) {
+        if (\array_key_exists('context', $data) && null !== $data['context']) {
             $object->setContext($this->denormalizer->denormalize($data['context'], \Gyroscops\Api\Model\Context::class, 'json', $context));
-        } elseif (\array_key_exists('context', $data) && $data['context'] === null) {
+        } elseif (\array_key_exists('context', $data) && null === $data['context']) {
             $object->setContext(null);
         }
-        if (\array_key_exists('minorAmount', $data) && $data['minorAmount'] !== null) {
+        if (\array_key_exists('minorAmount', $data) && null !== $data['minorAmount']) {
             $object->setMinorAmount($this->denormalizer->denormalize($data['minorAmount'], \Gyroscops\Api\Model\BigDecimal::class, 'json', $context));
-        } elseif (\array_key_exists('minorAmount', $data) && $data['minorAmount'] === null) {
+        } elseif (\array_key_exists('minorAmount', $data) && null === $data['minorAmount']) {
             $object->setMinorAmount(null);
         }
-        if (\array_key_exists('unscaledAmount', $data) && $data['unscaledAmount'] !== null) {
+        if (\array_key_exists('unscaledAmount', $data) && null !== $data['unscaledAmount']) {
             $object->setUnscaledAmount($this->denormalizer->denormalize($data['unscaledAmount'], \Gyroscops\Api\Model\BigInteger::class, 'json', $context));
-        } elseif (\array_key_exists('unscaledAmount', $data) && $data['unscaledAmount'] === null) {
+        } elseif (\array_key_exists('unscaledAmount', $data) && null === $data['unscaledAmount']) {
             $object->setUnscaledAmount(null);
         }
-        if (\array_key_exists('amounts', $data) && $data['amounts'] !== null) {
+        if (\array_key_exists('amounts', $data) && null !== $data['amounts']) {
             $values = [];
             foreach ($data['amounts'] as $value) {
                 $values[] = $this->denormalizer->denormalize($value, \Gyroscops\Api\Model\BigNumber::class, 'json', $context);
             }
             $object->setAmounts($values);
-        } elseif (\array_key_exists('amounts', $data) && $data['amounts'] === null) {
+        } elseif (\array_key_exists('amounts', $data) && null === $data['amounts']) {
             $object->setAmounts(null);
         }
-        if (\array_key_exists('sign', $data) && $data['sign'] !== null) {
+        if (\array_key_exists('sign', $data) && null !== $data['sign']) {
             $object->setSign($data['sign']);
-        } elseif (\array_key_exists('sign', $data) && $data['sign'] === null) {
+        } elseif (\array_key_exists('sign', $data) && null === $data['sign']) {
             $object->setSign(null);
         }
-        if (\array_key_exists('zero', $data) && $data['zero'] !== null) {
+        if (\array_key_exists('zero', $data) && null !== $data['zero']) {
             $object->setZero($data['zero']);
-        } elseif (\array_key_exists('zero', $data) && $data['zero'] === null) {
+        } elseif (\array_key_exists('zero', $data) && null === $data['zero']) {
             $object->setZero(null);
         }
-        if (\array_key_exists('negative', $data) && $data['negative'] !== null) {
+        if (\array_key_exists('negative', $data) && null !== $data['negative']) {
             $object->setNegative($data['negative']);
-        } elseif (\array_key_exists('negative', $data) && $data['negative'] === null) {
+        } elseif (\array_key_exists('negative', $data) && null === $data['negative']) {
             $object->setNegative(null);
         }
-        if (\array_key_exists('negativeOrZero', $data) && $data['negativeOrZero'] !== null) {
+        if (\array_key_exists('negativeOrZero', $data) && null !== $data['negativeOrZero']) {
             $object->setNegativeOrZero($data['negativeOrZero']);
-        } elseif (\array_key_exists('negativeOrZero', $data) && $data['negativeOrZero'] === null) {
+        } elseif (\array_key_exists('negativeOrZero', $data) && null === $data['negativeOrZero']) {
             $object->setNegativeOrZero(null);
         }
-        if (\array_key_exists('positive', $data) && $data['positive'] !== null) {
+        if (\array_key_exists('positive', $data) && null !== $data['positive']) {
             $object->setPositive($data['positive']);
-        } elseif (\array_key_exists('positive', $data) && $data['positive'] === null) {
+        } elseif (\array_key_exists('positive', $data) && null === $data['positive']) {
             $object->setPositive(null);
         }
-        if (\array_key_exists('positiveOrZero', $data) && $data['positiveOrZero'] !== null) {
+        if (\array_key_exists('positiveOrZero', $data) && null !== $data['positiveOrZero']) {
             $object->setPositiveOrZero($data['positiveOrZero']);
-        } elseif (\array_key_exists('positiveOrZero', $data) && $data['positiveOrZero'] === null) {
+        } elseif (\array_key_exists('positiveOrZero', $data) && null === $data['positiveOrZero']) {
             $object->setPositiveOrZero(null);
         }
 
@@ -119,6 +123,9 @@ class MoneyNormalizer implements DenormalizerInterface, NormalizerInterface, Den
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

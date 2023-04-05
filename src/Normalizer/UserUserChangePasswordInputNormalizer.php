@@ -27,15 +27,19 @@ class UserUserChangePasswordInputNormalizer implements DenormalizerInterface, No
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\UserUserChangePasswordInput::class;
+        return \Gyroscops\Api\Model\UserUserChangePasswordInput::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\UserUserChangePasswordInput::class;
+        return \is_object($data) && \Gyroscops\Api\Model\UserUserChangePasswordInput::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,19 +54,19 @@ class UserUserChangePasswordInputNormalizer implements DenormalizerInterface, No
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('currentPassword', $data) && $data['currentPassword'] !== null) {
+        if (\array_key_exists('currentPassword', $data) && null !== $data['currentPassword']) {
             $object->setCurrentPassword($data['currentPassword']);
-        } elseif (\array_key_exists('currentPassword', $data) && $data['currentPassword'] === null) {
+        } elseif (\array_key_exists('currentPassword', $data) && null === $data['currentPassword']) {
             $object->setCurrentPassword(null);
         }
-        if (\array_key_exists('newPassword', $data) && $data['newPassword'] !== null) {
+        if (\array_key_exists('newPassword', $data) && null !== $data['newPassword']) {
             $object->setNewPassword($data['newPassword']);
-        } elseif (\array_key_exists('newPassword', $data) && $data['newPassword'] === null) {
+        } elseif (\array_key_exists('newPassword', $data) && null === $data['newPassword']) {
             $object->setNewPassword(null);
         }
-        if (\array_key_exists('confirmPassword', $data) && $data['confirmPassword'] !== null) {
+        if (\array_key_exists('confirmPassword', $data) && null !== $data['confirmPassword']) {
             $object->setConfirmPassword($data['confirmPassword']);
-        } elseif (\array_key_exists('confirmPassword', $data) && $data['confirmPassword'] === null) {
+        } elseif (\array_key_exists('confirmPassword', $data) && null === $data['confirmPassword']) {
             $object->setConfirmPassword(null);
         }
 
@@ -70,6 +74,9 @@ class UserUserChangePasswordInputNormalizer implements DenormalizerInterface, No
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

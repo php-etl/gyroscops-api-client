@@ -27,15 +27,19 @@ class PipelineReorderPipelineStepsCommandInputJsonldNormalizer implements Denorm
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandInputJsonld::class;
+        return \Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandInputJsonld::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandInputJsonld::class;
+        return \is_object($data) && \Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandInputJsonld::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,28 +54,28 @@ class PipelineReorderPipelineStepsCommandInputJsonldNormalizer implements Denorm
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
+        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
             $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
+        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
             $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
+        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
+        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
+        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
+        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
             $object->setType(null);
         }
-        if (\array_key_exists('codes', $data) && $data['codes'] !== null) {
+        if (\array_key_exists('codes', $data) && null !== $data['codes']) {
             $values = [];
             foreach ($data['codes'] as $value) {
                 $values[] = $value;
             }
             $object->setCodes($values);
-        } elseif (\array_key_exists('codes', $data) && $data['codes'] === null) {
+        } elseif (\array_key_exists('codes', $data) && null === $data['codes']) {
             $object->setCodes(null);
         }
 
@@ -79,6 +83,9 @@ class PipelineReorderPipelineStepsCommandInputJsonldNormalizer implements Denorm
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])

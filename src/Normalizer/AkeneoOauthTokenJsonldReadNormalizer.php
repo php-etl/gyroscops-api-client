@@ -27,15 +27,19 @@ class AkeneoOauthTokenJsonldReadNormalizer implements DenormalizerInterface, Nor
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \Gyroscops\Api\Model\AkeneoOauthTokenJsonldRead::class;
+        return \Gyroscops\Api\Model\AkeneoOauthTokenJsonldRead::class === $type;
     }
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return is_object($data) && $data::class === \Gyroscops\Api\Model\AkeneoOauthTokenJsonldRead::class;
+        return \is_object($data) && \Gyroscops\Api\Model\AkeneoOauthTokenJsonldRead::class === $data::class;
     }
 
     /**
+     * @param mixed      $data
+     * @param mixed      $class
+     * @param mixed|null $format
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -50,43 +54,43 @@ class AkeneoOauthTokenJsonldReadNormalizer implements DenormalizerInterface, Nor
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
+        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
+        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
+        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
+        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
             $object->setType(null);
         }
-        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
+        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
             $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
+        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
             $object->setContext(null);
         }
-        if (\array_key_exists('id', $data) && $data['id'] !== null) {
+        if (\array_key_exists('id', $data) && null !== $data['id']) {
             $object->setId2($data['id']);
-        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
+        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
             $object->setId2(null);
         }
-        if (\array_key_exists('url', $data) && $data['url'] !== null) {
+        if (\array_key_exists('url', $data) && null !== $data['url']) {
             $object->setUrl($data['url']);
-        } elseif (\array_key_exists('url', $data) && $data['url'] === null) {
+        } elseif (\array_key_exists('url', $data) && null === $data['url']) {
             $object->setUrl(null);
         }
-        if (\array_key_exists('scopes', $data) && $data['scopes'] !== null) {
+        if (\array_key_exists('scopes', $data) && null !== $data['scopes']) {
             $values = [];
             foreach ($data['scopes'] as $value) {
                 $values[] = $value;
             }
             $object->setScopes($values);
-        } elseif (\array_key_exists('scopes', $data) && $data['scopes'] === null) {
+        } elseif (\array_key_exists('scopes', $data) && null === $data['scopes']) {
             $object->setScopes(null);
         }
-        if (\array_key_exists('responseType', $data) && $data['responseType'] !== null) {
+        if (\array_key_exists('responseType', $data) && null !== $data['responseType']) {
             $object->setResponseType($data['responseType']);
-        } elseif (\array_key_exists('responseType', $data) && $data['responseType'] === null) {
+        } elseif (\array_key_exists('responseType', $data) && null === $data['responseType']) {
             $object->setResponseType(null);
         }
 
@@ -94,6 +98,9 @@ class AkeneoOauthTokenJsonldReadNormalizer implements DenormalizerInterface, Nor
     }
 
     /**
+     * @param mixed      $object
+     * @param mixed|null $format
+     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
