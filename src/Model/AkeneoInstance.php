@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class AkeneoInstance
+class AkeneoInstance extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -48,6 +57,7 @@ class AkeneoInstance
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -60,6 +70,7 @@ class AkeneoInstance
 
     public function setUrl(?string $url): self
     {
+        $this->initialized['url'] = true;
         $this->url = $url;
 
         return $this;
@@ -72,6 +83,7 @@ class AkeneoInstance
 
     public function setOrganization(?string $organization): self
     {
+        $this->initialized['organization'] = true;
         $this->organization = $organization;
 
         return $this;
@@ -84,6 +96,7 @@ class AkeneoInstance
 
     public function setWorkspace(?string $workspace): self
     {
+        $this->initialized['workspace'] = true;
         $this->workspace = $workspace;
 
         return $this;
@@ -96,6 +109,7 @@ class AkeneoInstance
 
     public function setSecret(?string $secret): self
     {
+        $this->initialized['secret'] = true;
         $this->secret = $secret;
 
         return $this;
@@ -114,6 +128,7 @@ class AkeneoInstance
      */
     public function setLinkedAccounts(?array $linkedAccounts): self
     {
+        $this->initialized['linkedAccounts'] = true;
         $this->linkedAccounts = $linkedAccounts;
 
         return $this;
@@ -132,6 +147,7 @@ class AkeneoInstance
      */
     public function setOauthTokens(?array $oauthTokens): self
     {
+        $this->initialized['oauthTokens'] = true;
         $this->oauthTokens = $oauthTokens;
 
         return $this;

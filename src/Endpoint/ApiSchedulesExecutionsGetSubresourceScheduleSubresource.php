@@ -14,6 +14,7 @@ class ApiSchedulesExecutionsGetSubresourceScheduleSubresource extends \Gyroscops
 {
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $id;
+    protected $accept;
 
     /**
      * Retrieves a Schedule resource.
@@ -23,11 +24,14 @@ class ApiSchedulesExecutionsGetSubresourceScheduleSubresource extends \Gyroscops
      *
      *     @var int $page The collection page number
      * }
+     *
+     * @param array $accept Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(string $id, array $queryParameters = [])
+    public function __construct(string $id, array $queryParameters = [], array $accept = [])
     {
         $this->id = $id;
         $this->queryParameters = $queryParameters;
+        $this->accept = $accept;
     }
 
     public function getMethod(): string
@@ -37,7 +41,7 @@ class ApiSchedulesExecutionsGetSubresourceScheduleSubresource extends \Gyroscops
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/runtime/schedule/{id}/executions');
+        return str_replace(['{id}'], [$this->id], '/runtime/schedules/{id}/executions');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
@@ -47,7 +51,11 @@ class ApiSchedulesExecutionsGetSubresourceScheduleSubresource extends \Gyroscops
 
     public function getExtraHeaders(): array
     {
-        return ['Accept' => ['application/json']];
+        if (empty($this->accept)) {
+            return ['Accept' => ['application/ld+json', 'application/json']];
+        }
+
+        return $this->accept;
     }
 
     protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
@@ -56,7 +64,7 @@ class ApiSchedulesExecutionsGetSubresourceScheduleSubresource extends \Gyroscops
         $optionsResolver->setDefined(['page']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults(['page' => 1]);
-        $optionsResolver->setAllowedTypes('page', ['int']);
+        $optionsResolver->addAllowedTypes('page', ['int']);
 
         return $optionsResolver;
     }
@@ -64,12 +72,19 @@ class ApiSchedulesExecutionsGetSubresourceScheduleSubresource extends \Gyroscops
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\ExecutionRead[]|null
+     * @return \Gyroscops\Api\Model\RuntimeSchedulesIdExecutionsGetLdjsonResponse200|\Gyroscops\Api\Model\ExecutionRead[]|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ExecutionRead[]', 'json');
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (200 === $status) {
+            if (mb_strpos($contentType, 'application/ld+json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\RuntimeSchedulesIdExecutionsGetLdjsonResponse200', 'json');
+            }
+            if (mb_strpos($contentType, 'application/json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ExecutionRead[]', 'json');
+            }
         }
     }
 

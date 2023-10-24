@@ -32,7 +32,7 @@ class DeleteUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implemen
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/authentication/user/{id}');
+        return str_replace(['{id}'], [$this->id], '/authentication/users/{id}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
@@ -43,15 +43,19 @@ class DeleteUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implemen
     /**
      * {@inheritdoc}
      *
+     * @return null
+     *
      * @throws \Gyroscops\Api\Exception\DeleteUserItemNotFoundException
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (204 === $status) {
             return null;
         }
         if (404 === $status) {
-            throw new \Gyroscops\Api\Exception\DeleteUserItemNotFoundException();
+            throw new \Gyroscops\Api\Exception\DeleteUserItemNotFoundException($response);
         }
     }
 

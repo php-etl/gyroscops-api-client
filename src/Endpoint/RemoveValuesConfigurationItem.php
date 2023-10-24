@@ -14,17 +14,20 @@ class RemoveValuesConfigurationItem extends \Gyroscops\Api\Runtime\Client\BaseEn
 {
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $id;
+    protected $accept;
 
     /**
      * Remove some configuration values inside an existing configurations storage.
      *
      * @param string                                                                                                                                     $id          Resource identifier
      * @param \Gyroscops\Api\Model\ConfigurationRemoveConfigurationValueInputJsonld|\Gyroscops\Api\Model\ConfigurationRemoveConfigurationValueInput|null $requestBody
+     * @param array                                                                                                                                      $accept      Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(string $id, $requestBody = null)
+    public function __construct(string $id, $requestBody = null, array $accept = [])
     {
         $this->id = $id;
         $this->body = $requestBody;
+        $this->accept = $accept;
     }
 
     public function getMethod(): string
@@ -34,13 +37,13 @@ class RemoveValuesConfigurationItem extends \Gyroscops\Api\Runtime\Client\BaseEn
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/environment/configuration/{id}/remove');
+        return str_replace(['{id}'], [$this->id], '/environment/configurations/{id}/remove');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         if ($this->body instanceof \Gyroscops\Api\Model\ConfigurationRemoveConfigurationValueInputJsonld) {
-            return [['Content-Type' => ['application/ld+json']], $this->body];
+            return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
         if ($this->body instanceof \Gyroscops\Api\Model\ConfigurationRemoveConfigurationValueInput) {
             return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
@@ -54,31 +57,42 @@ class RemoveValuesConfigurationItem extends \Gyroscops\Api\Runtime\Client\BaseEn
 
     public function getExtraHeaders(): array
     {
-        return ['Accept' => ['application/json']];
+        if (empty($this->accept)) {
+            return ['Accept' => ['application/ld+json', 'application/json']];
+        }
+
+        return $this->accept;
     }
 
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\Configuration|null
+     * @return \Gyroscops\Api\Model\ConfigurationJsonld|\Gyroscops\Api\Model\Configuration|null
      *
      * @throws \Gyroscops\Api\Exception\RemoveValuesConfigurationItemBadRequestException
      * @throws \Gyroscops\Api\Exception\RemoveValuesConfigurationItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\RemoveValuesConfigurationItemNotFoundException
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return $serializer->deserialize($body, \Gyroscops\Api\Model\Configuration::class, 'json');
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (200 === $status) {
+            if (mb_strpos($contentType, 'application/ld+json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ConfigurationJsonld', 'json');
+            }
+            if (mb_strpos($contentType, 'application/json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Configuration', 'json');
+            }
         }
         if (400 === $status) {
-            throw new \Gyroscops\Api\Exception\RemoveValuesConfigurationItemBadRequestException();
+            throw new \Gyroscops\Api\Exception\RemoveValuesConfigurationItemBadRequestException($response);
         }
         if (422 === $status) {
-            throw new \Gyroscops\Api\Exception\RemoveValuesConfigurationItemUnprocessableEntityException();
+            throw new \Gyroscops\Api\Exception\RemoveValuesConfigurationItemUnprocessableEntityException($response);
         }
         if (404 === $status) {
-            throw new \Gyroscops\Api\Exception\RemoveValuesConfigurationItemNotFoundException();
+            throw new \Gyroscops\Api\Exception\RemoveValuesConfigurationItemNotFoundException($response);
         }
     }
 

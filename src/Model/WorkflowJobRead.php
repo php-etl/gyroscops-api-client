@@ -10,61 +10,81 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class WorkflowJobRead
+class WorkflowJobRead extends \ArrayObject
 {
     /**
-     * @var mixed|null
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
+     * @var string|null
+     */
+    protected $id;
+    /**
+     * @var WorkflowRead|null
      */
     protected $workflow;
     /**
-     * @var mixed|null
+     * @var WorkflowJobPipelineRead|null
      */
     protected $pipeline;
     /**
-     * @var mixed|null
+     * @var WorkflowJobActionRead|null
      */
     protected $action;
 
-    /**
-     * @return mixed
-     */
-    public function getWorkflow()
+    public function getId(): ?string
+    {
+        return $this->id;
+    }
+
+    public function setId(?string $id): self
+    {
+        $this->initialized['id'] = true;
+        $this->id = $id;
+
+        return $this;
+    }
+
+    public function getWorkflow(): ?WorkflowRead
     {
         return $this->workflow;
     }
 
-    public function setWorkflow(mixed $workflow): self
+    public function setWorkflow(?WorkflowRead $workflow): self
     {
+        $this->initialized['workflow'] = true;
         $this->workflow = $workflow;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getPipeline()
+    public function getPipeline(): ?WorkflowJobPipelineRead
     {
         return $this->pipeline;
     }
 
-    public function setPipeline(mixed $pipeline): self
+    public function setPipeline(?WorkflowJobPipelineRead $pipeline): self
     {
+        $this->initialized['pipeline'] = true;
         $this->pipeline = $pipeline;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getAction()
+    public function getAction(): ?WorkflowJobActionRead
     {
         return $this->action;
     }
 
-    public function setAction(mixed $action): self
+    public function setAction(?WorkflowJobActionRead $action): self
     {
+        $this->initialized['action'] = true;
         $this->action = $action;
 
         return $this;

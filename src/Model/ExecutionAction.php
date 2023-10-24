@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class ExecutionAction
+class ExecutionAction extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -28,6 +37,7 @@ class ExecutionAction
 
     public function setExecution(?string $execution): self
     {
+        $this->initialized['execution'] = true;
         $this->execution = $execution;
 
         return $this;
@@ -40,6 +50,7 @@ class ExecutionAction
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;

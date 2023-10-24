@@ -13,15 +13,18 @@ namespace Gyroscops\Api\Endpoint;
 class DeclarePipelinePipelineCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
 {
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
+    protected $accept;
 
     /**
-     * Declares a docker pipeline.
+     * Declares a pipeline.
      *
      * @param \Gyroscops\Api\Model\PipelineDeclarePipelineCommandInputJsonld|\Gyroscops\Api\Model\PipelineDeclarePipelineCommandInput|null $requestBody
+     * @param array                                                                                                                        $accept      Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct($requestBody = null)
+    public function __construct($requestBody = null, array $accept = [])
     {
         $this->body = $requestBody;
+        $this->accept = $accept;
     }
 
     public function getMethod(): string
@@ -31,13 +34,13 @@ class DeclarePipelinePipelineCollection extends \Gyroscops\Api\Runtime\Client\Ba
 
     public function getUri(): string
     {
-        return '/runtime/pipeline';
+        return '/runtime/pipelines';
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         if ($this->body instanceof \Gyroscops\Api\Model\PipelineDeclarePipelineCommandInputJsonld) {
-            return [['Content-Type' => ['application/ld+json']], $this->body];
+            return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
         if ($this->body instanceof \Gyroscops\Api\Model\PipelineDeclarePipelineCommandInput) {
             return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
@@ -51,25 +54,38 @@ class DeclarePipelinePipelineCollection extends \Gyroscops\Api\Runtime\Client\Ba
 
     public function getExtraHeaders(): array
     {
-        return ['Accept' => ['application/json']];
+        if (empty($this->accept)) {
+            return ['Accept' => ['application/ld+json', 'application/json']];
+        }
+
+        return $this->accept;
     }
 
     /**
      * {@inheritdoc}
      *
+     * @return \Gyroscops\Api\Model\PipelineDeclarePipelineCommandJsonldRead|null
+     *
      * @throws \Gyroscops\Api\Exception\DeclarePipelinePipelineCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\DeclarePipelinePipelineCollectionUnprocessableEntityException
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (202 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return json_decode($body, null, 512, \JSON_THROW_ON_ERROR);
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (202 === $status) {
+            if (mb_strpos($contentType, 'application/ld+json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\PipelineDeclarePipelineCommandJsonldRead', 'json');
+            }
+            if (mb_strpos($contentType, 'application/json') !== false) {
+                return json_decode($body);
+            }
         }
         if (400 === $status) {
-            throw new \Gyroscops\Api\Exception\DeclarePipelinePipelineCollectionBadRequestException();
+            throw new \Gyroscops\Api\Exception\DeclarePipelinePipelineCollectionBadRequestException($response);
         }
         if (422 === $status) {
-            throw new \Gyroscops\Api\Exception\DeclarePipelinePipelineCollectionUnprocessableEntityException();
+            throw new \Gyroscops\Api\Exception\DeclarePipelinePipelineCollectionUnprocessableEntityException($response);
         }
     }
 

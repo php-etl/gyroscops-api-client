@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class Token
+class Token extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -24,6 +33,7 @@ class Token
 
     public function setToken(?string $token): self
     {
+        $this->initialized['token'] = true;
         $this->token = $token;
 
         return $this;

@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -24,22 +25,19 @@ class AkeneoInstanceAkeneoInstanceInputJsonldNormalizer implements DenormalizerI
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+    use ValidatorTrait;
 
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return \Gyroscops\Api\Model\AkeneoInstanceAkeneoInstanceInputJsonld::class === $type;
+        return $type === 'Gyroscops\\Api\\Model\\AkeneoInstanceAkeneoInstanceInputJsonld';
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        return \is_object($data) && \Gyroscops\Api\Model\AkeneoInstanceAkeneoInstanceInputJsonld::class === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\AkeneoInstanceAkeneoInstanceInputJsonld';
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,57 +52,70 @@ class AkeneoInstanceAkeneoInstanceInputJsonldNormalizer implements DenormalizerI
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
+        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
             $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+            unset($data['@context']);
+        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
             $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
+        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+            unset($data['@id']);
+        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
+        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+            unset($data['@type']);
+        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
             $object->setType(null);
         }
-        if (\array_key_exists('pimUrl', $data) && null !== $data['pimUrl']) {
+        if (\array_key_exists('pimUrl', $data) && $data['pimUrl'] !== null) {
             $object->setPimUrl($data['pimUrl']);
-        } elseif (\array_key_exists('pimUrl', $data) && null === $data['pimUrl']) {
+            unset($data['pimUrl']);
+        } elseif (\array_key_exists('pimUrl', $data) && $data['pimUrl'] === null) {
             $object->setPimUrl(null);
         }
-        if (\array_key_exists('organization', $data) && null !== $data['organization']) {
+        if (\array_key_exists('organization', $data) && $data['organization'] !== null) {
             $object->setOrganization($data['organization']);
-        } elseif (\array_key_exists('organization', $data) && null === $data['organization']) {
+            unset($data['organization']);
+        } elseif (\array_key_exists('organization', $data) && $data['organization'] === null) {
             $object->setOrganization(null);
         }
-        if (\array_key_exists('secret', $data) && null !== $data['secret']) {
-            $object->setSecret($this->denormalizer->denormalize($data['secret'], \Gyroscops\Api\Model\CreateSecretInputJsonld::class, 'json', $context));
-        } elseif (\array_key_exists('secret', $data) && null === $data['secret']) {
+        if (\array_key_exists('secret', $data) && $data['secret'] !== null) {
+            $object->setSecret($this->denormalizer->denormalize($data['secret'], 'Gyroscops\\Api\\Model\\CreateSecretInputJsonld', 'json', $context));
+            unset($data['secret']);
+        } elseif (\array_key_exists('secret', $data) && $data['secret'] === null) {
             $object->setSecret(null);
+        }
+        foreach ($data as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value;
+            }
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getPimUrl()) {
+        if ($object->isInitialized('pimUrl') && null !== $object->getPimUrl()) {
             $data['pimUrl'] = $object->getPimUrl();
         }
-        if (null !== $object->getOrganization()) {
+        if ($object->isInitialized('organization') && null !== $object->getOrganization()) {
             $data['organization'] = $object->getOrganization();
         }
-        if (null !== $object->getSecret()) {
+        if ($object->isInitialized('secret') && null !== $object->getSecret()) {
             $data['secret'] = $this->normalizer->normalize($object->getSecret(), 'json', $context);
+        }
+        foreach ($object as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value;
+            }
         }
 
         return $data;

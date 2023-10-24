@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -24,22 +25,19 @@ class GatewayAkeneoOauthTokenPutBodyHydraSearchHydraMappingItemNormalizer implem
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+    use ValidatorTrait;
 
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBodyHydraSearchHydraMappingItem::class === $type;
+        return $type === 'Gyroscops\\Api\\Model\\GatewayAkeneoOauthTokenPutBodyHydraSearchHydraMappingItem';
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        return \is_object($data) && \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBodyHydraSearchHydraMappingItem::class === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\GatewayAkeneoOauthTokenPutBodyHydraSearchHydraMappingItem';
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,50 +52,61 @@ class GatewayAkeneoOauthTokenPutBodyHydraSearchHydraMappingItemNormalizer implem
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
+        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+            unset($data['@type']);
+        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
             $object->setType(null);
         }
-        if (\array_key_exists('variable', $data) && null !== $data['variable']) {
+        if (\array_key_exists('variable', $data) && $data['variable'] !== null) {
             $object->setVariable($data['variable']);
-        } elseif (\array_key_exists('variable', $data) && null === $data['variable']) {
+            unset($data['variable']);
+        } elseif (\array_key_exists('variable', $data) && $data['variable'] === null) {
             $object->setVariable(null);
         }
-        if (\array_key_exists('property', $data) && null !== $data['property']) {
+        if (\array_key_exists('property', $data) && $data['property'] !== null) {
             $object->setProperty($data['property']);
-        } elseif (\array_key_exists('property', $data) && null === $data['property']) {
+            unset($data['property']);
+        } elseif (\array_key_exists('property', $data) && $data['property'] === null) {
             $object->setProperty(null);
         }
-        if (\array_key_exists('required', $data) && null !== $data['required']) {
+        if (\array_key_exists('required', $data) && $data['required'] !== null) {
             $object->setRequired($data['required']);
-        } elseif (\array_key_exists('required', $data) && null === $data['required']) {
+            unset($data['required']);
+        } elseif (\array_key_exists('required', $data) && $data['required'] === null) {
             $object->setRequired(null);
+        }
+        foreach ($data as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value;
+            }
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getType()) {
+        if ($object->isInitialized('type') && null !== $object->getType()) {
             $data['@type'] = $object->getType();
         }
-        if (null !== $object->getVariable()) {
+        if ($object->isInitialized('variable') && null !== $object->getVariable()) {
             $data['variable'] = $object->getVariable();
         }
-        if (null !== $object->getProperty()) {
+        if ($object->isInitialized('property') && null !== $object->getProperty()) {
             $data['property'] = $object->getProperty();
         }
-        if (null !== $object->getRequired()) {
+        if ($object->isInitialized('required') && null !== $object->getRequired()) {
             $data['required'] = $object->getRequired();
+        }
+        foreach ($object as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value;
+            }
         }
 
         return $data;

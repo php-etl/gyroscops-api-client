@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -24,22 +25,19 @@ class GatewayAkeneoOauthTokenPutBodyHydraSearchNormalizer implements Denormalize
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+    use ValidatorTrait;
 
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBodyHydraSearch::class === $type;
+        return $type === 'Gyroscops\\Api\\Model\\GatewayAkeneoOauthTokenPutBodyHydraSearch';
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        return \is_object($data) && \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBodyHydraSearch::class === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\GatewayAkeneoOauthTokenPutBodyHydraSearch';
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,58 +52,69 @@ class GatewayAkeneoOauthTokenPutBodyHydraSearchNormalizer implements Denormalize
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
+        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+            unset($data['@type']);
+        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
             $object->setType(null);
         }
-        if (\array_key_exists('hydra:template', $data) && null !== $data['hydra:template']) {
+        if (\array_key_exists('hydra:template', $data) && $data['hydra:template'] !== null) {
             $object->setHydraTemplate($data['hydra:template']);
-        } elseif (\array_key_exists('hydra:template', $data) && null === $data['hydra:template']) {
+            unset($data['hydra:template']);
+        } elseif (\array_key_exists('hydra:template', $data) && $data['hydra:template'] === null) {
             $object->setHydraTemplate(null);
         }
-        if (\array_key_exists('hydra:variableRepresentation', $data) && null !== $data['hydra:variableRepresentation']) {
+        if (\array_key_exists('hydra:variableRepresentation', $data) && $data['hydra:variableRepresentation'] !== null) {
             $object->setHydraVariableRepresentation($data['hydra:variableRepresentation']);
-        } elseif (\array_key_exists('hydra:variableRepresentation', $data) && null === $data['hydra:variableRepresentation']) {
+            unset($data['hydra:variableRepresentation']);
+        } elseif (\array_key_exists('hydra:variableRepresentation', $data) && $data['hydra:variableRepresentation'] === null) {
             $object->setHydraVariableRepresentation(null);
         }
-        if (\array_key_exists('hydra:mapping', $data) && null !== $data['hydra:mapping']) {
+        if (\array_key_exists('hydra:mapping', $data) && $data['hydra:mapping'] !== null) {
             $values = [];
             foreach ($data['hydra:mapping'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBodyHydraSearchHydraMappingItem::class, 'json', $context);
+                $values[] = $this->denormalizer->denormalize($value, 'Gyroscops\\Api\\Model\\GatewayAkeneoOauthTokenPutBodyHydraSearchHydraMappingItem', 'json', $context);
             }
             $object->setHydraMapping($values);
-        } elseif (\array_key_exists('hydra:mapping', $data) && null === $data['hydra:mapping']) {
+            unset($data['hydra:mapping']);
+        } elseif (\array_key_exists('hydra:mapping', $data) && $data['hydra:mapping'] === null) {
             $object->setHydraMapping(null);
+        }
+        foreach ($data as $key => $value_1) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value_1;
+            }
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getType()) {
+        if ($object->isInitialized('type') && null !== $object->getType()) {
             $data['@type'] = $object->getType();
         }
-        if (null !== $object->getHydraTemplate()) {
+        if ($object->isInitialized('hydraTemplate') && null !== $object->getHydraTemplate()) {
             $data['hydra:template'] = $object->getHydraTemplate();
         }
-        if (null !== $object->getHydraVariableRepresentation()) {
+        if ($object->isInitialized('hydraVariableRepresentation') && null !== $object->getHydraVariableRepresentation()) {
             $data['hydra:variableRepresentation'] = $object->getHydraVariableRepresentation();
         }
-        if (null !== $object->getHydraMapping()) {
+        if ($object->isInitialized('hydraMapping') && null !== $object->getHydraMapping()) {
             $values = [];
             foreach ($object->getHydraMapping() as $value) {
                 $values[] = $this->normalizer->normalize($value, 'json', $context);
             }
             $data['hydra:mapping'] = $values;
+        }
+        foreach ($object as $key => $value_1) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value_1;
+            }
         }
 
         return $data;

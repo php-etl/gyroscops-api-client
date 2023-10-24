@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class OrganizationJsonld
+class OrganizationJsonld extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var mixed|null
      */
@@ -41,6 +50,10 @@ class OrganizationJsonld
      */
     protected $slug;
     /**
+     * @var string|null
+     */
+    protected $stripeCode;
+    /**
      * @var string[]|null
      */
     protected $users;
@@ -52,6 +65,10 @@ class OrganizationJsonld
      * @var string[]|null
      */
     protected $workspaces;
+    /**
+     * @var \DateTime|null
+     */
+    protected $activeUntil;
 
     /**
      * @return mixed
@@ -61,8 +78,12 @@ class OrganizationJsonld
         return $this->context;
     }
 
-    public function setContext(mixed $context): self
+    /**
+     * @param mixed $context
+     */
+    public function setContext($context): self
     {
+        $this->initialized['context'] = true;
         $this->context = $context;
 
         return $this;
@@ -75,6 +96,7 @@ class OrganizationJsonld
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -87,6 +109,7 @@ class OrganizationJsonld
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -99,6 +122,7 @@ class OrganizationJsonld
 
     public function setId2(?string $id2): self
     {
+        $this->initialized['id2'] = true;
         $this->id2 = $id2;
 
         return $this;
@@ -117,6 +141,7 @@ class OrganizationJsonld
      */
     public function setAuthorizations(?array $authorizations): self
     {
+        $this->initialized['authorizations'] = true;
         $this->authorizations = $authorizations;
 
         return $this;
@@ -129,6 +154,7 @@ class OrganizationJsonld
 
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -141,7 +167,21 @@ class OrganizationJsonld
 
     public function setSlug(?string $slug): self
     {
+        $this->initialized['slug'] = true;
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getStripeCode(): ?string
+    {
+        return $this->stripeCode;
+    }
+
+    public function setStripeCode(?string $stripeCode): self
+    {
+        $this->initialized['stripeCode'] = true;
+        $this->stripeCode = $stripeCode;
 
         return $this;
     }
@@ -159,6 +199,7 @@ class OrganizationJsonld
      */
     public function setUsers(?array $users): self
     {
+        $this->initialized['users'] = true;
         $this->users = $users;
 
         return $this;
@@ -177,6 +218,7 @@ class OrganizationJsonld
      */
     public function setExternalCollaborators(?array $externalCollaborators): self
     {
+        $this->initialized['externalCollaborators'] = true;
         $this->externalCollaborators = $externalCollaborators;
 
         return $this;
@@ -195,7 +237,21 @@ class OrganizationJsonld
      */
     public function setWorkspaces(?array $workspaces): self
     {
+        $this->initialized['workspaces'] = true;
         $this->workspaces = $workspaces;
+
+        return $this;
+    }
+
+    public function getActiveUntil(): ?\DateTime
+    {
+        return $this->activeUntil;
+    }
+
+    public function setActiveUntil(?\DateTime $activeUntil): self
+    {
+        $this->initialized['activeUntil'] = true;
+        $this->activeUntil = $activeUntil;
 
         return $this;
     }

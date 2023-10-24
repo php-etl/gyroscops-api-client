@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -24,22 +25,19 @@ class BigNumberNormalizer implements DenormalizerInterface, NormalizerInterface,
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+    use ValidatorTrait;
 
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return \Gyroscops\Api\Model\BigNumber::class === $type;
+        return $type === 'Gyroscops\\Api\\Model\\BigNumber';
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        return \is_object($data) && \Gyroscops\Api\Model\BigNumber::class === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\BigNumber';
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,48 +52,63 @@ class BigNumberNormalizer implements DenormalizerInterface, NormalizerInterface,
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('zero', $data) && null !== $data['zero']) {
+        if (\array_key_exists('zero', $data) && $data['zero'] !== null) {
             $object->setZero($data['zero']);
-        } elseif (\array_key_exists('zero', $data) && null === $data['zero']) {
+            unset($data['zero']);
+        } elseif (\array_key_exists('zero', $data) && $data['zero'] === null) {
             $object->setZero(null);
         }
-        if (\array_key_exists('negative', $data) && null !== $data['negative']) {
+        if (\array_key_exists('negative', $data) && $data['negative'] !== null) {
             $object->setNegative($data['negative']);
-        } elseif (\array_key_exists('negative', $data) && null === $data['negative']) {
+            unset($data['negative']);
+        } elseif (\array_key_exists('negative', $data) && $data['negative'] === null) {
             $object->setNegative(null);
         }
-        if (\array_key_exists('negativeOrZero', $data) && null !== $data['negativeOrZero']) {
+        if (\array_key_exists('negativeOrZero', $data) && $data['negativeOrZero'] !== null) {
             $object->setNegativeOrZero($data['negativeOrZero']);
-        } elseif (\array_key_exists('negativeOrZero', $data) && null === $data['negativeOrZero']) {
+            unset($data['negativeOrZero']);
+        } elseif (\array_key_exists('negativeOrZero', $data) && $data['negativeOrZero'] === null) {
             $object->setNegativeOrZero(null);
         }
-        if (\array_key_exists('positive', $data) && null !== $data['positive']) {
+        if (\array_key_exists('positive', $data) && $data['positive'] !== null) {
             $object->setPositive($data['positive']);
-        } elseif (\array_key_exists('positive', $data) && null === $data['positive']) {
+            unset($data['positive']);
+        } elseif (\array_key_exists('positive', $data) && $data['positive'] === null) {
             $object->setPositive(null);
         }
-        if (\array_key_exists('positiveOrZero', $data) && null !== $data['positiveOrZero']) {
+        if (\array_key_exists('positiveOrZero', $data) && $data['positiveOrZero'] !== null) {
             $object->setPositiveOrZero($data['positiveOrZero']);
-        } elseif (\array_key_exists('positiveOrZero', $data) && null === $data['positiveOrZero']) {
+            unset($data['positiveOrZero']);
+        } elseif (\array_key_exists('positiveOrZero', $data) && $data['positiveOrZero'] === null) {
             $object->setPositiveOrZero(null);
         }
-        if (\array_key_exists('sign', $data) && null !== $data['sign']) {
+        if (\array_key_exists('sign', $data) && $data['sign'] !== null) {
             $object->setSign($data['sign']);
-        } elseif (\array_key_exists('sign', $data) && null === $data['sign']) {
+            unset($data['sign']);
+        } elseif (\array_key_exists('sign', $data) && $data['sign'] === null) {
             $object->setSign(null);
+        }
+        foreach ($data as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value;
+            }
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
-        return [];
+        $data = [];
+        foreach ($object as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value;
+            }
+        }
+
+        return $data;
     }
 }

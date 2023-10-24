@@ -13,6 +13,7 @@ namespace Gyroscops\Api\Endpoint;
 class GetPipelineCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
 {
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
+    protected $accept;
 
     /**
      * Retrieves the collection of Pipeline resources.
@@ -23,10 +24,13 @@ class GetPipelineCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
      *     @var string $code
      *     @var array $code[]
      * }
+     *
+     * @param array $accept Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(array $queryParameters = [])
+    public function __construct(array $queryParameters = [], array $accept = [])
     {
         $this->queryParameters = $queryParameters;
+        $this->accept = $accept;
     }
 
     public function getMethod(): string
@@ -46,18 +50,22 @@ class GetPipelineCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
 
     public function getExtraHeaders(): array
     {
-        return ['Accept' => ['application/json']];
+        if (empty($this->accept)) {
+            return ['Accept' => ['application/ld+json', 'application/json']];
+        }
+
+        return $this->accept;
     }
 
     protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(['page', 'code', 'code[]']);
+        $optionsResolver->setDefined(['page', 'code']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults(['page' => 1]);
-        $optionsResolver->setAllowedTypes('page', ['int']);
-        $optionsResolver->setAllowedTypes('code', ['string']);
-        $optionsResolver->setAllowedTypes('code[]', ['array']);
+        $optionsResolver->addAllowedTypes('page', ['int']);
+        $optionsResolver->addAllowedTypes('code', ['string']);
+        $optionsResolver->addAllowedTypes('code', ['array']);
 
         return $optionsResolver;
     }
@@ -65,12 +73,19 @@ class GetPipelineCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\PipelineRead[]|null
+     * @return \Gyroscops\Api\Model\RuntimePipelinesGetLdjsonResponse200|\Gyroscops\Api\Model\PipelineRead[]|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\PipelineRead[]', 'json');
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (200 === $status) {
+            if (mb_strpos($contentType, 'application/ld+json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\RuntimePipelinesGetLdjsonResponse200', 'json');
+            }
+            if (mb_strpos($contentType, 'application/json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\PipelineRead[]', 'json');
+            }
         }
     }
 

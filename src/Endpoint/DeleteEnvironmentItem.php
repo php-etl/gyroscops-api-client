@@ -32,7 +32,7 @@ class DeleteEnvironmentItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/environment/environment/{id}');
+        return str_replace(['{id}'], [$this->id], '/environment/environments/{id}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
@@ -43,15 +43,19 @@ class DeleteEnvironmentItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
     /**
      * {@inheritdoc}
      *
+     * @return null
+     *
      * @throws \Gyroscops\Api\Exception\DeleteEnvironmentItemNotFoundException
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (204 === $status) {
             return null;
         }
         if (404 === $status) {
-            throw new \Gyroscops\Api\Exception\DeleteEnvironmentItemNotFoundException();
+            throw new \Gyroscops\Api\Exception\DeleteEnvironmentItemNotFoundException($response);
         }
     }
 

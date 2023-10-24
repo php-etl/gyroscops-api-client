@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -24,22 +25,19 @@ class ExecutionDeclarePipelineExecutionCommandInputNormalizer implements Denorma
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+    use ValidatorTrait;
 
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return \Gyroscops\Api\Model\ExecutionDeclarePipelineExecutionCommandInput::class === $type;
+        return $type === 'Gyroscops\\Api\\Model\\ExecutionDeclarePipelineExecutionCommandInput';
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        return \is_object($data) && \Gyroscops\Api\Model\ExecutionDeclarePipelineExecutionCommandInput::class === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\ExecutionDeclarePipelineExecutionCommandInput';
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,31 +52,48 @@ class ExecutionDeclarePipelineExecutionCommandInputNormalizer implements Denorma
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('schedule', $data) && null !== $data['schedule']) {
-            $object->setSchedule($data['schedule']);
-        } elseif (\array_key_exists('schedule', $data) && null === $data['schedule']) {
+        if (\array_key_exists('schedule', $data) && $data['schedule'] !== null) {
+            $values = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['schedule'] as $key => $value) {
+                $values[$key] = $value;
+            }
+            $object->setSchedule($values);
+            unset($data['schedule']);
+        } elseif (\array_key_exists('schedule', $data) && $data['schedule'] === null) {
             $object->setSchedule(null);
         }
-        if (\array_key_exists('pipeline', $data) && null !== $data['pipeline']) {
-            $object->setPipeline($data['pipeline']);
-        } elseif (\array_key_exists('pipeline', $data) && null === $data['pipeline']) {
+        if (\array_key_exists('pipeline', $data) && $data['pipeline'] !== null) {
+            $object->setPipeline($this->denormalizer->denormalize($data['pipeline'], 'Gyroscops\\Api\\Model\\Pipeline', 'json', $context));
+            unset($data['pipeline']);
+        } elseif (\array_key_exists('pipeline', $data) && $data['pipeline'] === null) {
             $object->setPipeline(null);
+        }
+        foreach ($data as $key_1 => $value_1) {
+            if (preg_match('/.*/', (string) $key_1)) {
+                $object[$key_1] = $value_1;
+            }
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        $data['schedule'] = $object->getSchedule();
-        $data['pipeline'] = $object->getPipeline();
+        $values = [];
+        foreach ($object->getSchedule() as $key => $value) {
+            $values[$key] = $value;
+        }
+        $data['schedule'] = $values;
+        $data['pipeline'] = $this->normalizer->normalize($object->getPipeline(), 'json', $context);
+        foreach ($object as $key_1 => $value_1) {
+            if (preg_match('/.*/', (string) $key_1)) {
+                $data[$key_1] = $value_1;
+            }
+        }
 
         return $data;
     }

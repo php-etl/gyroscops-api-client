@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class Configuration
+class Configuration extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -40,10 +49,6 @@ class Configuration
      * @var string[]|null
      */
     protected $contents;
-    /**
-     * @var mixed|null
-     */
-    protected $iterator;
 
     public function getId(): ?string
     {
@@ -52,6 +57,7 @@ class Configuration
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -64,6 +70,7 @@ class Configuration
 
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -76,6 +83,7 @@ class Configuration
 
     public function setSlug(?string $slug): self
     {
+        $this->initialized['slug'] = true;
         $this->slug = $slug;
 
         return $this;
@@ -88,6 +96,7 @@ class Configuration
 
     public function setDescription(?string $description): self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
 
         return $this;
@@ -100,6 +109,7 @@ class Configuration
 
     public function setOrganization(?string $organization): self
     {
+        $this->initialized['organization'] = true;
         $this->organization = $organization;
 
         return $this;
@@ -112,6 +122,7 @@ class Configuration
 
     public function setWorkspace(?string $workspace): self
     {
+        $this->initialized['workspace'] = true;
         $this->workspace = $workspace;
 
         return $this;
@@ -130,22 +141,8 @@ class Configuration
      */
     public function setContents(?iterable $contents): self
     {
+        $this->initialized['contents'] = true;
         $this->contents = $contents;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getIterator()
-    {
-        return $this->iterator;
-    }
-
-    public function setIterator(mixed $iterator): self
-    {
-        $this->iterator = $iterator;
 
         return $this;
     }

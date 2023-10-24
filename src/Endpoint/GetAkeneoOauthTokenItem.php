@@ -14,15 +14,18 @@ class GetAkeneoOauthTokenItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint
 {
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $id;
+    protected $accept;
 
     /**
      * Retrieves a AkeneoOauthToken resource.
      *
-     * @param string $id Resource identifier
+     * @param string $id     Resource identifier
+     * @param array  $accept Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(string $id)
+    public function __construct(string $id, array $accept = [])
     {
         $this->id = $id;
+        $this->accept = $accept;
     }
 
     public function getMethod(): string
@@ -32,7 +35,7 @@ class GetAkeneoOauthTokenItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/gateway/akeneo/oauth/state/{id}');
+        return str_replace(['{id}'], [$this->id], '/gateway/akeneo/oauth/akeneo-oauth-tokens/{id}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
@@ -42,23 +45,34 @@ class GetAkeneoOauthTokenItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint
 
     public function getExtraHeaders(): array
     {
-        return ['Accept' => ['application/json']];
+        if (empty($this->accept)) {
+            return ['Accept' => ['application/ld+json', 'application/json']];
+        }
+
+        return $this->accept;
     }
 
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\AkeneoOauthTokenRead|null
+     * @return \Gyroscops\Api\Model\AkeneoOauthTokenJsonldRead|\Gyroscops\Api\Model\AkeneoOauthTokenRead|null
      *
      * @throws \Gyroscops\Api\Exception\GetAkeneoOauthTokenItemNotFoundException
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return $serializer->deserialize($body, \Gyroscops\Api\Model\AkeneoOauthTokenRead::class, 'json');
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (200 === $status) {
+            if (mb_strpos($contentType, 'application/ld+json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\AkeneoOauthTokenJsonldRead', 'json');
+            }
+            if (mb_strpos($contentType, 'application/json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\AkeneoOauthTokenRead', 'json');
+            }
         }
         if (404 === $status) {
-            throw new \Gyroscops\Api\Exception\GetAkeneoOauthTokenItemNotFoundException();
+            throw new \Gyroscops\Api\Exception\GetAkeneoOauthTokenItemNotFoundException($response);
         }
     }
 

@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class ExecutionJsonldRead
+class ExecutionJsonldRead extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -72,6 +81,10 @@ class ExecutionJsonldRead
      * @var string|null
      */
     protected $reason;
+    /**
+     * @var int|null
+     */
+    protected $currentVersion;
 
     public function getId(): ?string
     {
@@ -80,6 +93,7 @@ class ExecutionJsonldRead
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -92,6 +106,7 @@ class ExecutionJsonldRead
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -105,8 +120,12 @@ class ExecutionJsonldRead
         return $this->context;
     }
 
-    public function setContext(mixed $context): self
+    /**
+     * @param mixed $context
+     */
+    public function setContext($context): self
     {
+        $this->initialized['context'] = true;
         $this->context = $context;
 
         return $this;
@@ -119,6 +138,7 @@ class ExecutionJsonldRead
 
     public function setId2(?string $id2): self
     {
+        $this->initialized['id2'] = true;
         $this->id2 = $id2;
 
         return $this;
@@ -131,6 +151,7 @@ class ExecutionJsonldRead
 
     public function setCode(?string $code): self
     {
+        $this->initialized['code'] = true;
         $this->code = $code;
 
         return $this;
@@ -143,6 +164,7 @@ class ExecutionJsonldRead
 
     public function setStatus(?string $status): self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
 
         return $this;
@@ -155,6 +177,7 @@ class ExecutionJsonldRead
 
     public function setErrors(?int $errors): self
     {
+        $this->initialized['errors'] = true;
         $this->errors = $errors;
 
         return $this;
@@ -167,6 +190,7 @@ class ExecutionJsonldRead
 
     public function setScheduledAt(?\DateTime $scheduledAt): self
     {
+        $this->initialized['scheduledAt'] = true;
         $this->scheduledAt = $scheduledAt;
 
         return $this;
@@ -179,6 +203,7 @@ class ExecutionJsonldRead
 
     public function setStartedAt(?\DateTime $startedAt): self
     {
+        $this->initialized['startedAt'] = true;
         $this->startedAt = $startedAt;
 
         return $this;
@@ -191,6 +216,7 @@ class ExecutionJsonldRead
 
     public function setFinishedAt(?\DateTime $finishedAt): self
     {
+        $this->initialized['finishedAt'] = true;
         $this->finishedAt = $finishedAt;
 
         return $this;
@@ -203,6 +229,7 @@ class ExecutionJsonldRead
 
     public function setInterruptedAt(?\DateTime $interruptedAt): self
     {
+        $this->initialized['interruptedAt'] = true;
         $this->interruptedAt = $interruptedAt;
 
         return $this;
@@ -215,6 +242,7 @@ class ExecutionJsonldRead
 
     public function setResumedAt(?\DateTime $resumedAt): self
     {
+        $this->initialized['resumedAt'] = true;
         $this->resumedAt = $resumedAt;
 
         return $this;
@@ -227,6 +255,7 @@ class ExecutionJsonldRead
 
     public function setUpdatedAt(?\DateTime $updatedAt): self
     {
+        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
 
         return $this;
@@ -239,6 +268,7 @@ class ExecutionJsonldRead
 
     public function setTerminatedAt(?\DateTime $terminatedAt): self
     {
+        $this->initialized['terminatedAt'] = true;
         $this->terminatedAt = $terminatedAt;
 
         return $this;
@@ -251,7 +281,21 @@ class ExecutionJsonldRead
 
     public function setReason(?string $reason): self
     {
+        $this->initialized['reason'] = true;
         $this->reason = $reason;
+
+        return $this;
+    }
+
+    public function getCurrentVersion(): ?int
+    {
+        return $this->currentVersion;
+    }
+
+    public function setCurrentVersion(?int $currentVersion): self
+    {
+        $this->initialized['currentVersion'] = true;
+        $this->currentVersion = $currentVersion;
 
         return $this;
     }

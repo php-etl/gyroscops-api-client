@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -24,22 +25,19 @@ class SecretRemoveSecretValueInputNormalizer implements DenormalizerInterface, N
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+    use ValidatorTrait;
 
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return \Gyroscops\Api\Model\SecretRemoveSecretValueInput::class === $type;
+        return $type === 'Gyroscops\\Api\\Model\\SecretRemoveSecretValueInput';
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        return \is_object($data) && \Gyroscops\Api\Model\SecretRemoveSecretValueInput::class === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\SecretRemoveSecretValueInput';
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,66 +52,42 @@ class SecretRemoveSecretValueInputNormalizer implements DenormalizerInterface, N
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('id', $data) && null !== $data['id']) {
-            $object->setId($data['id']);
-        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
-            $object->setId(null);
-        }
-        if (\array_key_exists('contents', $data) && null !== $data['contents']) {
+        if (\array_key_exists('contents', $data) && $data['contents'] !== null) {
             $values = [];
             foreach ($data['contents'] as $value) {
                 $values[] = $value;
             }
             $object->setContents($values);
-        } elseif (\array_key_exists('contents', $data) && null === $data['contents']) {
+            unset($data['contents']);
+        } elseif (\array_key_exists('contents', $data) && $data['contents'] === null) {
             $object->setContents(null);
         }
-        if (\array_key_exists('organization', $data) && null !== $data['organization']) {
-            $object->setOrganization($data['organization']);
-        } elseif (\array_key_exists('organization', $data) && null === $data['organization']) {
-            $object->setOrganization(null);
-        }
-        if (\array_key_exists('workspace', $data) && null !== $data['workspace']) {
-            $object->setWorkspace($data['workspace']);
-        } elseif (\array_key_exists('workspace', $data) && null === $data['workspace']) {
-            $object->setWorkspace(null);
-        }
-        if (\array_key_exists('iterator', $data) && null !== $data['iterator']) {
-            $object->setIterator($data['iterator']);
-        } elseif (\array_key_exists('iterator', $data) && null === $data['iterator']) {
-            $object->setIterator(null);
+        foreach ($data as $key => $value_1) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value_1;
+            }
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getId()) {
-            $data['id'] = $object->getId();
-        }
-        if (null !== $object->getContents()) {
+        if ($object->isInitialized('contents') && null !== $object->getContents()) {
             $values = [];
             foreach ($object->getContents() as $value) {
                 $values[] = $value;
             }
             $data['contents'] = $values;
         }
-        if (null !== $object->getOrganization()) {
-            $data['organization'] = $object->getOrganization();
-        }
-        if (null !== $object->getWorkspace()) {
-            $data['workspace'] = $object->getWorkspace();
-        }
-        if (null !== $object->getIterator()) {
-            $data['iterator'] = $object->getIterator();
+        foreach ($object as $key => $value_1) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value_1;
+            }
         }
 
         return $data;

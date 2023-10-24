@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class AkeneoLinkedAccount
+class AkeneoLinkedAccount extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -44,6 +53,7 @@ class AkeneoLinkedAccount
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -56,6 +66,7 @@ class AkeneoLinkedAccount
 
     public function setUser(?string $user): self
     {
+        $this->initialized['user'] = true;
         $this->user = $user;
 
         return $this;
@@ -68,6 +79,7 @@ class AkeneoLinkedAccount
 
     public function setTokenId(?string $tokenId): self
     {
+        $this->initialized['tokenId'] = true;
         $this->tokenId = $tokenId;
 
         return $this;
@@ -80,6 +92,7 @@ class AkeneoLinkedAccount
 
     public function setAkeneoUserId(?string $akeneoUserId): self
     {
+        $this->initialized['akeneoUserId'] = true;
         $this->akeneoUserId = $akeneoUserId;
 
         return $this;
@@ -92,6 +105,7 @@ class AkeneoLinkedAccount
 
     public function setToken(?string $token): self
     {
+        $this->initialized['token'] = true;
         $this->token = $token;
 
         return $this;
@@ -104,6 +118,7 @@ class AkeneoLinkedAccount
 
     public function setAkeneoInstance(?string $akeneoInstance): self
     {
+        $this->initialized['akeneoInstance'] = true;
         $this->akeneoInstance = $akeneoInstance;
 
         return $this;

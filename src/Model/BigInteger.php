@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class BigInteger
+class BigInteger extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * Returns the number of bits in the minimal two's-complement representation of this BigInteger, excluding a sign bit.
      *
@@ -37,6 +46,8 @@ class BigInteger
      */
     protected $odd;
     /**
+     * {@inheritdoc}
+     *
      * @var int|null
      */
     protected $sign;
@@ -84,6 +95,7 @@ class BigInteger
      */
     public function setBitLength(?int $bitLength): self
     {
+        $this->initialized['bitLength'] = true;
         $this->bitLength = $bitLength;
 
         return $this;
@@ -102,6 +114,7 @@ class BigInteger
      */
     public function setLowestSetBit(?int $lowestSetBit): self
     {
+        $this->initialized['lowestSetBit'] = true;
         $this->lowestSetBit = $lowestSetBit;
 
         return $this;
@@ -120,6 +133,7 @@ class BigInteger
      */
     public function setEven(?bool $even): self
     {
+        $this->initialized['even'] = true;
         $this->even = $even;
 
         return $this;
@@ -138,18 +152,26 @@ class BigInteger
      */
     public function setOdd(?bool $odd): self
     {
+        $this->initialized['odd'] = true;
         $this->odd = $odd;
 
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getSign(): ?int
     {
         return $this->sign;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setSign(?int $sign): self
     {
+        $this->initialized['sign'] = true;
         $this->sign = $sign;
 
         return $this;
@@ -168,6 +190,7 @@ class BigInteger
      */
     public function setZero(?bool $zero): self
     {
+        $this->initialized['zero'] = true;
         $this->zero = $zero;
 
         return $this;
@@ -186,6 +209,7 @@ class BigInteger
      */
     public function setNegative(?bool $negative): self
     {
+        $this->initialized['negative'] = true;
         $this->negative = $negative;
 
         return $this;
@@ -204,6 +228,7 @@ class BigInteger
      */
     public function setNegativeOrZero(?bool $negativeOrZero): self
     {
+        $this->initialized['negativeOrZero'] = true;
         $this->negativeOrZero = $negativeOrZero;
 
         return $this;
@@ -222,6 +247,7 @@ class BigInteger
      */
     public function setPositive(?bool $positive): self
     {
+        $this->initialized['positive'] = true;
         $this->positive = $positive;
 
         return $this;
@@ -240,6 +266,7 @@ class BigInteger
      */
     public function setPositiveOrZero(?bool $positiveOrZero): self
     {
+        $this->initialized['positiveOrZero'] = true;
         $this->positiveOrZero = $positiveOrZero;
 
         return $this;

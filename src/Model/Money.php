@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class Money
+class Money extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var BigDecimal|null
      */
@@ -82,6 +91,7 @@ class Money
 
     public function setAmount(?BigDecimal $amount): self
     {
+        $this->initialized['amount'] = true;
         $this->amount = $amount;
 
         return $this;
@@ -94,6 +104,7 @@ class Money
 
     public function setCurrency(?Currency $currency): self
     {
+        $this->initialized['currency'] = true;
         $this->currency = $currency;
 
         return $this;
@@ -106,6 +117,7 @@ class Money
 
     public function setContext(?Context $context): self
     {
+        $this->initialized['context'] = true;
         $this->context = $context;
 
         return $this;
@@ -118,6 +130,7 @@ class Money
 
     public function setMinorAmount(?BigDecimal $minorAmount): self
     {
+        $this->initialized['minorAmount'] = true;
         $this->minorAmount = $minorAmount;
 
         return $this;
@@ -130,6 +143,7 @@ class Money
 
     public function setUnscaledAmount(?BigInteger $unscaledAmount): self
     {
+        $this->initialized['unscaledAmount'] = true;
         $this->unscaledAmount = $unscaledAmount;
 
         return $this;
@@ -152,6 +166,7 @@ class Money
      */
     public function setAmounts(?array $amounts): self
     {
+        $this->initialized['amounts'] = true;
         $this->amounts = $amounts;
 
         return $this;
@@ -170,6 +185,7 @@ class Money
      */
     public function setSign(?int $sign): self
     {
+        $this->initialized['sign'] = true;
         $this->sign = $sign;
 
         return $this;
@@ -188,6 +204,7 @@ class Money
      */
     public function setZero(?bool $zero): self
     {
+        $this->initialized['zero'] = true;
         $this->zero = $zero;
 
         return $this;
@@ -206,6 +223,7 @@ class Money
      */
     public function setNegative(?bool $negative): self
     {
+        $this->initialized['negative'] = true;
         $this->negative = $negative;
 
         return $this;
@@ -224,6 +242,7 @@ class Money
      */
     public function setNegativeOrZero(?bool $negativeOrZero): self
     {
+        $this->initialized['negativeOrZero'] = true;
         $this->negativeOrZero = $negativeOrZero;
 
         return $this;
@@ -242,6 +261,7 @@ class Money
      */
     public function setPositive(?bool $positive): self
     {
+        $this->initialized['positive'] = true;
         $this->positive = $positive;
 
         return $this;
@@ -260,6 +280,7 @@ class Money
      */
     public function setPositiveOrZero(?bool $positiveOrZero): self
     {
+        $this->initialized['positiveOrZero'] = true;
         $this->positiveOrZero = $positiveOrZero;
 
         return $this;

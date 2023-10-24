@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class BigIntegerJsonld
+class BigIntegerJsonld extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var mixed|null
      */
@@ -49,6 +58,8 @@ class BigIntegerJsonld
      */
     protected $odd;
     /**
+     * {@inheritdoc}
+     *
      * @var int|null
      */
     protected $sign;
@@ -91,8 +102,12 @@ class BigIntegerJsonld
         return $this->context;
     }
 
-    public function setContext(mixed $context): self
+    /**
+     * @param mixed $context
+     */
+    public function setContext($context): self
     {
+        $this->initialized['context'] = true;
         $this->context = $context;
 
         return $this;
@@ -105,6 +120,7 @@ class BigIntegerJsonld
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -117,6 +133,7 @@ class BigIntegerJsonld
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -135,6 +152,7 @@ class BigIntegerJsonld
      */
     public function setBitLength(?int $bitLength): self
     {
+        $this->initialized['bitLength'] = true;
         $this->bitLength = $bitLength;
 
         return $this;
@@ -153,6 +171,7 @@ class BigIntegerJsonld
      */
     public function setLowestSetBit(?int $lowestSetBit): self
     {
+        $this->initialized['lowestSetBit'] = true;
         $this->lowestSetBit = $lowestSetBit;
 
         return $this;
@@ -171,6 +190,7 @@ class BigIntegerJsonld
      */
     public function setEven(?bool $even): self
     {
+        $this->initialized['even'] = true;
         $this->even = $even;
 
         return $this;
@@ -189,18 +209,26 @@ class BigIntegerJsonld
      */
     public function setOdd(?bool $odd): self
     {
+        $this->initialized['odd'] = true;
         $this->odd = $odd;
 
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getSign(): ?int
     {
         return $this->sign;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setSign(?int $sign): self
     {
+        $this->initialized['sign'] = true;
         $this->sign = $sign;
 
         return $this;
@@ -219,6 +247,7 @@ class BigIntegerJsonld
      */
     public function setZero(?bool $zero): self
     {
+        $this->initialized['zero'] = true;
         $this->zero = $zero;
 
         return $this;
@@ -237,6 +266,7 @@ class BigIntegerJsonld
      */
     public function setNegative(?bool $negative): self
     {
+        $this->initialized['negative'] = true;
         $this->negative = $negative;
 
         return $this;
@@ -255,6 +285,7 @@ class BigIntegerJsonld
      */
     public function setNegativeOrZero(?bool $negativeOrZero): self
     {
+        $this->initialized['negativeOrZero'] = true;
         $this->negativeOrZero = $negativeOrZero;
 
         return $this;
@@ -273,6 +304,7 @@ class BigIntegerJsonld
      */
     public function setPositive(?bool $positive): self
     {
+        $this->initialized['positive'] = true;
         $this->positive = $positive;
 
         return $this;
@@ -291,6 +323,7 @@ class BigIntegerJsonld
      */
     public function setPositiveOrZero(?bool $positiveOrZero): self
     {
+        $this->initialized['positiveOrZero'] = true;
         $this->positiveOrZero = $positiveOrZero;
 
         return $this;

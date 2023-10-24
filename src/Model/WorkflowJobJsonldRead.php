@@ -10,8 +10,21 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class WorkflowJobJsonldRead
+class WorkflowJobJsonldRead extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
+     * @var mixed|null
+     */
+    protected $context;
     /**
      * @var string|null
      */
@@ -21,21 +34,40 @@ class WorkflowJobJsonldRead
      */
     protected $type;
     /**
-     * @var mixed|null
+     * @var string|null
      */
-    protected $context;
+    protected $id2;
     /**
-     * @var mixed|null
+     * @var WorkflowJsonldRead|null
      */
     protected $workflow;
     /**
-     * @var mixed|null
+     * @var WorkflowJobPipelineJsonldRead|null
      */
     protected $pipeline;
     /**
-     * @var mixed|null
+     * @var WorkflowJobActionJsonldRead|null
      */
     protected $action;
+
+    /**
+     * @return mixed
+     */
+    public function getContext()
+    {
+        return $this->context;
+    }
+
+    /**
+     * @param mixed $context
+     */
+    public function setContext($context): self
+    {
+        $this->initialized['context'] = true;
+        $this->context = $context;
+
+        return $this;
+    }
 
     public function getId(): ?string
     {
@@ -44,6 +76,7 @@ class WorkflowJobJsonldRead
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -56,66 +89,59 @@ class WorkflowJobJsonldRead
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getContext()
+    public function getId2(): ?string
     {
-        return $this->context;
+        return $this->id2;
     }
 
-    public function setContext(mixed $context): self
+    public function setId2(?string $id2): self
     {
-        $this->context = $context;
+        $this->initialized['id2'] = true;
+        $this->id2 = $id2;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getWorkflow()
+    public function getWorkflow(): ?WorkflowJsonldRead
     {
         return $this->workflow;
     }
 
-    public function setWorkflow(mixed $workflow): self
+    public function setWorkflow(?WorkflowJsonldRead $workflow): self
     {
+        $this->initialized['workflow'] = true;
         $this->workflow = $workflow;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getPipeline()
+    public function getPipeline(): ?WorkflowJobPipelineJsonldRead
     {
         return $this->pipeline;
     }
 
-    public function setPipeline(mixed $pipeline): self
+    public function setPipeline(?WorkflowJobPipelineJsonldRead $pipeline): self
     {
+        $this->initialized['pipeline'] = true;
         $this->pipeline = $pipeline;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getAction()
+    public function getAction(): ?WorkflowJobActionJsonldRead
     {
         return $this->action;
     }
 
-    public function setAction(mixed $action): self
+    public function setAction(?WorkflowJobActionJsonldRead $action): self
     {
+        $this->initialized['action'] = true;
         $this->action = $action;
 
         return $this;

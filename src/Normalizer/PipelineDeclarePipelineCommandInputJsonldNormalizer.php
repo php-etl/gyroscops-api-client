@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -24,22 +25,19 @@ class PipelineDeclarePipelineCommandInputJsonldNormalizer implements Denormalize
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+    use ValidatorTrait;
 
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return \Gyroscops\Api\Model\PipelineDeclarePipelineCommandInputJsonld::class === $type;
+        return $type === 'Gyroscops\\Api\\Model\\PipelineDeclarePipelineCommandInputJsonld';
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        return \is_object($data) && \Gyroscops\Api\Model\PipelineDeclarePipelineCommandInputJsonld::class === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\PipelineDeclarePipelineCommandInputJsonld';
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,123 +52,79 @@ class PipelineDeclarePipelineCommandInputJsonldNormalizer implements Denormalize
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
+        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
             $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+            unset($data['@context']);
+        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
             $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
+        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+            unset($data['@id']);
+        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
+        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+            unset($data['@type']);
+        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
             $object->setType(null);
         }
-        if (\array_key_exists('label', $data) && null !== $data['label']) {
-            $object->setLabel($data['label']);
-        } elseif (\array_key_exists('label', $data) && null === $data['label']) {
-            $object->setLabel(null);
-        }
-        if (\array_key_exists('code', $data) && null !== $data['code']) {
-            $object->setCode($data['code']);
-        } elseif (\array_key_exists('code', $data) && null === $data['code']) {
-            $object->setCode(null);
-        }
-        if (\array_key_exists('steps', $data) && null !== $data['steps']) {
+        if (\array_key_exists('steps', $data) && $data['steps'] !== null) {
             $values = [];
             foreach ($data['steps'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, \Gyroscops\Api\Model\StepInputJsonld::class, 'json', $context);
+                $values[] = $this->denormalizer->denormalize($value, 'Gyroscops\\Api\\Model\\StepJsonld', 'json', $context);
             }
             $object->setSteps($values);
-        } elseif (\array_key_exists('steps', $data) && null === $data['steps']) {
+            unset($data['steps']);
+        } elseif (\array_key_exists('steps', $data) && $data['steps'] === null) {
             $object->setSteps(null);
         }
-        if (\array_key_exists('autoloads', $data) && null !== $data['autoloads']) {
-            $values_1 = [];
-            foreach ($data['autoloads'] as $value_1) {
-                $values_1[] = $this->denormalizer->denormalize($value_1, \Gyroscops\Api\Model\AutoloadInputJsonld::class, 'json', $context);
-            }
-            $object->setAutoloads($values_1);
-        } elseif (\array_key_exists('autoloads', $data) && null === $data['autoloads']) {
-            $object->setAutoloads(null);
+        if (\array_key_exists('composer', $data) && $data['composer'] !== null) {
+            $object->setComposer($this->denormalizer->denormalize($data['composer'], 'Gyroscops\\Api\\Model\\ComposerJsonld', 'json', $context));
+            unset($data['composer']);
+        } elseif (\array_key_exists('composer', $data) && $data['composer'] === null) {
+            $object->setComposer(null);
         }
-        if (\array_key_exists('packages', $data) && null !== $data['packages']) {
-            $values_2 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-            foreach ($data['packages'] as $key => $value_2) {
-                $values_2[$key] = $value_2;
-            }
-            $object->setPackages($values_2);
-        } elseif (\array_key_exists('packages', $data) && null === $data['packages']) {
-            $object->setPackages(null);
+        if (\array_key_exists('code', $data) && $data['code'] !== null) {
+            $object->setCode($data['code']);
+            unset($data['code']);
+        } elseif (\array_key_exists('code', $data) && $data['code'] === null) {
+            $object->setCode(null);
         }
-        if (\array_key_exists('repositories', $data) && null !== $data['repositories']) {
-            $values_3 = [];
-            foreach ($data['repositories'] as $value_3) {
-                $values_3[] = $this->denormalizer->denormalize($value_3, \Gyroscops\Api\Model\AddPipelineComposerRepositoryCommandInputJsonld::class, 'json', $context);
-            }
-            $object->setRepositories($values_3);
-        } elseif (\array_key_exists('repositories', $data) && null === $data['repositories']) {
-            $object->setRepositories(null);
+        if (\array_key_exists('label', $data) && $data['label'] !== null) {
+            $object->setLabel($data['label']);
+            unset($data['label']);
+        } elseif (\array_key_exists('label', $data) && $data['label'] === null) {
+            $object->setLabel(null);
         }
-        if (\array_key_exists('auths', $data) && null !== $data['auths']) {
-            $values_4 = [];
-            foreach ($data['auths'] as $value_4) {
-                $values_4[] = $this->denormalizer->denormalize($value_4, \Gyroscops\Api\Model\AddPipelineComposerAuthCommandInputJsonld::class, 'json', $context);
+        foreach ($data as $key => $value_1) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value_1;
             }
-            $object->setAuths($values_4);
-        } elseif (\array_key_exists('auths', $data) && null === $data['auths']) {
-            $object->setAuths(null);
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        $data['label'] = $object->getLabel();
-        $data['code'] = $object->getCode();
         $values = [];
         foreach ($object->getSteps() as $value) {
             $values[] = $this->normalizer->normalize($value, 'json', $context);
         }
         $data['steps'] = $values;
-        if (null !== $object->getAutoloads()) {
-            $values_1 = [];
-            foreach ($object->getAutoloads() as $value_1) {
-                $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
+        $data['composer'] = $this->normalizer->normalize($object->getComposer(), 'json', $context);
+        $data['code'] = $object->getCode();
+        $data['label'] = $object->getLabel();
+        foreach ($object as $key => $value_1) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value_1;
             }
-            $data['autoloads'] = $values_1;
-        }
-        if (null !== $object->getPackages()) {
-            $values_2 = [];
-            foreach ($object->getPackages() as $key => $value_2) {
-                $values_2[$key] = $value_2;
-            }
-            $data['packages'] = $values_2;
-        }
-        if (null !== $object->getRepositories()) {
-            $values_3 = [];
-            foreach ($object->getRepositories() as $value_3) {
-                $values_3[] = $this->normalizer->normalize($value_3, 'json', $context);
-            }
-            $data['repositories'] = $values_3;
-        }
-        if (null !== $object->getAuths()) {
-            $values_4 = [];
-            foreach ($object->getAuths() as $value_4) {
-                $values_4[] = $this->normalizer->normalize($value_4, 'json', $context);
-            }
-            $data['auths'] = $values_4;
         }
 
         return $data;

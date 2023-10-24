@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class ConfigurationJsonld
+class ConfigurationJsonld extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var mixed|null
      */
@@ -52,10 +61,6 @@ class ConfigurationJsonld
      * @var string[]|null
      */
     protected $contents;
-    /**
-     * @var TraversableJsonld|null
-     */
-    protected $iterator;
 
     /**
      * @return mixed
@@ -65,8 +70,12 @@ class ConfigurationJsonld
         return $this->context;
     }
 
-    public function setContext(mixed $context): self
+    /**
+     * @param mixed $context
+     */
+    public function setContext($context): self
     {
+        $this->initialized['context'] = true;
         $this->context = $context;
 
         return $this;
@@ -79,6 +88,7 @@ class ConfigurationJsonld
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -91,6 +101,7 @@ class ConfigurationJsonld
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -103,6 +114,7 @@ class ConfigurationJsonld
 
     public function setId2(?string $id2): self
     {
+        $this->initialized['id2'] = true;
         $this->id2 = $id2;
 
         return $this;
@@ -115,6 +127,7 @@ class ConfigurationJsonld
 
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -127,6 +140,7 @@ class ConfigurationJsonld
 
     public function setSlug(?string $slug): self
     {
+        $this->initialized['slug'] = true;
         $this->slug = $slug;
 
         return $this;
@@ -139,6 +153,7 @@ class ConfigurationJsonld
 
     public function setDescription(?string $description): self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
 
         return $this;
@@ -151,6 +166,7 @@ class ConfigurationJsonld
 
     public function setOrganization(?string $organization): self
     {
+        $this->initialized['organization'] = true;
         $this->organization = $organization;
 
         return $this;
@@ -163,6 +179,7 @@ class ConfigurationJsonld
 
     public function setWorkspace(?string $workspace): self
     {
+        $this->initialized['workspace'] = true;
         $this->workspace = $workspace;
 
         return $this;
@@ -181,19 +198,8 @@ class ConfigurationJsonld
      */
     public function setContents(?iterable $contents): self
     {
+        $this->initialized['contents'] = true;
         $this->contents = $contents;
-
-        return $this;
-    }
-
-    public function getIterator(): ?TraversableJsonld
-    {
-        return $this->iterator;
-    }
-
-    public function setIterator(?TraversableJsonld $iterator): self
-    {
-        $this->iterator = $iterator;
 
         return $this;
     }

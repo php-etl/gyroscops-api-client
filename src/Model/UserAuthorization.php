@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class UserAuthorization
+class UserAuthorization extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -44,6 +53,7 @@ class UserAuthorization
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -56,6 +66,7 @@ class UserAuthorization
 
     public function setUser(?string $user): self
     {
+        $this->initialized['user'] = true;
         $this->user = $user;
 
         return $this;
@@ -68,6 +79,7 @@ class UserAuthorization
 
     public function setWorkspace(?string $workspace): self
     {
+        $this->initialized['workspace'] = true;
         $this->workspace = $workspace;
 
         return $this;
@@ -80,6 +92,7 @@ class UserAuthorization
 
     public function setOrganization(?string $organization): self
     {
+        $this->initialized['organization'] = true;
         $this->organization = $organization;
 
         return $this;
@@ -92,6 +105,7 @@ class UserAuthorization
 
     public function setResource(?string $resource): self
     {
+        $this->initialized['resource'] = true;
         $this->resource = $resource;
 
         return $this;
@@ -110,6 +124,7 @@ class UserAuthorization
      */
     public function setAuthorizations(?array $authorizations): self
     {
+        $this->initialized['authorizations'] = true;
         $this->authorizations = $authorizations;
 
         return $this;

@@ -14,17 +14,20 @@ class PutUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements 
 {
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $id;
+    protected $accept;
 
     /**
      * Replaces the User resource.
      *
      * @param string                                                         $id          Resource identifier
      * @param \Gyroscops\Api\Model\UserJsonld|\Gyroscops\Api\Model\User|null $requestBody
+     * @param array                                                          $accept      Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(string $id, $requestBody = null)
+    public function __construct(string $id, $requestBody = null, array $accept = [])
     {
         $this->id = $id;
         $this->body = $requestBody;
+        $this->accept = $accept;
     }
 
     public function getMethod(): string
@@ -34,13 +37,13 @@ class PutUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements 
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/authentication/user/{id}');
+        return str_replace(['{id}'], [$this->id], '/authentication/users/{id}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         if ($this->body instanceof \Gyroscops\Api\Model\UserJsonld) {
-            return [['Content-Type' => ['application/ld+json']], $this->body];
+            return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
         if ($this->body instanceof \Gyroscops\Api\Model\User) {
             return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
@@ -54,31 +57,42 @@ class PutUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements 
 
     public function getExtraHeaders(): array
     {
-        return ['Accept' => ['application/json']];
+        if (empty($this->accept)) {
+            return ['Accept' => ['application/ld+json', 'application/json']];
+        }
+
+        return $this->accept;
     }
 
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\User|null
+     * @return \Gyroscops\Api\Model\UserJsonld|\Gyroscops\Api\Model\User|null
      *
      * @throws \Gyroscops\Api\Exception\PutUserItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PutUserItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\PutUserItemNotFoundException
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return $serializer->deserialize($body, \Gyroscops\Api\Model\User::class, 'json');
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (200 === $status) {
+            if (mb_strpos($contentType, 'application/ld+json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\UserJsonld', 'json');
+            }
+            if (mb_strpos($contentType, 'application/json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\User', 'json');
+            }
         }
         if (400 === $status) {
-            throw new \Gyroscops\Api\Exception\PutUserItemBadRequestException();
+            throw new \Gyroscops\Api\Exception\PutUserItemBadRequestException($response);
         }
         if (422 === $status) {
-            throw new \Gyroscops\Api\Exception\PutUserItemUnprocessableEntityException();
+            throw new \Gyroscops\Api\Exception\PutUserItemUnprocessableEntityException($response);
         }
         if (404 === $status) {
-            throw new \Gyroscops\Api\Exception\PutUserItemNotFoundException();
+            throw new \Gyroscops\Api\Exception\PutUserItemNotFoundException($response);
         }
     }
 

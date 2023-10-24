@@ -15,17 +15,20 @@ class ApiExecutionWorkflowsJobsActionGetSubresourceExecutionWorkflowSubresource 
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $id;
     protected $jobs;
+    protected $accept;
 
     /**
      * Retrieves a ExecutionWorkflow resource.
      *
-     * @param string $id   ExecutionWorkflow identifier
-     * @param string $jobs ExecutionWorkflowJob identifier
+     * @param string $id     ExecutionWorkflow identifier
+     * @param string $jobs   ExecutionWorkflowJob identifier
+     * @param array  $accept Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(string $id, string $jobs)
+    public function __construct(string $id, string $jobs, array $accept = [])
     {
         $this->id = $id;
         $this->jobs = $jobs;
+        $this->accept = $accept;
     }
 
     public function getMethod(): string
@@ -35,7 +38,7 @@ class ApiExecutionWorkflowsJobsActionGetSubresourceExecutionWorkflowSubresource 
 
     public function getUri(): string
     {
-        return str_replace(['{id}', '{jobs}'], [$this->id, $this->jobs], '/runtime/execution/execution-workflow/{id}/job/{job}/action');
+        return str_replace(['{id}', '{jobs}'], [$this->id, $this->jobs], '/runtime/executions/workflows/{id}/jobs/{job}/action');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
@@ -45,18 +48,29 @@ class ApiExecutionWorkflowsJobsActionGetSubresourceExecutionWorkflowSubresource 
 
     public function getExtraHeaders(): array
     {
-        return ['Accept' => ['application/json']];
+        if (empty($this->accept)) {
+            return ['Accept' => ['application/ld+json', 'application/json']];
+        }
+
+        return $this->accept;
     }
 
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\ExecutionWorkflowJobAction|null
+     * @return \Gyroscops\Api\Model\ExecutionWorkflowJobActionJsonld|\Gyroscops\Api\Model\ExecutionWorkflowJobAction|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return $serializer->deserialize($body, \Gyroscops\Api\Model\ExecutionWorkflowJobAction::class, 'json');
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (200 === $status) {
+            if (mb_strpos($contentType, 'application/ld+json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ExecutionWorkflowJobActionJsonld', 'json');
+            }
+            if (mb_strpos($contentType, 'application/json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ExecutionWorkflowJobAction', 'json');
+            }
         }
     }
 

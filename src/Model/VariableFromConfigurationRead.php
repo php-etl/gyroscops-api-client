@@ -10,10 +10,19 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class VariableFromConfigurationRead
+class VariableFromConfigurationRead extends \ArrayObject
 {
     /**
-     * @var mixed|null
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
+     * @var ConfigurationRead|null
      */
     protected $configuration;
     /**
@@ -21,7 +30,7 @@ class VariableFromConfigurationRead
      */
     protected $item;
     /**
-     * @var mixed|null
+     * @var EnvironmentRead|null
      */
     protected $environment;
     /**
@@ -29,16 +38,14 @@ class VariableFromConfigurationRead
      */
     protected $name;
 
-    /**
-     * @return mixed
-     */
-    public function getConfiguration()
+    public function getConfiguration(): ?ConfigurationRead
     {
         return $this->configuration;
     }
 
-    public function setConfiguration(mixed $configuration): self
+    public function setConfiguration(?ConfigurationRead $configuration): self
     {
+        $this->initialized['configuration'] = true;
         $this->configuration = $configuration;
 
         return $this;
@@ -51,21 +58,20 @@ class VariableFromConfigurationRead
 
     public function setItem(?string $item): self
     {
+        $this->initialized['item'] = true;
         $this->item = $item;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getEnvironment()
+    public function getEnvironment(): ?EnvironmentRead
     {
         return $this->environment;
     }
 
-    public function setEnvironment(mixed $environment): self
+    public function setEnvironment(?EnvironmentRead $environment): self
     {
+        $this->initialized['environment'] = true;
         $this->environment = $environment;
 
         return $this;
@@ -78,6 +84,7 @@ class VariableFromConfigurationRead
 
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;

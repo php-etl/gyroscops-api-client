@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class VariableJsonldRead
+class VariableJsonldRead extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -21,7 +30,7 @@ class VariableJsonldRead
      */
     protected $type;
     /**
-     * @var mixed|null
+     * @var EnvironmentJsonldRead|null
      */
     protected $environment;
     /**
@@ -36,6 +45,7 @@ class VariableJsonldRead
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -48,21 +58,20 @@ class VariableJsonldRead
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getEnvironment()
+    public function getEnvironment(): ?EnvironmentJsonldRead
     {
         return $this->environment;
     }
 
-    public function setEnvironment(mixed $environment): self
+    public function setEnvironment(?EnvironmentJsonldRead $environment): self
     {
+        $this->initialized['environment'] = true;
         $this->environment = $environment;
 
         return $this;
@@ -75,6 +84,7 @@ class VariableJsonldRead
 
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;

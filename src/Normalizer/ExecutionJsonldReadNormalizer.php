@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -24,22 +25,19 @@ class ExecutionJsonldReadNormalizer implements DenormalizerInterface, Normalizer
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+    use ValidatorTrait;
 
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return \Gyroscops\Api\Model\ExecutionJsonldRead::class === $type;
+        return $type === 'Gyroscops\\Api\\Model\\ExecutionJsonldRead';
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        return \is_object($data) && \Gyroscops\Api\Model\ExecutionJsonldRead::class === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\ExecutionJsonldRead';
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,89 +52,112 @@ class ExecutionJsonldReadNormalizer implements DenormalizerInterface, Normalizer
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
+        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+            unset($data['@id']);
+        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
+        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+            unset($data['@type']);
+        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
             $object->setType(null);
         }
-        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
+        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
             $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+            unset($data['@context']);
+        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
             $object->setContext(null);
         }
-        if (\array_key_exists('id', $data) && null !== $data['id']) {
+        if (\array_key_exists('id', $data) && $data['id'] !== null) {
             $object->setId2($data['id']);
-        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+            unset($data['id']);
+        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId2(null);
         }
-        if (\array_key_exists('code', $data) && null !== $data['code']) {
+        if (\array_key_exists('code', $data) && $data['code'] !== null) {
             $object->setCode($data['code']);
-        } elseif (\array_key_exists('code', $data) && null === $data['code']) {
+            unset($data['code']);
+        } elseif (\array_key_exists('code', $data) && $data['code'] === null) {
             $object->setCode(null);
         }
-        if (\array_key_exists('status', $data) && null !== $data['status']) {
+        if (\array_key_exists('status', $data) && $data['status'] !== null) {
             $object->setStatus($data['status']);
-        } elseif (\array_key_exists('status', $data) && null === $data['status']) {
+            unset($data['status']);
+        } elseif (\array_key_exists('status', $data) && $data['status'] === null) {
             $object->setStatus(null);
         }
-        if (\array_key_exists('errors', $data) && null !== $data['errors']) {
+        if (\array_key_exists('errors', $data) && $data['errors'] !== null) {
             $object->setErrors($data['errors']);
-        } elseif (\array_key_exists('errors', $data) && null === $data['errors']) {
+            unset($data['errors']);
+        } elseif (\array_key_exists('errors', $data) && $data['errors'] === null) {
             $object->setErrors(null);
         }
-        if (\array_key_exists('scheduledAt', $data) && null !== $data['scheduledAt']) {
+        if (\array_key_exists('scheduledAt', $data) && $data['scheduledAt'] !== null) {
             $object->setScheduledAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['scheduledAt']));
-        } elseif (\array_key_exists('scheduledAt', $data) && null === $data['scheduledAt']) {
+            unset($data['scheduledAt']);
+        } elseif (\array_key_exists('scheduledAt', $data) && $data['scheduledAt'] === null) {
             $object->setScheduledAt(null);
         }
-        if (\array_key_exists('startedAt', $data) && null !== $data['startedAt']) {
+        if (\array_key_exists('startedAt', $data) && $data['startedAt'] !== null) {
             $object->setStartedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['startedAt']));
-        } elseif (\array_key_exists('startedAt', $data) && null === $data['startedAt']) {
+            unset($data['startedAt']);
+        } elseif (\array_key_exists('startedAt', $data) && $data['startedAt'] === null) {
             $object->setStartedAt(null);
         }
-        if (\array_key_exists('finishedAt', $data) && null !== $data['finishedAt']) {
+        if (\array_key_exists('finishedAt', $data) && $data['finishedAt'] !== null) {
             $object->setFinishedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['finishedAt']));
-        } elseif (\array_key_exists('finishedAt', $data) && null === $data['finishedAt']) {
+            unset($data['finishedAt']);
+        } elseif (\array_key_exists('finishedAt', $data) && $data['finishedAt'] === null) {
             $object->setFinishedAt(null);
         }
-        if (\array_key_exists('interruptedAt', $data) && null !== $data['interruptedAt']) {
+        if (\array_key_exists('interruptedAt', $data) && $data['interruptedAt'] !== null) {
             $object->setInterruptedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['interruptedAt']));
-        } elseif (\array_key_exists('interruptedAt', $data) && null === $data['interruptedAt']) {
+            unset($data['interruptedAt']);
+        } elseif (\array_key_exists('interruptedAt', $data) && $data['interruptedAt'] === null) {
             $object->setInterruptedAt(null);
         }
-        if (\array_key_exists('resumedAt', $data) && null !== $data['resumedAt']) {
+        if (\array_key_exists('resumedAt', $data) && $data['resumedAt'] !== null) {
             $object->setResumedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['resumedAt']));
-        } elseif (\array_key_exists('resumedAt', $data) && null === $data['resumedAt']) {
+            unset($data['resumedAt']);
+        } elseif (\array_key_exists('resumedAt', $data) && $data['resumedAt'] === null) {
             $object->setResumedAt(null);
         }
-        if (\array_key_exists('updatedAt', $data) && null !== $data['updatedAt']) {
+        if (\array_key_exists('updatedAt', $data) && $data['updatedAt'] !== null) {
             $object->setUpdatedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['updatedAt']));
-        } elseif (\array_key_exists('updatedAt', $data) && null === $data['updatedAt']) {
+            unset($data['updatedAt']);
+        } elseif (\array_key_exists('updatedAt', $data) && $data['updatedAt'] === null) {
             $object->setUpdatedAt(null);
         }
-        if (\array_key_exists('terminatedAt', $data) && null !== $data['terminatedAt']) {
+        if (\array_key_exists('terminatedAt', $data) && $data['terminatedAt'] !== null) {
             $object->setTerminatedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['terminatedAt']));
-        } elseif (\array_key_exists('terminatedAt', $data) && null === $data['terminatedAt']) {
+            unset($data['terminatedAt']);
+        } elseif (\array_key_exists('terminatedAt', $data) && $data['terminatedAt'] === null) {
             $object->setTerminatedAt(null);
         }
-        if (\array_key_exists('reason', $data) && null !== $data['reason']) {
+        if (\array_key_exists('reason', $data) && $data['reason'] !== null) {
             $object->setReason($data['reason']);
-        } elseif (\array_key_exists('reason', $data) && null === $data['reason']) {
+            unset($data['reason']);
+        } elseif (\array_key_exists('reason', $data) && $data['reason'] === null) {
             $object->setReason(null);
+        }
+        if (\array_key_exists('currentVersion', $data) && $data['currentVersion'] !== null) {
+            $object->setCurrentVersion($data['currentVersion']);
+            unset($data['currentVersion']);
+        } elseif (\array_key_exists('currentVersion', $data) && $data['currentVersion'] === null) {
+            $object->setCurrentVersion(null);
+        }
+        foreach ($data as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value;
+            }
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
@@ -147,25 +168,33 @@ class ExecutionJsonldReadNormalizer implements DenormalizerInterface, Normalizer
         $data['status'] = $object->getStatus();
         $data['errors'] = $object->getErrors();
         $data['scheduledAt'] = $object->getScheduledAt()->format('Y-m-d\\TH:i:sP');
-        if (null !== $object->getStartedAt()) {
+        if ($object->isInitialized('startedAt') && null !== $object->getStartedAt()) {
             $data['startedAt'] = $object->getStartedAt()->format('Y-m-d\\TH:i:sP');
         }
-        if (null !== $object->getFinishedAt()) {
+        if ($object->isInitialized('finishedAt') && null !== $object->getFinishedAt()) {
             $data['finishedAt'] = $object->getFinishedAt()->format('Y-m-d\\TH:i:sP');
         }
-        if (null !== $object->getInterruptedAt()) {
+        if ($object->isInitialized('interruptedAt') && null !== $object->getInterruptedAt()) {
             $data['interruptedAt'] = $object->getInterruptedAt()->format('Y-m-d\\TH:i:sP');
         }
-        if (null !== $object->getResumedAt()) {
+        if ($object->isInitialized('resumedAt') && null !== $object->getResumedAt()) {
             $data['resumedAt'] = $object->getResumedAt()->format('Y-m-d\\TH:i:sP');
         }
-        if (null !== $object->getUpdatedAt()) {
+        if ($object->isInitialized('updatedAt') && null !== $object->getUpdatedAt()) {
             $data['updatedAt'] = $object->getUpdatedAt()->format('Y-m-d\\TH:i:sP');
         }
-        if (null !== $object->getTerminatedAt()) {
+        if ($object->isInitialized('terminatedAt') && null !== $object->getTerminatedAt()) {
             $data['terminatedAt'] = $object->getTerminatedAt()->format('Y-m-d\\TH:i:sP');
         }
         $data['reason'] = $object->getReason();
+        if ($object->isInitialized('currentVersion') && null !== $object->getCurrentVersion()) {
+            $data['currentVersion'] = $object->getCurrentVersion();
+        }
+        foreach ($object as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value;
+            }
+        }
 
         return $data;
     }

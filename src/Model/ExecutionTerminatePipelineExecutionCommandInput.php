@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class ExecutionTerminatePipelineExecutionCommandInput
+class ExecutionTerminatePipelineExecutionCommandInput extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -24,6 +33,7 @@ class ExecutionTerminatePipelineExecutionCommandInput
 
     public function setReason(?string $reason): self
     {
+        $this->initialized['reason'] = true;
         $this->reason = $reason;
 
         return $this;

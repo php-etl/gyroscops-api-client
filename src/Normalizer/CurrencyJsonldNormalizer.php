@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -24,22 +25,19 @@ class CurrencyJsonldNormalizer implements DenormalizerInterface, NormalizerInter
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+    use ValidatorTrait;
 
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return \Gyroscops\Api\Model\CurrencyJsonld::class === $type;
+        return $type === 'Gyroscops\\Api\\Model\\CurrencyJsonld';
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        return \is_object($data) && \Gyroscops\Api\Model\CurrencyJsonld::class === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\CurrencyJsonld';
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,65 +52,79 @@ class CurrencyJsonldNormalizer implements DenormalizerInterface, NormalizerInter
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
+        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
             $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+            unset($data['@context']);
+        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
             $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
+        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+            unset($data['@id']);
+        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
+        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+            unset($data['@type']);
+        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
             $object->setType(null);
         }
-        if (\array_key_exists('currencyCode', $data) && null !== $data['currencyCode']) {
+        if (\array_key_exists('currencyCode', $data) && $data['currencyCode'] !== null) {
             $object->setCurrencyCode($data['currencyCode']);
-        } elseif (\array_key_exists('currencyCode', $data) && null === $data['currencyCode']) {
+            unset($data['currencyCode']);
+        } elseif (\array_key_exists('currencyCode', $data) && $data['currencyCode'] === null) {
             $object->setCurrencyCode(null);
         }
-        if (\array_key_exists('numericCode', $data) && null !== $data['numericCode']) {
+        if (\array_key_exists('numericCode', $data) && $data['numericCode'] !== null) {
             $object->setNumericCode($data['numericCode']);
-        } elseif (\array_key_exists('numericCode', $data) && null === $data['numericCode']) {
+            unset($data['numericCode']);
+        } elseif (\array_key_exists('numericCode', $data) && $data['numericCode'] === null) {
             $object->setNumericCode(null);
         }
-        if (\array_key_exists('name', $data) && null !== $data['name']) {
+        if (\array_key_exists('name', $data) && $data['name'] !== null) {
             $object->setName($data['name']);
-        } elseif (\array_key_exists('name', $data) && null === $data['name']) {
+            unset($data['name']);
+        } elseif (\array_key_exists('name', $data) && $data['name'] === null) {
             $object->setName(null);
         }
-        if (\array_key_exists('defaultFractionDigits', $data) && null !== $data['defaultFractionDigits']) {
+        if (\array_key_exists('defaultFractionDigits', $data) && $data['defaultFractionDigits'] !== null) {
             $object->setDefaultFractionDigits($data['defaultFractionDigits']);
-        } elseif (\array_key_exists('defaultFractionDigits', $data) && null === $data['defaultFractionDigits']) {
+            unset($data['defaultFractionDigits']);
+        } elseif (\array_key_exists('defaultFractionDigits', $data) && $data['defaultFractionDigits'] === null) {
             $object->setDefaultFractionDigits(null);
+        }
+        foreach ($data as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value;
+            }
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getCurrencyCode()) {
+        if ($object->isInitialized('currencyCode') && null !== $object->getCurrencyCode()) {
             $data['currencyCode'] = $object->getCurrencyCode();
         }
-        if (null !== $object->getNumericCode()) {
+        if ($object->isInitialized('numericCode') && null !== $object->getNumericCode()) {
             $data['numericCode'] = $object->getNumericCode();
         }
-        if (null !== $object->getName()) {
+        if ($object->isInitialized('name') && null !== $object->getName()) {
             $data['name'] = $object->getName();
         }
-        if (null !== $object->getDefaultFractionDigits()) {
+        if ($object->isInitialized('defaultFractionDigits') && null !== $object->getDefaultFractionDigits()) {
             $data['defaultFractionDigits'] = $object->getDefaultFractionDigits();
+        }
+        foreach ($object as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value;
+            }
         }
 
         return $data;

@@ -32,7 +32,7 @@ class DeleteSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implem
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/environment/secret/{id}');
+        return str_replace(['{id}'], [$this->id], '/environment/secrets/{id}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
@@ -43,15 +43,19 @@ class DeleteSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implem
     /**
      * {@inheritdoc}
      *
+     * @return null
+     *
      * @throws \Gyroscops\Api\Exception\DeleteSecretItemNotFoundException
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (204 === $status) {
             return null;
         }
         if (404 === $status) {
-            throw new \Gyroscops\Api\Exception\DeleteSecretItemNotFoundException();
+            throw new \Gyroscops\Api\Exception\DeleteSecretItemNotFoundException($response);
         }
     }
 

@@ -14,6 +14,7 @@ class ApiWorkspacesUsersGetSubresourceWorkspaceSubresource extends \Gyroscops\Ap
 {
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $id;
+    protected $accept;
 
     /**
      * Retrieves a Workspace resource.
@@ -23,11 +24,14 @@ class ApiWorkspacesUsersGetSubresourceWorkspaceSubresource extends \Gyroscops\Ap
      *
      *     @var int $page The collection page number
      * }
+     *
+     * @param array $accept Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(string $id, array $queryParameters = [])
+    public function __construct(string $id, array $queryParameters = [], array $accept = [])
     {
         $this->id = $id;
         $this->queryParameters = $queryParameters;
+        $this->accept = $accept;
     }
 
     public function getMethod(): string
@@ -37,7 +41,7 @@ class ApiWorkspacesUsersGetSubresourceWorkspaceSubresource extends \Gyroscops\Ap
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/authentication/workspace/{id}/users');
+        return str_replace(['{id}'], [$this->id], '/authentication/workspaces/{id}/users');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
@@ -47,7 +51,11 @@ class ApiWorkspacesUsersGetSubresourceWorkspaceSubresource extends \Gyroscops\Ap
 
     public function getExtraHeaders(): array
     {
-        return ['Accept' => ['application/json']];
+        if (empty($this->accept)) {
+            return ['Accept' => ['application/ld+json', 'application/json']];
+        }
+
+        return $this->accept;
     }
 
     protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
@@ -56,7 +64,7 @@ class ApiWorkspacesUsersGetSubresourceWorkspaceSubresource extends \Gyroscops\Ap
         $optionsResolver->setDefined(['page']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults(['page' => 1]);
-        $optionsResolver->setAllowedTypes('page', ['int']);
+        $optionsResolver->addAllowedTypes('page', ['int']);
 
         return $optionsResolver;
     }
@@ -64,12 +72,19 @@ class ApiWorkspacesUsersGetSubresourceWorkspaceSubresource extends \Gyroscops\Ap
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\User[]|null
+     * @return \Gyroscops\Api\Model\AuthenticationWorkspacesIdUsersGetLdjsonResponse200|\Gyroscops\Api\Model\User[]|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\User[]', 'json');
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (200 === $status) {
+            if (mb_strpos($contentType, 'application/ld+json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\AuthenticationWorkspacesIdUsersGetLdjsonResponse200', 'json');
+            }
+            if (mb_strpos($contentType, 'application/json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\User[]', 'json');
+            }
         }
     }
 

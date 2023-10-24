@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class VariableFromConstantJsonldRead
+class VariableFromConstantJsonldRead extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var mixed|null
      */
@@ -29,7 +38,7 @@ class VariableFromConstantJsonldRead
      */
     protected $value;
     /**
-     * @var mixed|null
+     * @var EnvironmentJsonldRead|null
      */
     protected $environment;
     /**
@@ -45,8 +54,12 @@ class VariableFromConstantJsonldRead
         return $this->context;
     }
 
-    public function setContext(mixed $context): self
+    /**
+     * @param mixed $context
+     */
+    public function setContext($context): self
     {
+        $this->initialized['context'] = true;
         $this->context = $context;
 
         return $this;
@@ -59,6 +72,7 @@ class VariableFromConstantJsonldRead
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -71,6 +85,7 @@ class VariableFromConstantJsonldRead
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -83,21 +98,20 @@ class VariableFromConstantJsonldRead
 
     public function setValue(?string $value): self
     {
+        $this->initialized['value'] = true;
         $this->value = $value;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getEnvironment()
+    public function getEnvironment(): ?EnvironmentJsonldRead
     {
         return $this->environment;
     }
 
-    public function setEnvironment(mixed $environment): self
+    public function setEnvironment(?EnvironmentJsonldRead $environment): self
     {
+        $this->initialized['environment'] = true;
         $this->environment = $environment;
 
         return $this;
@@ -110,6 +124,7 @@ class VariableFromConstantJsonldRead
 
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;

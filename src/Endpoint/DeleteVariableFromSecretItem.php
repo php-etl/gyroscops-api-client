@@ -43,15 +43,19 @@ class DeleteVariableFromSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEnd
     /**
      * {@inheritdoc}
      *
+     * @return null
+     *
      * @throws \Gyroscops\Api\Exception\DeleteVariableFromSecretItemNotFoundException
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (204 === $status) {
             return null;
         }
         if (404 === $status) {
-            throw new \Gyroscops\Api\Exception\DeleteVariableFromSecretItemNotFoundException();
+            throw new \Gyroscops\Api\Exception\DeleteVariableFromSecretItemNotFoundException($response);
         }
     }
 

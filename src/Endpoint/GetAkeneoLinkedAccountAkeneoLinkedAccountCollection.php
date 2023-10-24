@@ -14,6 +14,7 @@ class GetAkeneoLinkedAccountAkeneoLinkedAccountCollection extends \Gyroscops\Api
 {
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $akeneoUserId;
+    protected $accept;
 
     /**
      * Check if an akeneo user exists in the database.
@@ -22,11 +23,14 @@ class GetAkeneoLinkedAccountAkeneoLinkedAccountCollection extends \Gyroscops\Api
      *
      *     @var int $page The collection page number
      * }
+     *
+     * @param array $accept Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(string $akeneoUserId, array $queryParameters = [])
+    public function __construct(string $akeneoUserId, array $queryParameters = [], array $accept = [])
     {
         $this->akeneoUserId = $akeneoUserId;
         $this->queryParameters = $queryParameters;
+        $this->accept = $accept;
     }
 
     public function getMethod(): string
@@ -46,7 +50,11 @@ class GetAkeneoLinkedAccountAkeneoLinkedAccountCollection extends \Gyroscops\Api
 
     public function getExtraHeaders(): array
     {
-        return ['Accept' => ['application/json']];
+        if (empty($this->accept)) {
+            return ['Accept' => ['application/ld+json', 'application/json']];
+        }
+
+        return $this->accept;
     }
 
     protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
@@ -55,7 +63,7 @@ class GetAkeneoLinkedAccountAkeneoLinkedAccountCollection extends \Gyroscops\Api
         $optionsResolver->setDefined(['page']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults(['page' => 1]);
-        $optionsResolver->setAllowedTypes('page', ['int']);
+        $optionsResolver->addAllowedTypes('page', ['int']);
 
         return $optionsResolver;
     }
@@ -63,12 +71,19 @@ class GetAkeneoLinkedAccountAkeneoLinkedAccountCollection extends \Gyroscops\Api
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\AkeneoLinkedAccount[]|null
+     * @return \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountAkeneoUserIdGetLdjsonResponse200|\Gyroscops\Api\Model\AkeneoLinkedAccount[]|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\AkeneoLinkedAccount[]', 'json');
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (200 === $status) {
+            if (mb_strpos($contentType, 'application/ld+json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\GatewayAkeneoLinkedAccountAkeneoUserIdGetLdjsonResponse200', 'json');
+            }
+            if (mb_strpos($contentType, 'application/json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\AkeneoLinkedAccount[]', 'json');
+            }
         }
     }
 

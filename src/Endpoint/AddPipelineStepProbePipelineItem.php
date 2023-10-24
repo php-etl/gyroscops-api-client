@@ -14,17 +14,20 @@ class AddPipelineStepProbePipelineItem extends \Gyroscops\Api\Runtime\Client\Bas
 {
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $id;
+    protected $accept;
 
     /**
      * Adds a probe to a step.
      *
-     * @param string                                                                                                                               $id          Resource identifier
-     * @param \Gyroscops\Api\Model\PipelineAddPipelineStepProbCommandInputJsonld|\Gyroscops\Api\Model\PipelineAddPipelineStepProbCommandInput|null $requestBody
+     * @param string                                                                                                                                 $id          Resource identifier
+     * @param \Gyroscops\Api\Model\PipelineAddPipelineStepProbeCommandInputJsonld|\Gyroscops\Api\Model\PipelineAddPipelineStepProbeCommandInput|null $requestBody
+     * @param array                                                                                                                                  $accept      Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(string $id, $requestBody = null)
+    public function __construct(string $id, $requestBody = null, array $accept = [])
     {
         $this->id = $id;
         $this->body = $requestBody;
+        $this->accept = $accept;
     }
 
     public function getMethod(): string
@@ -34,18 +37,18 @@ class AddPipelineStepProbePipelineItem extends \Gyroscops\Api\Runtime\Client\Bas
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/runtime/pipeline/{id}/step/{code}/probe');
+        return str_replace(['{id}'], [$this->id], '/runtime/pipelines/{id}/steps/{code}/probe');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineAddPipelineStepProbCommandInputJsonld) {
-            return [['Content-Type' => ['application/ld+json']], $this->body];
+        if ($this->body instanceof \Gyroscops\Api\Model\PipelineAddPipelineStepProbeCommandInputJsonld) {
+            return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineAddPipelineStepProbCommandInput) {
+        if ($this->body instanceof \Gyroscops\Api\Model\PipelineAddPipelineStepProbeCommandInput) {
             return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineAddPipelineStepProbCommandInput) {
+        if ($this->body instanceof \Gyroscops\Api\Model\PipelineAddPipelineStepProbeCommandInput) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -54,29 +57,42 @@ class AddPipelineStepProbePipelineItem extends \Gyroscops\Api\Runtime\Client\Bas
 
     public function getExtraHeaders(): array
     {
-        return ['Accept' => ['application/json']];
+        if (empty($this->accept)) {
+            return ['Accept' => ['application/ld+json', 'application/json']];
+        }
+
+        return $this->accept;
     }
 
     /**
      * {@inheritdoc}
      *
+     * @return \Gyroscops\Api\Model\PipelineAddPipelineStepProbeCommandJsonldRead|null
+     *
      * @throws \Gyroscops\Api\Exception\AddPipelineStepProbePipelineItemBadRequestException
      * @throws \Gyroscops\Api\Exception\AddPipelineStepProbePipelineItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\AddPipelineStepProbePipelineItemNotFoundException
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (202 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return json_decode($body, null, 512, \JSON_THROW_ON_ERROR);
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (202 === $status) {
+            if (mb_strpos($contentType, 'application/ld+json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\PipelineAddPipelineStepProbeCommandJsonldRead', 'json');
+            }
+            if (mb_strpos($contentType, 'application/json') !== false) {
+                return json_decode($body);
+            }
         }
         if (400 === $status) {
-            throw new \Gyroscops\Api\Exception\AddPipelineStepProbePipelineItemBadRequestException();
+            throw new \Gyroscops\Api\Exception\AddPipelineStepProbePipelineItemBadRequestException($response);
         }
         if (422 === $status) {
-            throw new \Gyroscops\Api\Exception\AddPipelineStepProbePipelineItemUnprocessableEntityException();
+            throw new \Gyroscops\Api\Exception\AddPipelineStepProbePipelineItemUnprocessableEntityException($response);
         }
         if (404 === $status) {
-            throw new \Gyroscops\Api\Exception\AddPipelineStepProbePipelineItemNotFoundException();
+            throw new \Gyroscops\Api\Exception\AddPipelineStepProbePipelineItemNotFoundException($response);
         }
     }
 

@@ -10,22 +10,23 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class ConfigurationChangeConfigurationValueInput
+class ConfigurationChangeConfigurationValueInput extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string[]|null
      */
     protected $contents;
     /**
-     * @var mixed|null
-     */
-    protected $organization;
-    /**
-     * @var mixed|null
-     */
-    protected $workspace;
-    /**
-     * @var mixed|null
+     * @var mixed[]|null
      */
     protected $iterator;
 
@@ -42,51 +43,26 @@ class ConfigurationChangeConfigurationValueInput
      */
     public function setContents(?iterable $contents): self
     {
+        $this->initialized['contents'] = true;
         $this->contents = $contents;
 
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return mixed[]|null
      */
-    public function getOrganization()
-    {
-        return $this->organization;
-    }
-
-    public function setOrganization(mixed $organization): self
-    {
-        $this->organization = $organization;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getWorkspace()
-    {
-        return $this->workspace;
-    }
-
-    public function setWorkspace(mixed $workspace): self
-    {
-        $this->workspace = $workspace;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getIterator()
+    public function getIterator(): ?iterable
     {
         return $this->iterator;
     }
 
-    public function setIterator(mixed $iterator): self
+    /**
+     * @param mixed[]|null $iterator
+     */
+    public function setIterator(?iterable $iterator): self
     {
+        $this->initialized['iterator'] = true;
         $this->iterator = $iterator;
 
         return $this;

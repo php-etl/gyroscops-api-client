@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class SubscriptionOption
+class SubscriptionOption extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -36,6 +45,7 @@ class SubscriptionOption
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -48,6 +58,7 @@ class SubscriptionOption
 
     public function setSubscription(?string $subscription): self
     {
+        $this->initialized['subscription'] = true;
         $this->subscription = $subscription;
 
         return $this;
@@ -60,6 +71,7 @@ class SubscriptionOption
 
     public function setOption(?string $option): self
     {
+        $this->initialized['option'] = true;
         $this->option = $option;
 
         return $this;
@@ -72,6 +84,7 @@ class SubscriptionOption
 
     public function setPrice(?Price $price): self
     {
+        $this->initialized['price'] = true;
         $this->price = $price;
 
         return $this;

@@ -10,10 +10,19 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class VariableRead
+class VariableRead extends \ArrayObject
 {
     /**
-     * @var mixed|null
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
+     * @var EnvironmentRead|null
      */
     protected $environment;
     /**
@@ -21,16 +30,14 @@ class VariableRead
      */
     protected $name;
 
-    /**
-     * @return mixed
-     */
-    public function getEnvironment()
+    public function getEnvironment(): ?EnvironmentRead
     {
         return $this->environment;
     }
 
-    public function setEnvironment(mixed $environment): self
+    public function setEnvironment(?EnvironmentRead $environment): self
     {
+        $this->initialized['environment'] = true;
         $this->environment = $environment;
 
         return $this;
@@ -43,6 +50,7 @@ class VariableRead
 
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;

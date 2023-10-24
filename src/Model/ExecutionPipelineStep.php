@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class ExecutionPipelineStep
+class ExecutionPipelineStep extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -32,6 +41,7 @@ class ExecutionPipelineStep
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -44,6 +54,7 @@ class ExecutionPipelineStep
 
     public function setPipeline(?AbstractPipeline $pipeline): self
     {
+        $this->initialized['pipeline'] = true;
         $this->pipeline = $pipeline;
 
         return $this;
@@ -62,6 +73,7 @@ class ExecutionPipelineStep
      */
     public function setMetrics(?array $metrics): self
     {
+        $this->initialized['metrics'] = true;
         $this->metrics = $metrics;
 
         return $this;

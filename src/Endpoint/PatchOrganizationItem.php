@@ -14,16 +14,19 @@ class PatchOrganizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
 {
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $id;
+    protected $accept;
 
     /**
      * Updates the Organization resource.
      *
-     * @param string $id Resource identifier
+     * @param string $id     Resource identifier
+     * @param array  $accept Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(string $id, ?\Gyroscops\Api\Model\Organization $requestBody = null)
+    public function __construct(string $id, ?\Gyroscops\Api\Model\Organization $requestBody = null, array $accept = [])
     {
         $this->id = $id;
         $this->body = $requestBody;
+        $this->accept = $accept;
     }
 
     public function getMethod(): string
@@ -33,13 +36,13 @@ class PatchOrganizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/authentication/organization/{id}');
+        return str_replace(['{id}'], [$this->id], '/authentication/organizations/{id}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         if ($this->body instanceof \Gyroscops\Api\Model\Organization) {
-            return [['Content-Type' => ['application/merge-patch+json']], $this->body];
+            return [['Content-Type' => ['application/merge-patch+json']], $serializer->serialize($this->body, 'json')];
         }
 
         return [[], null];
@@ -47,31 +50,42 @@ class PatchOrganizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
 
     public function getExtraHeaders(): array
     {
-        return ['Accept' => ['application/json']];
+        if (empty($this->accept)) {
+            return ['Accept' => ['application/ld+json', 'application/json']];
+        }
+
+        return $this->accept;
     }
 
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\Organization|null
+     * @return \Gyroscops\Api\Model\OrganizationJsonld|\Gyroscops\Api\Model\Organization|null
      *
      * @throws \Gyroscops\Api\Exception\PatchOrganizationItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PatchOrganizationItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\PatchOrganizationItemNotFoundException
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return $serializer->deserialize($body, \Gyroscops\Api\Model\Organization::class, 'json');
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (200 === $status) {
+            if (mb_strpos($contentType, 'application/ld+json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\OrganizationJsonld', 'json');
+            }
+            if (mb_strpos($contentType, 'application/json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Organization', 'json');
+            }
         }
         if (400 === $status) {
-            throw new \Gyroscops\Api\Exception\PatchOrganizationItemBadRequestException();
+            throw new \Gyroscops\Api\Exception\PatchOrganizationItemBadRequestException($response);
         }
         if (422 === $status) {
-            throw new \Gyroscops\Api\Exception\PatchOrganizationItemUnprocessableEntityException();
+            throw new \Gyroscops\Api\Exception\PatchOrganizationItemUnprocessableEntityException($response);
         }
         if (404 === $status) {
-            throw new \Gyroscops\Api\Exception\PatchOrganizationItemNotFoundException();
+            throw new \Gyroscops\Api\Exception\PatchOrganizationItemNotFoundException($response);
         }
     }
 

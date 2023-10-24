@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -24,22 +25,19 @@ class MoneyJsonldNormalizer implements DenormalizerInterface, NormalizerInterfac
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+    use ValidatorTrait;
 
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return \Gyroscops\Api\Model\MoneyJsonld::class === $type;
+        return $type === 'Gyroscops\\Api\\Model\\MoneyJsonld';
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        return \is_object($data) && \Gyroscops\Api\Model\MoneyJsonld::class === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\MoneyJsonld';
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,112 +52,134 @@ class MoneyJsonldNormalizer implements DenormalizerInterface, NormalizerInterfac
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
+        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
             $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+            unset($data['@context']);
+        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
             $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
+        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+            unset($data['@id']);
+        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
+        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+            unset($data['@type']);
+        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
             $object->setType(null);
         }
-        if (\array_key_exists('amount', $data) && null !== $data['amount']) {
-            $object->setAmount($this->denormalizer->denormalize($data['amount'], \Gyroscops\Api\Model\BigDecimalJsonld::class, 'json', $context));
-        } elseif (\array_key_exists('amount', $data) && null === $data['amount']) {
+        if (\array_key_exists('amount', $data) && $data['amount'] !== null) {
+            $object->setAmount($this->denormalizer->denormalize($data['amount'], 'Gyroscops\\Api\\Model\\BigDecimalJsonld', 'json', $context));
+            unset($data['amount']);
+        } elseif (\array_key_exists('amount', $data) && $data['amount'] === null) {
             $object->setAmount(null);
         }
-        if (\array_key_exists('currency', $data) && null !== $data['currency']) {
-            $object->setCurrency($this->denormalizer->denormalize($data['currency'], \Gyroscops\Api\Model\CurrencyJsonld::class, 'json', $context));
-        } elseif (\array_key_exists('currency', $data) && null === $data['currency']) {
+        if (\array_key_exists('currency', $data) && $data['currency'] !== null) {
+            $object->setCurrency($this->denormalizer->denormalize($data['currency'], 'Gyroscops\\Api\\Model\\CurrencyJsonld', 'json', $context));
+            unset($data['currency']);
+        } elseif (\array_key_exists('currency', $data) && $data['currency'] === null) {
             $object->setCurrency(null);
         }
-        if (\array_key_exists('context', $data) && null !== $data['context']) {
-            $object->setContext2($this->denormalizer->denormalize($data['context'], \Gyroscops\Api\Model\ContextJsonld::class, 'json', $context));
-        } elseif (\array_key_exists('context', $data) && null === $data['context']) {
+        if (\array_key_exists('context', $data) && $data['context'] !== null) {
+            $object->setContext2($this->denormalizer->denormalize($data['context'], 'Gyroscops\\Api\\Model\\ContextJsonld', 'json', $context));
+            unset($data['context']);
+        } elseif (\array_key_exists('context', $data) && $data['context'] === null) {
             $object->setContext2(null);
         }
-        if (\array_key_exists('minorAmount', $data) && null !== $data['minorAmount']) {
-            $object->setMinorAmount($this->denormalizer->denormalize($data['minorAmount'], \Gyroscops\Api\Model\BigDecimalJsonld::class, 'json', $context));
-        } elseif (\array_key_exists('minorAmount', $data) && null === $data['minorAmount']) {
+        if (\array_key_exists('minorAmount', $data) && $data['minorAmount'] !== null) {
+            $object->setMinorAmount($this->denormalizer->denormalize($data['minorAmount'], 'Gyroscops\\Api\\Model\\BigDecimalJsonld', 'json', $context));
+            unset($data['minorAmount']);
+        } elseif (\array_key_exists('minorAmount', $data) && $data['minorAmount'] === null) {
             $object->setMinorAmount(null);
         }
-        if (\array_key_exists('unscaledAmount', $data) && null !== $data['unscaledAmount']) {
-            $object->setUnscaledAmount($this->denormalizer->denormalize($data['unscaledAmount'], \Gyroscops\Api\Model\BigIntegerJsonld::class, 'json', $context));
-        } elseif (\array_key_exists('unscaledAmount', $data) && null === $data['unscaledAmount']) {
+        if (\array_key_exists('unscaledAmount', $data) && $data['unscaledAmount'] !== null) {
+            $object->setUnscaledAmount($this->denormalizer->denormalize($data['unscaledAmount'], 'Gyroscops\\Api\\Model\\BigIntegerJsonld', 'json', $context));
+            unset($data['unscaledAmount']);
+        } elseif (\array_key_exists('unscaledAmount', $data) && $data['unscaledAmount'] === null) {
             $object->setUnscaledAmount(null);
         }
-        if (\array_key_exists('amounts', $data) && null !== $data['amounts']) {
+        if (\array_key_exists('amounts', $data) && $data['amounts'] !== null) {
             $values = [];
             foreach ($data['amounts'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, \Gyroscops\Api\Model\BigNumberJsonld::class, 'json', $context);
+                $values[] = $this->denormalizer->denormalize($value, 'Gyroscops\\Api\\Model\\BigNumberJsonld', 'json', $context);
             }
             $object->setAmounts($values);
-        } elseif (\array_key_exists('amounts', $data) && null === $data['amounts']) {
+            unset($data['amounts']);
+        } elseif (\array_key_exists('amounts', $data) && $data['amounts'] === null) {
             $object->setAmounts(null);
         }
-        if (\array_key_exists('sign', $data) && null !== $data['sign']) {
+        if (\array_key_exists('sign', $data) && $data['sign'] !== null) {
             $object->setSign($data['sign']);
-        } elseif (\array_key_exists('sign', $data) && null === $data['sign']) {
+            unset($data['sign']);
+        } elseif (\array_key_exists('sign', $data) && $data['sign'] === null) {
             $object->setSign(null);
         }
-        if (\array_key_exists('zero', $data) && null !== $data['zero']) {
+        if (\array_key_exists('zero', $data) && $data['zero'] !== null) {
             $object->setZero($data['zero']);
-        } elseif (\array_key_exists('zero', $data) && null === $data['zero']) {
+            unset($data['zero']);
+        } elseif (\array_key_exists('zero', $data) && $data['zero'] === null) {
             $object->setZero(null);
         }
-        if (\array_key_exists('negative', $data) && null !== $data['negative']) {
+        if (\array_key_exists('negative', $data) && $data['negative'] !== null) {
             $object->setNegative($data['negative']);
-        } elseif (\array_key_exists('negative', $data) && null === $data['negative']) {
+            unset($data['negative']);
+        } elseif (\array_key_exists('negative', $data) && $data['negative'] === null) {
             $object->setNegative(null);
         }
-        if (\array_key_exists('negativeOrZero', $data) && null !== $data['negativeOrZero']) {
+        if (\array_key_exists('negativeOrZero', $data) && $data['negativeOrZero'] !== null) {
             $object->setNegativeOrZero($data['negativeOrZero']);
-        } elseif (\array_key_exists('negativeOrZero', $data) && null === $data['negativeOrZero']) {
+            unset($data['negativeOrZero']);
+        } elseif (\array_key_exists('negativeOrZero', $data) && $data['negativeOrZero'] === null) {
             $object->setNegativeOrZero(null);
         }
-        if (\array_key_exists('positive', $data) && null !== $data['positive']) {
+        if (\array_key_exists('positive', $data) && $data['positive'] !== null) {
             $object->setPositive($data['positive']);
-        } elseif (\array_key_exists('positive', $data) && null === $data['positive']) {
+            unset($data['positive']);
+        } elseif (\array_key_exists('positive', $data) && $data['positive'] === null) {
             $object->setPositive(null);
         }
-        if (\array_key_exists('positiveOrZero', $data) && null !== $data['positiveOrZero']) {
+        if (\array_key_exists('positiveOrZero', $data) && $data['positiveOrZero'] !== null) {
             $object->setPositiveOrZero($data['positiveOrZero']);
-        } elseif (\array_key_exists('positiveOrZero', $data) && null === $data['positiveOrZero']) {
+            unset($data['positiveOrZero']);
+        } elseif (\array_key_exists('positiveOrZero', $data) && $data['positiveOrZero'] === null) {
             $object->setPositiveOrZero(null);
+        }
+        foreach ($data as $key => $value_1) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value_1;
+            }
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getAmount()) {
+        if ($object->isInitialized('amount') && null !== $object->getAmount()) {
             $data['amount'] = $this->normalizer->normalize($object->getAmount(), 'json', $context);
         }
-        if (null !== $object->getCurrency()) {
+        if ($object->isInitialized('currency') && null !== $object->getCurrency()) {
             $data['currency'] = $this->normalizer->normalize($object->getCurrency(), 'json', $context);
         }
-        if (null !== $object->getContext2()) {
+        if ($object->isInitialized('context2') && null !== $object->getContext2()) {
             $data['context'] = $this->normalizer->normalize($object->getContext2(), 'json', $context);
         }
-        if (null !== $object->getMinorAmount()) {
+        if ($object->isInitialized('minorAmount') && null !== $object->getMinorAmount()) {
             $data['minorAmount'] = $this->normalizer->normalize($object->getMinorAmount(), 'json', $context);
         }
-        if (null !== $object->getUnscaledAmount()) {
+        if ($object->isInitialized('unscaledAmount') && null !== $object->getUnscaledAmount()) {
             $data['unscaledAmount'] = $this->normalizer->normalize($object->getUnscaledAmount(), 'json', $context);
+        }
+        foreach ($object as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value;
+            }
         }
 
         return $data;

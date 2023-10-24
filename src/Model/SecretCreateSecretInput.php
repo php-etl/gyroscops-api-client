@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class SecretCreateSecretInput
+class SecretCreateSecretInput extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -24,18 +33,6 @@ class SecretCreateSecretInput
      * @var string[]|null
      */
     protected $contents;
-    /**
-     * @var mixed|null
-     */
-    protected $organization;
-    /**
-     * @var mixed|null
-     */
-    protected $workspace;
-    /**
-     * @var mixed|null
-     */
-    protected $iterator;
 
     public function getName(): ?string
     {
@@ -44,6 +41,7 @@ class SecretCreateSecretInput
 
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -56,6 +54,7 @@ class SecretCreateSecretInput
 
     public function setDescription(?string $description): self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
 
         return $this;
@@ -74,52 +73,8 @@ class SecretCreateSecretInput
      */
     public function setContents(?iterable $contents): self
     {
+        $this->initialized['contents'] = true;
         $this->contents = $contents;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getOrganization()
-    {
-        return $this->organization;
-    }
-
-    public function setOrganization(mixed $organization): self
-    {
-        $this->organization = $organization;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getWorkspace()
-    {
-        return $this->workspace;
-    }
-
-    public function setWorkspace(mixed $workspace): self
-    {
-        $this->workspace = $workspace;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getIterator()
-    {
-        return $this->iterator;
-    }
-
-    public function setIterator(mixed $iterator): self
-    {
-        $this->iterator = $iterator;
 
         return $this;
     }

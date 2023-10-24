@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class MoneyJsonld
+class MoneyJsonld extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var mixed|null
      */
@@ -95,8 +104,12 @@ class MoneyJsonld
         return $this->context;
     }
 
-    public function setContext(mixed $context): self
+    /**
+     * @param mixed $context
+     */
+    public function setContext($context): self
     {
+        $this->initialized['context'] = true;
         $this->context = $context;
 
         return $this;
@@ -109,6 +122,7 @@ class MoneyJsonld
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -121,6 +135,7 @@ class MoneyJsonld
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -133,6 +148,7 @@ class MoneyJsonld
 
     public function setAmount(?BigDecimalJsonld $amount): self
     {
+        $this->initialized['amount'] = true;
         $this->amount = $amount;
 
         return $this;
@@ -145,6 +161,7 @@ class MoneyJsonld
 
     public function setCurrency(?CurrencyJsonld $currency): self
     {
+        $this->initialized['currency'] = true;
         $this->currency = $currency;
 
         return $this;
@@ -157,6 +174,7 @@ class MoneyJsonld
 
     public function setContext2(?ContextJsonld $context2): self
     {
+        $this->initialized['context2'] = true;
         $this->context2 = $context2;
 
         return $this;
@@ -169,6 +187,7 @@ class MoneyJsonld
 
     public function setMinorAmount(?BigDecimalJsonld $minorAmount): self
     {
+        $this->initialized['minorAmount'] = true;
         $this->minorAmount = $minorAmount;
 
         return $this;
@@ -181,6 +200,7 @@ class MoneyJsonld
 
     public function setUnscaledAmount(?BigIntegerJsonld $unscaledAmount): self
     {
+        $this->initialized['unscaledAmount'] = true;
         $this->unscaledAmount = $unscaledAmount;
 
         return $this;
@@ -203,6 +223,7 @@ class MoneyJsonld
      */
     public function setAmounts(?array $amounts): self
     {
+        $this->initialized['amounts'] = true;
         $this->amounts = $amounts;
 
         return $this;
@@ -221,6 +242,7 @@ class MoneyJsonld
      */
     public function setSign(?int $sign): self
     {
+        $this->initialized['sign'] = true;
         $this->sign = $sign;
 
         return $this;
@@ -239,6 +261,7 @@ class MoneyJsonld
      */
     public function setZero(?bool $zero): self
     {
+        $this->initialized['zero'] = true;
         $this->zero = $zero;
 
         return $this;
@@ -257,6 +280,7 @@ class MoneyJsonld
      */
     public function setNegative(?bool $negative): self
     {
+        $this->initialized['negative'] = true;
         $this->negative = $negative;
 
         return $this;
@@ -275,6 +299,7 @@ class MoneyJsonld
      */
     public function setNegativeOrZero(?bool $negativeOrZero): self
     {
+        $this->initialized['negativeOrZero'] = true;
         $this->negativeOrZero = $negativeOrZero;
 
         return $this;
@@ -293,6 +318,7 @@ class MoneyJsonld
      */
     public function setPositive(?bool $positive): self
     {
+        $this->initialized['positive'] = true;
         $this->positive = $positive;
 
         return $this;
@@ -311,6 +337,7 @@ class MoneyJsonld
      */
     public function setPositiveOrZero(?bool $positiveOrZero): self
     {
+        $this->initialized['positiveOrZero'] = true;
         $this->positiveOrZero = $positiveOrZero;
 
         return $this;

@@ -14,15 +14,18 @@ class GetCompilationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impl
 {
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $id;
+    protected $accept;
 
     /**
      * Retrieves a Compilation resource.
      *
-     * @param string $id Resource identifier
+     * @param string $id     Resource identifier
+     * @param array  $accept Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(string $id)
+    public function __construct(string $id, array $accept = [])
     {
         $this->id = $id;
+        $this->accept = $accept;
     }
 
     public function getMethod(): string
@@ -32,7 +35,7 @@ class GetCompilationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impl
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/runtime/compilation/{id}');
+        return str_replace(['{id}'], [$this->id], '/runtime/compilations/{id}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
@@ -42,23 +45,34 @@ class GetCompilationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impl
 
     public function getExtraHeaders(): array
     {
-        return ['Accept' => ['application/json']];
+        if (empty($this->accept)) {
+            return ['Accept' => ['application/ld+json', 'application/json']];
+        }
+
+        return $this->accept;
     }
 
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\Compilation|null
+     * @return \Gyroscops\Api\Model\CompilationJsonld|\Gyroscops\Api\Model\Compilation|null
      *
      * @throws \Gyroscops\Api\Exception\GetCompilationItemNotFoundException
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return $serializer->deserialize($body, \Gyroscops\Api\Model\Compilation::class, 'json');
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (200 === $status) {
+            if (mb_strpos($contentType, 'application/ld+json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\CompilationJsonld', 'json');
+            }
+            if (mb_strpos($contentType, 'application/json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Compilation', 'json');
+            }
         }
         if (404 === $status) {
-            throw new \Gyroscops\Api\Exception\GetCompilationItemNotFoundException();
+            throw new \Gyroscops\Api\Exception\GetCompilationItemNotFoundException($response);
         }
     }
 

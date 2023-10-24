@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class ReferralRequestReferralRequestInput
+class ReferralRequestReferralRequestInput extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -44,6 +53,7 @@ class ReferralRequestReferralRequestInput
 
     public function setEmail(?string $email): self
     {
+        $this->initialized['email'] = true;
         $this->email = $email;
 
         return $this;
@@ -56,6 +66,7 @@ class ReferralRequestReferralRequestInput
 
     public function setFirstName(?string $firstName): self
     {
+        $this->initialized['firstName'] = true;
         $this->firstName = $firstName;
 
         return $this;
@@ -68,6 +79,7 @@ class ReferralRequestReferralRequestInput
 
     public function setLastName(?string $lastName): self
     {
+        $this->initialized['lastName'] = true;
         $this->lastName = $lastName;
 
         return $this;
@@ -80,6 +92,7 @@ class ReferralRequestReferralRequestInput
 
     public function setUsername(?string $username): self
     {
+        $this->initialized['username'] = true;
         $this->username = $username;
 
         return $this;
@@ -92,6 +105,7 @@ class ReferralRequestReferralRequestInput
 
     public function setCompanyName(?string $companyName): self
     {
+        $this->initialized['companyName'] = true;
         $this->companyName = $companyName;
 
         return $this;
@@ -104,6 +118,7 @@ class ReferralRequestReferralRequestInput
 
     public function setReferralCode(?string $referralCode): self
     {
+        $this->initialized['referralCode'] = true;
         $this->referralCode = $referralCode;
 
         return $this;

@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class ActionJsonldRead
+class ActionJsonldRead extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -28,6 +37,18 @@ class ActionJsonldRead
      * @var string|null
      */
     protected $id2;
+    /**
+     * @var string|null
+     */
+    protected $code;
+    /**
+     * @var string|null
+     */
+    protected $label;
+    /**
+     * @var string[]|null
+     */
+    protected $configuration;
 
     public function getId(): ?string
     {
@@ -36,6 +57,7 @@ class ActionJsonldRead
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -48,6 +70,7 @@ class ActionJsonldRead
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -61,8 +84,12 @@ class ActionJsonldRead
         return $this->context;
     }
 
-    public function setContext(mixed $context): self
+    /**
+     * @param mixed $context
+     */
+    public function setContext($context): self
     {
+        $this->initialized['context'] = true;
         $this->context = $context;
 
         return $this;
@@ -75,7 +102,53 @@ class ActionJsonldRead
 
     public function setId2(?string $id2): self
     {
+        $this->initialized['id2'] = true;
         $this->id2 = $id2;
+
+        return $this;
+    }
+
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    public function setCode(?string $code): self
+    {
+        $this->initialized['code'] = true;
+        $this->code = $code;
+
+        return $this;
+    }
+
+    public function getLabel(): ?string
+    {
+        return $this->label;
+    }
+
+    public function setLabel(?string $label): self
+    {
+        $this->initialized['label'] = true;
+        $this->label = $label;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getConfiguration(): ?array
+    {
+        return $this->configuration;
+    }
+
+    /**
+     * @param string[]|null $configuration
+     */
+    public function setConfiguration(?array $configuration): self
+    {
+        $this->initialized['configuration'] = true;
+        $this->configuration = $configuration;
 
         return $this;
     }

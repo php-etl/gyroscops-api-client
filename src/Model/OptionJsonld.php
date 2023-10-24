@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class OptionJsonld
+class OptionJsonld extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -43,11 +52,35 @@ class OptionJsonld
     /**
      * @var string|null
      */
+    protected $shortDescription;
+    /**
+     * @var string|null
+     */
     protected $description;
     /**
-     * @var PriceJsonld|null
+     * @var string[]|null
      */
-    protected $price;
+    protected $features;
+    /**
+     * @var PriceJsonld[]|null
+     */
+    protected $priceList;
+    /**
+     * @var int|null
+     */
+    protected $rank;
+    /**
+     * @var bool|null
+     */
+    protected $active;
+    /**
+     * @var \DateTime|null
+     */
+    protected $activeFrom;
+    /**
+     * @var \DateTime|null
+     */
+    protected $activeUntil;
 
     public function getId(): ?string
     {
@@ -56,6 +89,7 @@ class OptionJsonld
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -68,6 +102,7 @@ class OptionJsonld
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -80,6 +115,7 @@ class OptionJsonld
 
     public function setOffer(?string $offer): self
     {
+        $this->initialized['offer'] = true;
         $this->offer = $offer;
 
         return $this;
@@ -92,6 +128,7 @@ class OptionJsonld
 
     public function setId2(?string $id2): self
     {
+        $this->initialized['id2'] = true;
         $this->id2 = $id2;
 
         return $this;
@@ -104,6 +141,7 @@ class OptionJsonld
 
     public function setSku(?string $sku): self
     {
+        $this->initialized['sku'] = true;
         $this->sku = $sku;
 
         return $this;
@@ -116,6 +154,7 @@ class OptionJsonld
 
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -128,7 +167,21 @@ class OptionJsonld
 
     public function setSlug(?string $slug): self
     {
+        $this->initialized['slug'] = true;
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getShortDescription(): ?string
+    {
+        return $this->shortDescription;
+    }
+
+    public function setShortDescription(?string $shortDescription): self
+    {
+        $this->initialized['shortDescription'] = true;
+        $this->shortDescription = $shortDescription;
 
         return $this;
     }
@@ -140,19 +193,98 @@ class OptionJsonld
 
     public function setDescription(?string $description): self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
 
         return $this;
     }
 
-    public function getPrice(): ?PriceJsonld
+    /**
+     * @return string[]|null
+     */
+    public function getFeatures(): ?array
     {
-        return $this->price;
+        return $this->features;
     }
 
-    public function setPrice(?PriceJsonld $price): self
+    /**
+     * @param string[]|null $features
+     */
+    public function setFeatures(?array $features): self
     {
-        $this->price = $price;
+        $this->initialized['features'] = true;
+        $this->features = $features;
+
+        return $this;
+    }
+
+    /**
+     * @return PriceJsonld[]|null
+     */
+    public function getPriceList(): ?array
+    {
+        return $this->priceList;
+    }
+
+    /**
+     * @param PriceJsonld[]|null $priceList
+     */
+    public function setPriceList(?array $priceList): self
+    {
+        $this->initialized['priceList'] = true;
+        $this->priceList = $priceList;
+
+        return $this;
+    }
+
+    public function getRank(): ?int
+    {
+        return $this->rank;
+    }
+
+    public function setRank(?int $rank): self
+    {
+        $this->initialized['rank'] = true;
+        $this->rank = $rank;
+
+        return $this;
+    }
+
+    public function getActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(?bool $active): self
+    {
+        $this->initialized['active'] = true;
+        $this->active = $active;
+
+        return $this;
+    }
+
+    public function getActiveFrom(): ?\DateTime
+    {
+        return $this->activeFrom;
+    }
+
+    public function setActiveFrom(?\DateTime $activeFrom): self
+    {
+        $this->initialized['activeFrom'] = true;
+        $this->activeFrom = $activeFrom;
+
+        return $this;
+    }
+
+    public function getActiveUntil(): ?\DateTime
+    {
+        return $this->activeUntil;
+    }
+
+    public function setActiveUntil(?\DateTime $activeUntil): self
+    {
+        $this->initialized['activeUntil'] = true;
+        $this->activeUntil = $activeUntil;
 
         return $this;
     }

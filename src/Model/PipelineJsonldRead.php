@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class PipelineJsonldRead
+class PipelineJsonldRead extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -25,6 +34,10 @@ class PipelineJsonldRead
      */
     protected $context;
     /**
+     * @var int|null
+     */
+    protected $currentVersion;
+    /**
      * @var bool|null
      */
     protected $isSoftDeleted;
@@ -32,26 +45,6 @@ class PipelineJsonldRead
      * @var \DateTime|null
      */
     protected $compiledAt;
-    /**
-     * @var string|null
-     */
-    protected $id2;
-    /**
-     * @var string|null
-     */
-    protected $code;
-    /**
-     * @var string|null
-     */
-    protected $label;
-    /**
-     * @var string|null
-     */
-    protected $runtimeType;
-    /**
-     * @var string[]|null
-     */
-    protected $runtime;
     /**
      * @var string[]|null
      */
@@ -69,7 +62,23 @@ class PipelineJsonldRead
      */
     protected $auths;
     /**
+     * @var string|null
+     */
+    protected $id2;
+    /**
+     * @var string|null
+     */
+    protected $code;
+    /**
+     * @var string|null
+     */
+    protected $label;
+    /**
      * @var string[]|null
+     */
+    protected $runtime;
+    /**
+     * @var PipelineStepJsonldRead[]|null
      */
     protected $steps;
 
@@ -80,6 +89,7 @@ class PipelineJsonldRead
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -92,6 +102,7 @@ class PipelineJsonldRead
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -105,9 +116,26 @@ class PipelineJsonldRead
         return $this->context;
     }
 
-    public function setContext(mixed $context): self
+    /**
+     * @param mixed $context
+     */
+    public function setContext($context): self
     {
+        $this->initialized['context'] = true;
         $this->context = $context;
+
+        return $this;
+    }
+
+    public function getCurrentVersion(): ?int
+    {
+        return $this->currentVersion;
+    }
+
+    public function setCurrentVersion(?int $currentVersion): self
+    {
+        $this->initialized['currentVersion'] = true;
+        $this->currentVersion = $currentVersion;
 
         return $this;
     }
@@ -119,6 +147,7 @@ class PipelineJsonldRead
 
     public function setIsSoftDeleted(?bool $isSoftDeleted): self
     {
+        $this->initialized['isSoftDeleted'] = true;
         $this->isSoftDeleted = $isSoftDeleted;
 
         return $this;
@@ -131,73 +160,8 @@ class PipelineJsonldRead
 
     public function setCompiledAt(?\DateTime $compiledAt): self
     {
+        $this->initialized['compiledAt'] = true;
         $this->compiledAt = $compiledAt;
-
-        return $this;
-    }
-
-    public function getId2(): ?string
-    {
-        return $this->id2;
-    }
-
-    public function setId2(?string $id2): self
-    {
-        $this->id2 = $id2;
-
-        return $this;
-    }
-
-    public function getCode(): ?string
-    {
-        return $this->code;
-    }
-
-    public function setCode(?string $code): self
-    {
-        $this->code = $code;
-
-        return $this;
-    }
-
-    public function getLabel(): ?string
-    {
-        return $this->label;
-    }
-
-    public function setLabel(?string $label): self
-    {
-        $this->label = $label;
-
-        return $this;
-    }
-
-    public function getRuntimeType(): ?string
-    {
-        return $this->runtimeType;
-    }
-
-    public function setRuntimeType(?string $runtimeType): self
-    {
-        $this->runtimeType = $runtimeType;
-
-        return $this;
-    }
-
-    /**
-     * @return string[]|null
-     */
-    public function getRuntime(): ?array
-    {
-        return $this->runtime;
-    }
-
-    /**
-     * @param string[]|null $runtime
-     */
-    public function setRuntime(?array $runtime): self
-    {
-        $this->runtime = $runtime;
 
         return $this;
     }
@@ -215,6 +179,7 @@ class PipelineJsonldRead
      */
     public function setAutoload(?array $autoload): self
     {
+        $this->initialized['autoload'] = true;
         $this->autoload = $autoload;
 
         return $this;
@@ -233,6 +198,7 @@ class PipelineJsonldRead
      */
     public function setPackages(?array $packages): self
     {
+        $this->initialized['packages'] = true;
         $this->packages = $packages;
 
         return $this;
@@ -251,6 +217,7 @@ class PipelineJsonldRead
      */
     public function setRepositories(?array $repositories): self
     {
+        $this->initialized['repositories'] = true;
         $this->repositories = $repositories;
 
         return $this;
@@ -269,7 +236,47 @@ class PipelineJsonldRead
      */
     public function setAuths(?array $auths): self
     {
+        $this->initialized['auths'] = true;
         $this->auths = $auths;
+
+        return $this;
+    }
+
+    public function getId2(): ?string
+    {
+        return $this->id2;
+    }
+
+    public function setId2(?string $id2): self
+    {
+        $this->initialized['id2'] = true;
+        $this->id2 = $id2;
+
+        return $this;
+    }
+
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    public function setCode(?string $code): self
+    {
+        $this->initialized['code'] = true;
+        $this->code = $code;
+
+        return $this;
+    }
+
+    public function getLabel(): ?string
+    {
+        return $this->label;
+    }
+
+    public function setLabel(?string $label): self
+    {
+        $this->initialized['label'] = true;
+        $this->label = $label;
 
         return $this;
     }
@@ -277,16 +284,36 @@ class PipelineJsonldRead
     /**
      * @return string[]|null
      */
+    public function getRuntime(): ?array
+    {
+        return $this->runtime;
+    }
+
+    /**
+     * @param string[]|null $runtime
+     */
+    public function setRuntime(?array $runtime): self
+    {
+        $this->initialized['runtime'] = true;
+        $this->runtime = $runtime;
+
+        return $this;
+    }
+
+    /**
+     * @return PipelineStepJsonldRead[]|null
+     */
     public function getSteps(): ?array
     {
         return $this->steps;
     }
 
     /**
-     * @param string[]|null $steps
+     * @param PipelineStepJsonldRead[]|null $steps
      */
     public function setSteps(?array $steps): self
     {
+        $this->initialized['steps'] = true;
         $this->steps = $steps;
 
         return $this;

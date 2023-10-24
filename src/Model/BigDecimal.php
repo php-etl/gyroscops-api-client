@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class BigDecimal
+class BigDecimal extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * The scale (number of digits after the decimal point) of this decimal number.
      *
@@ -19,6 +28,8 @@ class BigDecimal
      */
     protected $scale;
     /**
+     * {@inheritdoc}
+     *
      * @var int|null
      */
     protected $sign;
@@ -88,18 +99,26 @@ class BigDecimal
      */
     public function setScale(?int $scale): self
     {
+        $this->initialized['scale'] = true;
         $this->scale = $scale;
 
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getSign(): ?int
     {
         return $this->sign;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setSign(?int $sign): self
     {
+        $this->initialized['sign'] = true;
         $this->sign = $sign;
 
         return $this;
@@ -112,6 +131,7 @@ class BigDecimal
 
     public function setUnscaledValue(?BigInteger $unscaledValue): self
     {
+        $this->initialized['unscaledValue'] = true;
         $this->unscaledValue = $unscaledValue;
 
         return $this;
@@ -130,6 +150,7 @@ class BigDecimal
      */
     public function setIntegralPart(?string $integralPart): self
     {
+        $this->initialized['integralPart'] = true;
         $this->integralPart = $integralPart;
 
         return $this;
@@ -148,6 +169,7 @@ class BigDecimal
      */
     public function setFractionalPart(?string $fractionalPart): self
     {
+        $this->initialized['fractionalPart'] = true;
         $this->fractionalPart = $fractionalPart;
 
         return $this;
@@ -166,6 +188,7 @@ class BigDecimal
      */
     public function setNonZeroFractionalPart(?bool $nonZeroFractionalPart): self
     {
+        $this->initialized['nonZeroFractionalPart'] = true;
         $this->nonZeroFractionalPart = $nonZeroFractionalPart;
 
         return $this;
@@ -184,6 +207,7 @@ class BigDecimal
      */
     public function setZero(?bool $zero): self
     {
+        $this->initialized['zero'] = true;
         $this->zero = $zero;
 
         return $this;
@@ -202,6 +226,7 @@ class BigDecimal
      */
     public function setNegative(?bool $negative): self
     {
+        $this->initialized['negative'] = true;
         $this->negative = $negative;
 
         return $this;
@@ -220,6 +245,7 @@ class BigDecimal
      */
     public function setNegativeOrZero(?bool $negativeOrZero): self
     {
+        $this->initialized['negativeOrZero'] = true;
         $this->negativeOrZero = $negativeOrZero;
 
         return $this;
@@ -238,6 +264,7 @@ class BigDecimal
      */
     public function setPositive(?bool $positive): self
     {
+        $this->initialized['positive'] = true;
         $this->positive = $positive;
 
         return $this;
@@ -256,6 +283,7 @@ class BigDecimal
      */
     public function setPositiveOrZero(?bool $positiveOrZero): self
     {
+        $this->initialized['positiveOrZero'] = true;
         $this->positiveOrZero = $positiveOrZero;
 
         return $this;

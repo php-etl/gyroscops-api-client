@@ -13,15 +13,18 @@ namespace Gyroscops\Api\Endpoint;
 class PostAkeneoOauthTokenCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
 {
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
+    protected $accept;
 
     /**
      * Generate an Akeneo OAuth state.
      *
      * @param \Gyroscops\Api\Model\AkeneoOauthTokenOauthStateInputJsonld|\Gyroscops\Api\Model\AkeneoOauthTokenOauthStateInput|null $requestBody
+     * @param array                                                                                                                $accept      Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct($requestBody = null)
+    public function __construct($requestBody = null, array $accept = [])
     {
         $this->body = $requestBody;
+        $this->accept = $accept;
     }
 
     public function getMethod(): string
@@ -31,13 +34,13 @@ class PostAkeneoOauthTokenCollection extends \Gyroscops\Api\Runtime\Client\BaseE
 
     public function getUri(): string
     {
-        return '/gateway/akeneo/oauth/state';
+        return '/gateway/akeneo/oauth/akeneo-oauth-tokens';
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         if ($this->body instanceof \Gyroscops\Api\Model\AkeneoOauthTokenOauthStateInputJsonld) {
-            return [['Content-Type' => ['application/ld+json']], $this->body];
+            return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
         if ($this->body instanceof \Gyroscops\Api\Model\AkeneoOauthTokenOauthStateInput) {
             return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
@@ -51,25 +54,38 @@ class PostAkeneoOauthTokenCollection extends \Gyroscops\Api\Runtime\Client\BaseE
 
     public function getExtraHeaders(): array
     {
-        return ['Accept' => ['application/json']];
+        if (empty($this->accept)) {
+            return ['Accept' => ['application/ld+json', 'application/json']];
+        }
+
+        return $this->accept;
     }
 
     /**
      * {@inheritdoc}
      *
+     * @return \Gyroscops\Api\Model\AkeneoOauthTokenOauthStateOutputJsonldRead|null
+     *
      * @throws \Gyroscops\Api\Exception\PostAkeneoOauthTokenCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostAkeneoOauthTokenCollectionUnprocessableEntityException
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (201 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return json_decode($body, null, 512, \JSON_THROW_ON_ERROR);
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (201 === $status) {
+            if (mb_strpos($contentType, 'application/ld+json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\AkeneoOauthTokenOauthStateOutputJsonldRead', 'json');
+            }
+            if (mb_strpos($contentType, 'application/json') !== false) {
+                return json_decode($body);
+            }
         }
         if (400 === $status) {
-            throw new \Gyroscops\Api\Exception\PostAkeneoOauthTokenCollectionBadRequestException();
+            throw new \Gyroscops\Api\Exception\PostAkeneoOauthTokenCollectionBadRequestException($response);
         }
         if (422 === $status) {
-            throw new \Gyroscops\Api\Exception\PostAkeneoOauthTokenCollectionUnprocessableEntityException();
+            throw new \Gyroscops\Api\Exception\PostAkeneoOauthTokenCollectionUnprocessableEntityException($response);
         }
     }
 

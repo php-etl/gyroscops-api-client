@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class PipelineReorderPipelineStepsCommandInput
+class PipelineReorderPipelineStepsCommandInput extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string[]|null
      */
@@ -30,6 +39,7 @@ class PipelineReorderPipelineStepsCommandInput
      */
     public function setCodes(?array $codes): self
     {
+        $this->initialized['codes'] = true;
         $this->codes = $codes;
 
         return $this;

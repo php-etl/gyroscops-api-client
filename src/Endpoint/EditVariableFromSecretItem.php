@@ -14,17 +14,20 @@ class EditVariableFromSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
 {
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $id;
+    protected $accept;
 
     /**
      * Replaces the VariableFromSecret resource.
      *
      * @param string                                                            $id          Resource identifier
      * @param \Gyroscops\Api\Model\VariableFromSecretJsonldWrite|\stdClass|null $requestBody
+     * @param array                                                             $accept      Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(string $id, $requestBody = null)
+    public function __construct(string $id, $requestBody = null, array $accept = [])
     {
         $this->id = $id;
         $this->body = $requestBody;
+        $this->accept = $accept;
     }
 
     public function getMethod(): string
@@ -40,10 +43,10 @@ class EditVariableFromSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         if ($this->body instanceof \Gyroscops\Api\Model\VariableFromSecretJsonldWrite) {
-            return [['Content-Type' => ['application/ld+json']], $this->body];
+            return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
         if ($this->body instanceof \stdClass) {
-            return [['Content-Type' => ['application/json']], json_encode($this->body, \JSON_THROW_ON_ERROR)];
+            return [['Content-Type' => ['application/json']], json_encode($this->body)];
         }
         if ($this->body instanceof \stdClass) {
             return [['Content-Type' => ['text/html']], $this->body];
@@ -54,31 +57,42 @@ class EditVariableFromSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
 
     public function getExtraHeaders(): array
     {
-        return ['Accept' => ['application/json']];
+        if (empty($this->accept)) {
+            return ['Accept' => ['application/ld+json', 'application/json']];
+        }
+
+        return $this->accept;
     }
 
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\VariableFromSecretRead|null
+     * @return \Gyroscops\Api\Model\VariableFromSecretJsonldRead|\Gyroscops\Api\Model\VariableFromSecretRead|null
      *
      * @throws \Gyroscops\Api\Exception\EditVariableFromSecretItemBadRequestException
      * @throws \Gyroscops\Api\Exception\EditVariableFromSecretItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\EditVariableFromSecretItemNotFoundException
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return $serializer->deserialize($body, \Gyroscops\Api\Model\VariableFromSecretRead::class, 'json');
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (200 === $status) {
+            if (mb_strpos($contentType, 'application/ld+json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\VariableFromSecretJsonldRead', 'json');
+            }
+            if (mb_strpos($contentType, 'application/json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\VariableFromSecretRead', 'json');
+            }
         }
         if (400 === $status) {
-            throw new \Gyroscops\Api\Exception\EditVariableFromSecretItemBadRequestException();
+            throw new \Gyroscops\Api\Exception\EditVariableFromSecretItemBadRequestException($response);
         }
         if (422 === $status) {
-            throw new \Gyroscops\Api\Exception\EditVariableFromSecretItemUnprocessableEntityException();
+            throw new \Gyroscops\Api\Exception\EditVariableFromSecretItemUnprocessableEntityException($response);
         }
         if (404 === $status) {
-            throw new \Gyroscops\Api\Exception\EditVariableFromSecretItemNotFoundException();
+            throw new \Gyroscops\Api\Exception\EditVariableFromSecretItemNotFoundException($response);
         }
     }
 

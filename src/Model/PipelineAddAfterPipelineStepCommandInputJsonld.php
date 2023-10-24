@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class PipelineAddAfterPipelineStepCommandInputJsonld
+class PipelineAddAfterPipelineStepCommandInputJsonld extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var mixed|null
      */
@@ -33,7 +42,7 @@ class PipelineAddAfterPipelineStepCommandInputJsonld
      */
     protected $label;
     /**
-     * @var string[][]|null
+     * @var string[]|null
      */
     protected $configuration;
     /**
@@ -49,8 +58,12 @@ class PipelineAddAfterPipelineStepCommandInputJsonld
         return $this->context;
     }
 
-    public function setContext(mixed $context): self
+    /**
+     * @param mixed $context
+     */
+    public function setContext($context): self
     {
+        $this->initialized['context'] = true;
         $this->context = $context;
 
         return $this;
@@ -63,6 +76,7 @@ class PipelineAddAfterPipelineStepCommandInputJsonld
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -75,6 +89,7 @@ class PipelineAddAfterPipelineStepCommandInputJsonld
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -87,6 +102,7 @@ class PipelineAddAfterPipelineStepCommandInputJsonld
 
     public function setCode(?string $code): self
     {
+        $this->initialized['code'] = true;
         $this->code = $code;
 
         return $this;
@@ -99,13 +115,14 @@ class PipelineAddAfterPipelineStepCommandInputJsonld
 
     public function setLabel(?string $label): self
     {
+        $this->initialized['label'] = true;
         $this->label = $label;
 
         return $this;
     }
 
     /**
-     * @return string[][]|null
+     * @return string[]|null
      */
     public function getConfiguration(): ?iterable
     {
@@ -113,10 +130,11 @@ class PipelineAddAfterPipelineStepCommandInputJsonld
     }
 
     /**
-     * @param string[][]|null $configuration
+     * @param string[]|null $configuration
      */
     public function setConfiguration(?iterable $configuration): self
     {
+        $this->initialized['configuration'] = true;
         $this->configuration = $configuration;
 
         return $this;
@@ -135,6 +153,7 @@ class PipelineAddAfterPipelineStepCommandInputJsonld
      */
     public function setProbes(?array $probes): self
     {
+        $this->initialized['probes'] = true;
         $this->probes = $probes;
 
         return $this;

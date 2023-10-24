@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class VariableFromConfigurationJsonldRead
+class VariableFromConfigurationJsonldRead extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var mixed|null
      */
@@ -25,7 +34,7 @@ class VariableFromConfigurationJsonldRead
      */
     protected $type;
     /**
-     * @var mixed|null
+     * @var ConfigurationJsonldRead|null
      */
     protected $configuration;
     /**
@@ -33,7 +42,7 @@ class VariableFromConfigurationJsonldRead
      */
     protected $item;
     /**
-     * @var mixed|null
+     * @var EnvironmentJsonldRead|null
      */
     protected $environment;
     /**
@@ -49,8 +58,12 @@ class VariableFromConfigurationJsonldRead
         return $this->context;
     }
 
-    public function setContext(mixed $context): self
+    /**
+     * @param mixed $context
+     */
+    public function setContext($context): self
     {
+        $this->initialized['context'] = true;
         $this->context = $context;
 
         return $this;
@@ -63,6 +76,7 @@ class VariableFromConfigurationJsonldRead
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -75,21 +89,20 @@ class VariableFromConfigurationJsonldRead
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getConfiguration()
+    public function getConfiguration(): ?ConfigurationJsonldRead
     {
         return $this->configuration;
     }
 
-    public function setConfiguration(mixed $configuration): self
+    public function setConfiguration(?ConfigurationJsonldRead $configuration): self
     {
+        $this->initialized['configuration'] = true;
         $this->configuration = $configuration;
 
         return $this;
@@ -102,21 +115,20 @@ class VariableFromConfigurationJsonldRead
 
     public function setItem(?string $item): self
     {
+        $this->initialized['item'] = true;
         $this->item = $item;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getEnvironment()
+    public function getEnvironment(): ?EnvironmentJsonldRead
     {
         return $this->environment;
     }
 
-    public function setEnvironment(mixed $environment): self
+    public function setEnvironment(?EnvironmentJsonldRead $environment): self
     {
+        $this->initialized['environment'] = true;
         $this->environment = $environment;
 
         return $this;
@@ -129,6 +141,7 @@ class VariableFromConfigurationJsonldRead
 
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;

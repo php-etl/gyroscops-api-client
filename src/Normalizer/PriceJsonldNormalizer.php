@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -24,22 +25,19 @@ class PriceJsonldNormalizer implements DenormalizerInterface, NormalizerInterfac
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+    use ValidatorTrait;
 
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return \Gyroscops\Api\Model\PriceJsonld::class === $type;
+        return $type === 'Gyroscops\\Api\\Model\\PriceJsonld';
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        return \is_object($data) && \Gyroscops\Api\Model\PriceJsonld::class === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\PriceJsonld';
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,41 +52,95 @@ class PriceJsonldNormalizer implements DenormalizerInterface, NormalizerInterfac
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
+        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
             $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+            unset($data['@context']);
+        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
             $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
+        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+            unset($data['@id']);
+        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
+        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+            unset($data['@type']);
+        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
             $object->setType(null);
         }
-        if (\array_key_exists('price', $data) && null !== $data['price']) {
-            $object->setPrice($data['price']);
-        } elseif (\array_key_exists('price', $data) && null === $data['price']) {
+        if (\array_key_exists('id', $data) && $data['id'] !== null) {
+            $object->setId2($data['id']);
+            unset($data['id']);
+        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
+            $object->setId2(null);
+        }
+        if (\array_key_exists('buyable', $data) && $data['buyable'] !== null) {
+            $object->setBuyable($this->denormalizer->denormalize($data['buyable'], 'Gyroscops\\Api\\Model\\BuyableJsonld', 'json', $context));
+            unset($data['buyable']);
+        } elseif (\array_key_exists('buyable', $data) && $data['buyable'] === null) {
+            $object->setBuyable(null);
+        }
+        if (\array_key_exists('type', $data) && $data['type'] !== null) {
+            $object->setType2($this->denormalizer->denormalize($data['type'], 'Gyroscops\\Api\\Model\\SubscriptionTypeJsonld', 'json', $context));
+            unset($data['type']);
+        } elseif (\array_key_exists('type', $data) && $data['type'] === null) {
+            $object->setType2(null);
+        }
+        if (\array_key_exists('amount', $data) && $data['amount'] !== null) {
+            $object->setAmount($data['amount']);
+            unset($data['amount']);
+        } elseif (\array_key_exists('amount', $data) && $data['amount'] === null) {
+            $object->setAmount(null);
+        }
+        if (\array_key_exists('price', $data) && $data['price'] !== null) {
+            $object->setPrice($this->denormalizer->denormalize($data['price'], 'Gyroscops\\Api\\Model\\MoneyJsonld', 'json', $context));
+            unset($data['price']);
+        } elseif (\array_key_exists('price', $data) && $data['price'] === null) {
             $object->setPrice(null);
+        }
+        if (\array_key_exists('currency', $data) && $data['currency'] !== null) {
+            $object->setCurrency($data['currency']);
+            unset($data['currency']);
+        } elseif (\array_key_exists('currency', $data) && $data['currency'] === null) {
+            $object->setCurrency(null);
+        }
+        foreach ($data as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value;
+            }
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getPrice()) {
-            $data['price'] = $object->getPrice();
+        if ($object->isInitialized('id2') && null !== $object->getId2()) {
+            $data['id'] = $object->getId2();
+        }
+        if ($object->isInitialized('buyable') && null !== $object->getBuyable()) {
+            $data['buyable'] = $this->normalizer->normalize($object->getBuyable(), 'json', $context);
+        }
+        if ($object->isInitialized('type2') && null !== $object->getType2()) {
+            $data['type'] = $this->normalizer->normalize($object->getType2(), 'json', $context);
+        }
+        $data['amount'] = $object->getAmount();
+        if ($object->isInitialized('price') && null !== $object->getPrice()) {
+            $data['price'] = $this->normalizer->normalize($object->getPrice(), 'json', $context);
+        }
+        if ($object->isInitialized('currency') && null !== $object->getCurrency()) {
+            $data['currency'] = $object->getCurrency();
+        }
+        foreach ($object as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value;
+            }
         }
 
         return $data;
