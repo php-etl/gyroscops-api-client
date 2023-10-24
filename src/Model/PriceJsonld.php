@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class PriceJsonld
+class PriceJsonld extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var mixed|null
      */
@@ -25,9 +34,29 @@ class PriceJsonld
      */
     protected $type;
     /**
-     * @var mixed|null
+     * @var string|null
+     */
+    protected $id2;
+    /**
+     * @var BuyableJsonld|null
+     */
+    protected $buyable;
+    /**
+     * @var SubscriptionTypeJsonld|null
+     */
+    protected $type2;
+    /**
+     * @var string|null
+     */
+    protected $amount;
+    /**
+     * @var MoneyJsonld|null
      */
     protected $price;
+    /**
+     * @var string|null
+     */
+    protected $currency;
 
     /**
      * @return mixed
@@ -37,8 +66,12 @@ class PriceJsonld
         return $this->context;
     }
 
-    public function setContext(mixed $context): self
+    /**
+     * @param mixed $context
+     */
+    public function setContext($context): self
     {
+        $this->initialized['context'] = true;
         $this->context = $context;
 
         return $this;
@@ -51,6 +84,7 @@ class PriceJsonld
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -63,22 +97,86 @@ class PriceJsonld
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getPrice()
+    public function getId2(): ?string
+    {
+        return $this->id2;
+    }
+
+    public function setId2(?string $id2): self
+    {
+        $this->initialized['id2'] = true;
+        $this->id2 = $id2;
+
+        return $this;
+    }
+
+    public function getBuyable(): ?BuyableJsonld
+    {
+        return $this->buyable;
+    }
+
+    public function setBuyable(?BuyableJsonld $buyable): self
+    {
+        $this->initialized['buyable'] = true;
+        $this->buyable = $buyable;
+
+        return $this;
+    }
+
+    public function getType2(): ?SubscriptionTypeJsonld
+    {
+        return $this->type2;
+    }
+
+    public function setType2(?SubscriptionTypeJsonld $type2): self
+    {
+        $this->initialized['type2'] = true;
+        $this->type2 = $type2;
+
+        return $this;
+    }
+
+    public function getAmount(): ?string
+    {
+        return $this->amount;
+    }
+
+    public function setAmount(?string $amount): self
+    {
+        $this->initialized['amount'] = true;
+        $this->amount = $amount;
+
+        return $this;
+    }
+
+    public function getPrice(): ?MoneyJsonld
     {
         return $this->price;
     }
 
-    public function setPrice(mixed $price): self
+    public function setPrice(?MoneyJsonld $price): self
     {
+        $this->initialized['price'] = true;
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getCurrency(): ?string
+    {
+        return $this->currency;
+    }
+
+    public function setCurrency(?string $currency): self
+    {
+        $this->initialized['currency'] = true;
+        $this->currency = $currency;
 
         return $this;
     }

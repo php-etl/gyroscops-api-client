@@ -13,15 +13,18 @@ namespace Gyroscops\Api\Endpoint;
 class PutAkeneoOauthTokenAkeneoOauthTokenCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
 {
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
+    protected $accept;
 
     /**
      * Generate an Akeneo OAuth token.
      *
      * @param \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBody|\Gyroscops\Api\Model\AkeneoOauthTokenOauthTokenInput[]|null $requestBody
+     * @param array                                                                                                           $accept      Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct($requestBody = null)
+    public function __construct($requestBody = null, array $accept = [])
     {
         $this->body = $requestBody;
+        $this->accept = $accept;
     }
 
     public function getMethod(): string
@@ -37,12 +40,12 @@ class PutAkeneoOauthTokenAkeneoOauthTokenCollection extends \Gyroscops\Api\Runti
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         if ($this->body instanceof \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBody) {
-            return [['Content-Type' => ['application/ld+json']], $this->body];
+            return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
-        if (\is_array($this->body) && isset($this->body[0]) && $this->body[0] instanceof \Gyroscops\Api\Model\AkeneoOauthTokenOauthTokenInput) {
+        if (is_array($this->body) and isset($this->body[0]) and $this->body[0] instanceof \Gyroscops\Api\Model\AkeneoOauthTokenOauthTokenInput) {
             return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
         }
-        if (\is_array($this->body) && isset($this->body[0]) && $this->body[0] instanceof \Gyroscops\Api\Model\AkeneoOauthTokenOauthTokenInput) {
+        if (is_array($this->body) and isset($this->body[0]) and $this->body[0] instanceof \Gyroscops\Api\Model\AkeneoOauthTokenOauthTokenInput) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -51,25 +54,38 @@ class PutAkeneoOauthTokenAkeneoOauthTokenCollection extends \Gyroscops\Api\Runti
 
     public function getExtraHeaders(): array
     {
-        return ['Accept' => ['application/json']];
+        if (empty($this->accept)) {
+            return ['Accept' => ['application/ld+json', 'application/json']];
+        }
+
+        return $this->accept;
     }
 
     /**
      * {@inheritdoc}
      *
+     * @return \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutLdjsonResponse200|null
+     *
      * @throws \Gyroscops\Api\Exception\PutAkeneoOauthTokenAkeneoOauthTokenCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PutAkeneoOauthTokenAkeneoOauthTokenCollectionUnprocessableEntityException
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return json_decode($body, null, 512, \JSON_THROW_ON_ERROR);
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (200 === $status) {
+            if (mb_strpos($contentType, 'application/ld+json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\GatewayAkeneoOauthTokenPutLdjsonResponse200', 'json');
+            }
+            if (mb_strpos($contentType, 'application/json') !== false) {
+                return json_decode($body);
+            }
         }
         if (400 === $status) {
-            throw new \Gyroscops\Api\Exception\PutAkeneoOauthTokenAkeneoOauthTokenCollectionBadRequestException();
+            throw new \Gyroscops\Api\Exception\PutAkeneoOauthTokenAkeneoOauthTokenCollectionBadRequestException($response);
         }
         if (422 === $status) {
-            throw new \Gyroscops\Api\Exception\PutAkeneoOauthTokenAkeneoOauthTokenCollectionUnprocessableEntityException();
+            throw new \Gyroscops\Api\Exception\PutAkeneoOauthTokenAkeneoOauthTokenCollectionUnprocessableEntityException($response);
         }
     }
 

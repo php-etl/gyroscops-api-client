@@ -14,15 +14,18 @@ class GetUserAuthorizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoin
 {
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $id;
+    protected $accept;
 
     /**
      * Retrieves a UserAuthorization resource.
      *
-     * @param string $id Resource identifier
+     * @param string $id     Resource identifier
+     * @param array  $accept Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(string $id)
+    public function __construct(string $id, array $accept = [])
     {
         $this->id = $id;
+        $this->accept = $accept;
     }
 
     public function getMethod(): string
@@ -42,23 +45,34 @@ class GetUserAuthorizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoin
 
     public function getExtraHeaders(): array
     {
-        return ['Accept' => ['application/json']];
+        if (empty($this->accept)) {
+            return ['Accept' => ['application/ld+json', 'application/json']];
+        }
+
+        return $this->accept;
     }
 
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\UserAuthorization|null
+     * @return \Gyroscops\Api\Model\UserAuthorizationJsonld|\Gyroscops\Api\Model\UserAuthorization|null
      *
      * @throws \Gyroscops\Api\Exception\GetUserAuthorizationItemNotFoundException
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return $serializer->deserialize($body, \Gyroscops\Api\Model\UserAuthorization::class, 'json');
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (200 === $status) {
+            if (mb_strpos($contentType, 'application/ld+json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\UserAuthorizationJsonld', 'json');
+            }
+            if (mb_strpos($contentType, 'application/json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\UserAuthorization', 'json');
+            }
         }
         if (404 === $status) {
-            throw new \Gyroscops\Api\Exception\GetUserAuthorizationItemNotFoundException();
+            throw new \Gyroscops\Api\Exception\GetUserAuthorizationItemNotFoundException($response);
         }
     }
 

@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -24,22 +25,19 @@ class AkeneoLinkedAccountAkeneoLinkedAccountsInputJsonldNormalizer implements De
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+    use ValidatorTrait;
 
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return \Gyroscops\Api\Model\AkeneoLinkedAccountAkeneoLinkedAccountsInputJsonld::class === $type;
+        return $type === 'Gyroscops\\Api\\Model\\AkeneoLinkedAccountAkeneoLinkedAccountsInputJsonld';
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        return \is_object($data) && \Gyroscops\Api\Model\AkeneoLinkedAccountAkeneoLinkedAccountsInputJsonld::class === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\AkeneoLinkedAccountAkeneoLinkedAccountsInputJsonld';
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,65 +52,79 @@ class AkeneoLinkedAccountAkeneoLinkedAccountsInputJsonldNormalizer implements De
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
+        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
             $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+            unset($data['@context']);
+        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
             $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
+        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+            unset($data['@id']);
+        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
+        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+            unset($data['@type']);
+        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
             $object->setType(null);
         }
-        if (\array_key_exists('akeneoInstance', $data) && null !== $data['akeneoInstance']) {
+        if (\array_key_exists('akeneoInstance', $data) && $data['akeneoInstance'] !== null) {
             $object->setAkeneoInstance($data['akeneoInstance']);
-        } elseif (\array_key_exists('akeneoInstance', $data) && null === $data['akeneoInstance']) {
+            unset($data['akeneoInstance']);
+        } elseif (\array_key_exists('akeneoInstance', $data) && $data['akeneoInstance'] === null) {
             $object->setAkeneoInstance(null);
         }
-        if (\array_key_exists('tokenId', $data) && null !== $data['tokenId']) {
+        if (\array_key_exists('tokenId', $data) && $data['tokenId'] !== null) {
             $object->setTokenId($data['tokenId']);
-        } elseif (\array_key_exists('tokenId', $data) && null === $data['tokenId']) {
+            unset($data['tokenId']);
+        } elseif (\array_key_exists('tokenId', $data) && $data['tokenId'] === null) {
             $object->setTokenId(null);
         }
-        if (\array_key_exists('akeneoUserId', $data) && null !== $data['akeneoUserId']) {
+        if (\array_key_exists('akeneoUserId', $data) && $data['akeneoUserId'] !== null) {
             $object->setAkeneoUserId($data['akeneoUserId']);
-        } elseif (\array_key_exists('akeneoUserId', $data) && null === $data['akeneoUserId']) {
+            unset($data['akeneoUserId']);
+        } elseif (\array_key_exists('akeneoUserId', $data) && $data['akeneoUserId'] === null) {
             $object->setAkeneoUserId(null);
         }
-        if (\array_key_exists('token', $data) && null !== $data['token']) {
+        if (\array_key_exists('token', $data) && $data['token'] !== null) {
             $object->setToken($data['token']);
-        } elseif (\array_key_exists('token', $data) && null === $data['token']) {
+            unset($data['token']);
+        } elseif (\array_key_exists('token', $data) && $data['token'] === null) {
             $object->setToken(null);
+        }
+        foreach ($data as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value;
+            }
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getAkeneoInstance()) {
+        if ($object->isInitialized('akeneoInstance') && null !== $object->getAkeneoInstance()) {
             $data['akeneoInstance'] = $object->getAkeneoInstance();
         }
-        if (null !== $object->getTokenId()) {
+        if ($object->isInitialized('tokenId') && null !== $object->getTokenId()) {
             $data['tokenId'] = $object->getTokenId();
         }
-        if (null !== $object->getAkeneoUserId()) {
+        if ($object->isInitialized('akeneoUserId') && null !== $object->getAkeneoUserId()) {
             $data['akeneoUserId'] = $object->getAkeneoUserId();
         }
-        if (null !== $object->getToken()) {
+        if ($object->isInitialized('token') && null !== $object->getToken()) {
             $data['token'] = $object->getToken();
+        }
+        foreach ($object as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value;
+            }
         }
 
         return $data;

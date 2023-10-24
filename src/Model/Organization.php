@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class Organization
+class Organization extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -29,6 +38,10 @@ class Organization
      */
     protected $slug;
     /**
+     * @var string|null
+     */
+    protected $stripeCode;
+    /**
      * @var string[]|null
      */
     protected $users;
@@ -40,6 +53,10 @@ class Organization
      * @var string[]|null
      */
     protected $workspaces;
+    /**
+     * @var \DateTime|null
+     */
+    protected $activeUntil;
 
     public function getId(): ?string
     {
@@ -48,6 +65,7 @@ class Organization
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -66,6 +84,7 @@ class Organization
      */
     public function setAuthorizations(?array $authorizations): self
     {
+        $this->initialized['authorizations'] = true;
         $this->authorizations = $authorizations;
 
         return $this;
@@ -78,6 +97,7 @@ class Organization
 
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -90,7 +110,21 @@ class Organization
 
     public function setSlug(?string $slug): self
     {
+        $this->initialized['slug'] = true;
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getStripeCode(): ?string
+    {
+        return $this->stripeCode;
+    }
+
+    public function setStripeCode(?string $stripeCode): self
+    {
+        $this->initialized['stripeCode'] = true;
+        $this->stripeCode = $stripeCode;
 
         return $this;
     }
@@ -108,6 +142,7 @@ class Organization
      */
     public function setUsers(?array $users): self
     {
+        $this->initialized['users'] = true;
         $this->users = $users;
 
         return $this;
@@ -126,6 +161,7 @@ class Organization
      */
     public function setExternalCollaborators(?array $externalCollaborators): self
     {
+        $this->initialized['externalCollaborators'] = true;
         $this->externalCollaborators = $externalCollaborators;
 
         return $this;
@@ -144,7 +180,21 @@ class Organization
      */
     public function setWorkspaces(?array $workspaces): self
     {
+        $this->initialized['workspaces'] = true;
         $this->workspaces = $workspaces;
+
+        return $this;
+    }
+
+    public function getActiveUntil(): ?\DateTime
+    {
+        return $this->activeUntil;
+    }
+
+    public function setActiveUntil(?\DateTime $activeUntil): self
+    {
+        $this->initialized['activeUntil'] = true;
+        $this->activeUntil = $activeUntil;
 
         return $this;
     }

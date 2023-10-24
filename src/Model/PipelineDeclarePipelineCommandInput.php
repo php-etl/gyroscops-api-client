@@ -10,45 +10,62 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class PipelineDeclarePipelineCommandInput
+class PipelineDeclarePipelineCommandInput extends \ArrayObject
 {
     /**
-     * @var string|null
+     * @var array
      */
-    protected $label;
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
+     * @var Step[]|null
+     */
+    protected $steps;
+    /**
+     * @var Composer|null
+     */
+    protected $composer;
     /**
      * @var string|null
      */
     protected $code;
     /**
-     * @var StepInput[]|null
+     * @var string|null
      */
-    protected $steps;
-    /**
-     * @var AutoloadInput[]|null
-     */
-    protected $autoloads;
-    /**
-     * @var string[]|null
-     */
-    protected $packages;
-    /**
-     * @var AddPipelineComposerRepositoryCommandInput[]|null
-     */
-    protected $repositories;
-    /**
-     * @var AddPipelineComposerAuthCommandInput[]|null
-     */
-    protected $auths;
+    protected $label;
 
-    public function getLabel(): ?string
+    /**
+     * @return Step[]|null
+     */
+    public function getSteps(): ?array
     {
-        return $this->label;
+        return $this->steps;
     }
 
-    public function setLabel(?string $label): self
+    /**
+     * @param Step[]|null $steps
+     */
+    public function setSteps(?array $steps): self
     {
-        $this->label = $label;
+        $this->initialized['steps'] = true;
+        $this->steps = $steps;
+
+        return $this;
+    }
+
+    public function getComposer(): ?Composer
+    {
+        return $this->composer;
+    }
+
+    public function setComposer(?Composer $composer): self
+    {
+        $this->initialized['composer'] = true;
+        $this->composer = $composer;
 
         return $this;
     }
@@ -60,97 +77,21 @@ class PipelineDeclarePipelineCommandInput
 
     public function setCode(?string $code): self
     {
+        $this->initialized['code'] = true;
         $this->code = $code;
 
         return $this;
     }
 
-    /**
-     * @return StepInput[]|null
-     */
-    public function getSteps(): ?array
+    public function getLabel(): ?string
     {
-        return $this->steps;
+        return $this->label;
     }
 
-    /**
-     * @param StepInput[]|null $steps
-     */
-    public function setSteps(?array $steps): self
+    public function setLabel(?string $label): self
     {
-        $this->steps = $steps;
-
-        return $this;
-    }
-
-    /**
-     * @return AutoloadInput[]|null
-     */
-    public function getAutoloads(): ?array
-    {
-        return $this->autoloads;
-    }
-
-    /**
-     * @param AutoloadInput[]|null $autoloads
-     */
-    public function setAutoloads(?array $autoloads): self
-    {
-        $this->autoloads = $autoloads;
-
-        return $this;
-    }
-
-    /**
-     * @return string[]|null
-     */
-    public function getPackages(): ?iterable
-    {
-        return $this->packages;
-    }
-
-    /**
-     * @param string[]|null $packages
-     */
-    public function setPackages(?iterable $packages): self
-    {
-        $this->packages = $packages;
-
-        return $this;
-    }
-
-    /**
-     * @return AddPipelineComposerRepositoryCommandInput[]|null
-     */
-    public function getRepositories(): ?array
-    {
-        return $this->repositories;
-    }
-
-    /**
-     * @param AddPipelineComposerRepositoryCommandInput[]|null $repositories
-     */
-    public function setRepositories(?array $repositories): self
-    {
-        $this->repositories = $repositories;
-
-        return $this;
-    }
-
-    /**
-     * @return AddPipelineComposerAuthCommandInput[]|null
-     */
-    public function getAuths(): ?array
-    {
-        return $this->auths;
-    }
-
-    /**
-     * @param AddPipelineComposerAuthCommandInput[]|null $auths
-     */
-    public function setAuths(?array $auths): self
-    {
-        $this->auths = $auths;
+        $this->initialized['label'] = true;
+        $this->label = $label;
 
         return $this;
     }

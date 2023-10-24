@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -24,22 +25,19 @@ class CredentialsNormalizer implements DenormalizerInterface, NormalizerInterfac
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+    use ValidatorTrait;
 
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return \Gyroscops\Api\Model\Credentials::class === $type;
+        return $type === 'Gyroscops\\Api\\Model\\Credentials';
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        return \is_object($data) && \Gyroscops\Api\Model\Credentials::class === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\Credentials';
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,34 +52,40 @@ class CredentialsNormalizer implements DenormalizerInterface, NormalizerInterfac
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('username', $data) && null !== $data['username']) {
+        if (\array_key_exists('username', $data) && $data['username'] !== null) {
             $object->setUsername($data['username']);
-        } elseif (\array_key_exists('username', $data) && null === $data['username']) {
+            unset($data['username']);
+        } elseif (\array_key_exists('username', $data) && $data['username'] === null) {
             $object->setUsername(null);
         }
-        if (\array_key_exists('password', $data) && null !== $data['password']) {
+        if (\array_key_exists('password', $data) && $data['password'] !== null) {
             $object->setPassword($data['password']);
-        } elseif (\array_key_exists('password', $data) && null === $data['password']) {
+            unset($data['password']);
+        } elseif (\array_key_exists('password', $data) && $data['password'] === null) {
             $object->setPassword(null);
         }
-        if (\array_key_exists('organization', $data) && null !== $data['organization']) {
+        if (\array_key_exists('organization', $data) && $data['organization'] !== null) {
             $object->setOrganization($data['organization']);
-        } elseif (\array_key_exists('organization', $data) && null === $data['organization']) {
+            unset($data['organization']);
+        } elseif (\array_key_exists('organization', $data) && $data['organization'] === null) {
             $object->setOrganization(null);
         }
-        if (\array_key_exists('workspace', $data) && null !== $data['workspace']) {
+        if (\array_key_exists('workspace', $data) && $data['workspace'] !== null) {
             $object->setWorkspace($data['workspace']);
-        } elseif (\array_key_exists('workspace', $data) && null === $data['workspace']) {
+            unset($data['workspace']);
+        } elseif (\array_key_exists('workspace', $data) && $data['workspace'] === null) {
             $object->setWorkspace(null);
+        }
+        foreach ($data as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value;
+            }
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
@@ -89,11 +93,16 @@ class CredentialsNormalizer implements DenormalizerInterface, NormalizerInterfac
         $data = [];
         $data['username'] = $object->getUsername();
         $data['password'] = $object->getPassword();
-        if (null !== $object->getOrganization()) {
+        if ($object->isInitialized('organization') && null !== $object->getOrganization()) {
             $data['organization'] = $object->getOrganization();
         }
-        if (null !== $object->getWorkspace()) {
+        if ($object->isInitialized('workspace') && null !== $object->getWorkspace()) {
             $data['workspace'] = $object->getWorkspace();
+        }
+        foreach ($object as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value;
+            }
         }
 
         return $data;

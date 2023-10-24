@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class PipelineReplacePipelineStepCommandInput
+class PipelineReplacePipelineStepCommandInput extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -36,6 +45,7 @@ class PipelineReplacePipelineStepCommandInput
 
     public function setCode(?string $code): self
     {
+        $this->initialized['code'] = true;
         $this->code = $code;
 
         return $this;
@@ -48,6 +58,7 @@ class PipelineReplacePipelineStepCommandInput
 
     public function setLabel(?string $label): self
     {
+        $this->initialized['label'] = true;
         $this->label = $label;
 
         return $this;
@@ -56,7 +67,7 @@ class PipelineReplacePipelineStepCommandInput
     /**
      * @return string[]|null
      */
-    public function getConfiguration(): ?array
+    public function getConfiguration(): ?iterable
     {
         return $this->configuration;
     }
@@ -64,8 +75,9 @@ class PipelineReplacePipelineStepCommandInput
     /**
      * @param string[]|null $configuration
      */
-    public function setConfiguration(?array $configuration): self
+    public function setConfiguration(?iterable $configuration): self
     {
+        $this->initialized['configuration'] = true;
         $this->configuration = $configuration;
 
         return $this;
@@ -84,6 +96,7 @@ class PipelineReplacePipelineStepCommandInput
      */
     public function setProbes(?array $probes): self
     {
+        $this->initialized['probes'] = true;
         $this->probes = $probes;
 
         return $this;

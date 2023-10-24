@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -24,22 +25,19 @@ class PipelineStepNormalizer implements DenormalizerInterface, NormalizerInterfa
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+    use ValidatorTrait;
 
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return \Gyroscops\Api\Model\PipelineStep::class === $type;
+        return $type === 'Gyroscops\\Api\\Model\\PipelineStep';
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        return \is_object($data) && \Gyroscops\Api\Model\PipelineStep::class === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\PipelineStep';
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,67 +52,76 @@ class PipelineStepNormalizer implements DenormalizerInterface, NormalizerInterfa
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('id', $data) && null !== $data['id']) {
+        if (\array_key_exists('id', $data) && $data['id'] !== null) {
             $object->setId($data['id']);
-        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+            unset($data['id']);
+        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('code', $data) && null !== $data['code']) {
-            $object->setCode($data['code']);
-        } elseif (\array_key_exists('code', $data) && null === $data['code']) {
-            $object->setCode(null);
-        }
-        if (\array_key_exists('order', $data) && null !== $data['order']) {
+        if (\array_key_exists('order', $data) && $data['order'] !== null) {
             $object->setOrder($data['order']);
-        } elseif (\array_key_exists('order', $data) && null === $data['order']) {
+            unset($data['order']);
+        } elseif (\array_key_exists('order', $data) && $data['order'] === null) {
             $object->setOrder(null);
         }
-        if (\array_key_exists('label', $data) && null !== $data['label']) {
+        if (\array_key_exists('code', $data) && $data['code'] !== null) {
+            $object->setCode($data['code']);
+            unset($data['code']);
+        } elseif (\array_key_exists('code', $data) && $data['code'] === null) {
+            $object->setCode(null);
+        }
+        if (\array_key_exists('label', $data) && $data['label'] !== null) {
             $object->setLabel($data['label']);
-        } elseif (\array_key_exists('label', $data) && null === $data['label']) {
+            unset($data['label']);
+        } elseif (\array_key_exists('label', $data) && $data['label'] === null) {
             $object->setLabel(null);
         }
-        if (\array_key_exists('pipeline', $data) && null !== $data['pipeline']) {
-            $object->setPipeline($this->denormalizer->denormalize($data['pipeline'], \Gyroscops\Api\Model\AbstractPipeline::class, 'json', $context));
-        } elseif (\array_key_exists('pipeline', $data) && null === $data['pipeline']) {
+        if (\array_key_exists('pipeline', $data) && $data['pipeline'] !== null) {
+            $object->setPipeline($this->denormalizer->denormalize($data['pipeline'], 'Gyroscops\\Api\\Model\\AbstractPipeline', 'json', $context));
+            unset($data['pipeline']);
+        } elseif (\array_key_exists('pipeline', $data) && $data['pipeline'] === null) {
             $object->setPipeline(null);
         }
-        if (\array_key_exists('probes', $data) && null !== $data['probes']) {
+        if (\array_key_exists('probes', $data) && $data['probes'] !== null) {
             $values = [];
             foreach ($data['probes'] as $value) {
                 $values[] = $value;
             }
             $object->setProbes($values);
-        } elseif (\array_key_exists('probes', $data) && null === $data['probes']) {
+            unset($data['probes']);
+        } elseif (\array_key_exists('probes', $data) && $data['probes'] === null) {
             $object->setProbes(null);
         }
-        if (\array_key_exists('configuration', $data) && null !== $data['configuration']) {
+        if (\array_key_exists('configuration', $data) && $data['configuration'] !== null) {
             $values_1 = [];
             foreach ($data['configuration'] as $value_1) {
                 $values_1[] = $value_1;
             }
             $object->setConfiguration($values_1);
-        } elseif (\array_key_exists('configuration', $data) && null === $data['configuration']) {
+            unset($data['configuration']);
+        } elseif (\array_key_exists('configuration', $data) && $data['configuration'] === null) {
             $object->setConfiguration(null);
+        }
+        foreach ($data as $key => $value_2) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value_2;
+            }
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        $data['code'] = $object->getCode();
         $data['order'] = $object->getOrder();
+        $data['code'] = $object->getCode();
         $data['label'] = $object->getLabel();
         $data['pipeline'] = $this->normalizer->normalize($object->getPipeline(), 'json', $context);
-        if (null !== $object->getProbes()) {
+        if ($object->isInitialized('probes') && null !== $object->getProbes()) {
             $values = [];
             foreach ($object->getProbes() as $value) {
                 $values[] = $value;
@@ -126,6 +133,11 @@ class PipelineStepNormalizer implements DenormalizerInterface, NormalizerInterfa
             $values_1[] = $value_1;
         }
         $data['configuration'] = $values_1;
+        foreach ($object as $key => $value_2) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value_2;
+            }
+        }
 
         return $data;
     }

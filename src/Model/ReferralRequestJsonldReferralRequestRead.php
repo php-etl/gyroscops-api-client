@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class ReferralRequestJsonldReferralRequestRead
+class ReferralRequestJsonldReferralRequestRead extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var mixed|null
      */
@@ -73,8 +82,12 @@ class ReferralRequestJsonldReferralRequestRead
         return $this->context;
     }
 
-    public function setContext(mixed $context): self
+    /**
+     * @param mixed $context
+     */
+    public function setContext($context): self
     {
+        $this->initialized['context'] = true;
         $this->context = $context;
 
         return $this;
@@ -87,6 +100,7 @@ class ReferralRequestJsonldReferralRequestRead
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -99,6 +113,7 @@ class ReferralRequestJsonldReferralRequestRead
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -111,6 +126,7 @@ class ReferralRequestJsonldReferralRequestRead
 
     public function setId2(?string $id2): self
     {
+        $this->initialized['id2'] = true;
         $this->id2 = $id2;
 
         return $this;
@@ -123,6 +139,7 @@ class ReferralRequestJsonldReferralRequestRead
 
     public function setEmail(?string $email): self
     {
+        $this->initialized['email'] = true;
         $this->email = $email;
 
         return $this;
@@ -135,6 +152,7 @@ class ReferralRequestJsonldReferralRequestRead
 
     public function setFirstName(?string $firstName): self
     {
+        $this->initialized['firstName'] = true;
         $this->firstName = $firstName;
 
         return $this;
@@ -147,6 +165,7 @@ class ReferralRequestJsonldReferralRequestRead
 
     public function setLastName(?string $lastName): self
     {
+        $this->initialized['lastName'] = true;
         $this->lastName = $lastName;
 
         return $this;
@@ -159,6 +178,7 @@ class ReferralRequestJsonldReferralRequestRead
 
     public function setUserName(?string $userName): self
     {
+        $this->initialized['userName'] = true;
         $this->userName = $userName;
 
         return $this;
@@ -171,6 +191,7 @@ class ReferralRequestJsonldReferralRequestRead
 
     public function setCompanyName(?string $companyName): self
     {
+        $this->initialized['companyName'] = true;
         $this->companyName = $companyName;
 
         return $this;
@@ -183,6 +204,7 @@ class ReferralRequestJsonldReferralRequestRead
 
     public function setCreationDate(?\DateTime $creationDate): self
     {
+        $this->initialized['creationDate'] = true;
         $this->creationDate = $creationDate;
 
         return $this;
@@ -195,6 +217,7 @@ class ReferralRequestJsonldReferralRequestRead
 
     public function setReferralCode(?string $referralCode): self
     {
+        $this->initialized['referralCode'] = true;
         $this->referralCode = $referralCode;
 
         return $this;
@@ -207,6 +230,7 @@ class ReferralRequestJsonldReferralRequestRead
 
     public function setApprover(?string $approver): self
     {
+        $this->initialized['approver'] = true;
         $this->approver = $approver;
 
         return $this;
@@ -219,6 +243,7 @@ class ReferralRequestJsonldReferralRequestRead
 
     public function setStatus(?string $status): self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
 
         return $this;

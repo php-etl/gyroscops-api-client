@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class Workspace
+class Workspace extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -29,6 +38,10 @@ class Workspace
      */
     protected $organization;
     /**
+     * @var Region|null
+     */
+    protected $region;
+    /**
      * @var string[]|null
      */
     protected $authorizations;
@@ -44,6 +57,7 @@ class Workspace
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -56,6 +70,7 @@ class Workspace
 
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -68,6 +83,7 @@ class Workspace
 
     public function setSlug(?string $slug): self
     {
+        $this->initialized['slug'] = true;
         $this->slug = $slug;
 
         return $this;
@@ -80,7 +96,21 @@ class Workspace
 
     public function setOrganization(?string $organization): self
     {
+        $this->initialized['organization'] = true;
         $this->organization = $organization;
+
+        return $this;
+    }
+
+    public function getRegion(): ?Region
+    {
+        return $this->region;
+    }
+
+    public function setRegion(?Region $region): self
+    {
+        $this->initialized['region'] = true;
+        $this->region = $region;
 
         return $this;
     }
@@ -98,6 +128,7 @@ class Workspace
      */
     public function setAuthorizations(?array $authorizations): self
     {
+        $this->initialized['authorizations'] = true;
         $this->authorizations = $authorizations;
 
         return $this;
@@ -116,6 +147,7 @@ class Workspace
      */
     public function setUsers(?array $users): self
     {
+        $this->initialized['users'] = true;
         $this->users = $users;
 
         return $this;

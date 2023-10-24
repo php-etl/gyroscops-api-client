@@ -13,6 +13,7 @@ namespace Gyroscops\Api\Endpoint;
 class GetActionCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
 {
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
+    protected $accept;
 
     /**
      * Retrieves the collection of Action resources.
@@ -21,10 +22,13 @@ class GetActionCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
      *
      *     @var int $page The collection page number
      * }
+     *
+     * @param array $accept Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(array $queryParameters = [])
+    public function __construct(array $queryParameters = [], array $accept = [])
     {
         $this->queryParameters = $queryParameters;
+        $this->accept = $accept;
     }
 
     public function getMethod(): string
@@ -44,7 +48,11 @@ class GetActionCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
 
     public function getExtraHeaders(): array
     {
-        return ['Accept' => ['application/json']];
+        if (empty($this->accept)) {
+            return ['Accept' => ['application/ld+json', 'application/json']];
+        }
+
+        return $this->accept;
     }
 
     protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
@@ -53,7 +61,7 @@ class GetActionCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
         $optionsResolver->setDefined(['page']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults(['page' => 1]);
-        $optionsResolver->setAllowedTypes('page', ['int']);
+        $optionsResolver->addAllowedTypes('page', ['int']);
 
         return $optionsResolver;
     }
@@ -61,12 +69,19 @@ class GetActionCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\ActionRead[]|null
+     * @return \Gyroscops\Api\Model\RuntimeActionsGetLdjsonResponse200|\Gyroscops\Api\Model\ActionRead[]|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ActionRead[]', 'json');
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (200 === $status) {
+            if (mb_strpos($contentType, 'application/ld+json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\RuntimeActionsGetLdjsonResponse200', 'json');
+            }
+            if (mb_strpos($contentType, 'application/json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ActionRead[]', 'json');
+            }
         }
     }
 

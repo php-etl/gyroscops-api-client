@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class GatewayAkeneoOauthTokenPutBodyHydraSearch
+class GatewayAkeneoOauthTokenPutBodyHydraSearch extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -36,6 +45,7 @@ class GatewayAkeneoOauthTokenPutBodyHydraSearch
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -48,6 +58,7 @@ class GatewayAkeneoOauthTokenPutBodyHydraSearch
 
     public function setHydraTemplate(?string $hydraTemplate): self
     {
+        $this->initialized['hydraTemplate'] = true;
         $this->hydraTemplate = $hydraTemplate;
 
         return $this;
@@ -60,6 +71,7 @@ class GatewayAkeneoOauthTokenPutBodyHydraSearch
 
     public function setHydraVariableRepresentation(?string $hydraVariableRepresentation): self
     {
+        $this->initialized['hydraVariableRepresentation'] = true;
         $this->hydraVariableRepresentation = $hydraVariableRepresentation;
 
         return $this;
@@ -78,6 +90,7 @@ class GatewayAkeneoOauthTokenPutBodyHydraSearch
      */
     public function setHydraMapping(?array $hydraMapping): self
     {
+        $this->initialized['hydraMapping'] = true;
         $this->hydraMapping = $hydraMapping;
 
         return $this;

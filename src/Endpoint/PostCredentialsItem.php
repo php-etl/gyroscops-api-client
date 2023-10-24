@@ -48,10 +48,12 @@ class PostCredentialsItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
      *
      * @return \Gyroscops\Api\Model\Token|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return $serializer->deserialize($body, \Gyroscops\Api\Model\Token::class, 'json');
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+            return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Token', 'json');
         }
     }
 

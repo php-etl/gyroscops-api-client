@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -24,22 +25,19 @@ class PipelineMoveAfterPipelineStepCommandInputNormalizer implements Denormalize
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+    use ValidatorTrait;
 
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return \Gyroscops\Api\Model\PipelineMoveAfterPipelineStepCommandInput::class === $type;
+        return $type === 'Gyroscops\\Api\\Model\\PipelineMoveAfterPipelineStepCommandInput';
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        return \is_object($data) && \Gyroscops\Api\Model\PipelineMoveAfterPipelineStepCommandInput::class === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\PipelineMoveAfterPipelineStepCommandInput';
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,25 +52,40 @@ class PipelineMoveAfterPipelineStepCommandInputNormalizer implements Denormalize
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('code', $data) && null !== $data['code']) {
+        if (\array_key_exists('after', $data) && $data['after'] !== null) {
+            $object->setAfter($data['after']);
+            unset($data['after']);
+        } elseif (\array_key_exists('after', $data) && $data['after'] === null) {
+            $object->setAfter(null);
+        }
+        if (\array_key_exists('code', $data) && $data['code'] !== null) {
             $object->setCode($data['code']);
-        } elseif (\array_key_exists('code', $data) && null === $data['code']) {
+            unset($data['code']);
+        } elseif (\array_key_exists('code', $data) && $data['code'] === null) {
             $object->setCode(null);
+        }
+        foreach ($data as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value;
+            }
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
+        $data['after'] = $object->getAfter();
         $data['code'] = $object->getCode();
+        foreach ($object as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value;
+            }
+        }
 
         return $data;
     }

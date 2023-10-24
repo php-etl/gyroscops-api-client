@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class SecretJsonldRead
+class SecretJsonldRead extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var mixed|null
      */
@@ -37,13 +46,17 @@ class SecretJsonldRead
      */
     protected $description;
     /**
+     * @var string|null
+     */
+    protected $organization;
+    /**
+     * @var string|null
+     */
+    protected $workspace;
+    /**
      * @var string[]|null
      */
     protected $contents;
-    /**
-     * @var TraversableJsonldRead|null
-     */
-    protected $iterator;
 
     /**
      * @return mixed
@@ -53,8 +66,12 @@ class SecretJsonldRead
         return $this->context;
     }
 
-    public function setContext(mixed $context): self
+    /**
+     * @param mixed $context
+     */
+    public function setContext($context): self
     {
+        $this->initialized['context'] = true;
         $this->context = $context;
 
         return $this;
@@ -67,6 +84,7 @@ class SecretJsonldRead
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -79,6 +97,7 @@ class SecretJsonldRead
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -91,6 +110,7 @@ class SecretJsonldRead
 
     public function setId2(?string $id2): self
     {
+        $this->initialized['id2'] = true;
         $this->id2 = $id2;
 
         return $this;
@@ -103,6 +123,7 @@ class SecretJsonldRead
 
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -115,7 +136,34 @@ class SecretJsonldRead
 
     public function setDescription(?string $description): self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getOrganization(): ?string
+    {
+        return $this->organization;
+    }
+
+    public function setOrganization(?string $organization): self
+    {
+        $this->initialized['organization'] = true;
+        $this->organization = $organization;
+
+        return $this;
+    }
+
+    public function getWorkspace(): ?string
+    {
+        return $this->workspace;
+    }
+
+    public function setWorkspace(?string $workspace): self
+    {
+        $this->initialized['workspace'] = true;
+        $this->workspace = $workspace;
 
         return $this;
     }
@@ -133,19 +181,8 @@ class SecretJsonldRead
      */
     public function setContents(?iterable $contents): self
     {
+        $this->initialized['contents'] = true;
         $this->contents = $contents;
-
-        return $this;
-    }
-
-    public function getIterator(): ?TraversableJsonldRead
-    {
-        return $this->iterator;
-    }
-
-    public function setIterator(?TraversableJsonldRead $iterator): self
-    {
-        $this->iterator = $iterator;
 
         return $this;
     }

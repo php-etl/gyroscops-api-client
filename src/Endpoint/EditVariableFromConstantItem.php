@@ -14,17 +14,20 @@ class EditVariableFromConstantItem extends \Gyroscops\Api\Runtime\Client\BaseEnd
 {
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $id;
+    protected $accept;
 
     /**
      * Replaces the VariableFromConstant resource.
      *
      * @param string                                                              $id          Resource identifier
      * @param \Gyroscops\Api\Model\VariableFromConstantJsonldWrite|\stdClass|null $requestBody
+     * @param array                                                               $accept      Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(string $id, $requestBody = null)
+    public function __construct(string $id, $requestBody = null, array $accept = [])
     {
         $this->id = $id;
         $this->body = $requestBody;
+        $this->accept = $accept;
     }
 
     public function getMethod(): string
@@ -40,10 +43,10 @@ class EditVariableFromConstantItem extends \Gyroscops\Api\Runtime\Client\BaseEnd
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         if ($this->body instanceof \Gyroscops\Api\Model\VariableFromConstantJsonldWrite) {
-            return [['Content-Type' => ['application/ld+json']], $this->body];
+            return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
         if ($this->body instanceof \stdClass) {
-            return [['Content-Type' => ['application/json']], json_encode($this->body, \JSON_THROW_ON_ERROR)];
+            return [['Content-Type' => ['application/json']], json_encode($this->body)];
         }
         if ($this->body instanceof \stdClass) {
             return [['Content-Type' => ['text/html']], $this->body];
@@ -54,31 +57,42 @@ class EditVariableFromConstantItem extends \Gyroscops\Api\Runtime\Client\BaseEnd
 
     public function getExtraHeaders(): array
     {
-        return ['Accept' => ['application/json']];
+        if (empty($this->accept)) {
+            return ['Accept' => ['application/ld+json', 'application/json']];
+        }
+
+        return $this->accept;
     }
 
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\VariableFromConstantRead|null
+     * @return \Gyroscops\Api\Model\VariableFromConstantJsonldRead|\Gyroscops\Api\Model\VariableFromConstantRead|null
      *
      * @throws \Gyroscops\Api\Exception\EditVariableFromConstantItemBadRequestException
      * @throws \Gyroscops\Api\Exception\EditVariableFromConstantItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\EditVariableFromConstantItemNotFoundException
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return $serializer->deserialize($body, \Gyroscops\Api\Model\VariableFromConstantRead::class, 'json');
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (200 === $status) {
+            if (mb_strpos($contentType, 'application/ld+json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\VariableFromConstantJsonldRead', 'json');
+            }
+            if (mb_strpos($contentType, 'application/json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\VariableFromConstantRead', 'json');
+            }
         }
         if (400 === $status) {
-            throw new \Gyroscops\Api\Exception\EditVariableFromConstantItemBadRequestException();
+            throw new \Gyroscops\Api\Exception\EditVariableFromConstantItemBadRequestException($response);
         }
         if (422 === $status) {
-            throw new \Gyroscops\Api\Exception\EditVariableFromConstantItemUnprocessableEntityException();
+            throw new \Gyroscops\Api\Exception\EditVariableFromConstantItemUnprocessableEntityException($response);
         }
         if (404 === $status) {
-            throw new \Gyroscops\Api\Exception\EditVariableFromConstantItemNotFoundException();
+            throw new \Gyroscops\Api\Exception\EditVariableFromConstantItemNotFoundException($response);
         }
     }
 

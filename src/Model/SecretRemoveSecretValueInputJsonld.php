@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class SecretRemoveSecretValueInputJsonld
+class SecretRemoveSecretValueInputJsonld extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var mixed|null
      */
@@ -25,25 +34,9 @@ class SecretRemoveSecretValueInputJsonld
      */
     protected $type;
     /**
-     * @var mixed|null
-     */
-    protected $id2;
-    /**
      * @var string[]|null
      */
     protected $contents;
-    /**
-     * @var mixed|null
-     */
-    protected $organization;
-    /**
-     * @var mixed|null
-     */
-    protected $workspace;
-    /**
-     * @var TraversableJsonld|null
-     */
-    protected $iterator;
 
     /**
      * @return mixed
@@ -53,8 +46,12 @@ class SecretRemoveSecretValueInputJsonld
         return $this->context;
     }
 
-    public function setContext(mixed $context): self
+    /**
+     * @param mixed $context
+     */
+    public function setContext($context): self
     {
+        $this->initialized['context'] = true;
         $this->context = $context;
 
         return $this;
@@ -67,6 +64,7 @@ class SecretRemoveSecretValueInputJsonld
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -79,22 +77,8 @@ class SecretRemoveSecretValueInputJsonld
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getId2()
-    {
-        return $this->id2;
-    }
-
-    public function setId2(mixed $id2): self
-    {
-        $this->id2 = $id2;
 
         return $this;
     }
@@ -112,49 +96,8 @@ class SecretRemoveSecretValueInputJsonld
      */
     public function setContents(?array $contents): self
     {
+        $this->initialized['contents'] = true;
         $this->contents = $contents;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getOrganization()
-    {
-        return $this->organization;
-    }
-
-    public function setOrganization(mixed $organization): self
-    {
-        $this->organization = $organization;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getWorkspace()
-    {
-        return $this->workspace;
-    }
-
-    public function setWorkspace(mixed $workspace): self
-    {
-        $this->workspace = $workspace;
-
-        return $this;
-    }
-
-    public function getIterator(): ?TraversableJsonld
-    {
-        return $this->iterator;
-    }
-
-    public function setIterator(?TraversableJsonld $iterator): self
-    {
-        $this->iterator = $iterator;
 
         return $this;
     }

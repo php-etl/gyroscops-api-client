@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -24,22 +25,19 @@ class VariableFromConfigurationReadNormalizer implements DenormalizerInterface, 
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+    use ValidatorTrait;
 
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return \Gyroscops\Api\Model\VariableFromConfigurationRead::class === $type;
+        return $type === 'Gyroscops\\Api\\Model\\VariableFromConfigurationRead';
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        return \is_object($data) && \Gyroscops\Api\Model\VariableFromConfigurationRead::class === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\VariableFromConfigurationRead';
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,50 +52,77 @@ class VariableFromConfigurationReadNormalizer implements DenormalizerInterface, 
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('configuration', $data) && null !== $data['configuration']) {
-            $object->setConfiguration($data['configuration']);
-        } elseif (\array_key_exists('configuration', $data) && null === $data['configuration']) {
+        if (\array_key_exists('configuration', $data) && $data['configuration'] !== null) {
+            $value = $data['configuration'];
+            if (is_array($data['configuration'])) {
+                $value = $this->denormalizer->denormalize($data['configuration'], 'Gyroscops\\Api\\Model\\ConfigurationRead', 'json', $context);
+            }
+            $object->setConfiguration($value);
+            unset($data['configuration']);
+        } elseif (\array_key_exists('configuration', $data) && $data['configuration'] === null) {
             $object->setConfiguration(null);
         }
-        if (\array_key_exists('item', $data) && null !== $data['item']) {
+        if (\array_key_exists('item', $data) && $data['item'] !== null) {
             $object->setItem($data['item']);
-        } elseif (\array_key_exists('item', $data) && null === $data['item']) {
+            unset($data['item']);
+        } elseif (\array_key_exists('item', $data) && $data['item'] === null) {
             $object->setItem(null);
         }
-        if (\array_key_exists('environment', $data) && null !== $data['environment']) {
-            $object->setEnvironment($data['environment']);
-        } elseif (\array_key_exists('environment', $data) && null === $data['environment']) {
+        if (\array_key_exists('environment', $data) && $data['environment'] !== null) {
+            $value_1 = $data['environment'];
+            if (is_array($data['environment'])) {
+                $value_1 = $this->denormalizer->denormalize($data['environment'], 'Gyroscops\\Api\\Model\\EnvironmentRead', 'json', $context);
+            }
+            $object->setEnvironment($value_1);
+            unset($data['environment']);
+        } elseif (\array_key_exists('environment', $data) && $data['environment'] === null) {
             $object->setEnvironment(null);
         }
-        if (\array_key_exists('name', $data) && null !== $data['name']) {
+        if (\array_key_exists('name', $data) && $data['name'] !== null) {
             $object->setName($data['name']);
-        } elseif (\array_key_exists('name', $data) && null === $data['name']) {
+            unset($data['name']);
+        } elseif (\array_key_exists('name', $data) && $data['name'] === null) {
             $object->setName(null);
+        }
+        foreach ($data as $key => $value_2) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value_2;
+            }
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getConfiguration()) {
-            $data['configuration'] = $object->getConfiguration();
+        if ($object->isInitialized('configuration') && null !== $object->getConfiguration()) {
+            $value = $object->getConfiguration();
+            if (is_object($object->getConfiguration())) {
+                $value = $this->normalizer->normalize($object->getConfiguration(), 'json', $context);
+            }
+            $data['configuration'] = $value;
         }
-        if (null !== $object->getItem()) {
+        if ($object->isInitialized('item') && null !== $object->getItem()) {
             $data['item'] = $object->getItem();
         }
-        if (null !== $object->getEnvironment()) {
-            $data['environment'] = $object->getEnvironment();
+        if ($object->isInitialized('environment') && null !== $object->getEnvironment()) {
+            $value_1 = $object->getEnvironment();
+            if (is_object($object->getEnvironment())) {
+                $value_1 = $this->normalizer->normalize($object->getEnvironment(), 'json', $context);
+            }
+            $data['environment'] = $value_1;
         }
-        if (null !== $object->getName()) {
+        if ($object->isInitialized('name') && null !== $object->getName()) {
             $data['name'] = $object->getName();
+        }
+        foreach ($object as $key => $value_2) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value_2;
+            }
         }
 
         return $data;

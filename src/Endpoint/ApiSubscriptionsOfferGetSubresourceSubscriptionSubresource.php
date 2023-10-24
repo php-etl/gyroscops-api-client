@@ -14,15 +14,18 @@ class ApiSubscriptionsOfferGetSubresourceSubscriptionSubresource extends \Gyrosc
 {
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $id;
+    protected $accept;
 
     /**
      * Retrieves a Subscription resource.
      *
-     * @param string $id Subscription identifier
+     * @param string $id     Subscription identifier
+     * @param array  $accept Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(string $id)
+    public function __construct(string $id, array $accept = [])
     {
         $this->id = $id;
+        $this->accept = $accept;
     }
 
     public function getMethod(): string
@@ -42,18 +45,29 @@ class ApiSubscriptionsOfferGetSubresourceSubscriptionSubresource extends \Gyrosc
 
     public function getExtraHeaders(): array
     {
-        return ['Accept' => ['application/json']];
+        if (empty($this->accept)) {
+            return ['Accept' => ['application/ld+json', 'application/json']];
+        }
+
+        return $this->accept;
     }
 
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\Offer|null
+     * @return \Gyroscops\Api\Model\SubscriptionOfferJsonldRead|\Gyroscops\Api\Model\SubscriptionOfferRead|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return $serializer->deserialize($body, \Gyroscops\Api\Model\Offer::class, 'json');
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (200 === $status) {
+            if (mb_strpos($contentType, 'application/ld+json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\SubscriptionOfferJsonldRead', 'json');
+            }
+            if (mb_strpos($contentType, 'application/json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\SubscriptionOfferRead', 'json');
+            }
         }
     }
 

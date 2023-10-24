@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class PipelineAddPipelineComposerAuthCommandInput
+class PipelineAddPipelineComposerAuthCommandInput extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -28,6 +37,7 @@ class PipelineAddPipelineComposerAuthCommandInput
 
     public function setUrl(?string $url): self
     {
+        $this->initialized['url'] = true;
         $this->url = $url;
 
         return $this;
@@ -40,6 +50,7 @@ class PipelineAddPipelineComposerAuthCommandInput
 
     public function setToken(?string $token): self
     {
+        $this->initialized['token'] = true;
         $this->token = $token;
 
         return $this;

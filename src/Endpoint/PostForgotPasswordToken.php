@@ -34,7 +34,7 @@ class PostForgotPasswordToken extends \Gyroscops\Api\Runtime\Client\BaseEndpoint
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         if ($this->body instanceof \stdClass) {
-            return [['Content-Type' => ['application/json']], json_encode($this->body, \JSON_THROW_ON_ERROR)];
+            return [['Content-Type' => ['application/json']], json_encode($this->body)];
         }
 
         return [[], null];
@@ -43,19 +43,23 @@ class PostForgotPasswordToken extends \Gyroscops\Api\Runtime\Client\BaseEndpoint
     /**
      * {@inheritdoc}
      *
+     * @return null
+     *
      * @throws \Gyroscops\Api\Exception\PostForgotPasswordTokenBadRequestException
      * @throws \Gyroscops\Api\Exception\PostForgotPasswordTokenNotFoundException
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (204 === $status) {
             return null;
         }
         if (400 === $status) {
-            throw new \Gyroscops\Api\Exception\PostForgotPasswordTokenBadRequestException();
+            throw new \Gyroscops\Api\Exception\PostForgotPasswordTokenBadRequestException($response);
         }
         if (404 === $status) {
-            throw new \Gyroscops\Api\Exception\PostForgotPasswordTokenNotFoundException();
+            throw new \Gyroscops\Api\Exception\PostForgotPasswordTokenNotFoundException($response);
         }
     }
 

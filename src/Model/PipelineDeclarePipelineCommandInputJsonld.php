@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class PipelineDeclarePipelineCommandInputJsonld
+class PipelineDeclarePipelineCommandInputJsonld extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var mixed|null
      */
@@ -25,33 +34,21 @@ class PipelineDeclarePipelineCommandInputJsonld
      */
     protected $type;
     /**
-     * @var string|null
+     * @var StepJsonld[]|null
      */
-    protected $label;
+    protected $steps;
+    /**
+     * @var ComposerJsonld|null
+     */
+    protected $composer;
     /**
      * @var string|null
      */
     protected $code;
     /**
-     * @var StepInputJsonld[]|null
+     * @var string|null
      */
-    protected $steps;
-    /**
-     * @var AutoloadInputJsonld[]|null
-     */
-    protected $autoloads;
-    /**
-     * @var string[]|null
-     */
-    protected $packages;
-    /**
-     * @var AddPipelineComposerRepositoryCommandInputJsonld[]|null
-     */
-    protected $repositories;
-    /**
-     * @var AddPipelineComposerAuthCommandInputJsonld[]|null
-     */
-    protected $auths;
+    protected $label;
 
     /**
      * @return mixed
@@ -61,8 +58,12 @@ class PipelineDeclarePipelineCommandInputJsonld
         return $this->context;
     }
 
-    public function setContext(mixed $context): self
+    /**
+     * @param mixed $context
+     */
+    public function setContext($context): self
     {
+        $this->initialized['context'] = true;
         $this->context = $context;
 
         return $this;
@@ -75,6 +76,7 @@ class PipelineDeclarePipelineCommandInputJsonld
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -87,19 +89,40 @@ class PipelineDeclarePipelineCommandInputJsonld
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
     }
 
-    public function getLabel(): ?string
+    /**
+     * @return StepJsonld[]|null
+     */
+    public function getSteps(): ?array
     {
-        return $this->label;
+        return $this->steps;
     }
 
-    public function setLabel(?string $label): self
+    /**
+     * @param StepJsonld[]|null $steps
+     */
+    public function setSteps(?array $steps): self
     {
-        $this->label = $label;
+        $this->initialized['steps'] = true;
+        $this->steps = $steps;
+
+        return $this;
+    }
+
+    public function getComposer(): ?ComposerJsonld
+    {
+        return $this->composer;
+    }
+
+    public function setComposer(?ComposerJsonld $composer): self
+    {
+        $this->initialized['composer'] = true;
+        $this->composer = $composer;
 
         return $this;
     }
@@ -111,97 +134,21 @@ class PipelineDeclarePipelineCommandInputJsonld
 
     public function setCode(?string $code): self
     {
+        $this->initialized['code'] = true;
         $this->code = $code;
 
         return $this;
     }
 
-    /**
-     * @return StepInputJsonld[]|null
-     */
-    public function getSteps(): ?array
+    public function getLabel(): ?string
     {
-        return $this->steps;
+        return $this->label;
     }
 
-    /**
-     * @param StepInputJsonld[]|null $steps
-     */
-    public function setSteps(?array $steps): self
+    public function setLabel(?string $label): self
     {
-        $this->steps = $steps;
-
-        return $this;
-    }
-
-    /**
-     * @return AutoloadInputJsonld[]|null
-     */
-    public function getAutoloads(): ?array
-    {
-        return $this->autoloads;
-    }
-
-    /**
-     * @param AutoloadInputJsonld[]|null $autoloads
-     */
-    public function setAutoloads(?array $autoloads): self
-    {
-        $this->autoloads = $autoloads;
-
-        return $this;
-    }
-
-    /**
-     * @return string[]|null
-     */
-    public function getPackages(): ?iterable
-    {
-        return $this->packages;
-    }
-
-    /**
-     * @param string[]|null $packages
-     */
-    public function setPackages(?iterable $packages): self
-    {
-        $this->packages = $packages;
-
-        return $this;
-    }
-
-    /**
-     * @return AddPipelineComposerRepositoryCommandInputJsonld[]|null
-     */
-    public function getRepositories(): ?array
-    {
-        return $this->repositories;
-    }
-
-    /**
-     * @param AddPipelineComposerRepositoryCommandInputJsonld[]|null $repositories
-     */
-    public function setRepositories(?array $repositories): self
-    {
-        $this->repositories = $repositories;
-
-        return $this;
-    }
-
-    /**
-     * @return AddPipelineComposerAuthCommandInputJsonld[]|null
-     */
-    public function getAuths(): ?array
-    {
-        return $this->auths;
-    }
-
-    /**
-     * @param AddPipelineComposerAuthCommandInputJsonld[]|null $auths
-     */
-    public function setAuths(?array $auths): self
-    {
-        $this->auths = $auths;
+        $this->initialized['label'] = true;
+        $this->label = $label;
 
         return $this;
     }

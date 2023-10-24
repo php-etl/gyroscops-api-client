@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -24,22 +25,19 @@ class WorkspaceNormalizer implements DenormalizerInterface, NormalizerInterface,
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+    use ValidatorTrait;
 
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return \Gyroscops\Api\Model\Workspace::class === $type;
+        return $type === 'Gyroscops\\Api\\Model\\Workspace';
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        return \is_object($data) && \Gyroscops\Api\Model\Workspace::class === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\Workspace';
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,73 +52,103 @@ class WorkspaceNormalizer implements DenormalizerInterface, NormalizerInterface,
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('id', $data) && null !== $data['id']) {
+        if (\array_key_exists('id', $data) && $data['id'] !== null) {
             $object->setId($data['id']);
-        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+            unset($data['id']);
+        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('name', $data) && null !== $data['name']) {
+        if (\array_key_exists('name', $data) && $data['name'] !== null) {
             $object->setName($data['name']);
-        } elseif (\array_key_exists('name', $data) && null === $data['name']) {
+            unset($data['name']);
+        } elseif (\array_key_exists('name', $data) && $data['name'] === null) {
             $object->setName(null);
         }
-        if (\array_key_exists('slug', $data) && null !== $data['slug']) {
+        if (\array_key_exists('slug', $data) && $data['slug'] !== null) {
             $object->setSlug($data['slug']);
-        } elseif (\array_key_exists('slug', $data) && null === $data['slug']) {
+            unset($data['slug']);
+        } elseif (\array_key_exists('slug', $data) && $data['slug'] === null) {
             $object->setSlug(null);
         }
-        if (\array_key_exists('organization', $data) && null !== $data['organization']) {
+        if (\array_key_exists('organization', $data) && $data['organization'] !== null) {
             $object->setOrganization($data['organization']);
-        } elseif (\array_key_exists('organization', $data) && null === $data['organization']) {
+            unset($data['organization']);
+        } elseif (\array_key_exists('organization', $data) && $data['organization'] === null) {
             $object->setOrganization(null);
         }
-        if (\array_key_exists('authorizations', $data) && null !== $data['authorizations']) {
+        if (\array_key_exists('region', $data) && $data['region'] !== null) {
+            $value = $data['region'];
+            if (is_array($data['region']) and isset($data['region']['provider']) and isset($data['region']['datacenterName']) and isset($data['region']['datacenterAddress'])) {
+                $value = $this->denormalizer->denormalize($data['region'], 'Gyroscops\\Api\\Model\\Region', 'json', $context);
+            }
+            $object->setRegion($value);
+            unset($data['region']);
+        } elseif (\array_key_exists('region', $data) && $data['region'] === null) {
+            $object->setRegion(null);
+        }
+        if (\array_key_exists('authorizations', $data) && $data['authorizations'] !== null) {
             $values = [];
-            foreach ($data['authorizations'] as $value) {
-                $values[] = $value;
+            foreach ($data['authorizations'] as $value_1) {
+                $values[] = $value_1;
             }
             $object->setAuthorizations($values);
-        } elseif (\array_key_exists('authorizations', $data) && null === $data['authorizations']) {
+            unset($data['authorizations']);
+        } elseif (\array_key_exists('authorizations', $data) && $data['authorizations'] === null) {
             $object->setAuthorizations(null);
         }
-        if (\array_key_exists('users', $data) && null !== $data['users']) {
+        if (\array_key_exists('users', $data) && $data['users'] !== null) {
             $values_1 = [];
-            foreach ($data['users'] as $value_1) {
-                $values_1[] = $value_1;
+            foreach ($data['users'] as $value_2) {
+                $values_1[] = $value_2;
             }
             $object->setUsers($values_1);
-        } elseif (\array_key_exists('users', $data) && null === $data['users']) {
+            unset($data['users']);
+        } elseif (\array_key_exists('users', $data) && $data['users'] === null) {
             $object->setUsers(null);
+        }
+        foreach ($data as $key => $value_3) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value_3;
+            }
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
         $data['name'] = $object->getName();
-        $data['slug'] = $object->getSlug();
+        if ($object->isInitialized('slug') && null !== $object->getSlug()) {
+            $data['slug'] = $object->getSlug();
+        }
         $data['organization'] = $object->getOrganization();
-        if (null !== $object->getAuthorizations()) {
+        $value = $object->getRegion();
+        if (is_object($object->getRegion())) {
+            $value = $this->normalizer->normalize($object->getRegion(), 'json', $context);
+        }
+        $data['region'] = $value;
+        if ($object->isInitialized('authorizations') && null !== $object->getAuthorizations()) {
             $values = [];
-            foreach ($object->getAuthorizations() as $value) {
-                $values[] = $value;
+            foreach ($object->getAuthorizations() as $value_1) {
+                $values[] = $value_1;
             }
             $data['authorizations'] = $values;
         }
-        if (null !== $object->getUsers()) {
+        if ($object->isInitialized('users') && null !== $object->getUsers()) {
             $values_1 = [];
-            foreach ($object->getUsers() as $value_1) {
-                $values_1[] = $value_1;
+            foreach ($object->getUsers() as $value_2) {
+                $values_1[] = $value_2;
             }
             $data['users'] = $values_1;
+        }
+        foreach ($object as $key => $value_3) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value_3;
+            }
         }
 
         return $data;

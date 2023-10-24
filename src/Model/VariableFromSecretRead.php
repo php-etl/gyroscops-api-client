@@ -10,10 +10,19 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class VariableFromSecretRead
+class VariableFromSecretRead extends \ArrayObject
 {
     /**
-     * @var mixed|null
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
+     * @var SecretRead|null
      */
     protected $secret;
     /**
@@ -21,7 +30,7 @@ class VariableFromSecretRead
      */
     protected $item;
     /**
-     * @var mixed|null
+     * @var EnvironmentRead|null
      */
     protected $environment;
     /**
@@ -29,16 +38,14 @@ class VariableFromSecretRead
      */
     protected $name;
 
-    /**
-     * @return mixed
-     */
-    public function getSecret()
+    public function getSecret(): ?SecretRead
     {
         return $this->secret;
     }
 
-    public function setSecret(mixed $secret): self
+    public function setSecret(?SecretRead $secret): self
     {
+        $this->initialized['secret'] = true;
         $this->secret = $secret;
 
         return $this;
@@ -51,21 +58,20 @@ class VariableFromSecretRead
 
     public function setItem(?string $item): self
     {
+        $this->initialized['item'] = true;
         $this->item = $item;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getEnvironment()
+    public function getEnvironment(): ?EnvironmentRead
     {
         return $this->environment;
     }
 
-    public function setEnvironment(mixed $environment): self
+    public function setEnvironment(?EnvironmentRead $environment): self
     {
+        $this->initialized['environment'] = true;
         $this->environment = $environment;
 
         return $this;
@@ -78,6 +84,7 @@ class VariableFromSecretRead
 
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;

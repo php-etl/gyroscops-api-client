@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class PipelineRemovePipelineComposerAuthCommandInput
+class PipelineRemovePipelineComposerAuthCommandInput extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -24,6 +33,7 @@ class PipelineRemovePipelineComposerAuthCommandInput
 
     public function setUrl(?string $url): self
     {
+        $this->initialized['url'] = true;
         $this->url = $url;
 
         return $this;

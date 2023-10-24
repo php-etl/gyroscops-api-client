@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -24,22 +25,19 @@ class PipelineAddPipelineComposerRepositoryCommandInputNormalizer implements Den
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+    use ValidatorTrait;
 
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return \Gyroscops\Api\Model\PipelineAddPipelineComposerRepositoryCommandInput::class === $type;
+        return $type === 'Gyroscops\\Api\\Model\\PipelineAddPipelineComposerRepositoryCommandInput';
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        return \is_object($data) && \Gyroscops\Api\Model\PipelineAddPipelineComposerRepositoryCommandInput::class === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\PipelineAddPipelineComposerRepositoryCommandInput';
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,42 +52,46 @@ class PipelineAddPipelineComposerRepositoryCommandInputNormalizer implements Den
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('name', $data) && null !== $data['name']) {
+        if (\array_key_exists('name', $data) && $data['name'] !== null) {
             $object->setName($data['name']);
-        } elseif (\array_key_exists('name', $data) && null === $data['name']) {
+            unset($data['name']);
+        } elseif (\array_key_exists('name', $data) && $data['name'] === null) {
             $object->setName(null);
         }
-        if (\array_key_exists('type', $data) && null !== $data['type']) {
+        if (\array_key_exists('type', $data) && $data['type'] !== null) {
             $object->setType($data['type']);
-        } elseif (\array_key_exists('type', $data) && null === $data['type']) {
+            unset($data['type']);
+        } elseif (\array_key_exists('type', $data) && $data['type'] === null) {
             $object->setType(null);
         }
-        if (\array_key_exists('url', $data) && null !== $data['url']) {
+        if (\array_key_exists('url', $data) && $data['url'] !== null) {
             $object->setUrl($data['url']);
-        } elseif (\array_key_exists('url', $data) && null === $data['url']) {
+            unset($data['url']);
+        } elseif (\array_key_exists('url', $data) && $data['url'] === null) {
             $object->setUrl(null);
+        }
+        foreach ($data as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value;
+            }
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getName()) {
-            $data['name'] = $object->getName();
-        }
-        if (null !== $object->getType()) {
-            $data['type'] = $object->getType();
-        }
-        if (null !== $object->getUrl()) {
-            $data['url'] = $object->getUrl();
+        $data['name'] = $object->getName();
+        $data['type'] = $object->getType();
+        $data['url'] = $object->getUrl();
+        foreach ($object as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value;
+            }
         }
 
         return $data;

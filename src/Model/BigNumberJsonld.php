@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class BigNumberJsonld
+class BigNumberJsonld extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var mixed|null
      */
@@ -69,8 +78,12 @@ class BigNumberJsonld
         return $this->context;
     }
 
-    public function setContext(mixed $context): self
+    /**
+     * @param mixed $context
+     */
+    public function setContext($context): self
     {
+        $this->initialized['context'] = true;
         $this->context = $context;
 
         return $this;
@@ -83,6 +96,7 @@ class BigNumberJsonld
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -95,6 +109,7 @@ class BigNumberJsonld
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -113,6 +128,7 @@ class BigNumberJsonld
      */
     public function setZero(?bool $zero): self
     {
+        $this->initialized['zero'] = true;
         $this->zero = $zero;
 
         return $this;
@@ -131,6 +147,7 @@ class BigNumberJsonld
      */
     public function setNegative(?bool $negative): self
     {
+        $this->initialized['negative'] = true;
         $this->negative = $negative;
 
         return $this;
@@ -149,6 +166,7 @@ class BigNumberJsonld
      */
     public function setNegativeOrZero(?bool $negativeOrZero): self
     {
+        $this->initialized['negativeOrZero'] = true;
         $this->negativeOrZero = $negativeOrZero;
 
         return $this;
@@ -167,6 +185,7 @@ class BigNumberJsonld
      */
     public function setPositive(?bool $positive): self
     {
+        $this->initialized['positive'] = true;
         $this->positive = $positive;
 
         return $this;
@@ -185,6 +204,7 @@ class BigNumberJsonld
      */
     public function setPositiveOrZero(?bool $positiveOrZero): self
     {
+        $this->initialized['positiveOrZero'] = true;
         $this->positiveOrZero = $positiveOrZero;
 
         return $this;
@@ -203,6 +223,7 @@ class BigNumberJsonld
      */
     public function setSign(?int $sign): self
     {
+        $this->initialized['sign'] = true;
         $this->sign = $sign;
 
         return $this;

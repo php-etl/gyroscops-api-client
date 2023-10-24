@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class ExecutionWorkflowJob
+class ExecutionWorkflowJob extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -36,6 +45,7 @@ class ExecutionWorkflowJob
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -48,6 +58,7 @@ class ExecutionWorkflowJob
 
     public function setWorkflow(?string $workflow): self
     {
+        $this->initialized['workflow'] = true;
         $this->workflow = $workflow;
 
         return $this;
@@ -60,6 +71,7 @@ class ExecutionWorkflowJob
 
     public function setPipeline(?string $pipeline): self
     {
+        $this->initialized['pipeline'] = true;
         $this->pipeline = $pipeline;
 
         return $this;
@@ -72,6 +84,7 @@ class ExecutionWorkflowJob
 
     public function setAction(?string $action): self
     {
+        $this->initialized['action'] = true;
         $this->action = $action;
 
         return $this;

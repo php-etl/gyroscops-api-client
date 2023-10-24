@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class WorkflowJobPipelineRead
+class WorkflowJobPipelineRead extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -25,31 +34,11 @@ class WorkflowJobPipelineRead
      */
     protected $label;
     /**
-     * @var string|null
-     */
-    protected $runtimeType;
-    /**
      * @var string[]|null
      */
     protected $runtime;
     /**
-     * @var string[]|null
-     */
-    protected $autoload;
-    /**
-     * @var string[]|null
-     */
-    protected $packages;
-    /**
-     * @var string[]|null
-     */
-    protected $repositories;
-    /**
-     * @var string[]|null
-     */
-    protected $auths;
-    /**
-     * @var string[]|null
+     * @var PipelineStepRead[]|null
      */
     protected $steps;
 
@@ -60,6 +49,7 @@ class WorkflowJobPipelineRead
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -72,6 +62,7 @@ class WorkflowJobPipelineRead
 
     public function setCode(?string $code): self
     {
+        $this->initialized['code'] = true;
         $this->code = $code;
 
         return $this;
@@ -84,19 +75,8 @@ class WorkflowJobPipelineRead
 
     public function setLabel(?string $label): self
     {
+        $this->initialized['label'] = true;
         $this->label = $label;
-
-        return $this;
-    }
-
-    public function getRuntimeType(): ?string
-    {
-        return $this->runtimeType;
-    }
-
-    public function setRuntimeType(?string $runtimeType): self
-    {
-        $this->runtimeType = $runtimeType;
 
         return $this;
     }
@@ -114,85 +94,14 @@ class WorkflowJobPipelineRead
      */
     public function setRuntime(?array $runtime): self
     {
+        $this->initialized['runtime'] = true;
         $this->runtime = $runtime;
 
         return $this;
     }
 
     /**
-     * @return string[]|null
-     */
-    public function getAutoload(): ?array
-    {
-        return $this->autoload;
-    }
-
-    /**
-     * @param string[]|null $autoload
-     */
-    public function setAutoload(?array $autoload): self
-    {
-        $this->autoload = $autoload;
-
-        return $this;
-    }
-
-    /**
-     * @return string[]|null
-     */
-    public function getPackages(): ?array
-    {
-        return $this->packages;
-    }
-
-    /**
-     * @param string[]|null $packages
-     */
-    public function setPackages(?array $packages): self
-    {
-        $this->packages = $packages;
-
-        return $this;
-    }
-
-    /**
-     * @return string[]|null
-     */
-    public function getRepositories(): ?array
-    {
-        return $this->repositories;
-    }
-
-    /**
-     * @param string[]|null $repositories
-     */
-    public function setRepositories(?array $repositories): self
-    {
-        $this->repositories = $repositories;
-
-        return $this;
-    }
-
-    /**
-     * @return string[]|null
-     */
-    public function getAuths(): ?array
-    {
-        return $this->auths;
-    }
-
-    /**
-     * @param string[]|null $auths
-     */
-    public function setAuths(?array $auths): self
-    {
-        $this->auths = $auths;
-
-        return $this;
-    }
-
-    /**
-     * @return string[]|null
+     * @return PipelineStepRead[]|null
      */
     public function getSteps(): ?array
     {
@@ -200,10 +109,11 @@ class WorkflowJobPipelineRead
     }
 
     /**
-     * @param string[]|null $steps
+     * @param PipelineStepRead[]|null $steps
      */
     public function setSteps(?array $steps): self
     {
+        $this->initialized['steps'] = true;
         $this->steps = $steps;
 
         return $this;

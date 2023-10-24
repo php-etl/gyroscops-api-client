@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class PipelineStepProbeJsonld
+class PipelineStepProbeJsonld extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -52,6 +61,7 @@ class PipelineStepProbeJsonld
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -64,6 +74,7 @@ class PipelineStepProbeJsonld
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -77,8 +88,12 @@ class PipelineStepProbeJsonld
         return $this->context;
     }
 
-    public function setContext(mixed $context): self
+    /**
+     * @param mixed $context
+     */
+    public function setContext($context): self
     {
+        $this->initialized['context'] = true;
         $this->context = $context;
 
         return $this;
@@ -91,6 +106,7 @@ class PipelineStepProbeJsonld
 
     public function setId2(?string $id2): self
     {
+        $this->initialized['id2'] = true;
         $this->id2 = $id2;
 
         return $this;
@@ -103,6 +119,7 @@ class PipelineStepProbeJsonld
 
     public function setCode(?string $code): self
     {
+        $this->initialized['code'] = true;
         $this->code = $code;
 
         return $this;
@@ -115,6 +132,7 @@ class PipelineStepProbeJsonld
 
     public function setOrder(?int $order): self
     {
+        $this->initialized['order'] = true;
         $this->order = $order;
 
         return $this;
@@ -127,6 +145,7 @@ class PipelineStepProbeJsonld
 
     public function setLabel(?string $label): self
     {
+        $this->initialized['label'] = true;
         $this->label = $label;
 
         return $this;
@@ -139,6 +158,7 @@ class PipelineStepProbeJsonld
 
     public function setStep(?string $step): self
     {
+        $this->initialized['step'] = true;
         $this->step = $step;
 
         return $this;

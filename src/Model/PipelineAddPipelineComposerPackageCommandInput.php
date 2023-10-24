@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class PipelineAddPipelineComposerPackageCommandInput
+class PipelineAddPipelineComposerPackageCommandInput extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -28,6 +37,7 @@ class PipelineAddPipelineComposerPackageCommandInput
 
     public function setPackage(?string $package): self
     {
+        $this->initialized['package'] = true;
         $this->package = $package;
 
         return $this;
@@ -40,6 +50,7 @@ class PipelineAddPipelineComposerPackageCommandInput
 
     public function setVersion(?string $version): self
     {
+        $this->initialized['version'] = true;
         $this->version = $version;
 
         return $this;

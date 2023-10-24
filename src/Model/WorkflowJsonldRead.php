@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class WorkflowJsonldRead
+class WorkflowJsonldRead extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -29,6 +38,10 @@ class WorkflowJsonldRead
      */
     protected $id2;
     /**
+     * @var bool|null
+     */
+    protected $isSoftDeleted;
+    /**
      * @var string|null
      */
     protected $code;
@@ -36,6 +49,30 @@ class WorkflowJsonldRead
      * @var string|null
      */
     protected $label;
+    /**
+     * @var string[]|null
+     */
+    protected $autoload;
+    /**
+     * @var string[]|null
+     */
+    protected $packages;
+    /**
+     * @var string[]|null
+     */
+    protected $repositories;
+    /**
+     * @var string[]|null
+     */
+    protected $auths;
+    /**
+     * @var \DateTime|null
+     */
+    protected $compiledAt;
+    /**
+     * @var int|null
+     */
+    protected $currentVersion;
     /**
      * @var WorkflowJobJsonldRead[]|null
      */
@@ -48,6 +85,7 @@ class WorkflowJsonldRead
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -60,6 +98,7 @@ class WorkflowJsonldRead
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -73,8 +112,12 @@ class WorkflowJsonldRead
         return $this->context;
     }
 
-    public function setContext(mixed $context): self
+    /**
+     * @param mixed $context
+     */
+    public function setContext($context): self
     {
+        $this->initialized['context'] = true;
         $this->context = $context;
 
         return $this;
@@ -87,7 +130,21 @@ class WorkflowJsonldRead
 
     public function setId2(?string $id2): self
     {
+        $this->initialized['id2'] = true;
         $this->id2 = $id2;
+
+        return $this;
+    }
+
+    public function getIsSoftDeleted(): ?bool
+    {
+        return $this->isSoftDeleted;
+    }
+
+    public function setIsSoftDeleted(?bool $isSoftDeleted): self
+    {
+        $this->initialized['isSoftDeleted'] = true;
+        $this->isSoftDeleted = $isSoftDeleted;
 
         return $this;
     }
@@ -99,6 +156,7 @@ class WorkflowJsonldRead
 
     public function setCode(?string $code): self
     {
+        $this->initialized['code'] = true;
         $this->code = $code;
 
         return $this;
@@ -111,7 +169,110 @@ class WorkflowJsonldRead
 
     public function setLabel(?string $label): self
     {
+        $this->initialized['label'] = true;
         $this->label = $label;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getAutoload(): ?array
+    {
+        return $this->autoload;
+    }
+
+    /**
+     * @param string[]|null $autoload
+     */
+    public function setAutoload(?array $autoload): self
+    {
+        $this->initialized['autoload'] = true;
+        $this->autoload = $autoload;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getPackages(): ?array
+    {
+        return $this->packages;
+    }
+
+    /**
+     * @param string[]|null $packages
+     */
+    public function setPackages(?array $packages): self
+    {
+        $this->initialized['packages'] = true;
+        $this->packages = $packages;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getRepositories(): ?array
+    {
+        return $this->repositories;
+    }
+
+    /**
+     * @param string[]|null $repositories
+     */
+    public function setRepositories(?array $repositories): self
+    {
+        $this->initialized['repositories'] = true;
+        $this->repositories = $repositories;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getAuths(): ?array
+    {
+        return $this->auths;
+    }
+
+    /**
+     * @param string[]|null $auths
+     */
+    public function setAuths(?array $auths): self
+    {
+        $this->initialized['auths'] = true;
+        $this->auths = $auths;
+
+        return $this;
+    }
+
+    public function getCompiledAt(): ?\DateTime
+    {
+        return $this->compiledAt;
+    }
+
+    public function setCompiledAt(?\DateTime $compiledAt): self
+    {
+        $this->initialized['compiledAt'] = true;
+        $this->compiledAt = $compiledAt;
+
+        return $this;
+    }
+
+    public function getCurrentVersion(): ?int
+    {
+        return $this->currentVersion;
+    }
+
+    public function setCurrentVersion(?int $currentVersion): self
+    {
+        $this->initialized['currentVersion'] = true;
+        $this->currentVersion = $currentVersion;
 
         return $this;
     }
@@ -129,6 +290,7 @@ class WorkflowJsonldRead
      */
     public function setJobs(?array $jobs): self
     {
+        $this->initialized['jobs'] = true;
         $this->jobs = $jobs;
 
         return $this;

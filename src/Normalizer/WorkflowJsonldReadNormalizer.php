@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -24,22 +25,19 @@ class WorkflowJsonldReadNormalizer implements DenormalizerInterface, NormalizerI
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+    use ValidatorTrait;
 
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return \Gyroscops\Api\Model\WorkflowJsonldRead::class === $type;
+        return $type === 'Gyroscops\\Api\\Model\\WorkflowJsonldRead';
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        return \is_object($data) && \Gyroscops\Api\Model\WorkflowJsonldRead::class === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\WorkflowJsonldRead';
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,67 +52,165 @@ class WorkflowJsonldReadNormalizer implements DenormalizerInterface, NormalizerI
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
+        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+            unset($data['@id']);
+        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
+        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+            unset($data['@type']);
+        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
             $object->setType(null);
         }
-        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
+        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
             $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+            unset($data['@context']);
+        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
             $object->setContext(null);
         }
-        if (\array_key_exists('id', $data) && null !== $data['id']) {
+        if (\array_key_exists('id', $data) && $data['id'] !== null) {
             $object->setId2($data['id']);
-        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+            unset($data['id']);
+        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId2(null);
         }
-        if (\array_key_exists('code', $data) && null !== $data['code']) {
+        if (\array_key_exists('isSoftDeleted', $data) && $data['isSoftDeleted'] !== null) {
+            $object->setIsSoftDeleted($data['isSoftDeleted']);
+            unset($data['isSoftDeleted']);
+        } elseif (\array_key_exists('isSoftDeleted', $data) && $data['isSoftDeleted'] === null) {
+            $object->setIsSoftDeleted(null);
+        }
+        if (\array_key_exists('code', $data) && $data['code'] !== null) {
             $object->setCode($data['code']);
-        } elseif (\array_key_exists('code', $data) && null === $data['code']) {
+            unset($data['code']);
+        } elseif (\array_key_exists('code', $data) && $data['code'] === null) {
             $object->setCode(null);
         }
-        if (\array_key_exists('label', $data) && null !== $data['label']) {
+        if (\array_key_exists('label', $data) && $data['label'] !== null) {
             $object->setLabel($data['label']);
-        } elseif (\array_key_exists('label', $data) && null === $data['label']) {
+            unset($data['label']);
+        } elseif (\array_key_exists('label', $data) && $data['label'] === null) {
             $object->setLabel(null);
         }
-        if (\array_key_exists('jobs', $data) && null !== $data['jobs']) {
+        if (\array_key_exists('autoload', $data) && $data['autoload'] !== null) {
             $values = [];
-            foreach ($data['jobs'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, \Gyroscops\Api\Model\WorkflowJobJsonldRead::class, 'json', $context);
+            foreach ($data['autoload'] as $value) {
+                $values[] = $value;
             }
-            $object->setJobs($values);
-        } elseif (\array_key_exists('jobs', $data) && null === $data['jobs']) {
+            $object->setAutoload($values);
+            unset($data['autoload']);
+        } elseif (\array_key_exists('autoload', $data) && $data['autoload'] === null) {
+            $object->setAutoload(null);
+        }
+        if (\array_key_exists('packages', $data) && $data['packages'] !== null) {
+            $values_1 = [];
+            foreach ($data['packages'] as $value_1) {
+                $values_1[] = $value_1;
+            }
+            $object->setPackages($values_1);
+            unset($data['packages']);
+        } elseif (\array_key_exists('packages', $data) && $data['packages'] === null) {
+            $object->setPackages(null);
+        }
+        if (\array_key_exists('repositories', $data) && $data['repositories'] !== null) {
+            $values_2 = [];
+            foreach ($data['repositories'] as $value_2) {
+                $values_2[] = $value_2;
+            }
+            $object->setRepositories($values_2);
+            unset($data['repositories']);
+        } elseif (\array_key_exists('repositories', $data) && $data['repositories'] === null) {
+            $object->setRepositories(null);
+        }
+        if (\array_key_exists('auths', $data) && $data['auths'] !== null) {
+            $values_3 = [];
+            foreach ($data['auths'] as $value_3) {
+                $values_3[] = $value_3;
+            }
+            $object->setAuths($values_3);
+            unset($data['auths']);
+        } elseif (\array_key_exists('auths', $data) && $data['auths'] === null) {
+            $object->setAuths(null);
+        }
+        if (\array_key_exists('compiledAt', $data) && $data['compiledAt'] !== null) {
+            $object->setCompiledAt(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['compiledAt']));
+            unset($data['compiledAt']);
+        } elseif (\array_key_exists('compiledAt', $data) && $data['compiledAt'] === null) {
+            $object->setCompiledAt(null);
+        }
+        if (\array_key_exists('currentVersion', $data) && $data['currentVersion'] !== null) {
+            $object->setCurrentVersion($data['currentVersion']);
+            unset($data['currentVersion']);
+        } elseif (\array_key_exists('currentVersion', $data) && $data['currentVersion'] === null) {
+            $object->setCurrentVersion(null);
+        }
+        if (\array_key_exists('jobs', $data) && $data['jobs'] !== null) {
+            $values_4 = [];
+            foreach ($data['jobs'] as $value_4) {
+                $values_4[] = $this->denormalizer->denormalize($value_4, 'Gyroscops\\Api\\Model\\WorkflowJobJsonldRead', 'json', $context);
+            }
+            $object->setJobs($values_4);
+            unset($data['jobs']);
+        } elseif (\array_key_exists('jobs', $data) && $data['jobs'] === null) {
             $object->setJobs(null);
+        }
+        foreach ($data as $key => $value_5) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value_5;
+            }
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
         $data['id'] = $object->getId2();
+        if ($object->isInitialized('isSoftDeleted') && null !== $object->getIsSoftDeleted()) {
+            $data['isSoftDeleted'] = $object->getIsSoftDeleted();
+        }
         $data['code'] = $object->getCode();
         $data['label'] = $object->getLabel();
-        if (null !== $object->getJobs()) {
+        if ($object->isInitialized('packages') && null !== $object->getPackages()) {
             $values = [];
-            foreach ($object->getJobs() as $value) {
-                $values[] = $this->normalizer->normalize($value, 'json', $context);
+            foreach ($object->getPackages() as $value) {
+                $values[] = $value;
             }
-            $data['jobs'] = $values;
+            $data['packages'] = $values;
+        }
+        $values_1 = [];
+        foreach ($object->getRepositories() as $value_1) {
+            $values_1[] = $value_1;
+        }
+        $data['repositories'] = $values_1;
+        $values_2 = [];
+        foreach ($object->getAuths() as $value_2) {
+            $values_2[] = $value_2;
+        }
+        $data['auths'] = $values_2;
+        if ($object->isInitialized('compiledAt') && null !== $object->getCompiledAt()) {
+            $data['compiledAt'] = $object->getCompiledAt()->format('Y-m-d\\TH:i:sP');
+        }
+        if ($object->isInitialized('currentVersion') && null !== $object->getCurrentVersion()) {
+            $data['currentVersion'] = $object->getCurrentVersion();
+        }
+        if ($object->isInitialized('jobs') && null !== $object->getJobs()) {
+            $values_3 = [];
+            foreach ($object->getJobs() as $value_3) {
+                $values_3[] = $this->normalizer->normalize($value_3, 'json', $context);
+            }
+            $data['jobs'] = $values_3;
+        }
+        foreach ($object as $key => $value_4) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value_4;
+            }
         }
 
         return $data;

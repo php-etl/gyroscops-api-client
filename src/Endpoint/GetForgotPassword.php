@@ -43,15 +43,19 @@ class GetForgotPassword extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imple
     /**
      * {@inheritdoc}
      *
+     * @return null
+     *
      * @throws \Gyroscops\Api\Exception\GetForgotPasswordNotFoundException
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return json_decode($body, null, 512, \JSON_THROW_ON_ERROR);
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+            return json_decode($body);
         }
         if (404 === $status) {
-            throw new \Gyroscops\Api\Exception\GetForgotPasswordNotFoundException();
+            throw new \Gyroscops\Api\Exception\GetForgotPasswordNotFoundException($response);
         }
     }
 

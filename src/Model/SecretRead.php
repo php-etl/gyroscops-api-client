@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class SecretRead
+class SecretRead extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -25,13 +34,17 @@ class SecretRead
      */
     protected $description;
     /**
+     * @var string|null
+     */
+    protected $organization;
+    /**
+     * @var string|null
+     */
+    protected $workspace;
+    /**
      * @var string[]|null
      */
     protected $contents;
-    /**
-     * @var mixed|null
-     */
-    protected $iterator;
 
     public function getId(): ?string
     {
@@ -40,6 +53,7 @@ class SecretRead
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -52,6 +66,7 @@ class SecretRead
 
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -64,7 +79,34 @@ class SecretRead
 
     public function setDescription(?string $description): self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getOrganization(): ?string
+    {
+        return $this->organization;
+    }
+
+    public function setOrganization(?string $organization): self
+    {
+        $this->initialized['organization'] = true;
+        $this->organization = $organization;
+
+        return $this;
+    }
+
+    public function getWorkspace(): ?string
+    {
+        return $this->workspace;
+    }
+
+    public function setWorkspace(?string $workspace): self
+    {
+        $this->initialized['workspace'] = true;
+        $this->workspace = $workspace;
 
         return $this;
     }
@@ -82,22 +124,8 @@ class SecretRead
      */
     public function setContents(?iterable $contents): self
     {
+        $this->initialized['contents'] = true;
         $this->contents = $contents;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getIterator()
-    {
-        return $this->iterator;
-    }
-
-    public function setIterator(mixed $iterator): self
-    {
-        $this->iterator = $iterator;
 
         return $this;
     }

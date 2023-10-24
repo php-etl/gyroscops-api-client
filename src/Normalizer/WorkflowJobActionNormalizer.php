@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -24,22 +25,19 @@ class WorkflowJobActionNormalizer implements DenormalizerInterface, NormalizerIn
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+    use ValidatorTrait;
 
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return \Gyroscops\Api\Model\WorkflowJobAction::class === $type;
+        return $type === 'Gyroscops\\Api\\Model\\WorkflowJobAction';
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        return \is_object($data) && \Gyroscops\Api\Model\WorkflowJobAction::class === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\WorkflowJobAction';
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,31 +52,68 @@ class WorkflowJobActionNormalizer implements DenormalizerInterface, NormalizerIn
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('job', $data) && null !== $data['job']) {
+        if (\array_key_exists('job', $data) && $data['job'] !== null) {
             $object->setJob($data['job']);
-        } elseif (\array_key_exists('job', $data) && null === $data['job']) {
+            unset($data['job']);
+        } elseif (\array_key_exists('job', $data) && $data['job'] === null) {
             $object->setJob(null);
         }
-        if (\array_key_exists('id', $data) && null !== $data['id']) {
+        if (\array_key_exists('id', $data) && $data['id'] !== null) {
             $object->setId($data['id']);
-        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+            unset($data['id']);
+        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId(null);
+        }
+        if (\array_key_exists('code', $data) && $data['code'] !== null) {
+            $object->setCode($data['code']);
+            unset($data['code']);
+        } elseif (\array_key_exists('code', $data) && $data['code'] === null) {
+            $object->setCode(null);
+        }
+        if (\array_key_exists('label', $data) && $data['label'] !== null) {
+            $object->setLabel($data['label']);
+            unset($data['label']);
+        } elseif (\array_key_exists('label', $data) && $data['label'] === null) {
+            $object->setLabel(null);
+        }
+        if (\array_key_exists('configuration', $data) && $data['configuration'] !== null) {
+            $values = [];
+            foreach ($data['configuration'] as $value) {
+                $values[] = $value;
+            }
+            $object->setConfiguration($values);
+            unset($data['configuration']);
+        } elseif (\array_key_exists('configuration', $data) && $data['configuration'] === null) {
+            $object->setConfiguration(null);
+        }
+        foreach ($data as $key => $value_1) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value_1;
+            }
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
         $data['job'] = $object->getJob();
-        $data['id'] = $object->getId();
+        $data['code'] = $object->getCode();
+        $data['label'] = $object->getLabel();
+        $values = [];
+        foreach ($object->getConfiguration() as $value) {
+            $values[] = $value;
+        }
+        $data['configuration'] = $values;
+        foreach ($object as $key => $value_1) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value_1;
+            }
+        }
 
         return $data;
     }

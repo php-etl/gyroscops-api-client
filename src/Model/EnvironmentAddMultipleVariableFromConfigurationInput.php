@@ -10,16 +10,21 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class EnvironmentAddMultipleVariableFromConfigurationInput
+class EnvironmentAddMultipleVariableFromConfigurationInput extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var VariableFromConfigurationInput[]|null
      */
     protected $variables;
-    /**
-     * @var mixed|null
-     */
-    protected $iterator;
 
     /**
      * @return VariableFromConfigurationInput[]|null
@@ -34,22 +39,8 @@ class EnvironmentAddMultipleVariableFromConfigurationInput
      */
     public function setVariables(?array $variables): self
     {
+        $this->initialized['variables'] = true;
         $this->variables = $variables;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getIterator()
-    {
-        return $this->iterator;
-    }
-
-    public function setIterator(mixed $iterator): self
-    {
-        $this->iterator = $iterator;
 
         return $this;
     }

@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class EnvironmentCreateEnvironmentInput
+class EnvironmentCreateEnvironmentInput extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -24,10 +33,6 @@ class EnvironmentCreateEnvironmentInput
      * @var string[]|null
      */
     protected $variables;
-    /**
-     * @var mixed|null
-     */
-    protected $iterator;
 
     public function getName(): ?string
     {
@@ -36,6 +41,7 @@ class EnvironmentCreateEnvironmentInput
 
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -48,6 +54,7 @@ class EnvironmentCreateEnvironmentInput
 
     public function setDescription(?string $description): self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
 
         return $this;
@@ -66,22 +73,8 @@ class EnvironmentCreateEnvironmentInput
      */
     public function setVariables(?array $variables): self
     {
+        $this->initialized['variables'] = true;
         $this->variables = $variables;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getIterator()
-    {
-        return $this->iterator;
-    }
-
-    public function setIterator(mixed $iterator): self
-    {
-        $this->iterator = $iterator;
 
         return $this;
     }

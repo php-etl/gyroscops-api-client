@@ -15,6 +15,7 @@ class ApiExecutionWorkflowJobsPipelineStepsGetSubresourceExecutionWorkflowJobSub
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $id;
     protected $pipeline;
+    protected $accept;
 
     /**
      * Retrieves a ExecutionWorkflowJob resource.
@@ -25,12 +26,15 @@ class ApiExecutionWorkflowJobsPipelineStepsGetSubresourceExecutionWorkflowJobSub
      *
      *     @var int $page The collection page number
      * }
+     *
+     * @param array $accept Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(string $id, string $pipeline, array $queryParameters = [])
+    public function __construct(string $id, string $pipeline, array $queryParameters = [], array $accept = [])
     {
         $this->id = $id;
         $this->pipeline = $pipeline;
         $this->queryParameters = $queryParameters;
+        $this->accept = $accept;
     }
 
     public function getMethod(): string
@@ -40,7 +44,7 @@ class ApiExecutionWorkflowJobsPipelineStepsGetSubresourceExecutionWorkflowJobSub
 
     public function getUri(): string
     {
-        return str_replace(['{id}', '{pipeline}'], [$this->id, $this->pipeline], '/runtime/execution/workflow/execution-workflow-job/{id}/pipeline/steps');
+        return str_replace(['{id}', '{pipeline}'], [$this->id, $this->pipeline], '/runtime/executions/workflows/jobs/{id}/pipelines/steps');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
@@ -50,7 +54,11 @@ class ApiExecutionWorkflowJobsPipelineStepsGetSubresourceExecutionWorkflowJobSub
 
     public function getExtraHeaders(): array
     {
-        return ['Accept' => ['application/json']];
+        if (empty($this->accept)) {
+            return ['Accept' => ['application/ld+json', 'application/json']];
+        }
+
+        return $this->accept;
     }
 
     protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
@@ -59,7 +67,7 @@ class ApiExecutionWorkflowJobsPipelineStepsGetSubresourceExecutionWorkflowJobSub
         $optionsResolver->setDefined(['page']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults(['page' => 1]);
-        $optionsResolver->setAllowedTypes('page', ['int']);
+        $optionsResolver->addAllowedTypes('page', ['int']);
 
         return $optionsResolver;
     }
@@ -67,12 +75,19 @@ class ApiExecutionWorkflowJobsPipelineStepsGetSubresourceExecutionWorkflowJobSub
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\ExecutionPipelineStep[]|null
+     * @return \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200|\Gyroscops\Api\Model\ExecutionPipelineStep[]|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ExecutionPipelineStep[]', 'json');
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (200 === $status) {
+            if (mb_strpos($contentType, 'application/ld+json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200', 'json');
+            }
+            if (mb_strpos($contentType, 'application/json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ExecutionPipelineStep[]', 'json');
+            }
         }
     }
 

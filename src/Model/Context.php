@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class Context
+class Context extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * Returns the step used by this context.
      *
@@ -38,6 +47,7 @@ class Context
      */
     public function setStep(?int $step): self
     {
+        $this->initialized['step'] = true;
         $this->step = $step;
 
         return $this;
@@ -56,6 +66,7 @@ class Context
      */
     public function setFixedScale(?bool $fixedScale): self
     {
+        $this->initialized['fixedScale'] = true;
         $this->fixedScale = $fixedScale;
 
         return $this;

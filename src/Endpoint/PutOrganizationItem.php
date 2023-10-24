@@ -14,17 +14,20 @@ class PutOrganizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
 {
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $id;
+    protected $accept;
 
     /**
      * Replaces the Organization resource.
      *
      * @param string                                                                         $id          Resource identifier
      * @param \Gyroscops\Api\Model\OrganizationJsonld|\Gyroscops\Api\Model\Organization|null $requestBody
+     * @param array                                                                          $accept      Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(string $id, $requestBody = null)
+    public function __construct(string $id, $requestBody = null, array $accept = [])
     {
         $this->id = $id;
         $this->body = $requestBody;
+        $this->accept = $accept;
     }
 
     public function getMethod(): string
@@ -34,13 +37,13 @@ class PutOrganizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/authentication/organization/{id}');
+        return str_replace(['{id}'], [$this->id], '/authentication/organizations/{id}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         if ($this->body instanceof \Gyroscops\Api\Model\OrganizationJsonld) {
-            return [['Content-Type' => ['application/ld+json']], $this->body];
+            return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
         if ($this->body instanceof \Gyroscops\Api\Model\Organization) {
             return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
@@ -54,31 +57,42 @@ class PutOrganizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
 
     public function getExtraHeaders(): array
     {
-        return ['Accept' => ['application/json']];
+        if (empty($this->accept)) {
+            return ['Accept' => ['application/ld+json', 'application/json']];
+        }
+
+        return $this->accept;
     }
 
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\Organization|null
+     * @return \Gyroscops\Api\Model\OrganizationJsonld|\Gyroscops\Api\Model\Organization|null
      *
      * @throws \Gyroscops\Api\Exception\PutOrganizationItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PutOrganizationItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\PutOrganizationItemNotFoundException
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return $serializer->deserialize($body, \Gyroscops\Api\Model\Organization::class, 'json');
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (200 === $status) {
+            if (mb_strpos($contentType, 'application/ld+json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\OrganizationJsonld', 'json');
+            }
+            if (mb_strpos($contentType, 'application/json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Organization', 'json');
+            }
         }
         if (400 === $status) {
-            throw new \Gyroscops\Api\Exception\PutOrganizationItemBadRequestException();
+            throw new \Gyroscops\Api\Exception\PutOrganizationItemBadRequestException($response);
         }
         if (422 === $status) {
-            throw new \Gyroscops\Api\Exception\PutOrganizationItemUnprocessableEntityException();
+            throw new \Gyroscops\Api\Exception\PutOrganizationItemUnprocessableEntityException($response);
         }
         if (404 === $status) {
-            throw new \Gyroscops\Api\Exception\PutOrganizationItemNotFoundException();
+            throw new \Gyroscops\Api\Exception\PutOrganizationItemNotFoundException($response);
         }
     }
 

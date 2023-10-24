@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class EnvironmentJsonldRead
+class EnvironmentJsonldRead extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var mixed|null
      */
@@ -53,8 +62,12 @@ class EnvironmentJsonldRead
         return $this->context;
     }
 
-    public function setContext(mixed $context): self
+    /**
+     * @param mixed $context
+     */
+    public function setContext($context): self
     {
+        $this->initialized['context'] = true;
         $this->context = $context;
 
         return $this;
@@ -67,6 +80,7 @@ class EnvironmentJsonldRead
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -79,6 +93,7 @@ class EnvironmentJsonldRead
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -91,6 +106,7 @@ class EnvironmentJsonldRead
 
     public function setId2(?string $id2): self
     {
+        $this->initialized['id2'] = true;
         $this->id2 = $id2;
 
         return $this;
@@ -103,6 +119,7 @@ class EnvironmentJsonldRead
 
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -115,6 +132,7 @@ class EnvironmentJsonldRead
 
     public function setDescription(?string $description): self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
 
         return $this;
@@ -127,6 +145,7 @@ class EnvironmentJsonldRead
 
     public function setOrganization(?string $organization): self
     {
+        $this->initialized['organization'] = true;
         $this->organization = $organization;
 
         return $this;
@@ -139,6 +158,7 @@ class EnvironmentJsonldRead
 
     public function setWorkspace(?string $workspace): self
     {
+        $this->initialized['workspace'] = true;
         $this->workspace = $workspace;
 
         return $this;

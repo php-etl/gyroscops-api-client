@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class BigNumber
+class BigNumber extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * Checks if this number equals zero.
      *
@@ -62,6 +71,7 @@ class BigNumber
      */
     public function setZero(?bool $zero): self
     {
+        $this->initialized['zero'] = true;
         $this->zero = $zero;
 
         return $this;
@@ -80,6 +90,7 @@ class BigNumber
      */
     public function setNegative(?bool $negative): self
     {
+        $this->initialized['negative'] = true;
         $this->negative = $negative;
 
         return $this;
@@ -98,6 +109,7 @@ class BigNumber
      */
     public function setNegativeOrZero(?bool $negativeOrZero): self
     {
+        $this->initialized['negativeOrZero'] = true;
         $this->negativeOrZero = $negativeOrZero;
 
         return $this;
@@ -116,6 +128,7 @@ class BigNumber
      */
     public function setPositive(?bool $positive): self
     {
+        $this->initialized['positive'] = true;
         $this->positive = $positive;
 
         return $this;
@@ -134,6 +147,7 @@ class BigNumber
      */
     public function setPositiveOrZero(?bool $positiveOrZero): self
     {
+        $this->initialized['positiveOrZero'] = true;
         $this->positiveOrZero = $positiveOrZero;
 
         return $this;
@@ -152,6 +166,7 @@ class BigNumber
      */
     public function setSign(?int $sign): self
     {
+        $this->initialized['sign'] = true;
         $this->sign = $sign;
 
         return $this;

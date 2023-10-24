@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class WorkflowJobPipelineJsonld
+class WorkflowJobPipelineJsonld extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -41,29 +50,9 @@ class WorkflowJobPipelineJsonld
      */
     protected $label;
     /**
-     * @var string|null
-     */
-    protected $runtimeType;
-    /**
      * @var string[]|null
      */
     protected $runtime;
-    /**
-     * @var string[]|null
-     */
-    protected $autoload;
-    /**
-     * @var string[]|null
-     */
-    protected $packages;
-    /**
-     * @var string[]|null
-     */
-    protected $repositories;
-    /**
-     * @var string[]|null
-     */
-    protected $auths;
     /**
      * @var string[]|null
      */
@@ -76,6 +65,7 @@ class WorkflowJobPipelineJsonld
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -88,6 +78,7 @@ class WorkflowJobPipelineJsonld
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -101,8 +92,12 @@ class WorkflowJobPipelineJsonld
         return $this->context;
     }
 
-    public function setContext(mixed $context): self
+    /**
+     * @param mixed $context
+     */
+    public function setContext($context): self
     {
+        $this->initialized['context'] = true;
         $this->context = $context;
 
         return $this;
@@ -115,6 +110,7 @@ class WorkflowJobPipelineJsonld
 
     public function setJob(?string $job): self
     {
+        $this->initialized['job'] = true;
         $this->job = $job;
 
         return $this;
@@ -127,6 +123,7 @@ class WorkflowJobPipelineJsonld
 
     public function setId2(?string $id2): self
     {
+        $this->initialized['id2'] = true;
         $this->id2 = $id2;
 
         return $this;
@@ -139,6 +136,7 @@ class WorkflowJobPipelineJsonld
 
     public function setCode(?string $code): self
     {
+        $this->initialized['code'] = true;
         $this->code = $code;
 
         return $this;
@@ -151,19 +149,8 @@ class WorkflowJobPipelineJsonld
 
     public function setLabel(?string $label): self
     {
+        $this->initialized['label'] = true;
         $this->label = $label;
-
-        return $this;
-    }
-
-    public function getRuntimeType(): ?string
-    {
-        return $this->runtimeType;
-    }
-
-    public function setRuntimeType(?string $runtimeType): self
-    {
-        $this->runtimeType = $runtimeType;
 
         return $this;
     }
@@ -181,79 +168,8 @@ class WorkflowJobPipelineJsonld
      */
     public function setRuntime(?array $runtime): self
     {
+        $this->initialized['runtime'] = true;
         $this->runtime = $runtime;
-
-        return $this;
-    }
-
-    /**
-     * @return string[]|null
-     */
-    public function getAutoload(): ?array
-    {
-        return $this->autoload;
-    }
-
-    /**
-     * @param string[]|null $autoload
-     */
-    public function setAutoload(?array $autoload): self
-    {
-        $this->autoload = $autoload;
-
-        return $this;
-    }
-
-    /**
-     * @return string[]|null
-     */
-    public function getPackages(): ?array
-    {
-        return $this->packages;
-    }
-
-    /**
-     * @param string[]|null $packages
-     */
-    public function setPackages(?array $packages): self
-    {
-        $this->packages = $packages;
-
-        return $this;
-    }
-
-    /**
-     * @return string[]|null
-     */
-    public function getRepositories(): ?array
-    {
-        return $this->repositories;
-    }
-
-    /**
-     * @param string[]|null $repositories
-     */
-    public function setRepositories(?array $repositories): self
-    {
-        $this->repositories = $repositories;
-
-        return $this;
-    }
-
-    /**
-     * @return string[]|null
-     */
-    public function getAuths(): ?array
-    {
-        return $this->auths;
-    }
-
-    /**
-     * @param string[]|null $auths
-     */
-    public function setAuths(?array $auths): self
-    {
-        $this->auths = $auths;
 
         return $this;
     }
@@ -271,6 +187,7 @@ class WorkflowJobPipelineJsonld
      */
     public function setSteps(?array $steps): self
     {
+        $this->initialized['steps'] = true;
         $this->steps = $steps;
 
         return $this;

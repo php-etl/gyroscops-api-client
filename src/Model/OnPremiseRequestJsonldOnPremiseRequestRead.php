@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class OnPremiseRequestJsonldOnPremiseRequestRead
+class OnPremiseRequestJsonldOnPremiseRequestRead extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -56,6 +65,7 @@ class OnPremiseRequestJsonldOnPremiseRequestRead
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -68,6 +78,7 @@ class OnPremiseRequestJsonldOnPremiseRequestRead
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -81,8 +92,12 @@ class OnPremiseRequestJsonldOnPremiseRequestRead
         return $this->context;
     }
 
-    public function setContext(mixed $context): self
+    /**
+     * @param mixed $context
+     */
+    public function setContext($context): self
     {
+        $this->initialized['context'] = true;
         $this->context = $context;
 
         return $this;
@@ -95,6 +110,7 @@ class OnPremiseRequestJsonldOnPremiseRequestRead
 
     public function setId2(?string $id2): self
     {
+        $this->initialized['id2'] = true;
         $this->id2 = $id2;
 
         return $this;
@@ -107,6 +123,7 @@ class OnPremiseRequestJsonldOnPremiseRequestRead
 
     public function setFirstName(?string $firstName): self
     {
+        $this->initialized['firstName'] = true;
         $this->firstName = $firstName;
 
         return $this;
@@ -119,6 +136,7 @@ class OnPremiseRequestJsonldOnPremiseRequestRead
 
     public function setLastName(?string $lastName): self
     {
+        $this->initialized['lastName'] = true;
         $this->lastName = $lastName;
 
         return $this;
@@ -131,6 +149,7 @@ class OnPremiseRequestJsonldOnPremiseRequestRead
 
     public function setEmail(?string $email): self
     {
+        $this->initialized['email'] = true;
         $this->email = $email;
 
         return $this;
@@ -143,6 +162,7 @@ class OnPremiseRequestJsonldOnPremiseRequestRead
 
     public function setMessage(?string $message): self
     {
+        $this->initialized['message'] = true;
         $this->message = $message;
 
         return $this;
@@ -155,6 +175,7 @@ class OnPremiseRequestJsonldOnPremiseRequestRead
 
     public function setCreatedAt(?\DateTime $createdAt): self
     {
+        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
 
         return $this;

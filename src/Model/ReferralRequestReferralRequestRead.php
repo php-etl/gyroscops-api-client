@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class ReferralRequestReferralRequestRead
+class ReferralRequestReferralRequestRead extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -60,6 +69,7 @@ class ReferralRequestReferralRequestRead
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -72,6 +82,7 @@ class ReferralRequestReferralRequestRead
 
     public function setEmail(?string $email): self
     {
+        $this->initialized['email'] = true;
         $this->email = $email;
 
         return $this;
@@ -84,6 +95,7 @@ class ReferralRequestReferralRequestRead
 
     public function setFirstName(?string $firstName): self
     {
+        $this->initialized['firstName'] = true;
         $this->firstName = $firstName;
 
         return $this;
@@ -96,6 +108,7 @@ class ReferralRequestReferralRequestRead
 
     public function setLastName(?string $lastName): self
     {
+        $this->initialized['lastName'] = true;
         $this->lastName = $lastName;
 
         return $this;
@@ -108,6 +121,7 @@ class ReferralRequestReferralRequestRead
 
     public function setUserName(?string $userName): self
     {
+        $this->initialized['userName'] = true;
         $this->userName = $userName;
 
         return $this;
@@ -120,6 +134,7 @@ class ReferralRequestReferralRequestRead
 
     public function setCompanyName(?string $companyName): self
     {
+        $this->initialized['companyName'] = true;
         $this->companyName = $companyName;
 
         return $this;
@@ -132,6 +147,7 @@ class ReferralRequestReferralRequestRead
 
     public function setCreationDate(?\DateTime $creationDate): self
     {
+        $this->initialized['creationDate'] = true;
         $this->creationDate = $creationDate;
 
         return $this;
@@ -144,6 +160,7 @@ class ReferralRequestReferralRequestRead
 
     public function setReferralCode(?string $referralCode): self
     {
+        $this->initialized['referralCode'] = true;
         $this->referralCode = $referralCode;
 
         return $this;
@@ -156,6 +173,7 @@ class ReferralRequestReferralRequestRead
 
     public function setApprover(?string $approver): self
     {
+        $this->initialized['approver'] = true;
         $this->approver = $approver;
 
         return $this;
@@ -168,6 +186,7 @@ class ReferralRequestReferralRequestRead
 
     public function setStatus(?string $status): self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
 
         return $this;

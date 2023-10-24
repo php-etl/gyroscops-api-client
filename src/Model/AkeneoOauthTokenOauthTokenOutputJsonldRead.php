@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class AkeneoOauthTokenOauthTokenOutputJsonldRead
+class AkeneoOauthTokenOauthTokenOutputJsonldRead extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -28,6 +37,7 @@ class AkeneoOauthTokenOauthTokenOutputJsonldRead
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -40,6 +50,7 @@ class AkeneoOauthTokenOauthTokenOutputJsonldRead
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;

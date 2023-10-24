@@ -13,6 +13,17 @@ namespace Gyroscops\Api\Endpoint;
 class MeUserCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
 {
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
+    protected $accept;
+
+    /**
+     * Get the current user.
+     *
+     * @param array $accept Accept content header application/ld+json|application/json|text/html
+     */
+    public function __construct(array $accept = [])
+    {
+        $this->accept = $accept;
+    }
 
     public function getMethod(): string
     {
@@ -31,18 +42,29 @@ class MeUserCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implem
 
     public function getExtraHeaders(): array
     {
-        return ['Accept' => ['application/json']];
+        if (empty($this->accept)) {
+            return ['Accept' => ['application/ld+json', 'application/json']];
+        }
+
+        return $this->accept;
     }
 
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\User[]|null
+     * @return \Gyroscops\Api\Model\AuthenticationMeGetLdjsonResponse200|\Gyroscops\Api\Model\User[]|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\User[]', 'json');
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (200 === $status) {
+            if (mb_strpos($contentType, 'application/ld+json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\AuthenticationMeGetLdjsonResponse200', 'json');
+            }
+            if (mb_strpos($contentType, 'application/json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\User[]', 'json');
+            }
         }
     }
 

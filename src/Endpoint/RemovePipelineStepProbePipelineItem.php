@@ -38,7 +38,7 @@ class RemovePipelineStepProbePipelineItem extends \Gyroscops\Api\Runtime\Client\
 
     public function getUri(): string
     {
-        return str_replace(['{code}', '{probe_code}', '{id}'], [$this->code, $this->probe_code, $this->id], '/runtime/pipeline/{id}/step/{code}/probe/{probeCode}');
+        return str_replace(['{code}', '{probe_code}', '{id}'], [$this->code, $this->probe_code, $this->id], '/runtime/pipelines/{id}/steps/{code}/probes/{probeCode}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
@@ -49,15 +49,19 @@ class RemovePipelineStepProbePipelineItem extends \Gyroscops\Api\Runtime\Client\
     /**
      * {@inheritdoc}
      *
+     * @return null
+     *
      * @throws \Gyroscops\Api\Exception\RemovePipelineStepProbePipelineItemNotFoundException
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (204 === $status) {
             return null;
         }
         if (404 === $status) {
-            throw new \Gyroscops\Api\Exception\RemovePipelineStepProbePipelineItemNotFoundException();
+            throw new \Gyroscops\Api\Exception\RemovePipelineStepProbePipelineItemNotFoundException($response);
         }
     }
 

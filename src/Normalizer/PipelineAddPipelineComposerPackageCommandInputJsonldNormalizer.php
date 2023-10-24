@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -24,22 +25,19 @@ class PipelineAddPipelineComposerPackageCommandInputJsonldNormalizer implements 
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+    use ValidatorTrait;
 
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return \Gyroscops\Api\Model\PipelineAddPipelineComposerPackageCommandInputJsonld::class === $type;
+        return $type === 'Gyroscops\\Api\\Model\\PipelineAddPipelineComposerPackageCommandInputJsonld';
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        return \is_object($data) && \Gyroscops\Api\Model\PipelineAddPipelineComposerPackageCommandInputJsonld::class === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\PipelineAddPipelineComposerPackageCommandInputJsonld';
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,49 +52,57 @@ class PipelineAddPipelineComposerPackageCommandInputJsonldNormalizer implements 
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
+        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
             $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+            unset($data['@context']);
+        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
             $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
+        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+            unset($data['@id']);
+        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
+        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+            unset($data['@type']);
+        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
             $object->setType(null);
         }
-        if (\array_key_exists('package', $data) && null !== $data['package']) {
+        if (\array_key_exists('package', $data) && $data['package'] !== null) {
             $object->setPackage($data['package']);
-        } elseif (\array_key_exists('package', $data) && null === $data['package']) {
+            unset($data['package']);
+        } elseif (\array_key_exists('package', $data) && $data['package'] === null) {
             $object->setPackage(null);
         }
-        if (\array_key_exists('version', $data) && null !== $data['version']) {
+        if (\array_key_exists('version', $data) && $data['version'] !== null) {
             $object->setVersion($data['version']);
-        } elseif (\array_key_exists('version', $data) && null === $data['version']) {
+            unset($data['version']);
+        } elseif (\array_key_exists('version', $data) && $data['version'] === null) {
             $object->setVersion(null);
+        }
+        foreach ($data as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value;
+            }
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getPackage()) {
-            $data['package'] = $object->getPackage();
-        }
-        if (null !== $object->getVersion()) {
-            $data['version'] = $object->getVersion();
+        $data['package'] = $object->getPackage();
+        $data['version'] = $object->getVersion();
+        foreach ($object as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value;
+            }
         }
 
         return $data;

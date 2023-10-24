@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class User
+class User extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -77,9 +86,17 @@ class User
      */
     protected $acceptedReferralRequests;
     /**
+     * @var string[]|null
+     */
+    protected $akeneoLinkedAccounts;
+    /**
      * @var string|null
      */
     protected $userIdentifier;
+    /**
+     * @var string|null
+     */
+    protected $fullName;
     /**
      * @var string|null
      */
@@ -96,6 +113,7 @@ class User
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -108,6 +126,7 @@ class User
 
     public function setFirstName(?string $firstName): self
     {
+        $this->initialized['firstName'] = true;
         $this->firstName = $firstName;
 
         return $this;
@@ -120,6 +139,7 @@ class User
 
     public function setLastName(?string $lastName): self
     {
+        $this->initialized['lastName'] = true;
         $this->lastName = $lastName;
 
         return $this;
@@ -132,6 +152,7 @@ class User
 
     public function setUsername(?string $username): self
     {
+        $this->initialized['username'] = true;
         $this->username = $username;
 
         return $this;
@@ -144,6 +165,7 @@ class User
 
     public function setEmail(?string $email): self
     {
+        $this->initialized['email'] = true;
         $this->email = $email;
 
         return $this;
@@ -156,6 +178,7 @@ class User
 
     public function setPassword(?string $password): self
     {
+        $this->initialized['password'] = true;
         $this->password = $password;
 
         return $this;
@@ -168,6 +191,7 @@ class User
 
     public function setEnabled(?bool $enabled): self
     {
+        $this->initialized['enabled'] = true;
         $this->enabled = $enabled;
 
         return $this;
@@ -186,6 +210,7 @@ class User
      */
     public function setRoles(?array $roles): self
     {
+        $this->initialized['roles'] = true;
         $this->roles = $roles;
 
         return $this;
@@ -204,6 +229,7 @@ class User
      */
     public function setAuthorizations(?array $authorizations): self
     {
+        $this->initialized['authorizations'] = true;
         $this->authorizations = $authorizations;
 
         return $this;
@@ -216,6 +242,7 @@ class User
 
     public function setOrganization(?string $organization): self
     {
+        $this->initialized['organization'] = true;
         $this->organization = $organization;
 
         return $this;
@@ -234,6 +261,7 @@ class User
      */
     public function setAdditionalOrganizations(?array $additionalOrganizations): self
     {
+        $this->initialized['additionalOrganizations'] = true;
         $this->additionalOrganizations = $additionalOrganizations;
 
         return $this;
@@ -252,6 +280,7 @@ class User
      */
     public function setWorkspaces(?array $workspaces): self
     {
+        $this->initialized['workspaces'] = true;
         $this->workspaces = $workspaces;
 
         return $this;
@@ -264,6 +293,7 @@ class User
 
     public function setCurrentWorkspace(?string $currentWorkspace): self
     {
+        $this->initialized['currentWorkspace'] = true;
         $this->currentWorkspace = $currentWorkspace;
 
         return $this;
@@ -276,6 +306,7 @@ class User
 
     public function setCurrentOrganization(?string $currentOrganization): self
     {
+        $this->initialized['currentOrganization'] = true;
         $this->currentOrganization = $currentOrganization;
 
         return $this;
@@ -294,6 +325,7 @@ class User
      */
     public function setReferralCodes(?array $referralCodes): self
     {
+        $this->initialized['referralCodes'] = true;
         $this->referralCodes = $referralCodes;
 
         return $this;
@@ -312,7 +344,27 @@ class User
      */
     public function setAcceptedReferralRequests(?array $acceptedReferralRequests): self
     {
+        $this->initialized['acceptedReferralRequests'] = true;
         $this->acceptedReferralRequests = $acceptedReferralRequests;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getAkeneoLinkedAccounts(): ?array
+    {
+        return $this->akeneoLinkedAccounts;
+    }
+
+    /**
+     * @param string[]|null $akeneoLinkedAccounts
+     */
+    public function setAkeneoLinkedAccounts(?array $akeneoLinkedAccounts): self
+    {
+        $this->initialized['akeneoLinkedAccounts'] = true;
+        $this->akeneoLinkedAccounts = $akeneoLinkedAccounts;
 
         return $this;
     }
@@ -324,7 +376,21 @@ class User
 
     public function setUserIdentifier(?string $userIdentifier): self
     {
+        $this->initialized['userIdentifier'] = true;
         $this->userIdentifier = $userIdentifier;
+
+        return $this;
+    }
+
+    public function getFullName(): ?string
+    {
+        return $this->fullName;
+    }
+
+    public function setFullName(?string $fullName): self
+    {
+        $this->initialized['fullName'] = true;
+        $this->fullName = $fullName;
 
         return $this;
     }
@@ -336,6 +402,7 @@ class User
 
     public function setSalt(?string $salt): self
     {
+        $this->initialized['salt'] = true;
         $this->salt = $salt;
 
         return $this;
@@ -354,6 +421,7 @@ class User
      */
     public function setWorkspace(?array $workspace): self
     {
+        $this->initialized['workspace'] = true;
         $this->workspace = $workspace;
 
         return $this;

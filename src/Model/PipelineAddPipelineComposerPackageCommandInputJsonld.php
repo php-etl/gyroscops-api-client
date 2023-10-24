@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class PipelineAddPipelineComposerPackageCommandInputJsonld
+class PipelineAddPipelineComposerPackageCommandInputJsonld extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var mixed|null
      */
@@ -41,8 +50,12 @@ class PipelineAddPipelineComposerPackageCommandInputJsonld
         return $this->context;
     }
 
-    public function setContext(mixed $context): self
+    /**
+     * @param mixed $context
+     */
+    public function setContext($context): self
     {
+        $this->initialized['context'] = true;
         $this->context = $context;
 
         return $this;
@@ -55,6 +68,7 @@ class PipelineAddPipelineComposerPackageCommandInputJsonld
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -67,6 +81,7 @@ class PipelineAddPipelineComposerPackageCommandInputJsonld
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -79,6 +94,7 @@ class PipelineAddPipelineComposerPackageCommandInputJsonld
 
     public function setPackage(?string $package): self
     {
+        $this->initialized['package'] = true;
         $this->package = $package;
 
         return $this;
@@ -91,6 +107,7 @@ class PipelineAddPipelineComposerPackageCommandInputJsonld
 
     public function setVersion(?string $version): self
     {
+        $this->initialized['version'] = true;
         $this->version = $version;
 
         return $this;

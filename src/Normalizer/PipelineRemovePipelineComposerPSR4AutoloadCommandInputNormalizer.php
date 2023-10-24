@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -24,22 +25,19 @@ class PipelineRemovePipelineComposerPSR4AutoloadCommandInputNormalizer implement
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+    use ValidatorTrait;
 
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return \Gyroscops\Api\Model\PipelineRemovePipelineComposerPSR4AutoloadCommandInput::class === $type;
+        return $type === 'Gyroscops\\Api\\Model\\PipelineRemovePipelineComposerPSR4AutoloadCommandInput';
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        return \is_object($data) && \Gyroscops\Api\Model\PipelineRemovePipelineComposerPSR4AutoloadCommandInput::class === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\PipelineRemovePipelineComposerPSR4AutoloadCommandInput';
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,26 +52,34 @@ class PipelineRemovePipelineComposerPSR4AutoloadCommandInputNormalizer implement
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('namespace', $data) && null !== $data['namespace']) {
+        if (\array_key_exists('namespace', $data) && $data['namespace'] !== null) {
             $object->setNamespace($data['namespace']);
-        } elseif (\array_key_exists('namespace', $data) && null === $data['namespace']) {
+            unset($data['namespace']);
+        } elseif (\array_key_exists('namespace', $data) && $data['namespace'] === null) {
             $object->setNamespace(null);
+        }
+        foreach ($data as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value;
+            }
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getNamespace()) {
+        if ($object->isInitialized('namespace') && null !== $object->getNamespace()) {
             $data['namespace'] = $object->getNamespace();
+        }
+        foreach ($object as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value;
+            }
         }
 
         return $data;

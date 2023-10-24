@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -24,22 +25,19 @@ class UserUserChangePasswordInputNormalizer implements DenormalizerInterface, No
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+    use ValidatorTrait;
 
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return \Gyroscops\Api\Model\UserUserChangePasswordInput::class === $type;
+        return $type === 'Gyroscops\\Api\\Model\\UserUserChangePasswordInput';
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        return \is_object($data) && \Gyroscops\Api\Model\UserUserChangePasswordInput::class === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\UserUserChangePasswordInput';
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,42 +52,52 @@ class UserUserChangePasswordInputNormalizer implements DenormalizerInterface, No
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('currentPassword', $data) && null !== $data['currentPassword']) {
+        if (\array_key_exists('currentPassword', $data) && $data['currentPassword'] !== null) {
             $object->setCurrentPassword($data['currentPassword']);
-        } elseif (\array_key_exists('currentPassword', $data) && null === $data['currentPassword']) {
+            unset($data['currentPassword']);
+        } elseif (\array_key_exists('currentPassword', $data) && $data['currentPassword'] === null) {
             $object->setCurrentPassword(null);
         }
-        if (\array_key_exists('newPassword', $data) && null !== $data['newPassword']) {
+        if (\array_key_exists('newPassword', $data) && $data['newPassword'] !== null) {
             $object->setNewPassword($data['newPassword']);
-        } elseif (\array_key_exists('newPassword', $data) && null === $data['newPassword']) {
+            unset($data['newPassword']);
+        } elseif (\array_key_exists('newPassword', $data) && $data['newPassword'] === null) {
             $object->setNewPassword(null);
         }
-        if (\array_key_exists('confirmPassword', $data) && null !== $data['confirmPassword']) {
+        if (\array_key_exists('confirmPassword', $data) && $data['confirmPassword'] !== null) {
             $object->setConfirmPassword($data['confirmPassword']);
-        } elseif (\array_key_exists('confirmPassword', $data) && null === $data['confirmPassword']) {
+            unset($data['confirmPassword']);
+        } elseif (\array_key_exists('confirmPassword', $data) && $data['confirmPassword'] === null) {
             $object->setConfirmPassword(null);
+        }
+        foreach ($data as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value;
+            }
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getCurrentPassword()) {
+        if ($object->isInitialized('currentPassword') && null !== $object->getCurrentPassword()) {
             $data['currentPassword'] = $object->getCurrentPassword();
         }
-        if (null !== $object->getNewPassword()) {
+        if ($object->isInitialized('newPassword') && null !== $object->getNewPassword()) {
             $data['newPassword'] = $object->getNewPassword();
         }
-        if (null !== $object->getConfirmPassword()) {
+        if ($object->isInitialized('confirmPassword') && null !== $object->getConfirmPassword()) {
             $data['confirmPassword'] = $object->getConfirmPassword();
+        }
+        foreach ($object as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value;
+            }
         }
 
         return $data;

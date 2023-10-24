@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class AkeneoLinkedAccountJsonld
+class AkeneoLinkedAccountJsonld extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -56,6 +65,7 @@ class AkeneoLinkedAccountJsonld
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -68,6 +78,7 @@ class AkeneoLinkedAccountJsonld
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -81,8 +92,12 @@ class AkeneoLinkedAccountJsonld
         return $this->context;
     }
 
-    public function setContext(mixed $context): self
+    /**
+     * @param mixed $context
+     */
+    public function setContext($context): self
     {
+        $this->initialized['context'] = true;
         $this->context = $context;
 
         return $this;
@@ -95,6 +110,7 @@ class AkeneoLinkedAccountJsonld
 
     public function setId2(?string $id2): self
     {
+        $this->initialized['id2'] = true;
         $this->id2 = $id2;
 
         return $this;
@@ -107,6 +123,7 @@ class AkeneoLinkedAccountJsonld
 
     public function setUser(?string $user): self
     {
+        $this->initialized['user'] = true;
         $this->user = $user;
 
         return $this;
@@ -119,6 +136,7 @@ class AkeneoLinkedAccountJsonld
 
     public function setTokenId(?string $tokenId): self
     {
+        $this->initialized['tokenId'] = true;
         $this->tokenId = $tokenId;
 
         return $this;
@@ -131,6 +149,7 @@ class AkeneoLinkedAccountJsonld
 
     public function setAkeneoUserId(?string $akeneoUserId): self
     {
+        $this->initialized['akeneoUserId'] = true;
         $this->akeneoUserId = $akeneoUserId;
 
         return $this;
@@ -143,6 +162,7 @@ class AkeneoLinkedAccountJsonld
 
     public function setToken(?string $token): self
     {
+        $this->initialized['token'] = true;
         $this->token = $token;
 
         return $this;
@@ -155,6 +175,7 @@ class AkeneoLinkedAccountJsonld
 
     public function setAkeneoInstance(?string $akeneoInstance): self
     {
+        $this->initialized['akeneoInstance'] = true;
         $this->akeneoInstance = $akeneoInstance;
 
         return $this;

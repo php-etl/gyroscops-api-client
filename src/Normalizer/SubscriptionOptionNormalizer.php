@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -24,22 +25,19 @@ class SubscriptionOptionNormalizer implements DenormalizerInterface, NormalizerI
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+    use ValidatorTrait;
 
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return \Gyroscops\Api\Model\SubscriptionOption::class === $type;
+        return $type === 'Gyroscops\\Api\\Model\\SubscriptionOption';
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        return \is_object($data) && \Gyroscops\Api\Model\SubscriptionOption::class === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\SubscriptionOption';
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,34 +52,40 @@ class SubscriptionOptionNormalizer implements DenormalizerInterface, NormalizerI
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('id', $data) && null !== $data['id']) {
+        if (\array_key_exists('id', $data) && $data['id'] !== null) {
             $object->setId($data['id']);
-        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+            unset($data['id']);
+        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('subscription', $data) && null !== $data['subscription']) {
+        if (\array_key_exists('subscription', $data) && $data['subscription'] !== null) {
             $object->setSubscription($data['subscription']);
-        } elseif (\array_key_exists('subscription', $data) && null === $data['subscription']) {
+            unset($data['subscription']);
+        } elseif (\array_key_exists('subscription', $data) && $data['subscription'] === null) {
             $object->setSubscription(null);
         }
-        if (\array_key_exists('option', $data) && null !== $data['option']) {
+        if (\array_key_exists('option', $data) && $data['option'] !== null) {
             $object->setOption($data['option']);
-        } elseif (\array_key_exists('option', $data) && null === $data['option']) {
+            unset($data['option']);
+        } elseif (\array_key_exists('option', $data) && $data['option'] === null) {
             $object->setOption(null);
         }
-        if (\array_key_exists('price', $data) && null !== $data['price']) {
-            $object->setPrice($this->denormalizer->denormalize($data['price'], \Gyroscops\Api\Model\Price::class, 'json', $context));
-        } elseif (\array_key_exists('price', $data) && null === $data['price']) {
+        if (\array_key_exists('price', $data) && $data['price'] !== null) {
+            $object->setPrice($this->denormalizer->denormalize($data['price'], 'Gyroscops\\Api\\Model\\Price', 'json', $context));
+            unset($data['price']);
+        } elseif (\array_key_exists('price', $data) && $data['price'] === null) {
             $object->setPrice(null);
+        }
+        foreach ($data as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value;
+            }
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
@@ -90,6 +94,11 @@ class SubscriptionOptionNormalizer implements DenormalizerInterface, NormalizerI
         $data['subscription'] = $object->getSubscription();
         $data['option'] = $object->getOption();
         $data['price'] = $this->normalizer->normalize($object->getPrice(), 'json', $context);
+        foreach ($object as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value;
+            }
+        }
 
         return $data;
     }

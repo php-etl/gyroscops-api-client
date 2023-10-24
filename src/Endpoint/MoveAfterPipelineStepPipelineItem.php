@@ -14,17 +14,20 @@ class MoveAfterPipelineStepPipelineItem extends \Gyroscops\Api\Runtime\Client\Ba
 {
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $id;
+    protected $accept;
 
     /**
      * Moves a step after another one in a pipeline.
      *
      * @param string                                                                                                                                   $id          Resource identifier
      * @param \Gyroscops\Api\Model\PipelineMoveAfterPipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineMoveAfterPipelineStepCommandInput|null $requestBody
+     * @param array                                                                                                                                    $accept      Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(string $id, $requestBody = null)
+    public function __construct(string $id, $requestBody = null, array $accept = [])
     {
         $this->id = $id;
         $this->body = $requestBody;
+        $this->accept = $accept;
     }
 
     public function getMethod(): string
@@ -34,13 +37,13 @@ class MoveAfterPipelineStepPipelineItem extends \Gyroscops\Api\Runtime\Client\Ba
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/runtime/pipeline/{id}/step/{code}/move-after');
+        return str_replace(['{id}'], [$this->id], '/runtime/pipelines/{id}/steps/{code}/move-after');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         if ($this->body instanceof \Gyroscops\Api\Model\PipelineMoveAfterPipelineStepCommandInputJsonld) {
-            return [['Content-Type' => ['application/ld+json']], $this->body];
+            return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
         if ($this->body instanceof \Gyroscops\Api\Model\PipelineMoveAfterPipelineStepCommandInput) {
             return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
@@ -54,29 +57,42 @@ class MoveAfterPipelineStepPipelineItem extends \Gyroscops\Api\Runtime\Client\Ba
 
     public function getExtraHeaders(): array
     {
-        return ['Accept' => ['application/json']];
+        if (empty($this->accept)) {
+            return ['Accept' => ['application/ld+json', 'application/json']];
+        }
+
+        return $this->accept;
     }
 
     /**
      * {@inheritdoc}
      *
+     * @return \Gyroscops\Api\Model\PipelineMoveAfterPipelineStepCommandJsonldRead|null
+     *
      * @throws \Gyroscops\Api\Exception\MoveAfterPipelineStepPipelineItemBadRequestException
      * @throws \Gyroscops\Api\Exception\MoveAfterPipelineStepPipelineItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\MoveAfterPipelineStepPipelineItemNotFoundException
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (202 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return json_decode($body, null, 512, \JSON_THROW_ON_ERROR);
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (202 === $status) {
+            if (mb_strpos($contentType, 'application/ld+json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\PipelineMoveAfterPipelineStepCommandJsonldRead', 'json');
+            }
+            if (mb_strpos($contentType, 'application/json') !== false) {
+                return json_decode($body);
+            }
         }
         if (400 === $status) {
-            throw new \Gyroscops\Api\Exception\MoveAfterPipelineStepPipelineItemBadRequestException();
+            throw new \Gyroscops\Api\Exception\MoveAfterPipelineStepPipelineItemBadRequestException($response);
         }
         if (422 === $status) {
-            throw new \Gyroscops\Api\Exception\MoveAfterPipelineStepPipelineItemUnprocessableEntityException();
+            throw new \Gyroscops\Api\Exception\MoveAfterPipelineStepPipelineItemUnprocessableEntityException($response);
         }
         if (404 === $status) {
-            throw new \Gyroscops\Api\Exception\MoveAfterPipelineStepPipelineItemNotFoundException();
+            throw new \Gyroscops\Api\Exception\MoveAfterPipelineStepPipelineItemNotFoundException($response);
         }
     }
 

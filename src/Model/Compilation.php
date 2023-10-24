@@ -10,16 +10,33 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class Compilation
+class Compilation extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
     protected $id;
     /**
+     * @var int|null
+     */
+    protected $currentVersion;
+    /**
      * @var \DateTime|null
      */
     protected $createdAt;
+    /**
+     * @var string|null
+     */
+    protected $workflow;
     /**
      * @var string|null
      */
@@ -44,7 +61,21 @@ class Compilation
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
+
+        return $this;
+    }
+
+    public function getCurrentVersion(): ?int
+    {
+        return $this->currentVersion;
+    }
+
+    public function setCurrentVersion(?int $currentVersion): self
+    {
+        $this->initialized['currentVersion'] = true;
+        $this->currentVersion = $currentVersion;
 
         return $this;
     }
@@ -56,7 +87,21 @@ class Compilation
 
     public function setCreatedAt(?\DateTime $createdAt): self
     {
+        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getWorkflow(): ?string
+    {
+        return $this->workflow;
+    }
+
+    public function setWorkflow(?string $workflow): self
+    {
+        $this->initialized['workflow'] = true;
+        $this->workflow = $workflow;
 
         return $this;
     }
@@ -68,6 +113,7 @@ class Compilation
 
     public function setPipeline(?string $pipeline): self
     {
+        $this->initialized['pipeline'] = true;
         $this->pipeline = $pipeline;
 
         return $this;
@@ -80,6 +126,7 @@ class Compilation
 
     public function setWorkspace(?string $workspace): self
     {
+        $this->initialized['workspace'] = true;
         $this->workspace = $workspace;
 
         return $this;
@@ -92,6 +139,7 @@ class Compilation
 
     public function setOrganization(?string $organization): self
     {
+        $this->initialized['organization'] = true;
         $this->organization = $organization;
 
         return $this;
@@ -104,6 +152,7 @@ class Compilation
 
     public function setOwner(?string $owner): self
     {
+        $this->initialized['owner'] = true;
         $this->owner = $owner;
 
         return $this;

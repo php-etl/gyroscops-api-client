@@ -14,17 +14,20 @@ class AddComposerRepositoryPipelinePipelineItem extends \Gyroscops\Api\Runtime\C
 {
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $id;
+    protected $accept;
 
     /**
      * Adds a composer repository to a pipeline.
      *
      * @param string                                                                                                                                                   $id          Resource identifier
      * @param \Gyroscops\Api\Model\PipelineAddPipelineComposerRepositoryCommandInputJsonld|\Gyroscops\Api\Model\PipelineAddPipelineComposerRepositoryCommandInput|null $requestBody
+     * @param array                                                                                                                                                    $accept      Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(string $id, $requestBody = null)
+    public function __construct(string $id, $requestBody = null, array $accept = [])
     {
         $this->id = $id;
         $this->body = $requestBody;
+        $this->accept = $accept;
     }
 
     public function getMethod(): string
@@ -34,13 +37,13 @@ class AddComposerRepositoryPipelinePipelineItem extends \Gyroscops\Api\Runtime\C
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/runtime/pipeline/{id}/add-composer-repository');
+        return str_replace(['{id}'], [$this->id], '/runtime/pipelines/{id}/add-composer-repository');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         if ($this->body instanceof \Gyroscops\Api\Model\PipelineAddPipelineComposerRepositoryCommandInputJsonld) {
-            return [['Content-Type' => ['application/ld+json']], $this->body];
+            return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
         if ($this->body instanceof \Gyroscops\Api\Model\PipelineAddPipelineComposerRepositoryCommandInput) {
             return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
@@ -54,29 +57,42 @@ class AddComposerRepositoryPipelinePipelineItem extends \Gyroscops\Api\Runtime\C
 
     public function getExtraHeaders(): array
     {
-        return ['Accept' => ['application/json']];
+        if (empty($this->accept)) {
+            return ['Accept' => ['application/ld+json', 'application/json']];
+        }
+
+        return $this->accept;
     }
 
     /**
      * {@inheritdoc}
      *
+     * @return \Gyroscops\Api\Model\PipelineAddPipelineComposerRepositoryCommandJsonldRead|null
+     *
      * @throws \Gyroscops\Api\Exception\AddComposerRepositoryPipelinePipelineItemBadRequestException
      * @throws \Gyroscops\Api\Exception\AddComposerRepositoryPipelinePipelineItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\AddComposerRepositoryPipelinePipelineItemNotFoundException
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (202 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return json_decode($body, null, 512, \JSON_THROW_ON_ERROR);
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (202 === $status) {
+            if (mb_strpos($contentType, 'application/ld+json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\PipelineAddPipelineComposerRepositoryCommandJsonldRead', 'json');
+            }
+            if (mb_strpos($contentType, 'application/json') !== false) {
+                return json_decode($body);
+            }
         }
         if (400 === $status) {
-            throw new \Gyroscops\Api\Exception\AddComposerRepositoryPipelinePipelineItemBadRequestException();
+            throw new \Gyroscops\Api\Exception\AddComposerRepositoryPipelinePipelineItemBadRequestException($response);
         }
         if (422 === $status) {
-            throw new \Gyroscops\Api\Exception\AddComposerRepositoryPipelinePipelineItemUnprocessableEntityException();
+            throw new \Gyroscops\Api\Exception\AddComposerRepositoryPipelinePipelineItemUnprocessableEntityException($response);
         }
         if (404 === $status) {
-            throw new \Gyroscops\Api\Exception\AddComposerRepositoryPipelinePipelineItemNotFoundException();
+            throw new \Gyroscops\Api\Exception\AddComposerRepositoryPipelinePipelineItemNotFoundException($response);
         }
     }
 

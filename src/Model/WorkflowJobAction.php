@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class WorkflowJobAction
+class WorkflowJobAction extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -20,6 +29,18 @@ class WorkflowJobAction
      * @var string|null
      */
     protected $id;
+    /**
+     * @var string|null
+     */
+    protected $code;
+    /**
+     * @var string|null
+     */
+    protected $label;
+    /**
+     * @var string[]|null
+     */
+    protected $configuration;
 
     public function getJob(): ?string
     {
@@ -28,6 +49,7 @@ class WorkflowJobAction
 
     public function setJob(?string $job): self
     {
+        $this->initialized['job'] = true;
         $this->job = $job;
 
         return $this;
@@ -40,7 +62,53 @@ class WorkflowJobAction
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
+
+        return $this;
+    }
+
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    public function setCode(?string $code): self
+    {
+        $this->initialized['code'] = true;
+        $this->code = $code;
+
+        return $this;
+    }
+
+    public function getLabel(): ?string
+    {
+        return $this->label;
+    }
+
+    public function setLabel(?string $label): self
+    {
+        $this->initialized['label'] = true;
+        $this->label = $label;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getConfiguration(): ?array
+    {
+        return $this->configuration;
+    }
+
+    /**
+     * @param string[]|null $configuration
+     */
+    public function setConfiguration(?array $configuration): self
+    {
+        $this->initialized['configuration'] = true;
+        $this->configuration = $configuration;
 
         return $this;
     }

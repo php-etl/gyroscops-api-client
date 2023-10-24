@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class Currency
+class Currency extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * The currency code.
      *
@@ -50,6 +59,7 @@ class Currency
      */
     public function setCurrencyCode(?string $currencyCode): self
     {
+        $this->initialized['currencyCode'] = true;
         $this->currencyCode = $currencyCode;
 
         return $this;
@@ -68,6 +78,7 @@ class Currency
      */
     public function setNumericCode(?int $numericCode): self
     {
+        $this->initialized['numericCode'] = true;
         $this->numericCode = $numericCode;
 
         return $this;
@@ -86,6 +97,7 @@ class Currency
      */
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -104,6 +116,7 @@ class Currency
      */
     public function setDefaultFractionDigits(?int $defaultFractionDigits): self
     {
+        $this->initialized['defaultFractionDigits'] = true;
         $this->defaultFractionDigits = $defaultFractionDigits;
 
         return $this;

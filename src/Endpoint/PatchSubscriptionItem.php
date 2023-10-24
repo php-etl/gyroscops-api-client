@@ -14,16 +14,19 @@ class PatchSubscriptionItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
 {
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $id;
+    protected $accept;
 
     /**
      * Updates the Subscription resource.
      *
-     * @param string $id Resource identifier
+     * @param string $id     Resource identifier
+     * @param array  $accept Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(string $id, ?\Gyroscops\Api\Model\Subscription $requestBody = null)
+    public function __construct(string $id, ?\Gyroscops\Api\Model\Subscription $requestBody = null, array $accept = [])
     {
         $this->id = $id;
         $this->body = $requestBody;
+        $this->accept = $accept;
     }
 
     public function getMethod(): string
@@ -33,13 +36,13 @@ class PatchSubscriptionItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/authentication/subscription/{id}');
+        return str_replace(['{id}'], [$this->id], '/authentication/subscriptions/{id}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         if ($this->body instanceof \Gyroscops\Api\Model\Subscription) {
-            return [['Content-Type' => ['application/merge-patch+json']], $this->body];
+            return [['Content-Type' => ['application/merge-patch+json']], $serializer->serialize($this->body, 'json')];
         }
 
         return [[], null];
@@ -47,31 +50,42 @@ class PatchSubscriptionItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
 
     public function getExtraHeaders(): array
     {
-        return ['Accept' => ['application/json']];
+        if (empty($this->accept)) {
+            return ['Accept' => ['application/ld+json', 'application/json']];
+        }
+
+        return $this->accept;
     }
 
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\Subscription|null
+     * @return \Gyroscops\Api\Model\SubscriptionJsonld|\Gyroscops\Api\Model\Subscription|null
      *
      * @throws \Gyroscops\Api\Exception\PatchSubscriptionItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PatchSubscriptionItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\PatchSubscriptionItemNotFoundException
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return $serializer->deserialize($body, \Gyroscops\Api\Model\Subscription::class, 'json');
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (200 === $status) {
+            if (mb_strpos($contentType, 'application/ld+json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\SubscriptionJsonld', 'json');
+            }
+            if (mb_strpos($contentType, 'application/json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Subscription', 'json');
+            }
         }
         if (400 === $status) {
-            throw new \Gyroscops\Api\Exception\PatchSubscriptionItemBadRequestException();
+            throw new \Gyroscops\Api\Exception\PatchSubscriptionItemBadRequestException($response);
         }
         if (422 === $status) {
-            throw new \Gyroscops\Api\Exception\PatchSubscriptionItemUnprocessableEntityException();
+            throw new \Gyroscops\Api\Exception\PatchSubscriptionItemUnprocessableEntityException($response);
         }
         if (404 === $status) {
-            throw new \Gyroscops\Api\Exception\PatchSubscriptionItemNotFoundException();
+            throw new \Gyroscops\Api\Exception\PatchSubscriptionItemNotFoundException($response);
         }
     }
 

@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -24,22 +25,19 @@ class EnvironmentCreateEnvironmentInputNormalizer implements DenormalizerInterfa
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+    use ValidatorTrait;
 
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return \Gyroscops\Api\Model\EnvironmentCreateEnvironmentInput::class === $type;
+        return $type === 'Gyroscops\\Api\\Model\\EnvironmentCreateEnvironmentInput';
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        return \is_object($data) && \Gyroscops\Api\Model\EnvironmentCreateEnvironmentInput::class === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\EnvironmentCreateEnvironmentInput';
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,58 +52,60 @@ class EnvironmentCreateEnvironmentInputNormalizer implements DenormalizerInterfa
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('name', $data) && null !== $data['name']) {
+        if (\array_key_exists('name', $data) && $data['name'] !== null) {
             $object->setName($data['name']);
-        } elseif (\array_key_exists('name', $data) && null === $data['name']) {
+            unset($data['name']);
+        } elseif (\array_key_exists('name', $data) && $data['name'] === null) {
             $object->setName(null);
         }
-        if (\array_key_exists('description', $data) && null !== $data['description']) {
+        if (\array_key_exists('description', $data) && $data['description'] !== null) {
             $object->setDescription($data['description']);
-        } elseif (\array_key_exists('description', $data) && null === $data['description']) {
+            unset($data['description']);
+        } elseif (\array_key_exists('description', $data) && $data['description'] === null) {
             $object->setDescription(null);
         }
-        if (\array_key_exists('variables', $data) && null !== $data['variables']) {
+        if (\array_key_exists('variables', $data) && $data['variables'] !== null) {
             $values = [];
             foreach ($data['variables'] as $value) {
                 $values[] = $value;
             }
             $object->setVariables($values);
-        } elseif (\array_key_exists('variables', $data) && null === $data['variables']) {
+            unset($data['variables']);
+        } elseif (\array_key_exists('variables', $data) && $data['variables'] === null) {
             $object->setVariables(null);
         }
-        if (\array_key_exists('iterator', $data) && null !== $data['iterator']) {
-            $object->setIterator($data['iterator']);
-        } elseif (\array_key_exists('iterator', $data) && null === $data['iterator']) {
-            $object->setIterator(null);
+        foreach ($data as $key => $value_1) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value_1;
+            }
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getName()) {
+        if ($object->isInitialized('name') && null !== $object->getName()) {
             $data['name'] = $object->getName();
         }
-        if (null !== $object->getDescription()) {
+        if ($object->isInitialized('description') && null !== $object->getDescription()) {
             $data['description'] = $object->getDescription();
         }
-        if (null !== $object->getVariables()) {
+        if ($object->isInitialized('variables') && null !== $object->getVariables()) {
             $values = [];
             foreach ($object->getVariables() as $value) {
                 $values[] = $value;
             }
             $data['variables'] = $values;
         }
-        if (null !== $object->getIterator()) {
-            $data['iterator'] = $object->getIterator();
+        foreach ($object as $key => $value_1) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value_1;
+            }
         }
 
         return $data;

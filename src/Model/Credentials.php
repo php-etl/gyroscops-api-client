@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class Credentials
+class Credentials extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -36,6 +45,7 @@ class Credentials
 
     public function setUsername(?string $username): self
     {
+        $this->initialized['username'] = true;
         $this->username = $username;
 
         return $this;
@@ -48,6 +58,7 @@ class Credentials
 
     public function setPassword(?string $password): self
     {
+        $this->initialized['password'] = true;
         $this->password = $password;
 
         return $this;
@@ -60,6 +71,7 @@ class Credentials
 
     public function setOrganization(?string $organization): self
     {
+        $this->initialized['organization'] = true;
         $this->organization = $organization;
 
         return $this;
@@ -72,6 +84,7 @@ class Credentials
 
     public function setWorkspace(?string $workspace): self
     {
+        $this->initialized['workspace'] = true;
         $this->workspace = $workspace;
 
         return $this;

@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class PipelineRemovePipelineComposerPSR4AutoloadCommandInput
+class PipelineRemovePipelineComposerPSR4AutoloadCommandInput extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -24,6 +33,7 @@ class PipelineRemovePipelineComposerPSR4AutoloadCommandInput
 
     public function setNamespace(?string $namespace): self
     {
+        $this->initialized['namespace'] = true;
         $this->namespace = $namespace;
 
         return $this;

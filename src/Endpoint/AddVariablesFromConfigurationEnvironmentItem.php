@@ -15,6 +15,7 @@ class AddVariablesFromConfigurationEnvironmentItem extends \Gyroscops\Api\Runtim
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $configuration;
     protected $id;
+    protected $accept;
 
     /**
      * Add variables from an existing configuration storage.
@@ -22,12 +23,14 @@ class AddVariablesFromConfigurationEnvironmentItem extends \Gyroscops\Api\Runtim
      * @param string                                                                                                                                                         $configuration Configuration identifier
      * @param string                                                                                                                                                         $id            Resource identifier
      * @param \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConfigurationInputJsonld|\Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConfigurationInput|null $requestBody
+     * @param array                                                                                                                                                          $accept        Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(string $configuration, string $id, $requestBody = null)
+    public function __construct(string $configuration, string $id, $requestBody = null, array $accept = [])
     {
         $this->configuration = $configuration;
         $this->id = $id;
         $this->body = $requestBody;
+        $this->accept = $accept;
     }
 
     public function getMethod(): string
@@ -37,13 +40,13 @@ class AddVariablesFromConfigurationEnvironmentItem extends \Gyroscops\Api\Runtim
 
     public function getUri(): string
     {
-        return str_replace(['{configuration}', '{id}'], [$this->configuration, $this->id], '/environment/environment/{id}/add-variables-from-configuration/{configuration}');
+        return str_replace(['{configuration}', '{id}'], [$this->configuration, $this->id], '/environment/environments/{id}/add-variables-from-configuration/{configuration}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         if ($this->body instanceof \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConfigurationInputJsonld) {
-            return [['Content-Type' => ['application/ld+json']], $this->body];
+            return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
         if ($this->body instanceof \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConfigurationInput) {
             return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
@@ -57,31 +60,42 @@ class AddVariablesFromConfigurationEnvironmentItem extends \Gyroscops\Api\Runtim
 
     public function getExtraHeaders(): array
     {
-        return ['Accept' => ['application/json']];
+        if (empty($this->accept)) {
+            return ['Accept' => ['application/ld+json', 'application/json']];
+        }
+
+        return $this->accept;
     }
 
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\EnvironmentRead|null
+     * @return \Gyroscops\Api\Model\EnvironmentJsonldRead|\Gyroscops\Api\Model\EnvironmentRead|null
      *
      * @throws \Gyroscops\Api\Exception\AddVariablesFromConfigurationEnvironmentItemBadRequestException
      * @throws \Gyroscops\Api\Exception\AddVariablesFromConfigurationEnvironmentItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\AddVariablesFromConfigurationEnvironmentItemNotFoundException
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return $serializer->deserialize($body, \Gyroscops\Api\Model\EnvironmentRead::class, 'json');
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (200 === $status) {
+            if (mb_strpos($contentType, 'application/ld+json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\EnvironmentJsonldRead', 'json');
+            }
+            if (mb_strpos($contentType, 'application/json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\EnvironmentRead', 'json');
+            }
         }
         if (400 === $status) {
-            throw new \Gyroscops\Api\Exception\AddVariablesFromConfigurationEnvironmentItemBadRequestException();
+            throw new \Gyroscops\Api\Exception\AddVariablesFromConfigurationEnvironmentItemBadRequestException($response);
         }
         if (422 === $status) {
-            throw new \Gyroscops\Api\Exception\AddVariablesFromConfigurationEnvironmentItemUnprocessableEntityException();
+            throw new \Gyroscops\Api\Exception\AddVariablesFromConfigurationEnvironmentItemUnprocessableEntityException($response);
         }
         if (404 === $status) {
-            throw new \Gyroscops\Api\Exception\AddVariablesFromConfigurationEnvironmentItemNotFoundException();
+            throw new \Gyroscops\Api\Exception\AddVariablesFromConfigurationEnvironmentItemNotFoundException($response);
         }
     }
 

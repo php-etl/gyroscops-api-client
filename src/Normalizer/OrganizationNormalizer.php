@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -24,22 +25,19 @@ class OrganizationNormalizer implements DenormalizerInterface, NormalizerInterfa
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+    use ValidatorTrait;
 
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return \Gyroscops\Api\Model\Organization::class === $type;
+        return $type === 'Gyroscops\\Api\\Model\\Organization';
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        return \is_object($data) && \Gyroscops\Api\Model\Organization::class === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\Organization';
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,71 +52,92 @@ class OrganizationNormalizer implements DenormalizerInterface, NormalizerInterfa
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('id', $data) && null !== $data['id']) {
+        if (\array_key_exists('id', $data) && $data['id'] !== null) {
             $object->setId($data['id']);
-        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+            unset($data['id']);
+        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('authorizations', $data) && null !== $data['authorizations']) {
+        if (\array_key_exists('authorizations', $data) && $data['authorizations'] !== null) {
             $values = [];
             foreach ($data['authorizations'] as $value) {
                 $values[] = $value;
             }
             $object->setAuthorizations($values);
-        } elseif (\array_key_exists('authorizations', $data) && null === $data['authorizations']) {
+            unset($data['authorizations']);
+        } elseif (\array_key_exists('authorizations', $data) && $data['authorizations'] === null) {
             $object->setAuthorizations(null);
         }
-        if (\array_key_exists('name', $data) && null !== $data['name']) {
+        if (\array_key_exists('name', $data) && $data['name'] !== null) {
             $object->setName($data['name']);
-        } elseif (\array_key_exists('name', $data) && null === $data['name']) {
+            unset($data['name']);
+        } elseif (\array_key_exists('name', $data) && $data['name'] === null) {
             $object->setName(null);
         }
-        if (\array_key_exists('slug', $data) && null !== $data['slug']) {
+        if (\array_key_exists('slug', $data) && $data['slug'] !== null) {
             $object->setSlug($data['slug']);
-        } elseif (\array_key_exists('slug', $data) && null === $data['slug']) {
+            unset($data['slug']);
+        } elseif (\array_key_exists('slug', $data) && $data['slug'] === null) {
             $object->setSlug(null);
         }
-        if (\array_key_exists('users', $data) && null !== $data['users']) {
+        if (\array_key_exists('stripeCode', $data) && $data['stripeCode'] !== null) {
+            $object->setStripeCode($data['stripeCode']);
+            unset($data['stripeCode']);
+        } elseif (\array_key_exists('stripeCode', $data) && $data['stripeCode'] === null) {
+            $object->setStripeCode(null);
+        }
+        if (\array_key_exists('users', $data) && $data['users'] !== null) {
             $values_1 = [];
             foreach ($data['users'] as $value_1) {
                 $values_1[] = $value_1;
             }
             $object->setUsers($values_1);
-        } elseif (\array_key_exists('users', $data) && null === $data['users']) {
+            unset($data['users']);
+        } elseif (\array_key_exists('users', $data) && $data['users'] === null) {
             $object->setUsers(null);
         }
-        if (\array_key_exists('externalCollaborators', $data) && null !== $data['externalCollaborators']) {
+        if (\array_key_exists('externalCollaborators', $data) && $data['externalCollaborators'] !== null) {
             $values_2 = [];
             foreach ($data['externalCollaborators'] as $value_2) {
                 $values_2[] = $value_2;
             }
             $object->setExternalCollaborators($values_2);
-        } elseif (\array_key_exists('externalCollaborators', $data) && null === $data['externalCollaborators']) {
+            unset($data['externalCollaborators']);
+        } elseif (\array_key_exists('externalCollaborators', $data) && $data['externalCollaborators'] === null) {
             $object->setExternalCollaborators(null);
         }
-        if (\array_key_exists('workspaces', $data) && null !== $data['workspaces']) {
+        if (\array_key_exists('workspaces', $data) && $data['workspaces'] !== null) {
             $values_3 = [];
             foreach ($data['workspaces'] as $value_3) {
                 $values_3[] = $value_3;
             }
             $object->setWorkspaces($values_3);
-        } elseif (\array_key_exists('workspaces', $data) && null === $data['workspaces']) {
+            unset($data['workspaces']);
+        } elseif (\array_key_exists('workspaces', $data) && $data['workspaces'] === null) {
             $object->setWorkspaces(null);
+        }
+        if (\array_key_exists('activeUntil', $data) && $data['activeUntil'] !== null) {
+            $object->setActiveUntil(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['activeUntil']));
+            unset($data['activeUntil']);
+        } elseif (\array_key_exists('activeUntil', $data) && $data['activeUntil'] === null) {
+            $object->setActiveUntil(null);
+        }
+        foreach ($data as $key => $value_4) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value_4;
+            }
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getAuthorizations()) {
+        if ($object->isInitialized('authorizations') && null !== $object->getAuthorizations()) {
             $values = [];
             foreach ($object->getAuthorizations() as $value) {
                 $values[] = $value;
@@ -126,27 +145,40 @@ class OrganizationNormalizer implements DenormalizerInterface, NormalizerInterfa
             $data['authorizations'] = $values;
         }
         $data['name'] = $object->getName();
-        $data['slug'] = $object->getSlug();
-        if (null !== $object->getUsers()) {
+        if ($object->isInitialized('slug') && null !== $object->getSlug()) {
+            $data['slug'] = $object->getSlug();
+        }
+        if ($object->isInitialized('stripeCode') && null !== $object->getStripeCode()) {
+            $data['stripeCode'] = $object->getStripeCode();
+        }
+        if ($object->isInitialized('users') && null !== $object->getUsers()) {
             $values_1 = [];
             foreach ($object->getUsers() as $value_1) {
                 $values_1[] = $value_1;
             }
             $data['users'] = $values_1;
         }
-        if (null !== $object->getExternalCollaborators()) {
+        if ($object->isInitialized('externalCollaborators') && null !== $object->getExternalCollaborators()) {
             $values_2 = [];
             foreach ($object->getExternalCollaborators() as $value_2) {
                 $values_2[] = $value_2;
             }
             $data['externalCollaborators'] = $values_2;
         }
-        if (null !== $object->getWorkspaces()) {
+        if ($object->isInitialized('workspaces') && null !== $object->getWorkspaces()) {
             $values_3 = [];
             foreach ($object->getWorkspaces() as $value_3) {
                 $values_3[] = $value_3;
             }
             $data['workspaces'] = $values_3;
+        }
+        if ($object->isInitialized('activeUntil') && null !== $object->getActiveUntil()) {
+            $data['activeUntil'] = $object->getActiveUntil()->format('Y-m-d\\TH:i:sP');
+        }
+        foreach ($object as $key => $value_4) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value_4;
+            }
         }
 
         return $data;

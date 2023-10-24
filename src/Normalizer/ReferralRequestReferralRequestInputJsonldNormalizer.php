@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -24,22 +25,19 @@ class ReferralRequestReferralRequestInputJsonldNormalizer implements Denormalize
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+    use ValidatorTrait;
 
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return \Gyroscops\Api\Model\ReferralRequestReferralRequestInputJsonld::class === $type;
+        return $type === 'Gyroscops\\Api\\Model\\ReferralRequestReferralRequestInputJsonld';
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        return \is_object($data) && \Gyroscops\Api\Model\ReferralRequestReferralRequestInputJsonld::class === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\ReferralRequestReferralRequestInputJsonld';
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,81 +52,97 @@ class ReferralRequestReferralRequestInputJsonldNormalizer implements Denormalize
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
+        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
             $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+            unset($data['@context']);
+        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
             $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
+        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+            unset($data['@id']);
+        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
+        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+            unset($data['@type']);
+        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
             $object->setType(null);
         }
-        if (\array_key_exists('email', $data) && null !== $data['email']) {
+        if (\array_key_exists('email', $data) && $data['email'] !== null) {
             $object->setEmail($data['email']);
-        } elseif (\array_key_exists('email', $data) && null === $data['email']) {
+            unset($data['email']);
+        } elseif (\array_key_exists('email', $data) && $data['email'] === null) {
             $object->setEmail(null);
         }
-        if (\array_key_exists('firstName', $data) && null !== $data['firstName']) {
+        if (\array_key_exists('firstName', $data) && $data['firstName'] !== null) {
             $object->setFirstName($data['firstName']);
-        } elseif (\array_key_exists('firstName', $data) && null === $data['firstName']) {
+            unset($data['firstName']);
+        } elseif (\array_key_exists('firstName', $data) && $data['firstName'] === null) {
             $object->setFirstName(null);
         }
-        if (\array_key_exists('lastName', $data) && null !== $data['lastName']) {
+        if (\array_key_exists('lastName', $data) && $data['lastName'] !== null) {
             $object->setLastName($data['lastName']);
-        } elseif (\array_key_exists('lastName', $data) && null === $data['lastName']) {
+            unset($data['lastName']);
+        } elseif (\array_key_exists('lastName', $data) && $data['lastName'] === null) {
             $object->setLastName(null);
         }
-        if (\array_key_exists('username', $data) && null !== $data['username']) {
+        if (\array_key_exists('username', $data) && $data['username'] !== null) {
             $object->setUsername($data['username']);
-        } elseif (\array_key_exists('username', $data) && null === $data['username']) {
+            unset($data['username']);
+        } elseif (\array_key_exists('username', $data) && $data['username'] === null) {
             $object->setUsername(null);
         }
-        if (\array_key_exists('companyName', $data) && null !== $data['companyName']) {
+        if (\array_key_exists('companyName', $data) && $data['companyName'] !== null) {
             $object->setCompanyName($data['companyName']);
-        } elseif (\array_key_exists('companyName', $data) && null === $data['companyName']) {
+            unset($data['companyName']);
+        } elseif (\array_key_exists('companyName', $data) && $data['companyName'] === null) {
             $object->setCompanyName(null);
         }
-        if (\array_key_exists('referralCode', $data) && null !== $data['referralCode']) {
+        if (\array_key_exists('referralCode', $data) && $data['referralCode'] !== null) {
             $object->setReferralCode($data['referralCode']);
-        } elseif (\array_key_exists('referralCode', $data) && null === $data['referralCode']) {
+            unset($data['referralCode']);
+        } elseif (\array_key_exists('referralCode', $data) && $data['referralCode'] === null) {
             $object->setReferralCode(null);
+        }
+        foreach ($data as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value;
+            }
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getEmail()) {
+        if ($object->isInitialized('email') && null !== $object->getEmail()) {
             $data['email'] = $object->getEmail();
         }
-        if (null !== $object->getFirstName()) {
+        if ($object->isInitialized('firstName') && null !== $object->getFirstName()) {
             $data['firstName'] = $object->getFirstName();
         }
-        if (null !== $object->getLastName()) {
+        if ($object->isInitialized('lastName') && null !== $object->getLastName()) {
             $data['lastName'] = $object->getLastName();
         }
-        if (null !== $object->getUsername()) {
+        if ($object->isInitialized('username') && null !== $object->getUsername()) {
             $data['username'] = $object->getUsername();
         }
-        if (null !== $object->getCompanyName()) {
+        if ($object->isInitialized('companyName') && null !== $object->getCompanyName()) {
             $data['companyName'] = $object->getCompanyName();
         }
-        if (null !== $object->getReferralCode()) {
+        if ($object->isInitialized('referralCode') && null !== $object->getReferralCode()) {
             $data['referralCode'] = $object->getReferralCode();
+        }
+        foreach ($object as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value;
+            }
         }
 
         return $data;

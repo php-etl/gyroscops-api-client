@@ -13,6 +13,7 @@ namespace Gyroscops\Api\Endpoint;
 class GetAkeneoInstanceOauthAkeneoInstanceCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
 {
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
+    protected $accept;
 
     /**
      * Check if an organization exists in the database.
@@ -22,10 +23,13 @@ class GetAkeneoInstanceOauthAkeneoInstanceCollection extends \Gyroscops\Api\Runt
      *     @var string $url
      *     @var int $page The collection page number
      * }
+     *
+     * @param array $accept Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(array $queryParameters = [])
+    public function __construct(array $queryParameters = [], array $accept = [])
     {
         $this->queryParameters = $queryParameters;
+        $this->accept = $accept;
     }
 
     public function getMethod(): string
@@ -35,7 +39,7 @@ class GetAkeneoInstanceOauthAkeneoInstanceCollection extends \Gyroscops\Api\Runt
 
     public function getUri(): string
     {
-        return '/gateway/akeneo/instance/oauth-state';
+        return '/gateway/akeneo/instances/oauth-state';
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
@@ -45,7 +49,11 @@ class GetAkeneoInstanceOauthAkeneoInstanceCollection extends \Gyroscops\Api\Runt
 
     public function getExtraHeaders(): array
     {
-        return ['Accept' => ['application/json']];
+        if (empty($this->accept)) {
+            return ['Accept' => ['application/ld+json', 'application/json']];
+        }
+
+        return $this->accept;
     }
 
     protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
@@ -54,8 +62,8 @@ class GetAkeneoInstanceOauthAkeneoInstanceCollection extends \Gyroscops\Api\Runt
         $optionsResolver->setDefined(['url', 'page']);
         $optionsResolver->setRequired(['url']);
         $optionsResolver->setDefaults(['page' => 1]);
-        $optionsResolver->setAllowedTypes('url', ['string']);
-        $optionsResolver->setAllowedTypes('page', ['int']);
+        $optionsResolver->addAllowedTypes('url', ['string']);
+        $optionsResolver->addAllowedTypes('page', ['int']);
 
         return $optionsResolver;
     }
@@ -63,12 +71,19 @@ class GetAkeneoInstanceOauthAkeneoInstanceCollection extends \Gyroscops\Api\Runt
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\AkeneoInstance[]|null
+     * @return \Gyroscops\Api\Model\GatewayAkeneoInstancesOauthStateGetLdjsonResponse200|\Gyroscops\Api\Model\AkeneoInstance[]|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\AkeneoInstance[]', 'json');
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (200 === $status) {
+            if (mb_strpos($contentType, 'application/ld+json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\GatewayAkeneoInstancesOauthStateGetLdjsonResponse200', 'json');
+            }
+            if (mb_strpos($contentType, 'application/json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\AkeneoInstance[]', 'json');
+            }
         }
     }
 

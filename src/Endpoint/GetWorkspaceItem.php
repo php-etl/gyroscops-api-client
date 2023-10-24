@@ -14,15 +14,18 @@ class GetWorkspaceItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implem
 {
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $id;
+    protected $accept;
 
     /**
      * Retrieves a Workspace resource.
      *
-     * @param string $id Resource identifier
+     * @param string $id     Resource identifier
+     * @param array  $accept Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(string $id)
+    public function __construct(string $id, array $accept = [])
     {
         $this->id = $id;
+        $this->accept = $accept;
     }
 
     public function getMethod(): string
@@ -32,7 +35,7 @@ class GetWorkspaceItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implem
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/authentication/workspace/{id}');
+        return str_replace(['{id}'], [$this->id], '/authentication/workspaces/{id}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
@@ -42,23 +45,34 @@ class GetWorkspaceItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implem
 
     public function getExtraHeaders(): array
     {
-        return ['Accept' => ['application/json']];
+        if (empty($this->accept)) {
+            return ['Accept' => ['application/ld+json', 'application/json']];
+        }
+
+        return $this->accept;
     }
 
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\Workspace|null
+     * @return \Gyroscops\Api\Model\WorkspaceJsonld|\Gyroscops\Api\Model\Workspace|null
      *
      * @throws \Gyroscops\Api\Exception\GetWorkspaceItemNotFoundException
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return $serializer->deserialize($body, \Gyroscops\Api\Model\Workspace::class, 'json');
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (200 === $status) {
+            if (mb_strpos($contentType, 'application/ld+json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\WorkspaceJsonld', 'json');
+            }
+            if (mb_strpos($contentType, 'application/json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Workspace', 'json');
+            }
         }
         if (404 === $status) {
-            throw new \Gyroscops\Api\Exception\GetWorkspaceItemNotFoundException();
+            throw new \Gyroscops\Api\Exception\GetWorkspaceItemNotFoundException($response);
         }
     }
 

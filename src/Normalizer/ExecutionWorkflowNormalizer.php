@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -24,22 +25,19 @@ class ExecutionWorkflowNormalizer implements DenormalizerInterface, NormalizerIn
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+    use ValidatorTrait;
 
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return \Gyroscops\Api\Model\ExecutionWorkflow::class === $type;
+        return $type === 'Gyroscops\\Api\\Model\\ExecutionWorkflow';
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        return \is_object($data) && \Gyroscops\Api\Model\ExecutionWorkflow::class === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\ExecutionWorkflow';
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,39 +52,44 @@ class ExecutionWorkflowNormalizer implements DenormalizerInterface, NormalizerIn
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('id', $data) && null !== $data['id']) {
+        if (\array_key_exists('id', $data) && $data['id'] !== null) {
             $object->setId($data['id']);
-        } elseif (\array_key_exists('id', $data) && null === $data['id']) {
+            unset($data['id']);
+        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('jobs', $data) && null !== $data['jobs']) {
+        if (\array_key_exists('jobs', $data) && $data['jobs'] !== null) {
             $values = [];
             foreach ($data['jobs'] as $value) {
                 $values[] = $value;
             }
             $object->setJobs($values);
-        } elseif (\array_key_exists('jobs', $data) && null === $data['jobs']) {
+            unset($data['jobs']);
+        } elseif (\array_key_exists('jobs', $data) && $data['jobs'] === null) {
             $object->setJobs(null);
         }
-        if (\array_key_exists('execution', $data) && null !== $data['execution']) {
+        if (\array_key_exists('execution', $data) && $data['execution'] !== null) {
             $object->setExecution($data['execution']);
-        } elseif (\array_key_exists('execution', $data) && null === $data['execution']) {
+            unset($data['execution']);
+        } elseif (\array_key_exists('execution', $data) && $data['execution'] === null) {
             $object->setExecution(null);
+        }
+        foreach ($data as $key => $value_1) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value_1;
+            }
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getJobs()) {
+        if ($object->isInitialized('jobs') && null !== $object->getJobs()) {
             $values = [];
             foreach ($object->getJobs() as $value) {
                 $values[] = $value;
@@ -94,6 +97,11 @@ class ExecutionWorkflowNormalizer implements DenormalizerInterface, NormalizerIn
             $data['jobs'] = $values;
         }
         $data['execution'] = $object->getExecution();
+        foreach ($object as $key => $value_1) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value_1;
+            }
+        }
 
         return $data;
     }

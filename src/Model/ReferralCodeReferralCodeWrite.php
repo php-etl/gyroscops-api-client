@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class ReferralCodeReferralCodeWrite
+class ReferralCodeReferralCodeWrite extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -24,6 +33,7 @@ class ReferralCodeReferralCodeWrite
 
     public function setUser(?string $user): self
     {
+        $this->initialized['user'] = true;
         $this->user = $user;
 
         return $this;

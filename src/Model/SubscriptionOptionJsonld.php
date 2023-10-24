@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class SubscriptionOptionJsonld
+class SubscriptionOptionJsonld extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -44,6 +53,7 @@ class SubscriptionOptionJsonld
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -56,6 +66,7 @@ class SubscriptionOptionJsonld
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -68,6 +79,7 @@ class SubscriptionOptionJsonld
 
     public function setId2(?string $id2): self
     {
+        $this->initialized['id2'] = true;
         $this->id2 = $id2;
 
         return $this;
@@ -80,6 +92,7 @@ class SubscriptionOptionJsonld
 
     public function setSubscription(?string $subscription): self
     {
+        $this->initialized['subscription'] = true;
         $this->subscription = $subscription;
 
         return $this;
@@ -92,6 +105,7 @@ class SubscriptionOptionJsonld
 
     public function setOption(?string $option): self
     {
+        $this->initialized['option'] = true;
         $this->option = $option;
 
         return $this;
@@ -104,6 +118,7 @@ class SubscriptionOptionJsonld
 
     public function setPrice(?PriceJsonld $price): self
     {
+        $this->initialized['price'] = true;
         $this->price = $price;
 
         return $this;

@@ -10,8 +10,21 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class PipelineRead
+class PipelineRead extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
+     * @var int|null
+     */
+    protected $currentVersion;
     /**
      * @var bool|null
      */
@@ -20,26 +33,6 @@ class PipelineRead
      * @var \DateTime|null
      */
     protected $compiledAt;
-    /**
-     * @var string|null
-     */
-    protected $id;
-    /**
-     * @var string|null
-     */
-    protected $code;
-    /**
-     * @var string|null
-     */
-    protected $label;
-    /**
-     * @var string|null
-     */
-    protected $runtimeType;
-    /**
-     * @var string[]|null
-     */
-    protected $runtime;
     /**
      * @var string[]|null
      */
@@ -57,9 +50,38 @@ class PipelineRead
      */
     protected $auths;
     /**
+     * @var string|null
+     */
+    protected $id;
+    /**
+     * @var string|null
+     */
+    protected $code;
+    /**
+     * @var string|null
+     */
+    protected $label;
+    /**
      * @var string[]|null
      */
+    protected $runtime;
+    /**
+     * @var PipelineStepRead[]|null
+     */
     protected $steps;
+
+    public function getCurrentVersion(): ?int
+    {
+        return $this->currentVersion;
+    }
+
+    public function setCurrentVersion(?int $currentVersion): self
+    {
+        $this->initialized['currentVersion'] = true;
+        $this->currentVersion = $currentVersion;
+
+        return $this;
+    }
 
     public function getIsSoftDeleted(): ?bool
     {
@@ -68,6 +90,7 @@ class PipelineRead
 
     public function setIsSoftDeleted(?bool $isSoftDeleted): self
     {
+        $this->initialized['isSoftDeleted'] = true;
         $this->isSoftDeleted = $isSoftDeleted;
 
         return $this;
@@ -80,73 +103,8 @@ class PipelineRead
 
     public function setCompiledAt(?\DateTime $compiledAt): self
     {
+        $this->initialized['compiledAt'] = true;
         $this->compiledAt = $compiledAt;
-
-        return $this;
-    }
-
-    public function getId(): ?string
-    {
-        return $this->id;
-    }
-
-    public function setId(?string $id): self
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    public function getCode(): ?string
-    {
-        return $this->code;
-    }
-
-    public function setCode(?string $code): self
-    {
-        $this->code = $code;
-
-        return $this;
-    }
-
-    public function getLabel(): ?string
-    {
-        return $this->label;
-    }
-
-    public function setLabel(?string $label): self
-    {
-        $this->label = $label;
-
-        return $this;
-    }
-
-    public function getRuntimeType(): ?string
-    {
-        return $this->runtimeType;
-    }
-
-    public function setRuntimeType(?string $runtimeType): self
-    {
-        $this->runtimeType = $runtimeType;
-
-        return $this;
-    }
-
-    /**
-     * @return string[]|null
-     */
-    public function getRuntime(): ?array
-    {
-        return $this->runtime;
-    }
-
-    /**
-     * @param string[]|null $runtime
-     */
-    public function setRuntime(?array $runtime): self
-    {
-        $this->runtime = $runtime;
 
         return $this;
     }
@@ -164,6 +122,7 @@ class PipelineRead
      */
     public function setAutoload(?array $autoload): self
     {
+        $this->initialized['autoload'] = true;
         $this->autoload = $autoload;
 
         return $this;
@@ -182,6 +141,7 @@ class PipelineRead
      */
     public function setPackages(?array $packages): self
     {
+        $this->initialized['packages'] = true;
         $this->packages = $packages;
 
         return $this;
@@ -200,6 +160,7 @@ class PipelineRead
      */
     public function setRepositories(?array $repositories): self
     {
+        $this->initialized['repositories'] = true;
         $this->repositories = $repositories;
 
         return $this;
@@ -218,7 +179,47 @@ class PipelineRead
      */
     public function setAuths(?array $auths): self
     {
+        $this->initialized['auths'] = true;
         $this->auths = $auths;
+
+        return $this;
+    }
+
+    public function getId(): ?string
+    {
+        return $this->id;
+    }
+
+    public function setId(?string $id): self
+    {
+        $this->initialized['id'] = true;
+        $this->id = $id;
+
+        return $this;
+    }
+
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    public function setCode(?string $code): self
+    {
+        $this->initialized['code'] = true;
+        $this->code = $code;
+
+        return $this;
+    }
+
+    public function getLabel(): ?string
+    {
+        return $this->label;
+    }
+
+    public function setLabel(?string $label): self
+    {
+        $this->initialized['label'] = true;
+        $this->label = $label;
 
         return $this;
     }
@@ -226,16 +227,36 @@ class PipelineRead
     /**
      * @return string[]|null
      */
+    public function getRuntime(): ?array
+    {
+        return $this->runtime;
+    }
+
+    /**
+     * @param string[]|null $runtime
+     */
+    public function setRuntime(?array $runtime): self
+    {
+        $this->initialized['runtime'] = true;
+        $this->runtime = $runtime;
+
+        return $this;
+    }
+
+    /**
+     * @return PipelineStepRead[]|null
+     */
     public function getSteps(): ?array
     {
         return $this->steps;
     }
 
     /**
-     * @param string[]|null $steps
+     * @param PipelineStepRead[]|null $steps
      */
     public function setSteps(?array $steps): self
     {
+        $this->initialized['steps'] = true;
         $this->steps = $steps;
 
         return $this;

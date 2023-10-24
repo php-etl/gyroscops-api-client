@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class GatewayAkeneoOauthTokenPutBodyHydraView
+class GatewayAkeneoOauthTokenPutBodyHydraView extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -44,6 +53,7 @@ class GatewayAkeneoOauthTokenPutBodyHydraView
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -56,6 +66,7 @@ class GatewayAkeneoOauthTokenPutBodyHydraView
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -68,6 +79,7 @@ class GatewayAkeneoOauthTokenPutBodyHydraView
 
     public function setHydraFirst(?string $hydraFirst): self
     {
+        $this->initialized['hydraFirst'] = true;
         $this->hydraFirst = $hydraFirst;
 
         return $this;
@@ -80,6 +92,7 @@ class GatewayAkeneoOauthTokenPutBodyHydraView
 
     public function setHydraLast(?string $hydraLast): self
     {
+        $this->initialized['hydraLast'] = true;
         $this->hydraLast = $hydraLast;
 
         return $this;
@@ -92,6 +105,7 @@ class GatewayAkeneoOauthTokenPutBodyHydraView
 
     public function setHydraPrevious(?string $hydraPrevious): self
     {
+        $this->initialized['hydraPrevious'] = true;
         $this->hydraPrevious = $hydraPrevious;
 
         return $this;
@@ -104,6 +118,7 @@ class GatewayAkeneoOauthTokenPutBodyHydraView
 
     public function setHydraNext(?string $hydraNext): self
     {
+        $this->initialized['hydraNext'] = true;
         $this->hydraNext = $hydraNext;
 
         return $this;

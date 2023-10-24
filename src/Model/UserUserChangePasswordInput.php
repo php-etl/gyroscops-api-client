@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class UserUserChangePasswordInput
+class UserUserChangePasswordInput extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -32,6 +41,7 @@ class UserUserChangePasswordInput
 
     public function setCurrentPassword(?string $currentPassword): self
     {
+        $this->initialized['currentPassword'] = true;
         $this->currentPassword = $currentPassword;
 
         return $this;
@@ -44,6 +54,7 @@ class UserUserChangePasswordInput
 
     public function setNewPassword(?string $newPassword): self
     {
+        $this->initialized['newPassword'] = true;
         $this->newPassword = $newPassword;
 
         return $this;
@@ -56,6 +67,7 @@ class UserUserChangePasswordInput
 
     public function setConfirmPassword(?string $confirmPassword): self
     {
+        $this->initialized['confirmPassword'] = true;
         $this->confirmPassword = $confirmPassword;
 
         return $this;

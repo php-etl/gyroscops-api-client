@@ -10,36 +10,53 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class ExecutionDeclarePipelineExecutionCommandInput
+class ExecutionDeclarePipelineExecutionCommandInput extends \ArrayObject
 {
     /**
-     * @var string|null
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
+     * @var mixed[]|null
      */
     protected $schedule;
     /**
-     * @var string|null
+     * @var Pipeline|null
      */
     protected $pipeline;
 
-    public function getSchedule(): ?string
+    /**
+     * @return mixed[]|null
+     */
+    public function getSchedule(): ?iterable
     {
         return $this->schedule;
     }
 
-    public function setSchedule(?string $schedule): self
+    /**
+     * @param mixed[]|null $schedule
+     */
+    public function setSchedule(?iterable $schedule): self
     {
+        $this->initialized['schedule'] = true;
         $this->schedule = $schedule;
 
         return $this;
     }
 
-    public function getPipeline(): ?string
+    public function getPipeline(): ?Pipeline
     {
         return $this->pipeline;
     }
 
-    public function setPipeline(?string $pipeline): self
+    public function setPipeline(?Pipeline $pipeline): self
     {
+        $this->initialized['pipeline'] = true;
         $this->pipeline = $pipeline;
 
         return $this;

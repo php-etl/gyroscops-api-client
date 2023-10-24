@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -24,22 +25,19 @@ class GatewayAkeneoOauthTokenPutBodyNormalizer implements DenormalizerInterface,
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+    use ValidatorTrait;
 
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBody::class === $type;
+        return $type === 'Gyroscops\\Api\\Model\\GatewayAkeneoOauthTokenPutBody';
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        return \is_object($data) && \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBody::class === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\GatewayAkeneoOauthTokenPutBody';
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,38 +52,44 @@ class GatewayAkeneoOauthTokenPutBodyNormalizer implements DenormalizerInterface,
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('hydra:member', $data) && null !== $data['hydra:member']) {
+        if (\array_key_exists('hydra:member', $data) && $data['hydra:member'] !== null) {
             $values = [];
             foreach ($data['hydra:member'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, \Gyroscops\Api\Model\AkeneoOauthTokenOauthTokenInputJsonld::class, 'json', $context);
+                $values[] = $this->denormalizer->denormalize($value, 'Gyroscops\\Api\\Model\\AkeneoOauthTokenOauthTokenInputJsonld', 'json', $context);
             }
             $object->setHydraMember($values);
-        } elseif (\array_key_exists('hydra:member', $data) && null === $data['hydra:member']) {
+            unset($data['hydra:member']);
+        } elseif (\array_key_exists('hydra:member', $data) && $data['hydra:member'] === null) {
             $object->setHydraMember(null);
         }
-        if (\array_key_exists('hydra:totalItems', $data) && null !== $data['hydra:totalItems']) {
+        if (\array_key_exists('hydra:totalItems', $data) && $data['hydra:totalItems'] !== null) {
             $object->setHydraTotalItems($data['hydra:totalItems']);
-        } elseif (\array_key_exists('hydra:totalItems', $data) && null === $data['hydra:totalItems']) {
+            unset($data['hydra:totalItems']);
+        } elseif (\array_key_exists('hydra:totalItems', $data) && $data['hydra:totalItems'] === null) {
             $object->setHydraTotalItems(null);
         }
-        if (\array_key_exists('hydra:view', $data) && null !== $data['hydra:view']) {
-            $object->setHydraView($this->denormalizer->denormalize($data['hydra:view'], \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBodyHydraView::class, 'json', $context));
-        } elseif (\array_key_exists('hydra:view', $data) && null === $data['hydra:view']) {
+        if (\array_key_exists('hydra:view', $data) && $data['hydra:view'] !== null) {
+            $object->setHydraView($this->denormalizer->denormalize($data['hydra:view'], 'Gyroscops\\Api\\Model\\GatewayAkeneoOauthTokenPutBodyHydraView', 'json', $context));
+            unset($data['hydra:view']);
+        } elseif (\array_key_exists('hydra:view', $data) && $data['hydra:view'] === null) {
             $object->setHydraView(null);
         }
-        if (\array_key_exists('hydra:search', $data) && null !== $data['hydra:search']) {
-            $object->setHydraSearch($this->denormalizer->denormalize($data['hydra:search'], \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBodyHydraSearch::class, 'json', $context));
-        } elseif (\array_key_exists('hydra:search', $data) && null === $data['hydra:search']) {
+        if (\array_key_exists('hydra:search', $data) && $data['hydra:search'] !== null) {
+            $object->setHydraSearch($this->denormalizer->denormalize($data['hydra:search'], 'Gyroscops\\Api\\Model\\GatewayAkeneoOauthTokenPutBodyHydraSearch', 'json', $context));
+            unset($data['hydra:search']);
+        } elseif (\array_key_exists('hydra:search', $data) && $data['hydra:search'] === null) {
             $object->setHydraSearch(null);
+        }
+        foreach ($data as $key => $value_1) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value_1;
+            }
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
@@ -96,14 +100,19 @@ class GatewayAkeneoOauthTokenPutBodyNormalizer implements DenormalizerInterface,
             $values[] = $this->normalizer->normalize($value, 'json', $context);
         }
         $data['hydra:member'] = $values;
-        if (null !== $object->getHydraTotalItems()) {
+        if ($object->isInitialized('hydraTotalItems') && null !== $object->getHydraTotalItems()) {
             $data['hydra:totalItems'] = $object->getHydraTotalItems();
         }
-        if (null !== $object->getHydraView()) {
+        if ($object->isInitialized('hydraView') && null !== $object->getHydraView()) {
             $data['hydra:view'] = $this->normalizer->normalize($object->getHydraView(), 'json', $context);
         }
-        if (null !== $object->getHydraSearch()) {
+        if ($object->isInitialized('hydraSearch') && null !== $object->getHydraSearch()) {
             $data['hydra:search'] = $this->normalizer->normalize($object->getHydraSearch(), 'json', $context);
+        }
+        foreach ($object as $key => $value_1) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value_1;
+            }
         }
 
         return $data;

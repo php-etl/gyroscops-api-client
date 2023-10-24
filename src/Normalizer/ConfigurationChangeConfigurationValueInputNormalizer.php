@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -24,22 +25,19 @@ class ConfigurationChangeConfigurationValueInputNormalizer implements Denormaliz
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+    use ValidatorTrait;
 
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return \Gyroscops\Api\Model\ConfigurationChangeConfigurationValueInput::class === $type;
+        return $type === 'Gyroscops\\Api\\Model\\ConfigurationChangeConfigurationValueInput';
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        return \is_object($data) && \Gyroscops\Api\Model\ConfigurationChangeConfigurationValueInput::class === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\ConfigurationChangeConfigurationValueInput';
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,58 +52,59 @@ class ConfigurationChangeConfigurationValueInputNormalizer implements Denormaliz
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('contents', $data) && null !== $data['contents']) {
+        if (\array_key_exists('contents', $data) && $data['contents'] !== null) {
             $values = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
             foreach ($data['contents'] as $key => $value) {
                 $values[$key] = $value;
             }
             $object->setContents($values);
-        } elseif (\array_key_exists('contents', $data) && null === $data['contents']) {
+            unset($data['contents']);
+        } elseif (\array_key_exists('contents', $data) && $data['contents'] === null) {
             $object->setContents(null);
         }
-        if (\array_key_exists('organization', $data) && null !== $data['organization']) {
-            $object->setOrganization($data['organization']);
-        } elseif (\array_key_exists('organization', $data) && null === $data['organization']) {
-            $object->setOrganization(null);
-        }
-        if (\array_key_exists('workspace', $data) && null !== $data['workspace']) {
-            $object->setWorkspace($data['workspace']);
-        } elseif (\array_key_exists('workspace', $data) && null === $data['workspace']) {
-            $object->setWorkspace(null);
-        }
-        if (\array_key_exists('iterator', $data) && null !== $data['iterator']) {
-            $object->setIterator($data['iterator']);
-        } elseif (\array_key_exists('iterator', $data) && null === $data['iterator']) {
+        if (\array_key_exists('iterator', $data) && $data['iterator'] !== null) {
+            $values_1 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['iterator'] as $key_1 => $value_1) {
+                $values_1[$key_1] = $value_1;
+            }
+            $object->setIterator($values_1);
+            unset($data['iterator']);
+        } elseif (\array_key_exists('iterator', $data) && $data['iterator'] === null) {
             $object->setIterator(null);
+        }
+        foreach ($data as $key_2 => $value_2) {
+            if (preg_match('/.*/', (string) $key_2)) {
+                $object[$key_2] = $value_2;
+            }
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getContents()) {
+        if ($object->isInitialized('contents') && null !== $object->getContents()) {
             $values = [];
             foreach ($object->getContents() as $key => $value) {
                 $values[$key] = $value;
             }
             $data['contents'] = $values;
         }
-        if (null !== $object->getOrganization()) {
-            $data['organization'] = $object->getOrganization();
+        if ($object->isInitialized('iterator') && null !== $object->getIterator()) {
+            $values_1 = [];
+            foreach ($object->getIterator() as $key_1 => $value_1) {
+                $values_1[$key_1] = $value_1;
+            }
+            $data['iterator'] = $values_1;
         }
-        if (null !== $object->getWorkspace()) {
-            $data['workspace'] = $object->getWorkspace();
-        }
-        if (null !== $object->getIterator()) {
-            $data['iterator'] = $object->getIterator();
+        foreach ($object as $key_2 => $value_2) {
+            if (preg_match('/.*/', (string) $key_2)) {
+                $data[$key_2] = $value_2;
+            }
         }
 
         return $data;

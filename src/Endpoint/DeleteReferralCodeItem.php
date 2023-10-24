@@ -43,15 +43,19 @@ class DeleteReferralCodeItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
     /**
      * {@inheritdoc}
      *
+     * @return null
+     *
      * @throws \Gyroscops\Api\Exception\DeleteReferralCodeItemNotFoundException
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (204 === $status) {
             return null;
         }
         if (404 === $status) {
-            throw new \Gyroscops\Api\Exception\DeleteReferralCodeItemNotFoundException();
+            throw new \Gyroscops\Api\Exception\DeleteReferralCodeItemNotFoundException($response);
         }
     }
 

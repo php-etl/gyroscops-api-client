@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class PipelineAddPipelineComposerRepositoryCommandInput
+class PipelineAddPipelineComposerRepositoryCommandInput extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -32,6 +41,7 @@ class PipelineAddPipelineComposerRepositoryCommandInput
 
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -44,6 +54,7 @@ class PipelineAddPipelineComposerRepositoryCommandInput
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -56,6 +67,7 @@ class PipelineAddPipelineComposerRepositoryCommandInput
 
     public function setUrl(?string $url): self
     {
+        $this->initialized['url'] = true;
         $this->url = $url;
 
         return $this;

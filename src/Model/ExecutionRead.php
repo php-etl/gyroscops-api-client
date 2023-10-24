@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class ExecutionRead
+class ExecutionRead extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -60,6 +69,10 @@ class ExecutionRead
      * @var string|null
      */
     protected $reason;
+    /**
+     * @var int|null
+     */
+    protected $currentVersion;
 
     public function getId(): ?string
     {
@@ -68,6 +81,7 @@ class ExecutionRead
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -80,6 +94,7 @@ class ExecutionRead
 
     public function setCode(?string $code): self
     {
+        $this->initialized['code'] = true;
         $this->code = $code;
 
         return $this;
@@ -92,6 +107,7 @@ class ExecutionRead
 
     public function setStatus(?string $status): self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
 
         return $this;
@@ -104,6 +120,7 @@ class ExecutionRead
 
     public function setErrors(?int $errors): self
     {
+        $this->initialized['errors'] = true;
         $this->errors = $errors;
 
         return $this;
@@ -116,6 +133,7 @@ class ExecutionRead
 
     public function setScheduledAt(?\DateTime $scheduledAt): self
     {
+        $this->initialized['scheduledAt'] = true;
         $this->scheduledAt = $scheduledAt;
 
         return $this;
@@ -128,6 +146,7 @@ class ExecutionRead
 
     public function setStartedAt(?\DateTime $startedAt): self
     {
+        $this->initialized['startedAt'] = true;
         $this->startedAt = $startedAt;
 
         return $this;
@@ -140,6 +159,7 @@ class ExecutionRead
 
     public function setFinishedAt(?\DateTime $finishedAt): self
     {
+        $this->initialized['finishedAt'] = true;
         $this->finishedAt = $finishedAt;
 
         return $this;
@@ -152,6 +172,7 @@ class ExecutionRead
 
     public function setInterruptedAt(?\DateTime $interruptedAt): self
     {
+        $this->initialized['interruptedAt'] = true;
         $this->interruptedAt = $interruptedAt;
 
         return $this;
@@ -164,6 +185,7 @@ class ExecutionRead
 
     public function setResumedAt(?\DateTime $resumedAt): self
     {
+        $this->initialized['resumedAt'] = true;
         $this->resumedAt = $resumedAt;
 
         return $this;
@@ -176,6 +198,7 @@ class ExecutionRead
 
     public function setUpdatedAt(?\DateTime $updatedAt): self
     {
+        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
 
         return $this;
@@ -188,6 +211,7 @@ class ExecutionRead
 
     public function setTerminatedAt(?\DateTime $terminatedAt): self
     {
+        $this->initialized['terminatedAt'] = true;
         $this->terminatedAt = $terminatedAt;
 
         return $this;
@@ -200,7 +224,21 @@ class ExecutionRead
 
     public function setReason(?string $reason): self
     {
+        $this->initialized['reason'] = true;
         $this->reason = $reason;
+
+        return $this;
+    }
+
+    public function getCurrentVersion(): ?int
+    {
+        return $this->currentVersion;
+    }
+
+    public function setCurrentVersion(?int $currentVersion): self
+    {
+        $this->initialized['currentVersion'] = true;
+        $this->currentVersion = $currentVersion;
 
         return $this;
     }

@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class AkeneoOauthTokenRead
+class AkeneoOauthTokenRead extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string|null
      */
@@ -36,6 +45,7 @@ class AkeneoOauthTokenRead
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -48,6 +58,7 @@ class AkeneoOauthTokenRead
 
     public function setUrl(?string $url): self
     {
+        $this->initialized['url'] = true;
         $this->url = $url;
 
         return $this;
@@ -66,6 +77,7 @@ class AkeneoOauthTokenRead
      */
     public function setScopes(?array $scopes): self
     {
+        $this->initialized['scopes'] = true;
         $this->scopes = $scopes;
 
         return $this;
@@ -78,6 +90,7 @@ class AkeneoOauthTokenRead
 
     public function setResponseType(?string $responseType): self
     {
+        $this->initialized['responseType'] = true;
         $this->responseType = $responseType;
 
         return $this;

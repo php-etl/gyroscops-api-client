@@ -14,16 +14,19 @@ class ChangePasswordUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
 {
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $id;
+    protected $accept;
 
     /**
      * Updates the User resource.
      *
-     * @param string $id Resource identifier
+     * @param string $id     Resource identifier
+     * @param array  $accept Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(string $id, ?\Gyroscops\Api\Model\UserUserChangePasswordInput $requestBody = null)
+    public function __construct(string $id, ?\Gyroscops\Api\Model\UserUserChangePasswordInput $requestBody = null, array $accept = [])
     {
         $this->id = $id;
         $this->body = $requestBody;
+        $this->accept = $accept;
     }
 
     public function getMethod(): string
@@ -33,13 +36,13 @@ class ChangePasswordUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/authentication/user/{id}/change-password');
+        return str_replace(['{id}'], [$this->id], '/authentication/users/{id}/change-password');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         if ($this->body instanceof \Gyroscops\Api\Model\UserUserChangePasswordInput) {
-            return [['Content-Type' => ['application/merge-patch+json']], $this->body];
+            return [['Content-Type' => ['application/merge-patch+json']], $serializer->serialize($this->body, 'json')];
         }
 
         return [[], null];
@@ -47,31 +50,42 @@ class ChangePasswordUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
 
     public function getExtraHeaders(): array
     {
-        return ['Accept' => ['application/json']];
+        if (empty($this->accept)) {
+            return ['Accept' => ['application/ld+json', 'application/json']];
+        }
+
+        return $this->accept;
     }
 
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\User|null
+     * @return \Gyroscops\Api\Model\UserJsonld|\Gyroscops\Api\Model\User|null
      *
      * @throws \Gyroscops\Api\Exception\ChangePasswordUserItemBadRequestException
      * @throws \Gyroscops\Api\Exception\ChangePasswordUserItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\ChangePasswordUserItemNotFoundException
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return $serializer->deserialize($body, \Gyroscops\Api\Model\User::class, 'json');
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (200 === $status) {
+            if (mb_strpos($contentType, 'application/ld+json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\UserJsonld', 'json');
+            }
+            if (mb_strpos($contentType, 'application/json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\User', 'json');
+            }
         }
         if (400 === $status) {
-            throw new \Gyroscops\Api\Exception\ChangePasswordUserItemBadRequestException();
+            throw new \Gyroscops\Api\Exception\ChangePasswordUserItemBadRequestException($response);
         }
         if (422 === $status) {
-            throw new \Gyroscops\Api\Exception\ChangePasswordUserItemUnprocessableEntityException();
+            throw new \Gyroscops\Api\Exception\ChangePasswordUserItemUnprocessableEntityException($response);
         }
         if (404 === $status) {
-            throw new \Gyroscops\Api\Exception\ChangePasswordUserItemNotFoundException();
+            throw new \Gyroscops\Api\Exception\ChangePasswordUserItemNotFoundException($response);
         }
     }
 

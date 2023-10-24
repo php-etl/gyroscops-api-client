@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
+use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -24,22 +25,19 @@ class VariableFromSecretJsonldReadNormalizer implements DenormalizerInterface, N
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
+    use ValidatorTrait;
 
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return \Gyroscops\Api\Model\VariableFromSecretJsonldRead::class === $type;
+        return $type === 'Gyroscops\\Api\\Model\\VariableFromSecretJsonldRead';
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        return \is_object($data) && \Gyroscops\Api\Model\VariableFromSecretJsonldRead::class === $data::class;
+        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\VariableFromSecretJsonldRead';
     }
 
     /**
-     * @param mixed      $data
-     * @param mixed      $class
-     * @param mixed|null $format
-     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -54,65 +52,95 @@ class VariableFromSecretJsonldReadNormalizer implements DenormalizerInterface, N
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('@context', $data) && null !== $data['@context']) {
+        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
             $object->setContext($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && null === $data['@context']) {
+            unset($data['@context']);
+        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
             $object->setContext(null);
         }
-        if (\array_key_exists('@id', $data) && null !== $data['@id']) {
+        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
             $object->setId($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && null === $data['@id']) {
+            unset($data['@id']);
+        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
             $object->setId(null);
         }
-        if (\array_key_exists('@type', $data) && null !== $data['@type']) {
+        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
             $object->setType($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && null === $data['@type']) {
+            unset($data['@type']);
+        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
             $object->setType(null);
         }
-        if (\array_key_exists('secret', $data) && null !== $data['secret']) {
-            $object->setSecret($data['secret']);
-        } elseif (\array_key_exists('secret', $data) && null === $data['secret']) {
+        if (\array_key_exists('secret', $data) && $data['secret'] !== null) {
+            $value = $data['secret'];
+            if (is_array($data['secret'])) {
+                $value = $this->denormalizer->denormalize($data['secret'], 'Gyroscops\\Api\\Model\\SecretJsonldRead', 'json', $context);
+            }
+            $object->setSecret($value);
+            unset($data['secret']);
+        } elseif (\array_key_exists('secret', $data) && $data['secret'] === null) {
             $object->setSecret(null);
         }
-        if (\array_key_exists('item', $data) && null !== $data['item']) {
+        if (\array_key_exists('item', $data) && $data['item'] !== null) {
             $object->setItem($data['item']);
-        } elseif (\array_key_exists('item', $data) && null === $data['item']) {
+            unset($data['item']);
+        } elseif (\array_key_exists('item', $data) && $data['item'] === null) {
             $object->setItem(null);
         }
-        if (\array_key_exists('environment', $data) && null !== $data['environment']) {
-            $object->setEnvironment($data['environment']);
-        } elseif (\array_key_exists('environment', $data) && null === $data['environment']) {
+        if (\array_key_exists('environment', $data) && $data['environment'] !== null) {
+            $value_1 = $data['environment'];
+            if (is_array($data['environment'])) {
+                $value_1 = $this->denormalizer->denormalize($data['environment'], 'Gyroscops\\Api\\Model\\EnvironmentJsonldRead', 'json', $context);
+            }
+            $object->setEnvironment($value_1);
+            unset($data['environment']);
+        } elseif (\array_key_exists('environment', $data) && $data['environment'] === null) {
             $object->setEnvironment(null);
         }
-        if (\array_key_exists('name', $data) && null !== $data['name']) {
+        if (\array_key_exists('name', $data) && $data['name'] !== null) {
             $object->setName($data['name']);
-        } elseif (\array_key_exists('name', $data) && null === $data['name']) {
+            unset($data['name']);
+        } elseif (\array_key_exists('name', $data) && $data['name'] === null) {
             $object->setName(null);
+        }
+        foreach ($data as $key => $value_2) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value_2;
+            }
         }
 
         return $object;
     }
 
     /**
-     * @param mixed      $object
-     * @param mixed|null $format
-     *
      * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getSecret()) {
-            $data['secret'] = $object->getSecret();
+        if ($object->isInitialized('secret') && null !== $object->getSecret()) {
+            $value = $object->getSecret();
+            if (is_object($object->getSecret())) {
+                $value = $this->normalizer->normalize($object->getSecret(), 'json', $context);
+            }
+            $data['secret'] = $value;
         }
-        if (null !== $object->getItem()) {
+        if ($object->isInitialized('item') && null !== $object->getItem()) {
             $data['item'] = $object->getItem();
         }
-        if (null !== $object->getEnvironment()) {
-            $data['environment'] = $object->getEnvironment();
+        if ($object->isInitialized('environment') && null !== $object->getEnvironment()) {
+            $value_1 = $object->getEnvironment();
+            if (is_object($object->getEnvironment())) {
+                $value_1 = $this->normalizer->normalize($object->getEnvironment(), 'json', $context);
+            }
+            $data['environment'] = $value_1;
         }
-        if (null !== $object->getName()) {
+        if ($object->isInitialized('name') && null !== $object->getName()) {
             $data['name'] = $object->getName();
+        }
+        foreach ($object as $key => $value_2) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value_2;
+            }
         }
 
         return $data;

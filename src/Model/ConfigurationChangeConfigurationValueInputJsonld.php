@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class ConfigurationChangeConfigurationValueInputJsonld
+class ConfigurationChangeConfigurationValueInputJsonld extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var mixed|null
      */
@@ -29,14 +38,6 @@ class ConfigurationChangeConfigurationValueInputJsonld
      */
     protected $contents;
     /**
-     * @var mixed|null
-     */
-    protected $organization;
-    /**
-     * @var mixed|null
-     */
-    protected $workspace;
-    /**
      * @var TraversableJsonld|null
      */
     protected $iterator;
@@ -49,8 +50,12 @@ class ConfigurationChangeConfigurationValueInputJsonld
         return $this->context;
     }
 
-    public function setContext(mixed $context): self
+    /**
+     * @param mixed $context
+     */
+    public function setContext($context): self
     {
+        $this->initialized['context'] = true;
         $this->context = $context;
 
         return $this;
@@ -63,6 +68,7 @@ class ConfigurationChangeConfigurationValueInputJsonld
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -75,6 +81,7 @@ class ConfigurationChangeConfigurationValueInputJsonld
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -93,37 +100,8 @@ class ConfigurationChangeConfigurationValueInputJsonld
      */
     public function setContents(?iterable $contents): self
     {
+        $this->initialized['contents'] = true;
         $this->contents = $contents;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getOrganization()
-    {
-        return $this->organization;
-    }
-
-    public function setOrganization(mixed $organization): self
-    {
-        $this->organization = $organization;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getWorkspace()
-    {
-        return $this->workspace;
-    }
-
-    public function setWorkspace(mixed $workspace): self
-    {
-        $this->workspace = $workspace;
 
         return $this;
     }
@@ -135,6 +113,7 @@ class ConfigurationChangeConfigurationValueInputJsonld
 
     public function setIterator(?TraversableJsonld $iterator): self
     {
+        $this->initialized['iterator'] = true;
         $this->iterator = $iterator;
 
         return $this;

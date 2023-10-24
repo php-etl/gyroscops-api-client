@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Gyroscops\Api\Runtime\Client;
 
 use Http\Message\MultipartStream\MultipartStreamBuilder;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -28,7 +29,7 @@ abstract class BaseEndpoint implements Endpoint
 
     abstract public function getAuthenticationScopes(): array;
 
-    abstract protected function transformResponseBody(string $body, int $status, SerializerInterface $serializer, ?string $contentType = null);
+    abstract protected function transformResponseBody(ResponseInterface $response, SerializerInterface $serializer, ?string $contentType = null);
 
     protected function getExtraHeaders(): array
     {
@@ -38,9 +39,11 @@ abstract class BaseEndpoint implements Endpoint
     public function getQueryString(): string
     {
         $optionsResolved = $this->getQueryOptionsResolver()->resolve($this->queryParameters);
-        $optionsResolved = array_map(fn ($value) => $value ?? '', $optionsResolved);
+        $optionsResolved = array_map(function ($value) {
+            return null !== $value ? $value : '';
+        }, $optionsResolved);
 
-        return http_build_query($optionsResolved, '', '&', \PHP_QUERY_RFC3986);
+        return http_build_query($optionsResolved, '', '&', PHP_QUERY_RFC3986);
     }
 
     public function getHeaders(array $baseHeaders = []): array
@@ -73,7 +76,7 @@ abstract class BaseEndpoint implements Endpoint
             $bodyBuilder->addResource($key, $value);
         }
 
-        return [['Content-Type' => ['multipart/form-data; boundary="'.($bodyBuilder->getBoundary().'"')]], $bodyBuilder->build()];
+        return [['Content-Type' => ['multipart/form-data; boundary="' . ($bodyBuilder->getBoundary() . '"')]], $bodyBuilder->build()];
     }
 
     protected function getFormOptionsResolver(): OptionsResolver

@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace Gyroscops\Api\Model;
 
-class BigDecimalJsonld
+class BigDecimalJsonld extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var mixed|null
      */
@@ -31,6 +40,8 @@ class BigDecimalJsonld
      */
     protected $scale;
     /**
+     * {@inheritdoc}
+     *
      * @var int|null
      */
     protected $sign;
@@ -95,8 +106,12 @@ class BigDecimalJsonld
         return $this->context;
     }
 
-    public function setContext(mixed $context): self
+    /**
+     * @param mixed $context
+     */
+    public function setContext($context): self
     {
+        $this->initialized['context'] = true;
         $this->context = $context;
 
         return $this;
@@ -109,6 +124,7 @@ class BigDecimalJsonld
 
     public function setId(?string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -121,6 +137,7 @@ class BigDecimalJsonld
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -139,18 +156,26 @@ class BigDecimalJsonld
      */
     public function setScale(?int $scale): self
     {
+        $this->initialized['scale'] = true;
         $this->scale = $scale;
 
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getSign(): ?int
     {
         return $this->sign;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setSign(?int $sign): self
     {
+        $this->initialized['sign'] = true;
         $this->sign = $sign;
 
         return $this;
@@ -163,6 +188,7 @@ class BigDecimalJsonld
 
     public function setUnscaledValue(?BigIntegerJsonld $unscaledValue): self
     {
+        $this->initialized['unscaledValue'] = true;
         $this->unscaledValue = $unscaledValue;
 
         return $this;
@@ -181,6 +207,7 @@ class BigDecimalJsonld
      */
     public function setIntegralPart(?string $integralPart): self
     {
+        $this->initialized['integralPart'] = true;
         $this->integralPart = $integralPart;
 
         return $this;
@@ -199,6 +226,7 @@ class BigDecimalJsonld
      */
     public function setFractionalPart(?string $fractionalPart): self
     {
+        $this->initialized['fractionalPart'] = true;
         $this->fractionalPart = $fractionalPart;
 
         return $this;
@@ -217,6 +245,7 @@ class BigDecimalJsonld
      */
     public function setNonZeroFractionalPart(?bool $nonZeroFractionalPart): self
     {
+        $this->initialized['nonZeroFractionalPart'] = true;
         $this->nonZeroFractionalPart = $nonZeroFractionalPart;
 
         return $this;
@@ -235,6 +264,7 @@ class BigDecimalJsonld
      */
     public function setZero(?bool $zero): self
     {
+        $this->initialized['zero'] = true;
         $this->zero = $zero;
 
         return $this;
@@ -253,6 +283,7 @@ class BigDecimalJsonld
      */
     public function setNegative(?bool $negative): self
     {
+        $this->initialized['negative'] = true;
         $this->negative = $negative;
 
         return $this;
@@ -271,6 +302,7 @@ class BigDecimalJsonld
      */
     public function setNegativeOrZero(?bool $negativeOrZero): self
     {
+        $this->initialized['negativeOrZero'] = true;
         $this->negativeOrZero = $negativeOrZero;
 
         return $this;
@@ -289,6 +321,7 @@ class BigDecimalJsonld
      */
     public function setPositive(?bool $positive): self
     {
+        $this->initialized['positive'] = true;
         $this->positive = $positive;
 
         return $this;
@@ -307,6 +340,7 @@ class BigDecimalJsonld
      */
     public function setPositiveOrZero(?bool $positiveOrZero): self
     {
+        $this->initialized['positiveOrZero'] = true;
         $this->positiveOrZero = $positiveOrZero;
 
         return $this;

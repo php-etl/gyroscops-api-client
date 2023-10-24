@@ -14,16 +14,19 @@ class PatchUserAuthorizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
 {
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $id;
+    protected $accept;
 
     /**
      * Updates the UserAuthorization resource.
      *
-     * @param string $id Resource identifier
+     * @param string $id     Resource identifier
+     * @param array  $accept Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(string $id, ?\Gyroscops\Api\Model\UserAuthorization $requestBody = null)
+    public function __construct(string $id, ?\Gyroscops\Api\Model\UserAuthorization $requestBody = null, array $accept = [])
     {
         $this->id = $id;
         $this->body = $requestBody;
+        $this->accept = $accept;
     }
 
     public function getMethod(): string
@@ -39,7 +42,7 @@ class PatchUserAuthorizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         if ($this->body instanceof \Gyroscops\Api\Model\UserAuthorization) {
-            return [['Content-Type' => ['application/merge-patch+json']], $this->body];
+            return [['Content-Type' => ['application/merge-patch+json']], $serializer->serialize($this->body, 'json')];
         }
 
         return [[], null];
@@ -47,31 +50,42 @@ class PatchUserAuthorizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
 
     public function getExtraHeaders(): array
     {
-        return ['Accept' => ['application/json']];
+        if (empty($this->accept)) {
+            return ['Accept' => ['application/ld+json', 'application/json']];
+        }
+
+        return $this->accept;
     }
 
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\UserAuthorization|null
+     * @return \Gyroscops\Api\Model\UserAuthorizationJsonld|\Gyroscops\Api\Model\UserAuthorization|null
      *
      * @throws \Gyroscops\Api\Exception\PatchUserAuthorizationItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PatchUserAuthorizationItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\PatchUserAuthorizationItemNotFoundException
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return $serializer->deserialize($body, \Gyroscops\Api\Model\UserAuthorization::class, 'json');
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (200 === $status) {
+            if (mb_strpos($contentType, 'application/ld+json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\UserAuthorizationJsonld', 'json');
+            }
+            if (mb_strpos($contentType, 'application/json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\UserAuthorization', 'json');
+            }
         }
         if (400 === $status) {
-            throw new \Gyroscops\Api\Exception\PatchUserAuthorizationItemBadRequestException();
+            throw new \Gyroscops\Api\Exception\PatchUserAuthorizationItemBadRequestException($response);
         }
         if (422 === $status) {
-            throw new \Gyroscops\Api\Exception\PatchUserAuthorizationItemUnprocessableEntityException();
+            throw new \Gyroscops\Api\Exception\PatchUserAuthorizationItemUnprocessableEntityException($response);
         }
         if (404 === $status) {
-            throw new \Gyroscops\Api\Exception\PatchUserAuthorizationItemNotFoundException();
+            throw new \Gyroscops\Api\Exception\PatchUserAuthorizationItemNotFoundException($response);
         }
     }
 

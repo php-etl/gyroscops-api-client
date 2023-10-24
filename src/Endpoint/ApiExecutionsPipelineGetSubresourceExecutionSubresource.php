@@ -14,15 +14,18 @@ class ApiExecutionsPipelineGetSubresourceExecutionSubresource extends \Gyroscops
 {
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
     protected $id;
+    protected $accept;
 
     /**
      * Retrieves a Execution resource.
      *
-     * @param string $id Execution identifier
+     * @param string $id     Execution identifier
+     * @param array  $accept Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(string $id)
+    public function __construct(string $id, array $accept = [])
     {
         $this->id = $id;
+        $this->accept = $accept;
     }
 
     public function getMethod(): string
@@ -32,7 +35,7 @@ class ApiExecutionsPipelineGetSubresourceExecutionSubresource extends \Gyroscops
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/runtime/execution/{id}/pipeline');
+        return str_replace(['{id}'], [$this->id], '/runtime/executions/{id}/pipelines');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
@@ -42,18 +45,29 @@ class ApiExecutionsPipelineGetSubresourceExecutionSubresource extends \Gyroscops
 
     public function getExtraHeaders(): array
     {
-        return ['Accept' => ['application/json']];
+        if (empty($this->accept)) {
+            return ['Accept' => ['application/ld+json', 'application/json']];
+        }
+
+        return $this->accept;
     }
 
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\ExecutionPipeline|null
+     * @return \Gyroscops\Api\Model\ExecutionPipelineJsonld|\Gyroscops\Api\Model\ExecutionPipeline|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if ((null === $contentType) === false && (200 === $status && false !== mb_strpos($contentType, 'application/json'))) {
-            return $serializer->deserialize($body, \Gyroscops\Api\Model\ExecutionPipeline::class, 'json');
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (200 === $status) {
+            if (mb_strpos($contentType, 'application/ld+json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ExecutionPipelineJsonld', 'json');
+            }
+            if (mb_strpos($contentType, 'application/json') !== false) {
+                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ExecutionPipeline', 'json');
+            }
         }
     }
 
