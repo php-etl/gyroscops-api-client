@@ -58,6 +58,7 @@ class GetScheduleItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impleme
      * @return \Gyroscops\Api\Model\ScheduleJsonld|null
      *
      * @throws \Gyroscops\Api\Exception\GetScheduleItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -74,6 +75,7 @@ class GetScheduleItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impleme
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\GetScheduleItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

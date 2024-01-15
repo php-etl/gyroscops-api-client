@@ -55,9 +55,10 @@ class GetExecutionPipelineJobItem extends \Gyroscops\Api\Runtime\Client\BaseEndp
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\ExecutionPipelineJobJsonld|\Gyroscops\Api\Model\ExecutionPipelineJob|null
+     * @return \Gyroscops\Api\Model\ExecutionPipelineJobJsonld|\Gyroscops\Api\Model\ExecutionPipelineJob
      *
      * @throws \Gyroscops\Api\Exception\GetExecutionPipelineJobItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -74,6 +75,7 @@ class GetExecutionPipelineJobItem extends \Gyroscops\Api\Runtime\Client\BaseEndp
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\GetExecutionPipelineJobItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

@@ -73,7 +73,9 @@ class GetPipelineCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\RuntimePipelinesGetLdjsonResponse200|\Gyroscops\Api\Model\PipelineRead[]|null
+     * @return \Gyroscops\Api\Model\RuntimePipelinesGetLdjsonResponse200|\Gyroscops\Api\Model\PipelineRead[]
+     *
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -87,6 +89,7 @@ class GetPipelineCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
                 return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\PipelineRead[]', 'json');
             }
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

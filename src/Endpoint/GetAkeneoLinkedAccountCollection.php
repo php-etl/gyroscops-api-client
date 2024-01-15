@@ -69,7 +69,9 @@ class GetAkeneoLinkedAccountCollection extends \Gyroscops\Api\Runtime\Client\Bas
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsGetLdjsonResponse200|\Gyroscops\Api\Model\AkeneoLinkedAccount[]|null
+     * @return \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsGetLdjsonResponse200|\Gyroscops\Api\Model\AkeneoLinkedAccount[]
+     *
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -83,6 +85,7 @@ class GetAkeneoLinkedAccountCollection extends \Gyroscops\Api\Runtime\Client\Bas
                 return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\AkeneoLinkedAccount[]', 'json');
             }
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

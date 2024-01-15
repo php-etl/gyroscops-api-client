@@ -55,9 +55,10 @@ class GetReferralCodeItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\ReferralCodeJsonldReferralCodeRead|\Gyroscops\Api\Model\ReferralCodeReferralCodeRead|null
+     * @return \Gyroscops\Api\Model\ReferralCodeJsonldReferralCodeRead|\Gyroscops\Api\Model\ReferralCodeReferralCodeRead
      *
      * @throws \Gyroscops\Api\Exception\GetReferralCodeItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -74,6 +75,7 @@ class GetReferralCodeItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\GetReferralCodeItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

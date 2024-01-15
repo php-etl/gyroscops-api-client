@@ -55,9 +55,10 @@ class GetVariableFromConfigurationItem extends \Gyroscops\Api\Runtime\Client\Bas
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\VariableFromConfigurationJsonldRead|\Gyroscops\Api\Model\VariableFromConfigurationRead|null
+     * @return \Gyroscops\Api\Model\VariableFromConfigurationJsonldRead|\Gyroscops\Api\Model\VariableFromConfigurationRead
      *
      * @throws \Gyroscops\Api\Exception\GetVariableFromConfigurationItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -74,6 +75,7 @@ class GetVariableFromConfigurationItem extends \Gyroscops\Api\Runtime\Client\Bas
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\GetVariableFromConfigurationItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

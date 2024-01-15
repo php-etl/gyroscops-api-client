@@ -46,6 +46,7 @@ class DeletePipelinePipelineItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
      * @return null
      *
      * @throws \Gyroscops\Api\Exception\DeletePipelinePipelineItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -57,6 +58,7 @@ class DeletePipelinePipelineItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\DeletePipelinePipelineItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

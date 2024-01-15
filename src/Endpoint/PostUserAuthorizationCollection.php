@@ -64,10 +64,11 @@ class PostUserAuthorizationCollection extends \Gyroscops\Api\Runtime\Client\Base
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\UserAuthorizationJsonld|\Gyroscops\Api\Model\UserAuthorization|null
+     * @return \Gyroscops\Api\Model\UserAuthorizationJsonld|\Gyroscops\Api\Model\UserAuthorization
      *
      * @throws \Gyroscops\Api\Exception\PostUserAuthorizationCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostUserAuthorizationCollectionUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -87,6 +88,7 @@ class PostUserAuthorizationCollection extends \Gyroscops\Api\Runtime\Client\Base
         if (422 === $status) {
             throw new \Gyroscops\Api\Exception\PostUserAuthorizationCollectionUnprocessableEntityException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

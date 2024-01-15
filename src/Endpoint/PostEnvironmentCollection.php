@@ -64,10 +64,11 @@ class PostEnvironmentCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoi
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\EnvironmentJsonldRead|\Gyroscops\Api\Model\EnvironmentRead|null
+     * @return \Gyroscops\Api\Model\EnvironmentJsonldRead|\Gyroscops\Api\Model\EnvironmentRead
      *
      * @throws \Gyroscops\Api\Exception\PostEnvironmentCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostEnvironmentCollectionUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -87,6 +88,7 @@ class PostEnvironmentCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoi
         if (422 === $status) {
             throw new \Gyroscops\Api\Exception\PostEnvironmentCollectionUnprocessableEntityException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

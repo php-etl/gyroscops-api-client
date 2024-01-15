@@ -67,11 +67,12 @@ class EditConfigurationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\ConfigurationJsonld|\Gyroscops\Api\Model\Configuration|null
+     * @return \Gyroscops\Api\Model\ConfigurationJsonld|\Gyroscops\Api\Model\Configuration
      *
      * @throws \Gyroscops\Api\Exception\EditConfigurationItemBadRequestException
      * @throws \Gyroscops\Api\Exception\EditConfigurationItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\EditConfigurationItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -94,6 +95,7 @@ class EditConfigurationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\EditConfigurationItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

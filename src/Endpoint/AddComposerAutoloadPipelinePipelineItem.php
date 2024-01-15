@@ -72,6 +72,7 @@ class AddComposerAutoloadPipelinePipelineItem extends \Gyroscops\Api\Runtime\Cli
      * @throws \Gyroscops\Api\Exception\AddComposerAutoloadPipelinePipelineItemBadRequestException
      * @throws \Gyroscops\Api\Exception\AddComposerAutoloadPipelinePipelineItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\AddComposerAutoloadPipelinePipelineItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -94,6 +95,7 @@ class AddComposerAutoloadPipelinePipelineItem extends \Gyroscops\Api\Runtime\Cli
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\AddComposerAutoloadPipelinePipelineItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

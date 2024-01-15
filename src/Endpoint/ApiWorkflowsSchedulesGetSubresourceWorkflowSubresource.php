@@ -73,6 +73,8 @@ class ApiWorkflowsSchedulesGetSubresourceWorkflowSubresource extends \Gyroscops\
      * {@inheritdoc}
      *
      * @return \Gyroscops\Api\Model\RuntimeWorkflowsIdSchedulesGetLdjsonResponse200|null
+     *
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -86,6 +88,7 @@ class ApiWorkflowsSchedulesGetSubresourceWorkflowSubresource extends \Gyroscops\
                 return json_decode($body);
             }
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

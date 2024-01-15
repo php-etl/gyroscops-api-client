@@ -67,11 +67,12 @@ class EditVariableFromSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\VariableFromSecretJsonldRead|\Gyroscops\Api\Model\VariableFromSecretRead|null
+     * @return \Gyroscops\Api\Model\VariableFromSecretJsonldRead|\Gyroscops\Api\Model\VariableFromSecretRead
      *
      * @throws \Gyroscops\Api\Exception\EditVariableFromSecretItemBadRequestException
      * @throws \Gyroscops\Api\Exception\EditVariableFromSecretItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\EditVariableFromSecretItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -94,6 +95,7 @@ class EditVariableFromSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\EditVariableFromSecretItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

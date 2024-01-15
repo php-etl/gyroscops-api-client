@@ -72,6 +72,7 @@ class WorkflowScheduleCrontabWorkflowItem extends \Gyroscops\Api\Runtime\Client\
      * @throws \Gyroscops\Api\Exception\WorkflowScheduleCrontabWorkflowItemBadRequestException
      * @throws \Gyroscops\Api\Exception\WorkflowScheduleCrontabWorkflowItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\WorkflowScheduleCrontabWorkflowItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -94,6 +95,7 @@ class WorkflowScheduleCrontabWorkflowItem extends \Gyroscops\Api\Runtime\Client\
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\WorkflowScheduleCrontabWorkflowItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

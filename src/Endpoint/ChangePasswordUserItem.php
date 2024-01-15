@@ -60,11 +60,12 @@ class ChangePasswordUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\UserJsonld|\Gyroscops\Api\Model\User|null
+     * @return \Gyroscops\Api\Model\UserJsonld|\Gyroscops\Api\Model\User
      *
      * @throws \Gyroscops\Api\Exception\ChangePasswordUserItemBadRequestException
      * @throws \Gyroscops\Api\Exception\ChangePasswordUserItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\ChangePasswordUserItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -87,6 +88,7 @@ class ChangePasswordUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\ChangePasswordUserItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

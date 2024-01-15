@@ -68,6 +68,7 @@ class PostAkeneoOauthTokenCollection extends \Gyroscops\Api\Runtime\Client\BaseE
      *
      * @throws \Gyroscops\Api\Exception\PostAkeneoOauthTokenCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostAkeneoOauthTokenCollectionUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -87,6 +88,7 @@ class PostAkeneoOauthTokenCollection extends \Gyroscops\Api\Runtime\Client\BaseE
         if (422 === $status) {
             throw new \Gyroscops\Api\Exception\PostAkeneoOauthTokenCollectionUnprocessableEntityException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

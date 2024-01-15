@@ -72,7 +72,9 @@ class ApiSubscriptionOffersOptionsGetSubresourceSubscriptionOfferSubresource ext
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\AuthenticationOffersIdOptionsGetLdjsonResponse200|\Gyroscops\Api\Model\Option[]|null
+     * @return \Gyroscops\Api\Model\AuthenticationOffersIdOptionsGetLdjsonResponse200|\Gyroscops\Api\Model\Option[]
+     *
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -86,6 +88,7 @@ class ApiSubscriptionOffersOptionsGetSubresourceSubscriptionOfferSubresource ext
                 return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Option[]', 'json');
             }
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

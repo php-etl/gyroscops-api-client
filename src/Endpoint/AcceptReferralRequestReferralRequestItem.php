@@ -57,11 +57,12 @@ class AcceptReferralRequestReferralRequestItem extends \Gyroscops\Api\Runtime\Cl
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\ReferralRequestJsonldReferralRequestRead|\Gyroscops\Api\Model\ReferralRequestReferralRequestRead|null
+     * @return \Gyroscops\Api\Model\ReferralRequestJsonldReferralRequestRead|\Gyroscops\Api\Model\ReferralRequestReferralRequestRead
      *
      * @throws \Gyroscops\Api\Exception\AcceptReferralRequestReferralRequestItemBadRequestException
      * @throws \Gyroscops\Api\Exception\AcceptReferralRequestReferralRequestItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\AcceptReferralRequestReferralRequestItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -84,6 +85,7 @@ class AcceptReferralRequestReferralRequestItem extends \Gyroscops\Api\Runtime\Cl
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\AcceptReferralRequestReferralRequestItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

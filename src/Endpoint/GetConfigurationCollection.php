@@ -69,7 +69,9 @@ class GetConfigurationCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpo
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\EnvironmentConfigurationsGetLdjsonResponse200|\Gyroscops\Api\Model\Configuration[]|null
+     * @return \Gyroscops\Api\Model\EnvironmentConfigurationsGetLdjsonResponse200|\Gyroscops\Api\Model\Configuration[]
+     *
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -83,6 +85,7 @@ class GetConfigurationCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpo
                 return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Configuration[]', 'json');
             }
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

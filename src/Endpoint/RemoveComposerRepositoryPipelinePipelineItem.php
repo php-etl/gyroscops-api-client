@@ -72,6 +72,7 @@ class RemoveComposerRepositoryPipelinePipelineItem extends \Gyroscops\Api\Runtim
      * @throws \Gyroscops\Api\Exception\RemoveComposerRepositoryPipelinePipelineItemBadRequestException
      * @throws \Gyroscops\Api\Exception\RemoveComposerRepositoryPipelinePipelineItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\RemoveComposerRepositoryPipelinePipelineItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -94,6 +95,7 @@ class RemoveComposerRepositoryPipelinePipelineItem extends \Gyroscops\Api\Runtim
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\RemoveComposerRepositoryPipelinePipelineItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

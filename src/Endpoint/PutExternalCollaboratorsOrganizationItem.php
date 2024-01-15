@@ -67,11 +67,12 @@ class PutExternalCollaboratorsOrganizationItem extends \Gyroscops\Api\Runtime\Cl
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\OrganizationJsonld|\Gyroscops\Api\Model\Organization|null
+     * @return \Gyroscops\Api\Model\OrganizationJsonld|\Gyroscops\Api\Model\Organization
      *
      * @throws \Gyroscops\Api\Exception\PutExternalCollaboratorsOrganizationItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PutExternalCollaboratorsOrganizationItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\PutExternalCollaboratorsOrganizationItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -94,6 +95,7 @@ class PutExternalCollaboratorsOrganizationItem extends \Gyroscops\Api\Runtime\Cl
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\PutExternalCollaboratorsOrganizationItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

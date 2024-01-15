@@ -69,7 +69,9 @@ class GetWorkflowCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\RuntimeWorkflowsGetLdjsonResponse200|\Gyroscops\Api\Model\WorkflowRead[]|null
+     * @return \Gyroscops\Api\Model\RuntimeWorkflowsGetLdjsonResponse200|\Gyroscops\Api\Model\WorkflowRead[]
+     *
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -83,6 +85,7 @@ class GetWorkflowCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
                 return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\WorkflowRead[]', 'json');
             }
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

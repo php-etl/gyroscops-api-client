@@ -70,11 +70,12 @@ class AddVariablesFromSecretEnvironmentItem extends \Gyroscops\Api\Runtime\Clien
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\EnvironmentJsonldRead|\Gyroscops\Api\Model\EnvironmentRead|null
+     * @return \Gyroscops\Api\Model\EnvironmentJsonldRead|\Gyroscops\Api\Model\EnvironmentRead
      *
      * @throws \Gyroscops\Api\Exception\AddVariablesFromSecretEnvironmentItemBadRequestException
      * @throws \Gyroscops\Api\Exception\AddVariablesFromSecretEnvironmentItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\AddVariablesFromSecretEnvironmentItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -97,6 +98,7 @@ class AddVariablesFromSecretEnvironmentItem extends \Gyroscops\Api\Runtime\Clien
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\AddVariablesFromSecretEnvironmentItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

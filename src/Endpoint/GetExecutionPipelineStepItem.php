@@ -55,9 +55,10 @@ class GetExecutionPipelineStepItem extends \Gyroscops\Api\Runtime\Client\BaseEnd
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\ExecutionPipelineStepJsonld|\Gyroscops\Api\Model\ExecutionPipelineStep|null
+     * @return \Gyroscops\Api\Model\ExecutionPipelineStepJsonld|\Gyroscops\Api\Model\ExecutionPipelineStep
      *
      * @throws \Gyroscops\Api\Exception\GetExecutionPipelineStepItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -74,6 +75,7 @@ class GetExecutionPipelineStepItem extends \Gyroscops\Api\Runtime\Client\BaseEnd
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\GetExecutionPipelineStepItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

@@ -67,11 +67,12 @@ class InterruptExecutionExecutionWorkflowItem extends \Gyroscops\Api\Runtime\Cli
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\ExecutionWorkflowInterruptWorkflowExecutionCommandJsonld|\Gyroscops\Api\Model\ExecutionWorkflowInterruptWorkflowExecutionCommand|null
+     * @return \Gyroscops\Api\Model\ExecutionWorkflowInterruptWorkflowExecutionCommandJsonld|\Gyroscops\Api\Model\ExecutionWorkflowInterruptWorkflowExecutionCommand
      *
      * @throws \Gyroscops\Api\Exception\InterruptExecutionExecutionWorkflowItemBadRequestException
      * @throws \Gyroscops\Api\Exception\InterruptExecutionExecutionWorkflowItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\InterruptExecutionExecutionWorkflowItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -94,6 +95,7 @@ class InterruptExecutionExecutionWorkflowItem extends \Gyroscops\Api\Runtime\Cli
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\InterruptExecutionExecutionWorkflowItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

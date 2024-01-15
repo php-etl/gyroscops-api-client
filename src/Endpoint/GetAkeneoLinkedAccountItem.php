@@ -55,9 +55,10 @@ class GetAkeneoLinkedAccountItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\AkeneoLinkedAccountJsonld|\Gyroscops\Api\Model\AkeneoLinkedAccount|null
+     * @return \Gyroscops\Api\Model\AkeneoLinkedAccountJsonld|\Gyroscops\Api\Model\AkeneoLinkedAccount
      *
      * @throws \Gyroscops\Api\Exception\GetAkeneoLinkedAccountItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -74,6 +75,7 @@ class GetAkeneoLinkedAccountItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\GetAkeneoLinkedAccountItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

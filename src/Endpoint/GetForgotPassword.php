@@ -46,6 +46,7 @@ class GetForgotPassword extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imple
      * @return null
      *
      * @throws \Gyroscops\Api\Exception\GetForgotPasswordNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -57,6 +58,7 @@ class GetForgotPassword extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imple
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\GetForgotPasswordNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

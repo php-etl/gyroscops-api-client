@@ -55,9 +55,10 @@ class GetExecutionWorkflowJobActionItem extends \Gyroscops\Api\Runtime\Client\Ba
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\ExecutionWorkflowJobActionJsonld|\Gyroscops\Api\Model\ExecutionWorkflowJobAction|null
+     * @return \Gyroscops\Api\Model\ExecutionWorkflowJobActionJsonld|\Gyroscops\Api\Model\ExecutionWorkflowJobAction
      *
      * @throws \Gyroscops\Api\Exception\GetExecutionWorkflowJobActionItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -74,6 +75,7 @@ class GetExecutionWorkflowJobActionItem extends \Gyroscops\Api\Runtime\Client\Ba
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\GetExecutionWorkflowJobActionItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

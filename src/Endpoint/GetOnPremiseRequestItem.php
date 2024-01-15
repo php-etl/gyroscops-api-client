@@ -55,9 +55,10 @@ class GetOnPremiseRequestItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\OnPremiseRequestJsonldOnPremiseRequestRead|\Gyroscops\Api\Model\OnPremiseRequestOnPremiseRequestRead|null
+     * @return \Gyroscops\Api\Model\OnPremiseRequestJsonldOnPremiseRequestRead|\Gyroscops\Api\Model\OnPremiseRequestOnPremiseRequestRead
      *
      * @throws \Gyroscops\Api\Exception\GetOnPremiseRequestItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -74,6 +75,7 @@ class GetOnPremiseRequestItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\GetOnPremiseRequestItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

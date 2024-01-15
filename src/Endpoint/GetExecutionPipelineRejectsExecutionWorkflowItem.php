@@ -61,9 +61,10 @@ class GetExecutionPipelineRejectsExecutionWorkflowItem extends \Gyroscops\Api\Ru
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\ExecutionWorkflowJsonld|\Gyroscops\Api\Model\ExecutionWorkflow|null
+     * @return \Gyroscops\Api\Model\ExecutionWorkflowJsonld|\Gyroscops\Api\Model\ExecutionWorkflow
      *
      * @throws \Gyroscops\Api\Exception\GetExecutionPipelineRejectsExecutionWorkflowItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -80,6 +81,7 @@ class GetExecutionPipelineRejectsExecutionWorkflowItem extends \Gyroscops\Api\Ru
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\GetExecutionPipelineRejectsExecutionWorkflowItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

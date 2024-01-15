@@ -69,7 +69,9 @@ class GetEnvironmentCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoin
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\EnvironmentEnvironmentsGetLdjsonResponse200|\Gyroscops\Api\Model\EnvironmentRead[]|null
+     * @return \Gyroscops\Api\Model\EnvironmentEnvironmentsGetLdjsonResponse200|\Gyroscops\Api\Model\EnvironmentRead[]
+     *
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -83,6 +85,7 @@ class GetEnvironmentCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoin
                 return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\EnvironmentRead[]', 'json');
             }
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

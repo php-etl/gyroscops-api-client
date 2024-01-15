@@ -64,10 +64,11 @@ class PostSubscriptionCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpo
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\SubscriptionJsonld|\Gyroscops\Api\Model\Subscription|null
+     * @return \Gyroscops\Api\Model\SubscriptionJsonld|\Gyroscops\Api\Model\Subscription
      *
      * @throws \Gyroscops\Api\Exception\PostSubscriptionCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostSubscriptionCollectionUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -87,6 +88,7 @@ class PostSubscriptionCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpo
         if (422 === $status) {
             throw new \Gyroscops\Api\Exception\PostSubscriptionCollectionUnprocessableEntityException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

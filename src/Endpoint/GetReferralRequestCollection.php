@@ -69,7 +69,9 @@ class GetReferralRequestCollection extends \Gyroscops\Api\Runtime\Client\BaseEnd
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\ReferralRequestsGetLdjsonResponse200|\Gyroscops\Api\Model\ReferralRequestReferralRequestRead[]|null
+     * @return \Gyroscops\Api\Model\ReferralRequestsGetLdjsonResponse200|\Gyroscops\Api\Model\ReferralRequestReferralRequestRead[]
+     *
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -83,6 +85,7 @@ class GetReferralRequestCollection extends \Gyroscops\Api\Runtime\Client\BaseEnd
                 return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ReferralRequestReferralRequestRead[]', 'json');
             }
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

@@ -69,7 +69,9 @@ class GetAkeneoInstanceCollection extends \Gyroscops\Api\Runtime\Client\BaseEndp
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\GatewayAkeneoInstancesGetLdjsonResponse200|\Gyroscops\Api\Model\AkeneoInstance[]|null
+     * @return \Gyroscops\Api\Model\GatewayAkeneoInstancesGetLdjsonResponse200|\Gyroscops\Api\Model\AkeneoInstance[]
+     *
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -83,6 +85,7 @@ class GetAkeneoInstanceCollection extends \Gyroscops\Api\Runtime\Client\BaseEndp
                 return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\AkeneoInstance[]', 'json');
             }
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

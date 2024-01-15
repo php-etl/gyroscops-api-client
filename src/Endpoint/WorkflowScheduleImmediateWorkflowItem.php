@@ -72,6 +72,7 @@ class WorkflowScheduleImmediateWorkflowItem extends \Gyroscops\Api\Runtime\Clien
      * @throws \Gyroscops\Api\Exception\WorkflowScheduleImmediateWorkflowItemBadRequestException
      * @throws \Gyroscops\Api\Exception\WorkflowScheduleImmediateWorkflowItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\WorkflowScheduleImmediateWorkflowItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -94,6 +95,7 @@ class WorkflowScheduleImmediateWorkflowItem extends \Gyroscops\Api\Runtime\Clien
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\WorkflowScheduleImmediateWorkflowItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

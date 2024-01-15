@@ -68,6 +68,7 @@ class DeclareWorkflowWorkflowCollection extends \Gyroscops\Api\Runtime\Client\Ba
      *
      * @throws \Gyroscops\Api\Exception\DeclareWorkflowWorkflowCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\DeclareWorkflowWorkflowCollectionUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -87,6 +88,7 @@ class DeclareWorkflowWorkflowCollection extends \Gyroscops\Api\Runtime\Client\Ba
         if (422 === $status) {
             throw new \Gyroscops\Api\Exception\DeclareWorkflowWorkflowCollectionUnprocessableEntityException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

@@ -55,9 +55,10 @@ class GetSubscriptionItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\SubscriptionJsonld|\Gyroscops\Api\Model\Subscription|null
+     * @return \Gyroscops\Api\Model\SubscriptionJsonld|\Gyroscops\Api\Model\Subscription
      *
      * @throws \Gyroscops\Api\Exception\GetSubscriptionItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -74,6 +75,7 @@ class GetSubscriptionItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\GetSubscriptionItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

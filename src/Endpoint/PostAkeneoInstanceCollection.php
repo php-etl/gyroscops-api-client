@@ -64,10 +64,11 @@ class PostAkeneoInstanceCollection extends \Gyroscops\Api\Runtime\Client\BaseEnd
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\AkeneoInstanceJsonld|\Gyroscops\Api\Model\AkeneoInstance|null
+     * @return \Gyroscops\Api\Model\AkeneoInstanceJsonld|\Gyroscops\Api\Model\AkeneoInstance
      *
      * @throws \Gyroscops\Api\Exception\PostAkeneoInstanceCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostAkeneoInstanceCollectionUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -87,6 +88,7 @@ class PostAkeneoInstanceCollection extends \Gyroscops\Api\Runtime\Client\BaseEnd
         if (422 === $status) {
             throw new \Gyroscops\Api\Exception\PostAkeneoInstanceCollectionUnprocessableEntityException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

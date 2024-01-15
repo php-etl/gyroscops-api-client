@@ -55,9 +55,10 @@ class GetActionItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implement
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\ActionJsonldRead|\Gyroscops\Api\Model\ActionRead|null
+     * @return \Gyroscops\Api\Model\ActionJsonldRead|\Gyroscops\Api\Model\ActionRead
      *
      * @throws \Gyroscops\Api\Exception\GetActionItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -74,6 +75,7 @@ class GetActionItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implement
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\GetActionItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

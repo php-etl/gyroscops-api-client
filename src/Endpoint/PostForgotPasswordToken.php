@@ -47,6 +47,7 @@ class PostForgotPasswordToken extends \Gyroscops\Api\Runtime\Client\BaseEndpoint
      *
      * @throws \Gyroscops\Api\Exception\PostForgotPasswordTokenBadRequestException
      * @throws \Gyroscops\Api\Exception\PostForgotPasswordTokenNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -61,6 +62,7 @@ class PostForgotPasswordToken extends \Gyroscops\Api\Runtime\Client\BaseEndpoint
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\PostForgotPasswordTokenNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

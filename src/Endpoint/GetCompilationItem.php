@@ -55,9 +55,10 @@ class GetCompilationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impl
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\CompilationJsonld|\Gyroscops\Api\Model\Compilation|null
+     * @return \Gyroscops\Api\Model\CompilationJsonld|\Gyroscops\Api\Model\Compilation
      *
      * @throws \Gyroscops\Api\Exception\GetCompilationItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -74,6 +75,7 @@ class GetCompilationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impl
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\GetCompilationItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

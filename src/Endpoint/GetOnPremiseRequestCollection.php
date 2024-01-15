@@ -69,7 +69,9 @@ class GetOnPremiseRequestCollection extends \Gyroscops\Api\Runtime\Client\BaseEn
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\ReferralOnPremiseRequestsGetLdjsonResponse200|\Gyroscops\Api\Model\OnPremiseRequestOnPremiseRequestRead[]|null
+     * @return \Gyroscops\Api\Model\ReferralOnPremiseRequestsGetLdjsonResponse200|\Gyroscops\Api\Model\OnPremiseRequestOnPremiseRequestRead[]
+     *
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -83,6 +85,7 @@ class GetOnPremiseRequestCollection extends \Gyroscops\Api\Runtime\Client\BaseEn
                 return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\OnPremiseRequestOnPremiseRequestRead[]', 'json');
             }
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

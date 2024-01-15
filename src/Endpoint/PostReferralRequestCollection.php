@@ -64,10 +64,11 @@ class PostReferralRequestCollection extends \Gyroscops\Api\Runtime\Client\BaseEn
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\ReferralRequestJsonldReferralRequestRead|\Gyroscops\Api\Model\ReferralRequestReferralRequestRead|null
+     * @return \Gyroscops\Api\Model\ReferralRequestJsonldReferralRequestRead|\Gyroscops\Api\Model\ReferralRequestReferralRequestRead
      *
      * @throws \Gyroscops\Api\Exception\PostReferralRequestCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostReferralRequestCollectionUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -87,6 +88,7 @@ class PostReferralRequestCollection extends \Gyroscops\Api\Runtime\Client\BaseEn
         if (422 === $status) {
             throw new \Gyroscops\Api\Exception\PostReferralRequestCollectionUnprocessableEntityException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

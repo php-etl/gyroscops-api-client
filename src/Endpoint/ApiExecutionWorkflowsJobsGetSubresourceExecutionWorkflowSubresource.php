@@ -72,7 +72,9 @@ class ApiExecutionWorkflowsJobsGetSubresourceExecutionWorkflowSubresource extend
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200|\Gyroscops\Api\Model\ExecutionWorkflowJob[]|null
+     * @return \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200|\Gyroscops\Api\Model\ExecutionWorkflowJob[]
+     *
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -86,6 +88,7 @@ class ApiExecutionWorkflowsJobsGetSubresourceExecutionWorkflowSubresource extend
                 return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ExecutionWorkflowJob[]', 'json');
             }
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

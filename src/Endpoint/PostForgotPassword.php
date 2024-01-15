@@ -44,6 +44,7 @@ class PostForgotPassword extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impl
      * @return null
      *
      * @throws \Gyroscops\Api\Exception\PostForgotPasswordBadRequestException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -55,6 +56,7 @@ class PostForgotPassword extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impl
         if (400 === $status) {
             throw new \Gyroscops\Api\Exception\PostForgotPasswordBadRequestException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

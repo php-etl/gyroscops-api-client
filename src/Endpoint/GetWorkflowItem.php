@@ -55,9 +55,10 @@ class GetWorkflowItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impleme
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\WorkflowJsonldRead|\Gyroscops\Api\Model\WorkflowRead|null
+     * @return \Gyroscops\Api\Model\WorkflowJsonldRead|\Gyroscops\Api\Model\WorkflowRead
      *
      * @throws \Gyroscops\Api\Exception\GetWorkflowItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -74,6 +75,7 @@ class GetWorkflowItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impleme
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\GetWorkflowItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

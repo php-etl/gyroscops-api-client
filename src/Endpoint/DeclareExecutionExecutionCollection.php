@@ -68,6 +68,7 @@ class DeclareExecutionExecutionCollection extends \Gyroscops\Api\Runtime\Client\
      *
      * @throws \Gyroscops\Api\Exception\DeclareExecutionExecutionCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\DeclareExecutionExecutionCollectionUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -87,6 +88,7 @@ class DeclareExecutionExecutionCollection extends \Gyroscops\Api\Runtime\Client\
         if (422 === $status) {
             throw new \Gyroscops\Api\Exception\DeclareExecutionExecutionCollectionUnprocessableEntityException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

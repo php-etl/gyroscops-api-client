@@ -69,7 +69,9 @@ class GetActionCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\RuntimeActionsGetLdjsonResponse200|\Gyroscops\Api\Model\ActionRead[]|null
+     * @return \Gyroscops\Api\Model\RuntimeActionsGetLdjsonResponse200|\Gyroscops\Api\Model\ActionRead[]
+     *
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -83,6 +85,7 @@ class GetActionCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
                 return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ActionRead[]', 'json');
             }
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

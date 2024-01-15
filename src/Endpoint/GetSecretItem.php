@@ -55,9 +55,10 @@ class GetSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implement
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\SecretJsonld|\Gyroscops\Api\Model\Secret|null
+     * @return \Gyroscops\Api\Model\SecretJsonld|\Gyroscops\Api\Model\Secret
      *
      * @throws \Gyroscops\Api\Exception\GetSecretItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -74,6 +75,7 @@ class GetSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implement
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\GetSecretItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

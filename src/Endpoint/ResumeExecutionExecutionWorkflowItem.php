@@ -67,11 +67,12 @@ class ResumeExecutionExecutionWorkflowItem extends \Gyroscops\Api\Runtime\Client
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\ExecutionWorkflowResumeWorkflowExecutionCommandJsonld|\Gyroscops\Api\Model\ExecutionWorkflowResumeWorkflowExecutionCommand|null
+     * @return \Gyroscops\Api\Model\ExecutionWorkflowResumeWorkflowExecutionCommandJsonld|\Gyroscops\Api\Model\ExecutionWorkflowResumeWorkflowExecutionCommand
      *
      * @throws \Gyroscops\Api\Exception\ResumeExecutionExecutionWorkflowItemBadRequestException
      * @throws \Gyroscops\Api\Exception\ResumeExecutionExecutionWorkflowItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\ResumeExecutionExecutionWorkflowItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -94,6 +95,7 @@ class ResumeExecutionExecutionWorkflowItem extends \Gyroscops\Api\Runtime\Client
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\ResumeExecutionExecutionWorkflowItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

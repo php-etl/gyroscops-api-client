@@ -69,7 +69,9 @@ class GetSecretCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\EnvironmentSecretsGetLdjsonResponse200|\Gyroscops\Api\Model\Secret[]|null
+     * @return \Gyroscops\Api\Model\EnvironmentSecretsGetLdjsonResponse200|\Gyroscops\Api\Model\Secret[]
+     *
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -83,6 +85,7 @@ class GetSecretCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
                 return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Secret[]', 'json');
             }
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

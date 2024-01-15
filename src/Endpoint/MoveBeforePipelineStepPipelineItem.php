@@ -72,6 +72,7 @@ class MoveBeforePipelineStepPipelineItem extends \Gyroscops\Api\Runtime\Client\B
      * @throws \Gyroscops\Api\Exception\MoveBeforePipelineStepPipelineItemBadRequestException
      * @throws \Gyroscops\Api\Exception\MoveBeforePipelineStepPipelineItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\MoveBeforePipelineStepPipelineItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -94,6 +95,7 @@ class MoveBeforePipelineStepPipelineItem extends \Gyroscops\Api\Runtime\Client\B
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\MoveBeforePipelineStepPipelineItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

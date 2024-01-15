@@ -46,6 +46,7 @@ class DeleteEnvironmentItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
      * @return null
      *
      * @throws \Gyroscops\Api\Exception\DeleteEnvironmentItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -57,6 +58,7 @@ class DeleteEnvironmentItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\DeleteEnvironmentItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

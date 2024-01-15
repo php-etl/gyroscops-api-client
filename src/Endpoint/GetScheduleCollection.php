@@ -70,6 +70,8 @@ class GetScheduleCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
      * {@inheritdoc}
      *
      * @return \Gyroscops\Api\Model\RuntimeSchedulesGetLdjsonResponse200|null
+     *
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -83,6 +85,7 @@ class GetScheduleCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
                 return json_decode($body);
             }
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

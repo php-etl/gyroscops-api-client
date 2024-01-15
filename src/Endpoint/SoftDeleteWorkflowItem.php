@@ -72,6 +72,7 @@ class SoftDeleteWorkflowItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
      * @throws \Gyroscops\Api\Exception\SoftDeleteWorkflowItemBadRequestException
      * @throws \Gyroscops\Api\Exception\SoftDeleteWorkflowItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\SoftDeleteWorkflowItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -94,6 +95,7 @@ class SoftDeleteWorkflowItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\SoftDeleteWorkflowItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

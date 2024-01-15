@@ -55,9 +55,10 @@ class GetVariableFromConstantItem extends \Gyroscops\Api\Runtime\Client\BaseEndp
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\VariableFromConstantJsonldRead|\Gyroscops\Api\Model\VariableFromConstantRead|null
+     * @return \Gyroscops\Api\Model\VariableFromConstantJsonldRead|\Gyroscops\Api\Model\VariableFromConstantRead
      *
      * @throws \Gyroscops\Api\Exception\GetVariableFromConstantItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -74,6 +75,7 @@ class GetVariableFromConstantItem extends \Gyroscops\Api\Runtime\Client\BaseEndp
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\GetVariableFromConstantItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

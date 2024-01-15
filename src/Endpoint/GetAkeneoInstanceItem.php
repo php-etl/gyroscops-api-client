@@ -55,9 +55,10 @@ class GetAkeneoInstanceItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\AkeneoInstanceJsonld|\Gyroscops\Api\Model\AkeneoInstance|null
+     * @return \Gyroscops\Api\Model\AkeneoInstanceJsonld|\Gyroscops\Api\Model\AkeneoInstance
      *
      * @throws \Gyroscops\Api\Exception\GetAkeneoInstanceItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -74,6 +75,7 @@ class GetAkeneoInstanceItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\GetAkeneoInstanceItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

@@ -67,11 +67,12 @@ class PutUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements 
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\UserJsonld|\Gyroscops\Api\Model\User|null
+     * @return \Gyroscops\Api\Model\UserJsonld|\Gyroscops\Api\Model\User
      *
      * @throws \Gyroscops\Api\Exception\PutUserItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PutUserItemUnprocessableEntityException
      * @throws \Gyroscops\Api\Exception\PutUserItemNotFoundException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -94,6 +95,7 @@ class PutUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements 
         if (404 === $status) {
             throw new \Gyroscops\Api\Exception\PutUserItemNotFoundException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

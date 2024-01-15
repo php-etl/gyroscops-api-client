@@ -69,7 +69,9 @@ class GetPipelineStepCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoi
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\RuntimePipelineStepsGetLdjsonResponse200|\Gyroscops\Api\Model\PipelineStep[]|null
+     * @return \Gyroscops\Api\Model\RuntimePipelineStepsGetLdjsonResponse200|\Gyroscops\Api\Model\PipelineStep[]
+     *
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -83,6 +85,7 @@ class GetPipelineStepCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoi
                 return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\PipelineStep[]', 'json');
             }
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array

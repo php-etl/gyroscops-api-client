@@ -64,10 +64,11 @@ class PostSecretCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint im
     /**
      * {@inheritdoc}
      *
-     * @return \Gyroscops\Api\Model\SecretJsonld|\Gyroscops\Api\Model\Secret|null
+     * @return \Gyroscops\Api\Model\SecretJsonld|\Gyroscops\Api\Model\Secret
      *
      * @throws \Gyroscops\Api\Exception\PostSecretCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostSecretCollectionUnprocessableEntityException
+     * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -87,6 +88,7 @@ class PostSecretCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint im
         if (422 === $status) {
             throw new \Gyroscops\Api\Exception\PostSecretCollectionUnprocessableEntityException($response);
         }
+        throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array
