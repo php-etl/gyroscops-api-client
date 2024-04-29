@@ -1,0 +1,103 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Gyroscops\Api\Model;
+
+class WorkflowJobJobRead extends \ArrayObject
+{
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return \array_key_exists($property, $this->initialized);
+    }
+    /**
+     * @var string|null
+     */
+    protected $workflow;
+    /**
+     * @var string|null
+     */
+    protected $code;
+    /**
+     * @var int|null
+     */
+    protected $order;
+    /**
+     * @var WorkflowJobPipelineJobRead|null
+     */
+    protected $pipeline;
+    /**
+     * @var WorkflowJobActionJobRead|null
+     */
+    protected $action;
+
+    public function getWorkflow(): ?string
+    {
+        return $this->workflow;
+    }
+
+    public function setWorkflow(?string $workflow): self
+    {
+        $this->initialized['workflow'] = true;
+        $this->workflow = $workflow;
+
+        return $this;
+    }
+
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    public function setCode(?string $code): self
+    {
+        $this->initialized['code'] = true;
+        $this->code = $code;
+
+        return $this;
+    }
+
+    public function getOrder(): ?int
+    {
+        return $this->order;
+    }
+
+    public function setOrder(?int $order): self
+    {
+        $this->initialized['order'] = true;
+        $this->order = $order;
+
+        return $this;
+    }
+
+    public function getPipeline(): ?WorkflowJobPipelineJobRead
+    {
+        return $this->pipeline;
+    }
+
+    public function setPipeline(?WorkflowJobPipelineJobRead $pipeline): self
+    {
+        $this->initialized['pipeline'] = true;
+        $this->pipeline = $pipeline;
+
+        return $this;
+    }
+
+    public function getAction(): ?WorkflowJobActionJobRead
+    {
+        return $this->action;
+    }
+
+    public function setAction(?WorkflowJobActionJobRead $action): self
+    {
+        $this->initialized['action'] = true;
+        $this->action = $action;
+
+        return $this;
+    }
+}

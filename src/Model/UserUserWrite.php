@@ -1,0 +1,143 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Gyroscops\Api\Model;
+
+class UserUserWrite extends \ArrayObject
+{
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return \array_key_exists($property, $this->initialized);
+    }
+    /**
+     * @var string|null
+     */
+    protected $firstName;
+    /**
+     * @var string|null
+     */
+    protected $lastName;
+    /**
+     * @var string|null
+     */
+    protected $username;
+    /**
+     * @var string|null
+     */
+    protected $email;
+    /**
+     * @var string|null
+     */
+    protected $password;
+    /**
+     * @var string[][]|null
+     */
+    protected $roles;
+    /**
+     * @var string|null
+     */
+    protected $organization;
+
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(?string $firstName): self
+    {
+        $this->initialized['firstName'] = true;
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(?string $lastName): self
+    {
+        $this->initialized['lastName'] = true;
+        $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(?string $username): self
+    {
+        $this->initialized['username'] = true;
+        $this->username = $username;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): self
+    {
+        $this->initialized['email'] = true;
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(?string $password): self
+    {
+        $this->initialized['password'] = true;
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @return string[][]|null
+     */
+    public function getRoles(): ?array
+    {
+        return $this->roles;
+    }
+
+    /**
+     * @param string[][]|null $roles
+     */
+    public function setRoles(?array $roles): self
+    {
+        $this->initialized['roles'] = true;
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function getOrganization(): ?string
+    {
+        return $this->organization;
+    }
+
+    public function setOrganization(?string $organization): self
+    {
+        $this->initialized['organization'] = true;
+        $this->organization = $organization;
+
+        return $this;
+    }
+}

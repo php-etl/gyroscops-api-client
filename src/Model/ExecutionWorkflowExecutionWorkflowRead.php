@@ -1,0 +1,75 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Gyroscops\Api\Model;
+
+class ExecutionWorkflowExecutionWorkflowRead extends \ArrayObject
+{
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return \array_key_exists($property, $this->initialized);
+    }
+    /**
+     * @var string|null
+     */
+    protected $id;
+    /**
+     * @var string[]|null
+     */
+    protected $jobs;
+    /**
+     * @var string|null
+     */
+    protected $execution;
+
+    public function getId(): ?string
+    {
+        return $this->id;
+    }
+
+    public function setId(?string $id): self
+    {
+        $this->initialized['id'] = true;
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getJobs(): ?array
+    {
+        return $this->jobs;
+    }
+
+    /**
+     * @param string[]|null $jobs
+     */
+    public function setJobs(?array $jobs): self
+    {
+        $this->initialized['jobs'] = true;
+        $this->jobs = $jobs;
+
+        return $this;
+    }
+
+    public function getExecution(): ?string
+    {
+        return $this->execution;
+    }
+
+    public function setExecution(?string $execution): self
+    {
+        $this->initialized['execution'] = true;
+        $this->execution = $execution;
+
+        return $this;
+    }
+}
