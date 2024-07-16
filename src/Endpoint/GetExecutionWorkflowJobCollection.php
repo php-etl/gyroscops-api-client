@@ -20,8 +20,8 @@ class GetExecutionWorkflowJobCollection extends \Gyroscops\Api\Runtime\Client\Ba
      *
      * @param array $queryParameters {
      *
-     *     @var int $page The collection page number
-     * }
+     * @var int $page The collection page number
+     *          }
      *
      * @param array $accept Accept content header application/ld+json|application/json|text/html
      */
@@ -67,9 +67,7 @@ class GetExecutionWorkflowJobCollection extends \Gyroscops\Api\Runtime\Client\Ba
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200|\Gyroscops\Api\Model\ExecutionWorkflowJob[]
+     * @return \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200|\Gyroscops\Api\Model\ExecutionWorkflowJobExecutionWorkflowJobRead[]
      *
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
@@ -79,10 +77,10 @@ class GetExecutionWorkflowJobCollection extends \Gyroscops\Api\Runtime\Client\Ba
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ExecutionWorkflowJob[]', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ExecutionWorkflowJobExecutionWorkflowJobRead[]', 'json');
             }
         }
         throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
@@ -90,6 +88,6 @@ class GetExecutionWorkflowJobCollection extends \Gyroscops\Api\Runtime\Client\Ba
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

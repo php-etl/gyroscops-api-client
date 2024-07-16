@@ -41,8 +41,6 @@ class DeleteWorkspaceItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return null
      *
      * @throws \Gyroscops\Api\Exception\DeleteWorkspaceItemNotFoundException
@@ -63,6 +61,6 @@ class DeleteWorkspaceItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

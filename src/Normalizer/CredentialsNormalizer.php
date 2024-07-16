@@ -13,6 +13,7 @@ namespace Gyroscops\Api\Normalizer;
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
 use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -20,91 +21,183 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class CredentialsNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-    use ValidatorTrait;
-
-    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class CredentialsNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'Gyroscops\\Api\\Model\\Credentials';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null, array $context = []): bool
-    {
-        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\Credentials';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \Gyroscops\Api\Model\Credentials::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === Gyroscops\Api\Model\Credentials::class;
         }
-        $object = new \Gyroscops\Api\Model\Credentials();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \Gyroscops\Api\Model\Credentials();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('username', $data) && $data['username'] !== null) {
+                $object->setUsername($data['username']);
+                unset($data['username']);
+            } elseif (\array_key_exists('username', $data) && $data['username'] === null) {
+                $object->setUsername(null);
+            }
+            if (\array_key_exists('password', $data) && $data['password'] !== null) {
+                $object->setPassword($data['password']);
+                unset($data['password']);
+            } elseif (\array_key_exists('password', $data) && $data['password'] === null) {
+                $object->setPassword(null);
+            }
+            if (\array_key_exists('organization', $data) && $data['organization'] !== null) {
+                $object->setOrganization($data['organization']);
+                unset($data['organization']);
+            } elseif (\array_key_exists('organization', $data) && $data['organization'] === null) {
+                $object->setOrganization(null);
+            }
+            if (\array_key_exists('workspace', $data) && $data['workspace'] !== null) {
+                $object->setWorkspace($data['workspace']);
+                unset($data['workspace']);
+            } elseif (\array_key_exists('workspace', $data) && $data['workspace'] === null) {
+                $object->setWorkspace(null);
+            }
+            foreach ($data as $key => $value) {
+                if (preg_match('/.*/', (string) $key)) {
+                    $object[$key] = $value;
+                }
+            }
+
             return $object;
         }
-        if (\array_key_exists('username', $data) && $data['username'] !== null) {
-            $object->setUsername($data['username']);
-            unset($data['username']);
-        } elseif (\array_key_exists('username', $data) && $data['username'] === null) {
-            $object->setUsername(null);
-        }
-        if (\array_key_exists('password', $data) && $data['password'] !== null) {
-            $object->setPassword($data['password']);
-            unset($data['password']);
-        } elseif (\array_key_exists('password', $data) && $data['password'] === null) {
-            $object->setPassword(null);
-        }
-        if (\array_key_exists('organization', $data) && $data['organization'] !== null) {
-            $object->setOrganization($data['organization']);
-            unset($data['organization']);
-        } elseif (\array_key_exists('organization', $data) && $data['organization'] === null) {
-            $object->setOrganization(null);
-        }
-        if (\array_key_exists('workspace', $data) && $data['workspace'] !== null) {
-            $object->setWorkspace($data['workspace']);
-            unset($data['workspace']);
-        } elseif (\array_key_exists('workspace', $data) && $data['workspace'] === null) {
-            $object->setWorkspace(null);
-        }
-        foreach ($data as $key => $value) {
-            if (preg_match('/.*/', (string) $key)) {
-                $object[$key] = $value;
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            $data['username'] = $object->getUsername();
+            $data['password'] = $object->getPassword();
+            if ($object->isInitialized('organization') && null !== $object->getOrganization()) {
+                $data['organization'] = $object->getOrganization();
             }
+            if ($object->isInitialized('workspace') && null !== $object->getWorkspace()) {
+                $data['workspace'] = $object->getWorkspace();
+            }
+            foreach ($object as $key => $value) {
+                if (preg_match('/.*/', (string) $key)) {
+                    $data[$key] = $value;
+                }
+            }
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\Gyroscops\Api\Model\Credentials::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class CredentialsNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        $data['username'] = $object->getUsername();
-        $data['password'] = $object->getPassword();
-        if ($object->isInitialized('organization') && null !== $object->getOrganization()) {
-            $data['organization'] = $object->getOrganization();
-        }
-        if ($object->isInitialized('workspace') && null !== $object->getWorkspace()) {
-            $data['workspace'] = $object->getWorkspace();
-        }
-        foreach ($object as $key => $value) {
-            if (preg_match('/.*/', (string) $key)) {
-                $data[$key] = $value;
-            }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
+
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \Gyroscops\Api\Model\Credentials::class;
         }
 
-        return $data;
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === Gyroscops\Api\Model\Credentials::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \Gyroscops\Api\Model\Credentials();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('username', $data) && $data['username'] !== null) {
+                $object->setUsername($data['username']);
+                unset($data['username']);
+            } elseif (\array_key_exists('username', $data) && $data['username'] === null) {
+                $object->setUsername(null);
+            }
+            if (\array_key_exists('password', $data) && $data['password'] !== null) {
+                $object->setPassword($data['password']);
+                unset($data['password']);
+            } elseif (\array_key_exists('password', $data) && $data['password'] === null) {
+                $object->setPassword(null);
+            }
+            if (\array_key_exists('organization', $data) && $data['organization'] !== null) {
+                $object->setOrganization($data['organization']);
+                unset($data['organization']);
+            } elseif (\array_key_exists('organization', $data) && $data['organization'] === null) {
+                $object->setOrganization(null);
+            }
+            if (\array_key_exists('workspace', $data) && $data['workspace'] !== null) {
+                $object->setWorkspace($data['workspace']);
+                unset($data['workspace']);
+            } elseif (\array_key_exists('workspace', $data) && $data['workspace'] === null) {
+                $object->setWorkspace(null);
+            }
+            foreach ($data as $key => $value) {
+                if (preg_match('/.*/', (string) $key)) {
+                    $object[$key] = $value;
+                }
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            $data['username'] = $object->getUsername();
+            $data['password'] = $object->getPassword();
+            if ($object->isInitialized('organization') && null !== $object->getOrganization()) {
+                $data['organization'] = $object->getOrganization();
+            }
+            if ($object->isInitialized('workspace') && null !== $object->getWorkspace()) {
+                $data['workspace'] = $object->getWorkspace();
+            }
+            foreach ($object as $key => $value) {
+                if (preg_match('/.*/', (string) $key)) {
+                    $data[$key] = $value;
+                }
+            }
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\Gyroscops\Api\Model\Credentials::class => false];
+        }
     }
 }

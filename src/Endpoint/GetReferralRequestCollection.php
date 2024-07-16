@@ -20,8 +20,8 @@ class GetReferralRequestCollection extends \Gyroscops\Api\Runtime\Client\BaseEnd
      *
      * @param array $queryParameters {
      *
-     *     @var int $page The collection page number
-     * }
+     * @var int $page The collection page number
+     *          }
      *
      * @param array $accept Accept content header application/ld+json|application/json|text/html
      */
@@ -67,8 +67,6 @@ class GetReferralRequestCollection extends \Gyroscops\Api\Runtime\Client\BaseEnd
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \Gyroscops\Api\Model\ReferralRequestsGetLdjsonResponse200|\Gyroscops\Api\Model\ReferralRequestReferralRequestRead[]
      *
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
@@ -79,10 +77,10 @@ class GetReferralRequestCollection extends \Gyroscops\Api\Runtime\Client\BaseEnd
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ReferralRequestsGetLdjsonResponse200', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ReferralRequestsGetLdjsonResponse200', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ReferralRequestReferralRequestRead[]', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ReferralRequestReferralRequestRead[]', 'json');
             }
         }
         throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
@@ -90,6 +88,6 @@ class GetReferralRequestCollection extends \Gyroscops\Api\Runtime\Client\BaseEnd
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

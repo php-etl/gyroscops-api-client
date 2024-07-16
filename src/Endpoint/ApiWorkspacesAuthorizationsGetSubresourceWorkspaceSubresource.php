@@ -22,8 +22,8 @@ class ApiWorkspacesAuthorizationsGetSubresourceWorkspaceSubresource extends \Gyr
      * @param string $id              Workspace identifier
      * @param array  $queryParameters {
      *
-     *     @var int $page The collection page number
-     * }
+     * @var int $page The collection page number
+     *          }
      *
      * @param array $accept Accept content header application/ld+json|application/json|text/html
      */
@@ -70,9 +70,7 @@ class ApiWorkspacesAuthorizationsGetSubresourceWorkspaceSubresource extends \Gyr
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200|\Gyroscops\Api\Model\UserAuthorization[]
+     * @return \Gyroscops\Api\Model\AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200|\Gyroscops\Api\Model\UserAuthorizationAuthorizationRead[]
      *
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
@@ -82,10 +80,10 @@ class ApiWorkspacesAuthorizationsGetSubresourceWorkspaceSubresource extends \Gyr
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\UserAuthorization[]', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\UserAuthorizationAuthorizationRead[]', 'json');
             }
         }
         throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
@@ -93,6 +91,6 @@ class ApiWorkspacesAuthorizationsGetSubresourceWorkspaceSubresource extends \Gyr
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

@@ -13,6 +13,7 @@ namespace Gyroscops\Api\Normalizer;
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
 use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -20,111 +21,223 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class ReferralCodeJsonldReferralCodeReadNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-    use ValidatorTrait;
-
-    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class ReferralCodeJsonldReferralCodeReadNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'Gyroscops\\Api\\Model\\ReferralCodeJsonldReferralCodeRead';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null, array $context = []): bool
-    {
-        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\ReferralCodeJsonldReferralCodeRead';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \Gyroscops\Api\Model\ReferralCodeJsonldReferralCodeRead::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === Gyroscops\Api\Model\ReferralCodeJsonldReferralCodeRead::class;
         }
-        $object = new \Gyroscops\Api\Model\ReferralCodeJsonldReferralCodeRead();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \Gyroscops\Api\Model\ReferralCodeJsonldReferralCodeRead();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
+                $object->setId($data['@id']);
+                unset($data['@id']);
+            } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
+                $object->setId(null);
+            }
+            if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
+                $object->setType($data['@type']);
+                unset($data['@type']);
+            } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
+                $object->setType(null);
+            }
+            if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
+                $object->setContext($data['@context']);
+                unset($data['@context']);
+            } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
+                $object->setContext(null);
+            }
+            if (\array_key_exists('id', $data) && $data['id'] !== null) {
+                $object->setId2($data['id']);
+                unset($data['id']);
+            } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
+                $object->setId2(null);
+            }
+            if (\array_key_exists('user', $data) && $data['user'] !== null) {
+                $object->setUser($data['user']);
+                unset($data['user']);
+            } elseif (\array_key_exists('user', $data) && $data['user'] === null) {
+                $object->setUser(null);
+            }
+            if (\array_key_exists('code', $data) && $data['code'] !== null) {
+                $object->setCode($data['code']);
+                unset($data['code']);
+            } elseif (\array_key_exists('code', $data) && $data['code'] === null) {
+                $object->setCode(null);
+            }
+            if (\array_key_exists('referralRequests', $data) && $data['referralRequests'] !== null) {
+                $values = [];
+                foreach ($data['referralRequests'] as $value) {
+                    $values[] = $value;
+                }
+                $object->setReferralRequests($values);
+                unset($data['referralRequests']);
+            } elseif (\array_key_exists('referralRequests', $data) && $data['referralRequests'] === null) {
+                $object->setReferralRequests(null);
+            }
+            foreach ($data as $key => $value_1) {
+                if (preg_match('/.*/', (string) $key)) {
+                    $object[$key] = $value_1;
+                }
+            }
+
             return $object;
         }
-        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
-            $object->setId($data['@id']);
-            unset($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
-            $object->setId(null);
-        }
-        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
-            $object->setType($data['@type']);
-            unset($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
-            $object->setType(null);
-        }
-        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
-            $object->setContext($data['@context']);
-            unset($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
-            $object->setContext(null);
-        }
-        if (\array_key_exists('id', $data) && $data['id'] !== null) {
-            $object->setId2($data['id']);
-            unset($data['id']);
-        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
-            $object->setId2(null);
-        }
-        if (\array_key_exists('user', $data) && $data['user'] !== null) {
-            $object->setUser($data['user']);
-            unset($data['user']);
-        } elseif (\array_key_exists('user', $data) && $data['user'] === null) {
-            $object->setUser(null);
-        }
-        if (\array_key_exists('code', $data) && $data['code'] !== null) {
-            $object->setCode($data['code']);
-            unset($data['code']);
-        } elseif (\array_key_exists('code', $data) && $data['code'] === null) {
-            $object->setCode(null);
-        }
-        if (\array_key_exists('referralRequests', $data) && $data['referralRequests'] !== null) {
-            $values = [];
-            foreach ($data['referralRequests'] as $value) {
-                $values[] = $value;
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            if ($object->isInitialized('user') && null !== $object->getUser()) {
+                $data['user'] = $object->getUser();
             }
-            $object->setReferralRequests($values);
-            unset($data['referralRequests']);
-        } elseif (\array_key_exists('referralRequests', $data) && $data['referralRequests'] === null) {
-            $object->setReferralRequests(null);
-        }
-        foreach ($data as $key => $value_1) {
-            if (preg_match('/.*/', (string) $key)) {
-                $object[$key] = $value_1;
+            if ($object->isInitialized('code') && null !== $object->getCode()) {
+                $data['code'] = $object->getCode();
             }
+            foreach ($object as $key => $value) {
+                if (preg_match('/.*/', (string) $key)) {
+                    $data[$key] = $value;
+                }
+            }
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\Gyroscops\Api\Model\ReferralCodeJsonldReferralCodeRead::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class ReferralCodeJsonldReferralCodeReadNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        if ($object->isInitialized('user') && null !== $object->getUser()) {
-            $data['user'] = $object->getUser();
-        }
-        if ($object->isInitialized('code') && null !== $object->getCode()) {
-            $data['code'] = $object->getCode();
-        }
-        foreach ($object as $key => $value) {
-            if (preg_match('/.*/', (string) $key)) {
-                $data[$key] = $value;
-            }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
+
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \Gyroscops\Api\Model\ReferralCodeJsonldReferralCodeRead::class;
         }
 
-        return $data;
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === Gyroscops\Api\Model\ReferralCodeJsonldReferralCodeRead::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \Gyroscops\Api\Model\ReferralCodeJsonldReferralCodeRead();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
+                $object->setId($data['@id']);
+                unset($data['@id']);
+            } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
+                $object->setId(null);
+            }
+            if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
+                $object->setType($data['@type']);
+                unset($data['@type']);
+            } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
+                $object->setType(null);
+            }
+            if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
+                $object->setContext($data['@context']);
+                unset($data['@context']);
+            } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
+                $object->setContext(null);
+            }
+            if (\array_key_exists('id', $data) && $data['id'] !== null) {
+                $object->setId2($data['id']);
+                unset($data['id']);
+            } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
+                $object->setId2(null);
+            }
+            if (\array_key_exists('user', $data) && $data['user'] !== null) {
+                $object->setUser($data['user']);
+                unset($data['user']);
+            } elseif (\array_key_exists('user', $data) && $data['user'] === null) {
+                $object->setUser(null);
+            }
+            if (\array_key_exists('code', $data) && $data['code'] !== null) {
+                $object->setCode($data['code']);
+                unset($data['code']);
+            } elseif (\array_key_exists('code', $data) && $data['code'] === null) {
+                $object->setCode(null);
+            }
+            if (\array_key_exists('referralRequests', $data) && $data['referralRequests'] !== null) {
+                $values = [];
+                foreach ($data['referralRequests'] as $value) {
+                    $values[] = $value;
+                }
+                $object->setReferralRequests($values);
+                unset($data['referralRequests']);
+            } elseif (\array_key_exists('referralRequests', $data) && $data['referralRequests'] === null) {
+                $object->setReferralRequests(null);
+            }
+            foreach ($data as $key => $value_1) {
+                if (preg_match('/.*/', (string) $key)) {
+                    $object[$key] = $value_1;
+                }
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            if ($object->isInitialized('user') && null !== $object->getUser()) {
+                $data['user'] = $object->getUser();
+            }
+            if ($object->isInitialized('code') && null !== $object->getCode()) {
+                $data['code'] = $object->getCode();
+            }
+            foreach ($object as $key => $value) {
+                if (preg_match('/.*/', (string) $key)) {
+                    $data[$key] = $value;
+                }
+            }
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\Gyroscops\Api\Model\ReferralCodeJsonldReferralCodeRead::class => false];
+        }
     }
 }

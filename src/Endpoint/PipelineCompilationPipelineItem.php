@@ -19,9 +19,9 @@ class PipelineCompilationPipelineItem extends \Gyroscops\Api\Runtime\Client\Base
     /**
      * Launches a pipeline compilation.
      *
-     * @param string                                                                        $id          Resource identifier
-     * @param \Gyroscops\Api\Model\PipelineCompilePipelineCommandInputJsonld|\stdClass|null $requestBody
-     * @param array                                                                         $accept      Accept content header application/ld+json|application/json|text/html
+     * @param string                                                                                     $id          Resource identifier
+     * @param \Gyroscops\Api\Model\PipelineCompilePipelineCommandInputJsonldPipelineWrite|\stdClass|null $requestBody
+     * @param array                                                                                      $accept      Accept content header application/ld+json|application/json|text/html
      */
     public function __construct(string $id, $requestBody = null, array $accept = [])
     {
@@ -42,7 +42,7 @@ class PipelineCompilationPipelineItem extends \Gyroscops\Api\Runtime\Client\Base
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineCompilePipelineCommandInputJsonld) {
+        if ($this->body instanceof \Gyroscops\Api\Model\PipelineCompilePipelineCommandInputJsonldPipelineWrite) {
             return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
         if ($this->body instanceof \stdClass) {
@@ -65,9 +65,7 @@ class PipelineCompilationPipelineItem extends \Gyroscops\Api\Runtime\Client\Base
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\PipelineCompilePipelineCommandJsonldRead|null
+     * @return \Gyroscops\Api\Model\PipelineCompilePipelineCommandJsonldPipelineReadPipelineSubresourceRead|null
      *
      * @throws \Gyroscops\Api\Exception\PipelineCompilationPipelineItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PipelineCompilationPipelineItemUnprocessableEntityException
@@ -80,7 +78,7 @@ class PipelineCompilationPipelineItem extends \Gyroscops\Api\Runtime\Client\Base
         $body = (string) $response->getBody();
         if (202 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\PipelineCompilePipelineCommandJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\PipelineCompilePipelineCommandJsonldPipelineReadPipelineSubresourceRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
                 return json_decode($body);
@@ -100,6 +98,6 @@ class PipelineCompilationPipelineItem extends \Gyroscops\Api\Runtime\Client\Base
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

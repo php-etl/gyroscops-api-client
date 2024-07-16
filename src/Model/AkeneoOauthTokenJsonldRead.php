@@ -42,7 +42,7 @@ class AkeneoOauthTokenJsonldRead extends \ArrayObject
      */
     protected $url;
     /**
-     * @var string[]|null
+     * @var list<string>|null
      */
     protected $scopes;
     /**
@@ -76,17 +76,11 @@ class AkeneoOauthTokenJsonldRead extends \ArrayObject
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getContext()
     {
         return $this->context;
     }
 
-    /**
-     * @param mixed $context
-     */
     public function setContext($context): self
     {
         $this->initialized['context'] = true;
@@ -122,7 +116,7 @@ class AkeneoOauthTokenJsonldRead extends \ArrayObject
     }
 
     /**
-     * @return string[]|null
+     * @return list<string>|null
      */
     public function getScopes(): ?array
     {
@@ -130,7 +124,7 @@ class AkeneoOauthTokenJsonldRead extends \ArrayObject
     }
 
     /**
-     * @param string[]|null $scopes
+     * @param list<string>|null $scopes
      */
     public function setScopes(?array $scopes): self
     {

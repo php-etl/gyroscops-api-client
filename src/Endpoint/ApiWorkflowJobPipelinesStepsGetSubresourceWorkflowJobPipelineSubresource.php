@@ -13,23 +13,23 @@ namespace Gyroscops\Api\Endpoint;
 class ApiWorkflowJobPipelinesStepsGetSubresourceWorkflowJobPipelineSubresource extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
 {
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
-    protected $id;
+    protected $workflow;
     protected $accept;
 
     /**
      * Retrieves a WorkflowJobPipeline resource.
      *
-     * @param string $id              WorkflowJobPipeline identifier
+     * @param string $workflow        WorkflowJobPipeline identifier
      * @param array  $queryParameters {
      *
-     *     @var int $page The collection page number
-     * }
+     * @var int $page The collection page number
+     *          }
      *
      * @param array $accept Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(string $id, array $queryParameters = [], array $accept = [])
+    public function __construct(string $workflow, array $queryParameters = [], array $accept = [])
     {
-        $this->id = $id;
+        $this->workflow = $workflow;
         $this->queryParameters = $queryParameters;
         $this->accept = $accept;
     }
@@ -41,7 +41,7 @@ class ApiWorkflowJobPipelinesStepsGetSubresourceWorkflowJobPipelineSubresource e
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/runtime/workflows/workflow-job-pipelines/{id}/steps');
+        return str_replace(['{workflow}'], [$this->workflow], '/runtime/workflow-job-pipelines/{workflow}/steps');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
@@ -70,9 +70,7 @@ class ApiWorkflowJobPipelinesStepsGetSubresourceWorkflowJobPipelineSubresource e
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\RuntimeWorkflowsWorkflowJobPipelinesIdStepsGetLdjsonResponse200|\Gyroscops\Api\Model\PipelineStep[]
+     * @return \Gyroscops\Api\Model\RuntimeWorkflowJobPipelinesWorkflowStepsGetLdjsonResponse200|\Gyroscops\Api\Model\WorkflowJobPipelineStepStepRead[]
      *
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
@@ -82,10 +80,10 @@ class ApiWorkflowJobPipelinesStepsGetSubresourceWorkflowJobPipelineSubresource e
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\RuntimeWorkflowsWorkflowJobPipelinesIdStepsGetLdjsonResponse200', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\RuntimeWorkflowJobPipelinesWorkflowStepsGetLdjsonResponse200', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\PipelineStep[]', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\WorkflowJobPipelineStepStepRead[]', 'json');
             }
         }
         throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
@@ -93,6 +91,6 @@ class ApiWorkflowJobPipelinesStepsGetSubresourceWorkflowJobPipelineSubresource e
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

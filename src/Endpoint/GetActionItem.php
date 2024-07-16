@@ -53,9 +53,7 @@ class GetActionItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implement
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\ActionJsonldRead|\Gyroscops\Api\Model\ActionRead
+     * @return \Gyroscops\Api\Model\ActionJsonldActionRead|\Gyroscops\Api\Model\ActionActionRead
      *
      * @throws \Gyroscops\Api\Exception\GetActionItemNotFoundException
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
@@ -66,10 +64,10 @@ class GetActionItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implement
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ActionJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ActionJsonldActionRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ActionRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ActionActionRead', 'json');
             }
         }
         if (404 === $status) {
@@ -80,6 +78,6 @@ class GetActionItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implement
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

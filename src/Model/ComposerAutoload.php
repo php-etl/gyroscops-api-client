@@ -30,7 +30,7 @@ class ComposerAutoload extends \ArrayObject
      */
     protected $namespace;
     /**
-     * @var string[]|null
+     * @var list<string>|null
      */
     protected $paths;
 
@@ -61,7 +61,7 @@ class ComposerAutoload extends \ArrayObject
     }
 
     /**
-     * @return string[]|null
+     * @return list<string>|null
      */
     public function getPaths(): ?array
     {
@@ -69,7 +69,7 @@ class ComposerAutoload extends \ArrayObject
     }
 
     /**
-     * @param string[]|null $paths
+     * @param list<string>|null $paths
      */
     public function setPaths(?array $paths): self
     {

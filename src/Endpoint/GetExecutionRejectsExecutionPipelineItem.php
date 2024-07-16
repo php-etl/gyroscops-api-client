@@ -56,9 +56,7 @@ class GetExecutionRejectsExecutionPipelineItem extends \Gyroscops\Api\Runtime\Cl
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\ExecutionPipelineJsonld|\Gyroscops\Api\Model\ExecutionPipeline
+     * @return \Gyroscops\Api\Model\ExecutionPipelineJsonldExecutionPipelineRead|\Gyroscops\Api\Model\ExecutionPipelineExecutionPipelineRead
      *
      * @throws \Gyroscops\Api\Exception\GetExecutionRejectsExecutionPipelineItemNotFoundException
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
@@ -69,10 +67,10 @@ class GetExecutionRejectsExecutionPipelineItem extends \Gyroscops\Api\Runtime\Cl
         $body = (string) $response->getBody();
         if (202 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ExecutionPipelineJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ExecutionPipelineJsonldExecutionPipelineRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ExecutionPipeline', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ExecutionPipelineExecutionPipelineRead', 'json');
             }
         }
         if (404 === $status) {
@@ -83,6 +81,6 @@ class GetExecutionRejectsExecutionPipelineItem extends \Gyroscops\Api\Runtime\Cl
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

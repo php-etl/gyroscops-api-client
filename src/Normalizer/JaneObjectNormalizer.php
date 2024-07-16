@@ -12,6 +12,7 @@ namespace Gyroscops\Api\Normalizer;
 
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
 use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,59 +20,2339 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-    use ValidatorTrait;
-    protected $normalizers = ['Gyroscops\\Api\\Model\\AbstractCloudEngine' => 'Gyroscops\\Api\\Normalizer\\AbstractCloudEngineNormalizer', 'Gyroscops\\Api\\Model\\AbstractCloudEngineJsonld' => 'Gyroscops\\Api\\Normalizer\\AbstractCloudEngineJsonldNormalizer', 'Gyroscops\\Api\\Model\\AbstractPipeline' => 'Gyroscops\\Api\\Normalizer\\AbstractPipelineNormalizer', 'Gyroscops\\Api\\Model\\AbstractPipelineJsonld' => 'Gyroscops\\Api\\Normalizer\\AbstractPipelineJsonldNormalizer', 'Gyroscops\\Api\\Model\\Action' => 'Gyroscops\\Api\\Normalizer\\ActionNormalizer', 'Gyroscops\\Api\\Model\\ActionRead' => 'Gyroscops\\Api\\Normalizer\\ActionReadNormalizer', 'Gyroscops\\Api\\Model\\ActionJsonld' => 'Gyroscops\\Api\\Normalizer\\ActionJsonldNormalizer', 'Gyroscops\\Api\\Model\\ActionJsonldRead' => 'Gyroscops\\Api\\Normalizer\\ActionJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\AkeneoInstance' => 'Gyroscops\\Api\\Normalizer\\AkeneoInstanceNormalizer', 'Gyroscops\\Api\\Model\\AkeneoInstanceAkeneoInstanceInput' => 'Gyroscops\\Api\\Normalizer\\AkeneoInstanceAkeneoInstanceInputNormalizer', 'Gyroscops\\Api\\Model\\AkeneoInstanceAkeneoInstanceInputJsonld' => 'Gyroscops\\Api\\Normalizer\\AkeneoInstanceAkeneoInstanceInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\AkeneoInstanceJsonld' => 'Gyroscops\\Api\\Normalizer\\AkeneoInstanceJsonldNormalizer', 'Gyroscops\\Api\\Model\\AkeneoLinkedAccount' => 'Gyroscops\\Api\\Normalizer\\AkeneoLinkedAccountNormalizer', 'Gyroscops\\Api\\Model\\AkeneoLinkedAccountAkeneoLinkedAccountsInput' => 'Gyroscops\\Api\\Normalizer\\AkeneoLinkedAccountAkeneoLinkedAccountsInputNormalizer', 'Gyroscops\\Api\\Model\\AkeneoLinkedAccountAkeneoLinkedAccountsInputJsonld' => 'Gyroscops\\Api\\Normalizer\\AkeneoLinkedAccountAkeneoLinkedAccountsInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\AkeneoLinkedAccountJsonld' => 'Gyroscops\\Api\\Normalizer\\AkeneoLinkedAccountJsonldNormalizer', 'Gyroscops\\Api\\Model\\AkeneoOauthTokenRead' => 'Gyroscops\\Api\\Normalizer\\AkeneoOauthTokenReadNormalizer', 'Gyroscops\\Api\\Model\\AkeneoOauthTokenOauthStateInput' => 'Gyroscops\\Api\\Normalizer\\AkeneoOauthTokenOauthStateInputNormalizer', 'Gyroscops\\Api\\Model\\AkeneoOauthTokenOauthStateInputJsonld' => 'Gyroscops\\Api\\Normalizer\\AkeneoOauthTokenOauthStateInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\AkeneoOauthTokenOauthStateOutputJsonldRead' => 'Gyroscops\\Api\\Normalizer\\AkeneoOauthTokenOauthStateOutputJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\AkeneoOauthTokenOauthTokenInput' => 'Gyroscops\\Api\\Normalizer\\AkeneoOauthTokenOauthTokenInputNormalizer', 'Gyroscops\\Api\\Model\\AkeneoOauthTokenOauthTokenInputJsonld' => 'Gyroscops\\Api\\Normalizer\\AkeneoOauthTokenOauthTokenInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\AkeneoOauthTokenOauthTokenOutputJsonldRead' => 'Gyroscops\\Api\\Normalizer\\AkeneoOauthTokenOauthTokenOutputJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\AkeneoOauthTokenJsonldRead' => 'Gyroscops\\Api\\Normalizer\\AkeneoOauthTokenJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\BigDecimal' => 'Gyroscops\\Api\\Normalizer\\BigDecimalNormalizer', 'Gyroscops\\Api\\Model\\BigDecimalJsonld' => 'Gyroscops\\Api\\Normalizer\\BigDecimalJsonldNormalizer', 'Gyroscops\\Api\\Model\\BigInteger' => 'Gyroscops\\Api\\Normalizer\\BigIntegerNormalizer', 'Gyroscops\\Api\\Model\\BigIntegerJsonld' => 'Gyroscops\\Api\\Normalizer\\BigIntegerJsonldNormalizer', 'Gyroscops\\Api\\Model\\BigNumber' => 'Gyroscops\\Api\\Normalizer\\BigNumberNormalizer', 'Gyroscops\\Api\\Model\\BigNumberJsonld' => 'Gyroscops\\Api\\Normalizer\\BigNumberJsonldNormalizer', 'Gyroscops\\Api\\Model\\Buyable' => 'Gyroscops\\Api\\Normalizer\\BuyableNormalizer', 'Gyroscops\\Api\\Model\\BuyableJsonld' => 'Gyroscops\\Api\\Normalizer\\BuyableJsonldNormalizer', 'Gyroscops\\Api\\Model\\ColorJsonldRead' => 'Gyroscops\\Api\\Normalizer\\ColorJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\Compilation' => 'Gyroscops\\Api\\Normalizer\\CompilationNormalizer', 'Gyroscops\\Api\\Model\\CompilationJsonld' => 'Gyroscops\\Api\\Normalizer\\CompilationJsonldNormalizer', 'Gyroscops\\Api\\Model\\Composer' => 'Gyroscops\\Api\\Normalizer\\ComposerNormalizer', 'Gyroscops\\Api\\Model\\ComposerJsonld' => 'Gyroscops\\Api\\Normalizer\\ComposerJsonldNormalizer', 'Gyroscops\\Api\\Model\\ComposerAuthentication' => 'Gyroscops\\Api\\Normalizer\\ComposerAuthenticationNormalizer', 'Gyroscops\\Api\\Model\\ComposerAuthenticationJsonld' => 'Gyroscops\\Api\\Normalizer\\ComposerAuthenticationJsonldNormalizer', 'Gyroscops\\Api\\Model\\ComposerAutoload' => 'Gyroscops\\Api\\Normalizer\\ComposerAutoloadNormalizer', 'Gyroscops\\Api\\Model\\ComposerAutoloadJsonld' => 'Gyroscops\\Api\\Normalizer\\ComposerAutoloadJsonldNormalizer', 'Gyroscops\\Api\\Model\\ComposerRepository' => 'Gyroscops\\Api\\Normalizer\\ComposerRepositoryNormalizer', 'Gyroscops\\Api\\Model\\ComposerRepositoryJsonld' => 'Gyroscops\\Api\\Normalizer\\ComposerRepositoryJsonldNormalizer', 'Gyroscops\\Api\\Model\\Configuration' => 'Gyroscops\\Api\\Normalizer\\ConfigurationNormalizer', 'Gyroscops\\Api\\Model\\ConfigurationEdit' => 'Gyroscops\\Api\\Normalizer\\ConfigurationEditNormalizer', 'Gyroscops\\Api\\Model\\ConfigurationRead' => 'Gyroscops\\Api\\Normalizer\\ConfigurationReadNormalizer', 'Gyroscops\\Api\\Model\\ConfigurationChangeConfigurationValueInput' => 'Gyroscops\\Api\\Normalizer\\ConfigurationChangeConfigurationValueInputNormalizer', 'Gyroscops\\Api\\Model\\ConfigurationChangeConfigurationValueInputJsonld' => 'Gyroscops\\Api\\Normalizer\\ConfigurationChangeConfigurationValueInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\ConfigurationCreateConfigurationInput' => 'Gyroscops\\Api\\Normalizer\\ConfigurationCreateConfigurationInputNormalizer', 'Gyroscops\\Api\\Model\\ConfigurationCreateConfigurationInputJsonld' => 'Gyroscops\\Api\\Normalizer\\ConfigurationCreateConfigurationInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\ConfigurationRemoveConfigurationValueInput' => 'Gyroscops\\Api\\Normalizer\\ConfigurationRemoveConfigurationValueInputNormalizer', 'Gyroscops\\Api\\Model\\ConfigurationRemoveConfigurationValueInputJsonld' => 'Gyroscops\\Api\\Normalizer\\ConfigurationRemoveConfigurationValueInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\ConfigurationJsonld' => 'Gyroscops\\Api\\Normalizer\\ConfigurationJsonldNormalizer', 'Gyroscops\\Api\\Model\\ConfigurationJsonldEdit' => 'Gyroscops\\Api\\Normalizer\\ConfigurationJsonldEditNormalizer', 'Gyroscops\\Api\\Model\\ConfigurationJsonldRead' => 'Gyroscops\\Api\\Normalizer\\ConfigurationJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\Context' => 'Gyroscops\\Api\\Normalizer\\ContextNormalizer', 'Gyroscops\\Api\\Model\\ContextJsonld' => 'Gyroscops\\Api\\Normalizer\\ContextJsonldNormalizer', 'Gyroscops\\Api\\Model\\CreateSecretInput' => 'Gyroscops\\Api\\Normalizer\\CreateSecretInputNormalizer', 'Gyroscops\\Api\\Model\\CreateSecretInputJsonld' => 'Gyroscops\\Api\\Normalizer\\CreateSecretInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\Currency' => 'Gyroscops\\Api\\Normalizer\\CurrencyNormalizer', 'Gyroscops\\Api\\Model\\CurrencyJsonld' => 'Gyroscops\\Api\\Normalizer\\CurrencyJsonldNormalizer', 'Gyroscops\\Api\\Model\\EnvironmentRead' => 'Gyroscops\\Api\\Normalizer\\EnvironmentReadNormalizer', 'Gyroscops\\Api\\Model\\EnvironmentWrite' => 'Gyroscops\\Api\\Normalizer\\EnvironmentWriteNormalizer', 'Gyroscops\\Api\\Model\\EnvironmentAddMultipleVariableFromConfigurationInput' => 'Gyroscops\\Api\\Normalizer\\EnvironmentAddMultipleVariableFromConfigurationInputNormalizer', 'Gyroscops\\Api\\Model\\EnvironmentAddMultipleVariableFromConfigurationInputJsonld' => 'Gyroscops\\Api\\Normalizer\\EnvironmentAddMultipleVariableFromConfigurationInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\EnvironmentAddMultipleVariableFromConstantInput' => 'Gyroscops\\Api\\Normalizer\\EnvironmentAddMultipleVariableFromConstantInputNormalizer', 'Gyroscops\\Api\\Model\\EnvironmentAddMultipleVariableFromConstantInputJsonld' => 'Gyroscops\\Api\\Normalizer\\EnvironmentAddMultipleVariableFromConstantInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\EnvironmentAddMultipleVariableFromSecretInput' => 'Gyroscops\\Api\\Normalizer\\EnvironmentAddMultipleVariableFromSecretInputNormalizer', 'Gyroscops\\Api\\Model\\EnvironmentAddMultipleVariableFromSecretInputJsonld' => 'Gyroscops\\Api\\Normalizer\\EnvironmentAddMultipleVariableFromSecretInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\EnvironmentCreateEnvironmentInput' => 'Gyroscops\\Api\\Normalizer\\EnvironmentCreateEnvironmentInputNormalizer', 'Gyroscops\\Api\\Model\\EnvironmentCreateEnvironmentInputJsonld' => 'Gyroscops\\Api\\Normalizer\\EnvironmentCreateEnvironmentInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\EnvironmentJsonldRead' => 'Gyroscops\\Api\\Normalizer\\EnvironmentJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\EnvironmentJsonldWrite' => 'Gyroscops\\Api\\Normalizer\\EnvironmentJsonldWriteNormalizer', 'Gyroscops\\Api\\Model\\ExecutionRead' => 'Gyroscops\\Api\\Normalizer\\ExecutionReadNormalizer', 'Gyroscops\\Api\\Model\\ExecutionDeclarePipelineExecutionCommandJsonldRead' => 'Gyroscops\\Api\\Normalizer\\ExecutionDeclarePipelineExecutionCommandJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\ExecutionDeclarePipelineExecutionCommandInput' => 'Gyroscops\\Api\\Normalizer\\ExecutionDeclarePipelineExecutionCommandInputNormalizer', 'Gyroscops\\Api\\Model\\ExecutionDeclarePipelineExecutionCommandInputJsonld' => 'Gyroscops\\Api\\Normalizer\\ExecutionDeclarePipelineExecutionCommandInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\ExecutionInterruptPipelineExecutionCommandJsonldRead' => 'Gyroscops\\Api\\Normalizer\\ExecutionInterruptPipelineExecutionCommandJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\ExecutionInterruptPipelineExecutionCommandInputJsonld' => 'Gyroscops\\Api\\Normalizer\\ExecutionInterruptPipelineExecutionCommandInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\ExecutionResumePipelineExecutionCommandJsonldRead' => 'Gyroscops\\Api\\Normalizer\\ExecutionResumePipelineExecutionCommandJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\ExecutionResumePipelineExecutionCommandInputJsonld' => 'Gyroscops\\Api\\Normalizer\\ExecutionResumePipelineExecutionCommandInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\ExecutionTerminatePipelineExecutionCommandJsonldRead' => 'Gyroscops\\Api\\Normalizer\\ExecutionTerminatePipelineExecutionCommandJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\ExecutionTerminatePipelineExecutionCommandInput' => 'Gyroscops\\Api\\Normalizer\\ExecutionTerminatePipelineExecutionCommandInputNormalizer', 'Gyroscops\\Api\\Model\\ExecutionTerminatePipelineExecutionCommandInputJsonld' => 'Gyroscops\\Api\\Normalizer\\ExecutionTerminatePipelineExecutionCommandInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\ExecutionJsonldRead' => 'Gyroscops\\Api\\Normalizer\\ExecutionJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\ExecutionAction' => 'Gyroscops\\Api\\Normalizer\\ExecutionActionNormalizer', 'Gyroscops\\Api\\Model\\ExecutionActionJsonld' => 'Gyroscops\\Api\\Normalizer\\ExecutionActionJsonldNormalizer', 'Gyroscops\\Api\\Model\\ExecutionId' => 'Gyroscops\\Api\\Normalizer\\ExecutionIdNormalizer', 'Gyroscops\\Api\\Model\\ExecutionIdJsonld' => 'Gyroscops\\Api\\Normalizer\\ExecutionIdJsonldNormalizer', 'Gyroscops\\Api\\Model\\ExecutionPipeline' => 'Gyroscops\\Api\\Normalizer\\ExecutionPipelineNormalizer', 'Gyroscops\\Api\\Model\\ExecutionPipelineJsonld' => 'Gyroscops\\Api\\Normalizer\\ExecutionPipelineJsonldNormalizer', 'Gyroscops\\Api\\Model\\ExecutionPipelineJob' => 'Gyroscops\\Api\\Normalizer\\ExecutionPipelineJobNormalizer', 'Gyroscops\\Api\\Model\\ExecutionPipelineJobJsonld' => 'Gyroscops\\Api\\Normalizer\\ExecutionPipelineJobJsonldNormalizer', 'Gyroscops\\Api\\Model\\ExecutionPipelineStep' => 'Gyroscops\\Api\\Normalizer\\ExecutionPipelineStepNormalizer', 'Gyroscops\\Api\\Model\\ExecutionPipelineStepJsonld' => 'Gyroscops\\Api\\Normalizer\\ExecutionPipelineStepJsonldNormalizer', 'Gyroscops\\Api\\Model\\ExecutionWorkflow' => 'Gyroscops\\Api\\Normalizer\\ExecutionWorkflowNormalizer', 'Gyroscops\\Api\\Model\\ExecutionWorkflowInterruptWorkflowExecutionCommand' => 'Gyroscops\\Api\\Normalizer\\ExecutionWorkflowInterruptWorkflowExecutionCommandNormalizer', 'Gyroscops\\Api\\Model\\ExecutionWorkflowInterruptWorkflowExecutionCommandJsonld' => 'Gyroscops\\Api\\Normalizer\\ExecutionWorkflowInterruptWorkflowExecutionCommandJsonldNormalizer', 'Gyroscops\\Api\\Model\\ExecutionWorkflowInterruptWorkflowExecutionCommandInputJsonld' => 'Gyroscops\\Api\\Normalizer\\ExecutionWorkflowInterruptWorkflowExecutionCommandInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\ExecutionWorkflowResumeWorkflowExecutionCommand' => 'Gyroscops\\Api\\Normalizer\\ExecutionWorkflowResumeWorkflowExecutionCommandNormalizer', 'Gyroscops\\Api\\Model\\ExecutionWorkflowResumeWorkflowExecutionCommandJsonld' => 'Gyroscops\\Api\\Normalizer\\ExecutionWorkflowResumeWorkflowExecutionCommandJsonldNormalizer', 'Gyroscops\\Api\\Model\\ExecutionWorkflowResumeWorkflowExecutionCommandInputJsonld' => 'Gyroscops\\Api\\Normalizer\\ExecutionWorkflowResumeWorkflowExecutionCommandInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\ExecutionWorkflowTerminateWorkflowExecutionCommand' => 'Gyroscops\\Api\\Normalizer\\ExecutionWorkflowTerminateWorkflowExecutionCommandNormalizer', 'Gyroscops\\Api\\Model\\ExecutionWorkflowTerminateWorkflowExecutionCommandJsonld' => 'Gyroscops\\Api\\Normalizer\\ExecutionWorkflowTerminateWorkflowExecutionCommandJsonldNormalizer', 'Gyroscops\\Api\\Model\\ExecutionWorkflowTerminateWorkflowExecutionCommandInput' => 'Gyroscops\\Api\\Normalizer\\ExecutionWorkflowTerminateWorkflowExecutionCommandInputNormalizer', 'Gyroscops\\Api\\Model\\ExecutionWorkflowTerminateWorkflowExecutionCommandInputJsonld' => 'Gyroscops\\Api\\Normalizer\\ExecutionWorkflowTerminateWorkflowExecutionCommandInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\ExecutionWorkflowJsonld' => 'Gyroscops\\Api\\Normalizer\\ExecutionWorkflowJsonldNormalizer', 'Gyroscops\\Api\\Model\\ExecutionWorkflowJob' => 'Gyroscops\\Api\\Normalizer\\ExecutionWorkflowJobNormalizer', 'Gyroscops\\Api\\Model\\ExecutionWorkflowJobJsonld' => 'Gyroscops\\Api\\Normalizer\\ExecutionWorkflowJobJsonldNormalizer', 'Gyroscops\\Api\\Model\\ExecutionWorkflowJobAction' => 'Gyroscops\\Api\\Normalizer\\ExecutionWorkflowJobActionNormalizer', 'Gyroscops\\Api\\Model\\ExecutionWorkflowJobActionJsonld' => 'Gyroscops\\Api\\Normalizer\\ExecutionWorkflowJobActionJsonldNormalizer', 'Gyroscops\\Api\\Model\\Job' => 'Gyroscops\\Api\\Normalizer\\JobNormalizer', 'Gyroscops\\Api\\Model\\JobJsonld' => 'Gyroscops\\Api\\Normalizer\\JobJsonldNormalizer', 'Gyroscops\\Api\\Model\\Money' => 'Gyroscops\\Api\\Normalizer\\MoneyNormalizer', 'Gyroscops\\Api\\Model\\MoneyJsonld' => 'Gyroscops\\Api\\Normalizer\\MoneyJsonldNormalizer', 'Gyroscops\\Api\\Model\\OnPremiseRequestOnPremiseRequestRead' => 'Gyroscops\\Api\\Normalizer\\OnPremiseRequestOnPremiseRequestReadNormalizer', 'Gyroscops\\Api\\Model\\OnPremiseRequestOnPremiseRequestWrite' => 'Gyroscops\\Api\\Normalizer\\OnPremiseRequestOnPremiseRequestWriteNormalizer', 'Gyroscops\\Api\\Model\\OnPremiseRequestJsonldOnPremiseRequestRead' => 'Gyroscops\\Api\\Normalizer\\OnPremiseRequestJsonldOnPremiseRequestReadNormalizer', 'Gyroscops\\Api\\Model\\OnPremiseRequestJsonldOnPremiseRequestWrite' => 'Gyroscops\\Api\\Normalizer\\OnPremiseRequestJsonldOnPremiseRequestWriteNormalizer', 'Gyroscops\\Api\\Model\\OpaqueInterfaceJsonld' => 'Gyroscops\\Api\\Normalizer\\OpaqueInterfaceJsonldNormalizer', 'Gyroscops\\Api\\Model\\Option' => 'Gyroscops\\Api\\Normalizer\\OptionNormalizer', 'Gyroscops\\Api\\Model\\OptionJsonld' => 'Gyroscops\\Api\\Normalizer\\OptionJsonldNormalizer', 'Gyroscops\\Api\\Model\\Organization' => 'Gyroscops\\Api\\Normalizer\\OrganizationNormalizer', 'Gyroscops\\Api\\Model\\OrganizationAddCollaborators' => 'Gyroscops\\Api\\Normalizer\\OrganizationAddCollaboratorsNormalizer', 'Gyroscops\\Api\\Model\\OrganizationJsonld' => 'Gyroscops\\Api\\Normalizer\\OrganizationJsonldNormalizer', 'Gyroscops\\Api\\Model\\OrganizationJsonldAddCollaborators' => 'Gyroscops\\Api\\Normalizer\\OrganizationJsonldAddCollaboratorsNormalizer', 'Gyroscops\\Api\\Model\\Pipeline' => 'Gyroscops\\Api\\Normalizer\\PipelineNormalizer', 'Gyroscops\\Api\\Model\\PipelineRead' => 'Gyroscops\\Api\\Normalizer\\PipelineReadNormalizer', 'Gyroscops\\Api\\Model\\PipelineAddAfterPipelineStepCommandJsonldRead' => 'Gyroscops\\Api\\Normalizer\\PipelineAddAfterPipelineStepCommandJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\PipelineAddAfterPipelineStepCommandInput' => 'Gyroscops\\Api\\Normalizer\\PipelineAddAfterPipelineStepCommandInputNormalizer', 'Gyroscops\\Api\\Model\\PipelineAddAfterPipelineStepCommandInputJsonld' => 'Gyroscops\\Api\\Normalizer\\PipelineAddAfterPipelineStepCommandInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\PipelineAddBeforePipelineStepCommandJsonldRead' => 'Gyroscops\\Api\\Normalizer\\PipelineAddBeforePipelineStepCommandJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\PipelineAddBeforePipelineStepCommandInput' => 'Gyroscops\\Api\\Normalizer\\PipelineAddBeforePipelineStepCommandInputNormalizer', 'Gyroscops\\Api\\Model\\PipelineAddBeforePipelineStepCommandInputJsonld' => 'Gyroscops\\Api\\Normalizer\\PipelineAddBeforePipelineStepCommandInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\PipelineAddPipelineComposerAuthCommandJsonldRead' => 'Gyroscops\\Api\\Normalizer\\PipelineAddPipelineComposerAuthCommandJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\PipelineAddPipelineComposerAuthCommandInput' => 'Gyroscops\\Api\\Normalizer\\PipelineAddPipelineComposerAuthCommandInputNormalizer', 'Gyroscops\\Api\\Model\\PipelineAddPipelineComposerAuthCommandInputJsonld' => 'Gyroscops\\Api\\Normalizer\\PipelineAddPipelineComposerAuthCommandInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\PipelineAddPipelineComposerPSR4AutoloadCommandJsonldRead' => 'Gyroscops\\Api\\Normalizer\\PipelineAddPipelineComposerPSR4AutoloadCommandJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\PipelineAddPipelineComposerPSR4AutoloadCommandInput' => 'Gyroscops\\Api\\Normalizer\\PipelineAddPipelineComposerPSR4AutoloadCommandInputNormalizer', 'Gyroscops\\Api\\Model\\PipelineAddPipelineComposerPSR4AutoloadCommandInputJsonld' => 'Gyroscops\\Api\\Normalizer\\PipelineAddPipelineComposerPSR4AutoloadCommandInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\PipelineAddPipelineComposerPackageCommandJsonldRead' => 'Gyroscops\\Api\\Normalizer\\PipelineAddPipelineComposerPackageCommandJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\PipelineAddPipelineComposerPackageCommandInput' => 'Gyroscops\\Api\\Normalizer\\PipelineAddPipelineComposerPackageCommandInputNormalizer', 'Gyroscops\\Api\\Model\\PipelineAddPipelineComposerPackageCommandInputJsonld' => 'Gyroscops\\Api\\Normalizer\\PipelineAddPipelineComposerPackageCommandInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\PipelineAddPipelineComposerRepositoryCommandJsonldRead' => 'Gyroscops\\Api\\Normalizer\\PipelineAddPipelineComposerRepositoryCommandJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\PipelineAddPipelineComposerRepositoryCommandInput' => 'Gyroscops\\Api\\Normalizer\\PipelineAddPipelineComposerRepositoryCommandInputNormalizer', 'Gyroscops\\Api\\Model\\PipelineAddPipelineComposerRepositoryCommandInputJsonld' => 'Gyroscops\\Api\\Normalizer\\PipelineAddPipelineComposerRepositoryCommandInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\PipelineAddPipelineStepProbeCommandJsonldRead' => 'Gyroscops\\Api\\Normalizer\\PipelineAddPipelineStepProbeCommandJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\PipelineAddPipelineStepProbeCommandInput' => 'Gyroscops\\Api\\Normalizer\\PipelineAddPipelineStepProbeCommandInputNormalizer', 'Gyroscops\\Api\\Model\\PipelineAddPipelineStepProbeCommandInputJsonld' => 'Gyroscops\\Api\\Normalizer\\PipelineAddPipelineStepProbeCommandInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\PipelineAppendPipelineStepCommandJsonldRead' => 'Gyroscops\\Api\\Normalizer\\PipelineAppendPipelineStepCommandJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\PipelineAppendPipelineStepCommandInput' => 'Gyroscops\\Api\\Normalizer\\PipelineAppendPipelineStepCommandInputNormalizer', 'Gyroscops\\Api\\Model\\PipelineAppendPipelineStepCommandInputJsonld' => 'Gyroscops\\Api\\Normalizer\\PipelineAppendPipelineStepCommandInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\PipelineCompilePipelineCommandJsonldRead' => 'Gyroscops\\Api\\Normalizer\\PipelineCompilePipelineCommandJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\PipelineCompilePipelineCommandInputJsonld' => 'Gyroscops\\Api\\Normalizer\\PipelineCompilePipelineCommandInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\PipelineDeclarePipelineCommandJsonldRead' => 'Gyroscops\\Api\\Normalizer\\PipelineDeclarePipelineCommandJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\PipelineDeclarePipelineCommandInput' => 'Gyroscops\\Api\\Normalizer\\PipelineDeclarePipelineCommandInputNormalizer', 'Gyroscops\\Api\\Model\\PipelineDeclarePipelineCommandInputJsonld' => 'Gyroscops\\Api\\Normalizer\\PipelineDeclarePipelineCommandInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\PipelineDeclarePipelineScheduleImmediateCommandJsonldRead' => 'Gyroscops\\Api\\Normalizer\\PipelineDeclarePipelineScheduleImmediateCommandJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\PipelineDeclarePipelineScheduleImmediateCommandInput' => 'Gyroscops\\Api\\Normalizer\\PipelineDeclarePipelineScheduleImmediateCommandInputNormalizer', 'Gyroscops\\Api\\Model\\PipelineDeclarePipelineScheduleImmediateCommandInputJsonld' => 'Gyroscops\\Api\\Normalizer\\PipelineDeclarePipelineScheduleImmediateCommandInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\PipelineDeclarePipelineScheduleOnceCommandJsonldRead' => 'Gyroscops\\Api\\Normalizer\\PipelineDeclarePipelineScheduleOnceCommandJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\PipelineDeclarePipelineScheduleOnceCommandInput' => 'Gyroscops\\Api\\Normalizer\\PipelineDeclarePipelineScheduleOnceCommandInputNormalizer', 'Gyroscops\\Api\\Model\\PipelineDeclarePipelineScheduleOnceCommandInputJsonld' => 'Gyroscops\\Api\\Normalizer\\PipelineDeclarePipelineScheduleOnceCommandInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\PipelineMoveAfterPipelineStepCommandJsonldRead' => 'Gyroscops\\Api\\Normalizer\\PipelineMoveAfterPipelineStepCommandJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\PipelineMoveAfterPipelineStepCommandInput' => 'Gyroscops\\Api\\Normalizer\\PipelineMoveAfterPipelineStepCommandInputNormalizer', 'Gyroscops\\Api\\Model\\PipelineMoveAfterPipelineStepCommandInputJsonld' => 'Gyroscops\\Api\\Normalizer\\PipelineMoveAfterPipelineStepCommandInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\PipelineMoveBeforePipelineStepCommandJsonldRead' => 'Gyroscops\\Api\\Normalizer\\PipelineMoveBeforePipelineStepCommandJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\PipelineMoveBeforePipelineStepCommandInput' => 'Gyroscops\\Api\\Normalizer\\PipelineMoveBeforePipelineStepCommandInputNormalizer', 'Gyroscops\\Api\\Model\\PipelineMoveBeforePipelineStepCommandInputJsonld' => 'Gyroscops\\Api\\Normalizer\\PipelineMoveBeforePipelineStepCommandInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\PipelineRemovePipelineComposerAuthCommandJsonldRead' => 'Gyroscops\\Api\\Normalizer\\PipelineRemovePipelineComposerAuthCommandJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\PipelineRemovePipelineComposerAuthCommandInput' => 'Gyroscops\\Api\\Normalizer\\PipelineRemovePipelineComposerAuthCommandInputNormalizer', 'Gyroscops\\Api\\Model\\PipelineRemovePipelineComposerAuthCommandInputJsonld' => 'Gyroscops\\Api\\Normalizer\\PipelineRemovePipelineComposerAuthCommandInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\PipelineRemovePipelineComposerPSR4AutoloadCommandJsonldRead' => 'Gyroscops\\Api\\Normalizer\\PipelineRemovePipelineComposerPSR4AutoloadCommandJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\PipelineRemovePipelineComposerPSR4AutoloadCommandInput' => 'Gyroscops\\Api\\Normalizer\\PipelineRemovePipelineComposerPSR4AutoloadCommandInputNormalizer', 'Gyroscops\\Api\\Model\\PipelineRemovePipelineComposerPSR4AutoloadCommandInputJsonld' => 'Gyroscops\\Api\\Normalizer\\PipelineRemovePipelineComposerPSR4AutoloadCommandInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\PipelineRemovePipelineComposerPackageCommandJsonldRead' => 'Gyroscops\\Api\\Normalizer\\PipelineRemovePipelineComposerPackageCommandJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\PipelineRemovePipelineComposerPackageCommandInput' => 'Gyroscops\\Api\\Normalizer\\PipelineRemovePipelineComposerPackageCommandInputNormalizer', 'Gyroscops\\Api\\Model\\PipelineRemovePipelineComposerPackageCommandInputJsonld' => 'Gyroscops\\Api\\Normalizer\\PipelineRemovePipelineComposerPackageCommandInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\PipelineRemovePipelineComposerRepositoryCommandJsonldRead' => 'Gyroscops\\Api\\Normalizer\\PipelineRemovePipelineComposerRepositoryCommandJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\PipelineRemovePipelineComposerRepositoryCommandInput' => 'Gyroscops\\Api\\Normalizer\\PipelineRemovePipelineComposerRepositoryCommandInputNormalizer', 'Gyroscops\\Api\\Model\\PipelineRemovePipelineComposerRepositoryCommandInputJsonld' => 'Gyroscops\\Api\\Normalizer\\PipelineRemovePipelineComposerRepositoryCommandInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\PipelineRemovePipelineStepProbeCommandJsonldRead' => 'Gyroscops\\Api\\Normalizer\\PipelineRemovePipelineStepProbeCommandJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\PipelineReorderPipelineStepsCommandJsonldRead' => 'Gyroscops\\Api\\Normalizer\\PipelineReorderPipelineStepsCommandJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\PipelineReorderPipelineStepsCommandInput' => 'Gyroscops\\Api\\Normalizer\\PipelineReorderPipelineStepsCommandInputNormalizer', 'Gyroscops\\Api\\Model\\PipelineReorderPipelineStepsCommandInputJsonld' => 'Gyroscops\\Api\\Normalizer\\PipelineReorderPipelineStepsCommandInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\PipelineReplacePipelineStepCommandJsonldRead' => 'Gyroscops\\Api\\Normalizer\\PipelineReplacePipelineStepCommandJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\PipelineReplacePipelineStepCommandInput' => 'Gyroscops\\Api\\Normalizer\\PipelineReplacePipelineStepCommandInputNormalizer', 'Gyroscops\\Api\\Model\\PipelineReplacePipelineStepCommandInputJsonld' => 'Gyroscops\\Api\\Normalizer\\PipelineReplacePipelineStepCommandInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\PipelineJsonld' => 'Gyroscops\\Api\\Normalizer\\PipelineJsonldNormalizer', 'Gyroscops\\Api\\Model\\PipelineJsonldRead' => 'Gyroscops\\Api\\Normalizer\\PipelineJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\PipelineStep' => 'Gyroscops\\Api\\Normalizer\\PipelineStepNormalizer', 'Gyroscops\\Api\\Model\\PipelineStepRead' => 'Gyroscops\\Api\\Normalizer\\PipelineStepReadNormalizer', 'Gyroscops\\Api\\Model\\PipelineStepJsonld' => 'Gyroscops\\Api\\Normalizer\\PipelineStepJsonldNormalizer', 'Gyroscops\\Api\\Model\\PipelineStepJsonldRead' => 'Gyroscops\\Api\\Normalizer\\PipelineStepJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\PipelineStepProbe' => 'Gyroscops\\Api\\Normalizer\\PipelineStepProbeNormalizer', 'Gyroscops\\Api\\Model\\PipelineStepProbeJsonld' => 'Gyroscops\\Api\\Normalizer\\PipelineStepProbeJsonldNormalizer', 'Gyroscops\\Api\\Model\\Price' => 'Gyroscops\\Api\\Normalizer\\PriceNormalizer', 'Gyroscops\\Api\\Model\\PriceRead' => 'Gyroscops\\Api\\Normalizer\\PriceReadNormalizer', 'Gyroscops\\Api\\Model\\PriceJsonld' => 'Gyroscops\\Api\\Normalizer\\PriceJsonldNormalizer', 'Gyroscops\\Api\\Model\\PriceJsonldRead' => 'Gyroscops\\Api\\Normalizer\\PriceJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\Probe' => 'Gyroscops\\Api\\Normalizer\\ProbeNormalizer', 'Gyroscops\\Api\\Model\\ProbeJsonld' => 'Gyroscops\\Api\\Normalizer\\ProbeJsonldNormalizer', 'Gyroscops\\Api\\Model\\ReferralCodeReferralCodeRead' => 'Gyroscops\\Api\\Normalizer\\ReferralCodeReferralCodeReadNormalizer', 'Gyroscops\\Api\\Model\\ReferralCodeReferralCodeWrite' => 'Gyroscops\\Api\\Normalizer\\ReferralCodeReferralCodeWriteNormalizer', 'Gyroscops\\Api\\Model\\ReferralCodeJsonldReferralCodeRead' => 'Gyroscops\\Api\\Normalizer\\ReferralCodeJsonldReferralCodeReadNormalizer', 'Gyroscops\\Api\\Model\\ReferralCodeJsonldReferralCodeWrite' => 'Gyroscops\\Api\\Normalizer\\ReferralCodeJsonldReferralCodeWriteNormalizer', 'Gyroscops\\Api\\Model\\ReferralRequestReferralRequestRead' => 'Gyroscops\\Api\\Normalizer\\ReferralRequestReferralRequestReadNormalizer', 'Gyroscops\\Api\\Model\\ReferralRequestReferralRequestInput' => 'Gyroscops\\Api\\Normalizer\\ReferralRequestReferralRequestInputNormalizer', 'Gyroscops\\Api\\Model\\ReferralRequestReferralRequestInputJsonld' => 'Gyroscops\\Api\\Normalizer\\ReferralRequestReferralRequestInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\ReferralRequestJsonldReferralRequestRead' => 'Gyroscops\\Api\\Normalizer\\ReferralRequestJsonldReferralRequestReadNormalizer', 'Gyroscops\\Api\\Model\\Region' => 'Gyroscops\\Api\\Normalizer\\RegionNormalizer', 'Gyroscops\\Api\\Model\\RegionJsonld' => 'Gyroscops\\Api\\Normalizer\\RegionJsonldNormalizer', 'Gyroscops\\Api\\Model\\ScheduleJsonld' => 'Gyroscops\\Api\\Normalizer\\ScheduleJsonldNormalizer', 'Gyroscops\\Api\\Model\\Secret' => 'Gyroscops\\Api\\Normalizer\\SecretNormalizer', 'Gyroscops\\Api\\Model\\SecretEdit' => 'Gyroscops\\Api\\Normalizer\\SecretEditNormalizer', 'Gyroscops\\Api\\Model\\SecretRead' => 'Gyroscops\\Api\\Normalizer\\SecretReadNormalizer', 'Gyroscops\\Api\\Model\\SecretChangeSecretValueInput' => 'Gyroscops\\Api\\Normalizer\\SecretChangeSecretValueInputNormalizer', 'Gyroscops\\Api\\Model\\SecretChangeSecretValueInputJsonld' => 'Gyroscops\\Api\\Normalizer\\SecretChangeSecretValueInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\SecretCreateSecretInput' => 'Gyroscops\\Api\\Normalizer\\SecretCreateSecretInputNormalizer', 'Gyroscops\\Api\\Model\\SecretCreateSecretInputJsonld' => 'Gyroscops\\Api\\Normalizer\\SecretCreateSecretInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\SecretRemoveSecretValueInput' => 'Gyroscops\\Api\\Normalizer\\SecretRemoveSecretValueInputNormalizer', 'Gyroscops\\Api\\Model\\SecretRemoveSecretValueInputJsonld' => 'Gyroscops\\Api\\Normalizer\\SecretRemoveSecretValueInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\SecretJsonld' => 'Gyroscops\\Api\\Normalizer\\SecretJsonldNormalizer', 'Gyroscops\\Api\\Model\\SecretJsonldEdit' => 'Gyroscops\\Api\\Normalizer\\SecretJsonldEditNormalizer', 'Gyroscops\\Api\\Model\\SecretJsonldRead' => 'Gyroscops\\Api\\Normalizer\\SecretJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\Step' => 'Gyroscops\\Api\\Normalizer\\StepNormalizer', 'Gyroscops\\Api\\Model\\StepJsonld' => 'Gyroscops\\Api\\Normalizer\\StepJsonldNormalizer', 'Gyroscops\\Api\\Model\\Subscription' => 'Gyroscops\\Api\\Normalizer\\SubscriptionNormalizer', 'Gyroscops\\Api\\Model\\SubscriptionJsonld' => 'Gyroscops\\Api\\Normalizer\\SubscriptionJsonldNormalizer', 'Gyroscops\\Api\\Model\\SubscriptionOfferRead' => 'Gyroscops\\Api\\Normalizer\\SubscriptionOfferReadNormalizer', 'Gyroscops\\Api\\Model\\SubscriptionOfferWrite' => 'Gyroscops\\Api\\Normalizer\\SubscriptionOfferWriteNormalizer', 'Gyroscops\\Api\\Model\\SubscriptionOfferJsonldRead' => 'Gyroscops\\Api\\Normalizer\\SubscriptionOfferJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\SubscriptionOfferJsonldWrite' => 'Gyroscops\\Api\\Normalizer\\SubscriptionOfferJsonldWriteNormalizer', 'Gyroscops\\Api\\Model\\SubscriptionOption' => 'Gyroscops\\Api\\Normalizer\\SubscriptionOptionNormalizer', 'Gyroscops\\Api\\Model\\SubscriptionOptionJsonld' => 'Gyroscops\\Api\\Normalizer\\SubscriptionOptionJsonldNormalizer', 'Gyroscops\\Api\\Model\\SubscriptionType' => 'Gyroscops\\Api\\Normalizer\\SubscriptionTypeNormalizer', 'Gyroscops\\Api\\Model\\SubscriptionTypeJsonld' => 'Gyroscops\\Api\\Normalizer\\SubscriptionTypeJsonldNormalizer', 'Gyroscops\\Api\\Model\\SubscriptionTypeJsonldRead' => 'Gyroscops\\Api\\Normalizer\\SubscriptionTypeJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\TraversableJsonld' => 'Gyroscops\\Api\\Normalizer\\TraversableJsonldNormalizer', 'Gyroscops\\Api\\Model\\User' => 'Gyroscops\\Api\\Normalizer\\UserNormalizer', 'Gyroscops\\Api\\Model\\UserUserChangePasswordInput' => 'Gyroscops\\Api\\Normalizer\\UserUserChangePasswordInputNormalizer', 'Gyroscops\\Api\\Model\\UserJsonld' => 'Gyroscops\\Api\\Normalizer\\UserJsonldNormalizer', 'Gyroscops\\Api\\Model\\UserAuthorization' => 'Gyroscops\\Api\\Normalizer\\UserAuthorizationNormalizer', 'Gyroscops\\Api\\Model\\UserAuthorizationJsonld' => 'Gyroscops\\Api\\Normalizer\\UserAuthorizationJsonldNormalizer', 'Gyroscops\\Api\\Model\\UserId' => 'Gyroscops\\Api\\Normalizer\\UserIdNormalizer', 'Gyroscops\\Api\\Model\\UserIdJsonld' => 'Gyroscops\\Api\\Normalizer\\UserIdJsonldNormalizer', 'Gyroscops\\Api\\Model\\VariableRead' => 'Gyroscops\\Api\\Normalizer\\VariableReadNormalizer', 'Gyroscops\\Api\\Model\\VariableJsonldRead' => 'Gyroscops\\Api\\Normalizer\\VariableJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\VariableFromConfigurationRead' => 'Gyroscops\\Api\\Normalizer\\VariableFromConfigurationReadNormalizer', 'Gyroscops\\Api\\Model\\VariableFromConfigurationJsonldRead' => 'Gyroscops\\Api\\Normalizer\\VariableFromConfigurationJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\VariableFromConfigurationJsonldWrite' => 'Gyroscops\\Api\\Normalizer\\VariableFromConfigurationJsonldWriteNormalizer', 'Gyroscops\\Api\\Model\\VariableFromConfigurationInput' => 'Gyroscops\\Api\\Normalizer\\VariableFromConfigurationInputNormalizer', 'Gyroscops\\Api\\Model\\VariableFromConfigurationInputJsonld' => 'Gyroscops\\Api\\Normalizer\\VariableFromConfigurationInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\VariableFromConstantRead' => 'Gyroscops\\Api\\Normalizer\\VariableFromConstantReadNormalizer', 'Gyroscops\\Api\\Model\\VariableFromConstantJsonldRead' => 'Gyroscops\\Api\\Normalizer\\VariableFromConstantJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\VariableFromConstantJsonldWrite' => 'Gyroscops\\Api\\Normalizer\\VariableFromConstantJsonldWriteNormalizer', 'Gyroscops\\Api\\Model\\VariableFromConstantInput' => 'Gyroscops\\Api\\Normalizer\\VariableFromConstantInputNormalizer', 'Gyroscops\\Api\\Model\\VariableFromConstantInputJsonld' => 'Gyroscops\\Api\\Normalizer\\VariableFromConstantInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\VariableFromSecretRead' => 'Gyroscops\\Api\\Normalizer\\VariableFromSecretReadNormalizer', 'Gyroscops\\Api\\Model\\VariableFromSecretJsonldRead' => 'Gyroscops\\Api\\Normalizer\\VariableFromSecretJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\VariableFromSecretJsonldWrite' => 'Gyroscops\\Api\\Normalizer\\VariableFromSecretJsonldWriteNormalizer', 'Gyroscops\\Api\\Model\\VariableFromSecretInput' => 'Gyroscops\\Api\\Normalizer\\VariableFromSecretInputNormalizer', 'Gyroscops\\Api\\Model\\VariableFromSecretInputJsonld' => 'Gyroscops\\Api\\Normalizer\\VariableFromSecretInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\WorkflowRead' => 'Gyroscops\\Api\\Normalizer\\WorkflowReadNormalizer', 'Gyroscops\\Api\\Model\\WorkflowCompileWorkflowCommandJsonldRead' => 'Gyroscops\\Api\\Normalizer\\WorkflowCompileWorkflowCommandJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\WorkflowCompileWorkflowCommandInputJsonld' => 'Gyroscops\\Api\\Normalizer\\WorkflowCompileWorkflowCommandInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\WorkflowDeclareWorkflowCommandJsonldRead' => 'Gyroscops\\Api\\Normalizer\\WorkflowDeclareWorkflowCommandJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\WorkflowDeclareWorkflowCommandInput' => 'Gyroscops\\Api\\Normalizer\\WorkflowDeclareWorkflowCommandInputNormalizer', 'Gyroscops\\Api\\Model\\WorkflowDeclareWorkflowCommandInputJsonld' => 'Gyroscops\\Api\\Normalizer\\WorkflowDeclareWorkflowCommandInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\WorkflowDeclareWorkflowScheduleCrontabCommandJsonldRead' => 'Gyroscops\\Api\\Normalizer\\WorkflowDeclareWorkflowScheduleCrontabCommandJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\WorkflowDeclareWorkflowScheduleCrontabCommandInput' => 'Gyroscops\\Api\\Normalizer\\WorkflowDeclareWorkflowScheduleCrontabCommandInputNormalizer', 'Gyroscops\\Api\\Model\\WorkflowDeclareWorkflowScheduleCrontabCommandInputJsonld' => 'Gyroscops\\Api\\Normalizer\\WorkflowDeclareWorkflowScheduleCrontabCommandInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\WorkflowDeclareWorkflowScheduleImmediateCommandJsonldRead' => 'Gyroscops\\Api\\Normalizer\\WorkflowDeclareWorkflowScheduleImmediateCommandJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\WorkflowDeclareWorkflowScheduleImmediateCommandInput' => 'Gyroscops\\Api\\Normalizer\\WorkflowDeclareWorkflowScheduleImmediateCommandInputNormalizer', 'Gyroscops\\Api\\Model\\WorkflowDeclareWorkflowScheduleImmediateCommandInputJsonld' => 'Gyroscops\\Api\\Normalizer\\WorkflowDeclareWorkflowScheduleImmediateCommandInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\WorkflowRemoveWorkflowCommandJsonldRead' => 'Gyroscops\\Api\\Normalizer\\WorkflowRemoveWorkflowCommandJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\WorkflowRemoveWorkflowCommandInputJsonld' => 'Gyroscops\\Api\\Normalizer\\WorkflowRemoveWorkflowCommandInputJsonldNormalizer', 'Gyroscops\\Api\\Model\\WorkflowJsonldRead' => 'Gyroscops\\Api\\Normalizer\\WorkflowJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\WorkflowJobRead' => 'Gyroscops\\Api\\Normalizer\\WorkflowJobReadNormalizer', 'Gyroscops\\Api\\Model\\WorkflowJobJsonldRead' => 'Gyroscops\\Api\\Normalizer\\WorkflowJobJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\WorkflowJobAction' => 'Gyroscops\\Api\\Normalizer\\WorkflowJobActionNormalizer', 'Gyroscops\\Api\\Model\\WorkflowJobActionRead' => 'Gyroscops\\Api\\Normalizer\\WorkflowJobActionReadNormalizer', 'Gyroscops\\Api\\Model\\WorkflowJobActionJsonld' => 'Gyroscops\\Api\\Normalizer\\WorkflowJobActionJsonldNormalizer', 'Gyroscops\\Api\\Model\\WorkflowJobActionJsonldRead' => 'Gyroscops\\Api\\Normalizer\\WorkflowJobActionJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\WorkflowJobPipeline' => 'Gyroscops\\Api\\Normalizer\\WorkflowJobPipelineNormalizer', 'Gyroscops\\Api\\Model\\WorkflowJobPipelineRead' => 'Gyroscops\\Api\\Normalizer\\WorkflowJobPipelineReadNormalizer', 'Gyroscops\\Api\\Model\\WorkflowJobPipelineJsonld' => 'Gyroscops\\Api\\Normalizer\\WorkflowJobPipelineJsonldNormalizer', 'Gyroscops\\Api\\Model\\WorkflowJobPipelineJsonldRead' => 'Gyroscops\\Api\\Normalizer\\WorkflowJobPipelineJsonldReadNormalizer', 'Gyroscops\\Api\\Model\\Workspace' => 'Gyroscops\\Api\\Normalizer\\WorkspaceNormalizer', 'Gyroscops\\Api\\Model\\WorkspaceJsonld' => 'Gyroscops\\Api\\Normalizer\\WorkspaceJsonldNormalizer', 'Gyroscops\\Api\\Model\\Token' => 'Gyroscops\\Api\\Normalizer\\TokenNormalizer', 'Gyroscops\\Api\\Model\\Credentials' => 'Gyroscops\\Api\\Normalizer\\CredentialsNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationMeGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\AuthenticationMeGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\AuthenticationMeGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\AuthenticationMeGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationMeGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\AuthenticationMeGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationMeGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\AuthenticationMeGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationOffersIdOptionsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\AuthenticationOffersIdOptionsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\AuthenticationOffersIdOptionsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\AuthenticationOffersIdOptionsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationOffersIdOptionsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\AuthenticationOffersIdOptionsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationOffersIdOptionsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\AuthenticationOffersIdOptionsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationOrganizationsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\AuthenticationOrganizationsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\AuthenticationOrganizationsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\AuthenticationOrganizationsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationOrganizationsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\AuthenticationOrganizationsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationOrganizationsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\AuthenticationOrganizationsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationOrganizationsIdAuthorizationsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\AuthenticationOrganizationsIdAuthorizationsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\AuthenticationOrganizationsIdAuthorizationsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\AuthenticationOrganizationsIdAuthorizationsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationOrganizationsIdAuthorizationsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\AuthenticationOrganizationsIdAuthorizationsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationOrganizationsIdAuthorizationsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\AuthenticationOrganizationsIdAuthorizationsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationOrganizationsIdExternalCollaboratorsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\AuthenticationOrganizationsIdExternalCollaboratorsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\AuthenticationOrganizationsIdExternalCollaboratorsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\AuthenticationOrganizationsIdExternalCollaboratorsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationOrganizationsIdExternalCollaboratorsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\AuthenticationOrganizationsIdExternalCollaboratorsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationOrganizationsIdExternalCollaboratorsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\AuthenticationOrganizationsIdExternalCollaboratorsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationOrganizationsIdUsersGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\AuthenticationOrganizationsIdUsersGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\AuthenticationOrganizationsIdUsersGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\AuthenticationOrganizationsIdUsersGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationOrganizationsIdUsersGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\AuthenticationOrganizationsIdUsersGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationOrganizationsIdUsersGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\AuthenticationOrganizationsIdUsersGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationOrganizationsIdWorkspacesGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\AuthenticationOrganizationsIdWorkspacesGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\AuthenticationOrganizationsIdWorkspacesGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\AuthenticationOrganizationsIdWorkspacesGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationOrganizationsIdWorkspacesGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\AuthenticationOrganizationsIdWorkspacesGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationOrganizationsIdWorkspacesGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\AuthenticationOrganizationsIdWorkspacesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationSubscriptionOffersGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\AuthenticationSubscriptionOffersGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\AuthenticationSubscriptionOffersGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\AuthenticationSubscriptionOffersGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationSubscriptionOffersGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\AuthenticationSubscriptionOffersGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationSubscriptionOffersGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\AuthenticationSubscriptionOffersGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationSubscriptionsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\AuthenticationSubscriptionsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\AuthenticationSubscriptionsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\AuthenticationSubscriptionsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationSubscriptionsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\AuthenticationSubscriptionsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationSubscriptionsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\AuthenticationSubscriptionsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationSubscriptionsIdOptionsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\AuthenticationSubscriptionsIdOptionsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\AuthenticationSubscriptionsIdOptionsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\AuthenticationSubscriptionsIdOptionsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationSubscriptionsIdOptionsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\AuthenticationSubscriptionsIdOptionsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationSubscriptionsIdOptionsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\AuthenticationSubscriptionsIdOptionsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationUserAuthorizationsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\AuthenticationUserAuthorizationsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\AuthenticationUserAuthorizationsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\AuthenticationUserAuthorizationsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationUserAuthorizationsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\AuthenticationUserAuthorizationsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationUserAuthorizationsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\AuthenticationUserAuthorizationsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationUsersGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\AuthenticationUsersGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\AuthenticationUsersGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\AuthenticationUsersGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationUsersGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\AuthenticationUsersGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationUsersGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\AuthenticationUsersGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationWorkspacesGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\AuthenticationWorkspacesGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\AuthenticationWorkspacesGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\AuthenticationWorkspacesGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationWorkspacesGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\AuthenticationWorkspacesGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationWorkspacesGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\AuthenticationWorkspacesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationWorkspacesIdUsersGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\AuthenticationWorkspacesIdUsersGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\AuthenticationWorkspacesIdUsersGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\AuthenticationWorkspacesIdUsersGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationWorkspacesIdUsersGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\AuthenticationWorkspacesIdUsersGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\AuthenticationWorkspacesIdUsersGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\AuthenticationWorkspacesIdUsersGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\EnvironmentConfigurationsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\EnvironmentConfigurationsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\EnvironmentConfigurationsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\EnvironmentConfigurationsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\EnvironmentConfigurationsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\EnvironmentConfigurationsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\EnvironmentConfigurationsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\EnvironmentConfigurationsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\EnvironmentEnvironmentsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\EnvironmentEnvironmentsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\EnvironmentEnvironmentsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\EnvironmentEnvironmentsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\EnvironmentEnvironmentsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\EnvironmentEnvironmentsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\EnvironmentEnvironmentsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\EnvironmentEnvironmentsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\EnvironmentEnvironmentsIdVariablesGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\EnvironmentEnvironmentsIdVariablesGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\EnvironmentEnvironmentsIdVariablesGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\EnvironmentEnvironmentsIdVariablesGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\EnvironmentEnvironmentsIdVariablesGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\EnvironmentEnvironmentsIdVariablesGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\EnvironmentEnvironmentsIdVariablesGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\EnvironmentEnvironmentsIdVariablesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\EnvironmentSecretsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\EnvironmentSecretsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\EnvironmentSecretsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\EnvironmentSecretsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\EnvironmentSecretsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\EnvironmentSecretsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\EnvironmentSecretsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\EnvironmentSecretsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\GatewayAkeneoInstancesGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\GatewayAkeneoInstancesGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\GatewayAkeneoInstancesGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\GatewayAkeneoInstancesGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\GatewayAkeneoInstancesGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\GatewayAkeneoInstancesGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\GatewayAkeneoInstancesGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\GatewayAkeneoInstancesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\GatewayAkeneoInstancesFromUrlGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\GatewayAkeneoInstancesFromUrlGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\GatewayAkeneoInstancesFromUrlGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\GatewayAkeneoInstancesFromUrlGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\GatewayAkeneoInstancesFromUrlGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\GatewayAkeneoInstancesFromUrlGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\GatewayAkeneoInstancesFromUrlGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\GatewayAkeneoInstancesFromUrlGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\GatewayAkeneoInstancesOauthStateGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\GatewayAkeneoInstancesOauthStateGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\GatewayAkeneoInstancesOauthStateGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\GatewayAkeneoInstancesOauthStateGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\GatewayAkeneoInstancesOauthStateGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\GatewayAkeneoInstancesOauthStateGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\GatewayAkeneoInstancesOauthStateGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\GatewayAkeneoInstancesOauthStateGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\GatewayAkeneoLinkedAccountAkeneoUserIdGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\GatewayAkeneoLinkedAccountAkeneoUserIdGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\GatewayAkeneoLinkedAccountAkeneoUserIdGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\GatewayAkeneoLinkedAccountAkeneoUserIdGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\GatewayAkeneoLinkedAccountAkeneoUserIdGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\GatewayAkeneoLinkedAccountAkeneoUserIdGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\GatewayAkeneoLinkedAccountAkeneoUserIdGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\GatewayAkeneoLinkedAccountAkeneoUserIdGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\GatewayAkeneoLinkedAccountsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\GatewayAkeneoLinkedAccountsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\GatewayAkeneoOauthStatesGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\GatewayAkeneoOauthStatesGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\GatewayAkeneoOauthStatesGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\GatewayAkeneoOauthStatesGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\GatewayAkeneoOauthStatesGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\GatewayAkeneoOauthStatesGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\GatewayAkeneoOauthStatesGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\GatewayAkeneoOauthStatesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\GatewayAkeneoOauthTokenPutBody' => 'Gyroscops\\Api\\Normalizer\\GatewayAkeneoOauthTokenPutBodyNormalizer', 'Gyroscops\\Api\\Model\\GatewayAkeneoOauthTokenPutBodyHydraView' => 'Gyroscops\\Api\\Normalizer\\GatewayAkeneoOauthTokenPutBodyHydraViewNormalizer', 'Gyroscops\\Api\\Model\\GatewayAkeneoOauthTokenPutBodyHydraSearch' => 'Gyroscops\\Api\\Normalizer\\GatewayAkeneoOauthTokenPutBodyHydraSearchNormalizer', 'Gyroscops\\Api\\Model\\GatewayAkeneoOauthTokenPutBodyHydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\GatewayAkeneoOauthTokenPutBodyHydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\GatewayAkeneoOauthTokenPutLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\GatewayAkeneoOauthTokenPutLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\GatewayAkeneoOauthTokenPutLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\GatewayAkeneoOauthTokenPutLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\GatewayAkeneoOauthTokenPutLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\GatewayAkeneoOauthTokenPutLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\GatewayAkeneoOauthTokenPutLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\GatewayAkeneoOauthTokenPutLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\ReferralCodesGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\ReferralCodesGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\ReferralCodesGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\ReferralCodesGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\ReferralCodesGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\ReferralCodesGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\ReferralCodesGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\ReferralCodesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\ReferralOnPremiseRequestsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\ReferralOnPremiseRequestsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\ReferralOnPremiseRequestsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\ReferralOnPremiseRequestsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\ReferralOnPremiseRequestsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\ReferralOnPremiseRequestsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\ReferralOnPremiseRequestsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\ReferralOnPremiseRequestsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\ReferralRequestsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\ReferralRequestsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\ReferralRequestsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\ReferralRequestsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\ReferralRequestsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\ReferralRequestsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\ReferralRequestsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\ReferralRequestsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\RuntimeActionsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\RuntimeActionsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\RuntimeActionsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\RuntimeActionsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\RuntimeActionsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\RuntimeActionsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\RuntimeActionsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\RuntimeActionsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\RuntimeCompilationsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\RuntimeCompilationsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\RuntimeCompilationsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\RuntimeCompilationsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\RuntimeCompilationsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\RuntimeCompilationsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\RuntimeCompilationsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\RuntimeCompilationsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionPipelineJobsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionPipelineJobsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionPipelineJobsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionPipelineJobsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionPipelineJobsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionPipelineJobsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionPipelineJobsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionPipelineJobsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionPipelineJobsIdStepsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionPipelineJobsIdStepsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionPipelineJobsIdStepsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionPipelineJobsIdStepsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionPipelineJobsIdStepsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionPipelineJobsIdStepsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionPipelineJobsIdStepsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionPipelineJobsIdStepsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionsPipelinesGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionsPipelinesGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionsPipelinesGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionsPipelinesGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionsPipelinesGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionsPipelinesGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionsPipelinesGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionsPipelinesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionsWorkflowsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionsWorkflowsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionsWorkflowsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionsWorkflowsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionsWorkflowsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionsWorkflowsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionsWorkflowsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionsWorkflowsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionsIdWorkflowsJobsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionsIdWorkflowsJobsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionsIdWorkflowsJobsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionsIdWorkflowsJobsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionsIdWorkflowsJobsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionsIdWorkflowsJobsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\RuntimeExecutionsIdWorkflowsJobsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\RuntimeExecutionsIdWorkflowsJobsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\RuntimePipelineStepProbesGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\RuntimePipelineStepProbesGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\RuntimePipelineStepProbesGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\RuntimePipelineStepProbesGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\RuntimePipelineStepProbesGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\RuntimePipelineStepProbesGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\RuntimePipelineStepProbesGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\RuntimePipelineStepProbesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\RuntimePipelineStepsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\RuntimePipelineStepsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\RuntimePipelineStepsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\RuntimePipelineStepsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\RuntimePipelineStepsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\RuntimePipelineStepsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\RuntimePipelineStepsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\RuntimePipelineStepsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\RuntimePipelinesGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\RuntimePipelinesGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\RuntimePipelinesGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\RuntimePipelinesGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\RuntimePipelinesGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\RuntimePipelinesGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\RuntimePipelinesGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\RuntimePipelinesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\RuntimePipelinesStepsIdProbesGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\RuntimePipelinesStepsIdProbesGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\RuntimePipelinesStepsIdProbesGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\RuntimePipelinesStepsIdProbesGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\RuntimePipelinesStepsIdProbesGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\RuntimePipelinesStepsIdProbesGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\RuntimePipelinesStepsIdProbesGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\RuntimePipelinesStepsIdProbesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\RuntimePipelinesIdCompilationsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\RuntimePipelinesIdCompilationsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\RuntimePipelinesIdCompilationsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\RuntimePipelinesIdCompilationsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\RuntimePipelinesIdCompilationsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\RuntimePipelinesIdCompilationsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\RuntimePipelinesIdCompilationsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\RuntimePipelinesIdCompilationsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\RuntimePipelinesIdSchedulesGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\RuntimePipelinesIdSchedulesGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\RuntimePipelinesIdSchedulesGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\RuntimePipelinesIdSchedulesGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\RuntimePipelinesIdSchedulesGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\RuntimePipelinesIdSchedulesGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\RuntimePipelinesIdSchedulesGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\RuntimePipelinesIdSchedulesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\RuntimePipelinesIdStepsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\RuntimePipelinesIdStepsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\RuntimePipelinesIdStepsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\RuntimePipelinesIdStepsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\RuntimePipelinesIdStepsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\RuntimePipelinesIdStepsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\RuntimePipelinesIdStepsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\RuntimePipelinesIdStepsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\RuntimeSchedulesGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\RuntimeSchedulesGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\RuntimeSchedulesGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\RuntimeSchedulesGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\RuntimeSchedulesGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\RuntimeSchedulesGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\RuntimeSchedulesGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\RuntimeSchedulesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\RuntimeSchedulesIdExecutionsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\RuntimeSchedulesIdExecutionsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\RuntimeSchedulesIdExecutionsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\RuntimeSchedulesIdExecutionsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\RuntimeSchedulesIdExecutionsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\RuntimeSchedulesIdExecutionsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\RuntimeSchedulesIdExecutionsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\RuntimeSchedulesIdExecutionsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\RuntimeWorkflowsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\RuntimeWorkflowsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\RuntimeWorkflowsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\RuntimeWorkflowsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\RuntimeWorkflowsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\RuntimeWorkflowsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\RuntimeWorkflowsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\RuntimeWorkflowsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\RuntimeWorkflowsPipelinesGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\RuntimeWorkflowsPipelinesGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\RuntimeWorkflowsPipelinesGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\RuntimeWorkflowsPipelinesGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\RuntimeWorkflowsPipelinesGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\RuntimeWorkflowsPipelinesGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\RuntimeWorkflowsPipelinesGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\RuntimeWorkflowsPipelinesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\RuntimeWorkflowsWorkflowJobPipelinesIdStepsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\RuntimeWorkflowsWorkflowJobPipelinesIdStepsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\RuntimeWorkflowsWorkflowJobPipelinesIdStepsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\RuntimeWorkflowsWorkflowJobPipelinesIdStepsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\RuntimeWorkflowsWorkflowJobPipelinesIdStepsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\RuntimeWorkflowsWorkflowJobPipelinesIdStepsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\RuntimeWorkflowsWorkflowJobPipelinesIdStepsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\RuntimeWorkflowsWorkflowJobPipelinesIdStepsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\RuntimeWorkflowsIdCompilationsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\RuntimeWorkflowsIdCompilationsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\RuntimeWorkflowsIdCompilationsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\RuntimeWorkflowsIdCompilationsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\RuntimeWorkflowsIdCompilationsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\RuntimeWorkflowsIdCompilationsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\RuntimeWorkflowsIdCompilationsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\RuntimeWorkflowsIdCompilationsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\RuntimeWorkflowsIdJobsGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\RuntimeWorkflowsIdJobsGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\RuntimeWorkflowsIdJobsGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\RuntimeWorkflowsIdJobsGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\RuntimeWorkflowsIdJobsGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\RuntimeWorkflowsIdJobsGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\RuntimeWorkflowsIdJobsGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\RuntimeWorkflowsIdJobsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', 'Gyroscops\\Api\\Model\\RuntimeWorkflowsIdSchedulesGetLdjsonResponse200' => 'Gyroscops\\Api\\Normalizer\\RuntimeWorkflowsIdSchedulesGetLdjsonResponse200Normalizer', 'Gyroscops\\Api\\Model\\RuntimeWorkflowsIdSchedulesGetLdjsonResponse200HydraView' => 'Gyroscops\\Api\\Normalizer\\RuntimeWorkflowsIdSchedulesGetLdjsonResponse200HydraViewNormalizer', 'Gyroscops\\Api\\Model\\RuntimeWorkflowsIdSchedulesGetLdjsonResponse200HydraSearch' => 'Gyroscops\\Api\\Normalizer\\RuntimeWorkflowsIdSchedulesGetLdjsonResponse200HydraSearchNormalizer', 'Gyroscops\\Api\\Model\\RuntimeWorkflowsIdSchedulesGetLdjsonResponse200HydraSearchHydraMappingItem' => 'Gyroscops\\Api\\Normalizer\\RuntimeWorkflowsIdSchedulesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer', '\\Jane\\Component\\JsonSchemaRuntime\\Reference' => '\\Gyroscops\\Api\\Runtime\\Normalizer\\ReferenceNormalizer'];
-    protected $normalizersCache = [];
-
-    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return array_key_exists($type, $this->normalizers);
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
+        protected $normalizers = [
+            \Gyroscops\Api\Model\AbstractPipelineJsonldExecutionPipelineStepRead::class => AbstractPipelineJsonldExecutionPipelineStepReadNormalizer::class,
+
+            \Gyroscops\Api\Model\Action::class => ActionNormalizer::class,
+
+            \Gyroscops\Api\Model\ActionActionRead::class => ActionActionReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ActionJsonld::class => ActionJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\ActionJsonldActionRead::class => ActionJsonldActionReadNormalizer::class,
+
+            \Gyroscops\Api\Model\AkeneoInstance::class => AkeneoInstanceNormalizer::class,
+
+            \Gyroscops\Api\Model\AkeneoInstanceAkeneoInstanceInput::class => AkeneoInstanceAkeneoInstanceInputNormalizer::class,
+
+            \Gyroscops\Api\Model\AkeneoInstanceAkeneoInstanceInputJsonld::class => AkeneoInstanceAkeneoInstanceInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\AkeneoInstanceJsonld::class => AkeneoInstanceJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\AkeneoLinkedAccount::class => AkeneoLinkedAccountNormalizer::class,
+
+            \Gyroscops\Api\Model\AkeneoLinkedAccountAkeneoLinkedAccountsInput::class => AkeneoLinkedAccountAkeneoLinkedAccountsInputNormalizer::class,
+
+            \Gyroscops\Api\Model\AkeneoLinkedAccountAkeneoLinkedAccountsInputJsonld::class => AkeneoLinkedAccountAkeneoLinkedAccountsInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\AkeneoLinkedAccountJsonld::class => AkeneoLinkedAccountJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\AkeneoOauthTokenRead::class => AkeneoOauthTokenReadNormalizer::class,
+
+            \Gyroscops\Api\Model\AkeneoOauthTokenOauthStateInput::class => AkeneoOauthTokenOauthStateInputNormalizer::class,
+
+            \Gyroscops\Api\Model\AkeneoOauthTokenOauthStateInputJsonld::class => AkeneoOauthTokenOauthStateInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\AkeneoOauthTokenOauthStateOutputJsonldRead::class => AkeneoOauthTokenOauthStateOutputJsonldReadNormalizer::class,
+
+            \Gyroscops\Api\Model\AkeneoOauthTokenOauthTokenInput::class => AkeneoOauthTokenOauthTokenInputNormalizer::class,
+
+            \Gyroscops\Api\Model\AkeneoOauthTokenOauthTokenInputJsonld::class => AkeneoOauthTokenOauthTokenInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\AkeneoOauthTokenOauthTokenOutputJsonldRead::class => AkeneoOauthTokenOauthTokenOutputJsonldReadNormalizer::class,
+
+            \Gyroscops\Api\Model\AkeneoOauthTokenJsonldRead::class => AkeneoOauthTokenJsonldReadNormalizer::class,
+
+            \Gyroscops\Api\Model\BigDecimal::class => BigDecimalNormalizer::class,
+
+            \Gyroscops\Api\Model\BigDecimalJsonld::class => BigDecimalJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\BigInteger::class => BigIntegerNormalizer::class,
+
+            \Gyroscops\Api\Model\BigIntegerJsonld::class => BigIntegerJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\BigNumber::class => BigNumberNormalizer::class,
+
+            \Gyroscops\Api\Model\BigNumberJsonld::class => BigNumberJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\Buyable::class => BuyableNormalizer::class,
+
+            \Gyroscops\Api\Model\BuyableJsonld::class => BuyableJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\BuyablePrice::class => BuyablePriceNormalizer::class,
+
+            \Gyroscops\Api\Model\BuyablePriceRead::class => BuyablePriceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\BuyablePriceJsonld::class => BuyablePriceJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\BuyablePriceJsonldRead::class => BuyablePriceJsonldReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ColorJsonldRead::class => ColorJsonldReadNormalizer::class,
+
+            \Gyroscops\Api\Model\CompilationCompilationRead::class => CompilationCompilationReadNormalizer::class,
+
+            \Gyroscops\Api\Model\CompilationJsonldCompilationRead::class => CompilationJsonldCompilationReadNormalizer::class,
+
+            \Gyroscops\Api\Model\Composer::class => ComposerNormalizer::class,
+
+            \Gyroscops\Api\Model\ComposerJsonld::class => ComposerJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\ComposerAuthentication::class => ComposerAuthenticationNormalizer::class,
+
+            \Gyroscops\Api\Model\ComposerAuthenticationJsonld::class => ComposerAuthenticationJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\ComposerAutoload::class => ComposerAutoloadNormalizer::class,
+
+            \Gyroscops\Api\Model\ComposerAutoloadJsonld::class => ComposerAutoloadJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\ComposerRepository::class => ComposerRepositoryNormalizer::class,
+
+            \Gyroscops\Api\Model\ComposerRepositoryJsonld::class => ComposerRepositoryJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\ConfigurationConfigurationUpdate::class => ConfigurationConfigurationUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\ConfigurationConfigurationView::class => ConfigurationConfigurationViewNormalizer::class,
+
+            \Gyroscops\Api\Model\ConfigurationChangeConfigurationValueInputConfigurationUpdate::class => ConfigurationChangeConfigurationValueInputConfigurationUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\ConfigurationChangeConfigurationValueInputJsonldConfigurationUpdate::class => ConfigurationChangeConfigurationValueInputJsonldConfigurationUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\ConfigurationCreateConfigurationInputConfigurationCreate::class => ConfigurationCreateConfigurationInputConfigurationCreateNormalizer::class,
+
+            \Gyroscops\Api\Model\ConfigurationCreateConfigurationInputJsonldConfigurationCreate::class => ConfigurationCreateConfigurationInputJsonldConfigurationCreateNormalizer::class,
+
+            \Gyroscops\Api\Model\ConfigurationRemoveConfigurationValueInputConfigurationUpdate::class => ConfigurationRemoveConfigurationValueInputConfigurationUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\ConfigurationRemoveConfigurationValueInputJsonldConfigurationUpdate::class => ConfigurationRemoveConfigurationValueInputJsonldConfigurationUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\ConfigurationJsonldConfigurationUpdate::class => ConfigurationJsonldConfigurationUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\ConfigurationJsonldConfigurationView::class => ConfigurationJsonldConfigurationViewNormalizer::class,
+
+            \Gyroscops\Api\Model\Context::class => ContextNormalizer::class,
+
+            \Gyroscops\Api\Model\ContextJsonld::class => ContextJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\CreateSecretInput::class => CreateSecretInputNormalizer::class,
+
+            \Gyroscops\Api\Model\CreateSecretInputJsonld::class => CreateSecretInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\Currency::class => CurrencyNormalizer::class,
+
+            \Gyroscops\Api\Model\CurrencyJsonld::class => CurrencyJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentEnvironmentUpdate::class => EnvironmentEnvironmentUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentEnvironmentView::class => EnvironmentEnvironmentViewNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentVariableViewEnvironmentView::class => EnvironmentVariableViewEnvironmentViewNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConfigurationInputEnvironmentUpdate::class => EnvironmentAddMultipleVariableFromConfigurationInputEnvironmentUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConfigurationInputJsonldEnvironmentUpdate::class => EnvironmentAddMultipleVariableFromConfigurationInputJsonldEnvironmentUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConstantInputEnvironmentUpdate::class => EnvironmentAddMultipleVariableFromConstantInputEnvironmentUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConstantInputJsonldEnvironmentUpdate::class => EnvironmentAddMultipleVariableFromConstantInputJsonldEnvironmentUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromSecretInputEnvironmentUpdate::class => EnvironmentAddMultipleVariableFromSecretInputEnvironmentUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromSecretInputJsonldEnvironmentUpdate::class => EnvironmentAddMultipleVariableFromSecretInputJsonldEnvironmentUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentCreateEnvironmentInputEnvironmentCreate::class => EnvironmentCreateEnvironmentInputEnvironmentCreateNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentCreateEnvironmentInputJsonldEnvironmentCreate::class => EnvironmentCreateEnvironmentInputJsonldEnvironmentCreateNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentJsonldEnvironmentUpdate::class => EnvironmentJsonldEnvironmentUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentJsonldEnvironmentView::class => EnvironmentJsonldEnvironmentViewNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentJsonldVariableViewEnvironmentView::class => EnvironmentJsonldVariableViewEnvironmentViewNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionExecutionRead::class => ExecutionExecutionReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionDeclarePipelineExecutionCommandJsonldExecutionRead::class => ExecutionDeclarePipelineExecutionCommandJsonldExecutionReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionDeclarePipelineExecutionCommandInput::class => ExecutionDeclarePipelineExecutionCommandInputNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionDeclarePipelineExecutionCommandInputJsonld::class => ExecutionDeclarePipelineExecutionCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionInterruptPipelineExecutionCommandJsonldExecutionRead::class => ExecutionInterruptPipelineExecutionCommandJsonldExecutionReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionInterruptPipelineExecutionCommandInputJsonld::class => ExecutionInterruptPipelineExecutionCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionResumePipelineExecutionCommandJsonldExecutionRead::class => ExecutionResumePipelineExecutionCommandJsonldExecutionReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionResumePipelineExecutionCommandInputJsonld::class => ExecutionResumePipelineExecutionCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionTerminatePipelineExecutionCommandJsonldExecutionRead::class => ExecutionTerminatePipelineExecutionCommandJsonldExecutionReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionTerminatePipelineExecutionCommandInput::class => ExecutionTerminatePipelineExecutionCommandInputNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionTerminatePipelineExecutionCommandInputJsonld::class => ExecutionTerminatePipelineExecutionCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionJsonldExecutionRead::class => ExecutionJsonldExecutionReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionActionExecutionActionRead::class => ExecutionActionExecutionActionReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionActionJsonldExecutionActionRead::class => ExecutionActionJsonldExecutionActionReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionPipelineExecutionPipelineRead::class => ExecutionPipelineExecutionPipelineReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionPipelineJsonldExecutionPipelineRead::class => ExecutionPipelineJsonldExecutionPipelineReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionPipelineJob::class => ExecutionPipelineJobNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionPipelineJobJsonld::class => ExecutionPipelineJobJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionPipelineStepExecutionPipelineStepRead::class => ExecutionPipelineStepExecutionPipelineStepReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionPipelineStepJsonldExecutionPipelineStepRead::class => ExecutionPipelineStepJsonldExecutionPipelineStepReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionWorkflowExecutionWorkflowRead::class => ExecutionWorkflowExecutionWorkflowReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionWorkflowInterruptWorkflowExecutionCommandJsonldExecutionWorkflowRead::class => ExecutionWorkflowInterruptWorkflowExecutionCommandJsonldExecutionWorkflowReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionWorkflowInterruptWorkflowExecutionCommandInputJsonld::class => ExecutionWorkflowInterruptWorkflowExecutionCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionWorkflowResumeWorkflowExecutionCommandJsonldExecutionWorkflowRead::class => ExecutionWorkflowResumeWorkflowExecutionCommandJsonldExecutionWorkflowReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionWorkflowResumeWorkflowExecutionCommandInputJsonld::class => ExecutionWorkflowResumeWorkflowExecutionCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionWorkflowTerminateWorkflowExecutionCommandJsonldExecutionWorkflowRead::class => ExecutionWorkflowTerminateWorkflowExecutionCommandJsonldExecutionWorkflowReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionWorkflowTerminateWorkflowExecutionCommandInput::class => ExecutionWorkflowTerminateWorkflowExecutionCommandInputNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionWorkflowTerminateWorkflowExecutionCommandInputJsonld::class => ExecutionWorkflowTerminateWorkflowExecutionCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionWorkflowJsonldExecutionWorkflowRead::class => ExecutionWorkflowJsonldExecutionWorkflowReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionWorkflowJobExecutionWorkflowJobRead::class => ExecutionWorkflowJobExecutionWorkflowJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionWorkflowJobJsonldExecutionWorkflowJobRead::class => ExecutionWorkflowJobJsonldExecutionWorkflowJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionWorkflowJobAction::class => ExecutionWorkflowJobActionNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionWorkflowJobActionJsonld::class => ExecutionWorkflowJobActionJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\Job::class => JobNormalizer::class,
+
+            \Gyroscops\Api\Model\JobJsonld::class => JobJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\Money::class => MoneyNormalizer::class,
+
+            \Gyroscops\Api\Model\MoneyJsonld::class => MoneyJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\OnPremiseRequestOnPremiseRequestRead::class => OnPremiseRequestOnPremiseRequestReadNormalizer::class,
+
+            \Gyroscops\Api\Model\OnPremiseRequestOnPremiseRequestWrite::class => OnPremiseRequestOnPremiseRequestWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\OnPremiseRequestJsonldOnPremiseRequestRead::class => OnPremiseRequestJsonldOnPremiseRequestReadNormalizer::class,
+
+            \Gyroscops\Api\Model\OnPremiseRequestJsonldOnPremiseRequestWrite::class => OnPremiseRequestJsonldOnPremiseRequestWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\OpaqueInterfaceJsonldSecretUpdate::class => OpaqueInterfaceJsonldSecretUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\Option::class => OptionNormalizer::class,
+
+            \Gyroscops\Api\Model\OptionJsonld::class => OptionJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\OrganizationOrganizationRead::class => OrganizationOrganizationReadNormalizer::class,
+
+            \Gyroscops\Api\Model\OrganizationOrganizationWrite::class => OrganizationOrganizationWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\OrganizationJsonldAddCollaborators::class => OrganizationJsonldAddCollaboratorsNormalizer::class,
+
+            \Gyroscops\Api\Model\OrganizationJsonldOrganizationRead::class => OrganizationJsonldOrganizationReadNormalizer::class,
+
+            \Gyroscops\Api\Model\OrganizationJsonldOrganizationWrite::class => OrganizationJsonldOrganizationWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\Pipeline::class => PipelineNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelinePipelineReadPipelineSubresourceRead::class => PipelinePipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineAddAfterPipelineStepCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineAddAfterPipelineStepCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineAddAfterPipelineStepCommandInputJsonldPipelineWrite::class => PipelineAddAfterPipelineStepCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineAddBeforePipelineStepCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineAddBeforePipelineStepCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineAddBeforePipelineStepCommandInputJsonldPipelineWrite::class => PipelineAddBeforePipelineStepCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineAddPipelineComposerAuthCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineAddPipelineComposerAuthCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineAddPipelineComposerAuthCommandInputJsonldPipelineWrite::class => PipelineAddPipelineComposerAuthCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineAddPipelineComposerPSR4AutoloadCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineAddPipelineComposerPSR4AutoloadCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineAddPipelineComposerPSR4AutoloadCommandInputJsonldPipelineWrite::class => PipelineAddPipelineComposerPSR4AutoloadCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineAddPipelineComposerPackageCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineAddPipelineComposerPackageCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineAddPipelineComposerPackageCommandInputJsonldPipelineWrite::class => PipelineAddPipelineComposerPackageCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineAddPipelineComposerRepositoryCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineAddPipelineComposerRepositoryCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineAddPipelineComposerRepositoryCommandInputJsonldPipelineWrite::class => PipelineAddPipelineComposerRepositoryCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineAddPipelineStepProbeCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineAddPipelineStepProbeCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineAddPipelineStepProbeCommandInputJsonldPipelineWrite::class => PipelineAddPipelineStepProbeCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineAppendPipelineStepCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineAppendPipelineStepCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineAppendPipelineStepCommandInputJsonldPipelineWrite::class => PipelineAppendPipelineStepCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineCompilePipelineCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineCompilePipelineCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineCompilePipelineCommandInputJsonldPipelineWrite::class => PipelineCompilePipelineCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineDeclarePipelineCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineDeclarePipelineCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineDeclarePipelineCommandInputJsonldPipelineWrite::class => PipelineDeclarePipelineCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineDeclarePipelineScheduleImmediateCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineDeclarePipelineScheduleImmediateCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineDeclarePipelineScheduleImmediateCommandInputJsonldPipelineWrite::class => PipelineDeclarePipelineScheduleImmediateCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineDeclarePipelineScheduleOnceCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineDeclarePipelineScheduleOnceCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineDeclarePipelineScheduleOnceCommandInputJsonldPipelineWrite::class => PipelineDeclarePipelineScheduleOnceCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineMoveAfterPipelineStepCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineMoveAfterPipelineStepCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineMoveAfterPipelineStepCommandInputJsonldPipelineWrite::class => PipelineMoveAfterPipelineStepCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineMoveBeforePipelineStepCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineMoveBeforePipelineStepCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineMoveBeforePipelineStepCommandInputJsonldPipelineWrite::class => PipelineMoveBeforePipelineStepCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineRemovePipelineComposerAuthCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineRemovePipelineComposerAuthCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineRemovePipelineComposerAuthCommandInputJsonldPipelineWrite::class => PipelineRemovePipelineComposerAuthCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineRemovePipelineComposerPSR4AutoloadCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineRemovePipelineComposerPSR4AutoloadCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineRemovePipelineComposerPSR4AutoloadCommandInputJsonldPipelineWrite::class => PipelineRemovePipelineComposerPSR4AutoloadCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineRemovePipelineComposerPackageCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineRemovePipelineComposerPackageCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineRemovePipelineComposerPackageCommandInputJsonldPipelineWrite::class => PipelineRemovePipelineComposerPackageCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineRemovePipelineComposerRepositoryCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineRemovePipelineComposerRepositoryCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineRemovePipelineComposerRepositoryCommandInputJsonldPipelineWrite::class => PipelineRemovePipelineComposerRepositoryCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineRemovePipelineStepProbeCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineRemovePipelineStepProbeCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineReorderPipelineStepsCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandInputJsonldPipelineWrite::class => PipelineReorderPipelineStepsCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineReplacePipelineStepCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineReplacePipelineStepCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineReplacePipelineStepCommandInputJsonldPipelineWrite::class => PipelineReplacePipelineStepCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineJsonld::class => PipelineJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineJsonldPipelineReadPipelineSubresourceRead::class => PipelineJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineStepStepRead::class => PipelineStepStepReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineStepReplaceWorkflowPipelineStepCommandJsonldStepRead::class => PipelineStepReplaceWorkflowPipelineStepCommandJsonldStepReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineStepReplaceWorkflowPipelineStepCommandInput::class => PipelineStepReplaceWorkflowPipelineStepCommandInputNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineStepReplaceWorkflowPipelineStepCommandInputJsonld::class => PipelineStepReplaceWorkflowPipelineStepCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineStepJsonldStepRead::class => PipelineStepJsonldStepReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineStepProbeStepProbeRead::class => PipelineStepProbeStepProbeReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineStepProbeJsonldStepProbeRead::class => PipelineStepProbeJsonldStepProbeReadNormalizer::class,
+
+            \Gyroscops\Api\Model\Price::class => PriceNormalizer::class,
+
+            \Gyroscops\Api\Model\PriceJsonld::class => PriceJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\Probe::class => ProbeNormalizer::class,
+
+            \Gyroscops\Api\Model\ProbeJsonld::class => ProbeJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralCodeReferralCodeRead::class => ReferralCodeReferralCodeReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralCodeReferralCodeWrite::class => ReferralCodeReferralCodeWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralCodeJsonldReferralCodeRead::class => ReferralCodeJsonldReferralCodeReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralCodeJsonldReferralCodeWrite::class => ReferralCodeJsonldReferralCodeWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralRequestReferralRequestRead::class => ReferralRequestReferralRequestReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralRequestReferralRequestInput::class => ReferralRequestReferralRequestInputNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralRequestReferralRequestInputJsonld::class => ReferralRequestReferralRequestInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralRequestJsonldReferralRequestRead::class => ReferralRequestJsonldReferralRequestReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ScheduleScheduleRead::class => ScheduleScheduleReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ScheduleJsonld::class => ScheduleJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\ScheduleJsonldScheduleRead::class => ScheduleJsonldScheduleReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ScheduleTypeJsonldScheduleRead::class => ScheduleTypeJsonldScheduleReadNormalizer::class,
+
+            \Gyroscops\Api\Model\SecretSecretRead::class => SecretSecretReadNormalizer::class,
+
+            \Gyroscops\Api\Model\SecretChangeSecretValueInputSecretUpdate::class => SecretChangeSecretValueInputSecretUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\SecretChangeSecretValueInputJsonldSecretUpdate::class => SecretChangeSecretValueInputJsonldSecretUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\SecretCreateSecretInputSecretCreate::class => SecretCreateSecretInputSecretCreateNormalizer::class,
+
+            \Gyroscops\Api\Model\SecretCreateSecretInputJsonldSecretCreate::class => SecretCreateSecretInputJsonldSecretCreateNormalizer::class,
+
+            \Gyroscops\Api\Model\SecretRemoveSecretValueInputSecretUpdate::class => SecretRemoveSecretValueInputSecretUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\SecretRemoveSecretValueInputJsonldSecretUpdate::class => SecretRemoveSecretValueInputJsonldSecretUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\SecretJsonldSecretRead::class => SecretJsonldSecretReadNormalizer::class,
+
+            \Gyroscops\Api\Model\SecretJsonldSecretUpdate::class => SecretJsonldSecretUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\Step::class => StepNormalizer::class,
+
+            \Gyroscops\Api\Model\StepJsonld::class => StepJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\Subscription::class => SubscriptionNormalizer::class,
+
+            \Gyroscops\Api\Model\SubscriptionJsonld::class => SubscriptionJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\SubscriptionOfferRead::class => SubscriptionOfferReadNormalizer::class,
+
+            \Gyroscops\Api\Model\SubscriptionOfferWrite::class => SubscriptionOfferWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\SubscriptionOfferJsonldRead::class => SubscriptionOfferJsonldReadNormalizer::class,
+
+            \Gyroscops\Api\Model\SubscriptionOfferJsonldWrite::class => SubscriptionOfferJsonldWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\SubscriptionOption::class => SubscriptionOptionNormalizer::class,
+
+            \Gyroscops\Api\Model\SubscriptionOptionJsonld::class => SubscriptionOptionJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\SubscriptionType::class => SubscriptionTypeNormalizer::class,
+
+            \Gyroscops\Api\Model\SubscriptionTypeJsonld::class => SubscriptionTypeJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\SubscriptionTypeJsonldRead::class => SubscriptionTypeJsonldReadNormalizer::class,
+
+            \Gyroscops\Api\Model\Template::class => TemplateNormalizer::class,
+
+            \Gyroscops\Api\Model\TemplateTemplateCreate::class => TemplateTemplateCreateNormalizer::class,
+
+            \Gyroscops\Api\Model\TemplateTemplateList::class => TemplateTemplateListNormalizer::class,
+
+            \Gyroscops\Api\Model\TemplateTemplateView::class => TemplateTemplateViewNormalizer::class,
+
+            \Gyroscops\Api\Model\TemplateDeclareSatelliteTemplateInput::class => TemplateDeclareSatelliteTemplateInputNormalizer::class,
+
+            \Gyroscops\Api\Model\TemplateDeclareSatelliteTemplateInputJsonld::class => TemplateDeclareSatelliteTemplateInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\TemplateJsonld::class => TemplateJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\TemplateJsonldTemplateCreate::class => TemplateJsonldTemplateCreateNormalizer::class,
+
+            \Gyroscops\Api\Model\TemplateJsonldTemplateList::class => TemplateJsonldTemplateListNormalizer::class,
+
+            \Gyroscops\Api\Model\TemplateJsonldTemplateUpdate::class => TemplateJsonldTemplateUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\TemplateJsonldTemplateView::class => TemplateJsonldTemplateViewNormalizer::class,
+
+            \Gyroscops\Api\Model\UserUserRead::class => UserUserReadNormalizer::class,
+
+            \Gyroscops\Api\Model\UserUserWrite::class => UserUserWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\UserJsonldUserRead::class => UserJsonldUserReadNormalizer::class,
+
+            \Gyroscops\Api\Model\UserJsonldUserWrite::class => UserJsonldUserWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\UserAuthorizationAuthorizationRead::class => UserAuthorizationAuthorizationReadNormalizer::class,
+
+            \Gyroscops\Api\Model\UserAuthorizationAuthorizationWrite::class => UserAuthorizationAuthorizationWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\UserAuthorizationJsonldAuthorizationRead::class => UserAuthorizationJsonldAuthorizationReadNormalizer::class,
+
+            \Gyroscops\Api\Model\UserAuthorizationJsonldAuthorizationWrite::class => UserAuthorizationJsonldAuthorizationWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableVariableViewEnvironmentView::class => VariableVariableViewEnvironmentViewNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableJsonldVariableViewEnvironmentView::class => VariableJsonldVariableViewEnvironmentViewNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromConfigurationVariableUpdate::class => VariableFromConfigurationVariableUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromConfigurationVariableViewEnvironmentView::class => VariableFromConfigurationVariableViewEnvironmentViewNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromConfigurationJsonldVariableUpdate::class => VariableFromConfigurationJsonldVariableUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromConfigurationJsonldVariableViewEnvironmentView::class => VariableFromConfigurationJsonldVariableViewEnvironmentViewNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromConfigurationInputEnvironmentUpdate::class => VariableFromConfigurationInputEnvironmentUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromConfigurationInputJsonldEnvironmentUpdate::class => VariableFromConfigurationInputJsonldEnvironmentUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromConstantVariableUpdate::class => VariableFromConstantVariableUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromConstantVariableViewEnvironmentView::class => VariableFromConstantVariableViewEnvironmentViewNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromConstantJsonldVariableUpdate::class => VariableFromConstantJsonldVariableUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromConstantJsonldVariableViewEnvironmentView::class => VariableFromConstantJsonldVariableViewEnvironmentViewNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromConstantInputEnvironmentUpdate::class => VariableFromConstantInputEnvironmentUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromConstantInputJsonldEnvironmentUpdate::class => VariableFromConstantInputJsonldEnvironmentUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromSecretVariableUpdate::class => VariableFromSecretVariableUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromSecretVariableViewEnvironmentView::class => VariableFromSecretVariableViewEnvironmentViewNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromSecretJsonldVariableUpdate::class => VariableFromSecretJsonldVariableUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromSecretJsonldVariableViewEnvironmentView::class => VariableFromSecretJsonldVariableViewEnvironmentViewNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromSecretInputEnvironmentUpdate::class => VariableFromSecretInputEnvironmentUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromSecretInputJsonldEnvironmentUpdate::class => VariableFromSecretInputJsonldEnvironmentUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowWorkflowRead::class => WorkflowWorkflowReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowCompileWorkflowCommandJsonldWorkflowRead::class => WorkflowCompileWorkflowCommandJsonldWorkflowReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowCompileWorkflowCommandInputJsonld::class => WorkflowCompileWorkflowCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowDeclareWorkflowCommandJsonldWorkflowRead::class => WorkflowDeclareWorkflowCommandJsonldWorkflowReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowDeclareWorkflowCommandInput::class => WorkflowDeclareWorkflowCommandInputNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowDeclareWorkflowCommandInputJsonld::class => WorkflowDeclareWorkflowCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowDeclareWorkflowScheduleCrontabCommandJsonldWorkflowRead::class => WorkflowDeclareWorkflowScheduleCrontabCommandJsonldWorkflowReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowDeclareWorkflowScheduleCrontabCommandInput::class => WorkflowDeclareWorkflowScheduleCrontabCommandInputNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowDeclareWorkflowScheduleCrontabCommandInputJsonld::class => WorkflowDeclareWorkflowScheduleCrontabCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowDeclareWorkflowScheduleImmediateCommandJsonldWorkflowRead::class => WorkflowDeclareWorkflowScheduleImmediateCommandJsonldWorkflowReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowDeclareWorkflowScheduleImmediateCommandInput::class => WorkflowDeclareWorkflowScheduleImmediateCommandInputNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowDeclareWorkflowScheduleImmediateCommandInputJsonld::class => WorkflowDeclareWorkflowScheduleImmediateCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowRemoveWorkflowCommandJsonldWorkflowRead::class => WorkflowRemoveWorkflowCommandJsonldWorkflowReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowRemoveWorkflowCommandInputJsonld::class => WorkflowRemoveWorkflowCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJsonldWorkflowRead::class => WorkflowJsonldWorkflowReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobJobRead::class => WorkflowJobJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobJobReadPipelineRead::class => WorkflowJobJobReadPipelineReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobAddAfterWorkflowPipelineStepCommandJsonldJobRead::class => WorkflowJobAddAfterWorkflowPipelineStepCommandJsonldJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobAddAfterWorkflowPipelineStepCommandInput::class => WorkflowJobAddAfterWorkflowPipelineStepCommandInputNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobAddAfterWorkflowPipelineStepCommandInputJsonld::class => WorkflowJobAddAfterWorkflowPipelineStepCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobAddBeforeWorkflowPipelineStepCommandJsonldJobRead::class => WorkflowJobAddBeforeWorkflowPipelineStepCommandJsonldJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobAddBeforeWorkflowPipelineStepCommandInput::class => WorkflowJobAddBeforeWorkflowPipelineStepCommandInputNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobAddBeforeWorkflowPipelineStepCommandInputJsonld::class => WorkflowJobAddBeforeWorkflowPipelineStepCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobAppendWorkflowPipelineStepCommandJsonldJobRead::class => WorkflowJobAppendWorkflowPipelineStepCommandJsonldJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobAppendWorkflowPipelineStepCommandInput::class => WorkflowJobAppendWorkflowPipelineStepCommandInputNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobAppendWorkflowPipelineStepCommandInputJsonld::class => WorkflowJobAppendWorkflowPipelineStepCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobMoveAfterWorkflowPipelineStepCommandJsonldJobRead::class => WorkflowJobMoveAfterWorkflowPipelineStepCommandJsonldJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobMoveAfterWorkflowPipelineStepCommandInput::class => WorkflowJobMoveAfterWorkflowPipelineStepCommandInputNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobMoveAfterWorkflowPipelineStepCommandInputJsonld::class => WorkflowJobMoveAfterWorkflowPipelineStepCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobMoveBeforeWorkflowPipelineStepCommandJsonldJobRead::class => WorkflowJobMoveBeforeWorkflowPipelineStepCommandJsonldJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobMoveBeforeWorkflowPipelineStepCommandInput::class => WorkflowJobMoveBeforeWorkflowPipelineStepCommandInputNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobMoveBeforeWorkflowPipelineStepCommandInputJsonld::class => WorkflowJobMoveBeforeWorkflowPipelineStepCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobReorderWorkflowPipelineStepsCommandJsonldJobRead::class => WorkflowJobReorderWorkflowPipelineStepsCommandJsonldJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobReorderWorkflowPipelineStepsCommandInput::class => WorkflowJobReorderWorkflowPipelineStepsCommandInputNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobReorderWorkflowPipelineStepsCommandInputJsonld::class => WorkflowJobReorderWorkflowPipelineStepsCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobReplaceWorkflowPipelineStepCommandJsonldJobRead::class => WorkflowJobReplaceWorkflowPipelineStepCommandJsonldJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobReplaceWorkflowPipelineStepCommandInput::class => WorkflowJobReplaceWorkflowPipelineStepCommandInputNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobReplaceWorkflowPipelineStepCommandInputJsonld::class => WorkflowJobReplaceWorkflowPipelineStepCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobJsonldJobRead::class => WorkflowJobJsonldJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobJsonldJobReadPipelineRead::class => WorkflowJobJsonldJobReadPipelineReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobActionActionRead::class => WorkflowJobActionActionReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobActionJobRead::class => WorkflowJobActionJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobActionJobReadPipelineRead::class => WorkflowJobActionJobReadPipelineReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobActionJsonldActionRead::class => WorkflowJobActionJsonldActionReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobActionJsonldJobRead::class => WorkflowJobActionJsonldJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobActionJsonldJobReadPipelineRead::class => WorkflowJobActionJsonldJobReadPipelineReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobPipelineJobRead::class => WorkflowJobPipelineJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobPipelineJobReadPipelineRead::class => WorkflowJobPipelineJobReadPipelineReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobPipelineJsonldJobRead::class => WorkflowJobPipelineJsonldJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobPipelineJsonldJobReadPipelineRead::class => WorkflowJobPipelineJsonldJobReadPipelineReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobPipelineStepJobRead::class => WorkflowJobPipelineStepJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobPipelineStepJobReadPipelineRead::class => WorkflowJobPipelineStepJobReadPipelineReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobPipelineStepStepRead::class => WorkflowJobPipelineStepStepReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobPipelineStepReplaceWorkflowPipelineStepCommandJsonldStepRead::class => WorkflowJobPipelineStepReplaceWorkflowPipelineStepCommandJsonldStepReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobPipelineStepReplaceWorkflowPipelineStepCommandInput::class => WorkflowJobPipelineStepReplaceWorkflowPipelineStepCommandInputNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobPipelineStepReplaceWorkflowPipelineStepCommandInputJsonld::class => WorkflowJobPipelineStepReplaceWorkflowPipelineStepCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobPipelineStepJsonldJobRead::class => WorkflowJobPipelineStepJsonldJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobPipelineStepJsonldJobReadPipelineRead::class => WorkflowJobPipelineStepJsonldJobReadPipelineReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobPipelineStepJsonldStepRead::class => WorkflowJobPipelineStepJsonldStepReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkspaceWorkspaceRead::class => WorkspaceWorkspaceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkspaceWorkspaceWrite::class => WorkspaceWorkspaceWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkspaceJsonldWorkspaceRead::class => WorkspaceJsonldWorkspaceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkspaceJsonldWorkspaceWrite::class => WorkspaceJsonldWorkspaceWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\Token::class => TokenNormalizer::class,
+
+            \Gyroscops\Api\Model\Credentials::class => CredentialsNormalizer::class,
+
+            \Gyroscops\Api\Model\Impersonation::class => ImpersonationNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationMeGetLdjsonResponse200::class => AuthenticationMeGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationMeGetLdjsonResponse200HydraView::class => AuthenticationMeGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationMeGetLdjsonResponse200HydraSearch::class => AuthenticationMeGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationMeGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationMeGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOffersIdOptionsGetLdjsonResponse200::class => AuthenticationOffersIdOptionsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOffersIdOptionsGetLdjsonResponse200HydraView::class => AuthenticationOffersIdOptionsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOffersIdOptionsGetLdjsonResponse200HydraSearch::class => AuthenticationOffersIdOptionsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOffersIdOptionsGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationOffersIdOptionsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsGetLdjsonResponse200::class => AuthenticationOrganizationsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsGetLdjsonResponse200HydraView::class => AuthenticationOrganizationsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsGetLdjsonResponse200HydraSearch::class => AuthenticationOrganizationsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationOrganizationsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsIdAuthorizationsGetLdjsonResponse200::class => AuthenticationOrganizationsIdAuthorizationsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsIdAuthorizationsGetLdjsonResponse200HydraView::class => AuthenticationOrganizationsIdAuthorizationsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsIdAuthorizationsGetLdjsonResponse200HydraSearch::class => AuthenticationOrganizationsIdAuthorizationsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsIdAuthorizationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationOrganizationsIdAuthorizationsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsIdExternalCollaboratorsGetLdjsonResponse200::class => AuthenticationOrganizationsIdExternalCollaboratorsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsIdExternalCollaboratorsGetLdjsonResponse200HydraView::class => AuthenticationOrganizationsIdExternalCollaboratorsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsIdExternalCollaboratorsGetLdjsonResponse200HydraSearch::class => AuthenticationOrganizationsIdExternalCollaboratorsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsIdExternalCollaboratorsGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationOrganizationsIdExternalCollaboratorsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsIdUsersGetLdjsonResponse200::class => AuthenticationOrganizationsIdUsersGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsIdUsersGetLdjsonResponse200HydraView::class => AuthenticationOrganizationsIdUsersGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsIdUsersGetLdjsonResponse200HydraSearch::class => AuthenticationOrganizationsIdUsersGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsIdUsersGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationOrganizationsIdUsersGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsIdWorkspacesGetLdjsonResponse200::class => AuthenticationOrganizationsIdWorkspacesGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsIdWorkspacesGetLdjsonResponse200HydraView::class => AuthenticationOrganizationsIdWorkspacesGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsIdWorkspacesGetLdjsonResponse200HydraSearch::class => AuthenticationOrganizationsIdWorkspacesGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsIdWorkspacesGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationOrganizationsIdWorkspacesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationSubscriptionOffersGetLdjsonResponse200::class => AuthenticationSubscriptionOffersGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationSubscriptionOffersGetLdjsonResponse200HydraView::class => AuthenticationSubscriptionOffersGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationSubscriptionOffersGetLdjsonResponse200HydraSearch::class => AuthenticationSubscriptionOffersGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationSubscriptionOffersGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationSubscriptionOffersGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationSubscriptionsGetLdjsonResponse200::class => AuthenticationSubscriptionsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationSubscriptionsGetLdjsonResponse200HydraView::class => AuthenticationSubscriptionsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationSubscriptionsGetLdjsonResponse200HydraSearch::class => AuthenticationSubscriptionsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationSubscriptionsGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationSubscriptionsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationSubscriptionsIdOptionsGetLdjsonResponse200::class => AuthenticationSubscriptionsIdOptionsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationSubscriptionsIdOptionsGetLdjsonResponse200HydraView::class => AuthenticationSubscriptionsIdOptionsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationSubscriptionsIdOptionsGetLdjsonResponse200HydraSearch::class => AuthenticationSubscriptionsIdOptionsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationSubscriptionsIdOptionsGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationSubscriptionsIdOptionsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUserAuthorizationsGetLdjsonResponse200::class => AuthenticationUserAuthorizationsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUserAuthorizationsGetLdjsonResponse200HydraView::class => AuthenticationUserAuthorizationsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUserAuthorizationsGetLdjsonResponse200HydraSearch::class => AuthenticationUserAuthorizationsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUserAuthorizationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationUserAuthorizationsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUsersGetLdjsonResponse200::class => AuthenticationUsersGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUsersGetLdjsonResponse200HydraView::class => AuthenticationUsersGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUsersGetLdjsonResponse200HydraSearch::class => AuthenticationUsersGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUsersGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationUsersGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUsersIdAdditionalOrganizationsGetLdjsonResponse200::class => AuthenticationUsersIdAdditionalOrganizationsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUsersIdAdditionalOrganizationsGetLdjsonResponse200HydraView::class => AuthenticationUsersIdAdditionalOrganizationsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUsersIdAdditionalOrganizationsGetLdjsonResponse200HydraSearch::class => AuthenticationUsersIdAdditionalOrganizationsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUsersIdAdditionalOrganizationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationUsersIdAdditionalOrganizationsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUsersIdAuthorizationsGetLdjsonResponse200::class => AuthenticationUsersIdAuthorizationsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUsersIdAuthorizationsGetLdjsonResponse200HydraView::class => AuthenticationUsersIdAuthorizationsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUsersIdAuthorizationsGetLdjsonResponse200HydraSearch::class => AuthenticationUsersIdAuthorizationsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUsersIdAuthorizationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationUsersIdAuthorizationsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUsersIdWorkspacesGetLdjsonResponse200::class => AuthenticationUsersIdWorkspacesGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUsersIdWorkspacesGetLdjsonResponse200HydraView::class => AuthenticationUsersIdWorkspacesGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUsersIdWorkspacesGetLdjsonResponse200HydraSearch::class => AuthenticationUsersIdWorkspacesGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUsersIdWorkspacesGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationUsersIdWorkspacesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationWorkspacesGetLdjsonResponse200::class => AuthenticationWorkspacesGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationWorkspacesGetLdjsonResponse200HydraView::class => AuthenticationWorkspacesGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationWorkspacesGetLdjsonResponse200HydraSearch::class => AuthenticationWorkspacesGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationWorkspacesGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationWorkspacesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200::class => AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200HydraView::class => AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200HydraSearch::class => AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationWorkspacesIdUsersGetLdjsonResponse200::class => AuthenticationWorkspacesIdUsersGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationWorkspacesIdUsersGetLdjsonResponse200HydraView::class => AuthenticationWorkspacesIdUsersGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationWorkspacesIdUsersGetLdjsonResponse200HydraSearch::class => AuthenticationWorkspacesIdUsersGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationWorkspacesIdUsersGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationWorkspacesIdUsersGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentConfigurationsGetLdjsonResponse200::class => EnvironmentConfigurationsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentConfigurationsGetLdjsonResponse200HydraView::class => EnvironmentConfigurationsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentConfigurationsGetLdjsonResponse200HydraSearch::class => EnvironmentConfigurationsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentConfigurationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => EnvironmentConfigurationsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentEnvironmentsGetLdjsonResponse200::class => EnvironmentEnvironmentsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentEnvironmentsGetLdjsonResponse200HydraView::class => EnvironmentEnvironmentsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentEnvironmentsGetLdjsonResponse200HydraSearch::class => EnvironmentEnvironmentsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentEnvironmentsGetLdjsonResponse200HydraSearchHydraMappingItem::class => EnvironmentEnvironmentsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentSecretsGetLdjsonResponse200::class => EnvironmentSecretsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentSecretsGetLdjsonResponse200HydraView::class => EnvironmentSecretsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentSecretsGetLdjsonResponse200HydraSearch::class => EnvironmentSecretsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentSecretsGetLdjsonResponse200HydraSearchHydraMappingItem::class => EnvironmentSecretsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoInstancesGetLdjsonResponse200::class => GatewayAkeneoInstancesGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoInstancesGetLdjsonResponse200HydraView::class => GatewayAkeneoInstancesGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoInstancesGetLdjsonResponse200HydraSearch::class => GatewayAkeneoInstancesGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoInstancesGetLdjsonResponse200HydraSearchHydraMappingItem::class => GatewayAkeneoInstancesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoInstancesFromUrlGetLdjsonResponse200::class => GatewayAkeneoInstancesFromUrlGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoInstancesFromUrlGetLdjsonResponse200HydraView::class => GatewayAkeneoInstancesFromUrlGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoInstancesFromUrlGetLdjsonResponse200HydraSearch::class => GatewayAkeneoInstancesFromUrlGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoInstancesFromUrlGetLdjsonResponse200HydraSearchHydraMappingItem::class => GatewayAkeneoInstancesFromUrlGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoInstancesOauthStateGetLdjsonResponse200::class => GatewayAkeneoInstancesOauthStateGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoInstancesOauthStateGetLdjsonResponse200HydraView::class => GatewayAkeneoInstancesOauthStateGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoInstancesOauthStateGetLdjsonResponse200HydraSearch::class => GatewayAkeneoInstancesOauthStateGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoInstancesOauthStateGetLdjsonResponse200HydraSearchHydraMappingItem::class => GatewayAkeneoInstancesOauthStateGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsGetLdjsonResponse200::class => GatewayAkeneoLinkedAccountsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraView::class => GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraSearch::class => GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraSearchHydraMappingItem::class => GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsAkeneoUserIdGetLdjsonResponse200::class => GatewayAkeneoLinkedAccountsAkeneoUserIdGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsAkeneoUserIdGetLdjsonResponse200HydraView::class => GatewayAkeneoLinkedAccountsAkeneoUserIdGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsAkeneoUserIdGetLdjsonResponse200HydraSearch::class => GatewayAkeneoLinkedAccountsAkeneoUserIdGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsAkeneoUserIdGetLdjsonResponse200HydraSearchHydraMappingItem::class => GatewayAkeneoLinkedAccountsAkeneoUserIdGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoOauthStatesGetLdjsonResponse200::class => GatewayAkeneoOauthStatesGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoOauthStatesGetLdjsonResponse200HydraView::class => GatewayAkeneoOauthStatesGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoOauthStatesGetLdjsonResponse200HydraSearch::class => GatewayAkeneoOauthStatesGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoOauthStatesGetLdjsonResponse200HydraSearchHydraMappingItem::class => GatewayAkeneoOauthStatesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBody::class => GatewayAkeneoOauthTokenPutBodyNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBodyHydraView::class => GatewayAkeneoOauthTokenPutBodyHydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBodyHydraSearch::class => GatewayAkeneoOauthTokenPutBodyHydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBodyHydraSearchHydraMappingItem::class => GatewayAkeneoOauthTokenPutBodyHydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutLdjsonResponse200::class => GatewayAkeneoOauthTokenPutLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutLdjsonResponse200HydraView::class => GatewayAkeneoOauthTokenPutLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutLdjsonResponse200HydraSearch::class => GatewayAkeneoOauthTokenPutLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutLdjsonResponse200HydraSearchHydraMappingItem::class => GatewayAkeneoOauthTokenPutLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralCodesGetLdjsonResponse200::class => ReferralCodesGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\ReferralCodesGetLdjsonResponse200HydraView::class => ReferralCodesGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralCodesGetLdjsonResponse200HydraSearch::class => ReferralCodesGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralCodesGetLdjsonResponse200HydraSearchHydraMappingItem::class => ReferralCodesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralOnPremiseRequestsGetLdjsonResponse200::class => ReferralOnPremiseRequestsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\ReferralOnPremiseRequestsGetLdjsonResponse200HydraView::class => ReferralOnPremiseRequestsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralOnPremiseRequestsGetLdjsonResponse200HydraSearch::class => ReferralOnPremiseRequestsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralOnPremiseRequestsGetLdjsonResponse200HydraSearchHydraMappingItem::class => ReferralOnPremiseRequestsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralRequestsGetLdjsonResponse200::class => ReferralRequestsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\ReferralRequestsGetLdjsonResponse200HydraView::class => ReferralRequestsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralRequestsGetLdjsonResponse200HydraSearch::class => ReferralRequestsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralRequestsGetLdjsonResponse200HydraSearchHydraMappingItem::class => ReferralRequestsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeActionsGetLdjsonResponse200::class => RuntimeActionsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeActionsGetLdjsonResponse200HydraView::class => RuntimeActionsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeActionsGetLdjsonResponse200HydraSearch::class => RuntimeActionsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeActionsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeActionsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeCompilationsGetLdjsonResponse200::class => RuntimeCompilationsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeCompilationsGetLdjsonResponse200HydraView::class => RuntimeCompilationsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeCompilationsGetLdjsonResponse200HydraSearch::class => RuntimeCompilationsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeCompilationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeCompilationsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsGetLdjsonResponse200::class => RuntimeExecutionPipelineJobsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsGetLdjsonResponse200HydraView::class => RuntimeExecutionPipelineJobsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsGetLdjsonResponse200HydraSearch::class => RuntimeExecutionPipelineJobsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeExecutionPipelineJobsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsIdStepsGetLdjsonResponse200::class => RuntimeExecutionPipelineJobsIdStepsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsIdStepsGetLdjsonResponse200HydraView::class => RuntimeExecutionPipelineJobsIdStepsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsIdStepsGetLdjsonResponse200HydraSearch::class => RuntimeExecutionPipelineJobsIdStepsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsIdStepsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeExecutionPipelineJobsIdStepsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsGetLdjsonResponse200::class => RuntimeExecutionsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsGetLdjsonResponse200HydraView::class => RuntimeExecutionsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsGetLdjsonResponse200HydraSearch::class => RuntimeExecutionsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeExecutionsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsPipelinesGetLdjsonResponse200::class => RuntimeExecutionsPipelinesGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsPipelinesGetLdjsonResponse200HydraView::class => RuntimeExecutionsPipelinesGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsPipelinesGetLdjsonResponse200HydraSearch::class => RuntimeExecutionsPipelinesGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsPipelinesGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeExecutionsPipelinesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200::class => RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraView::class => RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraSearch::class => RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsGetLdjsonResponse200::class => RuntimeExecutionsWorkflowsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsGetLdjsonResponse200HydraView::class => RuntimeExecutionsWorkflowsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsGetLdjsonResponse200HydraSearch::class => RuntimeExecutionsWorkflowsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeExecutionsWorkflowsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200::class => RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200HydraView::class => RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200HydraSearch::class => RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200::class => RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200HydraView::class => RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200HydraSearch::class => RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200::class => RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200HydraView::class => RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200HydraSearch::class => RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelineStepProbesGetLdjsonResponse200::class => RuntimePipelineStepProbesGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelineStepProbesGetLdjsonResponse200HydraView::class => RuntimePipelineStepProbesGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelineStepProbesGetLdjsonResponse200HydraSearch::class => RuntimePipelineStepProbesGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelineStepProbesGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimePipelineStepProbesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelineStepsGetLdjsonResponse200::class => RuntimePipelineStepsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelineStepsGetLdjsonResponse200HydraView::class => RuntimePipelineStepsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelineStepsGetLdjsonResponse200HydraSearch::class => RuntimePipelineStepsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelineStepsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimePipelineStepsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesGetLdjsonResponse200::class => RuntimePipelinesGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesGetLdjsonResponse200HydraView::class => RuntimePipelinesGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesGetLdjsonResponse200HydraSearch::class => RuntimePipelinesGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimePipelinesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesStepsIdProbesGetLdjsonResponse200::class => RuntimePipelinesStepsIdProbesGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesStepsIdProbesGetLdjsonResponse200HydraView::class => RuntimePipelinesStepsIdProbesGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesStepsIdProbesGetLdjsonResponse200HydraSearch::class => RuntimePipelinesStepsIdProbesGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesStepsIdProbesGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimePipelinesStepsIdProbesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesIdCompilationsGetLdjsonResponse200::class => RuntimePipelinesIdCompilationsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesIdCompilationsGetLdjsonResponse200HydraView::class => RuntimePipelinesIdCompilationsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesIdCompilationsGetLdjsonResponse200HydraSearch::class => RuntimePipelinesIdCompilationsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesIdCompilationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimePipelinesIdCompilationsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesIdSchedulesGetLdjsonResponse200::class => RuntimePipelinesIdSchedulesGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesIdSchedulesGetLdjsonResponse200HydraView::class => RuntimePipelinesIdSchedulesGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesIdSchedulesGetLdjsonResponse200HydraSearch::class => RuntimePipelinesIdSchedulesGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesIdSchedulesGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimePipelinesIdSchedulesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesIdStepsGetLdjsonResponse200::class => RuntimePipelinesIdStepsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesIdStepsGetLdjsonResponse200HydraView::class => RuntimePipelinesIdStepsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesIdStepsGetLdjsonResponse200HydraSearch::class => RuntimePipelinesIdStepsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesIdStepsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimePipelinesIdStepsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeSchedulesGetLdjsonResponse200::class => RuntimeSchedulesGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeSchedulesGetLdjsonResponse200HydraView::class => RuntimeSchedulesGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeSchedulesGetLdjsonResponse200HydraSearch::class => RuntimeSchedulesGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeSchedulesGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeSchedulesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeSchedulesIdExecutionsGetLdjsonResponse200::class => RuntimeSchedulesIdExecutionsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeSchedulesIdExecutionsGetLdjsonResponse200HydraView::class => RuntimeSchedulesIdExecutionsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeSchedulesIdExecutionsGetLdjsonResponse200HydraSearch::class => RuntimeSchedulesIdExecutionsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeSchedulesIdExecutionsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeSchedulesIdExecutionsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeTemplatesGetLdjsonResponse200::class => RuntimeTemplatesGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeTemplatesGetLdjsonResponse200HydraView::class => RuntimeTemplatesGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeTemplatesGetLdjsonResponse200HydraSearch::class => RuntimeTemplatesGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeTemplatesGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeTemplatesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowJobPipelinesWorkflowStepsGetLdjsonResponse200::class => RuntimeWorkflowJobPipelinesWorkflowStepsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowJobPipelinesWorkflowStepsGetLdjsonResponse200HydraView::class => RuntimeWorkflowJobPipelinesWorkflowStepsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowJobPipelinesWorkflowStepsGetLdjsonResponse200HydraSearch::class => RuntimeWorkflowJobPipelinesWorkflowStepsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowJobPipelinesWorkflowStepsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeWorkflowJobPipelinesWorkflowStepsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsGetLdjsonResponse200::class => RuntimeWorkflowsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsGetLdjsonResponse200HydraView::class => RuntimeWorkflowsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsGetLdjsonResponse200HydraSearch::class => RuntimeWorkflowsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeWorkflowsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsActionsGetLdjsonResponse200::class => RuntimeWorkflowsActionsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsActionsGetLdjsonResponse200HydraView::class => RuntimeWorkflowsActionsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsActionsGetLdjsonResponse200HydraSearch::class => RuntimeWorkflowsActionsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsActionsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeWorkflowsActionsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsJobsPipelineStepsGetLdjsonResponse200::class => RuntimeWorkflowsJobsPipelineStepsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsJobsPipelineStepsGetLdjsonResponse200HydraView::class => RuntimeWorkflowsJobsPipelineStepsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsJobsPipelineStepsGetLdjsonResponse200HydraSearch::class => RuntimeWorkflowsJobsPipelineStepsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsJobsPipelineStepsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeWorkflowsJobsPipelineStepsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsIdJobsGetLdjsonResponse200::class => RuntimeWorkflowsIdJobsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsIdJobsGetLdjsonResponse200HydraView::class => RuntimeWorkflowsIdJobsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsIdJobsGetLdjsonResponse200HydraSearch::class => RuntimeWorkflowsIdJobsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsIdJobsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeWorkflowsIdJobsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsWorkflowJobsCodePipelineStepsGetLdjsonResponse200::class => RuntimeWorkflowsWorkflowJobsCodePipelineStepsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsWorkflowJobsCodePipelineStepsGetLdjsonResponse200HydraView::class => RuntimeWorkflowsWorkflowJobsCodePipelineStepsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsWorkflowJobsCodePipelineStepsGetLdjsonResponse200HydraSearch::class => RuntimeWorkflowsWorkflowJobsCodePipelineStepsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsWorkflowJobsCodePipelineStepsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeWorkflowsWorkflowJobsCodePipelineStepsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Jane\Component\JsonSchemaRuntime\Reference::class => \Gyroscops\Api\Runtime\Normalizer\ReferenceNormalizer::class,
+        ];
+        protected $normalizersCache = [];
+
+        public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
+        {
+            return array_key_exists($type, $this->normalizers);
+        }
+
+        public function supportsNormalization($data, $format = null, array $context = []): bool
+        {
+            return is_object($data) && array_key_exists(get_class($data), $this->normalizers);
+        }
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $normalizerClass = $this->normalizers[get_class($object)];
+            $normalizer = $this->getNormalizer($normalizerClass);
+
+            return $normalizer->normalize($object, $format, $context);
+        }
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            $denormalizerClass = $this->normalizers[$type];
+            $denormalizer = $this->getNormalizer($denormalizerClass);
+
+            return $denormalizer->denormalize($data, $type, $format, $context);
+        }
+
+        private function getNormalizer(string $normalizerClass)
+        {
+            return $this->normalizersCache[$normalizerClass] ?? $this->initNormalizer($normalizerClass);
+        }
+
+        private function initNormalizer(string $normalizerClass)
+        {
+            $normalizer = new $normalizerClass();
+            $normalizer->setNormalizer($this->normalizer);
+            $normalizer->setDenormalizer($this->denormalizer);
+            $this->normalizersCache[$normalizerClass] = $normalizer;
+
+            return $normalizer;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\Gyroscops\Api\Model\AbstractPipelineJsonldExecutionPipelineStepRead::class => false, \Gyroscops\Api\Model\Action::class => false, \Gyroscops\Api\Model\ActionActionRead::class => false, \Gyroscops\Api\Model\ActionJsonld::class => false, \Gyroscops\Api\Model\ActionJsonldActionRead::class => false, \Gyroscops\Api\Model\AkeneoInstance::class => false, \Gyroscops\Api\Model\AkeneoInstanceAkeneoInstanceInput::class => false, \Gyroscops\Api\Model\AkeneoInstanceAkeneoInstanceInputJsonld::class => false, \Gyroscops\Api\Model\AkeneoInstanceJsonld::class => false, \Gyroscops\Api\Model\AkeneoLinkedAccount::class => false, \Gyroscops\Api\Model\AkeneoLinkedAccountAkeneoLinkedAccountsInput::class => false, \Gyroscops\Api\Model\AkeneoLinkedAccountAkeneoLinkedAccountsInputJsonld::class => false, \Gyroscops\Api\Model\AkeneoLinkedAccountJsonld::class => false, \Gyroscops\Api\Model\AkeneoOauthTokenRead::class => false, \Gyroscops\Api\Model\AkeneoOauthTokenOauthStateInput::class => false, \Gyroscops\Api\Model\AkeneoOauthTokenOauthStateInputJsonld::class => false, \Gyroscops\Api\Model\AkeneoOauthTokenOauthStateOutputJsonldRead::class => false, \Gyroscops\Api\Model\AkeneoOauthTokenOauthTokenInput::class => false, \Gyroscops\Api\Model\AkeneoOauthTokenOauthTokenInputJsonld::class => false, \Gyroscops\Api\Model\AkeneoOauthTokenOauthTokenOutputJsonldRead::class => false, \Gyroscops\Api\Model\AkeneoOauthTokenJsonldRead::class => false, \Gyroscops\Api\Model\BigDecimal::class => false, \Gyroscops\Api\Model\BigDecimalJsonld::class => false, \Gyroscops\Api\Model\BigInteger::class => false, \Gyroscops\Api\Model\BigIntegerJsonld::class => false, \Gyroscops\Api\Model\BigNumber::class => false, \Gyroscops\Api\Model\BigNumberJsonld::class => false, \Gyroscops\Api\Model\Buyable::class => false, \Gyroscops\Api\Model\BuyableJsonld::class => false, \Gyroscops\Api\Model\BuyablePrice::class => false, \Gyroscops\Api\Model\BuyablePriceRead::class => false, \Gyroscops\Api\Model\BuyablePriceJsonld::class => false, \Gyroscops\Api\Model\BuyablePriceJsonldRead::class => false, \Gyroscops\Api\Model\ColorJsonldRead::class => false, \Gyroscops\Api\Model\CompilationCompilationRead::class => false, \Gyroscops\Api\Model\CompilationJsonldCompilationRead::class => false, \Gyroscops\Api\Model\Composer::class => false, \Gyroscops\Api\Model\ComposerJsonld::class => false, \Gyroscops\Api\Model\ComposerAuthentication::class => false, \Gyroscops\Api\Model\ComposerAuthenticationJsonld::class => false, \Gyroscops\Api\Model\ComposerAutoload::class => false, \Gyroscops\Api\Model\ComposerAutoloadJsonld::class => false, \Gyroscops\Api\Model\ComposerRepository::class => false, \Gyroscops\Api\Model\ComposerRepositoryJsonld::class => false, \Gyroscops\Api\Model\ConfigurationConfigurationUpdate::class => false, \Gyroscops\Api\Model\ConfigurationConfigurationView::class => false, \Gyroscops\Api\Model\ConfigurationChangeConfigurationValueInputConfigurationUpdate::class => false, \Gyroscops\Api\Model\ConfigurationChangeConfigurationValueInputJsonldConfigurationUpdate::class => false, \Gyroscops\Api\Model\ConfigurationCreateConfigurationInputConfigurationCreate::class => false, \Gyroscops\Api\Model\ConfigurationCreateConfigurationInputJsonldConfigurationCreate::class => false, \Gyroscops\Api\Model\ConfigurationRemoveConfigurationValueInputConfigurationUpdate::class => false, \Gyroscops\Api\Model\ConfigurationRemoveConfigurationValueInputJsonldConfigurationUpdate::class => false, \Gyroscops\Api\Model\ConfigurationJsonldConfigurationUpdate::class => false, \Gyroscops\Api\Model\ConfigurationJsonldConfigurationView::class => false, \Gyroscops\Api\Model\Context::class => false, \Gyroscops\Api\Model\ContextJsonld::class => false, \Gyroscops\Api\Model\CreateSecretInput::class => false, \Gyroscops\Api\Model\CreateSecretInputJsonld::class => false, \Gyroscops\Api\Model\Currency::class => false, \Gyroscops\Api\Model\CurrencyJsonld::class => false, \Gyroscops\Api\Model\EnvironmentEnvironmentUpdate::class => false, \Gyroscops\Api\Model\EnvironmentEnvironmentView::class => false, \Gyroscops\Api\Model\EnvironmentVariableViewEnvironmentView::class => false, \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConfigurationInputEnvironmentUpdate::class => false, \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConfigurationInputJsonldEnvironmentUpdate::class => false, \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConstantInputEnvironmentUpdate::class => false, \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConstantInputJsonldEnvironmentUpdate::class => false, \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromSecretInputEnvironmentUpdate::class => false, \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromSecretInputJsonldEnvironmentUpdate::class => false, \Gyroscops\Api\Model\EnvironmentCreateEnvironmentInputEnvironmentCreate::class => false, \Gyroscops\Api\Model\EnvironmentCreateEnvironmentInputJsonldEnvironmentCreate::class => false, \Gyroscops\Api\Model\EnvironmentJsonldEnvironmentUpdate::class => false, \Gyroscops\Api\Model\EnvironmentJsonldEnvironmentView::class => false, \Gyroscops\Api\Model\EnvironmentJsonldVariableViewEnvironmentView::class => false, \Gyroscops\Api\Model\ExecutionExecutionRead::class => false, \Gyroscops\Api\Model\ExecutionDeclarePipelineExecutionCommandJsonldExecutionRead::class => false, \Gyroscops\Api\Model\ExecutionDeclarePipelineExecutionCommandInput::class => false, \Gyroscops\Api\Model\ExecutionDeclarePipelineExecutionCommandInputJsonld::class => false, \Gyroscops\Api\Model\ExecutionInterruptPipelineExecutionCommandJsonldExecutionRead::class => false, \Gyroscops\Api\Model\ExecutionInterruptPipelineExecutionCommandInputJsonld::class => false, \Gyroscops\Api\Model\ExecutionResumePipelineExecutionCommandJsonldExecutionRead::class => false, \Gyroscops\Api\Model\ExecutionResumePipelineExecutionCommandInputJsonld::class => false, \Gyroscops\Api\Model\ExecutionTerminatePipelineExecutionCommandJsonldExecutionRead::class => false, \Gyroscops\Api\Model\ExecutionTerminatePipelineExecutionCommandInput::class => false, \Gyroscops\Api\Model\ExecutionTerminatePipelineExecutionCommandInputJsonld::class => false, \Gyroscops\Api\Model\ExecutionJsonldExecutionRead::class => false, \Gyroscops\Api\Model\ExecutionActionExecutionActionRead::class => false, \Gyroscops\Api\Model\ExecutionActionJsonldExecutionActionRead::class => false, \Gyroscops\Api\Model\ExecutionPipelineExecutionPipelineRead::class => false, \Gyroscops\Api\Model\ExecutionPipelineJsonldExecutionPipelineRead::class => false, \Gyroscops\Api\Model\ExecutionPipelineJob::class => false, \Gyroscops\Api\Model\ExecutionPipelineJobJsonld::class => false, \Gyroscops\Api\Model\ExecutionPipelineStepExecutionPipelineStepRead::class => false, \Gyroscops\Api\Model\ExecutionPipelineStepJsonldExecutionPipelineStepRead::class => false, \Gyroscops\Api\Model\ExecutionWorkflowExecutionWorkflowRead::class => false, \Gyroscops\Api\Model\ExecutionWorkflowInterruptWorkflowExecutionCommandJsonldExecutionWorkflowRead::class => false, \Gyroscops\Api\Model\ExecutionWorkflowInterruptWorkflowExecutionCommandInputJsonld::class => false, \Gyroscops\Api\Model\ExecutionWorkflowResumeWorkflowExecutionCommandJsonldExecutionWorkflowRead::class => false, \Gyroscops\Api\Model\ExecutionWorkflowResumeWorkflowExecutionCommandInputJsonld::class => false, \Gyroscops\Api\Model\ExecutionWorkflowTerminateWorkflowExecutionCommandJsonldExecutionWorkflowRead::class => false, \Gyroscops\Api\Model\ExecutionWorkflowTerminateWorkflowExecutionCommandInput::class => false, \Gyroscops\Api\Model\ExecutionWorkflowTerminateWorkflowExecutionCommandInputJsonld::class => false, \Gyroscops\Api\Model\ExecutionWorkflowJsonldExecutionWorkflowRead::class => false, \Gyroscops\Api\Model\ExecutionWorkflowJobExecutionWorkflowJobRead::class => false, \Gyroscops\Api\Model\ExecutionWorkflowJobJsonldExecutionWorkflowJobRead::class => false, \Gyroscops\Api\Model\ExecutionWorkflowJobAction::class => false, \Gyroscops\Api\Model\ExecutionWorkflowJobActionJsonld::class => false, \Gyroscops\Api\Model\Job::class => false, \Gyroscops\Api\Model\JobJsonld::class => false, \Gyroscops\Api\Model\Money::class => false, \Gyroscops\Api\Model\MoneyJsonld::class => false, \Gyroscops\Api\Model\OnPremiseRequestOnPremiseRequestRead::class => false, \Gyroscops\Api\Model\OnPremiseRequestOnPremiseRequestWrite::class => false, \Gyroscops\Api\Model\OnPremiseRequestJsonldOnPremiseRequestRead::class => false, \Gyroscops\Api\Model\OnPremiseRequestJsonldOnPremiseRequestWrite::class => false, \Gyroscops\Api\Model\OpaqueInterfaceJsonldSecretUpdate::class => false, \Gyroscops\Api\Model\Option::class => false, \Gyroscops\Api\Model\OptionJsonld::class => false, \Gyroscops\Api\Model\OrganizationOrganizationRead::class => false, \Gyroscops\Api\Model\OrganizationOrganizationWrite::class => false, \Gyroscops\Api\Model\OrganizationJsonldAddCollaborators::class => false, \Gyroscops\Api\Model\OrganizationJsonldOrganizationRead::class => false, \Gyroscops\Api\Model\OrganizationJsonldOrganizationWrite::class => false, \Gyroscops\Api\Model\Pipeline::class => false, \Gyroscops\Api\Model\PipelinePipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineAddAfterPipelineStepCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineAddAfterPipelineStepCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineAddBeforePipelineStepCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineAddBeforePipelineStepCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineAddPipelineComposerAuthCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineAddPipelineComposerAuthCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineAddPipelineComposerPSR4AutoloadCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineAddPipelineComposerPSR4AutoloadCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineAddPipelineComposerPackageCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineAddPipelineComposerPackageCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineAddPipelineComposerRepositoryCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineAddPipelineComposerRepositoryCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineAddPipelineStepProbeCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineAddPipelineStepProbeCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineAppendPipelineStepCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineAppendPipelineStepCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineCompilePipelineCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineCompilePipelineCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineDeclarePipelineCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineDeclarePipelineCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineDeclarePipelineScheduleImmediateCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineDeclarePipelineScheduleImmediateCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineDeclarePipelineScheduleOnceCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineDeclarePipelineScheduleOnceCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineMoveAfterPipelineStepCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineMoveAfterPipelineStepCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineMoveBeforePipelineStepCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineMoveBeforePipelineStepCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineRemovePipelineComposerAuthCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineRemovePipelineComposerAuthCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineRemovePipelineComposerPSR4AutoloadCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineRemovePipelineComposerPSR4AutoloadCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineRemovePipelineComposerPackageCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineRemovePipelineComposerPackageCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineRemovePipelineComposerRepositoryCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineRemovePipelineComposerRepositoryCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineRemovePipelineStepProbeCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineReplacePipelineStepCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineReplacePipelineStepCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineJsonld::class => false, \Gyroscops\Api\Model\PipelineJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineStepStepRead::class => false, \Gyroscops\Api\Model\PipelineStepReplaceWorkflowPipelineStepCommandJsonldStepRead::class => false, \Gyroscops\Api\Model\PipelineStepReplaceWorkflowPipelineStepCommandInput::class => false, \Gyroscops\Api\Model\PipelineStepReplaceWorkflowPipelineStepCommandInputJsonld::class => false, \Gyroscops\Api\Model\PipelineStepJsonldStepRead::class => false, \Gyroscops\Api\Model\PipelineStepProbeStepProbeRead::class => false, \Gyroscops\Api\Model\PipelineStepProbeJsonldStepProbeRead::class => false, \Gyroscops\Api\Model\Price::class => false, \Gyroscops\Api\Model\PriceJsonld::class => false, \Gyroscops\Api\Model\Probe::class => false, \Gyroscops\Api\Model\ProbeJsonld::class => false, \Gyroscops\Api\Model\ReferralCodeReferralCodeRead::class => false, \Gyroscops\Api\Model\ReferralCodeReferralCodeWrite::class => false, \Gyroscops\Api\Model\ReferralCodeJsonldReferralCodeRead::class => false, \Gyroscops\Api\Model\ReferralCodeJsonldReferralCodeWrite::class => false, \Gyroscops\Api\Model\ReferralRequestReferralRequestRead::class => false, \Gyroscops\Api\Model\ReferralRequestReferralRequestInput::class => false, \Gyroscops\Api\Model\ReferralRequestReferralRequestInputJsonld::class => false, \Gyroscops\Api\Model\ReferralRequestJsonldReferralRequestRead::class => false, \Gyroscops\Api\Model\ScheduleScheduleRead::class => false, \Gyroscops\Api\Model\ScheduleJsonld::class => false, \Gyroscops\Api\Model\ScheduleJsonldScheduleRead::class => false, \Gyroscops\Api\Model\ScheduleTypeJsonldScheduleRead::class => false, \Gyroscops\Api\Model\SecretSecretRead::class => false, \Gyroscops\Api\Model\SecretChangeSecretValueInputSecretUpdate::class => false, \Gyroscops\Api\Model\SecretChangeSecretValueInputJsonldSecretUpdate::class => false, \Gyroscops\Api\Model\SecretCreateSecretInputSecretCreate::class => false, \Gyroscops\Api\Model\SecretCreateSecretInputJsonldSecretCreate::class => false, \Gyroscops\Api\Model\SecretRemoveSecretValueInputSecretUpdate::class => false, \Gyroscops\Api\Model\SecretRemoveSecretValueInputJsonldSecretUpdate::class => false, \Gyroscops\Api\Model\SecretJsonldSecretRead::class => false, \Gyroscops\Api\Model\SecretJsonldSecretUpdate::class => false, \Gyroscops\Api\Model\Step::class => false, \Gyroscops\Api\Model\StepJsonld::class => false, \Gyroscops\Api\Model\Subscription::class => false, \Gyroscops\Api\Model\SubscriptionJsonld::class => false, \Gyroscops\Api\Model\SubscriptionOfferRead::class => false, \Gyroscops\Api\Model\SubscriptionOfferWrite::class => false, \Gyroscops\Api\Model\SubscriptionOfferJsonldRead::class => false, \Gyroscops\Api\Model\SubscriptionOfferJsonldWrite::class => false, \Gyroscops\Api\Model\SubscriptionOption::class => false, \Gyroscops\Api\Model\SubscriptionOptionJsonld::class => false, \Gyroscops\Api\Model\SubscriptionType::class => false, \Gyroscops\Api\Model\SubscriptionTypeJsonld::class => false, \Gyroscops\Api\Model\SubscriptionTypeJsonldRead::class => false, \Gyroscops\Api\Model\Template::class => false, \Gyroscops\Api\Model\TemplateTemplateCreate::class => false, \Gyroscops\Api\Model\TemplateTemplateList::class => false, \Gyroscops\Api\Model\TemplateTemplateView::class => false, \Gyroscops\Api\Model\TemplateDeclareSatelliteTemplateInput::class => false, \Gyroscops\Api\Model\TemplateDeclareSatelliteTemplateInputJsonld::class => false, \Gyroscops\Api\Model\TemplateJsonld::class => false, \Gyroscops\Api\Model\TemplateJsonldTemplateCreate::class => false, \Gyroscops\Api\Model\TemplateJsonldTemplateList::class => false, \Gyroscops\Api\Model\TemplateJsonldTemplateUpdate::class => false, \Gyroscops\Api\Model\TemplateJsonldTemplateView::class => false, \Gyroscops\Api\Model\UserUserRead::class => false, \Gyroscops\Api\Model\UserUserWrite::class => false, \Gyroscops\Api\Model\UserJsonldUserRead::class => false, \Gyroscops\Api\Model\UserJsonldUserWrite::class => false, \Gyroscops\Api\Model\UserAuthorizationAuthorizationRead::class => false, \Gyroscops\Api\Model\UserAuthorizationAuthorizationWrite::class => false, \Gyroscops\Api\Model\UserAuthorizationJsonldAuthorizationRead::class => false, \Gyroscops\Api\Model\UserAuthorizationJsonldAuthorizationWrite::class => false, \Gyroscops\Api\Model\VariableVariableViewEnvironmentView::class => false, \Gyroscops\Api\Model\VariableJsonldVariableViewEnvironmentView::class => false, \Gyroscops\Api\Model\VariableFromConfigurationVariableUpdate::class => false, \Gyroscops\Api\Model\VariableFromConfigurationVariableViewEnvironmentView::class => false, \Gyroscops\Api\Model\VariableFromConfigurationJsonldVariableUpdate::class => false, \Gyroscops\Api\Model\VariableFromConfigurationJsonldVariableViewEnvironmentView::class => false, \Gyroscops\Api\Model\VariableFromConfigurationInputEnvironmentUpdate::class => false, \Gyroscops\Api\Model\VariableFromConfigurationInputJsonldEnvironmentUpdate::class => false, \Gyroscops\Api\Model\VariableFromConstantVariableUpdate::class => false, \Gyroscops\Api\Model\VariableFromConstantVariableViewEnvironmentView::class => false, \Gyroscops\Api\Model\VariableFromConstantJsonldVariableUpdate::class => false, \Gyroscops\Api\Model\VariableFromConstantJsonldVariableViewEnvironmentView::class => false, \Gyroscops\Api\Model\VariableFromConstantInputEnvironmentUpdate::class => false, \Gyroscops\Api\Model\VariableFromConstantInputJsonldEnvironmentUpdate::class => false, \Gyroscops\Api\Model\VariableFromSecretVariableUpdate::class => false, \Gyroscops\Api\Model\VariableFromSecretVariableViewEnvironmentView::class => false, \Gyroscops\Api\Model\VariableFromSecretJsonldVariableUpdate::class => false, \Gyroscops\Api\Model\VariableFromSecretJsonldVariableViewEnvironmentView::class => false, \Gyroscops\Api\Model\VariableFromSecretInputEnvironmentUpdate::class => false, \Gyroscops\Api\Model\VariableFromSecretInputJsonldEnvironmentUpdate::class => false, \Gyroscops\Api\Model\WorkflowWorkflowRead::class => false, \Gyroscops\Api\Model\WorkflowCompileWorkflowCommandJsonldWorkflowRead::class => false, \Gyroscops\Api\Model\WorkflowCompileWorkflowCommandInputJsonld::class => false, \Gyroscops\Api\Model\WorkflowDeclareWorkflowCommandJsonldWorkflowRead::class => false, \Gyroscops\Api\Model\WorkflowDeclareWorkflowCommandInput::class => false, \Gyroscops\Api\Model\WorkflowDeclareWorkflowCommandInputJsonld::class => false, \Gyroscops\Api\Model\WorkflowDeclareWorkflowScheduleCrontabCommandJsonldWorkflowRead::class => false, \Gyroscops\Api\Model\WorkflowDeclareWorkflowScheduleCrontabCommandInput::class => false, \Gyroscops\Api\Model\WorkflowDeclareWorkflowScheduleCrontabCommandInputJsonld::class => false, \Gyroscops\Api\Model\WorkflowDeclareWorkflowScheduleImmediateCommandJsonldWorkflowRead::class => false, \Gyroscops\Api\Model\WorkflowDeclareWorkflowScheduleImmediateCommandInput::class => false, \Gyroscops\Api\Model\WorkflowDeclareWorkflowScheduleImmediateCommandInputJsonld::class => false, \Gyroscops\Api\Model\WorkflowRemoveWorkflowCommandJsonldWorkflowRead::class => false, \Gyroscops\Api\Model\WorkflowRemoveWorkflowCommandInputJsonld::class => false, \Gyroscops\Api\Model\WorkflowJsonldWorkflowRead::class => false, \Gyroscops\Api\Model\WorkflowJobJobRead::class => false, \Gyroscops\Api\Model\WorkflowJobJobReadPipelineRead::class => false, \Gyroscops\Api\Model\WorkflowJobAddAfterWorkflowPipelineStepCommandJsonldJobRead::class => false, \Gyroscops\Api\Model\WorkflowJobAddAfterWorkflowPipelineStepCommandInput::class => false, \Gyroscops\Api\Model\WorkflowJobAddAfterWorkflowPipelineStepCommandInputJsonld::class => false, \Gyroscops\Api\Model\WorkflowJobAddBeforeWorkflowPipelineStepCommandJsonldJobRead::class => false, \Gyroscops\Api\Model\WorkflowJobAddBeforeWorkflowPipelineStepCommandInput::class => false, \Gyroscops\Api\Model\WorkflowJobAddBeforeWorkflowPipelineStepCommandInputJsonld::class => false, \Gyroscops\Api\Model\WorkflowJobAppendWorkflowPipelineStepCommandJsonldJobRead::class => false, \Gyroscops\Api\Model\WorkflowJobAppendWorkflowPipelineStepCommandInput::class => false, \Gyroscops\Api\Model\WorkflowJobAppendWorkflowPipelineStepCommandInputJsonld::class => false, \Gyroscops\Api\Model\WorkflowJobMoveAfterWorkflowPipelineStepCommandJsonldJobRead::class => false, \Gyroscops\Api\Model\WorkflowJobMoveAfterWorkflowPipelineStepCommandInput::class => false, \Gyroscops\Api\Model\WorkflowJobMoveAfterWorkflowPipelineStepCommandInputJsonld::class => false, \Gyroscops\Api\Model\WorkflowJobMoveBeforeWorkflowPipelineStepCommandJsonldJobRead::class => false, \Gyroscops\Api\Model\WorkflowJobMoveBeforeWorkflowPipelineStepCommandInput::class => false, \Gyroscops\Api\Model\WorkflowJobMoveBeforeWorkflowPipelineStepCommandInputJsonld::class => false, \Gyroscops\Api\Model\WorkflowJobReorderWorkflowPipelineStepsCommandJsonldJobRead::class => false, \Gyroscops\Api\Model\WorkflowJobReorderWorkflowPipelineStepsCommandInput::class => false, \Gyroscops\Api\Model\WorkflowJobReorderWorkflowPipelineStepsCommandInputJsonld::class => false, \Gyroscops\Api\Model\WorkflowJobReplaceWorkflowPipelineStepCommandJsonldJobRead::class => false, \Gyroscops\Api\Model\WorkflowJobReplaceWorkflowPipelineStepCommandInput::class => false, \Gyroscops\Api\Model\WorkflowJobReplaceWorkflowPipelineStepCommandInputJsonld::class => false, \Gyroscops\Api\Model\WorkflowJobJsonldJobRead::class => false, \Gyroscops\Api\Model\WorkflowJobJsonldJobReadPipelineRead::class => false, \Gyroscops\Api\Model\WorkflowJobActionActionRead::class => false, \Gyroscops\Api\Model\WorkflowJobActionJobRead::class => false, \Gyroscops\Api\Model\WorkflowJobActionJobReadPipelineRead::class => false, \Gyroscops\Api\Model\WorkflowJobActionJsonldActionRead::class => false, \Gyroscops\Api\Model\WorkflowJobActionJsonldJobRead::class => false, \Gyroscops\Api\Model\WorkflowJobActionJsonldJobReadPipelineRead::class => false, \Gyroscops\Api\Model\WorkflowJobPipelineJobRead::class => false, \Gyroscops\Api\Model\WorkflowJobPipelineJobReadPipelineRead::class => false, \Gyroscops\Api\Model\WorkflowJobPipelineJsonldJobRead::class => false, \Gyroscops\Api\Model\WorkflowJobPipelineJsonldJobReadPipelineRead::class => false, \Gyroscops\Api\Model\WorkflowJobPipelineStepJobRead::class => false, \Gyroscops\Api\Model\WorkflowJobPipelineStepJobReadPipelineRead::class => false, \Gyroscops\Api\Model\WorkflowJobPipelineStepStepRead::class => false, \Gyroscops\Api\Model\WorkflowJobPipelineStepReplaceWorkflowPipelineStepCommandJsonldStepRead::class => false, \Gyroscops\Api\Model\WorkflowJobPipelineStepReplaceWorkflowPipelineStepCommandInput::class => false, \Gyroscops\Api\Model\WorkflowJobPipelineStepReplaceWorkflowPipelineStepCommandInputJsonld::class => false, \Gyroscops\Api\Model\WorkflowJobPipelineStepJsonldJobRead::class => false, \Gyroscops\Api\Model\WorkflowJobPipelineStepJsonldJobReadPipelineRead::class => false, \Gyroscops\Api\Model\WorkflowJobPipelineStepJsonldStepRead::class => false, \Gyroscops\Api\Model\WorkspaceWorkspaceRead::class => false, \Gyroscops\Api\Model\WorkspaceWorkspaceWrite::class => false, \Gyroscops\Api\Model\WorkspaceJsonldWorkspaceRead::class => false, \Gyroscops\Api\Model\WorkspaceJsonldWorkspaceWrite::class => false, \Gyroscops\Api\Model\Token::class => false, \Gyroscops\Api\Model\Credentials::class => false, \Gyroscops\Api\Model\Impersonation::class => false, \Gyroscops\Api\Model\AuthenticationMeGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationMeGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationMeGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationMeGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationOffersIdOptionsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationOffersIdOptionsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationOffersIdOptionsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationOffersIdOptionsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsIdAuthorizationsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsIdAuthorizationsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsIdAuthorizationsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsIdAuthorizationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsIdExternalCollaboratorsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsIdExternalCollaboratorsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsIdExternalCollaboratorsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsIdExternalCollaboratorsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsIdUsersGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsIdUsersGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsIdUsersGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsIdUsersGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsIdWorkspacesGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsIdWorkspacesGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsIdWorkspacesGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsIdWorkspacesGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationSubscriptionOffersGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationSubscriptionOffersGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationSubscriptionOffersGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationSubscriptionOffersGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationSubscriptionsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationSubscriptionsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationSubscriptionsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationSubscriptionsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationSubscriptionsIdOptionsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationSubscriptionsIdOptionsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationSubscriptionsIdOptionsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationSubscriptionsIdOptionsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationUserAuthorizationsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationUserAuthorizationsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationUserAuthorizationsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationUserAuthorizationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationUsersGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationUsersGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationUsersGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationUsersGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationUsersIdAdditionalOrganizationsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationUsersIdAdditionalOrganizationsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationUsersIdAdditionalOrganizationsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationUsersIdAdditionalOrganizationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationUsersIdAuthorizationsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationUsersIdAuthorizationsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationUsersIdAuthorizationsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationUsersIdAuthorizationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationUsersIdWorkspacesGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationUsersIdWorkspacesGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationUsersIdWorkspacesGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationUsersIdWorkspacesGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationWorkspacesGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationWorkspacesGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationWorkspacesGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationWorkspacesGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationWorkspacesIdUsersGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationWorkspacesIdUsersGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationWorkspacesIdUsersGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationWorkspacesIdUsersGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\EnvironmentConfigurationsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\EnvironmentConfigurationsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\EnvironmentConfigurationsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\EnvironmentConfigurationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\EnvironmentEnvironmentsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\EnvironmentEnvironmentsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\EnvironmentEnvironmentsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\EnvironmentEnvironmentsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\EnvironmentSecretsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\EnvironmentSecretsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\EnvironmentSecretsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\EnvironmentSecretsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\GatewayAkeneoInstancesGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\GatewayAkeneoInstancesGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\GatewayAkeneoInstancesGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\GatewayAkeneoInstancesGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\GatewayAkeneoInstancesFromUrlGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\GatewayAkeneoInstancesFromUrlGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\GatewayAkeneoInstancesFromUrlGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\GatewayAkeneoInstancesFromUrlGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\GatewayAkeneoInstancesOauthStateGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\GatewayAkeneoInstancesOauthStateGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\GatewayAkeneoInstancesOauthStateGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\GatewayAkeneoInstancesOauthStateGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsAkeneoUserIdGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsAkeneoUserIdGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsAkeneoUserIdGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsAkeneoUserIdGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\GatewayAkeneoOauthStatesGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\GatewayAkeneoOauthStatesGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\GatewayAkeneoOauthStatesGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\GatewayAkeneoOauthStatesGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBody::class => false, \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBodyHydraView::class => false, \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBodyHydraSearch::class => false, \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBodyHydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutLdjsonResponse200::class => false, \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\ReferralCodesGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\ReferralCodesGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\ReferralCodesGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\ReferralCodesGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\ReferralOnPremiseRequestsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\ReferralOnPremiseRequestsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\ReferralOnPremiseRequestsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\ReferralOnPremiseRequestsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\ReferralRequestsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\ReferralRequestsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\ReferralRequestsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\ReferralRequestsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeActionsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeActionsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeActionsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeActionsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeCompilationsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeCompilationsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeCompilationsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeCompilationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsIdStepsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsIdStepsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsIdStepsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsIdStepsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeExecutionsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeExecutionsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeExecutionsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeExecutionsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeExecutionsPipelinesGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeExecutionsPipelinesGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeExecutionsPipelinesGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeExecutionsPipelinesGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimePipelineStepProbesGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimePipelineStepProbesGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimePipelineStepProbesGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimePipelineStepProbesGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimePipelineStepsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimePipelineStepsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimePipelineStepsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimePipelineStepsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimePipelinesGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimePipelinesGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimePipelinesGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimePipelinesGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimePipelinesStepsIdProbesGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimePipelinesStepsIdProbesGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimePipelinesStepsIdProbesGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimePipelinesStepsIdProbesGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimePipelinesIdCompilationsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimePipelinesIdCompilationsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimePipelinesIdCompilationsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimePipelinesIdCompilationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimePipelinesIdSchedulesGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimePipelinesIdSchedulesGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimePipelinesIdSchedulesGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimePipelinesIdSchedulesGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimePipelinesIdStepsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimePipelinesIdStepsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimePipelinesIdStepsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimePipelinesIdStepsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeSchedulesGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeSchedulesGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeSchedulesGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeSchedulesGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeSchedulesIdExecutionsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeSchedulesIdExecutionsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeSchedulesIdExecutionsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeSchedulesIdExecutionsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeTemplatesGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeTemplatesGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeTemplatesGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeTemplatesGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeWorkflowJobPipelinesWorkflowStepsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeWorkflowJobPipelinesWorkflowStepsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeWorkflowJobPipelinesWorkflowStepsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeWorkflowJobPipelinesWorkflowStepsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsActionsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsActionsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsActionsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsActionsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsJobsPipelineStepsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsJobsPipelineStepsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsJobsPipelineStepsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsJobsPipelineStepsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsIdJobsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsIdJobsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsIdJobsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsIdJobsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsWorkflowJobsCodePipelineStepsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsWorkflowJobsCodePipelineStepsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsWorkflowJobsCodePipelineStepsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsWorkflowJobsCodePipelineStepsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Jane\Component\JsonSchemaRuntime\Reference::class => false];
+        }
     }
-
-    public function supportsNormalization($data, $format = null, array $context = []): bool
+} else {
+    class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return is_object($data) && array_key_exists(get_class($data), $this->normalizers);
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
+        protected $normalizers = [
+            \Gyroscops\Api\Model\AbstractPipelineJsonldExecutionPipelineStepRead::class => AbstractPipelineJsonldExecutionPipelineStepReadNormalizer::class,
 
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
-    {
-        $normalizerClass = $this->normalizers[get_class($object)];
-        $normalizer = $this->getNormalizer($normalizerClass);
+            \Gyroscops\Api\Model\Action::class => ActionNormalizer::class,
 
-        return $normalizer->normalize($object, $format, $context);
-    }
+            \Gyroscops\Api\Model\ActionActionRead::class => ActionActionReadNormalizer::class,
 
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        $denormalizerClass = $this->normalizers[$class];
-        $denormalizer = $this->getNormalizer($denormalizerClass);
+            \Gyroscops\Api\Model\ActionJsonld::class => ActionJsonldNormalizer::class,
 
-        return $denormalizer->denormalize($data, $class, $format, $context);
-    }
+            \Gyroscops\Api\Model\ActionJsonldActionRead::class => ActionJsonldActionReadNormalizer::class,
 
-    private function getNormalizer(string $normalizerClass)
-    {
-        return $this->normalizersCache[$normalizerClass] ?? $this->initNormalizer($normalizerClass);
-    }
+            \Gyroscops\Api\Model\AkeneoInstance::class => AkeneoInstanceNormalizer::class,
 
-    private function initNormalizer(string $normalizerClass)
-    {
-        $normalizer = new $normalizerClass();
-        $normalizer->setNormalizer($this->normalizer);
-        $normalizer->setDenormalizer($this->denormalizer);
-        $this->normalizersCache[$normalizerClass] = $normalizer;
+            \Gyroscops\Api\Model\AkeneoInstanceAkeneoInstanceInput::class => AkeneoInstanceAkeneoInstanceInputNormalizer::class,
 
-        return $normalizer;
+            \Gyroscops\Api\Model\AkeneoInstanceAkeneoInstanceInputJsonld::class => AkeneoInstanceAkeneoInstanceInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\AkeneoInstanceJsonld::class => AkeneoInstanceJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\AkeneoLinkedAccount::class => AkeneoLinkedAccountNormalizer::class,
+
+            \Gyroscops\Api\Model\AkeneoLinkedAccountAkeneoLinkedAccountsInput::class => AkeneoLinkedAccountAkeneoLinkedAccountsInputNormalizer::class,
+
+            \Gyroscops\Api\Model\AkeneoLinkedAccountAkeneoLinkedAccountsInputJsonld::class => AkeneoLinkedAccountAkeneoLinkedAccountsInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\AkeneoLinkedAccountJsonld::class => AkeneoLinkedAccountJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\AkeneoOauthTokenRead::class => AkeneoOauthTokenReadNormalizer::class,
+
+            \Gyroscops\Api\Model\AkeneoOauthTokenOauthStateInput::class => AkeneoOauthTokenOauthStateInputNormalizer::class,
+
+            \Gyroscops\Api\Model\AkeneoOauthTokenOauthStateInputJsonld::class => AkeneoOauthTokenOauthStateInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\AkeneoOauthTokenOauthStateOutputJsonldRead::class => AkeneoOauthTokenOauthStateOutputJsonldReadNormalizer::class,
+
+            \Gyroscops\Api\Model\AkeneoOauthTokenOauthTokenInput::class => AkeneoOauthTokenOauthTokenInputNormalizer::class,
+
+            \Gyroscops\Api\Model\AkeneoOauthTokenOauthTokenInputJsonld::class => AkeneoOauthTokenOauthTokenInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\AkeneoOauthTokenOauthTokenOutputJsonldRead::class => AkeneoOauthTokenOauthTokenOutputJsonldReadNormalizer::class,
+
+            \Gyroscops\Api\Model\AkeneoOauthTokenJsonldRead::class => AkeneoOauthTokenJsonldReadNormalizer::class,
+
+            \Gyroscops\Api\Model\BigDecimal::class => BigDecimalNormalizer::class,
+
+            \Gyroscops\Api\Model\BigDecimalJsonld::class => BigDecimalJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\BigInteger::class => BigIntegerNormalizer::class,
+
+            \Gyroscops\Api\Model\BigIntegerJsonld::class => BigIntegerJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\BigNumber::class => BigNumberNormalizer::class,
+
+            \Gyroscops\Api\Model\BigNumberJsonld::class => BigNumberJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\Buyable::class => BuyableNormalizer::class,
+
+            \Gyroscops\Api\Model\BuyableJsonld::class => BuyableJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\BuyablePrice::class => BuyablePriceNormalizer::class,
+
+            \Gyroscops\Api\Model\BuyablePriceRead::class => BuyablePriceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\BuyablePriceJsonld::class => BuyablePriceJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\BuyablePriceJsonldRead::class => BuyablePriceJsonldReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ColorJsonldRead::class => ColorJsonldReadNormalizer::class,
+
+            \Gyroscops\Api\Model\CompilationCompilationRead::class => CompilationCompilationReadNormalizer::class,
+
+            \Gyroscops\Api\Model\CompilationJsonldCompilationRead::class => CompilationJsonldCompilationReadNormalizer::class,
+
+            \Gyroscops\Api\Model\Composer::class => ComposerNormalizer::class,
+
+            \Gyroscops\Api\Model\ComposerJsonld::class => ComposerJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\ComposerAuthentication::class => ComposerAuthenticationNormalizer::class,
+
+            \Gyroscops\Api\Model\ComposerAuthenticationJsonld::class => ComposerAuthenticationJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\ComposerAutoload::class => ComposerAutoloadNormalizer::class,
+
+            \Gyroscops\Api\Model\ComposerAutoloadJsonld::class => ComposerAutoloadJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\ComposerRepository::class => ComposerRepositoryNormalizer::class,
+
+            \Gyroscops\Api\Model\ComposerRepositoryJsonld::class => ComposerRepositoryJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\ConfigurationConfigurationUpdate::class => ConfigurationConfigurationUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\ConfigurationConfigurationView::class => ConfigurationConfigurationViewNormalizer::class,
+
+            \Gyroscops\Api\Model\ConfigurationChangeConfigurationValueInputConfigurationUpdate::class => ConfigurationChangeConfigurationValueInputConfigurationUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\ConfigurationChangeConfigurationValueInputJsonldConfigurationUpdate::class => ConfigurationChangeConfigurationValueInputJsonldConfigurationUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\ConfigurationCreateConfigurationInputConfigurationCreate::class => ConfigurationCreateConfigurationInputConfigurationCreateNormalizer::class,
+
+            \Gyroscops\Api\Model\ConfigurationCreateConfigurationInputJsonldConfigurationCreate::class => ConfigurationCreateConfigurationInputJsonldConfigurationCreateNormalizer::class,
+
+            \Gyroscops\Api\Model\ConfigurationRemoveConfigurationValueInputConfigurationUpdate::class => ConfigurationRemoveConfigurationValueInputConfigurationUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\ConfigurationRemoveConfigurationValueInputJsonldConfigurationUpdate::class => ConfigurationRemoveConfigurationValueInputJsonldConfigurationUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\ConfigurationJsonldConfigurationUpdate::class => ConfigurationJsonldConfigurationUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\ConfigurationJsonldConfigurationView::class => ConfigurationJsonldConfigurationViewNormalizer::class,
+
+            \Gyroscops\Api\Model\Context::class => ContextNormalizer::class,
+
+            \Gyroscops\Api\Model\ContextJsonld::class => ContextJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\CreateSecretInput::class => CreateSecretInputNormalizer::class,
+
+            \Gyroscops\Api\Model\CreateSecretInputJsonld::class => CreateSecretInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\Currency::class => CurrencyNormalizer::class,
+
+            \Gyroscops\Api\Model\CurrencyJsonld::class => CurrencyJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentEnvironmentUpdate::class => EnvironmentEnvironmentUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentEnvironmentView::class => EnvironmentEnvironmentViewNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentVariableViewEnvironmentView::class => EnvironmentVariableViewEnvironmentViewNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConfigurationInputEnvironmentUpdate::class => EnvironmentAddMultipleVariableFromConfigurationInputEnvironmentUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConfigurationInputJsonldEnvironmentUpdate::class => EnvironmentAddMultipleVariableFromConfigurationInputJsonldEnvironmentUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConstantInputEnvironmentUpdate::class => EnvironmentAddMultipleVariableFromConstantInputEnvironmentUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConstantInputJsonldEnvironmentUpdate::class => EnvironmentAddMultipleVariableFromConstantInputJsonldEnvironmentUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromSecretInputEnvironmentUpdate::class => EnvironmentAddMultipleVariableFromSecretInputEnvironmentUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromSecretInputJsonldEnvironmentUpdate::class => EnvironmentAddMultipleVariableFromSecretInputJsonldEnvironmentUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentCreateEnvironmentInputEnvironmentCreate::class => EnvironmentCreateEnvironmentInputEnvironmentCreateNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentCreateEnvironmentInputJsonldEnvironmentCreate::class => EnvironmentCreateEnvironmentInputJsonldEnvironmentCreateNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentJsonldEnvironmentUpdate::class => EnvironmentJsonldEnvironmentUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentJsonldEnvironmentView::class => EnvironmentJsonldEnvironmentViewNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentJsonldVariableViewEnvironmentView::class => EnvironmentJsonldVariableViewEnvironmentViewNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionExecutionRead::class => ExecutionExecutionReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionDeclarePipelineExecutionCommandJsonldExecutionRead::class => ExecutionDeclarePipelineExecutionCommandJsonldExecutionReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionDeclarePipelineExecutionCommandInput::class => ExecutionDeclarePipelineExecutionCommandInputNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionDeclarePipelineExecutionCommandInputJsonld::class => ExecutionDeclarePipelineExecutionCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionInterruptPipelineExecutionCommandJsonldExecutionRead::class => ExecutionInterruptPipelineExecutionCommandJsonldExecutionReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionInterruptPipelineExecutionCommandInputJsonld::class => ExecutionInterruptPipelineExecutionCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionResumePipelineExecutionCommandJsonldExecutionRead::class => ExecutionResumePipelineExecutionCommandJsonldExecutionReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionResumePipelineExecutionCommandInputJsonld::class => ExecutionResumePipelineExecutionCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionTerminatePipelineExecutionCommandJsonldExecutionRead::class => ExecutionTerminatePipelineExecutionCommandJsonldExecutionReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionTerminatePipelineExecutionCommandInput::class => ExecutionTerminatePipelineExecutionCommandInputNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionTerminatePipelineExecutionCommandInputJsonld::class => ExecutionTerminatePipelineExecutionCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionJsonldExecutionRead::class => ExecutionJsonldExecutionReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionActionExecutionActionRead::class => ExecutionActionExecutionActionReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionActionJsonldExecutionActionRead::class => ExecutionActionJsonldExecutionActionReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionPipelineExecutionPipelineRead::class => ExecutionPipelineExecutionPipelineReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionPipelineJsonldExecutionPipelineRead::class => ExecutionPipelineJsonldExecutionPipelineReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionPipelineJob::class => ExecutionPipelineJobNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionPipelineJobJsonld::class => ExecutionPipelineJobJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionPipelineStepExecutionPipelineStepRead::class => ExecutionPipelineStepExecutionPipelineStepReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionPipelineStepJsonldExecutionPipelineStepRead::class => ExecutionPipelineStepJsonldExecutionPipelineStepReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionWorkflowExecutionWorkflowRead::class => ExecutionWorkflowExecutionWorkflowReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionWorkflowInterruptWorkflowExecutionCommandJsonldExecutionWorkflowRead::class => ExecutionWorkflowInterruptWorkflowExecutionCommandJsonldExecutionWorkflowReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionWorkflowInterruptWorkflowExecutionCommandInputJsonld::class => ExecutionWorkflowInterruptWorkflowExecutionCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionWorkflowResumeWorkflowExecutionCommandJsonldExecutionWorkflowRead::class => ExecutionWorkflowResumeWorkflowExecutionCommandJsonldExecutionWorkflowReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionWorkflowResumeWorkflowExecutionCommandInputJsonld::class => ExecutionWorkflowResumeWorkflowExecutionCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionWorkflowTerminateWorkflowExecutionCommandJsonldExecutionWorkflowRead::class => ExecutionWorkflowTerminateWorkflowExecutionCommandJsonldExecutionWorkflowReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionWorkflowTerminateWorkflowExecutionCommandInput::class => ExecutionWorkflowTerminateWorkflowExecutionCommandInputNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionWorkflowTerminateWorkflowExecutionCommandInputJsonld::class => ExecutionWorkflowTerminateWorkflowExecutionCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionWorkflowJsonldExecutionWorkflowRead::class => ExecutionWorkflowJsonldExecutionWorkflowReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionWorkflowJobExecutionWorkflowJobRead::class => ExecutionWorkflowJobExecutionWorkflowJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionWorkflowJobJsonldExecutionWorkflowJobRead::class => ExecutionWorkflowJobJsonldExecutionWorkflowJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionWorkflowJobAction::class => ExecutionWorkflowJobActionNormalizer::class,
+
+            \Gyroscops\Api\Model\ExecutionWorkflowJobActionJsonld::class => ExecutionWorkflowJobActionJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\Job::class => JobNormalizer::class,
+
+            \Gyroscops\Api\Model\JobJsonld::class => JobJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\Money::class => MoneyNormalizer::class,
+
+            \Gyroscops\Api\Model\MoneyJsonld::class => MoneyJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\OnPremiseRequestOnPremiseRequestRead::class => OnPremiseRequestOnPremiseRequestReadNormalizer::class,
+
+            \Gyroscops\Api\Model\OnPremiseRequestOnPremiseRequestWrite::class => OnPremiseRequestOnPremiseRequestWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\OnPremiseRequestJsonldOnPremiseRequestRead::class => OnPremiseRequestJsonldOnPremiseRequestReadNormalizer::class,
+
+            \Gyroscops\Api\Model\OnPremiseRequestJsonldOnPremiseRequestWrite::class => OnPremiseRequestJsonldOnPremiseRequestWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\OpaqueInterfaceJsonldSecretUpdate::class => OpaqueInterfaceJsonldSecretUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\Option::class => OptionNormalizer::class,
+
+            \Gyroscops\Api\Model\OptionJsonld::class => OptionJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\OrganizationOrganizationRead::class => OrganizationOrganizationReadNormalizer::class,
+
+            \Gyroscops\Api\Model\OrganizationOrganizationWrite::class => OrganizationOrganizationWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\OrganizationJsonldAddCollaborators::class => OrganizationJsonldAddCollaboratorsNormalizer::class,
+
+            \Gyroscops\Api\Model\OrganizationJsonldOrganizationRead::class => OrganizationJsonldOrganizationReadNormalizer::class,
+
+            \Gyroscops\Api\Model\OrganizationJsonldOrganizationWrite::class => OrganizationJsonldOrganizationWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\Pipeline::class => PipelineNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelinePipelineReadPipelineSubresourceRead::class => PipelinePipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineAddAfterPipelineStepCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineAddAfterPipelineStepCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineAddAfterPipelineStepCommandInputJsonldPipelineWrite::class => PipelineAddAfterPipelineStepCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineAddBeforePipelineStepCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineAddBeforePipelineStepCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineAddBeforePipelineStepCommandInputJsonldPipelineWrite::class => PipelineAddBeforePipelineStepCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineAddPipelineComposerAuthCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineAddPipelineComposerAuthCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineAddPipelineComposerAuthCommandInputJsonldPipelineWrite::class => PipelineAddPipelineComposerAuthCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineAddPipelineComposerPSR4AutoloadCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineAddPipelineComposerPSR4AutoloadCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineAddPipelineComposerPSR4AutoloadCommandInputJsonldPipelineWrite::class => PipelineAddPipelineComposerPSR4AutoloadCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineAddPipelineComposerPackageCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineAddPipelineComposerPackageCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineAddPipelineComposerPackageCommandInputJsonldPipelineWrite::class => PipelineAddPipelineComposerPackageCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineAddPipelineComposerRepositoryCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineAddPipelineComposerRepositoryCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineAddPipelineComposerRepositoryCommandInputJsonldPipelineWrite::class => PipelineAddPipelineComposerRepositoryCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineAddPipelineStepProbeCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineAddPipelineStepProbeCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineAddPipelineStepProbeCommandInputJsonldPipelineWrite::class => PipelineAddPipelineStepProbeCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineAppendPipelineStepCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineAppendPipelineStepCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineAppendPipelineStepCommandInputJsonldPipelineWrite::class => PipelineAppendPipelineStepCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineCompilePipelineCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineCompilePipelineCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineCompilePipelineCommandInputJsonldPipelineWrite::class => PipelineCompilePipelineCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineDeclarePipelineCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineDeclarePipelineCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineDeclarePipelineCommandInputJsonldPipelineWrite::class => PipelineDeclarePipelineCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineDeclarePipelineScheduleImmediateCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineDeclarePipelineScheduleImmediateCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineDeclarePipelineScheduleImmediateCommandInputJsonldPipelineWrite::class => PipelineDeclarePipelineScheduleImmediateCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineDeclarePipelineScheduleOnceCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineDeclarePipelineScheduleOnceCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineDeclarePipelineScheduleOnceCommandInputJsonldPipelineWrite::class => PipelineDeclarePipelineScheduleOnceCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineMoveAfterPipelineStepCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineMoveAfterPipelineStepCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineMoveAfterPipelineStepCommandInputJsonldPipelineWrite::class => PipelineMoveAfterPipelineStepCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineMoveBeforePipelineStepCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineMoveBeforePipelineStepCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineMoveBeforePipelineStepCommandInputJsonldPipelineWrite::class => PipelineMoveBeforePipelineStepCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineRemovePipelineComposerAuthCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineRemovePipelineComposerAuthCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineRemovePipelineComposerAuthCommandInputJsonldPipelineWrite::class => PipelineRemovePipelineComposerAuthCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineRemovePipelineComposerPSR4AutoloadCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineRemovePipelineComposerPSR4AutoloadCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineRemovePipelineComposerPSR4AutoloadCommandInputJsonldPipelineWrite::class => PipelineRemovePipelineComposerPSR4AutoloadCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineRemovePipelineComposerPackageCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineRemovePipelineComposerPackageCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineRemovePipelineComposerPackageCommandInputJsonldPipelineWrite::class => PipelineRemovePipelineComposerPackageCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineRemovePipelineComposerRepositoryCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineRemovePipelineComposerRepositoryCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineRemovePipelineComposerRepositoryCommandInputJsonldPipelineWrite::class => PipelineRemovePipelineComposerRepositoryCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineRemovePipelineStepProbeCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineRemovePipelineStepProbeCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineReorderPipelineStepsCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandInputJsonldPipelineWrite::class => PipelineReorderPipelineStepsCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineReplacePipelineStepCommandJsonldPipelineReadPipelineSubresourceRead::class => PipelineReplacePipelineStepCommandJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineReplacePipelineStepCommandInputJsonldPipelineWrite::class => PipelineReplacePipelineStepCommandInputJsonldPipelineWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineJsonld::class => PipelineJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineJsonldPipelineReadPipelineSubresourceRead::class => PipelineJsonldPipelineReadPipelineSubresourceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineStepStepRead::class => PipelineStepStepReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineStepReplaceWorkflowPipelineStepCommandJsonldStepRead::class => PipelineStepReplaceWorkflowPipelineStepCommandJsonldStepReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineStepReplaceWorkflowPipelineStepCommandInput::class => PipelineStepReplaceWorkflowPipelineStepCommandInputNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineStepReplaceWorkflowPipelineStepCommandInputJsonld::class => PipelineStepReplaceWorkflowPipelineStepCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineStepJsonldStepRead::class => PipelineStepJsonldStepReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineStepProbeStepProbeRead::class => PipelineStepProbeStepProbeReadNormalizer::class,
+
+            \Gyroscops\Api\Model\PipelineStepProbeJsonldStepProbeRead::class => PipelineStepProbeJsonldStepProbeReadNormalizer::class,
+
+            \Gyroscops\Api\Model\Price::class => PriceNormalizer::class,
+
+            \Gyroscops\Api\Model\PriceJsonld::class => PriceJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\Probe::class => ProbeNormalizer::class,
+
+            \Gyroscops\Api\Model\ProbeJsonld::class => ProbeJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralCodeReferralCodeRead::class => ReferralCodeReferralCodeReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralCodeReferralCodeWrite::class => ReferralCodeReferralCodeWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralCodeJsonldReferralCodeRead::class => ReferralCodeJsonldReferralCodeReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralCodeJsonldReferralCodeWrite::class => ReferralCodeJsonldReferralCodeWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralRequestReferralRequestRead::class => ReferralRequestReferralRequestReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralRequestReferralRequestInput::class => ReferralRequestReferralRequestInputNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralRequestReferralRequestInputJsonld::class => ReferralRequestReferralRequestInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralRequestJsonldReferralRequestRead::class => ReferralRequestJsonldReferralRequestReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ScheduleScheduleRead::class => ScheduleScheduleReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ScheduleJsonld::class => ScheduleJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\ScheduleJsonldScheduleRead::class => ScheduleJsonldScheduleReadNormalizer::class,
+
+            \Gyroscops\Api\Model\ScheduleTypeJsonldScheduleRead::class => ScheduleTypeJsonldScheduleReadNormalizer::class,
+
+            \Gyroscops\Api\Model\SecretSecretRead::class => SecretSecretReadNormalizer::class,
+
+            \Gyroscops\Api\Model\SecretChangeSecretValueInputSecretUpdate::class => SecretChangeSecretValueInputSecretUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\SecretChangeSecretValueInputJsonldSecretUpdate::class => SecretChangeSecretValueInputJsonldSecretUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\SecretCreateSecretInputSecretCreate::class => SecretCreateSecretInputSecretCreateNormalizer::class,
+
+            \Gyroscops\Api\Model\SecretCreateSecretInputJsonldSecretCreate::class => SecretCreateSecretInputJsonldSecretCreateNormalizer::class,
+
+            \Gyroscops\Api\Model\SecretRemoveSecretValueInputSecretUpdate::class => SecretRemoveSecretValueInputSecretUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\SecretRemoveSecretValueInputJsonldSecretUpdate::class => SecretRemoveSecretValueInputJsonldSecretUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\SecretJsonldSecretRead::class => SecretJsonldSecretReadNormalizer::class,
+
+            \Gyroscops\Api\Model\SecretJsonldSecretUpdate::class => SecretJsonldSecretUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\Step::class => StepNormalizer::class,
+
+            \Gyroscops\Api\Model\StepJsonld::class => StepJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\Subscription::class => SubscriptionNormalizer::class,
+
+            \Gyroscops\Api\Model\SubscriptionJsonld::class => SubscriptionJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\SubscriptionOfferRead::class => SubscriptionOfferReadNormalizer::class,
+
+            \Gyroscops\Api\Model\SubscriptionOfferWrite::class => SubscriptionOfferWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\SubscriptionOfferJsonldRead::class => SubscriptionOfferJsonldReadNormalizer::class,
+
+            \Gyroscops\Api\Model\SubscriptionOfferJsonldWrite::class => SubscriptionOfferJsonldWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\SubscriptionOption::class => SubscriptionOptionNormalizer::class,
+
+            \Gyroscops\Api\Model\SubscriptionOptionJsonld::class => SubscriptionOptionJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\SubscriptionType::class => SubscriptionTypeNormalizer::class,
+
+            \Gyroscops\Api\Model\SubscriptionTypeJsonld::class => SubscriptionTypeJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\SubscriptionTypeJsonldRead::class => SubscriptionTypeJsonldReadNormalizer::class,
+
+            \Gyroscops\Api\Model\Template::class => TemplateNormalizer::class,
+
+            \Gyroscops\Api\Model\TemplateTemplateCreate::class => TemplateTemplateCreateNormalizer::class,
+
+            \Gyroscops\Api\Model\TemplateTemplateList::class => TemplateTemplateListNormalizer::class,
+
+            \Gyroscops\Api\Model\TemplateTemplateView::class => TemplateTemplateViewNormalizer::class,
+
+            \Gyroscops\Api\Model\TemplateDeclareSatelliteTemplateInput::class => TemplateDeclareSatelliteTemplateInputNormalizer::class,
+
+            \Gyroscops\Api\Model\TemplateDeclareSatelliteTemplateInputJsonld::class => TemplateDeclareSatelliteTemplateInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\TemplateJsonld::class => TemplateJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\TemplateJsonldTemplateCreate::class => TemplateJsonldTemplateCreateNormalizer::class,
+
+            \Gyroscops\Api\Model\TemplateJsonldTemplateList::class => TemplateJsonldTemplateListNormalizer::class,
+
+            \Gyroscops\Api\Model\TemplateJsonldTemplateUpdate::class => TemplateJsonldTemplateUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\TemplateJsonldTemplateView::class => TemplateJsonldTemplateViewNormalizer::class,
+
+            \Gyroscops\Api\Model\UserUserRead::class => UserUserReadNormalizer::class,
+
+            \Gyroscops\Api\Model\UserUserWrite::class => UserUserWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\UserJsonldUserRead::class => UserJsonldUserReadNormalizer::class,
+
+            \Gyroscops\Api\Model\UserJsonldUserWrite::class => UserJsonldUserWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\UserAuthorizationAuthorizationRead::class => UserAuthorizationAuthorizationReadNormalizer::class,
+
+            \Gyroscops\Api\Model\UserAuthorizationAuthorizationWrite::class => UserAuthorizationAuthorizationWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\UserAuthorizationJsonldAuthorizationRead::class => UserAuthorizationJsonldAuthorizationReadNormalizer::class,
+
+            \Gyroscops\Api\Model\UserAuthorizationJsonldAuthorizationWrite::class => UserAuthorizationJsonldAuthorizationWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableVariableViewEnvironmentView::class => VariableVariableViewEnvironmentViewNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableJsonldVariableViewEnvironmentView::class => VariableJsonldVariableViewEnvironmentViewNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromConfigurationVariableUpdate::class => VariableFromConfigurationVariableUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromConfigurationVariableViewEnvironmentView::class => VariableFromConfigurationVariableViewEnvironmentViewNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromConfigurationJsonldVariableUpdate::class => VariableFromConfigurationJsonldVariableUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromConfigurationJsonldVariableViewEnvironmentView::class => VariableFromConfigurationJsonldVariableViewEnvironmentViewNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromConfigurationInputEnvironmentUpdate::class => VariableFromConfigurationInputEnvironmentUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromConfigurationInputJsonldEnvironmentUpdate::class => VariableFromConfigurationInputJsonldEnvironmentUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromConstantVariableUpdate::class => VariableFromConstantVariableUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromConstantVariableViewEnvironmentView::class => VariableFromConstantVariableViewEnvironmentViewNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromConstantJsonldVariableUpdate::class => VariableFromConstantJsonldVariableUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromConstantJsonldVariableViewEnvironmentView::class => VariableFromConstantJsonldVariableViewEnvironmentViewNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromConstantInputEnvironmentUpdate::class => VariableFromConstantInputEnvironmentUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromConstantInputJsonldEnvironmentUpdate::class => VariableFromConstantInputJsonldEnvironmentUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromSecretVariableUpdate::class => VariableFromSecretVariableUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromSecretVariableViewEnvironmentView::class => VariableFromSecretVariableViewEnvironmentViewNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromSecretJsonldVariableUpdate::class => VariableFromSecretJsonldVariableUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromSecretJsonldVariableViewEnvironmentView::class => VariableFromSecretJsonldVariableViewEnvironmentViewNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromSecretInputEnvironmentUpdate::class => VariableFromSecretInputEnvironmentUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\VariableFromSecretInputJsonldEnvironmentUpdate::class => VariableFromSecretInputJsonldEnvironmentUpdateNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowWorkflowRead::class => WorkflowWorkflowReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowCompileWorkflowCommandJsonldWorkflowRead::class => WorkflowCompileWorkflowCommandJsonldWorkflowReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowCompileWorkflowCommandInputJsonld::class => WorkflowCompileWorkflowCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowDeclareWorkflowCommandJsonldWorkflowRead::class => WorkflowDeclareWorkflowCommandJsonldWorkflowReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowDeclareWorkflowCommandInput::class => WorkflowDeclareWorkflowCommandInputNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowDeclareWorkflowCommandInputJsonld::class => WorkflowDeclareWorkflowCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowDeclareWorkflowScheduleCrontabCommandJsonldWorkflowRead::class => WorkflowDeclareWorkflowScheduleCrontabCommandJsonldWorkflowReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowDeclareWorkflowScheduleCrontabCommandInput::class => WorkflowDeclareWorkflowScheduleCrontabCommandInputNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowDeclareWorkflowScheduleCrontabCommandInputJsonld::class => WorkflowDeclareWorkflowScheduleCrontabCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowDeclareWorkflowScheduleImmediateCommandJsonldWorkflowRead::class => WorkflowDeclareWorkflowScheduleImmediateCommandJsonldWorkflowReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowDeclareWorkflowScheduleImmediateCommandInput::class => WorkflowDeclareWorkflowScheduleImmediateCommandInputNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowDeclareWorkflowScheduleImmediateCommandInputJsonld::class => WorkflowDeclareWorkflowScheduleImmediateCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowRemoveWorkflowCommandJsonldWorkflowRead::class => WorkflowRemoveWorkflowCommandJsonldWorkflowReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowRemoveWorkflowCommandInputJsonld::class => WorkflowRemoveWorkflowCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJsonldWorkflowRead::class => WorkflowJsonldWorkflowReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobJobRead::class => WorkflowJobJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobJobReadPipelineRead::class => WorkflowJobJobReadPipelineReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobAddAfterWorkflowPipelineStepCommandJsonldJobRead::class => WorkflowJobAddAfterWorkflowPipelineStepCommandJsonldJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobAddAfterWorkflowPipelineStepCommandInput::class => WorkflowJobAddAfterWorkflowPipelineStepCommandInputNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobAddAfterWorkflowPipelineStepCommandInputJsonld::class => WorkflowJobAddAfterWorkflowPipelineStepCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobAddBeforeWorkflowPipelineStepCommandJsonldJobRead::class => WorkflowJobAddBeforeWorkflowPipelineStepCommandJsonldJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobAddBeforeWorkflowPipelineStepCommandInput::class => WorkflowJobAddBeforeWorkflowPipelineStepCommandInputNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobAddBeforeWorkflowPipelineStepCommandInputJsonld::class => WorkflowJobAddBeforeWorkflowPipelineStepCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobAppendWorkflowPipelineStepCommandJsonldJobRead::class => WorkflowJobAppendWorkflowPipelineStepCommandJsonldJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobAppendWorkflowPipelineStepCommandInput::class => WorkflowJobAppendWorkflowPipelineStepCommandInputNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobAppendWorkflowPipelineStepCommandInputJsonld::class => WorkflowJobAppendWorkflowPipelineStepCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobMoveAfterWorkflowPipelineStepCommandJsonldJobRead::class => WorkflowJobMoveAfterWorkflowPipelineStepCommandJsonldJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobMoveAfterWorkflowPipelineStepCommandInput::class => WorkflowJobMoveAfterWorkflowPipelineStepCommandInputNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobMoveAfterWorkflowPipelineStepCommandInputJsonld::class => WorkflowJobMoveAfterWorkflowPipelineStepCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobMoveBeforeWorkflowPipelineStepCommandJsonldJobRead::class => WorkflowJobMoveBeforeWorkflowPipelineStepCommandJsonldJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobMoveBeforeWorkflowPipelineStepCommandInput::class => WorkflowJobMoveBeforeWorkflowPipelineStepCommandInputNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobMoveBeforeWorkflowPipelineStepCommandInputJsonld::class => WorkflowJobMoveBeforeWorkflowPipelineStepCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobReorderWorkflowPipelineStepsCommandJsonldJobRead::class => WorkflowJobReorderWorkflowPipelineStepsCommandJsonldJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobReorderWorkflowPipelineStepsCommandInput::class => WorkflowJobReorderWorkflowPipelineStepsCommandInputNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobReorderWorkflowPipelineStepsCommandInputJsonld::class => WorkflowJobReorderWorkflowPipelineStepsCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobReplaceWorkflowPipelineStepCommandJsonldJobRead::class => WorkflowJobReplaceWorkflowPipelineStepCommandJsonldJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobReplaceWorkflowPipelineStepCommandInput::class => WorkflowJobReplaceWorkflowPipelineStepCommandInputNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobReplaceWorkflowPipelineStepCommandInputJsonld::class => WorkflowJobReplaceWorkflowPipelineStepCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobJsonldJobRead::class => WorkflowJobJsonldJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobJsonldJobReadPipelineRead::class => WorkflowJobJsonldJobReadPipelineReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobActionActionRead::class => WorkflowJobActionActionReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobActionJobRead::class => WorkflowJobActionJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobActionJobReadPipelineRead::class => WorkflowJobActionJobReadPipelineReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobActionJsonldActionRead::class => WorkflowJobActionJsonldActionReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobActionJsonldJobRead::class => WorkflowJobActionJsonldJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobActionJsonldJobReadPipelineRead::class => WorkflowJobActionJsonldJobReadPipelineReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobPipelineJobRead::class => WorkflowJobPipelineJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobPipelineJobReadPipelineRead::class => WorkflowJobPipelineJobReadPipelineReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobPipelineJsonldJobRead::class => WorkflowJobPipelineJsonldJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobPipelineJsonldJobReadPipelineRead::class => WorkflowJobPipelineJsonldJobReadPipelineReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobPipelineStepJobRead::class => WorkflowJobPipelineStepJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobPipelineStepJobReadPipelineRead::class => WorkflowJobPipelineStepJobReadPipelineReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobPipelineStepStepRead::class => WorkflowJobPipelineStepStepReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobPipelineStepReplaceWorkflowPipelineStepCommandJsonldStepRead::class => WorkflowJobPipelineStepReplaceWorkflowPipelineStepCommandJsonldStepReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobPipelineStepReplaceWorkflowPipelineStepCommandInput::class => WorkflowJobPipelineStepReplaceWorkflowPipelineStepCommandInputNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobPipelineStepReplaceWorkflowPipelineStepCommandInputJsonld::class => WorkflowJobPipelineStepReplaceWorkflowPipelineStepCommandInputJsonldNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobPipelineStepJsonldJobRead::class => WorkflowJobPipelineStepJsonldJobReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobPipelineStepJsonldJobReadPipelineRead::class => WorkflowJobPipelineStepJsonldJobReadPipelineReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkflowJobPipelineStepJsonldStepRead::class => WorkflowJobPipelineStepJsonldStepReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkspaceWorkspaceRead::class => WorkspaceWorkspaceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkspaceWorkspaceWrite::class => WorkspaceWorkspaceWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkspaceJsonldWorkspaceRead::class => WorkspaceJsonldWorkspaceReadNormalizer::class,
+
+            \Gyroscops\Api\Model\WorkspaceJsonldWorkspaceWrite::class => WorkspaceJsonldWorkspaceWriteNormalizer::class,
+
+            \Gyroscops\Api\Model\Token::class => TokenNormalizer::class,
+
+            \Gyroscops\Api\Model\Credentials::class => CredentialsNormalizer::class,
+
+            \Gyroscops\Api\Model\Impersonation::class => ImpersonationNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationMeGetLdjsonResponse200::class => AuthenticationMeGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationMeGetLdjsonResponse200HydraView::class => AuthenticationMeGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationMeGetLdjsonResponse200HydraSearch::class => AuthenticationMeGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationMeGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationMeGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOffersIdOptionsGetLdjsonResponse200::class => AuthenticationOffersIdOptionsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOffersIdOptionsGetLdjsonResponse200HydraView::class => AuthenticationOffersIdOptionsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOffersIdOptionsGetLdjsonResponse200HydraSearch::class => AuthenticationOffersIdOptionsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOffersIdOptionsGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationOffersIdOptionsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsGetLdjsonResponse200::class => AuthenticationOrganizationsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsGetLdjsonResponse200HydraView::class => AuthenticationOrganizationsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsGetLdjsonResponse200HydraSearch::class => AuthenticationOrganizationsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationOrganizationsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsIdAuthorizationsGetLdjsonResponse200::class => AuthenticationOrganizationsIdAuthorizationsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsIdAuthorizationsGetLdjsonResponse200HydraView::class => AuthenticationOrganizationsIdAuthorizationsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsIdAuthorizationsGetLdjsonResponse200HydraSearch::class => AuthenticationOrganizationsIdAuthorizationsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsIdAuthorizationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationOrganizationsIdAuthorizationsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsIdExternalCollaboratorsGetLdjsonResponse200::class => AuthenticationOrganizationsIdExternalCollaboratorsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsIdExternalCollaboratorsGetLdjsonResponse200HydraView::class => AuthenticationOrganizationsIdExternalCollaboratorsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsIdExternalCollaboratorsGetLdjsonResponse200HydraSearch::class => AuthenticationOrganizationsIdExternalCollaboratorsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsIdExternalCollaboratorsGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationOrganizationsIdExternalCollaboratorsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsIdUsersGetLdjsonResponse200::class => AuthenticationOrganizationsIdUsersGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsIdUsersGetLdjsonResponse200HydraView::class => AuthenticationOrganizationsIdUsersGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsIdUsersGetLdjsonResponse200HydraSearch::class => AuthenticationOrganizationsIdUsersGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsIdUsersGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationOrganizationsIdUsersGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsIdWorkspacesGetLdjsonResponse200::class => AuthenticationOrganizationsIdWorkspacesGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsIdWorkspacesGetLdjsonResponse200HydraView::class => AuthenticationOrganizationsIdWorkspacesGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsIdWorkspacesGetLdjsonResponse200HydraSearch::class => AuthenticationOrganizationsIdWorkspacesGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationOrganizationsIdWorkspacesGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationOrganizationsIdWorkspacesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationSubscriptionOffersGetLdjsonResponse200::class => AuthenticationSubscriptionOffersGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationSubscriptionOffersGetLdjsonResponse200HydraView::class => AuthenticationSubscriptionOffersGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationSubscriptionOffersGetLdjsonResponse200HydraSearch::class => AuthenticationSubscriptionOffersGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationSubscriptionOffersGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationSubscriptionOffersGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationSubscriptionsGetLdjsonResponse200::class => AuthenticationSubscriptionsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationSubscriptionsGetLdjsonResponse200HydraView::class => AuthenticationSubscriptionsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationSubscriptionsGetLdjsonResponse200HydraSearch::class => AuthenticationSubscriptionsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationSubscriptionsGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationSubscriptionsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationSubscriptionsIdOptionsGetLdjsonResponse200::class => AuthenticationSubscriptionsIdOptionsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationSubscriptionsIdOptionsGetLdjsonResponse200HydraView::class => AuthenticationSubscriptionsIdOptionsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationSubscriptionsIdOptionsGetLdjsonResponse200HydraSearch::class => AuthenticationSubscriptionsIdOptionsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationSubscriptionsIdOptionsGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationSubscriptionsIdOptionsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUserAuthorizationsGetLdjsonResponse200::class => AuthenticationUserAuthorizationsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUserAuthorizationsGetLdjsonResponse200HydraView::class => AuthenticationUserAuthorizationsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUserAuthorizationsGetLdjsonResponse200HydraSearch::class => AuthenticationUserAuthorizationsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUserAuthorizationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationUserAuthorizationsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUsersGetLdjsonResponse200::class => AuthenticationUsersGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUsersGetLdjsonResponse200HydraView::class => AuthenticationUsersGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUsersGetLdjsonResponse200HydraSearch::class => AuthenticationUsersGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUsersGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationUsersGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUsersIdAdditionalOrganizationsGetLdjsonResponse200::class => AuthenticationUsersIdAdditionalOrganizationsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUsersIdAdditionalOrganizationsGetLdjsonResponse200HydraView::class => AuthenticationUsersIdAdditionalOrganizationsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUsersIdAdditionalOrganizationsGetLdjsonResponse200HydraSearch::class => AuthenticationUsersIdAdditionalOrganizationsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUsersIdAdditionalOrganizationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationUsersIdAdditionalOrganizationsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUsersIdAuthorizationsGetLdjsonResponse200::class => AuthenticationUsersIdAuthorizationsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUsersIdAuthorizationsGetLdjsonResponse200HydraView::class => AuthenticationUsersIdAuthorizationsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUsersIdAuthorizationsGetLdjsonResponse200HydraSearch::class => AuthenticationUsersIdAuthorizationsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUsersIdAuthorizationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationUsersIdAuthorizationsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUsersIdWorkspacesGetLdjsonResponse200::class => AuthenticationUsersIdWorkspacesGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUsersIdWorkspacesGetLdjsonResponse200HydraView::class => AuthenticationUsersIdWorkspacesGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUsersIdWorkspacesGetLdjsonResponse200HydraSearch::class => AuthenticationUsersIdWorkspacesGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationUsersIdWorkspacesGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationUsersIdWorkspacesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationWorkspacesGetLdjsonResponse200::class => AuthenticationWorkspacesGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationWorkspacesGetLdjsonResponse200HydraView::class => AuthenticationWorkspacesGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationWorkspacesGetLdjsonResponse200HydraSearch::class => AuthenticationWorkspacesGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationWorkspacesGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationWorkspacesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200::class => AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200HydraView::class => AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200HydraSearch::class => AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationWorkspacesIdUsersGetLdjsonResponse200::class => AuthenticationWorkspacesIdUsersGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationWorkspacesIdUsersGetLdjsonResponse200HydraView::class => AuthenticationWorkspacesIdUsersGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationWorkspacesIdUsersGetLdjsonResponse200HydraSearch::class => AuthenticationWorkspacesIdUsersGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\AuthenticationWorkspacesIdUsersGetLdjsonResponse200HydraSearchHydraMappingItem::class => AuthenticationWorkspacesIdUsersGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentConfigurationsGetLdjsonResponse200::class => EnvironmentConfigurationsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentConfigurationsGetLdjsonResponse200HydraView::class => EnvironmentConfigurationsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentConfigurationsGetLdjsonResponse200HydraSearch::class => EnvironmentConfigurationsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentConfigurationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => EnvironmentConfigurationsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentEnvironmentsGetLdjsonResponse200::class => EnvironmentEnvironmentsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentEnvironmentsGetLdjsonResponse200HydraView::class => EnvironmentEnvironmentsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentEnvironmentsGetLdjsonResponse200HydraSearch::class => EnvironmentEnvironmentsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentEnvironmentsGetLdjsonResponse200HydraSearchHydraMappingItem::class => EnvironmentEnvironmentsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentSecretsGetLdjsonResponse200::class => EnvironmentSecretsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentSecretsGetLdjsonResponse200HydraView::class => EnvironmentSecretsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentSecretsGetLdjsonResponse200HydraSearch::class => EnvironmentSecretsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\EnvironmentSecretsGetLdjsonResponse200HydraSearchHydraMappingItem::class => EnvironmentSecretsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoInstancesGetLdjsonResponse200::class => GatewayAkeneoInstancesGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoInstancesGetLdjsonResponse200HydraView::class => GatewayAkeneoInstancesGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoInstancesGetLdjsonResponse200HydraSearch::class => GatewayAkeneoInstancesGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoInstancesGetLdjsonResponse200HydraSearchHydraMappingItem::class => GatewayAkeneoInstancesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoInstancesFromUrlGetLdjsonResponse200::class => GatewayAkeneoInstancesFromUrlGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoInstancesFromUrlGetLdjsonResponse200HydraView::class => GatewayAkeneoInstancesFromUrlGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoInstancesFromUrlGetLdjsonResponse200HydraSearch::class => GatewayAkeneoInstancesFromUrlGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoInstancesFromUrlGetLdjsonResponse200HydraSearchHydraMappingItem::class => GatewayAkeneoInstancesFromUrlGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoInstancesOauthStateGetLdjsonResponse200::class => GatewayAkeneoInstancesOauthStateGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoInstancesOauthStateGetLdjsonResponse200HydraView::class => GatewayAkeneoInstancesOauthStateGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoInstancesOauthStateGetLdjsonResponse200HydraSearch::class => GatewayAkeneoInstancesOauthStateGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoInstancesOauthStateGetLdjsonResponse200HydraSearchHydraMappingItem::class => GatewayAkeneoInstancesOauthStateGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsGetLdjsonResponse200::class => GatewayAkeneoLinkedAccountsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraView::class => GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraSearch::class => GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraSearchHydraMappingItem::class => GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsAkeneoUserIdGetLdjsonResponse200::class => GatewayAkeneoLinkedAccountsAkeneoUserIdGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsAkeneoUserIdGetLdjsonResponse200HydraView::class => GatewayAkeneoLinkedAccountsAkeneoUserIdGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsAkeneoUserIdGetLdjsonResponse200HydraSearch::class => GatewayAkeneoLinkedAccountsAkeneoUserIdGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsAkeneoUserIdGetLdjsonResponse200HydraSearchHydraMappingItem::class => GatewayAkeneoLinkedAccountsAkeneoUserIdGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoOauthStatesGetLdjsonResponse200::class => GatewayAkeneoOauthStatesGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoOauthStatesGetLdjsonResponse200HydraView::class => GatewayAkeneoOauthStatesGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoOauthStatesGetLdjsonResponse200HydraSearch::class => GatewayAkeneoOauthStatesGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoOauthStatesGetLdjsonResponse200HydraSearchHydraMappingItem::class => GatewayAkeneoOauthStatesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBody::class => GatewayAkeneoOauthTokenPutBodyNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBodyHydraView::class => GatewayAkeneoOauthTokenPutBodyHydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBodyHydraSearch::class => GatewayAkeneoOauthTokenPutBodyHydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBodyHydraSearchHydraMappingItem::class => GatewayAkeneoOauthTokenPutBodyHydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutLdjsonResponse200::class => GatewayAkeneoOauthTokenPutLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutLdjsonResponse200HydraView::class => GatewayAkeneoOauthTokenPutLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutLdjsonResponse200HydraSearch::class => GatewayAkeneoOauthTokenPutLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutLdjsonResponse200HydraSearchHydraMappingItem::class => GatewayAkeneoOauthTokenPutLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralCodesGetLdjsonResponse200::class => ReferralCodesGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\ReferralCodesGetLdjsonResponse200HydraView::class => ReferralCodesGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralCodesGetLdjsonResponse200HydraSearch::class => ReferralCodesGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralCodesGetLdjsonResponse200HydraSearchHydraMappingItem::class => ReferralCodesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralOnPremiseRequestsGetLdjsonResponse200::class => ReferralOnPremiseRequestsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\ReferralOnPremiseRequestsGetLdjsonResponse200HydraView::class => ReferralOnPremiseRequestsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralOnPremiseRequestsGetLdjsonResponse200HydraSearch::class => ReferralOnPremiseRequestsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralOnPremiseRequestsGetLdjsonResponse200HydraSearchHydraMappingItem::class => ReferralOnPremiseRequestsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralRequestsGetLdjsonResponse200::class => ReferralRequestsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\ReferralRequestsGetLdjsonResponse200HydraView::class => ReferralRequestsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralRequestsGetLdjsonResponse200HydraSearch::class => ReferralRequestsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\ReferralRequestsGetLdjsonResponse200HydraSearchHydraMappingItem::class => ReferralRequestsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeActionsGetLdjsonResponse200::class => RuntimeActionsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeActionsGetLdjsonResponse200HydraView::class => RuntimeActionsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeActionsGetLdjsonResponse200HydraSearch::class => RuntimeActionsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeActionsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeActionsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeCompilationsGetLdjsonResponse200::class => RuntimeCompilationsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeCompilationsGetLdjsonResponse200HydraView::class => RuntimeCompilationsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeCompilationsGetLdjsonResponse200HydraSearch::class => RuntimeCompilationsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeCompilationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeCompilationsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsGetLdjsonResponse200::class => RuntimeExecutionPipelineJobsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsGetLdjsonResponse200HydraView::class => RuntimeExecutionPipelineJobsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsGetLdjsonResponse200HydraSearch::class => RuntimeExecutionPipelineJobsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeExecutionPipelineJobsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsIdStepsGetLdjsonResponse200::class => RuntimeExecutionPipelineJobsIdStepsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsIdStepsGetLdjsonResponse200HydraView::class => RuntimeExecutionPipelineJobsIdStepsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsIdStepsGetLdjsonResponse200HydraSearch::class => RuntimeExecutionPipelineJobsIdStepsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsIdStepsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeExecutionPipelineJobsIdStepsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsGetLdjsonResponse200::class => RuntimeExecutionsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsGetLdjsonResponse200HydraView::class => RuntimeExecutionsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsGetLdjsonResponse200HydraSearch::class => RuntimeExecutionsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeExecutionsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsPipelinesGetLdjsonResponse200::class => RuntimeExecutionsPipelinesGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsPipelinesGetLdjsonResponse200HydraView::class => RuntimeExecutionsPipelinesGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsPipelinesGetLdjsonResponse200HydraSearch::class => RuntimeExecutionsPipelinesGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsPipelinesGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeExecutionsPipelinesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200::class => RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraView::class => RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraSearch::class => RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsGetLdjsonResponse200::class => RuntimeExecutionsWorkflowsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsGetLdjsonResponse200HydraView::class => RuntimeExecutionsWorkflowsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsGetLdjsonResponse200HydraSearch::class => RuntimeExecutionsWorkflowsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeExecutionsWorkflowsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200::class => RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200HydraView::class => RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200HydraSearch::class => RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200::class => RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200HydraView::class => RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200HydraSearch::class => RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200::class => RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200HydraView::class => RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200HydraSearch::class => RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelineStepProbesGetLdjsonResponse200::class => RuntimePipelineStepProbesGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelineStepProbesGetLdjsonResponse200HydraView::class => RuntimePipelineStepProbesGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelineStepProbesGetLdjsonResponse200HydraSearch::class => RuntimePipelineStepProbesGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelineStepProbesGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimePipelineStepProbesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelineStepsGetLdjsonResponse200::class => RuntimePipelineStepsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelineStepsGetLdjsonResponse200HydraView::class => RuntimePipelineStepsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelineStepsGetLdjsonResponse200HydraSearch::class => RuntimePipelineStepsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelineStepsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimePipelineStepsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesGetLdjsonResponse200::class => RuntimePipelinesGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesGetLdjsonResponse200HydraView::class => RuntimePipelinesGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesGetLdjsonResponse200HydraSearch::class => RuntimePipelinesGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimePipelinesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesStepsIdProbesGetLdjsonResponse200::class => RuntimePipelinesStepsIdProbesGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesStepsIdProbesGetLdjsonResponse200HydraView::class => RuntimePipelinesStepsIdProbesGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesStepsIdProbesGetLdjsonResponse200HydraSearch::class => RuntimePipelinesStepsIdProbesGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesStepsIdProbesGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimePipelinesStepsIdProbesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesIdCompilationsGetLdjsonResponse200::class => RuntimePipelinesIdCompilationsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesIdCompilationsGetLdjsonResponse200HydraView::class => RuntimePipelinesIdCompilationsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesIdCompilationsGetLdjsonResponse200HydraSearch::class => RuntimePipelinesIdCompilationsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesIdCompilationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimePipelinesIdCompilationsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesIdSchedulesGetLdjsonResponse200::class => RuntimePipelinesIdSchedulesGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesIdSchedulesGetLdjsonResponse200HydraView::class => RuntimePipelinesIdSchedulesGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesIdSchedulesGetLdjsonResponse200HydraSearch::class => RuntimePipelinesIdSchedulesGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesIdSchedulesGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimePipelinesIdSchedulesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesIdStepsGetLdjsonResponse200::class => RuntimePipelinesIdStepsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesIdStepsGetLdjsonResponse200HydraView::class => RuntimePipelinesIdStepsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesIdStepsGetLdjsonResponse200HydraSearch::class => RuntimePipelinesIdStepsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimePipelinesIdStepsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimePipelinesIdStepsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeSchedulesGetLdjsonResponse200::class => RuntimeSchedulesGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeSchedulesGetLdjsonResponse200HydraView::class => RuntimeSchedulesGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeSchedulesGetLdjsonResponse200HydraSearch::class => RuntimeSchedulesGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeSchedulesGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeSchedulesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeSchedulesIdExecutionsGetLdjsonResponse200::class => RuntimeSchedulesIdExecutionsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeSchedulesIdExecutionsGetLdjsonResponse200HydraView::class => RuntimeSchedulesIdExecutionsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeSchedulesIdExecutionsGetLdjsonResponse200HydraSearch::class => RuntimeSchedulesIdExecutionsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeSchedulesIdExecutionsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeSchedulesIdExecutionsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeTemplatesGetLdjsonResponse200::class => RuntimeTemplatesGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeTemplatesGetLdjsonResponse200HydraView::class => RuntimeTemplatesGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeTemplatesGetLdjsonResponse200HydraSearch::class => RuntimeTemplatesGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeTemplatesGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeTemplatesGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowJobPipelinesWorkflowStepsGetLdjsonResponse200::class => RuntimeWorkflowJobPipelinesWorkflowStepsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowJobPipelinesWorkflowStepsGetLdjsonResponse200HydraView::class => RuntimeWorkflowJobPipelinesWorkflowStepsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowJobPipelinesWorkflowStepsGetLdjsonResponse200HydraSearch::class => RuntimeWorkflowJobPipelinesWorkflowStepsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowJobPipelinesWorkflowStepsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeWorkflowJobPipelinesWorkflowStepsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsGetLdjsonResponse200::class => RuntimeWorkflowsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsGetLdjsonResponse200HydraView::class => RuntimeWorkflowsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsGetLdjsonResponse200HydraSearch::class => RuntimeWorkflowsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeWorkflowsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsActionsGetLdjsonResponse200::class => RuntimeWorkflowsActionsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsActionsGetLdjsonResponse200HydraView::class => RuntimeWorkflowsActionsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsActionsGetLdjsonResponse200HydraSearch::class => RuntimeWorkflowsActionsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsActionsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeWorkflowsActionsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsJobsPipelineStepsGetLdjsonResponse200::class => RuntimeWorkflowsJobsPipelineStepsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsJobsPipelineStepsGetLdjsonResponse200HydraView::class => RuntimeWorkflowsJobsPipelineStepsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsJobsPipelineStepsGetLdjsonResponse200HydraSearch::class => RuntimeWorkflowsJobsPipelineStepsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsJobsPipelineStepsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeWorkflowsJobsPipelineStepsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsIdJobsGetLdjsonResponse200::class => RuntimeWorkflowsIdJobsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsIdJobsGetLdjsonResponse200HydraView::class => RuntimeWorkflowsIdJobsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsIdJobsGetLdjsonResponse200HydraSearch::class => RuntimeWorkflowsIdJobsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsIdJobsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeWorkflowsIdJobsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsWorkflowJobsCodePipelineStepsGetLdjsonResponse200::class => RuntimeWorkflowsWorkflowJobsCodePipelineStepsGetLdjsonResponse200Normalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsWorkflowJobsCodePipelineStepsGetLdjsonResponse200HydraView::class => RuntimeWorkflowsWorkflowJobsCodePipelineStepsGetLdjsonResponse200HydraViewNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsWorkflowJobsCodePipelineStepsGetLdjsonResponse200HydraSearch::class => RuntimeWorkflowsWorkflowJobsCodePipelineStepsGetLdjsonResponse200HydraSearchNormalizer::class,
+
+            \Gyroscops\Api\Model\RuntimeWorkflowsWorkflowJobsCodePipelineStepsGetLdjsonResponse200HydraSearchHydraMappingItem::class => RuntimeWorkflowsWorkflowJobsCodePipelineStepsGetLdjsonResponse200HydraSearchHydraMappingItemNormalizer::class,
+
+            \Jane\Component\JsonSchemaRuntime\Reference::class => \Gyroscops\Api\Runtime\Normalizer\ReferenceNormalizer::class,
+        ];
+        protected $normalizersCache = [];
+
+        public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
+        {
+            return array_key_exists($type, $this->normalizers);
+        }
+
+        public function supportsNormalization($data, $format = null, array $context = []): bool
+        {
+            return is_object($data) && array_key_exists(get_class($data), $this->normalizers);
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $normalizerClass = $this->normalizers[get_class($object)];
+            $normalizer = $this->getNormalizer($normalizerClass);
+
+            return $normalizer->normalize($object, $format, $context);
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            $denormalizerClass = $this->normalizers[$type];
+            $denormalizer = $this->getNormalizer($denormalizerClass);
+
+            return $denormalizer->denormalize($data, $type, $format, $context);
+        }
+
+        private function getNormalizer(string $normalizerClass)
+        {
+            return $this->normalizersCache[$normalizerClass] ?? $this->initNormalizer($normalizerClass);
+        }
+
+        private function initNormalizer(string $normalizerClass)
+        {
+            $normalizer = new $normalizerClass();
+            $normalizer->setNormalizer($this->normalizer);
+            $normalizer->setDenormalizer($this->denormalizer);
+            $this->normalizersCache[$normalizerClass] = $normalizer;
+
+            return $normalizer;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\Gyroscops\Api\Model\AbstractPipelineJsonldExecutionPipelineStepRead::class => false, \Gyroscops\Api\Model\Action::class => false, \Gyroscops\Api\Model\ActionActionRead::class => false, \Gyroscops\Api\Model\ActionJsonld::class => false, \Gyroscops\Api\Model\ActionJsonldActionRead::class => false, \Gyroscops\Api\Model\AkeneoInstance::class => false, \Gyroscops\Api\Model\AkeneoInstanceAkeneoInstanceInput::class => false, \Gyroscops\Api\Model\AkeneoInstanceAkeneoInstanceInputJsonld::class => false, \Gyroscops\Api\Model\AkeneoInstanceJsonld::class => false, \Gyroscops\Api\Model\AkeneoLinkedAccount::class => false, \Gyroscops\Api\Model\AkeneoLinkedAccountAkeneoLinkedAccountsInput::class => false, \Gyroscops\Api\Model\AkeneoLinkedAccountAkeneoLinkedAccountsInputJsonld::class => false, \Gyroscops\Api\Model\AkeneoLinkedAccountJsonld::class => false, \Gyroscops\Api\Model\AkeneoOauthTokenRead::class => false, \Gyroscops\Api\Model\AkeneoOauthTokenOauthStateInput::class => false, \Gyroscops\Api\Model\AkeneoOauthTokenOauthStateInputJsonld::class => false, \Gyroscops\Api\Model\AkeneoOauthTokenOauthStateOutputJsonldRead::class => false, \Gyroscops\Api\Model\AkeneoOauthTokenOauthTokenInput::class => false, \Gyroscops\Api\Model\AkeneoOauthTokenOauthTokenInputJsonld::class => false, \Gyroscops\Api\Model\AkeneoOauthTokenOauthTokenOutputJsonldRead::class => false, \Gyroscops\Api\Model\AkeneoOauthTokenJsonldRead::class => false, \Gyroscops\Api\Model\BigDecimal::class => false, \Gyroscops\Api\Model\BigDecimalJsonld::class => false, \Gyroscops\Api\Model\BigInteger::class => false, \Gyroscops\Api\Model\BigIntegerJsonld::class => false, \Gyroscops\Api\Model\BigNumber::class => false, \Gyroscops\Api\Model\BigNumberJsonld::class => false, \Gyroscops\Api\Model\Buyable::class => false, \Gyroscops\Api\Model\BuyableJsonld::class => false, \Gyroscops\Api\Model\BuyablePrice::class => false, \Gyroscops\Api\Model\BuyablePriceRead::class => false, \Gyroscops\Api\Model\BuyablePriceJsonld::class => false, \Gyroscops\Api\Model\BuyablePriceJsonldRead::class => false, \Gyroscops\Api\Model\ColorJsonldRead::class => false, \Gyroscops\Api\Model\CompilationCompilationRead::class => false, \Gyroscops\Api\Model\CompilationJsonldCompilationRead::class => false, \Gyroscops\Api\Model\Composer::class => false, \Gyroscops\Api\Model\ComposerJsonld::class => false, \Gyroscops\Api\Model\ComposerAuthentication::class => false, \Gyroscops\Api\Model\ComposerAuthenticationJsonld::class => false, \Gyroscops\Api\Model\ComposerAutoload::class => false, \Gyroscops\Api\Model\ComposerAutoloadJsonld::class => false, \Gyroscops\Api\Model\ComposerRepository::class => false, \Gyroscops\Api\Model\ComposerRepositoryJsonld::class => false, \Gyroscops\Api\Model\ConfigurationConfigurationUpdate::class => false, \Gyroscops\Api\Model\ConfigurationConfigurationView::class => false, \Gyroscops\Api\Model\ConfigurationChangeConfigurationValueInputConfigurationUpdate::class => false, \Gyroscops\Api\Model\ConfigurationChangeConfigurationValueInputJsonldConfigurationUpdate::class => false, \Gyroscops\Api\Model\ConfigurationCreateConfigurationInputConfigurationCreate::class => false, \Gyroscops\Api\Model\ConfigurationCreateConfigurationInputJsonldConfigurationCreate::class => false, \Gyroscops\Api\Model\ConfigurationRemoveConfigurationValueInputConfigurationUpdate::class => false, \Gyroscops\Api\Model\ConfigurationRemoveConfigurationValueInputJsonldConfigurationUpdate::class => false, \Gyroscops\Api\Model\ConfigurationJsonldConfigurationUpdate::class => false, \Gyroscops\Api\Model\ConfigurationJsonldConfigurationView::class => false, \Gyroscops\Api\Model\Context::class => false, \Gyroscops\Api\Model\ContextJsonld::class => false, \Gyroscops\Api\Model\CreateSecretInput::class => false, \Gyroscops\Api\Model\CreateSecretInputJsonld::class => false, \Gyroscops\Api\Model\Currency::class => false, \Gyroscops\Api\Model\CurrencyJsonld::class => false, \Gyroscops\Api\Model\EnvironmentEnvironmentUpdate::class => false, \Gyroscops\Api\Model\EnvironmentEnvironmentView::class => false, \Gyroscops\Api\Model\EnvironmentVariableViewEnvironmentView::class => false, \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConfigurationInputEnvironmentUpdate::class => false, \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConfigurationInputJsonldEnvironmentUpdate::class => false, \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConstantInputEnvironmentUpdate::class => false, \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConstantInputJsonldEnvironmentUpdate::class => false, \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromSecretInputEnvironmentUpdate::class => false, \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromSecretInputJsonldEnvironmentUpdate::class => false, \Gyroscops\Api\Model\EnvironmentCreateEnvironmentInputEnvironmentCreate::class => false, \Gyroscops\Api\Model\EnvironmentCreateEnvironmentInputJsonldEnvironmentCreate::class => false, \Gyroscops\Api\Model\EnvironmentJsonldEnvironmentUpdate::class => false, \Gyroscops\Api\Model\EnvironmentJsonldEnvironmentView::class => false, \Gyroscops\Api\Model\EnvironmentJsonldVariableViewEnvironmentView::class => false, \Gyroscops\Api\Model\ExecutionExecutionRead::class => false, \Gyroscops\Api\Model\ExecutionDeclarePipelineExecutionCommandJsonldExecutionRead::class => false, \Gyroscops\Api\Model\ExecutionDeclarePipelineExecutionCommandInput::class => false, \Gyroscops\Api\Model\ExecutionDeclarePipelineExecutionCommandInputJsonld::class => false, \Gyroscops\Api\Model\ExecutionInterruptPipelineExecutionCommandJsonldExecutionRead::class => false, \Gyroscops\Api\Model\ExecutionInterruptPipelineExecutionCommandInputJsonld::class => false, \Gyroscops\Api\Model\ExecutionResumePipelineExecutionCommandJsonldExecutionRead::class => false, \Gyroscops\Api\Model\ExecutionResumePipelineExecutionCommandInputJsonld::class => false, \Gyroscops\Api\Model\ExecutionTerminatePipelineExecutionCommandJsonldExecutionRead::class => false, \Gyroscops\Api\Model\ExecutionTerminatePipelineExecutionCommandInput::class => false, \Gyroscops\Api\Model\ExecutionTerminatePipelineExecutionCommandInputJsonld::class => false, \Gyroscops\Api\Model\ExecutionJsonldExecutionRead::class => false, \Gyroscops\Api\Model\ExecutionActionExecutionActionRead::class => false, \Gyroscops\Api\Model\ExecutionActionJsonldExecutionActionRead::class => false, \Gyroscops\Api\Model\ExecutionPipelineExecutionPipelineRead::class => false, \Gyroscops\Api\Model\ExecutionPipelineJsonldExecutionPipelineRead::class => false, \Gyroscops\Api\Model\ExecutionPipelineJob::class => false, \Gyroscops\Api\Model\ExecutionPipelineJobJsonld::class => false, \Gyroscops\Api\Model\ExecutionPipelineStepExecutionPipelineStepRead::class => false, \Gyroscops\Api\Model\ExecutionPipelineStepJsonldExecutionPipelineStepRead::class => false, \Gyroscops\Api\Model\ExecutionWorkflowExecutionWorkflowRead::class => false, \Gyroscops\Api\Model\ExecutionWorkflowInterruptWorkflowExecutionCommandJsonldExecutionWorkflowRead::class => false, \Gyroscops\Api\Model\ExecutionWorkflowInterruptWorkflowExecutionCommandInputJsonld::class => false, \Gyroscops\Api\Model\ExecutionWorkflowResumeWorkflowExecutionCommandJsonldExecutionWorkflowRead::class => false, \Gyroscops\Api\Model\ExecutionWorkflowResumeWorkflowExecutionCommandInputJsonld::class => false, \Gyroscops\Api\Model\ExecutionWorkflowTerminateWorkflowExecutionCommandJsonldExecutionWorkflowRead::class => false, \Gyroscops\Api\Model\ExecutionWorkflowTerminateWorkflowExecutionCommandInput::class => false, \Gyroscops\Api\Model\ExecutionWorkflowTerminateWorkflowExecutionCommandInputJsonld::class => false, \Gyroscops\Api\Model\ExecutionWorkflowJsonldExecutionWorkflowRead::class => false, \Gyroscops\Api\Model\ExecutionWorkflowJobExecutionWorkflowJobRead::class => false, \Gyroscops\Api\Model\ExecutionWorkflowJobJsonldExecutionWorkflowJobRead::class => false, \Gyroscops\Api\Model\ExecutionWorkflowJobAction::class => false, \Gyroscops\Api\Model\ExecutionWorkflowJobActionJsonld::class => false, \Gyroscops\Api\Model\Job::class => false, \Gyroscops\Api\Model\JobJsonld::class => false, \Gyroscops\Api\Model\Money::class => false, \Gyroscops\Api\Model\MoneyJsonld::class => false, \Gyroscops\Api\Model\OnPremiseRequestOnPremiseRequestRead::class => false, \Gyroscops\Api\Model\OnPremiseRequestOnPremiseRequestWrite::class => false, \Gyroscops\Api\Model\OnPremiseRequestJsonldOnPremiseRequestRead::class => false, \Gyroscops\Api\Model\OnPremiseRequestJsonldOnPremiseRequestWrite::class => false, \Gyroscops\Api\Model\OpaqueInterfaceJsonldSecretUpdate::class => false, \Gyroscops\Api\Model\Option::class => false, \Gyroscops\Api\Model\OptionJsonld::class => false, \Gyroscops\Api\Model\OrganizationOrganizationRead::class => false, \Gyroscops\Api\Model\OrganizationOrganizationWrite::class => false, \Gyroscops\Api\Model\OrganizationJsonldAddCollaborators::class => false, \Gyroscops\Api\Model\OrganizationJsonldOrganizationRead::class => false, \Gyroscops\Api\Model\OrganizationJsonldOrganizationWrite::class => false, \Gyroscops\Api\Model\Pipeline::class => false, \Gyroscops\Api\Model\PipelinePipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineAddAfterPipelineStepCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineAddAfterPipelineStepCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineAddBeforePipelineStepCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineAddBeforePipelineStepCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineAddPipelineComposerAuthCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineAddPipelineComposerAuthCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineAddPipelineComposerPSR4AutoloadCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineAddPipelineComposerPSR4AutoloadCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineAddPipelineComposerPackageCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineAddPipelineComposerPackageCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineAddPipelineComposerRepositoryCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineAddPipelineComposerRepositoryCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineAddPipelineStepProbeCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineAddPipelineStepProbeCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineAppendPipelineStepCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineAppendPipelineStepCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineCompilePipelineCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineCompilePipelineCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineDeclarePipelineCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineDeclarePipelineCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineDeclarePipelineScheduleImmediateCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineDeclarePipelineScheduleImmediateCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineDeclarePipelineScheduleOnceCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineDeclarePipelineScheduleOnceCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineMoveAfterPipelineStepCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineMoveAfterPipelineStepCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineMoveBeforePipelineStepCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineMoveBeforePipelineStepCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineRemovePipelineComposerAuthCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineRemovePipelineComposerAuthCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineRemovePipelineComposerPSR4AutoloadCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineRemovePipelineComposerPSR4AutoloadCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineRemovePipelineComposerPackageCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineRemovePipelineComposerPackageCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineRemovePipelineComposerRepositoryCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineRemovePipelineComposerRepositoryCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineRemovePipelineStepProbeCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineReplacePipelineStepCommandJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineReplacePipelineStepCommandInputJsonldPipelineWrite::class => false, \Gyroscops\Api\Model\PipelineJsonld::class => false, \Gyroscops\Api\Model\PipelineJsonldPipelineReadPipelineSubresourceRead::class => false, \Gyroscops\Api\Model\PipelineStepStepRead::class => false, \Gyroscops\Api\Model\PipelineStepReplaceWorkflowPipelineStepCommandJsonldStepRead::class => false, \Gyroscops\Api\Model\PipelineStepReplaceWorkflowPipelineStepCommandInput::class => false, \Gyroscops\Api\Model\PipelineStepReplaceWorkflowPipelineStepCommandInputJsonld::class => false, \Gyroscops\Api\Model\PipelineStepJsonldStepRead::class => false, \Gyroscops\Api\Model\PipelineStepProbeStepProbeRead::class => false, \Gyroscops\Api\Model\PipelineStepProbeJsonldStepProbeRead::class => false, \Gyroscops\Api\Model\Price::class => false, \Gyroscops\Api\Model\PriceJsonld::class => false, \Gyroscops\Api\Model\Probe::class => false, \Gyroscops\Api\Model\ProbeJsonld::class => false, \Gyroscops\Api\Model\ReferralCodeReferralCodeRead::class => false, \Gyroscops\Api\Model\ReferralCodeReferralCodeWrite::class => false, \Gyroscops\Api\Model\ReferralCodeJsonldReferralCodeRead::class => false, \Gyroscops\Api\Model\ReferralCodeJsonldReferralCodeWrite::class => false, \Gyroscops\Api\Model\ReferralRequestReferralRequestRead::class => false, \Gyroscops\Api\Model\ReferralRequestReferralRequestInput::class => false, \Gyroscops\Api\Model\ReferralRequestReferralRequestInputJsonld::class => false, \Gyroscops\Api\Model\ReferralRequestJsonldReferralRequestRead::class => false, \Gyroscops\Api\Model\ScheduleScheduleRead::class => false, \Gyroscops\Api\Model\ScheduleJsonld::class => false, \Gyroscops\Api\Model\ScheduleJsonldScheduleRead::class => false, \Gyroscops\Api\Model\ScheduleTypeJsonldScheduleRead::class => false, \Gyroscops\Api\Model\SecretSecretRead::class => false, \Gyroscops\Api\Model\SecretChangeSecretValueInputSecretUpdate::class => false, \Gyroscops\Api\Model\SecretChangeSecretValueInputJsonldSecretUpdate::class => false, \Gyroscops\Api\Model\SecretCreateSecretInputSecretCreate::class => false, \Gyroscops\Api\Model\SecretCreateSecretInputJsonldSecretCreate::class => false, \Gyroscops\Api\Model\SecretRemoveSecretValueInputSecretUpdate::class => false, \Gyroscops\Api\Model\SecretRemoveSecretValueInputJsonldSecretUpdate::class => false, \Gyroscops\Api\Model\SecretJsonldSecretRead::class => false, \Gyroscops\Api\Model\SecretJsonldSecretUpdate::class => false, \Gyroscops\Api\Model\Step::class => false, \Gyroscops\Api\Model\StepJsonld::class => false, \Gyroscops\Api\Model\Subscription::class => false, \Gyroscops\Api\Model\SubscriptionJsonld::class => false, \Gyroscops\Api\Model\SubscriptionOfferRead::class => false, \Gyroscops\Api\Model\SubscriptionOfferWrite::class => false, \Gyroscops\Api\Model\SubscriptionOfferJsonldRead::class => false, \Gyroscops\Api\Model\SubscriptionOfferJsonldWrite::class => false, \Gyroscops\Api\Model\SubscriptionOption::class => false, \Gyroscops\Api\Model\SubscriptionOptionJsonld::class => false, \Gyroscops\Api\Model\SubscriptionType::class => false, \Gyroscops\Api\Model\SubscriptionTypeJsonld::class => false, \Gyroscops\Api\Model\SubscriptionTypeJsonldRead::class => false, \Gyroscops\Api\Model\Template::class => false, \Gyroscops\Api\Model\TemplateTemplateCreate::class => false, \Gyroscops\Api\Model\TemplateTemplateList::class => false, \Gyroscops\Api\Model\TemplateTemplateView::class => false, \Gyroscops\Api\Model\TemplateDeclareSatelliteTemplateInput::class => false, \Gyroscops\Api\Model\TemplateDeclareSatelliteTemplateInputJsonld::class => false, \Gyroscops\Api\Model\TemplateJsonld::class => false, \Gyroscops\Api\Model\TemplateJsonldTemplateCreate::class => false, \Gyroscops\Api\Model\TemplateJsonldTemplateList::class => false, \Gyroscops\Api\Model\TemplateJsonldTemplateUpdate::class => false, \Gyroscops\Api\Model\TemplateJsonldTemplateView::class => false, \Gyroscops\Api\Model\UserUserRead::class => false, \Gyroscops\Api\Model\UserUserWrite::class => false, \Gyroscops\Api\Model\UserJsonldUserRead::class => false, \Gyroscops\Api\Model\UserJsonldUserWrite::class => false, \Gyroscops\Api\Model\UserAuthorizationAuthorizationRead::class => false, \Gyroscops\Api\Model\UserAuthorizationAuthorizationWrite::class => false, \Gyroscops\Api\Model\UserAuthorizationJsonldAuthorizationRead::class => false, \Gyroscops\Api\Model\UserAuthorizationJsonldAuthorizationWrite::class => false, \Gyroscops\Api\Model\VariableVariableViewEnvironmentView::class => false, \Gyroscops\Api\Model\VariableJsonldVariableViewEnvironmentView::class => false, \Gyroscops\Api\Model\VariableFromConfigurationVariableUpdate::class => false, \Gyroscops\Api\Model\VariableFromConfigurationVariableViewEnvironmentView::class => false, \Gyroscops\Api\Model\VariableFromConfigurationJsonldVariableUpdate::class => false, \Gyroscops\Api\Model\VariableFromConfigurationJsonldVariableViewEnvironmentView::class => false, \Gyroscops\Api\Model\VariableFromConfigurationInputEnvironmentUpdate::class => false, \Gyroscops\Api\Model\VariableFromConfigurationInputJsonldEnvironmentUpdate::class => false, \Gyroscops\Api\Model\VariableFromConstantVariableUpdate::class => false, \Gyroscops\Api\Model\VariableFromConstantVariableViewEnvironmentView::class => false, \Gyroscops\Api\Model\VariableFromConstantJsonldVariableUpdate::class => false, \Gyroscops\Api\Model\VariableFromConstantJsonldVariableViewEnvironmentView::class => false, \Gyroscops\Api\Model\VariableFromConstantInputEnvironmentUpdate::class => false, \Gyroscops\Api\Model\VariableFromConstantInputJsonldEnvironmentUpdate::class => false, \Gyroscops\Api\Model\VariableFromSecretVariableUpdate::class => false, \Gyroscops\Api\Model\VariableFromSecretVariableViewEnvironmentView::class => false, \Gyroscops\Api\Model\VariableFromSecretJsonldVariableUpdate::class => false, \Gyroscops\Api\Model\VariableFromSecretJsonldVariableViewEnvironmentView::class => false, \Gyroscops\Api\Model\VariableFromSecretInputEnvironmentUpdate::class => false, \Gyroscops\Api\Model\VariableFromSecretInputJsonldEnvironmentUpdate::class => false, \Gyroscops\Api\Model\WorkflowWorkflowRead::class => false, \Gyroscops\Api\Model\WorkflowCompileWorkflowCommandJsonldWorkflowRead::class => false, \Gyroscops\Api\Model\WorkflowCompileWorkflowCommandInputJsonld::class => false, \Gyroscops\Api\Model\WorkflowDeclareWorkflowCommandJsonldWorkflowRead::class => false, \Gyroscops\Api\Model\WorkflowDeclareWorkflowCommandInput::class => false, \Gyroscops\Api\Model\WorkflowDeclareWorkflowCommandInputJsonld::class => false, \Gyroscops\Api\Model\WorkflowDeclareWorkflowScheduleCrontabCommandJsonldWorkflowRead::class => false, \Gyroscops\Api\Model\WorkflowDeclareWorkflowScheduleCrontabCommandInput::class => false, \Gyroscops\Api\Model\WorkflowDeclareWorkflowScheduleCrontabCommandInputJsonld::class => false, \Gyroscops\Api\Model\WorkflowDeclareWorkflowScheduleImmediateCommandJsonldWorkflowRead::class => false, \Gyroscops\Api\Model\WorkflowDeclareWorkflowScheduleImmediateCommandInput::class => false, \Gyroscops\Api\Model\WorkflowDeclareWorkflowScheduleImmediateCommandInputJsonld::class => false, \Gyroscops\Api\Model\WorkflowRemoveWorkflowCommandJsonldWorkflowRead::class => false, \Gyroscops\Api\Model\WorkflowRemoveWorkflowCommandInputJsonld::class => false, \Gyroscops\Api\Model\WorkflowJsonldWorkflowRead::class => false, \Gyroscops\Api\Model\WorkflowJobJobRead::class => false, \Gyroscops\Api\Model\WorkflowJobJobReadPipelineRead::class => false, \Gyroscops\Api\Model\WorkflowJobAddAfterWorkflowPipelineStepCommandJsonldJobRead::class => false, \Gyroscops\Api\Model\WorkflowJobAddAfterWorkflowPipelineStepCommandInput::class => false, \Gyroscops\Api\Model\WorkflowJobAddAfterWorkflowPipelineStepCommandInputJsonld::class => false, \Gyroscops\Api\Model\WorkflowJobAddBeforeWorkflowPipelineStepCommandJsonldJobRead::class => false, \Gyroscops\Api\Model\WorkflowJobAddBeforeWorkflowPipelineStepCommandInput::class => false, \Gyroscops\Api\Model\WorkflowJobAddBeforeWorkflowPipelineStepCommandInputJsonld::class => false, \Gyroscops\Api\Model\WorkflowJobAppendWorkflowPipelineStepCommandJsonldJobRead::class => false, \Gyroscops\Api\Model\WorkflowJobAppendWorkflowPipelineStepCommandInput::class => false, \Gyroscops\Api\Model\WorkflowJobAppendWorkflowPipelineStepCommandInputJsonld::class => false, \Gyroscops\Api\Model\WorkflowJobMoveAfterWorkflowPipelineStepCommandJsonldJobRead::class => false, \Gyroscops\Api\Model\WorkflowJobMoveAfterWorkflowPipelineStepCommandInput::class => false, \Gyroscops\Api\Model\WorkflowJobMoveAfterWorkflowPipelineStepCommandInputJsonld::class => false, \Gyroscops\Api\Model\WorkflowJobMoveBeforeWorkflowPipelineStepCommandJsonldJobRead::class => false, \Gyroscops\Api\Model\WorkflowJobMoveBeforeWorkflowPipelineStepCommandInput::class => false, \Gyroscops\Api\Model\WorkflowJobMoveBeforeWorkflowPipelineStepCommandInputJsonld::class => false, \Gyroscops\Api\Model\WorkflowJobReorderWorkflowPipelineStepsCommandJsonldJobRead::class => false, \Gyroscops\Api\Model\WorkflowJobReorderWorkflowPipelineStepsCommandInput::class => false, \Gyroscops\Api\Model\WorkflowJobReorderWorkflowPipelineStepsCommandInputJsonld::class => false, \Gyroscops\Api\Model\WorkflowJobReplaceWorkflowPipelineStepCommandJsonldJobRead::class => false, \Gyroscops\Api\Model\WorkflowJobReplaceWorkflowPipelineStepCommandInput::class => false, \Gyroscops\Api\Model\WorkflowJobReplaceWorkflowPipelineStepCommandInputJsonld::class => false, \Gyroscops\Api\Model\WorkflowJobJsonldJobRead::class => false, \Gyroscops\Api\Model\WorkflowJobJsonldJobReadPipelineRead::class => false, \Gyroscops\Api\Model\WorkflowJobActionActionRead::class => false, \Gyroscops\Api\Model\WorkflowJobActionJobRead::class => false, \Gyroscops\Api\Model\WorkflowJobActionJobReadPipelineRead::class => false, \Gyroscops\Api\Model\WorkflowJobActionJsonldActionRead::class => false, \Gyroscops\Api\Model\WorkflowJobActionJsonldJobRead::class => false, \Gyroscops\Api\Model\WorkflowJobActionJsonldJobReadPipelineRead::class => false, \Gyroscops\Api\Model\WorkflowJobPipelineJobRead::class => false, \Gyroscops\Api\Model\WorkflowJobPipelineJobReadPipelineRead::class => false, \Gyroscops\Api\Model\WorkflowJobPipelineJsonldJobRead::class => false, \Gyroscops\Api\Model\WorkflowJobPipelineJsonldJobReadPipelineRead::class => false, \Gyroscops\Api\Model\WorkflowJobPipelineStepJobRead::class => false, \Gyroscops\Api\Model\WorkflowJobPipelineStepJobReadPipelineRead::class => false, \Gyroscops\Api\Model\WorkflowJobPipelineStepStepRead::class => false, \Gyroscops\Api\Model\WorkflowJobPipelineStepReplaceWorkflowPipelineStepCommandJsonldStepRead::class => false, \Gyroscops\Api\Model\WorkflowJobPipelineStepReplaceWorkflowPipelineStepCommandInput::class => false, \Gyroscops\Api\Model\WorkflowJobPipelineStepReplaceWorkflowPipelineStepCommandInputJsonld::class => false, \Gyroscops\Api\Model\WorkflowJobPipelineStepJsonldJobRead::class => false, \Gyroscops\Api\Model\WorkflowJobPipelineStepJsonldJobReadPipelineRead::class => false, \Gyroscops\Api\Model\WorkflowJobPipelineStepJsonldStepRead::class => false, \Gyroscops\Api\Model\WorkspaceWorkspaceRead::class => false, \Gyroscops\Api\Model\WorkspaceWorkspaceWrite::class => false, \Gyroscops\Api\Model\WorkspaceJsonldWorkspaceRead::class => false, \Gyroscops\Api\Model\WorkspaceJsonldWorkspaceWrite::class => false, \Gyroscops\Api\Model\Token::class => false, \Gyroscops\Api\Model\Credentials::class => false, \Gyroscops\Api\Model\Impersonation::class => false, \Gyroscops\Api\Model\AuthenticationMeGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationMeGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationMeGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationMeGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationOffersIdOptionsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationOffersIdOptionsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationOffersIdOptionsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationOffersIdOptionsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsIdAuthorizationsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsIdAuthorizationsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsIdAuthorizationsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsIdAuthorizationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsIdExternalCollaboratorsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsIdExternalCollaboratorsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsIdExternalCollaboratorsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsIdExternalCollaboratorsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsIdUsersGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsIdUsersGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsIdUsersGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsIdUsersGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsIdWorkspacesGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsIdWorkspacesGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsIdWorkspacesGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationOrganizationsIdWorkspacesGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationSubscriptionOffersGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationSubscriptionOffersGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationSubscriptionOffersGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationSubscriptionOffersGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationSubscriptionsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationSubscriptionsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationSubscriptionsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationSubscriptionsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationSubscriptionsIdOptionsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationSubscriptionsIdOptionsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationSubscriptionsIdOptionsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationSubscriptionsIdOptionsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationUserAuthorizationsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationUserAuthorizationsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationUserAuthorizationsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationUserAuthorizationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationUsersGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationUsersGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationUsersGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationUsersGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationUsersIdAdditionalOrganizationsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationUsersIdAdditionalOrganizationsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationUsersIdAdditionalOrganizationsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationUsersIdAdditionalOrganizationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationUsersIdAuthorizationsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationUsersIdAuthorizationsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationUsersIdAuthorizationsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationUsersIdAuthorizationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationUsersIdWorkspacesGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationUsersIdWorkspacesGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationUsersIdWorkspacesGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationUsersIdWorkspacesGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationWorkspacesGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationWorkspacesGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationWorkspacesGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationWorkspacesGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\AuthenticationWorkspacesIdUsersGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\AuthenticationWorkspacesIdUsersGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\AuthenticationWorkspacesIdUsersGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\AuthenticationWorkspacesIdUsersGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\EnvironmentConfigurationsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\EnvironmentConfigurationsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\EnvironmentConfigurationsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\EnvironmentConfigurationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\EnvironmentEnvironmentsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\EnvironmentEnvironmentsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\EnvironmentEnvironmentsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\EnvironmentEnvironmentsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\EnvironmentSecretsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\EnvironmentSecretsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\EnvironmentSecretsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\EnvironmentSecretsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\GatewayAkeneoInstancesGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\GatewayAkeneoInstancesGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\GatewayAkeneoInstancesGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\GatewayAkeneoInstancesGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\GatewayAkeneoInstancesFromUrlGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\GatewayAkeneoInstancesFromUrlGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\GatewayAkeneoInstancesFromUrlGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\GatewayAkeneoInstancesFromUrlGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\GatewayAkeneoInstancesOauthStateGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\GatewayAkeneoInstancesOauthStateGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\GatewayAkeneoInstancesOauthStateGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\GatewayAkeneoInstancesOauthStateGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsAkeneoUserIdGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsAkeneoUserIdGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsAkeneoUserIdGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsAkeneoUserIdGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\GatewayAkeneoOauthStatesGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\GatewayAkeneoOauthStatesGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\GatewayAkeneoOauthStatesGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\GatewayAkeneoOauthStatesGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBody::class => false, \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBodyHydraView::class => false, \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBodyHydraSearch::class => false, \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutBodyHydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutLdjsonResponse200::class => false, \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\ReferralCodesGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\ReferralCodesGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\ReferralCodesGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\ReferralCodesGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\ReferralOnPremiseRequestsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\ReferralOnPremiseRequestsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\ReferralOnPremiseRequestsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\ReferralOnPremiseRequestsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\ReferralRequestsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\ReferralRequestsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\ReferralRequestsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\ReferralRequestsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeActionsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeActionsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeActionsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeActionsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeCompilationsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeCompilationsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeCompilationsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeCompilationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsIdStepsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsIdStepsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsIdStepsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeExecutionPipelineJobsIdStepsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeExecutionsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeExecutionsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeExecutionsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeExecutionsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeExecutionsPipelinesGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeExecutionsPipelinesGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeExecutionsPipelinesGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeExecutionsPipelinesGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsJobsIdPipelinesStepsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeExecutionsWorkflowsIdJobsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimePipelineStepProbesGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimePipelineStepProbesGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimePipelineStepProbesGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimePipelineStepProbesGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimePipelineStepsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimePipelineStepsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimePipelineStepsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimePipelineStepsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimePipelinesGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimePipelinesGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimePipelinesGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimePipelinesGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimePipelinesStepsIdProbesGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimePipelinesStepsIdProbesGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimePipelinesStepsIdProbesGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimePipelinesStepsIdProbesGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimePipelinesIdCompilationsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimePipelinesIdCompilationsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimePipelinesIdCompilationsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimePipelinesIdCompilationsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimePipelinesIdSchedulesGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimePipelinesIdSchedulesGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimePipelinesIdSchedulesGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimePipelinesIdSchedulesGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimePipelinesIdStepsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimePipelinesIdStepsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimePipelinesIdStepsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimePipelinesIdStepsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeSchedulesGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeSchedulesGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeSchedulesGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeSchedulesGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeSchedulesIdExecutionsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeSchedulesIdExecutionsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeSchedulesIdExecutionsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeSchedulesIdExecutionsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeTemplatesGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeTemplatesGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeTemplatesGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeTemplatesGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeWorkflowJobPipelinesWorkflowStepsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeWorkflowJobPipelinesWorkflowStepsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeWorkflowJobPipelinesWorkflowStepsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeWorkflowJobPipelinesWorkflowStepsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsActionsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsActionsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsActionsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsActionsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsJobsPipelineStepsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsJobsPipelineStepsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsJobsPipelineStepsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsJobsPipelineStepsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsIdJobsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsIdJobsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsIdJobsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsIdJobsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsWorkflowJobsCodePipelineStepsGetLdjsonResponse200::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsWorkflowJobsCodePipelineStepsGetLdjsonResponse200HydraView::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsWorkflowJobsCodePipelineStepsGetLdjsonResponse200HydraSearch::class => false, \Gyroscops\Api\Model\RuntimeWorkflowsWorkflowJobsCodePipelineStepsGetLdjsonResponse200HydraSearchHydraMappingItem::class => false, \Jane\Component\JsonSchemaRuntime\Reference::class => false];
+        }
     }
 }

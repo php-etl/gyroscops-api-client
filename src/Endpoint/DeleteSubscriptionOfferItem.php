@@ -41,8 +41,6 @@ class DeleteSubscriptionOfferItem extends \Gyroscops\Api\Runtime\Client\BaseEndp
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return null
      *
      * @throws \Gyroscops\Api\Exception\DeleteSubscriptionOfferItemNotFoundException
@@ -63,6 +61,6 @@ class DeleteSubscriptionOfferItem extends \Gyroscops\Api\Runtime\Client\BaseEndp
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

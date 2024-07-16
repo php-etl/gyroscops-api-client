@@ -34,33 +34,27 @@ class ComposerJsonld extends \ArrayObject
      */
     protected $type;
     /**
-     * @var ComposerAutoloadJsonld[]|null
+     * @var list<ComposerAutoloadJsonld>|null
      */
     protected $autoloads;
     /**
-     * @var string[]|null
+     * @var array<string, string>|null
      */
     protected $packages;
     /**
-     * @var ComposerRepositoryJsonld[]|null
+     * @var list<ComposerRepositoryJsonld>|null
      */
     protected $repositories;
     /**
-     * @var ComposerAuthenticationJsonld[]|null
+     * @var list<ComposerAuthenticationJsonld>|null
      */
     protected $authentications;
 
-    /**
-     * @return mixed
-     */
     public function getContext()
     {
         return $this->context;
     }
 
-    /**
-     * @param mixed $context
-     */
     public function setContext($context): self
     {
         $this->initialized['context'] = true;
@@ -96,7 +90,7 @@ class ComposerJsonld extends \ArrayObject
     }
 
     /**
-     * @return ComposerAutoloadJsonld[]|null
+     * @return list<ComposerAutoloadJsonld>|null
      */
     public function getAutoloads(): ?array
     {
@@ -104,7 +98,7 @@ class ComposerJsonld extends \ArrayObject
     }
 
     /**
-     * @param ComposerAutoloadJsonld[]|null $autoloads
+     * @param list<ComposerAutoloadJsonld>|null $autoloads
      */
     public function setAutoloads(?array $autoloads): self
     {
@@ -115,7 +109,7 @@ class ComposerJsonld extends \ArrayObject
     }
 
     /**
-     * @return string[]|null
+     * @return array<string, string>|null
      */
     public function getPackages(): ?iterable
     {
@@ -123,7 +117,7 @@ class ComposerJsonld extends \ArrayObject
     }
 
     /**
-     * @param string[]|null $packages
+     * @param array<string, string>|null $packages
      */
     public function setPackages(?iterable $packages): self
     {
@@ -134,7 +128,7 @@ class ComposerJsonld extends \ArrayObject
     }
 
     /**
-     * @return ComposerRepositoryJsonld[]|null
+     * @return list<ComposerRepositoryJsonld>|null
      */
     public function getRepositories(): ?array
     {
@@ -142,7 +136,7 @@ class ComposerJsonld extends \ArrayObject
     }
 
     /**
-     * @param ComposerRepositoryJsonld[]|null $repositories
+     * @param list<ComposerRepositoryJsonld>|null $repositories
      */
     public function setRepositories(?array $repositories): self
     {
@@ -153,7 +147,7 @@ class ComposerJsonld extends \ArrayObject
     }
 
     /**
-     * @return ComposerAuthenticationJsonld[]|null
+     * @return list<ComposerAuthenticationJsonld>|null
      */
     public function getAuthentications(): ?array
     {
@@ -161,7 +155,7 @@ class ComposerJsonld extends \ArrayObject
     }
 
     /**
-     * @param ComposerAuthenticationJsonld[]|null $authentications
+     * @param list<ComposerAuthenticationJsonld>|null $authentications
      */
     public function setAuthentications(?array $authentications): self
     {

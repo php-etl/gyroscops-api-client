@@ -30,7 +30,7 @@ class ExecutionPipelineJob extends \ArrayObject
      */
     protected $id;
     /**
-     * @var string[]|null
+     * @var list<string>|null
      */
     protected $steps;
 
@@ -61,7 +61,7 @@ class ExecutionPipelineJob extends \ArrayObject
     }
 
     /**
-     * @return string[]|null
+     * @return list<string>|null
      */
     public function getSteps(): ?array
     {
@@ -69,7 +69,7 @@ class ExecutionPipelineJob extends \ArrayObject
     }
 
     /**
-     * @param string[]|null $steps
+     * @param list<string>|null $steps
      */
     public function setSteps(?array $steps): self
     {

@@ -24,18 +24,6 @@ class Price extends \ArrayObject
     /**
      * @var string|null
      */
-    protected $id;
-    /**
-     * @var Buyable|null
-     */
-    protected $buyable;
-    /**
-     * @var SubscriptionType|null
-     */
-    protected $type;
-    /**
-     * @var string|null
-     */
     protected $amount;
     /**
      * @var Money|null
@@ -45,45 +33,6 @@ class Price extends \ArrayObject
      * @var string|null
      */
     protected $currency;
-
-    public function getId(): ?string
-    {
-        return $this->id;
-    }
-
-    public function setId(?string $id): self
-    {
-        $this->initialized['id'] = true;
-        $this->id = $id;
-
-        return $this;
-    }
-
-    public function getBuyable(): ?Buyable
-    {
-        return $this->buyable;
-    }
-
-    public function setBuyable(?Buyable $buyable): self
-    {
-        $this->initialized['buyable'] = true;
-        $this->buyable = $buyable;
-
-        return $this;
-    }
-
-    public function getType(): ?SubscriptionType
-    {
-        return $this->type;
-    }
-
-    public function setType(?SubscriptionType $type): self
-    {
-        $this->initialized['type'] = true;
-        $this->type = $type;
-
-        return $this;
-    }
 
     public function getAmount(): ?string
     {

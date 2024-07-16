@@ -62,8 +62,6 @@ class PostSubscriptionCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpo
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \Gyroscops\Api\Model\SubscriptionJsonld|\Gyroscops\Api\Model\Subscription
      *
      * @throws \Gyroscops\Api\Exception\PostSubscriptionCollectionBadRequestException
@@ -76,10 +74,10 @@ class PostSubscriptionCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpo
         $body = (string) $response->getBody();
         if (201 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\SubscriptionJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\SubscriptionJsonld', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Subscription', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\Subscription', 'json');
             }
         }
         if (400 === $status) {
@@ -93,6 +91,6 @@ class PostSubscriptionCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpo
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

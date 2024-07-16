@@ -22,24 +22,24 @@ class Composer extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var ComposerAutoload[]|null
+     * @var list<ComposerAutoload>|null
      */
     protected $autoloads;
     /**
-     * @var string[]|null
+     * @var array<string, string>|null
      */
     protected $packages;
     /**
-     * @var ComposerRepository[]|null
+     * @var list<ComposerRepository>|null
      */
     protected $repositories;
     /**
-     * @var ComposerAuthentication[]|null
+     * @var list<ComposerAuthentication>|null
      */
     protected $authentications;
 
     /**
-     * @return ComposerAutoload[]|null
+     * @return list<ComposerAutoload>|null
      */
     public function getAutoloads(): ?array
     {
@@ -47,7 +47,7 @@ class Composer extends \ArrayObject
     }
 
     /**
-     * @param ComposerAutoload[]|null $autoloads
+     * @param list<ComposerAutoload>|null $autoloads
      */
     public function setAutoloads(?array $autoloads): self
     {
@@ -58,7 +58,7 @@ class Composer extends \ArrayObject
     }
 
     /**
-     * @return string[]|null
+     * @return array<string, string>|null
      */
     public function getPackages(): ?iterable
     {
@@ -66,7 +66,7 @@ class Composer extends \ArrayObject
     }
 
     /**
-     * @param string[]|null $packages
+     * @param array<string, string>|null $packages
      */
     public function setPackages(?iterable $packages): self
     {
@@ -77,7 +77,7 @@ class Composer extends \ArrayObject
     }
 
     /**
-     * @return ComposerRepository[]|null
+     * @return list<ComposerRepository>|null
      */
     public function getRepositories(): ?array
     {
@@ -85,7 +85,7 @@ class Composer extends \ArrayObject
     }
 
     /**
-     * @param ComposerRepository[]|null $repositories
+     * @param list<ComposerRepository>|null $repositories
      */
     public function setRepositories(?array $repositories): self
     {
@@ -96,7 +96,7 @@ class Composer extends \ArrayObject
     }
 
     /**
-     * @return ComposerAuthentication[]|null
+     * @return list<ComposerAuthentication>|null
      */
     public function getAuthentications(): ?array
     {
@@ -104,7 +104,7 @@ class Composer extends \ArrayObject
     }
 
     /**
-     * @param ComposerAuthentication[]|null $authentications
+     * @param list<ComposerAuthentication>|null $authentications
      */
     public function setAuthentications(?array $authentications): self
     {

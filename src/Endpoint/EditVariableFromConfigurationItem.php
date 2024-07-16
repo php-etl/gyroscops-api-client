@@ -19,9 +19,9 @@ class EditVariableFromConfigurationItem extends \Gyroscops\Api\Runtime\Client\Ba
     /**
      * Replaces the VariableFromConfiguration resource.
      *
-     * @param string                                                                   $id          Resource identifier
-     * @param \Gyroscops\Api\Model\VariableFromConfigurationJsonldWrite|\stdClass|null $requestBody
-     * @param array                                                                    $accept      Accept content header application/ld+json|application/json|text/html
+     * @param string                                                                                                                               $id          Resource identifier
+     * @param \Gyroscops\Api\Model\VariableFromConfigurationJsonldVariableUpdate|\Gyroscops\Api\Model\VariableFromConfigurationVariableUpdate|null $requestBody
+     * @param array                                                                                                                                $accept      Accept content header application/ld+json|application/json|text/html
      */
     public function __construct(string $id, $requestBody = null, array $accept = [])
     {
@@ -42,13 +42,13 @@ class EditVariableFromConfigurationItem extends \Gyroscops\Api\Runtime\Client\Ba
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\VariableFromConfigurationJsonldWrite) {
+        if ($this->body instanceof \Gyroscops\Api\Model\VariableFromConfigurationJsonldVariableUpdate) {
             return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \stdClass) {
-            return [['Content-Type' => ['application/json']], json_encode($this->body)];
+        if ($this->body instanceof \Gyroscops\Api\Model\VariableFromConfigurationVariableUpdate) {
+            return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \stdClass) {
+        if ($this->body instanceof \Gyroscops\Api\Model\VariableFromConfigurationVariableUpdate) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -65,9 +65,7 @@ class EditVariableFromConfigurationItem extends \Gyroscops\Api\Runtime\Client\Ba
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\VariableFromConfigurationJsonldRead|\Gyroscops\Api\Model\VariableFromConfigurationRead
+     * @return \Gyroscops\Api\Model\VariableFromConfigurationJsonldVariableViewEnvironmentView|\Gyroscops\Api\Model\VariableFromConfigurationVariableViewEnvironmentView
      *
      * @throws \Gyroscops\Api\Exception\EditVariableFromConfigurationItemBadRequestException
      * @throws \Gyroscops\Api\Exception\EditVariableFromConfigurationItemUnprocessableEntityException
@@ -80,10 +78,10 @@ class EditVariableFromConfigurationItem extends \Gyroscops\Api\Runtime\Client\Ba
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\VariableFromConfigurationJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\VariableFromConfigurationJsonldVariableViewEnvironmentView', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\VariableFromConfigurationRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\VariableFromConfigurationVariableViewEnvironmentView', 'json');
             }
         }
         if (400 === $status) {
@@ -100,6 +98,6 @@ class EditVariableFromConfigurationItem extends \Gyroscops\Api\Runtime\Client\Ba
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

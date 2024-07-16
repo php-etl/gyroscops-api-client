@@ -22,7 +22,7 @@ class PatchUserAuthorizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
      * @param string $id     Resource identifier
      * @param array  $accept Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(string $id, ?\Gyroscops\Api\Model\UserAuthorization $requestBody = null, array $accept = [])
+    public function __construct(string $id, ?\Gyroscops\Api\Model\UserAuthorizationAuthorizationWrite $requestBody = null, array $accept = [])
     {
         $this->id = $id;
         $this->body = $requestBody;
@@ -36,12 +36,12 @@ class PatchUserAuthorizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/authentication/user-authorization/{id}');
+        return str_replace(['{id}'], [$this->id], '/authentication/user-authorizations/{id}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\UserAuthorization) {
+        if ($this->body instanceof \Gyroscops\Api\Model\UserAuthorizationAuthorizationWrite) {
             return [['Content-Type' => ['application/merge-patch+json']], $serializer->serialize($this->body, 'json')];
         }
 
@@ -58,9 +58,7 @@ class PatchUserAuthorizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\UserAuthorizationJsonld|\Gyroscops\Api\Model\UserAuthorization
+     * @return \Gyroscops\Api\Model\UserAuthorizationJsonldAuthorizationRead|\Gyroscops\Api\Model\UserAuthorizationAuthorizationRead
      *
      * @throws \Gyroscops\Api\Exception\PatchUserAuthorizationItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PatchUserAuthorizationItemUnprocessableEntityException
@@ -73,10 +71,10 @@ class PatchUserAuthorizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\UserAuthorizationJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\UserAuthorizationJsonldAuthorizationRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\UserAuthorization', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\UserAuthorizationAuthorizationRead', 'json');
             }
         }
         if (400 === $status) {
@@ -93,6 +91,6 @@ class PatchUserAuthorizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

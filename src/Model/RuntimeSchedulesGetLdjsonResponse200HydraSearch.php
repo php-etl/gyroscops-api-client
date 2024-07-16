@@ -34,7 +34,7 @@ class RuntimeSchedulesGetLdjsonResponse200HydraSearch extends \ArrayObject
      */
     protected $hydraVariableRepresentation;
     /**
-     * @var RuntimeSchedulesGetLdjsonResponse200HydraSearchHydraMappingItem[]|null
+     * @var list<RuntimeSchedulesGetLdjsonResponse200HydraSearchHydraMappingItem>|null
      */
     protected $hydraMapping;
 
@@ -78,7 +78,7 @@ class RuntimeSchedulesGetLdjsonResponse200HydraSearch extends \ArrayObject
     }
 
     /**
-     * @return RuntimeSchedulesGetLdjsonResponse200HydraSearchHydraMappingItem[]|null
+     * @return list<RuntimeSchedulesGetLdjsonResponse200HydraSearchHydraMappingItem>|null
      */
     public function getHydraMapping(): ?array
     {
@@ -86,7 +86,7 @@ class RuntimeSchedulesGetLdjsonResponse200HydraSearch extends \ArrayObject
     }
 
     /**
-     * @param RuntimeSchedulesGetLdjsonResponse200HydraSearchHydraMappingItem[]|null $hydraMapping
+     * @param list<RuntimeSchedulesGetLdjsonResponse200HydraSearchHydraMappingItem>|null $hydraMapping
      */
     public function setHydraMapping(?array $hydraMapping): self
     {

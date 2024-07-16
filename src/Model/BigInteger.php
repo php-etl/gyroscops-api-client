@@ -46,8 +46,6 @@ class BigInteger extends \ArrayObject
      */
     protected $odd;
     /**
-     * {@inheritdoc}
-     *
      * @var int|null
      */
     protected $sign;
@@ -158,17 +156,11 @@ class BigInteger extends \ArrayObject
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSign(): ?int
     {
         return $this->sign;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setSign(?int $sign): self
     {
         $this->initialized['sign'] = true;

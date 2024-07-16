@@ -19,9 +19,9 @@ class AddComposerRepositoryPipelinePipelineItem extends \Gyroscops\Api\Runtime\C
     /**
      * Adds a composer repository to a pipeline.
      *
-     * @param string                                                                                                                                                   $id          Resource identifier
-     * @param \Gyroscops\Api\Model\PipelineAddPipelineComposerRepositoryCommandInputJsonld|\Gyroscops\Api\Model\PipelineAddPipelineComposerRepositoryCommandInput|null $requestBody
-     * @param array                                                                                                                                                    $accept      Accept content header application/ld+json|application/json|text/html
+     * @param string                                                                                                   $id          Resource identifier
+     * @param \Gyroscops\Api\Model\PipelineAddPipelineComposerRepositoryCommandInputJsonldPipelineWrite|\stdClass|null $requestBody
+     * @param array                                                                                                    $accept      Accept content header application/ld+json|application/json|text/html
      */
     public function __construct(string $id, $requestBody = null, array $accept = [])
     {
@@ -42,13 +42,13 @@ class AddComposerRepositoryPipelinePipelineItem extends \Gyroscops\Api\Runtime\C
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineAddPipelineComposerRepositoryCommandInputJsonld) {
+        if ($this->body instanceof \Gyroscops\Api\Model\PipelineAddPipelineComposerRepositoryCommandInputJsonldPipelineWrite) {
             return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineAddPipelineComposerRepositoryCommandInput) {
-            return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
+        if ($this->body instanceof \stdClass) {
+            return [['Content-Type' => ['application/json']], json_encode($this->body)];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineAddPipelineComposerRepositoryCommandInput) {
+        if ($this->body instanceof \stdClass) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -65,9 +65,7 @@ class AddComposerRepositoryPipelinePipelineItem extends \Gyroscops\Api\Runtime\C
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\PipelineAddPipelineComposerRepositoryCommandJsonldRead|null
+     * @return \Gyroscops\Api\Model\PipelineAddPipelineComposerRepositoryCommandJsonldPipelineReadPipelineSubresourceRead|null
      *
      * @throws \Gyroscops\Api\Exception\AddComposerRepositoryPipelinePipelineItemBadRequestException
      * @throws \Gyroscops\Api\Exception\AddComposerRepositoryPipelinePipelineItemUnprocessableEntityException
@@ -80,7 +78,7 @@ class AddComposerRepositoryPipelinePipelineItem extends \Gyroscops\Api\Runtime\C
         $body = (string) $response->getBody();
         if (202 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\PipelineAddPipelineComposerRepositoryCommandJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\PipelineAddPipelineComposerRepositoryCommandJsonldPipelineReadPipelineSubresourceRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
                 return json_decode($body);
@@ -100,6 +98,6 @@ class AddComposerRepositoryPipelinePipelineItem extends \Gyroscops\Api\Runtime\C
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

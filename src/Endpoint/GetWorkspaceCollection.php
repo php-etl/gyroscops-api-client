@@ -20,8 +20,10 @@ class GetWorkspaceCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
      *
      * @param array $queryParameters {
      *
-     *     @var int $page The collection page number
-     * }
+     * @var int    $page The collection page number
+     * @var string $organization
+     * @var array  $organization[]
+     *             }
      *
      * @param array $accept Accept content header application/ld+json|application/json|text/html
      */
@@ -58,18 +60,18 @@ class GetWorkspaceCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
     protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(['page']);
+        $optionsResolver->setDefined(['page', 'organization']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults(['page' => 1]);
         $optionsResolver->addAllowedTypes('page', ['int']);
+        $optionsResolver->addAllowedTypes('organization', ['string']);
+        $optionsResolver->addAllowedTypes('organization', ['array']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\AuthenticationWorkspacesGetLdjsonResponse200|\Gyroscops\Api\Model\Workspace[]
+     * @return \Gyroscops\Api\Model\AuthenticationWorkspacesGetLdjsonResponse200|\Gyroscops\Api\Model\WorkspaceWorkspaceRead[]
      *
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
@@ -79,10 +81,10 @@ class GetWorkspaceCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\AuthenticationWorkspacesGetLdjsonResponse200', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\AuthenticationWorkspacesGetLdjsonResponse200', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Workspace[]', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\WorkspaceWorkspaceRead[]', 'json');
             }
         }
         throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
@@ -90,6 +92,6 @@ class GetWorkspaceCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

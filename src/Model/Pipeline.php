@@ -22,7 +22,7 @@ class Pipeline extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var Step[]|null
+     * @var list<Step>|null
      */
     protected $steps;
     /**
@@ -31,7 +31,7 @@ class Pipeline extends \ArrayObject
     protected $code;
 
     /**
-     * @return Step[]|null
+     * @return list<Step>|null
      */
     public function getSteps(): ?array
     {
@@ -39,7 +39,7 @@ class Pipeline extends \ArrayObject
     }
 
     /**
-     * @param Step[]|null $steps
+     * @param list<Step>|null $steps
      */
     public function setSteps(?array $steps): self
     {

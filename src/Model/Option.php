@@ -50,11 +50,11 @@ class Option extends \ArrayObject
      */
     protected $description;
     /**
-     * @var string[]|null
+     * @var list<string>|null
      */
     protected $features;
     /**
-     * @var Price[]|null
+     * @var list<BuyablePrice>|null
      */
     protected $priceList;
     /**
@@ -166,7 +166,7 @@ class Option extends \ArrayObject
     }
 
     /**
-     * @return string[]|null
+     * @return list<string>|null
      */
     public function getFeatures(): ?array
     {
@@ -174,7 +174,7 @@ class Option extends \ArrayObject
     }
 
     /**
-     * @param string[]|null $features
+     * @param list<string>|null $features
      */
     public function setFeatures(?array $features): self
     {
@@ -185,7 +185,7 @@ class Option extends \ArrayObject
     }
 
     /**
-     * @return Price[]|null
+     * @return list<BuyablePrice>|null
      */
     public function getPriceList(): ?array
     {
@@ -193,7 +193,7 @@ class Option extends \ArrayObject
     }
 
     /**
-     * @param Price[]|null $priceList
+     * @param list<BuyablePrice>|null $priceList
      */
     public function setPriceList(?array $priceList): self
     {

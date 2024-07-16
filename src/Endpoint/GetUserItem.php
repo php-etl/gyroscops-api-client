@@ -53,9 +53,7 @@ class GetUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements 
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\UserJsonld|\Gyroscops\Api\Model\User
+     * @return \Gyroscops\Api\Model\UserJsonldUserRead|\Gyroscops\Api\Model\UserUserRead
      *
      * @throws \Gyroscops\Api\Exception\GetUserItemNotFoundException
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
@@ -66,10 +64,10 @@ class GetUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements 
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\UserJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\UserJsonldUserRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\User', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\UserUserRead', 'json');
             }
         }
         if (404 === $status) {
@@ -80,6 +78,6 @@ class GetUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements 
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

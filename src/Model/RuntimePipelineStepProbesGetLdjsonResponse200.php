@@ -22,7 +22,7 @@ class RuntimePipelineStepProbesGetLdjsonResponse200 extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var PipelineStepProbeJsonld[]|null
+     * @var list<PipelineStepProbeJsonldStepProbeRead>|null
      */
     protected $hydraMember;
     /**
@@ -39,7 +39,7 @@ class RuntimePipelineStepProbesGetLdjsonResponse200 extends \ArrayObject
     protected $hydraSearch;
 
     /**
-     * @return PipelineStepProbeJsonld[]|null
+     * @return list<PipelineStepProbeJsonldStepProbeRead>|null
      */
     public function getHydraMember(): ?array
     {
@@ -47,7 +47,7 @@ class RuntimePipelineStepProbesGetLdjsonResponse200 extends \ArrayObject
     }
 
     /**
-     * @param PipelineStepProbeJsonld[]|null $hydraMember
+     * @param list<PipelineStepProbeJsonldStepProbeRead>|null $hydraMember
      */
     public function setHydraMember(?array $hydraMember): self
     {

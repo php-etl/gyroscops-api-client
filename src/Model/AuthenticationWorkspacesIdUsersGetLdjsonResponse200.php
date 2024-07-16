@@ -22,7 +22,7 @@ class AuthenticationWorkspacesIdUsersGetLdjsonResponse200 extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var UserJsonld[]|null
+     * @var list<UserJsonldUserRead>|null
      */
     protected $hydraMember;
     /**
@@ -39,7 +39,7 @@ class AuthenticationWorkspacesIdUsersGetLdjsonResponse200 extends \ArrayObject
     protected $hydraSearch;
 
     /**
-     * @return UserJsonld[]|null
+     * @return list<UserJsonldUserRead>|null
      */
     public function getHydraMember(): ?array
     {
@@ -47,7 +47,7 @@ class AuthenticationWorkspacesIdUsersGetLdjsonResponse200 extends \ArrayObject
     }
 
     /**
-     * @param UserJsonld[]|null $hydraMember
+     * @param list<UserJsonldUserRead>|null $hydraMember
      */
     public function setHydraMember(?array $hydraMember): self
     {

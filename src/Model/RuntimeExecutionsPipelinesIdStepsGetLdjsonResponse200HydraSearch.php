@@ -34,7 +34,7 @@ class RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraSearch extends \
      */
     protected $hydraVariableRepresentation;
     /**
-     * @var RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraSearchHydraMappingItem[]|null
+     * @var list<RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraSearchHydraMappingItem>|null
      */
     protected $hydraMapping;
 
@@ -78,7 +78,7 @@ class RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraSearch extends \
     }
 
     /**
-     * @return RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraSearchHydraMappingItem[]|null
+     * @return list<RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraSearchHydraMappingItem>|null
      */
     public function getHydraMapping(): ?array
     {
@@ -86,7 +86,7 @@ class RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraSearch extends \
     }
 
     /**
-     * @param RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraSearchHydraMappingItem[]|null $hydraMapping
+     * @param list<RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200HydraSearchHydraMappingItem>|null $hydraMapping
      */
     public function setHydraMapping(?array $hydraMapping): self
     {

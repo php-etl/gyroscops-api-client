@@ -40,8 +40,6 @@ class BigDecimalJsonld extends \ArrayObject
      */
     protected $scale;
     /**
-     * {@inheritdoc}
-     *
      * @var int|null
      */
     protected $sign;
@@ -98,17 +96,11 @@ class BigDecimalJsonld extends \ArrayObject
      */
     protected $positiveOrZero;
 
-    /**
-     * @return mixed
-     */
     public function getContext()
     {
         return $this->context;
     }
 
-    /**
-     * @param mixed $context
-     */
     public function setContext($context): self
     {
         $this->initialized['context'] = true;
@@ -162,17 +154,11 @@ class BigDecimalJsonld extends \ArrayObject
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSign(): ?int
     {
         return $this->sign;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setSign(?int $sign): self
     {
         $this->initialized['sign'] = true;

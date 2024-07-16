@@ -22,7 +22,7 @@ class EnvironmentSecretsGetLdjsonResponse200 extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var SecretJsonld[]|null
+     * @var list<SecretJsonldSecretRead>|null
      */
     protected $hydraMember;
     /**
@@ -39,7 +39,7 @@ class EnvironmentSecretsGetLdjsonResponse200 extends \ArrayObject
     protected $hydraSearch;
 
     /**
-     * @return SecretJsonld[]|null
+     * @return list<SecretJsonldSecretRead>|null
      */
     public function getHydraMember(): ?array
     {
@@ -47,7 +47,7 @@ class EnvironmentSecretsGetLdjsonResponse200 extends \ArrayObject
     }
 
     /**
-     * @param SecretJsonld[]|null $hydraMember
+     * @param list<SecretJsonldSecretRead>|null $hydraMember
      */
     public function setHydraMember(?array $hydraMember): self
     {

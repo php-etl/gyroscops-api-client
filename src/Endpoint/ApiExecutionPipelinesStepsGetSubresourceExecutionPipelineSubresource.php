@@ -22,8 +22,8 @@ class ApiExecutionPipelinesStepsGetSubresourceExecutionPipelineSubresource exten
      * @param string $id              ExecutionPipeline identifier
      * @param array  $queryParameters {
      *
-     *     @var int $page The collection page number
-     * }
+     * @var int $page The collection page number
+     *          }
      *
      * @param array $accept Accept content header application/ld+json|application/json|text/html
      */
@@ -70,9 +70,7 @@ class ApiExecutionPipelinesStepsGetSubresourceExecutionPipelineSubresource exten
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200|\Gyroscops\Api\Model\ExecutionPipelineStep[]
+     * @return \Gyroscops\Api\Model\RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200|\Gyroscops\Api\Model\ExecutionPipelineStepExecutionPipelineStepRead[]
      *
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
@@ -82,10 +80,10 @@ class ApiExecutionPipelinesStepsGetSubresourceExecutionPipelineSubresource exten
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\RuntimeExecutionsPipelinesIdStepsGetLdjsonResponse200', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ExecutionPipelineStep[]', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ExecutionPipelineStepExecutionPipelineStepRead[]', 'json');
             }
         }
         throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
@@ -93,6 +91,6 @@ class ApiExecutionPipelinesStepsGetSubresourceExecutionPipelineSubresource exten
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

@@ -53,9 +53,7 @@ class GetConfigurationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint im
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\ConfigurationJsonld|\Gyroscops\Api\Model\Configuration
+     * @return \Gyroscops\Api\Model\ConfigurationJsonldConfigurationView|\Gyroscops\Api\Model\ConfigurationConfigurationView
      *
      * @throws \Gyroscops\Api\Exception\GetConfigurationItemNotFoundException
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
@@ -66,10 +64,10 @@ class GetConfigurationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint im
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ConfigurationJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ConfigurationJsonldConfigurationView', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Configuration', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ConfigurationConfigurationView', 'json');
             }
         }
         if (404 === $status) {
@@ -80,6 +78,6 @@ class GetConfigurationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint im
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

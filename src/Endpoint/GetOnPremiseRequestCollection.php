@@ -20,8 +20,8 @@ class GetOnPremiseRequestCollection extends \Gyroscops\Api\Runtime\Client\BaseEn
      *
      * @param array $queryParameters {
      *
-     *     @var int $page The collection page number
-     * }
+     * @var int $page The collection page number
+     *          }
      *
      * @param array $accept Accept content header application/ld+json|application/json|text/html
      */
@@ -67,8 +67,6 @@ class GetOnPremiseRequestCollection extends \Gyroscops\Api\Runtime\Client\BaseEn
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \Gyroscops\Api\Model\ReferralOnPremiseRequestsGetLdjsonResponse200|\Gyroscops\Api\Model\OnPremiseRequestOnPremiseRequestRead[]
      *
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
@@ -79,10 +77,10 @@ class GetOnPremiseRequestCollection extends \Gyroscops\Api\Runtime\Client\BaseEn
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ReferralOnPremiseRequestsGetLdjsonResponse200', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ReferralOnPremiseRequestsGetLdjsonResponse200', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\OnPremiseRequestOnPremiseRequestRead[]', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\OnPremiseRequestOnPremiseRequestRead[]', 'json');
             }
         }
         throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
@@ -90,6 +88,6 @@ class GetOnPremiseRequestCollection extends \Gyroscops\Api\Runtime\Client\BaseEn
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

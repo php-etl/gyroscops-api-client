@@ -19,9 +19,9 @@ class ReorderPipelineStepsPipelineItem extends \Gyroscops\Api\Runtime\Client\Bas
     /**
      * Reorganizes the steps of a pipeline according to a given order.
      *
-     * @param string                                                                                                                                 $id          Resource identifier
-     * @param \Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandInputJsonld|\Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandInput|null $requestBody
-     * @param array                                                                                                                                  $accept      Accept content header application/ld+json|application/json|text/html
+     * @param string                                                                                          $id          Resource identifier
+     * @param \Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandInputJsonldPipelineWrite|\stdClass|null $requestBody
+     * @param array                                                                                           $accept      Accept content header application/ld+json|application/json|text/html
      */
     public function __construct(string $id, $requestBody = null, array $accept = [])
     {
@@ -42,13 +42,13 @@ class ReorderPipelineStepsPipelineItem extends \Gyroscops\Api\Runtime\Client\Bas
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandInputJsonld) {
+        if ($this->body instanceof \Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandInputJsonldPipelineWrite) {
             return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandInput) {
-            return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
+        if ($this->body instanceof \stdClass) {
+            return [['Content-Type' => ['application/json']], json_encode($this->body)];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandInput) {
+        if ($this->body instanceof \stdClass) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -65,9 +65,7 @@ class ReorderPipelineStepsPipelineItem extends \Gyroscops\Api\Runtime\Client\Bas
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandJsonldRead|null
+     * @return \Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandJsonldPipelineReadPipelineSubresourceRead|null
      *
      * @throws \Gyroscops\Api\Exception\ReorderPipelineStepsPipelineItemBadRequestException
      * @throws \Gyroscops\Api\Exception\ReorderPipelineStepsPipelineItemUnprocessableEntityException
@@ -80,7 +78,7 @@ class ReorderPipelineStepsPipelineItem extends \Gyroscops\Api\Runtime\Client\Bas
         $body = (string) $response->getBody();
         if (202 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\PipelineReorderPipelineStepsCommandJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\PipelineReorderPipelineStepsCommandJsonldPipelineReadPipelineSubresourceRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
                 return json_decode($body);
@@ -100,6 +98,6 @@ class ReorderPipelineStepsPipelineItem extends \Gyroscops\Api\Runtime\Client\Bas
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

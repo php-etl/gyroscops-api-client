@@ -30,7 +30,7 @@ class CreateSecretInput extends \ArrayObject
      */
     protected $description;
     /**
-     * @var string[]|null
+     * @var array<string, string>|null
      */
     protected $contents;
 
@@ -61,7 +61,7 @@ class CreateSecretInput extends \ArrayObject
     }
 
     /**
-     * @return string[]|null
+     * @return array<string, string>|null
      */
     public function getContents(): ?iterable
     {
@@ -69,7 +69,7 @@ class CreateSecretInput extends \ArrayObject
     }
 
     /**
-     * @param string[]|null $contents
+     * @param array<string, string>|null $contents
      */
     public function setContents(?iterable $contents): self
     {

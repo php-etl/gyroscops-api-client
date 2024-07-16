@@ -53,8 +53,6 @@ class GetExecutionPipelineJobItem extends \Gyroscops\Api\Runtime\Client\BaseEndp
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \Gyroscops\Api\Model\ExecutionPipelineJobJsonld|\Gyroscops\Api\Model\ExecutionPipelineJob
      *
      * @throws \Gyroscops\Api\Exception\GetExecutionPipelineJobItemNotFoundException
@@ -66,10 +64,10 @@ class GetExecutionPipelineJobItem extends \Gyroscops\Api\Runtime\Client\BaseEndp
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ExecutionPipelineJobJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ExecutionPipelineJobJsonld', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ExecutionPipelineJob', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ExecutionPipelineJob', 'json');
             }
         }
         if (404 === $status) {
@@ -80,6 +78,6 @@ class GetExecutionPipelineJobItem extends \Gyroscops\Api\Runtime\Client\BaseEndp
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

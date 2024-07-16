@@ -19,9 +19,9 @@ class ChangeValuesSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
     /**
      * Change the secret values values inside an existing secrets storage.
      *
-     * @param string                                                                                                         $id          Resource identifier
-     * @param \Gyroscops\Api\Model\SecretChangeSecretValueInputJsonld|\Gyroscops\Api\Model\SecretChangeSecretValueInput|null $requestBody
-     * @param array                                                                                                          $accept      Accept content header application/ld+json|application/json|text/html
+     * @param string                                                                                                                                 $id          Secret identifier
+     * @param \Gyroscops\Api\Model\SecretChangeSecretValueInputJsonldSecretUpdate|\Gyroscops\Api\Model\SecretChangeSecretValueInputSecretUpdate|null $requestBody
+     * @param array                                                                                                                                  $accept      Accept content header application/ld+json|application/json|text/html
      */
     public function __construct(string $id, $requestBody = null, array $accept = [])
     {
@@ -42,13 +42,13 @@ class ChangeValuesSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\SecretChangeSecretValueInputJsonld) {
+        if ($this->body instanceof \Gyroscops\Api\Model\SecretChangeSecretValueInputJsonldSecretUpdate) {
             return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\SecretChangeSecretValueInput) {
+        if ($this->body instanceof \Gyroscops\Api\Model\SecretChangeSecretValueInputSecretUpdate) {
             return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\SecretChangeSecretValueInput) {
+        if ($this->body instanceof \Gyroscops\Api\Model\SecretChangeSecretValueInputSecretUpdate) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -65,9 +65,7 @@ class ChangeValuesSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\SecretJsonld|\Gyroscops\Api\Model\Secret
+     * @return \Gyroscops\Api\Model\SecretJsonldSecretRead|\Gyroscops\Api\Model\SecretSecretRead
      *
      * @throws \Gyroscops\Api\Exception\ChangeValuesSecretItemBadRequestException
      * @throws \Gyroscops\Api\Exception\ChangeValuesSecretItemUnprocessableEntityException
@@ -80,10 +78,10 @@ class ChangeValuesSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\SecretJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\SecretJsonldSecretRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Secret', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\SecretSecretRead', 'json');
             }
         }
         if (400 === $status) {
@@ -100,6 +98,6 @@ class ChangeValuesSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

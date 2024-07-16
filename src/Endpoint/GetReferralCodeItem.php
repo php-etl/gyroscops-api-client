@@ -35,7 +35,7 @@ class GetReferralCodeItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/referral/code/{id}');
+        return str_replace(['{id}'], [$this->id], '/referral/codes/{id}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
@@ -53,8 +53,6 @@ class GetReferralCodeItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \Gyroscops\Api\Model\ReferralCodeJsonldReferralCodeRead|\Gyroscops\Api\Model\ReferralCodeReferralCodeRead
      *
      * @throws \Gyroscops\Api\Exception\GetReferralCodeItemNotFoundException
@@ -66,10 +64,10 @@ class GetReferralCodeItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ReferralCodeJsonldReferralCodeRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ReferralCodeJsonldReferralCodeRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ReferralCodeReferralCodeRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ReferralCodeReferralCodeRead', 'json');
             }
         }
         if (404 === $status) {
@@ -80,6 +78,6 @@ class GetReferralCodeItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

@@ -58,8 +58,6 @@ class PatchSubscriptionOfferItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \Gyroscops\Api\Model\SubscriptionOfferJsonldRead|\Gyroscops\Api\Model\SubscriptionOfferRead
      *
      * @throws \Gyroscops\Api\Exception\PatchSubscriptionOfferItemBadRequestException
@@ -73,10 +71,10 @@ class PatchSubscriptionOfferItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\SubscriptionOfferJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\SubscriptionOfferJsonldRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\SubscriptionOfferRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\SubscriptionOfferRead', 'json');
             }
         }
         if (400 === $status) {
@@ -93,6 +91,6 @@ class PatchSubscriptionOfferItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

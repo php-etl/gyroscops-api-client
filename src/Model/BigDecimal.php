@@ -28,8 +28,6 @@ class BigDecimal extends \ArrayObject
      */
     protected $scale;
     /**
-     * {@inheritdoc}
-     *
      * @var int|null
      */
     protected $sign;
@@ -105,17 +103,11 @@ class BigDecimal extends \ArrayObject
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSign(): ?int
     {
         return $this->sign;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setSign(?int $sign): self
     {
         $this->initialized['sign'] = true;

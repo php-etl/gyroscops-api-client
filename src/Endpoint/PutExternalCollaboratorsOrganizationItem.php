@@ -19,9 +19,9 @@ class PutExternalCollaboratorsOrganizationItem extends \Gyroscops\Api\Runtime\Cl
     /**
      * Replaces the Organization resource.
      *
-     * @param string                                                                                                         $id          Resource identifier
-     * @param \Gyroscops\Api\Model\OrganizationJsonldAddCollaborators|\Gyroscops\Api\Model\OrganizationAddCollaborators|null $requestBody
-     * @param array                                                                                                          $accept      Accept content header application/ld+json|application/json|text/html
+     * @param string                                                                 $id          Resource identifier
+     * @param \Gyroscops\Api\Model\OrganizationJsonldAddCollaborators|\stdClass|null $requestBody
+     * @param array                                                                  $accept      Accept content header application/ld+json|application/json|text/html
      */
     public function __construct(string $id, $requestBody = null, array $accept = [])
     {
@@ -37,7 +37,7 @@ class PutExternalCollaboratorsOrganizationItem extends \Gyroscops\Api\Runtime\Cl
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/authentication/authentication/organizations/{id}/external-collaborators');
+        return str_replace(['{id}'], [$this->id], '/authentication/organizations/{id}/external-collaborators');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
@@ -45,10 +45,10 @@ class PutExternalCollaboratorsOrganizationItem extends \Gyroscops\Api\Runtime\Cl
         if ($this->body instanceof \Gyroscops\Api\Model\OrganizationJsonldAddCollaborators) {
             return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\OrganizationAddCollaborators) {
-            return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
+        if ($this->body instanceof \stdClass) {
+            return [['Content-Type' => ['application/json']], json_encode($this->body)];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\OrganizationAddCollaborators) {
+        if ($this->body instanceof \stdClass) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -65,9 +65,7 @@ class PutExternalCollaboratorsOrganizationItem extends \Gyroscops\Api\Runtime\Cl
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\OrganizationJsonld|\Gyroscops\Api\Model\Organization
+     * @return \Gyroscops\Api\Model\OrganizationJsonldOrganizationRead|\Gyroscops\Api\Model\OrganizationOrganizationRead
      *
      * @throws \Gyroscops\Api\Exception\PutExternalCollaboratorsOrganizationItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PutExternalCollaboratorsOrganizationItemUnprocessableEntityException
@@ -80,10 +78,10 @@ class PutExternalCollaboratorsOrganizationItem extends \Gyroscops\Api\Runtime\Cl
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\OrganizationJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\OrganizationJsonldOrganizationRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Organization', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\OrganizationOrganizationRead', 'json');
             }
         }
         if (400 === $status) {
@@ -100,6 +98,6 @@ class PutExternalCollaboratorsOrganizationItem extends \Gyroscops\Api\Runtime\Cl
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

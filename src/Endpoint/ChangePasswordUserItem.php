@@ -22,7 +22,7 @@ class ChangePasswordUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
      * @param string $id     Resource identifier
      * @param array  $accept Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(string $id, ?\Gyroscops\Api\Model\UserUserChangePasswordInput $requestBody = null, array $accept = [])
+    public function __construct(string $id, ?\stdClass $requestBody = null, array $accept = [])
     {
         $this->id = $id;
         $this->body = $requestBody;
@@ -41,8 +41,8 @@ class ChangePasswordUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\UserUserChangePasswordInput) {
-            return [['Content-Type' => ['application/merge-patch+json']], $serializer->serialize($this->body, 'json')];
+        if ($this->body instanceof \stdClass) {
+            return [['Content-Type' => ['application/merge-patch+json']], json_encode($this->body)];
         }
 
         return [[], null];
@@ -58,9 +58,7 @@ class ChangePasswordUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\UserJsonld|\Gyroscops\Api\Model\User
+     * @return \Gyroscops\Api\Model\UserJsonldUserRead|\Gyroscops\Api\Model\UserUserRead
      *
      * @throws \Gyroscops\Api\Exception\ChangePasswordUserItemBadRequestException
      * @throws \Gyroscops\Api\Exception\ChangePasswordUserItemUnprocessableEntityException
@@ -73,10 +71,10 @@ class ChangePasswordUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\UserJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\UserJsonldUserRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\User', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\UserUserRead', 'json');
             }
         }
         if (400 === $status) {
@@ -93,6 +91,6 @@ class ChangePasswordUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

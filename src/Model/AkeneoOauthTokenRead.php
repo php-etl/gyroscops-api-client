@@ -30,7 +30,7 @@ class AkeneoOauthTokenRead extends \ArrayObject
      */
     protected $url;
     /**
-     * @var string[]|null
+     * @var list<string>|null
      */
     protected $scopes;
     /**
@@ -65,7 +65,7 @@ class AkeneoOauthTokenRead extends \ArrayObject
     }
 
     /**
-     * @return string[]|null
+     * @return list<string>|null
      */
     public function getScopes(): ?array
     {
@@ -73,7 +73,7 @@ class AkeneoOauthTokenRead extends \ArrayObject
     }
 
     /**
-     * @param string[]|null $scopes
+     * @param list<string>|null $scopes
      */
     public function setScopes(?array $scopes): self
     {

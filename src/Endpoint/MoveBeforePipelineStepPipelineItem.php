@@ -19,9 +19,9 @@ class MoveBeforePipelineStepPipelineItem extends \Gyroscops\Api\Runtime\Client\B
     /**
      * Moves a step before another one in a pipeline.
      *
-     * @param string                                                                                                                                     $id          Resource identifier
-     * @param \Gyroscops\Api\Model\PipelineMoveBeforePipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineMoveBeforePipelineStepCommandInput|null $requestBody
-     * @param array                                                                                                                                      $accept      Accept content header application/ld+json|application/json|text/html
+     * @param string                                                                                            $id          Resource identifier
+     * @param \Gyroscops\Api\Model\PipelineMoveBeforePipelineStepCommandInputJsonldPipelineWrite|\stdClass|null $requestBody
+     * @param array                                                                                             $accept      Accept content header application/ld+json|application/json|text/html
      */
     public function __construct(string $id, $requestBody = null, array $accept = [])
     {
@@ -42,13 +42,13 @@ class MoveBeforePipelineStepPipelineItem extends \Gyroscops\Api\Runtime\Client\B
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineMoveBeforePipelineStepCommandInputJsonld) {
+        if ($this->body instanceof \Gyroscops\Api\Model\PipelineMoveBeforePipelineStepCommandInputJsonldPipelineWrite) {
             return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineMoveBeforePipelineStepCommandInput) {
-            return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
+        if ($this->body instanceof \stdClass) {
+            return [['Content-Type' => ['application/json']], json_encode($this->body)];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineMoveBeforePipelineStepCommandInput) {
+        if ($this->body instanceof \stdClass) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -65,9 +65,7 @@ class MoveBeforePipelineStepPipelineItem extends \Gyroscops\Api\Runtime\Client\B
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\PipelineMoveBeforePipelineStepCommandJsonldRead|null
+     * @return \Gyroscops\Api\Model\PipelineMoveBeforePipelineStepCommandJsonldPipelineReadPipelineSubresourceRead|null
      *
      * @throws \Gyroscops\Api\Exception\MoveBeforePipelineStepPipelineItemBadRequestException
      * @throws \Gyroscops\Api\Exception\MoveBeforePipelineStepPipelineItemUnprocessableEntityException
@@ -80,7 +78,7 @@ class MoveBeforePipelineStepPipelineItem extends \Gyroscops\Api\Runtime\Client\B
         $body = (string) $response->getBody();
         if (202 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\PipelineMoveBeforePipelineStepCommandJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\PipelineMoveBeforePipelineStepCommandJsonldPipelineReadPipelineSubresourceRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
                 return json_decode($body);
@@ -100,6 +98,6 @@ class MoveBeforePipelineStepPipelineItem extends \Gyroscops\Api\Runtime\Client\B
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

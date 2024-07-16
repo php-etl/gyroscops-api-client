@@ -35,7 +35,7 @@ class GetVariableFromConstantItem extends \Gyroscops\Api\Runtime\Client\BaseEndp
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/variables-from-constant/{id}');
+        return str_replace(['{id}'], [$this->id], '/environment/variables-from-constant/{id}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
@@ -53,9 +53,7 @@ class GetVariableFromConstantItem extends \Gyroscops\Api\Runtime\Client\BaseEndp
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\VariableFromConstantJsonldRead|\Gyroscops\Api\Model\VariableFromConstantRead
+     * @return \Gyroscops\Api\Model\VariableFromConstantJsonldVariableViewEnvironmentView|\Gyroscops\Api\Model\VariableFromConstantVariableViewEnvironmentView
      *
      * @throws \Gyroscops\Api\Exception\GetVariableFromConstantItemNotFoundException
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
@@ -66,10 +64,10 @@ class GetVariableFromConstantItem extends \Gyroscops\Api\Runtime\Client\BaseEndp
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\VariableFromConstantJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\VariableFromConstantJsonldVariableViewEnvironmentView', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\VariableFromConstantRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\VariableFromConstantVariableViewEnvironmentView', 'json');
             }
         }
         if (404 === $status) {
@@ -80,6 +78,6 @@ class GetVariableFromConstantItem extends \Gyroscops\Api\Runtime\Client\BaseEndp
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

@@ -13,18 +13,21 @@ namespace Gyroscops\Api\Endpoint;
 class GetWorkflowJobItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements \Gyroscops\Api\Runtime\Client\Endpoint
 {
     use \Gyroscops\Api\Runtime\Client\EndpointTrait;
-    protected $id;
+    protected $workflow;
+    protected $code;
     protected $accept;
 
     /**
      * Retrieves a WorkflowJob resource.
      *
-     * @param string $id     Resource identifier
-     * @param array  $accept Accept content header application/ld+json|application/json|text/html
+     * @param string $workflow The Workflow UUID
+     * @param string $code     The Workflow Job's code
+     * @param array  $accept   Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(string $id, array $accept = [])
+    public function __construct(string $workflow, string $code, array $accept = [])
     {
-        $this->id = $id;
+        $this->workflow = $workflow;
+        $this->code = $code;
         $this->accept = $accept;
     }
 
@@ -35,7 +38,7 @@ class GetWorkflowJobItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impl
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/runtime/workflows/jobs/{id}');
+        return str_replace(['{workflow}', '{code}'], [$this->workflow, $this->code], '/runtime/workflows/{workflow}/jobs/{code}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
@@ -53,9 +56,7 @@ class GetWorkflowJobItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impl
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\WorkflowJobJsonldRead|\Gyroscops\Api\Model\WorkflowJobRead
+     * @return \Gyroscops\Api\Model\WorkflowJobJsonldJobRead|\Gyroscops\Api\Model\WorkflowJobJobRead
      *
      * @throws \Gyroscops\Api\Exception\GetWorkflowJobItemNotFoundException
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
@@ -66,10 +67,10 @@ class GetWorkflowJobItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impl
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\WorkflowJobJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\WorkflowJobJsonldJobRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\WorkflowJobRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\WorkflowJobJobRead', 'json');
             }
         }
         if (404 === $status) {
@@ -80,6 +81,6 @@ class GetWorkflowJobItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impl
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

@@ -41,8 +41,6 @@ class DeleteSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implem
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return null
      *
      * @throws \Gyroscops\Api\Exception\DeleteSecretItemNotFoundException
@@ -63,6 +61,6 @@ class DeleteSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implem
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

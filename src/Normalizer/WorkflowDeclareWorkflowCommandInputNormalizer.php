@@ -13,6 +13,7 @@ namespace Gyroscops\Api\Normalizer;
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
 use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -20,95 +21,191 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class WorkflowDeclareWorkflowCommandInputNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-    use ValidatorTrait;
-
-    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class WorkflowDeclareWorkflowCommandInputNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'Gyroscops\\Api\\Model\\WorkflowDeclareWorkflowCommandInput';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null, array $context = []): bool
-    {
-        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\WorkflowDeclareWorkflowCommandInput';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \Gyroscops\Api\Model\WorkflowDeclareWorkflowCommandInput::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === Gyroscops\Api\Model\WorkflowDeclareWorkflowCommandInput::class;
         }
-        $object = new \Gyroscops\Api\Model\WorkflowDeclareWorkflowCommandInput();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \Gyroscops\Api\Model\WorkflowDeclareWorkflowCommandInput();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('jobs', $data) && $data['jobs'] !== null) {
+                $values = [];
+                foreach ($data['jobs'] as $value) {
+                    $values[] = $this->denormalizer->denormalize($value, \Gyroscops\Api\Model\Job::class, 'json', $context);
+                }
+                $object->setJobs($values);
+                unset($data['jobs']);
+            } elseif (\array_key_exists('jobs', $data) && $data['jobs'] === null) {
+                $object->setJobs(null);
+            }
+            if (\array_key_exists('composer', $data) && $data['composer'] !== null) {
+                $object->setComposer($this->denormalizer->denormalize($data['composer'], \Gyroscops\Api\Model\Composer::class, 'json', $context));
+                unset($data['composer']);
+            } elseif (\array_key_exists('composer', $data) && $data['composer'] === null) {
+                $object->setComposer(null);
+            }
+            if (\array_key_exists('code', $data) && $data['code'] !== null) {
+                $object->setCode($data['code']);
+                unset($data['code']);
+            } elseif (\array_key_exists('code', $data) && $data['code'] === null) {
+                $object->setCode(null);
+            }
+            if (\array_key_exists('label', $data) && $data['label'] !== null) {
+                $object->setLabel($data['label']);
+                unset($data['label']);
+            } elseif (\array_key_exists('label', $data) && $data['label'] === null) {
+                $object->setLabel(null);
+            }
+            foreach ($data as $key => $value_1) {
+                if (preg_match('/.*/', (string) $key)) {
+                    $object[$key] = $value_1;
+                }
+            }
+
             return $object;
         }
-        if (\array_key_exists('jobs', $data) && $data['jobs'] !== null) {
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
             $values = [];
-            foreach ($data['jobs'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'Gyroscops\\Api\\Model\\Job', 'json', $context);
+            foreach ($object->getJobs() as $value) {
+                $values[] = $this->normalizer->normalize($value, 'json', $context);
             }
-            $object->setJobs($values);
-            unset($data['jobs']);
-        } elseif (\array_key_exists('jobs', $data) && $data['jobs'] === null) {
-            $object->setJobs(null);
-        }
-        if (\array_key_exists('composer', $data) && $data['composer'] !== null) {
-            $object->setComposer($this->denormalizer->denormalize($data['composer'], 'Gyroscops\\Api\\Model\\Composer', 'json', $context));
-            unset($data['composer']);
-        } elseif (\array_key_exists('composer', $data) && $data['composer'] === null) {
-            $object->setComposer(null);
-        }
-        if (\array_key_exists('code', $data) && $data['code'] !== null) {
-            $object->setCode($data['code']);
-            unset($data['code']);
-        } elseif (\array_key_exists('code', $data) && $data['code'] === null) {
-            $object->setCode(null);
-        }
-        if (\array_key_exists('label', $data) && $data['label'] !== null) {
-            $object->setLabel($data['label']);
-            unset($data['label']);
-        } elseif (\array_key_exists('label', $data) && $data['label'] === null) {
-            $object->setLabel(null);
-        }
-        foreach ($data as $key => $value_1) {
-            if (preg_match('/.*/', (string) $key)) {
-                $object[$key] = $value_1;
+            $data['jobs'] = $values;
+            $data['composer'] = $this->normalizer->normalize($object->getComposer(), 'json', $context);
+            $data['code'] = $object->getCode();
+            $data['label'] = $object->getLabel();
+            foreach ($object as $key => $value_1) {
+                if (preg_match('/.*/', (string) $key)) {
+                    $data[$key] = $value_1;
+                }
             }
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\Gyroscops\Api\Model\WorkflowDeclareWorkflowCommandInput::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class WorkflowDeclareWorkflowCommandInputNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        $values = [];
-        foreach ($object->getJobs() as $value) {
-            $values[] = $this->normalizer->normalize($value, 'json', $context);
-        }
-        $data['jobs'] = $values;
-        $data['composer'] = $this->normalizer->normalize($object->getComposer(), 'json', $context);
-        $data['code'] = $object->getCode();
-        $data['label'] = $object->getLabel();
-        foreach ($object as $key => $value_1) {
-            if (preg_match('/.*/', (string) $key)) {
-                $data[$key] = $value_1;
-            }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
+
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \Gyroscops\Api\Model\WorkflowDeclareWorkflowCommandInput::class;
         }
 
-        return $data;
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === Gyroscops\Api\Model\WorkflowDeclareWorkflowCommandInput::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \Gyroscops\Api\Model\WorkflowDeclareWorkflowCommandInput();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('jobs', $data) && $data['jobs'] !== null) {
+                $values = [];
+                foreach ($data['jobs'] as $value) {
+                    $values[] = $this->denormalizer->denormalize($value, \Gyroscops\Api\Model\Job::class, 'json', $context);
+                }
+                $object->setJobs($values);
+                unset($data['jobs']);
+            } elseif (\array_key_exists('jobs', $data) && $data['jobs'] === null) {
+                $object->setJobs(null);
+            }
+            if (\array_key_exists('composer', $data) && $data['composer'] !== null) {
+                $object->setComposer($this->denormalizer->denormalize($data['composer'], \Gyroscops\Api\Model\Composer::class, 'json', $context));
+                unset($data['composer']);
+            } elseif (\array_key_exists('composer', $data) && $data['composer'] === null) {
+                $object->setComposer(null);
+            }
+            if (\array_key_exists('code', $data) && $data['code'] !== null) {
+                $object->setCode($data['code']);
+                unset($data['code']);
+            } elseif (\array_key_exists('code', $data) && $data['code'] === null) {
+                $object->setCode(null);
+            }
+            if (\array_key_exists('label', $data) && $data['label'] !== null) {
+                $object->setLabel($data['label']);
+                unset($data['label']);
+            } elseif (\array_key_exists('label', $data) && $data['label'] === null) {
+                $object->setLabel(null);
+            }
+            foreach ($data as $key => $value_1) {
+                if (preg_match('/.*/', (string) $key)) {
+                    $object[$key] = $value_1;
+                }
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            $values = [];
+            foreach ($object->getJobs() as $value) {
+                $values[] = $this->normalizer->normalize($value, 'json', $context);
+            }
+            $data['jobs'] = $values;
+            $data['composer'] = $this->normalizer->normalize($object->getComposer(), 'json', $context);
+            $data['code'] = $object->getCode();
+            $data['label'] = $object->getLabel();
+            foreach ($object as $key => $value_1) {
+                if (preg_match('/.*/', (string) $key)) {
+                    $data[$key] = $value_1;
+                }
+            }
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\Gyroscops\Api\Model\WorkflowDeclareWorkflowCommandInput::class => false];
+        }
     }
 }

@@ -19,9 +19,9 @@ class ReplacePipelineStepPipelineItem extends \Gyroscops\Api\Runtime\Client\Base
     /**
      * Replaces a step by another one in a pipeline.
      *
-     * @param string                                                                                                                               $id          Resource identifier
-     * @param \Gyroscops\Api\Model\PipelineReplacePipelineStepCommandInputJsonld|\Gyroscops\Api\Model\PipelineReplacePipelineStepCommandInput|null $requestBody
-     * @param array                                                                                                                                $accept      Accept content header application/ld+json|application/json|text/html
+     * @param string                                                                                         $id          Resource identifier
+     * @param \Gyroscops\Api\Model\PipelineReplacePipelineStepCommandInputJsonldPipelineWrite|\stdClass|null $requestBody
+     * @param array                                                                                          $accept      Accept content header application/ld+json|application/json|text/html
      */
     public function __construct(string $id, $requestBody = null, array $accept = [])
     {
@@ -37,18 +37,18 @@ class ReplacePipelineStepPipelineItem extends \Gyroscops\Api\Runtime\Client\Base
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/runtime/pipelines/{id}/steps/{code}/replace');
+        return str_replace(['{id}'], [$this->id], '/runtime/pipelines/{id}/steps/{code}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineReplacePipelineStepCommandInputJsonld) {
+        if ($this->body instanceof \Gyroscops\Api\Model\PipelineReplacePipelineStepCommandInputJsonldPipelineWrite) {
             return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineReplacePipelineStepCommandInput) {
-            return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
+        if ($this->body instanceof \stdClass) {
+            return [['Content-Type' => ['application/json']], json_encode($this->body)];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineReplacePipelineStepCommandInput) {
+        if ($this->body instanceof \stdClass) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -65,9 +65,7 @@ class ReplacePipelineStepPipelineItem extends \Gyroscops\Api\Runtime\Client\Base
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\PipelineReplacePipelineStepCommandJsonldRead|null
+     * @return \Gyroscops\Api\Model\PipelineReplacePipelineStepCommandJsonldPipelineReadPipelineSubresourceRead|null
      *
      * @throws \Gyroscops\Api\Exception\ReplacePipelineStepPipelineItemBadRequestException
      * @throws \Gyroscops\Api\Exception\ReplacePipelineStepPipelineItemUnprocessableEntityException
@@ -80,7 +78,7 @@ class ReplacePipelineStepPipelineItem extends \Gyroscops\Api\Runtime\Client\Base
         $body = (string) $response->getBody();
         if (202 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\PipelineReplacePipelineStepCommandJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\PipelineReplacePipelineStepCommandJsonldPipelineReadPipelineSubresourceRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
                 return json_decode($body);
@@ -100,6 +98,6 @@ class ReplacePipelineStepPipelineItem extends \Gyroscops\Api\Runtime\Client\Base
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

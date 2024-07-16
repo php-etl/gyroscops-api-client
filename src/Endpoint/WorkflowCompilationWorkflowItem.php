@@ -65,9 +65,7 @@ class WorkflowCompilationWorkflowItem extends \Gyroscops\Api\Runtime\Client\Base
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\WorkflowCompileWorkflowCommandJsonldRead|null
+     * @return \Gyroscops\Api\Model\WorkflowCompileWorkflowCommandJsonldWorkflowRead|null
      *
      * @throws \Gyroscops\Api\Exception\WorkflowCompilationWorkflowItemBadRequestException
      * @throws \Gyroscops\Api\Exception\WorkflowCompilationWorkflowItemUnprocessableEntityException
@@ -80,7 +78,7 @@ class WorkflowCompilationWorkflowItem extends \Gyroscops\Api\Runtime\Client\Base
         $body = (string) $response->getBody();
         if (202 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\WorkflowCompileWorkflowCommandJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\WorkflowCompileWorkflowCommandJsonldWorkflowRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
                 return json_decode($body);
@@ -100,6 +98,6 @@ class WorkflowCompilationWorkflowItem extends \Gyroscops\Api\Runtime\Client\Base
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

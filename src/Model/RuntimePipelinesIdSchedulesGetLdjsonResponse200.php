@@ -22,7 +22,7 @@ class RuntimePipelinesIdSchedulesGetLdjsonResponse200 extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var ScheduleJsonld[]|null
+     * @var list<ScheduleJsonldScheduleRead>|null
      */
     protected $hydraMember;
     /**
@@ -39,7 +39,7 @@ class RuntimePipelinesIdSchedulesGetLdjsonResponse200 extends \ArrayObject
     protected $hydraSearch;
 
     /**
-     * @return ScheduleJsonld[]|null
+     * @return list<ScheduleJsonldScheduleRead>|null
      */
     public function getHydraMember(): ?array
     {
@@ -47,7 +47,7 @@ class RuntimePipelinesIdSchedulesGetLdjsonResponse200 extends \ArrayObject
     }
 
     /**
-     * @param ScheduleJsonld[]|null $hydraMember
+     * @param list<ScheduleJsonldScheduleRead>|null $hydraMember
      */
     public function setHydraMember(?array $hydraMember): self
     {

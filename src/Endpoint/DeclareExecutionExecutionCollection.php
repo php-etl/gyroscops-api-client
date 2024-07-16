@@ -62,9 +62,7 @@ class DeclareExecutionExecutionCollection extends \Gyroscops\Api\Runtime\Client\
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\ExecutionDeclarePipelineExecutionCommandJsonldRead|null
+     * @return \Gyroscops\Api\Model\ExecutionDeclarePipelineExecutionCommandJsonldExecutionRead|null
      *
      * @throws \Gyroscops\Api\Exception\DeclareExecutionExecutionCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\DeclareExecutionExecutionCollectionUnprocessableEntityException
@@ -76,7 +74,7 @@ class DeclareExecutionExecutionCollection extends \Gyroscops\Api\Runtime\Client\
         $body = (string) $response->getBody();
         if (202 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ExecutionDeclarePipelineExecutionCommandJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ExecutionDeclarePipelineExecutionCommandJsonldExecutionRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
                 return json_decode($body);
@@ -93,6 +91,6 @@ class DeclareExecutionExecutionCollection extends \Gyroscops\Api\Runtime\Client\
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

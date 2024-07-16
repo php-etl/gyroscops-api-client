@@ -19,9 +19,9 @@ class PutOrganizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
     /**
      * Replaces the Organization resource.
      *
-     * @param string                                                                         $id          Resource identifier
-     * @param \Gyroscops\Api\Model\OrganizationJsonld|\Gyroscops\Api\Model\Organization|null $requestBody
-     * @param array                                                                          $accept      Accept content header application/ld+json|application/json|text/html
+     * @param string                                                                                                           $id          Resource identifier
+     * @param \Gyroscops\Api\Model\OrganizationJsonldOrganizationWrite|\Gyroscops\Api\Model\OrganizationOrganizationWrite|null $requestBody
+     * @param array                                                                                                            $accept      Accept content header application/ld+json|application/json|text/html
      */
     public function __construct(string $id, $requestBody = null, array $accept = [])
     {
@@ -42,13 +42,13 @@ class PutOrganizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\OrganizationJsonld) {
+        if ($this->body instanceof \Gyroscops\Api\Model\OrganizationJsonldOrganizationWrite) {
             return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\Organization) {
+        if ($this->body instanceof \Gyroscops\Api\Model\OrganizationOrganizationWrite) {
             return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\Organization) {
+        if ($this->body instanceof \Gyroscops\Api\Model\OrganizationOrganizationWrite) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -65,9 +65,7 @@ class PutOrganizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\OrganizationJsonld|\Gyroscops\Api\Model\Organization
+     * @return \Gyroscops\Api\Model\OrganizationJsonldOrganizationRead|\Gyroscops\Api\Model\OrganizationOrganizationRead
      *
      * @throws \Gyroscops\Api\Exception\PutOrganizationItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PutOrganizationItemUnprocessableEntityException
@@ -80,10 +78,10 @@ class PutOrganizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\OrganizationJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\OrganizationJsonldOrganizationRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Organization', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\OrganizationOrganizationRead', 'json');
             }
         }
         if (400 === $status) {
@@ -100,6 +98,6 @@ class PutOrganizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

@@ -53,9 +53,7 @@ class GetVariableFromConfigurationItem extends \Gyroscops\Api\Runtime\Client\Bas
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\VariableFromConfigurationJsonldRead|\Gyroscops\Api\Model\VariableFromConfigurationRead
+     * @return \Gyroscops\Api\Model\VariableFromConfigurationJsonldVariableViewEnvironmentView|\Gyroscops\Api\Model\VariableFromConfigurationVariableViewEnvironmentView
      *
      * @throws \Gyroscops\Api\Exception\GetVariableFromConfigurationItemNotFoundException
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
@@ -66,10 +64,10 @@ class GetVariableFromConfigurationItem extends \Gyroscops\Api\Runtime\Client\Bas
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\VariableFromConfigurationJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\VariableFromConfigurationJsonldVariableViewEnvironmentView', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\VariableFromConfigurationRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\VariableFromConfigurationVariableViewEnvironmentView', 'json');
             }
         }
         if (404 === $status) {
@@ -80,6 +78,6 @@ class GetVariableFromConfigurationItem extends \Gyroscops\Api\Runtime\Client\Bas
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

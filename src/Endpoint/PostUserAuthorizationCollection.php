@@ -18,8 +18,8 @@ class PostUserAuthorizationCollection extends \Gyroscops\Api\Runtime\Client\Base
     /**
      * Creates a UserAuthorization resource.
      *
-     * @param \Gyroscops\Api\Model\UserAuthorizationJsonld|\Gyroscops\Api\Model\UserAuthorization|null $requestBody
-     * @param array                                                                                    $accept      Accept content header application/ld+json|application/json|text/html
+     * @param \Gyroscops\Api\Model\UserAuthorizationJsonldAuthorizationWrite|\Gyroscops\Api\Model\UserAuthorizationAuthorizationWrite|null $requestBody
+     * @param array                                                                                                                        $accept      Accept content header application/ld+json|application/json|text/html
      */
     public function __construct($requestBody = null, array $accept = [])
     {
@@ -39,13 +39,13 @@ class PostUserAuthorizationCollection extends \Gyroscops\Api\Runtime\Client\Base
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\UserAuthorizationJsonld) {
+        if ($this->body instanceof \Gyroscops\Api\Model\UserAuthorizationJsonldAuthorizationWrite) {
             return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\UserAuthorization) {
+        if ($this->body instanceof \Gyroscops\Api\Model\UserAuthorizationAuthorizationWrite) {
             return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\UserAuthorization) {
+        if ($this->body instanceof \Gyroscops\Api\Model\UserAuthorizationAuthorizationWrite) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -62,9 +62,7 @@ class PostUserAuthorizationCollection extends \Gyroscops\Api\Runtime\Client\Base
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\UserAuthorizationJsonld|\Gyroscops\Api\Model\UserAuthorization
+     * @return \Gyroscops\Api\Model\UserAuthorizationJsonldAuthorizationRead|\Gyroscops\Api\Model\UserAuthorizationAuthorizationRead
      *
      * @throws \Gyroscops\Api\Exception\PostUserAuthorizationCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostUserAuthorizationCollectionUnprocessableEntityException
@@ -76,10 +74,10 @@ class PostUserAuthorizationCollection extends \Gyroscops\Api\Runtime\Client\Base
         $body = (string) $response->getBody();
         if (201 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\UserAuthorizationJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\UserAuthorizationJsonldAuthorizationRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\UserAuthorization', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\UserAuthorizationAuthorizationRead', 'json');
             }
         }
         if (400 === $status) {
@@ -93,6 +91,6 @@ class PostUserAuthorizationCollection extends \Gyroscops\Api\Runtime\Client\Base
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

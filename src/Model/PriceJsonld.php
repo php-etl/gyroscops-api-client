@@ -36,18 +36,6 @@ class PriceJsonld extends \ArrayObject
     /**
      * @var string|null
      */
-    protected $id2;
-    /**
-     * @var BuyableJsonld|null
-     */
-    protected $buyable;
-    /**
-     * @var SubscriptionTypeJsonld|null
-     */
-    protected $type2;
-    /**
-     * @var string|null
-     */
     protected $amount;
     /**
      * @var MoneyJsonld|null
@@ -58,17 +46,11 @@ class PriceJsonld extends \ArrayObject
      */
     protected $currency;
 
-    /**
-     * @return mixed
-     */
     public function getContext()
     {
         return $this->context;
     }
 
-    /**
-     * @param mixed $context
-     */
     public function setContext($context): self
     {
         $this->initialized['context'] = true;
@@ -99,45 +81,6 @@ class PriceJsonld extends \ArrayObject
     {
         $this->initialized['type'] = true;
         $this->type = $type;
-
-        return $this;
-    }
-
-    public function getId2(): ?string
-    {
-        return $this->id2;
-    }
-
-    public function setId2(?string $id2): self
-    {
-        $this->initialized['id2'] = true;
-        $this->id2 = $id2;
-
-        return $this;
-    }
-
-    public function getBuyable(): ?BuyableJsonld
-    {
-        return $this->buyable;
-    }
-
-    public function setBuyable(?BuyableJsonld $buyable): self
-    {
-        $this->initialized['buyable'] = true;
-        $this->buyable = $buyable;
-
-        return $this;
-    }
-
-    public function getType2(): ?SubscriptionTypeJsonld
-    {
-        return $this->type2;
-    }
-
-    public function setType2(?SubscriptionTypeJsonld $type2): self
-    {
-        $this->initialized['type2'] = true;
-        $this->type2 = $type2;
 
         return $this;
     }

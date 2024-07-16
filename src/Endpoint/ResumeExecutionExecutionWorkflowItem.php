@@ -65,9 +65,7 @@ class ResumeExecutionExecutionWorkflowItem extends \Gyroscops\Api\Runtime\Client
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\ExecutionWorkflowResumeWorkflowExecutionCommandJsonld|\Gyroscops\Api\Model\ExecutionWorkflowResumeWorkflowExecutionCommand
+     * @return \Gyroscops\Api\Model\ExecutionWorkflowResumeWorkflowExecutionCommandJsonldExecutionWorkflowRead|null
      *
      * @throws \Gyroscops\Api\Exception\ResumeExecutionExecutionWorkflowItemBadRequestException
      * @throws \Gyroscops\Api\Exception\ResumeExecutionExecutionWorkflowItemUnprocessableEntityException
@@ -80,10 +78,10 @@ class ResumeExecutionExecutionWorkflowItem extends \Gyroscops\Api\Runtime\Client
         $body = (string) $response->getBody();
         if (202 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ExecutionWorkflowResumeWorkflowExecutionCommandJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ExecutionWorkflowResumeWorkflowExecutionCommandJsonldExecutionWorkflowRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ExecutionWorkflowResumeWorkflowExecutionCommand', 'json');
+                return json_decode($body);
             }
         }
         if (400 === $status) {
@@ -100,6 +98,6 @@ class ResumeExecutionExecutionWorkflowItem extends \Gyroscops\Api\Runtime\Client
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

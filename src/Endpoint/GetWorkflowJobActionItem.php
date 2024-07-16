@@ -35,7 +35,7 @@ class GetWorkflowJobActionItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoin
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/runtime/workflows/workflow-job-actions/{id}');
+        return str_replace(['{id}'], [$this->id], '/runtime/workflows/actions/{id}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
@@ -53,9 +53,7 @@ class GetWorkflowJobActionItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoin
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\WorkflowJobActionJsonld|\Gyroscops\Api\Model\WorkflowJobAction
+     * @return \Gyroscops\Api\Model\WorkflowJobActionJsonldActionRead|\Gyroscops\Api\Model\WorkflowJobActionActionRead
      *
      * @throws \Gyroscops\Api\Exception\GetWorkflowJobActionItemNotFoundException
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
@@ -66,10 +64,10 @@ class GetWorkflowJobActionItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoin
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\WorkflowJobActionJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\WorkflowJobActionJsonldActionRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\WorkflowJobAction', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\WorkflowJobActionActionRead', 'json');
             }
         }
         if (404 === $status) {
@@ -80,6 +78,6 @@ class GetWorkflowJobActionItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoin
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

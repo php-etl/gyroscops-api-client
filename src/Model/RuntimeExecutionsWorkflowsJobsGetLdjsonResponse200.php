@@ -22,7 +22,7 @@ class RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200 extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var ExecutionWorkflowJobJsonld[]|null
+     * @var list<ExecutionWorkflowJobJsonldExecutionWorkflowJobRead>|null
      */
     protected $hydraMember;
     /**
@@ -39,7 +39,7 @@ class RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200 extends \ArrayObject
     protected $hydraSearch;
 
     /**
-     * @return ExecutionWorkflowJobJsonld[]|null
+     * @return list<ExecutionWorkflowJobJsonldExecutionWorkflowJobRead>|null
      */
     public function getHydraMember(): ?array
     {
@@ -47,7 +47,7 @@ class RuntimeExecutionsWorkflowsJobsGetLdjsonResponse200 extends \ArrayObject
     }
 
     /**
-     * @param ExecutionWorkflowJobJsonld[]|null $hydraMember
+     * @param list<ExecutionWorkflowJobJsonldExecutionWorkflowJobRead>|null $hydraMember
      */
     public function setHydraMember(?array $hydraMember): self
     {

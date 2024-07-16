@@ -22,8 +22,10 @@ class ApiSchedulesExecutionsGetSubresourceScheduleSubresource extends \Gyroscops
      * @param string $id              Schedule identifier
      * @param array  $queryParameters {
      *
-     *     @var int $page The collection page number
-     * }
+     * @var int    $page The collection page number
+     * @var string $schedule
+     * @var array  $schedule[]
+     *             }
      *
      * @param array $accept Accept content header application/ld+json|application/json|text/html
      */
@@ -61,18 +63,18 @@ class ApiSchedulesExecutionsGetSubresourceScheduleSubresource extends \Gyroscops
     protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(['page']);
+        $optionsResolver->setDefined(['page', 'schedule']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults(['page' => 1]);
         $optionsResolver->addAllowedTypes('page', ['int']);
+        $optionsResolver->addAllowedTypes('schedule', ['string']);
+        $optionsResolver->addAllowedTypes('schedule', ['array']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\RuntimeSchedulesIdExecutionsGetLdjsonResponse200|\Gyroscops\Api\Model\ExecutionRead[]
+     * @return \Gyroscops\Api\Model\RuntimeSchedulesIdExecutionsGetLdjsonResponse200|\Gyroscops\Api\Model\ExecutionExecutionRead[]
      *
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
@@ -82,10 +84,10 @@ class ApiSchedulesExecutionsGetSubresourceScheduleSubresource extends \Gyroscops
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\RuntimeSchedulesIdExecutionsGetLdjsonResponse200', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\RuntimeSchedulesIdExecutionsGetLdjsonResponse200', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ExecutionRead[]', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ExecutionExecutionRead[]', 'json');
             }
         }
         throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
@@ -93,6 +95,6 @@ class ApiSchedulesExecutionsGetSubresourceScheduleSubresource extends \Gyroscops
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

@@ -19,9 +19,9 @@ class ChangeValuesConfigurationItem extends \Gyroscops\Api\Runtime\Client\BaseEn
     /**
      * Change the configuration values inside an existing configurations storage.
      *
-     * @param string                                                                                                                                     $id          Resource identifier
-     * @param \Gyroscops\Api\Model\ConfigurationChangeConfigurationValueInputJsonld|\Gyroscops\Api\Model\ConfigurationChangeConfigurationValueInput|null $requestBody
-     * @param array                                                                                                                                      $accept      Accept content header application/ld+json|application/json|text/html
+     * @param string                                                                                                                                                                           $id          Configuration identifier
+     * @param \Gyroscops\Api\Model\ConfigurationChangeConfigurationValueInputJsonldConfigurationUpdate|\Gyroscops\Api\Model\ConfigurationChangeConfigurationValueInputConfigurationUpdate|null $requestBody
+     * @param array                                                                                                                                                                            $accept      Accept content header application/ld+json|application/json|text/html
      */
     public function __construct(string $id, $requestBody = null, array $accept = [])
     {
@@ -42,13 +42,13 @@ class ChangeValuesConfigurationItem extends \Gyroscops\Api\Runtime\Client\BaseEn
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\ConfigurationChangeConfigurationValueInputJsonld) {
+        if ($this->body instanceof \Gyroscops\Api\Model\ConfigurationChangeConfigurationValueInputJsonldConfigurationUpdate) {
             return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\ConfigurationChangeConfigurationValueInput) {
+        if ($this->body instanceof \Gyroscops\Api\Model\ConfigurationChangeConfigurationValueInputConfigurationUpdate) {
             return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\ConfigurationChangeConfigurationValueInput) {
+        if ($this->body instanceof \Gyroscops\Api\Model\ConfigurationChangeConfigurationValueInputConfigurationUpdate) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -65,9 +65,7 @@ class ChangeValuesConfigurationItem extends \Gyroscops\Api\Runtime\Client\BaseEn
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\ConfigurationJsonld|\Gyroscops\Api\Model\Configuration
+     * @return \Gyroscops\Api\Model\ConfigurationJsonldConfigurationView|\Gyroscops\Api\Model\ConfigurationConfigurationView
      *
      * @throws \Gyroscops\Api\Exception\ChangeValuesConfigurationItemBadRequestException
      * @throws \Gyroscops\Api\Exception\ChangeValuesConfigurationItemUnprocessableEntityException
@@ -80,10 +78,10 @@ class ChangeValuesConfigurationItem extends \Gyroscops\Api\Runtime\Client\BaseEn
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ConfigurationJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ConfigurationJsonldConfigurationView', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Configuration', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ConfigurationConfigurationView', 'json');
             }
         }
         if (400 === $status) {
@@ -100,6 +98,6 @@ class ChangeValuesConfigurationItem extends \Gyroscops\Api\Runtime\Client\BaseEn
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

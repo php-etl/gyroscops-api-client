@@ -17,7 +17,7 @@ class SoftDeleteWorkflowItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
     protected $accept;
 
     /**
-     * Replaces the Workflow resource.
+     * Deletes a workflow softly.
      *
      * @param string                                                                       $id          Resource identifier
      * @param \Gyroscops\Api\Model\WorkflowRemoveWorkflowCommandInputJsonld|\stdClass|null $requestBody
@@ -65,9 +65,7 @@ class SoftDeleteWorkflowItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\WorkflowRemoveWorkflowCommandJsonldRead|null
+     * @return \Gyroscops\Api\Model\WorkflowRemoveWorkflowCommandJsonldWorkflowRead|null
      *
      * @throws \Gyroscops\Api\Exception\SoftDeleteWorkflowItemBadRequestException
      * @throws \Gyroscops\Api\Exception\SoftDeleteWorkflowItemUnprocessableEntityException
@@ -80,7 +78,7 @@ class SoftDeleteWorkflowItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
         $body = (string) $response->getBody();
         if (202 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\WorkflowRemoveWorkflowCommandJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\WorkflowRemoveWorkflowCommandJsonldWorkflowRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
                 return json_decode($body);
@@ -100,6 +98,6 @@ class SoftDeleteWorkflowItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

@@ -22,7 +22,7 @@ class SubscriptionOfferRead extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var mixed[]|null
+     * @var array<string, mixed>|null
      */
     protected $color;
     /**
@@ -50,11 +50,11 @@ class SubscriptionOfferRead extends \ArrayObject
      */
     protected $description;
     /**
-     * @var string[]|null
+     * @var list<string>|null
      */
     protected $features;
     /**
-     * @var PriceRead[]|null
+     * @var list<BuyablePriceRead>|null
      */
     protected $priceList;
     /**
@@ -75,7 +75,7 @@ class SubscriptionOfferRead extends \ArrayObject
     protected $activeUntil;
 
     /**
-     * @return mixed[]|null
+     * @return array<string, mixed>|null
      */
     public function getColor(): ?iterable
     {
@@ -83,7 +83,7 @@ class SubscriptionOfferRead extends \ArrayObject
     }
 
     /**
-     * @param mixed[]|null $color
+     * @param array<string, mixed>|null $color
      */
     public function setColor(?iterable $color): self
     {
@@ -172,7 +172,7 @@ class SubscriptionOfferRead extends \ArrayObject
     }
 
     /**
-     * @return string[]|null
+     * @return list<string>|null
      */
     public function getFeatures(): ?array
     {
@@ -180,7 +180,7 @@ class SubscriptionOfferRead extends \ArrayObject
     }
 
     /**
-     * @param string[]|null $features
+     * @param list<string>|null $features
      */
     public function setFeatures(?array $features): self
     {
@@ -191,7 +191,7 @@ class SubscriptionOfferRead extends \ArrayObject
     }
 
     /**
-     * @return PriceRead[]|null
+     * @return list<BuyablePriceRead>|null
      */
     public function getPriceList(): ?array
     {
@@ -199,7 +199,7 @@ class SubscriptionOfferRead extends \ArrayObject
     }
 
     /**
-     * @param PriceRead[]|null $priceList
+     * @param list<BuyablePriceRead>|null $priceList
      */
     public function setPriceList(?array $priceList): self
     {

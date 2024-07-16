@@ -18,8 +18,8 @@ class DeclarePipelinePipelineCollection extends \Gyroscops\Api\Runtime\Client\Ba
     /**
      * Declares a pipeline.
      *
-     * @param \Gyroscops\Api\Model\PipelineDeclarePipelineCommandInputJsonld|\Gyroscops\Api\Model\PipelineDeclarePipelineCommandInput|null $requestBody
-     * @param array                                                                                                                        $accept      Accept content header application/ld+json|application/json|text/html
+     * @param \Gyroscops\Api\Model\PipelineDeclarePipelineCommandInputJsonldPipelineWrite|\stdClass|null $requestBody
+     * @param array                                                                                      $accept      Accept content header application/ld+json|application/json|text/html
      */
     public function __construct($requestBody = null, array $accept = [])
     {
@@ -39,13 +39,13 @@ class DeclarePipelinePipelineCollection extends \Gyroscops\Api\Runtime\Client\Ba
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineDeclarePipelineCommandInputJsonld) {
+        if ($this->body instanceof \Gyroscops\Api\Model\PipelineDeclarePipelineCommandInputJsonldPipelineWrite) {
             return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineDeclarePipelineCommandInput) {
-            return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
+        if ($this->body instanceof \stdClass) {
+            return [['Content-Type' => ['application/json']], json_encode($this->body)];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineDeclarePipelineCommandInput) {
+        if ($this->body instanceof \stdClass) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -62,9 +62,7 @@ class DeclarePipelinePipelineCollection extends \Gyroscops\Api\Runtime\Client\Ba
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\PipelineDeclarePipelineCommandJsonldRead|null
+     * @return \Gyroscops\Api\Model\PipelineDeclarePipelineCommandJsonldPipelineReadPipelineSubresourceRead|null
      *
      * @throws \Gyroscops\Api\Exception\DeclarePipelinePipelineCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\DeclarePipelinePipelineCollectionUnprocessableEntityException
@@ -76,7 +74,7 @@ class DeclarePipelinePipelineCollection extends \Gyroscops\Api\Runtime\Client\Ba
         $body = (string) $response->getBody();
         if (202 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\PipelineDeclarePipelineCommandJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\PipelineDeclarePipelineCommandJsonldPipelineReadPipelineSubresourceRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
                 return json_decode($body);
@@ -93,6 +91,6 @@ class DeclarePipelinePipelineCollection extends \Gyroscops\Api\Runtime\Client\Ba
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

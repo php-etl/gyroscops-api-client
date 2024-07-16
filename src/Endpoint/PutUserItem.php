@@ -19,9 +19,9 @@ class PutUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements 
     /**
      * Replaces the User resource.
      *
-     * @param string                                                         $id          Resource identifier
-     * @param \Gyroscops\Api\Model\UserJsonld|\Gyroscops\Api\Model\User|null $requestBody
-     * @param array                                                          $accept      Accept content header application/ld+json|application/json|text/html
+     * @param string                                                                           $id          Resource identifier
+     * @param \Gyroscops\Api\Model\UserJsonldUserWrite|\Gyroscops\Api\Model\UserUserWrite|null $requestBody
+     * @param array                                                                            $accept      Accept content header application/ld+json|application/json|text/html
      */
     public function __construct(string $id, $requestBody = null, array $accept = [])
     {
@@ -42,13 +42,13 @@ class PutUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements 
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\UserJsonld) {
+        if ($this->body instanceof \Gyroscops\Api\Model\UserJsonldUserWrite) {
             return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\User) {
+        if ($this->body instanceof \Gyroscops\Api\Model\UserUserWrite) {
             return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\User) {
+        if ($this->body instanceof \Gyroscops\Api\Model\UserUserWrite) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -65,9 +65,7 @@ class PutUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements 
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\UserJsonld|\Gyroscops\Api\Model\User
+     * @return \Gyroscops\Api\Model\UserJsonldUserRead|\Gyroscops\Api\Model\UserUserRead
      *
      * @throws \Gyroscops\Api\Exception\PutUserItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PutUserItemUnprocessableEntityException
@@ -80,10 +78,10 @@ class PutUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements 
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\UserJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\UserJsonldUserRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\User', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\UserUserRead', 'json');
             }
         }
         if (400 === $status) {
@@ -100,6 +98,6 @@ class PutUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implements 
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

@@ -62,8 +62,6 @@ class PutAkeneoOauthTokenAkeneoOauthTokenCollection extends \Gyroscops\Api\Runti
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutLdjsonResponse200|null
      *
      * @throws \Gyroscops\Api\Exception\PutAkeneoOauthTokenAkeneoOauthTokenCollectionBadRequestException
@@ -76,7 +74,7 @@ class PutAkeneoOauthTokenAkeneoOauthTokenCollection extends \Gyroscops\Api\Runti
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\GatewayAkeneoOauthTokenPutLdjsonResponse200', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\GatewayAkeneoOauthTokenPutLdjsonResponse200', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
                 return json_decode($body);
@@ -93,6 +91,6 @@ class PutAkeneoOauthTokenAkeneoOauthTokenCollection extends \Gyroscops\Api\Runti
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

@@ -56,8 +56,6 @@ class ApiExecutionWorkflowsJobsPipelineGetSubresourceExecutionWorkflowSubresourc
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \Gyroscops\Api\Model\ExecutionPipelineJobJsonld|\Gyroscops\Api\Model\ExecutionPipelineJob
      *
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
@@ -68,10 +66,10 @@ class ApiExecutionWorkflowsJobsPipelineGetSubresourceExecutionWorkflowSubresourc
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ExecutionPipelineJobJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ExecutionPipelineJobJsonld', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ExecutionPipelineJob', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ExecutionPipelineJob', 'json');
             }
         }
         throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
@@ -79,6 +77,6 @@ class ApiExecutionWorkflowsJobsPipelineGetSubresourceExecutionWorkflowSubresourc
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

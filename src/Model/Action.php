@@ -22,12 +22,12 @@ class Action extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var string[]|null
+     * @var array<string, string>|null
      */
     protected $configuration;
 
     /**
-     * @return string[]|null
+     * @return array<string, string>|null
      */
     public function getConfiguration(): ?iterable
     {
@@ -35,7 +35,7 @@ class Action extends \ArrayObject
     }
 
     /**
-     * @param string[]|null $configuration
+     * @param array<string, string>|null $configuration
      */
     public function setConfiguration(?iterable $configuration): self
     {

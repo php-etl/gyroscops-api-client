@@ -53,9 +53,7 @@ class GetSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implement
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\SecretJsonld|\Gyroscops\Api\Model\Secret
+     * @return \Gyroscops\Api\Model\SecretJsonldSecretRead|\Gyroscops\Api\Model\SecretSecretRead
      *
      * @throws \Gyroscops\Api\Exception\GetSecretItemNotFoundException
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
@@ -66,10 +64,10 @@ class GetSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implement
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\SecretJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\SecretJsonldSecretRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Secret', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\SecretSecretRead', 'json');
             }
         }
         if (404 === $status) {
@@ -80,6 +78,6 @@ class GetSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implement
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

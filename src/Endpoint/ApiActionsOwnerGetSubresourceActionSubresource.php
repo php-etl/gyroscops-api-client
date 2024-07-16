@@ -53,9 +53,7 @@ class ApiActionsOwnerGetSubresourceActionSubresource extends \Gyroscops\Api\Runt
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\UserJsonld|\Gyroscops\Api\Model\User
+     * @return \Gyroscops\Api\Model\UserJsonldUserRead|\Gyroscops\Api\Model\UserUserRead
      *
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
@@ -65,10 +63,10 @@ class ApiActionsOwnerGetSubresourceActionSubresource extends \Gyroscops\Api\Runt
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\UserJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\UserJsonldUserRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\User', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\UserUserRead', 'json');
             }
         }
         throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
@@ -76,6 +74,6 @@ class ApiActionsOwnerGetSubresourceActionSubresource extends \Gyroscops\Api\Runt
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

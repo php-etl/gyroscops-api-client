@@ -34,21 +34,15 @@ class ActionJsonld extends \ArrayObject
      */
     protected $type;
     /**
-     * @var string[]|null
+     * @var array<string, string>|null
      */
     protected $configuration;
 
-    /**
-     * @return mixed
-     */
     public function getContext()
     {
         return $this->context;
     }
 
-    /**
-     * @param mixed $context
-     */
     public function setContext($context): self
     {
         $this->initialized['context'] = true;
@@ -84,7 +78,7 @@ class ActionJsonld extends \ArrayObject
     }
 
     /**
-     * @return string[]|null
+     * @return array<string, string>|null
      */
     public function getConfiguration(): ?iterable
     {
@@ -92,7 +86,7 @@ class ActionJsonld extends \ArrayObject
     }
 
     /**
-     * @param string[]|null $configuration
+     * @param array<string, string>|null $configuration
      */
     public function setConfiguration(?iterable $configuration): self
     {

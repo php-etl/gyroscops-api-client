@@ -62,8 +62,6 @@ class PostReferralCodeCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpo
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \Gyroscops\Api\Model\ReferralCodeJsonldReferralCodeRead|\Gyroscops\Api\Model\ReferralCodeReferralCodeRead
      *
      * @throws \Gyroscops\Api\Exception\PostReferralCodeCollectionBadRequestException
@@ -76,10 +74,10 @@ class PostReferralCodeCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpo
         $body = (string) $response->getBody();
         if (201 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ReferralCodeJsonldReferralCodeRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ReferralCodeJsonldReferralCodeRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ReferralCodeReferralCodeRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ReferralCodeReferralCodeRead', 'json');
             }
         }
         if (400 === $status) {
@@ -93,6 +91,6 @@ class PostReferralCodeCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpo
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

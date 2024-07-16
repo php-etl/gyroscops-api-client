@@ -53,9 +53,7 @@ class GetWorkspaceItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implem
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\WorkspaceJsonld|\Gyroscops\Api\Model\Workspace
+     * @return \Gyroscops\Api\Model\WorkspaceJsonldWorkspaceRead|\Gyroscops\Api\Model\WorkspaceWorkspaceRead
      *
      * @throws \Gyroscops\Api\Exception\GetWorkspaceItemNotFoundException
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
@@ -66,10 +64,10 @@ class GetWorkspaceItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implem
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\WorkspaceJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\WorkspaceJsonldWorkspaceRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Workspace', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\WorkspaceWorkspaceRead', 'json');
             }
         }
         if (404 === $status) {
@@ -80,6 +78,6 @@ class GetWorkspaceItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implem
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

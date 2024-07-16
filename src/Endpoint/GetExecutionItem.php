@@ -53,9 +53,7 @@ class GetExecutionItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implem
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\ExecutionJsonldRead|\Gyroscops\Api\Model\ExecutionRead
+     * @return \Gyroscops\Api\Model\ExecutionJsonldExecutionRead|\Gyroscops\Api\Model\ExecutionExecutionRead
      *
      * @throws \Gyroscops\Api\Exception\GetExecutionItemNotFoundException
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
@@ -66,10 +64,10 @@ class GetExecutionItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implem
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ExecutionJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ExecutionJsonldExecutionRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ExecutionRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ExecutionExecutionRead', 'json');
             }
         }
         if (404 === $status) {
@@ -80,6 +78,6 @@ class GetExecutionItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implem
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

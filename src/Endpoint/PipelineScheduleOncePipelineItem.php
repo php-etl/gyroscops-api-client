@@ -19,9 +19,9 @@ class PipelineScheduleOncePipelineItem extends \Gyroscops\Api\Runtime\Client\Bas
     /**
      * Schedule a pipeline to a specific date.
      *
-     * @param string                                                                                                                                               $id          Resource identifier
-     * @param \Gyroscops\Api\Model\PipelineDeclarePipelineScheduleOnceCommandInputJsonld|\Gyroscops\Api\Model\PipelineDeclarePipelineScheduleOnceCommandInput|null $requestBody
-     * @param array                                                                                                                                                $accept      Accept content header application/ld+json|application/json|text/html
+     * @param string                                                                                                 $id          Resource identifier
+     * @param \Gyroscops\Api\Model\PipelineDeclarePipelineScheduleOnceCommandInputJsonldPipelineWrite|\stdClass|null $requestBody
+     * @param array                                                                                                  $accept      Accept content header application/ld+json|application/json|text/html
      */
     public function __construct(string $id, $requestBody = null, array $accept = [])
     {
@@ -42,13 +42,13 @@ class PipelineScheduleOncePipelineItem extends \Gyroscops\Api\Runtime\Client\Bas
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineDeclarePipelineScheduleOnceCommandInputJsonld) {
+        if ($this->body instanceof \Gyroscops\Api\Model\PipelineDeclarePipelineScheduleOnceCommandInputJsonldPipelineWrite) {
             return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineDeclarePipelineScheduleOnceCommandInput) {
-            return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
+        if ($this->body instanceof \stdClass) {
+            return [['Content-Type' => ['application/json']], json_encode($this->body)];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineDeclarePipelineScheduleOnceCommandInput) {
+        if ($this->body instanceof \stdClass) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -65,9 +65,7 @@ class PipelineScheduleOncePipelineItem extends \Gyroscops\Api\Runtime\Client\Bas
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\PipelineDeclarePipelineScheduleOnceCommandJsonldRead|null
+     * @return \Gyroscops\Api\Model\PipelineDeclarePipelineScheduleOnceCommandJsonldPipelineReadPipelineSubresourceRead|null
      *
      * @throws \Gyroscops\Api\Exception\PipelineScheduleOncePipelineItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PipelineScheduleOncePipelineItemUnprocessableEntityException
@@ -80,7 +78,7 @@ class PipelineScheduleOncePipelineItem extends \Gyroscops\Api\Runtime\Client\Bas
         $body = (string) $response->getBody();
         if (202 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\PipelineDeclarePipelineScheduleOnceCommandJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\PipelineDeclarePipelineScheduleOnceCommandJsonldPipelineReadPipelineSubresourceRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
                 return json_decode($body);
@@ -100,6 +98,6 @@ class PipelineScheduleOncePipelineItem extends \Gyroscops\Api\Runtime\Client\Bas
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

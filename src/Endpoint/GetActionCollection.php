@@ -20,8 +20,8 @@ class GetActionCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
      *
      * @param array $queryParameters {
      *
-     *     @var int $page The collection page number
-     * }
+     * @var int $page The collection page number
+     *          }
      *
      * @param array $accept Accept content header application/ld+json|application/json|text/html
      */
@@ -67,9 +67,7 @@ class GetActionCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\RuntimeActionsGetLdjsonResponse200|\Gyroscops\Api\Model\ActionRead[]
+     * @return \Gyroscops\Api\Model\RuntimeActionsGetLdjsonResponse200|\Gyroscops\Api\Model\ActionActionRead[]
      *
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
@@ -79,10 +77,10 @@ class GetActionCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\RuntimeActionsGetLdjsonResponse200', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\RuntimeActionsGetLdjsonResponse200', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ActionRead[]', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ActionActionRead[]', 'json');
             }
         }
         throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
@@ -90,6 +88,6 @@ class GetActionCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

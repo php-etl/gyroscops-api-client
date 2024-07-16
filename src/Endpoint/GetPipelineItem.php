@@ -53,9 +53,7 @@ class GetPipelineItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impleme
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\PipelineJsonldRead|\Gyroscops\Api\Model\PipelineRead
+     * @return \Gyroscops\Api\Model\PipelineJsonldPipelineReadPipelineSubresourceRead|\Gyroscops\Api\Model\PipelinePipelineReadPipelineSubresourceRead
      *
      * @throws \Gyroscops\Api\Exception\GetPipelineItemNotFoundException
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
@@ -66,10 +64,10 @@ class GetPipelineItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impleme
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\PipelineJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\PipelineJsonldPipelineReadPipelineSubresourceRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\PipelineRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\PipelinePipelineReadPipelineSubresourceRead', 'json');
             }
         }
         if (404 === $status) {
@@ -80,6 +78,6 @@ class GetPipelineItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impleme
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

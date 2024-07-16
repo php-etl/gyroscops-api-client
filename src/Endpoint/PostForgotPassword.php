@@ -39,8 +39,6 @@ class PostForgotPassword extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impl
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return null
      *
      * @throws \Gyroscops\Api\Exception\PostForgotPasswordBadRequestException
@@ -61,6 +59,6 @@ class PostForgotPassword extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impl
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

@@ -20,10 +20,10 @@ class AddVariablesFromSecretEnvironmentItem extends \Gyroscops\Api\Runtime\Clien
     /**
      * Add variables from an existing secret storage.
      *
-     * @param string                                                                                                                                           $secret      Secret identifier
-     * @param string                                                                                                                                           $id          Resource identifier
-     * @param \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromSecretInputJsonld|\Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromSecretInput|null $requestBody
-     * @param array                                                                                                                                            $accept      Accept content header application/ld+json|application/json|text/html
+     * @param string                                                                                                                                                                             $secret      Secret identifier
+     * @param string                                                                                                                                                                             $id          Resource identifier
+     * @param \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromSecretInputJsonldEnvironmentUpdate|\Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromSecretInputEnvironmentUpdate|null $requestBody
+     * @param array                                                                                                                                                                              $accept      Accept content header application/ld+json|application/json|text/html
      */
     public function __construct(string $secret, string $id, $requestBody = null, array $accept = [])
     {
@@ -45,13 +45,13 @@ class AddVariablesFromSecretEnvironmentItem extends \Gyroscops\Api\Runtime\Clien
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromSecretInputJsonld) {
+        if ($this->body instanceof \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromSecretInputJsonldEnvironmentUpdate) {
             return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromSecretInput) {
+        if ($this->body instanceof \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromSecretInputEnvironmentUpdate) {
             return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromSecretInput) {
+        if ($this->body instanceof \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromSecretInputEnvironmentUpdate) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -68,9 +68,7 @@ class AddVariablesFromSecretEnvironmentItem extends \Gyroscops\Api\Runtime\Clien
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\EnvironmentJsonldRead|\Gyroscops\Api\Model\EnvironmentRead
+     * @return \Gyroscops\Api\Model\EnvironmentJsonldEnvironmentView|\Gyroscops\Api\Model\EnvironmentEnvironmentView
      *
      * @throws \Gyroscops\Api\Exception\AddVariablesFromSecretEnvironmentItemBadRequestException
      * @throws \Gyroscops\Api\Exception\AddVariablesFromSecretEnvironmentItemUnprocessableEntityException
@@ -83,10 +81,10 @@ class AddVariablesFromSecretEnvironmentItem extends \Gyroscops\Api\Runtime\Clien
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\EnvironmentJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\EnvironmentJsonldEnvironmentView', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\EnvironmentRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\EnvironmentEnvironmentView', 'json');
             }
         }
         if (400 === $status) {
@@ -103,6 +101,6 @@ class AddVariablesFromSecretEnvironmentItem extends \Gyroscops\Api\Runtime\Clien
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

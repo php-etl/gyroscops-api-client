@@ -18,8 +18,8 @@ class PostEnvironmentCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoi
     /**
      * Creates a Environment resource.
      *
-     * @param \Gyroscops\Api\Model\EnvironmentCreateEnvironmentInputJsonld|\Gyroscops\Api\Model\EnvironmentCreateEnvironmentInput|null $requestBody
-     * @param array                                                                                                                    $accept      Accept content header application/ld+json|application/json|text/html
+     * @param \Gyroscops\Api\Model\EnvironmentCreateEnvironmentInputJsonldEnvironmentCreate|\Gyroscops\Api\Model\EnvironmentCreateEnvironmentInputEnvironmentCreate|null $requestBody
+     * @param array                                                                                                                                                      $accept      Accept content header application/ld+json|application/json|text/html
      */
     public function __construct($requestBody = null, array $accept = [])
     {
@@ -39,13 +39,13 @@ class PostEnvironmentCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoi
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\EnvironmentCreateEnvironmentInputJsonld) {
+        if ($this->body instanceof \Gyroscops\Api\Model\EnvironmentCreateEnvironmentInputJsonldEnvironmentCreate) {
             return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\EnvironmentCreateEnvironmentInput) {
+        if ($this->body instanceof \Gyroscops\Api\Model\EnvironmentCreateEnvironmentInputEnvironmentCreate) {
             return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\EnvironmentCreateEnvironmentInput) {
+        if ($this->body instanceof \Gyroscops\Api\Model\EnvironmentCreateEnvironmentInputEnvironmentCreate) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -62,9 +62,7 @@ class PostEnvironmentCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoi
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\EnvironmentJsonldRead|\Gyroscops\Api\Model\EnvironmentRead
+     * @return \Gyroscops\Api\Model\EnvironmentJsonldEnvironmentView|\Gyroscops\Api\Model\EnvironmentEnvironmentView
      *
      * @throws \Gyroscops\Api\Exception\PostEnvironmentCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostEnvironmentCollectionUnprocessableEntityException
@@ -76,10 +74,10 @@ class PostEnvironmentCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoi
         $body = (string) $response->getBody();
         if (201 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\EnvironmentJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\EnvironmentJsonldEnvironmentView', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\EnvironmentRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\EnvironmentEnvironmentView', 'json');
             }
         }
         if (400 === $status) {
@@ -93,6 +91,6 @@ class PostEnvironmentCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoi
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

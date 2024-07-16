@@ -41,8 +41,6 @@ class GetForgotPassword extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imple
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return null
      *
      * @throws \Gyroscops\Api\Exception\GetForgotPasswordNotFoundException
@@ -63,6 +61,6 @@ class GetForgotPassword extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imple
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

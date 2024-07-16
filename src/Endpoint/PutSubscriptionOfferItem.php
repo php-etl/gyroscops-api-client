@@ -65,8 +65,6 @@ class PutSubscriptionOfferItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoin
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \Gyroscops\Api\Model\SubscriptionOfferJsonldRead|\Gyroscops\Api\Model\SubscriptionOfferRead
      *
      * @throws \Gyroscops\Api\Exception\PutSubscriptionOfferItemBadRequestException
@@ -80,10 +78,10 @@ class PutSubscriptionOfferItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoin
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\SubscriptionOfferJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\SubscriptionOfferJsonldRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\SubscriptionOfferRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\SubscriptionOfferRead', 'json');
             }
         }
         if (400 === $status) {
@@ -100,6 +98,6 @@ class PutSubscriptionOfferItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoin
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

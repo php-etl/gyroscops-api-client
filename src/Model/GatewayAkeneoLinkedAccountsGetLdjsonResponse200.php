@@ -22,7 +22,7 @@ class GatewayAkeneoLinkedAccountsGetLdjsonResponse200 extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var AkeneoLinkedAccountJsonld[]|null
+     * @var list<AkeneoLinkedAccountJsonld>|null
      */
     protected $hydraMember;
     /**
@@ -39,7 +39,7 @@ class GatewayAkeneoLinkedAccountsGetLdjsonResponse200 extends \ArrayObject
     protected $hydraSearch;
 
     /**
-     * @return AkeneoLinkedAccountJsonld[]|null
+     * @return list<AkeneoLinkedAccountJsonld>|null
      */
     public function getHydraMember(): ?array
     {
@@ -47,7 +47,7 @@ class GatewayAkeneoLinkedAccountsGetLdjsonResponse200 extends \ArrayObject
     }
 
     /**
-     * @param AkeneoLinkedAccountJsonld[]|null $hydraMember
+     * @param list<AkeneoLinkedAccountJsonld>|null $hydraMember
      */
     public function setHydraMember(?array $hydraMember): self
     {

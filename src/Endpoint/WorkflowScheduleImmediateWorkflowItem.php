@@ -65,9 +65,7 @@ class WorkflowScheduleImmediateWorkflowItem extends \Gyroscops\Api\Runtime\Clien
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\WorkflowDeclareWorkflowScheduleImmediateCommandJsonldRead|null
+     * @return \Gyroscops\Api\Model\WorkflowDeclareWorkflowScheduleImmediateCommandJsonldWorkflowRead|null
      *
      * @throws \Gyroscops\Api\Exception\WorkflowScheduleImmediateWorkflowItemBadRequestException
      * @throws \Gyroscops\Api\Exception\WorkflowScheduleImmediateWorkflowItemUnprocessableEntityException
@@ -80,7 +78,7 @@ class WorkflowScheduleImmediateWorkflowItem extends \Gyroscops\Api\Runtime\Clien
         $body = (string) $response->getBody();
         if (202 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\WorkflowDeclareWorkflowScheduleImmediateCommandJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\WorkflowDeclareWorkflowScheduleImmediateCommandJsonldWorkflowRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
                 return json_decode($body);
@@ -100,6 +98,6 @@ class WorkflowScheduleImmediateWorkflowItem extends \Gyroscops\Api\Runtime\Clien
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

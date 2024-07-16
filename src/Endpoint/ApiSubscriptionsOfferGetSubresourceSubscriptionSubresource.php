@@ -53,8 +53,6 @@ class ApiSubscriptionsOfferGetSubresourceSubscriptionSubresource extends \Gyrosc
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \Gyroscops\Api\Model\SubscriptionOfferJsonldRead|\Gyroscops\Api\Model\SubscriptionOfferRead
      *
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
@@ -65,10 +63,10 @@ class ApiSubscriptionsOfferGetSubresourceSubscriptionSubresource extends \Gyrosc
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\SubscriptionOfferJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\SubscriptionOfferJsonldRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\SubscriptionOfferRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\SubscriptionOfferRead', 'json');
             }
         }
         throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
@@ -76,6 +74,6 @@ class ApiSubscriptionsOfferGetSubresourceSubscriptionSubresource extends \Gyrosc
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

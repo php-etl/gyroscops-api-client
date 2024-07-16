@@ -34,7 +34,7 @@ class StepJsonld extends \ArrayObject
      */
     protected $type;
     /**
-     * @var string[]|null
+     * @var array<string, string>|null
      */
     protected $configuration;
     /**
@@ -46,21 +46,15 @@ class StepJsonld extends \ArrayObject
      */
     protected $label;
     /**
-     * @var ProbeJsonld[]|null
+     * @var list<ProbeJsonld>|null
      */
     protected $probes;
 
-    /**
-     * @return mixed
-     */
     public function getContext()
     {
         return $this->context;
     }
 
-    /**
-     * @param mixed $context
-     */
     public function setContext($context): self
     {
         $this->initialized['context'] = true;
@@ -96,7 +90,7 @@ class StepJsonld extends \ArrayObject
     }
 
     /**
-     * @return string[]|null
+     * @return array<string, string>|null
      */
     public function getConfiguration(): ?iterable
     {
@@ -104,7 +98,7 @@ class StepJsonld extends \ArrayObject
     }
 
     /**
-     * @param string[]|null $configuration
+     * @param array<string, string>|null $configuration
      */
     public function setConfiguration(?iterable $configuration): self
     {
@@ -141,7 +135,7 @@ class StepJsonld extends \ArrayObject
     }
 
     /**
-     * @return ProbeJsonld[]|null
+     * @return list<ProbeJsonld>|null
      */
     public function getProbes(): ?array
     {
@@ -149,7 +143,7 @@ class StepJsonld extends \ArrayObject
     }
 
     /**
-     * @param ProbeJsonld[]|null $probes
+     * @param list<ProbeJsonld>|null $probes
      */
     public function setProbes(?array $probes): self
     {

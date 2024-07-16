@@ -41,8 +41,6 @@ class DeletePipelinePipelineItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return null
      *
      * @throws \Gyroscops\Api\Exception\DeletePipelinePipelineItemNotFoundException
@@ -63,6 +61,6 @@ class DeletePipelinePipelineItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

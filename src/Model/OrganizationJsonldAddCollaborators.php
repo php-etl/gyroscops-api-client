@@ -33,22 +33,12 @@ class OrganizationJsonldAddCollaborators extends \ArrayObject
      * @var string|null
      */
     protected $type;
-    /**
-     * @var string[]|null
-     */
-    protected $externalCollaborators;
 
-    /**
-     * @return mixed
-     */
     public function getContext()
     {
         return $this->context;
     }
 
-    /**
-     * @param mixed $context
-     */
     public function setContext($context): self
     {
         $this->initialized['context'] = true;
@@ -79,25 +69,6 @@ class OrganizationJsonldAddCollaborators extends \ArrayObject
     {
         $this->initialized['type'] = true;
         $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * @return string[]|null
-     */
-    public function getExternalCollaborators(): ?array
-    {
-        return $this->externalCollaborators;
-    }
-
-    /**
-     * @param string[]|null $externalCollaborators
-     */
-    public function setExternalCollaborators(?array $externalCollaborators): self
-    {
-        $this->initialized['externalCollaborators'] = true;
-        $this->externalCollaborators = $externalCollaborators;
 
         return $this;
     }

@@ -41,8 +41,6 @@ class DeleteVariableFromConfigurationItem extends \Gyroscops\Api\Runtime\Client\
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return null
      *
      * @throws \Gyroscops\Api\Exception\DeleteVariableFromConfigurationItemNotFoundException
@@ -63,6 +61,6 @@ class DeleteVariableFromConfigurationItem extends \Gyroscops\Api\Runtime\Client\
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

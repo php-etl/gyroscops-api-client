@@ -26,7 +26,7 @@ class AkeneoOauthTokenOauthStateInput extends \ArrayObject
      */
     protected $url;
     /**
-     * @var string[]|null
+     * @var list<string>|null
      */
     protected $scope;
 
@@ -44,7 +44,7 @@ class AkeneoOauthTokenOauthStateInput extends \ArrayObject
     }
 
     /**
-     * @return string[]|null
+     * @return list<string>|null
      */
     public function getScope(): ?array
     {
@@ -52,7 +52,7 @@ class AkeneoOauthTokenOauthStateInput extends \ArrayObject
     }
 
     /**
-     * @param string[]|null $scope
+     * @param list<string>|null $scope
      */
     public function setScope(?array $scope): self
     {

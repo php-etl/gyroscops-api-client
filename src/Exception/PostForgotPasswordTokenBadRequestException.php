@@ -17,7 +17,7 @@ class PostForgotPasswordTokenBadRequestException extends BadRequestException
      */
     private $response;
 
-    public function __construct(\Psr\Http\Message\ResponseInterface $response = null)
+    public function __construct(?\Psr\Http\Message\ResponseInterface $response = null)
     {
         parent::__construct('Missing password parameter');
         $this->response = $response;

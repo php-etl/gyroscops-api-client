@@ -34,7 +34,7 @@ class ReferralRequestsGetLdjsonResponse200HydraSearch extends \ArrayObject
      */
     protected $hydraVariableRepresentation;
     /**
-     * @var ReferralRequestsGetLdjsonResponse200HydraSearchHydraMappingItem[]|null
+     * @var list<ReferralRequestsGetLdjsonResponse200HydraSearchHydraMappingItem>|null
      */
     protected $hydraMapping;
 
@@ -78,7 +78,7 @@ class ReferralRequestsGetLdjsonResponse200HydraSearch extends \ArrayObject
     }
 
     /**
-     * @return ReferralRequestsGetLdjsonResponse200HydraSearchHydraMappingItem[]|null
+     * @return list<ReferralRequestsGetLdjsonResponse200HydraSearchHydraMappingItem>|null
      */
     public function getHydraMapping(): ?array
     {
@@ -86,7 +86,7 @@ class ReferralRequestsGetLdjsonResponse200HydraSearch extends \ArrayObject
     }
 
     /**
-     * @param ReferralRequestsGetLdjsonResponse200HydraSearchHydraMappingItem[]|null $hydraMapping
+     * @param list<ReferralRequestsGetLdjsonResponse200HydraSearchHydraMappingItem>|null $hydraMapping
      */
     public function setHydraMapping(?array $hydraMapping): self
     {

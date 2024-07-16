@@ -65,9 +65,7 @@ class WorkflowScheduleCrontabWorkflowItem extends \Gyroscops\Api\Runtime\Client\
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\WorkflowDeclareWorkflowScheduleCrontabCommandJsonldRead|null
+     * @return \Gyroscops\Api\Model\WorkflowDeclareWorkflowScheduleCrontabCommandJsonldWorkflowRead|null
      *
      * @throws \Gyroscops\Api\Exception\WorkflowScheduleCrontabWorkflowItemBadRequestException
      * @throws \Gyroscops\Api\Exception\WorkflowScheduleCrontabWorkflowItemUnprocessableEntityException
@@ -80,7 +78,7 @@ class WorkflowScheduleCrontabWorkflowItem extends \Gyroscops\Api\Runtime\Client\
         $body = (string) $response->getBody();
         if (202 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\WorkflowDeclareWorkflowScheduleCrontabCommandJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\WorkflowDeclareWorkflowScheduleCrontabCommandJsonldWorkflowRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
                 return json_decode($body);
@@ -100,6 +98,6 @@ class WorkflowScheduleCrontabWorkflowItem extends \Gyroscops\Api\Runtime\Client\
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

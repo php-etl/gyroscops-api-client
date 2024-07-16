@@ -20,8 +20,8 @@ class GetOrganizationCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoi
      *
      * @param array $queryParameters {
      *
-     *     @var int $page The collection page number
-     * }
+     * @var int $page The collection page number
+     *          }
      *
      * @param array $accept Accept content header application/ld+json|application/json|text/html
      */
@@ -67,9 +67,7 @@ class GetOrganizationCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoi
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\AuthenticationOrganizationsGetLdjsonResponse200|\Gyroscops\Api\Model\Organization[]
+     * @return \Gyroscops\Api\Model\AuthenticationOrganizationsGetLdjsonResponse200|\Gyroscops\Api\Model\OrganizationOrganizationRead[]
      *
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
@@ -79,10 +77,10 @@ class GetOrganizationCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoi
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\AuthenticationOrganizationsGetLdjsonResponse200', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\AuthenticationOrganizationsGetLdjsonResponse200', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Organization[]', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\OrganizationOrganizationRead[]', 'json');
             }
         }
         throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
@@ -90,6 +88,6 @@ class GetOrganizationCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoi
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

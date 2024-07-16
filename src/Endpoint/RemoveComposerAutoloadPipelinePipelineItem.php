@@ -19,9 +19,9 @@ class RemoveComposerAutoloadPipelinePipelineItem extends \Gyroscops\Api\Runtime\
     /**
      * Removes PSR4 autoload composer from a pipeline.
      *
-     * @param string                                                                                                                                                             $id          Resource identifier
-     * @param \Gyroscops\Api\Model\PipelineRemovePipelineComposerPSR4AutoloadCommandInputJsonld|\Gyroscops\Api\Model\PipelineRemovePipelineComposerPSR4AutoloadCommandInput|null $requestBody
-     * @param array                                                                                                                                                              $accept      Accept content header application/ld+json|application/json|text/html
+     * @param string                                                                                                        $id          Resource identifier
+     * @param \Gyroscops\Api\Model\PipelineRemovePipelineComposerPSR4AutoloadCommandInputJsonldPipelineWrite|\stdClass|null $requestBody
+     * @param array                                                                                                         $accept      Accept content header application/ld+json|application/json|text/html
      */
     public function __construct(string $id, $requestBody = null, array $accept = [])
     {
@@ -42,13 +42,13 @@ class RemoveComposerAutoloadPipelinePipelineItem extends \Gyroscops\Api\Runtime\
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineRemovePipelineComposerPSR4AutoloadCommandInputJsonld) {
+        if ($this->body instanceof \Gyroscops\Api\Model\PipelineRemovePipelineComposerPSR4AutoloadCommandInputJsonldPipelineWrite) {
             return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineRemovePipelineComposerPSR4AutoloadCommandInput) {
-            return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
+        if ($this->body instanceof \stdClass) {
+            return [['Content-Type' => ['application/json']], json_encode($this->body)];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineRemovePipelineComposerPSR4AutoloadCommandInput) {
+        if ($this->body instanceof \stdClass) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -65,9 +65,7 @@ class RemoveComposerAutoloadPipelinePipelineItem extends \Gyroscops\Api\Runtime\
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\PipelineRemovePipelineComposerPSR4AutoloadCommandJsonldRead|null
+     * @return \Gyroscops\Api\Model\PipelineRemovePipelineComposerPSR4AutoloadCommandJsonldPipelineReadPipelineSubresourceRead|null
      *
      * @throws \Gyroscops\Api\Exception\RemoveComposerAutoloadPipelinePipelineItemBadRequestException
      * @throws \Gyroscops\Api\Exception\RemoveComposerAutoloadPipelinePipelineItemUnprocessableEntityException
@@ -80,7 +78,7 @@ class RemoveComposerAutoloadPipelinePipelineItem extends \Gyroscops\Api\Runtime\
         $body = (string) $response->getBody();
         if (202 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\PipelineRemovePipelineComposerPSR4AutoloadCommandJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\PipelineRemovePipelineComposerPSR4AutoloadCommandJsonldPipelineReadPipelineSubresourceRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
                 return json_decode($body);
@@ -100,6 +98,6 @@ class RemoveComposerAutoloadPipelinePipelineItem extends \Gyroscops\Api\Runtime\
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

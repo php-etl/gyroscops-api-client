@@ -53,9 +53,7 @@ class GetScheduleItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impleme
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\ScheduleJsonld|null
+     * @return \Gyroscops\Api\Model\ScheduleJsonldScheduleRead|\Gyroscops\Api\Model\ScheduleScheduleRead
      *
      * @throws \Gyroscops\Api\Exception\GetScheduleItemNotFoundException
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
@@ -66,10 +64,10 @@ class GetScheduleItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impleme
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ScheduleJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ScheduleJsonldScheduleRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return json_decode($body);
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ScheduleScheduleRead', 'json');
             }
         }
         if (404 === $status) {
@@ -80,6 +78,6 @@ class GetScheduleItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impleme
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

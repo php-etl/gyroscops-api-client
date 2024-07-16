@@ -41,8 +41,6 @@ class DeleteEnvironmentItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return null
      *
      * @throws \Gyroscops\Api\Exception\DeleteEnvironmentItemNotFoundException
@@ -63,6 +61,6 @@ class DeleteEnvironmentItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

@@ -53,9 +53,7 @@ class GetCompilationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impl
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\CompilationJsonld|\Gyroscops\Api\Model\Compilation
+     * @return \Gyroscops\Api\Model\CompilationJsonldCompilationRead|\Gyroscops\Api\Model\CompilationCompilationRead
      *
      * @throws \Gyroscops\Api\Exception\GetCompilationItemNotFoundException
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
@@ -66,10 +64,10 @@ class GetCompilationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impl
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\CompilationJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\CompilationJsonldCompilationRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Compilation', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\CompilationCompilationRead', 'json');
             }
         }
         if (404 === $status) {
@@ -80,6 +78,6 @@ class GetCompilationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impl
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

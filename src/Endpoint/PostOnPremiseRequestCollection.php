@@ -62,8 +62,6 @@ class PostOnPremiseRequestCollection extends \Gyroscops\Api\Runtime\Client\BaseE
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \Gyroscops\Api\Model\OnPremiseRequestJsonldOnPremiseRequestRead|\Gyroscops\Api\Model\OnPremiseRequestOnPremiseRequestRead
      *
      * @throws \Gyroscops\Api\Exception\PostOnPremiseRequestCollectionBadRequestException
@@ -76,10 +74,10 @@ class PostOnPremiseRequestCollection extends \Gyroscops\Api\Runtime\Client\BaseE
         $body = (string) $response->getBody();
         if (201 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\OnPremiseRequestJsonldOnPremiseRequestRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\OnPremiseRequestJsonldOnPremiseRequestRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\OnPremiseRequestOnPremiseRequestRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\OnPremiseRequestOnPremiseRequestRead', 'json');
             }
         }
         if (400 === $status) {
@@ -93,6 +91,6 @@ class PostOnPremiseRequestCollection extends \Gyroscops\Api\Runtime\Client\BaseE
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

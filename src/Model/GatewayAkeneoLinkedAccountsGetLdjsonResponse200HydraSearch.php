@@ -34,7 +34,7 @@ class GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraSearch extends \ArrayO
      */
     protected $hydraVariableRepresentation;
     /**
-     * @var GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraSearchHydraMappingItem[]|null
+     * @var list<GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraSearchHydraMappingItem>|null
      */
     protected $hydraMapping;
 
@@ -78,7 +78,7 @@ class GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraSearch extends \ArrayO
     }
 
     /**
-     * @return GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraSearchHydraMappingItem[]|null
+     * @return list<GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraSearchHydraMappingItem>|null
      */
     public function getHydraMapping(): ?array
     {
@@ -86,7 +86,7 @@ class GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraSearch extends \ArrayO
     }
 
     /**
-     * @param GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraSearchHydraMappingItem[]|null $hydraMapping
+     * @param list<GatewayAkeneoLinkedAccountsGetLdjsonResponse200HydraSearchHydraMappingItem>|null $hydraMapping
      */
     public function setHydraMapping(?array $hydraMapping): self
     {

@@ -32,7 +32,7 @@ class DeleteReferralCodeItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/referral/code/{id}');
+        return str_replace(['{id}'], [$this->id], '/referral/codes/{id}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
@@ -41,8 +41,6 @@ class DeleteReferralCodeItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return null
      *
      * @throws \Gyroscops\Api\Exception\DeleteReferralCodeItemNotFoundException
@@ -63,6 +61,6 @@ class DeleteReferralCodeItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

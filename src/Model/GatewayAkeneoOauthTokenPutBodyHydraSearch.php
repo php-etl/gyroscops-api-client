@@ -34,7 +34,7 @@ class GatewayAkeneoOauthTokenPutBodyHydraSearch extends \ArrayObject
      */
     protected $hydraVariableRepresentation;
     /**
-     * @var GatewayAkeneoOauthTokenPutBodyHydraSearchHydraMappingItem[]|null
+     * @var list<GatewayAkeneoOauthTokenPutBodyHydraSearchHydraMappingItem>|null
      */
     protected $hydraMapping;
 
@@ -78,7 +78,7 @@ class GatewayAkeneoOauthTokenPutBodyHydraSearch extends \ArrayObject
     }
 
     /**
-     * @return GatewayAkeneoOauthTokenPutBodyHydraSearchHydraMappingItem[]|null
+     * @return list<GatewayAkeneoOauthTokenPutBodyHydraSearchHydraMappingItem>|null
      */
     public function getHydraMapping(): ?array
     {
@@ -86,7 +86,7 @@ class GatewayAkeneoOauthTokenPutBodyHydraSearch extends \ArrayObject
     }
 
     /**
-     * @param GatewayAkeneoOauthTokenPutBodyHydraSearchHydraMappingItem[]|null $hydraMapping
+     * @param list<GatewayAkeneoOauthTokenPutBodyHydraSearchHydraMappingItem>|null $hydraMapping
      */
     public function setHydraMapping(?array $hydraMapping): self
     {

@@ -22,7 +22,7 @@ class Step extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var string[]|null
+     * @var array<string, string>|null
      */
     protected $configuration;
     /**
@@ -34,12 +34,12 @@ class Step extends \ArrayObject
      */
     protected $label;
     /**
-     * @var Probe[]|null
+     * @var list<Probe>|null
      */
     protected $probes;
 
     /**
-     * @return string[]|null
+     * @return array<string, string>|null
      */
     public function getConfiguration(): ?iterable
     {
@@ -47,7 +47,7 @@ class Step extends \ArrayObject
     }
 
     /**
-     * @param string[]|null $configuration
+     * @param array<string, string>|null $configuration
      */
     public function setConfiguration(?iterable $configuration): self
     {
@@ -84,7 +84,7 @@ class Step extends \ArrayObject
     }
 
     /**
-     * @return Probe[]|null
+     * @return list<Probe>|null
      */
     public function getProbes(): ?array
     {
@@ -92,7 +92,7 @@ class Step extends \ArrayObject
     }
 
     /**
-     * @param Probe[]|null $probes
+     * @param list<Probe>|null $probes
      */
     public function setProbes(?array $probes): self
     {

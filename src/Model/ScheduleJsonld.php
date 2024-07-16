@@ -22,6 +22,10 @@ class ScheduleJsonld extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
+     * @var mixed|null
+     */
+    protected $context;
+    /**
      * @var string|null
      */
     protected $id;
@@ -29,10 +33,19 @@ class ScheduleJsonld extends \ArrayObject
      * @var string|null
      */
     protected $type;
-    /**
-     * @var mixed|null
-     */
-    protected $context;
+
+    public function getContext()
+    {
+        return $this->context;
+    }
+
+    public function setContext($context): self
+    {
+        $this->initialized['context'] = true;
+        $this->context = $context;
+
+        return $this;
+    }
 
     public function getId(): ?string
     {
@@ -56,25 +69,6 @@ class ScheduleJsonld extends \ArrayObject
     {
         $this->initialized['type'] = true;
         $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getContext()
-    {
-        return $this->context;
-    }
-
-    /**
-     * @param mixed $context
-     */
-    public function setContext($context): self
-    {
-        $this->initialized['context'] = true;
-        $this->context = $context;
 
         return $this;
     }

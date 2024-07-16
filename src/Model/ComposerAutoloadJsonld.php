@@ -42,21 +42,15 @@ class ComposerAutoloadJsonld extends \ArrayObject
      */
     protected $namespace;
     /**
-     * @var string[]|null
+     * @var list<string>|null
      */
     protected $paths;
 
-    /**
-     * @return mixed
-     */
     public function getContext()
     {
         return $this->context;
     }
 
-    /**
-     * @param mixed $context
-     */
     public function setContext($context): self
     {
         $this->initialized['context'] = true;
@@ -118,7 +112,7 @@ class ComposerAutoloadJsonld extends \ArrayObject
     }
 
     /**
-     * @return string[]|null
+     * @return list<string>|null
      */
     public function getPaths(): ?array
     {
@@ -126,7 +120,7 @@ class ComposerAutoloadJsonld extends \ArrayObject
     }
 
     /**
-     * @param string[]|null $paths
+     * @param list<string>|null $paths
      */
     public function setPaths(?array $paths): self
     {

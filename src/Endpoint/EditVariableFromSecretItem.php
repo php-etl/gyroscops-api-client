@@ -19,9 +19,9 @@ class EditVariableFromSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
     /**
      * Replaces the VariableFromSecret resource.
      *
-     * @param string                                                            $id          Resource identifier
-     * @param \Gyroscops\Api\Model\VariableFromSecretJsonldWrite|\stdClass|null $requestBody
-     * @param array                                                             $accept      Accept content header application/ld+json|application/json|text/html
+     * @param string                                                                                                                 $id          Resource identifier
+     * @param \Gyroscops\Api\Model\VariableFromSecretJsonldVariableUpdate|\Gyroscops\Api\Model\VariableFromSecretVariableUpdate|null $requestBody
+     * @param array                                                                                                                  $accept      Accept content header application/ld+json|application/json|text/html
      */
     public function __construct(string $id, $requestBody = null, array $accept = [])
     {
@@ -37,18 +37,18 @@ class EditVariableFromSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/variables-from-secret/{id}');
+        return str_replace(['{id}'], [$this->id], '/environment/variables-from-secret/{id}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\VariableFromSecretJsonldWrite) {
+        if ($this->body instanceof \Gyroscops\Api\Model\VariableFromSecretJsonldVariableUpdate) {
             return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \stdClass) {
-            return [['Content-Type' => ['application/json']], json_encode($this->body)];
+        if ($this->body instanceof \Gyroscops\Api\Model\VariableFromSecretVariableUpdate) {
+            return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \stdClass) {
+        if ($this->body instanceof \Gyroscops\Api\Model\VariableFromSecretVariableUpdate) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -65,9 +65,7 @@ class EditVariableFromSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\VariableFromSecretJsonldRead|\Gyroscops\Api\Model\VariableFromSecretRead
+     * @return \Gyroscops\Api\Model\VariableFromSecretJsonldVariableViewEnvironmentView|\Gyroscops\Api\Model\VariableFromSecretVariableViewEnvironmentView
      *
      * @throws \Gyroscops\Api\Exception\EditVariableFromSecretItemBadRequestException
      * @throws \Gyroscops\Api\Exception\EditVariableFromSecretItemUnprocessableEntityException
@@ -80,10 +78,10 @@ class EditVariableFromSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\VariableFromSecretJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\VariableFromSecretJsonldVariableViewEnvironmentView', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\VariableFromSecretRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\VariableFromSecretVariableViewEnvironmentView', 'json');
             }
         }
         if (400 === $status) {
@@ -100,6 +98,6 @@ class EditVariableFromSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

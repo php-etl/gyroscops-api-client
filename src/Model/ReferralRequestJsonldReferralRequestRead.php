@@ -74,17 +74,11 @@ class ReferralRequestJsonldReferralRequestRead extends \ArrayObject
      */
     protected $status = 'pending';
 
-    /**
-     * @return mixed
-     */
     public function getContext()
     {
         return $this->context;
     }
 
-    /**
-     * @param mixed $context
-     */
     public function setContext($context): self
     {
         $this->initialized['context'] = true;

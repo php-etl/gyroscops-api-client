@@ -54,11 +54,11 @@ class AkeneoInstanceJsonld extends \ArrayObject
      */
     protected $secret;
     /**
-     * @var string[]|null
+     * @var list<string>|null
      */
     protected $linkedAccounts;
     /**
-     * @var string[]|null
+     * @var list<string>|null
      */
     protected $oauthTokens;
 
@@ -88,17 +88,11 @@ class AkeneoInstanceJsonld extends \ArrayObject
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getContext()
     {
         return $this->context;
     }
 
-    /**
-     * @param mixed $context
-     */
     public function setContext($context): self
     {
         $this->initialized['context'] = true;
@@ -173,7 +167,7 @@ class AkeneoInstanceJsonld extends \ArrayObject
     }
 
     /**
-     * @return string[]|null
+     * @return list<string>|null
      */
     public function getLinkedAccounts(): ?array
     {
@@ -181,7 +175,7 @@ class AkeneoInstanceJsonld extends \ArrayObject
     }
 
     /**
-     * @param string[]|null $linkedAccounts
+     * @param list<string>|null $linkedAccounts
      */
     public function setLinkedAccounts(?array $linkedAccounts): self
     {
@@ -192,7 +186,7 @@ class AkeneoInstanceJsonld extends \ArrayObject
     }
 
     /**
-     * @return string[]|null
+     * @return list<string>|null
      */
     public function getOauthTokens(): ?array
     {
@@ -200,7 +194,7 @@ class AkeneoInstanceJsonld extends \ArrayObject
     }
 
     /**
-     * @param string[]|null $oauthTokens
+     * @param list<string>|null $oauthTokens
      */
     public function setOauthTokens(?array $oauthTokens): self
     {

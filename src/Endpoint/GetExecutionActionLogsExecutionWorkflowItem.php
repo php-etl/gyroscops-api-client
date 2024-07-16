@@ -56,9 +56,7 @@ class GetExecutionActionLogsExecutionWorkflowItem extends \Gyroscops\Api\Runtime
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\ExecutionWorkflowJsonld|\Gyroscops\Api\Model\ExecutionWorkflow
+     * @return \Gyroscops\Api\Model\ExecutionWorkflowJsonldExecutionWorkflowRead|\Gyroscops\Api\Model\ExecutionWorkflowExecutionWorkflowRead
      *
      * @throws \Gyroscops\Api\Exception\GetExecutionActionLogsExecutionWorkflowItemNotFoundException
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
@@ -69,10 +67,10 @@ class GetExecutionActionLogsExecutionWorkflowItem extends \Gyroscops\Api\Runtime
         $body = (string) $response->getBody();
         if (202 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ExecutionWorkflowJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ExecutionWorkflowJsonldExecutionWorkflowRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ExecutionWorkflow', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ExecutionWorkflowExecutionWorkflowRead', 'json');
             }
         }
         if (404 === $status) {
@@ -83,6 +81,6 @@ class GetExecutionActionLogsExecutionWorkflowItem extends \Gyroscops\Api\Runtime
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

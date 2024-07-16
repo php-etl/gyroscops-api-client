@@ -41,8 +41,6 @@ class DeleteConfigurationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return null
      *
      * @throws \Gyroscops\Api\Exception\DeleteConfigurationItemNotFoundException
@@ -63,6 +61,6 @@ class DeleteConfigurationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

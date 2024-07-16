@@ -22,7 +22,7 @@ class AuthenticationOffersIdOptionsGetLdjsonResponse200 extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var OptionJsonld[]|null
+     * @var list<OptionJsonld>|null
      */
     protected $hydraMember;
     /**
@@ -39,7 +39,7 @@ class AuthenticationOffersIdOptionsGetLdjsonResponse200 extends \ArrayObject
     protected $hydraSearch;
 
     /**
-     * @return OptionJsonld[]|null
+     * @return list<OptionJsonld>|null
      */
     public function getHydraMember(): ?array
     {
@@ -47,7 +47,7 @@ class AuthenticationOffersIdOptionsGetLdjsonResponse200 extends \ArrayObject
     }
 
     /**
-     * @param OptionJsonld[]|null $hydraMember
+     * @param list<OptionJsonld>|null $hydraMember
      */
     public function setHydraMember(?array $hydraMember): self
     {

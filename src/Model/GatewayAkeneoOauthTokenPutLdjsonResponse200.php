@@ -22,7 +22,7 @@ class GatewayAkeneoOauthTokenPutLdjsonResponse200 extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var AkeneoOauthTokenOauthTokenOutputJsonldRead[]|null
+     * @var list<AkeneoOauthTokenOauthTokenOutputJsonldRead>|null
      */
     protected $hydraMember;
     /**
@@ -39,7 +39,7 @@ class GatewayAkeneoOauthTokenPutLdjsonResponse200 extends \ArrayObject
     protected $hydraSearch;
 
     /**
-     * @return AkeneoOauthTokenOauthTokenOutputJsonldRead[]|null
+     * @return list<AkeneoOauthTokenOauthTokenOutputJsonldRead>|null
      */
     public function getHydraMember(): ?array
     {
@@ -47,7 +47,7 @@ class GatewayAkeneoOauthTokenPutLdjsonResponse200 extends \ArrayObject
     }
 
     /**
-     * @param AkeneoOauthTokenOauthTokenOutputJsonldRead[]|null $hydraMember
+     * @param list<AkeneoOauthTokenOauthTokenOutputJsonldRead>|null $hydraMember
      */
     public function setHydraMember(?array $hydraMember): self
     {

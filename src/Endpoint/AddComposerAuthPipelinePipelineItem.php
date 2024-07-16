@@ -19,9 +19,9 @@ class AddComposerAuthPipelinePipelineItem extends \Gyroscops\Api\Runtime\Client\
     /**
      * Adds a composer auth to a pipeline.
      *
-     * @param string                                                                                                                                       $id          Resource identifier
-     * @param \Gyroscops\Api\Model\PipelineAddPipelineComposerAuthCommandInputJsonld|\Gyroscops\Api\Model\PipelineAddPipelineComposerAuthCommandInput|null $requestBody
-     * @param array                                                                                                                                        $accept      Accept content header application/ld+json|application/json|text/html
+     * @param string                                                                                             $id          Resource identifier
+     * @param \Gyroscops\Api\Model\PipelineAddPipelineComposerAuthCommandInputJsonldPipelineWrite|\stdClass|null $requestBody
+     * @param array                                                                                              $accept      Accept content header application/ld+json|application/json|text/html
      */
     public function __construct(string $id, $requestBody = null, array $accept = [])
     {
@@ -42,13 +42,13 @@ class AddComposerAuthPipelinePipelineItem extends \Gyroscops\Api\Runtime\Client\
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineAddPipelineComposerAuthCommandInputJsonld) {
+        if ($this->body instanceof \Gyroscops\Api\Model\PipelineAddPipelineComposerAuthCommandInputJsonldPipelineWrite) {
             return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineAddPipelineComposerAuthCommandInput) {
-            return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
+        if ($this->body instanceof \stdClass) {
+            return [['Content-Type' => ['application/json']], json_encode($this->body)];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineAddPipelineComposerAuthCommandInput) {
+        if ($this->body instanceof \stdClass) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -65,9 +65,7 @@ class AddComposerAuthPipelinePipelineItem extends \Gyroscops\Api\Runtime\Client\
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\PipelineAddPipelineComposerAuthCommandJsonldRead|null
+     * @return \Gyroscops\Api\Model\PipelineAddPipelineComposerAuthCommandJsonldPipelineReadPipelineSubresourceRead|null
      *
      * @throws \Gyroscops\Api\Exception\AddComposerAuthPipelinePipelineItemBadRequestException
      * @throws \Gyroscops\Api\Exception\AddComposerAuthPipelinePipelineItemUnprocessableEntityException
@@ -80,7 +78,7 @@ class AddComposerAuthPipelinePipelineItem extends \Gyroscops\Api\Runtime\Client\
         $body = (string) $response->getBody();
         if (202 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\PipelineAddPipelineComposerAuthCommandJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\PipelineAddPipelineComposerAuthCommandJsonldPipelineReadPipelineSubresourceRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
                 return json_decode($body);
@@ -100,6 +98,6 @@ class AddComposerAuthPipelinePipelineItem extends \Gyroscops\Api\Runtime\Client\
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

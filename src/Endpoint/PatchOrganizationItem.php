@@ -22,7 +22,7 @@ class PatchOrganizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
      * @param string $id     Resource identifier
      * @param array  $accept Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(string $id, ?\Gyroscops\Api\Model\Organization $requestBody = null, array $accept = [])
+    public function __construct(string $id, ?\Gyroscops\Api\Model\OrganizationOrganizationWrite $requestBody = null, array $accept = [])
     {
         $this->id = $id;
         $this->body = $requestBody;
@@ -41,7 +41,7 @@ class PatchOrganizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\Organization) {
+        if ($this->body instanceof \Gyroscops\Api\Model\OrganizationOrganizationWrite) {
             return [['Content-Type' => ['application/merge-patch+json']], $serializer->serialize($this->body, 'json')];
         }
 
@@ -58,9 +58,7 @@ class PatchOrganizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\OrganizationJsonld|\Gyroscops\Api\Model\Organization
+     * @return \Gyroscops\Api\Model\OrganizationJsonldOrganizationRead|\Gyroscops\Api\Model\OrganizationOrganizationRead
      *
      * @throws \Gyroscops\Api\Exception\PatchOrganizationItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PatchOrganizationItemUnprocessableEntityException
@@ -73,10 +71,10 @@ class PatchOrganizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\OrganizationJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\OrganizationJsonldOrganizationRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Organization', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\OrganizationOrganizationRead', 'json');
             }
         }
         if (400 === $status) {
@@ -93,6 +91,6 @@ class PatchOrganizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

@@ -35,7 +35,7 @@ class GetUserAuthorizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoin
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/authentication/user-authorization/{id}');
+        return str_replace(['{id}'], [$this->id], '/authentication/user-authorizations/{id}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
@@ -53,9 +53,7 @@ class GetUserAuthorizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoin
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\UserAuthorizationJsonld|\Gyroscops\Api\Model\UserAuthorization
+     * @return \Gyroscops\Api\Model\UserAuthorizationJsonldAuthorizationRead|\Gyroscops\Api\Model\UserAuthorizationAuthorizationRead
      *
      * @throws \Gyroscops\Api\Exception\GetUserAuthorizationItemNotFoundException
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
@@ -66,10 +64,10 @@ class GetUserAuthorizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoin
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\UserAuthorizationJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\UserAuthorizationJsonldAuthorizationRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\UserAuthorization', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\UserAuthorizationAuthorizationRead', 'json');
             }
         }
         if (404 === $status) {
@@ -80,6 +78,6 @@ class GetUserAuthorizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoin
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

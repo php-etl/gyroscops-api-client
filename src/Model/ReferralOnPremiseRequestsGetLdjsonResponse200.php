@@ -22,7 +22,7 @@ class ReferralOnPremiseRequestsGetLdjsonResponse200 extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var OnPremiseRequestJsonldOnPremiseRequestRead[]|null
+     * @var list<OnPremiseRequestJsonldOnPremiseRequestRead>|null
      */
     protected $hydraMember;
     /**
@@ -39,7 +39,7 @@ class ReferralOnPremiseRequestsGetLdjsonResponse200 extends \ArrayObject
     protected $hydraSearch;
 
     /**
-     * @return OnPremiseRequestJsonldOnPremiseRequestRead[]|null
+     * @return list<OnPremiseRequestJsonldOnPremiseRequestRead>|null
      */
     public function getHydraMember(): ?array
     {
@@ -47,7 +47,7 @@ class ReferralOnPremiseRequestsGetLdjsonResponse200 extends \ArrayObject
     }
 
     /**
-     * @param OnPremiseRequestJsonldOnPremiseRequestRead[]|null $hydraMember
+     * @param list<OnPremiseRequestJsonldOnPremiseRequestRead>|null $hydraMember
      */
     public function setHydraMember(?array $hydraMember): self
     {

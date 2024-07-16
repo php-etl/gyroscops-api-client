@@ -20,10 +20,10 @@ class GetPipelineCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
      *
      * @param array $queryParameters {
      *
-     *     @var int $page The collection page number
-     *     @var string $code
-     *     @var array $code[]
-     * }
+     * @var int    $page The collection page number
+     * @var string $code
+     * @var array  $code[]
+     *             }
      *
      * @param array $accept Accept content header application/ld+json|application/json|text/html
      */
@@ -71,9 +71,7 @@ class GetPipelineCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\RuntimePipelinesGetLdjsonResponse200|\Gyroscops\Api\Model\PipelineRead[]
+     * @return \Gyroscops\Api\Model\RuntimePipelinesGetLdjsonResponse200|\Gyroscops\Api\Model\PipelinePipelineReadPipelineSubresourceRead[]
      *
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
@@ -83,10 +81,10 @@ class GetPipelineCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\RuntimePipelinesGetLdjsonResponse200', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\RuntimePipelinesGetLdjsonResponse200', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\PipelineRead[]', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\PipelinePipelineReadPipelineSubresourceRead[]', 'json');
             }
         }
         throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
@@ -94,6 +92,6 @@ class GetPipelineCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

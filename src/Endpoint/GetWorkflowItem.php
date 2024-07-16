@@ -53,9 +53,7 @@ class GetWorkflowItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impleme
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\WorkflowJsonldRead|\Gyroscops\Api\Model\WorkflowRead
+     * @return \Gyroscops\Api\Model\WorkflowJsonldWorkflowRead|\Gyroscops\Api\Model\WorkflowWorkflowRead
      *
      * @throws \Gyroscops\Api\Exception\GetWorkflowItemNotFoundException
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
@@ -66,10 +64,10 @@ class GetWorkflowItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impleme
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\WorkflowJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\WorkflowJsonldWorkflowRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\WorkflowRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\WorkflowWorkflowRead', 'json');
             }
         }
         if (404 === $status) {
@@ -80,6 +78,6 @@ class GetWorkflowItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impleme
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

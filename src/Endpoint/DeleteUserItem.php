@@ -41,8 +41,6 @@ class DeleteUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implemen
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return null
      *
      * @throws \Gyroscops\Api\Exception\DeleteUserItemNotFoundException
@@ -63,6 +61,6 @@ class DeleteUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implemen
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

@@ -62,8 +62,6 @@ class PostAkeneoOauthTokenCollection extends \Gyroscops\Api\Runtime\Client\BaseE
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \Gyroscops\Api\Model\AkeneoOauthTokenOauthStateOutputJsonldRead|null
      *
      * @throws \Gyroscops\Api\Exception\PostAkeneoOauthTokenCollectionBadRequestException
@@ -76,7 +74,7 @@ class PostAkeneoOauthTokenCollection extends \Gyroscops\Api\Runtime\Client\BaseE
         $body = (string) $response->getBody();
         if (201 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\AkeneoOauthTokenOauthStateOutputJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\AkeneoOauthTokenOauthStateOutputJsonldRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
                 return json_decode($body);
@@ -93,6 +91,6 @@ class PostAkeneoOauthTokenCollection extends \Gyroscops\Api\Runtime\Client\BaseE
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

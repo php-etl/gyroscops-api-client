@@ -42,7 +42,7 @@ class ExecutionPipelineJobJsonld extends \ArrayObject
      */
     protected $id2;
     /**
-     * @var string[]|null
+     * @var list<string>|null
      */
     protected $steps;
 
@@ -72,17 +72,11 @@ class ExecutionPipelineJobJsonld extends \ArrayObject
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getContext()
     {
         return $this->context;
     }
 
-    /**
-     * @param mixed $context
-     */
     public function setContext($context): self
     {
         $this->initialized['context'] = true;
@@ -118,7 +112,7 @@ class ExecutionPipelineJobJsonld extends \ArrayObject
     }
 
     /**
-     * @return string[]|null
+     * @return list<string>|null
      */
     public function getSteps(): ?array
     {
@@ -126,7 +120,7 @@ class ExecutionPipelineJobJsonld extends \ArrayObject
     }
 
     /**
-     * @param string[]|null $steps
+     * @param list<string>|null $steps
      */
     public function setSteps(?array $steps): self
     {

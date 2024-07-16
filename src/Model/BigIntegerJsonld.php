@@ -58,8 +58,6 @@ class BigIntegerJsonld extends \ArrayObject
      */
     protected $odd;
     /**
-     * {@inheritdoc}
-     *
      * @var int|null
      */
     protected $sign;
@@ -94,17 +92,11 @@ class BigIntegerJsonld extends \ArrayObject
      */
     protected $positiveOrZero;
 
-    /**
-     * @return mixed
-     */
     public function getContext()
     {
         return $this->context;
     }
 
-    /**
-     * @param mixed $context
-     */
     public function setContext($context): self
     {
         $this->initialized['context'] = true;
@@ -215,17 +207,11 @@ class BigIntegerJsonld extends \ArrayObject
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSign(): ?int
     {
         return $this->sign;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setSign(?int $sign): self
     {
         $this->initialized['sign'] = true;

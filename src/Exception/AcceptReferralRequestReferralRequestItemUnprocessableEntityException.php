@@ -17,7 +17,7 @@ class AcceptReferralRequestReferralRequestItemUnprocessableEntityException exten
      */
     private $response;
 
-    public function __construct(\Psr\Http\Message\ResponseInterface $response = null)
+    public function __construct(?\Psr\Http\Message\ResponseInterface $response = null)
     {
         parent::__construct('Unprocessable entity');
         $this->response = $response;

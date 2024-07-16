@@ -16,12 +16,12 @@ class GetPipelineStepCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoi
     protected $accept;
 
     /**
-     * Retrieves the collection of PipelineStep resources.
+     * Get a Step configuration list. The step is part of a Pipeline, itself a Job, part of a Workflow.
      *
      * @param array $queryParameters {
      *
-     *     @var int $page The collection page number
-     * }
+     * @var int $page The collection page number
+     *          }
      *
      * @param array $accept Accept content header application/ld+json|application/json|text/html
      */
@@ -67,9 +67,7 @@ class GetPipelineStepCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoi
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\RuntimePipelineStepsGetLdjsonResponse200|\Gyroscops\Api\Model\PipelineStep[]
+     * @return \Gyroscops\Api\Model\RuntimePipelineStepsGetLdjsonResponse200|\Gyroscops\Api\Model\PipelineStepStepRead[]
      *
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
@@ -79,10 +77,10 @@ class GetPipelineStepCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoi
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\RuntimePipelineStepsGetLdjsonResponse200', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\RuntimePipelineStepsGetLdjsonResponse200', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\PipelineStep[]', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\PipelineStepStepRead[]', 'json');
             }
         }
         throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
@@ -90,6 +88,6 @@ class GetPipelineStepCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoi
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

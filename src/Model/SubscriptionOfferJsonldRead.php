@@ -62,11 +62,11 @@ class SubscriptionOfferJsonldRead extends \ArrayObject
      */
     protected $description;
     /**
-     * @var string[]|null
+     * @var list<string>|null
      */
     protected $features;
     /**
-     * @var PriceJsonldRead[]|null
+     * @var list<BuyablePriceJsonldRead>|null
      */
     protected $priceList;
     /**
@@ -112,17 +112,11 @@ class SubscriptionOfferJsonldRead extends \ArrayObject
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getContext()
     {
         return $this->context;
     }
 
-    /**
-     * @param mixed $context
-     */
     public function setContext($context): self
     {
         $this->initialized['context'] = true;
@@ -223,7 +217,7 @@ class SubscriptionOfferJsonldRead extends \ArrayObject
     }
 
     /**
-     * @return string[]|null
+     * @return list<string>|null
      */
     public function getFeatures(): ?array
     {
@@ -231,7 +225,7 @@ class SubscriptionOfferJsonldRead extends \ArrayObject
     }
 
     /**
-     * @param string[]|null $features
+     * @param list<string>|null $features
      */
     public function setFeatures(?array $features): self
     {
@@ -242,7 +236,7 @@ class SubscriptionOfferJsonldRead extends \ArrayObject
     }
 
     /**
-     * @return PriceJsonldRead[]|null
+     * @return list<BuyablePriceJsonldRead>|null
      */
     public function getPriceList(): ?array
     {
@@ -250,7 +244,7 @@ class SubscriptionOfferJsonldRead extends \ArrayObject
     }
 
     /**
-     * @param PriceJsonldRead[]|null $priceList
+     * @param list<BuyablePriceJsonldRead>|null $priceList
      */
     public function setPriceList(?array $priceList): self
     {

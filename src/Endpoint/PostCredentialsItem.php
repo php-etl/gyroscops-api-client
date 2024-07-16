@@ -44,8 +44,6 @@ class PostCredentialsItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \Gyroscops\Api\Model\Token
      *
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
@@ -55,13 +53,13 @@ class PostCredentialsItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Token', 'json');
+            return $serializer->deserialize($body, 'Gyroscops\Api\Model\Token', 'json');
         }
         throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
     }
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

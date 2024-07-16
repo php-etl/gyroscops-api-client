@@ -56,7 +56,7 @@ class MoneyJsonld extends \ArrayObject
     /**
      * Required by interface MoneyContainer.
      *
-     * @var BigNumberJsonld[]|null
+     * @var list<BigNumberJsonld>|null
      */
     protected $amounts;
     /**
@@ -96,17 +96,11 @@ class MoneyJsonld extends \ArrayObject
      */
     protected $positiveOrZero;
 
-    /**
-     * @return mixed
-     */
     public function getContext()
     {
         return $this->context;
     }
 
-    /**
-     * @param mixed $context
-     */
     public function setContext($context): self
     {
         $this->initialized['context'] = true;
@@ -209,7 +203,7 @@ class MoneyJsonld extends \ArrayObject
     /**
      * Required by interface MoneyContainer.
      *
-     * @return BigNumberJsonld[]|null
+     * @return list<BigNumberJsonld>|null
      */
     public function getAmounts(): ?array
     {
@@ -219,7 +213,7 @@ class MoneyJsonld extends \ArrayObject
     /**
      * Required by interface MoneyContainer.
      *
-     * @param BigNumberJsonld[]|null $amounts
+     * @param list<BigNumberJsonld>|null $amounts
      */
     public function setAmounts(?array $amounts): self
     {

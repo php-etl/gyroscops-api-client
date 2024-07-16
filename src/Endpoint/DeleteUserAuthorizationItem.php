@@ -32,7 +32,7 @@ class DeleteUserAuthorizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndp
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/authentication/user-authorization/{id}');
+        return str_replace(['{id}'], [$this->id], '/authentication/user-authorizations/{id}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
@@ -41,8 +41,6 @@ class DeleteUserAuthorizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndp
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return null
      *
      * @throws \Gyroscops\Api\Exception\DeleteUserAuthorizationItemNotFoundException
@@ -63,6 +61,6 @@ class DeleteUserAuthorizationItem extends \Gyroscops\Api\Runtime\Client\BaseEndp
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

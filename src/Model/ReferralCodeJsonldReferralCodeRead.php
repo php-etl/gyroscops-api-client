@@ -46,7 +46,7 @@ class ReferralCodeJsonldReferralCodeRead extends \ArrayObject
      */
     protected $code;
     /**
-     * @var string[]|null
+     * @var list<string>|null
      */
     protected $referralRequests;
 
@@ -76,17 +76,11 @@ class ReferralCodeJsonldReferralCodeRead extends \ArrayObject
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getContext()
     {
         return $this->context;
     }
 
-    /**
-     * @param mixed $context
-     */
     public function setContext($context): self
     {
         $this->initialized['context'] = true;
@@ -135,7 +129,7 @@ class ReferralCodeJsonldReferralCodeRead extends \ArrayObject
     }
 
     /**
-     * @return string[]|null
+     * @return list<string>|null
      */
     public function getReferralRequests(): ?array
     {
@@ -143,7 +137,7 @@ class ReferralCodeJsonldReferralCodeRead extends \ArrayObject
     }
 
     /**
-     * @param string[]|null $referralRequests
+     * @param list<string>|null $referralRequests
      */
     public function setReferralRequests(?array $referralRequests): self
     {

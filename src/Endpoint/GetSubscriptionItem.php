@@ -53,8 +53,6 @@ class GetSubscriptionItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \Gyroscops\Api\Model\SubscriptionJsonld|\Gyroscops\Api\Model\Subscription
      *
      * @throws \Gyroscops\Api\Exception\GetSubscriptionItemNotFoundException
@@ -66,10 +64,10 @@ class GetSubscriptionItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\SubscriptionJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\SubscriptionJsonld', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Subscription', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\Subscription', 'json');
             }
         }
         if (404 === $status) {
@@ -80,6 +78,6 @@ class GetSubscriptionItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

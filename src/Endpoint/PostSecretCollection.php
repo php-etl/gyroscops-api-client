@@ -18,8 +18,8 @@ class PostSecretCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint im
     /**
      * Creates a Secret resource.
      *
-     * @param \Gyroscops\Api\Model\SecretCreateSecretInputJsonld|\Gyroscops\Api\Model\SecretCreateSecretInput|null $requestBody
-     * @param array                                                                                                $accept      Accept content header application/ld+json|application/json|text/html
+     * @param \Gyroscops\Api\Model\SecretCreateSecretInputJsonldSecretCreate|\Gyroscops\Api\Model\SecretCreateSecretInputSecretCreate|null $requestBody
+     * @param array                                                                                                                        $accept      Accept content header application/ld+json|application/json|text/html
      */
     public function __construct($requestBody = null, array $accept = [])
     {
@@ -39,13 +39,13 @@ class PostSecretCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint im
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\SecretCreateSecretInputJsonld) {
+        if ($this->body instanceof \Gyroscops\Api\Model\SecretCreateSecretInputJsonldSecretCreate) {
             return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\SecretCreateSecretInput) {
+        if ($this->body instanceof \Gyroscops\Api\Model\SecretCreateSecretInputSecretCreate) {
             return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\SecretCreateSecretInput) {
+        if ($this->body instanceof \Gyroscops\Api\Model\SecretCreateSecretInputSecretCreate) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -62,9 +62,7 @@ class PostSecretCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint im
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\SecretJsonld|\Gyroscops\Api\Model\Secret
+     * @return \Gyroscops\Api\Model\SecretJsonldSecretRead|\Gyroscops\Api\Model\SecretSecretRead
      *
      * @throws \Gyroscops\Api\Exception\PostSecretCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostSecretCollectionUnprocessableEntityException
@@ -76,10 +74,10 @@ class PostSecretCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint im
         $body = (string) $response->getBody();
         if (201 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\SecretJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\SecretJsonldSecretRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Secret', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\SecretSecretRead', 'json');
             }
         }
         if (400 === $status) {
@@ -93,6 +91,6 @@ class PostSecretCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint im
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

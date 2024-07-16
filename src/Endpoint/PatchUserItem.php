@@ -22,7 +22,7 @@ class PatchUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implement
      * @param string $id     Resource identifier
      * @param array  $accept Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(string $id, ?\Gyroscops\Api\Model\User $requestBody = null, array $accept = [])
+    public function __construct(string $id, ?\Gyroscops\Api\Model\UserUserWrite $requestBody = null, array $accept = [])
     {
         $this->id = $id;
         $this->body = $requestBody;
@@ -41,7 +41,7 @@ class PatchUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implement
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\User) {
+        if ($this->body instanceof \Gyroscops\Api\Model\UserUserWrite) {
             return [['Content-Type' => ['application/merge-patch+json']], $serializer->serialize($this->body, 'json')];
         }
 
@@ -58,9 +58,7 @@ class PatchUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implement
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\UserJsonld|\Gyroscops\Api\Model\User
+     * @return \Gyroscops\Api\Model\UserJsonldUserRead|\Gyroscops\Api\Model\UserUserRead
      *
      * @throws \Gyroscops\Api\Exception\PatchUserItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PatchUserItemUnprocessableEntityException
@@ -73,10 +71,10 @@ class PatchUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implement
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\UserJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\UserJsonldUserRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\User', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\UserUserRead', 'json');
             }
         }
         if (400 === $status) {
@@ -93,6 +91,6 @@ class PatchUserItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implement
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

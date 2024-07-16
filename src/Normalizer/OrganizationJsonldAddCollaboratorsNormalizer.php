@@ -13,6 +13,7 @@ namespace Gyroscops\Api\Normalizer;
 use Gyroscops\Api\Runtime\Normalizer\CheckArray;
 use Gyroscops\Api\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -20,94 +21,155 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class OrganizationJsonldAddCollaboratorsNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-    use ValidatorTrait;
-
-    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class OrganizationJsonldAddCollaboratorsNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'Gyroscops\\Api\\Model\\OrganizationJsonldAddCollaborators';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null, array $context = []): bool
-    {
-        return is_object($data) && get_class($data) === 'Gyroscops\\Api\\Model\\OrganizationJsonldAddCollaborators';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \Gyroscops\Api\Model\OrganizationJsonldAddCollaborators::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === Gyroscops\Api\Model\OrganizationJsonldAddCollaborators::class;
         }
-        $object = new \Gyroscops\Api\Model\OrganizationJsonldAddCollaborators();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \Gyroscops\Api\Model\OrganizationJsonldAddCollaborators();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
+                $object->setContext($data['@context']);
+                unset($data['@context']);
+            } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
+                $object->setContext(null);
+            }
+            if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
+                $object->setId($data['@id']);
+                unset($data['@id']);
+            } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
+                $object->setId(null);
+            }
+            if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
+                $object->setType($data['@type']);
+                unset($data['@type']);
+            } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
+                $object->setType(null);
+            }
+            foreach ($data as $key => $value) {
+                if (preg_match('/.*/', (string) $key)) {
+                    $object[$key] = $value;
+                }
+            }
+
             return $object;
         }
-        if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
-            $object->setContext($data['@context']);
-            unset($data['@context']);
-        } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
-            $object->setContext(null);
-        }
-        if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
-            $object->setId($data['@id']);
-            unset($data['@id']);
-        } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
-            $object->setId(null);
-        }
-        if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
-            $object->setType($data['@type']);
-            unset($data['@type']);
-        } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
-            $object->setType(null);
-        }
-        if (\array_key_exists('externalCollaborators', $data) && $data['externalCollaborators'] !== null) {
-            $values = [];
-            foreach ($data['externalCollaborators'] as $value) {
-                $values[] = $value;
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            foreach ($object as $key => $value) {
+                if (preg_match('/.*/', (string) $key)) {
+                    $data[$key] = $value;
+                }
             }
-            $object->setExternalCollaborators($values);
-            unset($data['externalCollaborators']);
-        } elseif (\array_key_exists('externalCollaborators', $data) && $data['externalCollaborators'] === null) {
-            $object->setExternalCollaborators(null);
-        }
-        foreach ($data as $key => $value_1) {
-            if (preg_match('/.*/', (string) $key)) {
-                $object[$key] = $value_1;
-            }
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\Gyroscops\Api\Model\OrganizationJsonldAddCollaborators::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class OrganizationJsonldAddCollaboratorsNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        if ($object->isInitialized('externalCollaborators') && null !== $object->getExternalCollaborators()) {
-            $values = [];
-            foreach ($object->getExternalCollaborators() as $value) {
-                $values[] = $value;
-            }
-            $data['externalCollaborators'] = $values;
-        }
-        foreach ($object as $key => $value_1) {
-            if (preg_match('/.*/', (string) $key)) {
-                $data[$key] = $value_1;
-            }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
+
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \Gyroscops\Api\Model\OrganizationJsonldAddCollaborators::class;
         }
 
-        return $data;
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === Gyroscops\Api\Model\OrganizationJsonldAddCollaborators::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \Gyroscops\Api\Model\OrganizationJsonldAddCollaborators();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('@context', $data) && $data['@context'] !== null) {
+                $object->setContext($data['@context']);
+                unset($data['@context']);
+            } elseif (\array_key_exists('@context', $data) && $data['@context'] === null) {
+                $object->setContext(null);
+            }
+            if (\array_key_exists('@id', $data) && $data['@id'] !== null) {
+                $object->setId($data['@id']);
+                unset($data['@id']);
+            } elseif (\array_key_exists('@id', $data) && $data['@id'] === null) {
+                $object->setId(null);
+            }
+            if (\array_key_exists('@type', $data) && $data['@type'] !== null) {
+                $object->setType($data['@type']);
+                unset($data['@type']);
+            } elseif (\array_key_exists('@type', $data) && $data['@type'] === null) {
+                $object->setType(null);
+            }
+            foreach ($data as $key => $value) {
+                if (preg_match('/.*/', (string) $key)) {
+                    $object[$key] = $value;
+                }
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            foreach ($object as $key => $value) {
+                if (preg_match('/.*/', (string) $key)) {
+                    $data[$key] = $value;
+                }
+            }
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\Gyroscops\Api\Model\OrganizationJsonldAddCollaborators::class => false];
+        }
     }
 }

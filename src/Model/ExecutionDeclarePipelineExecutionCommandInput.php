@@ -22,7 +22,7 @@ class ExecutionDeclarePipelineExecutionCommandInput extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var mixed[]|null
+     * @var array<string, mixed>|null
      */
     protected $schedule;
     /**
@@ -31,7 +31,7 @@ class ExecutionDeclarePipelineExecutionCommandInput extends \ArrayObject
     protected $pipeline;
 
     /**
-     * @return mixed[]|null
+     * @return array<string, mixed>|null
      */
     public function getSchedule(): ?iterable
     {
@@ -39,7 +39,7 @@ class ExecutionDeclarePipelineExecutionCommandInput extends \ArrayObject
     }
 
     /**
-     * @param mixed[]|null $schedule
+     * @param array<string, mixed>|null $schedule
      */
     public function setSchedule(?iterable $schedule): self
     {

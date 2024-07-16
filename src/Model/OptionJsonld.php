@@ -58,11 +58,11 @@ class OptionJsonld extends \ArrayObject
      */
     protected $description;
     /**
-     * @var string[]|null
+     * @var list<string>|null
      */
     protected $features;
     /**
-     * @var PriceJsonld[]|null
+     * @var list<BuyablePriceJsonld>|null
      */
     protected $priceList;
     /**
@@ -200,7 +200,7 @@ class OptionJsonld extends \ArrayObject
     }
 
     /**
-     * @return string[]|null
+     * @return list<string>|null
      */
     public function getFeatures(): ?array
     {
@@ -208,7 +208,7 @@ class OptionJsonld extends \ArrayObject
     }
 
     /**
-     * @param string[]|null $features
+     * @param list<string>|null $features
      */
     public function setFeatures(?array $features): self
     {
@@ -219,7 +219,7 @@ class OptionJsonld extends \ArrayObject
     }
 
     /**
-     * @return PriceJsonld[]|null
+     * @return list<BuyablePriceJsonld>|null
      */
     public function getPriceList(): ?array
     {
@@ -227,7 +227,7 @@ class OptionJsonld extends \ArrayObject
     }
 
     /**
-     * @param PriceJsonld[]|null $priceList
+     * @param list<BuyablePriceJsonld>|null $priceList
      */
     public function setPriceList(?array $priceList): self
     {

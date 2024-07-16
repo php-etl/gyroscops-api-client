@@ -18,8 +18,8 @@ class PostConfigurationCollection extends \Gyroscops\Api\Runtime\Client\BaseEndp
     /**
      * Creates a Configuration resource.
      *
-     * @param \Gyroscops\Api\Model\ConfigurationCreateConfigurationInputJsonld|\Gyroscops\Api\Model\ConfigurationCreateConfigurationInput|null $requestBody
-     * @param array                                                                                                                            $accept      Accept content header application/ld+json|application/json|text/html
+     * @param \Gyroscops\Api\Model\ConfigurationCreateConfigurationInputJsonldConfigurationCreate|\Gyroscops\Api\Model\ConfigurationCreateConfigurationInputConfigurationCreate|null $requestBody
+     * @param array                                                                                                                                                                  $accept      Accept content header application/ld+json|application/json|text/html
      */
     public function __construct($requestBody = null, array $accept = [])
     {
@@ -39,13 +39,13 @@ class PostConfigurationCollection extends \Gyroscops\Api\Runtime\Client\BaseEndp
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\ConfigurationCreateConfigurationInputJsonld) {
+        if ($this->body instanceof \Gyroscops\Api\Model\ConfigurationCreateConfigurationInputJsonldConfigurationCreate) {
             return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\ConfigurationCreateConfigurationInput) {
+        if ($this->body instanceof \Gyroscops\Api\Model\ConfigurationCreateConfigurationInputConfigurationCreate) {
             return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\ConfigurationCreateConfigurationInput) {
+        if ($this->body instanceof \Gyroscops\Api\Model\ConfigurationCreateConfigurationInputConfigurationCreate) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -62,9 +62,7 @@ class PostConfigurationCollection extends \Gyroscops\Api\Runtime\Client\BaseEndp
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\ConfigurationJsonld|\Gyroscops\Api\Model\Configuration
+     * @return \Gyroscops\Api\Model\ConfigurationJsonldConfigurationView|\Gyroscops\Api\Model\ConfigurationConfigurationView
      *
      * @throws \Gyroscops\Api\Exception\PostConfigurationCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostConfigurationCollectionUnprocessableEntityException
@@ -76,10 +74,10 @@ class PostConfigurationCollection extends \Gyroscops\Api\Runtime\Client\BaseEndp
         $body = (string) $response->getBody();
         if (201 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ConfigurationJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ConfigurationJsonldConfigurationView', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Configuration', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ConfigurationConfigurationView', 'json');
             }
         }
         if (400 === $status) {
@@ -93,6 +91,6 @@ class PostConfigurationCollection extends \Gyroscops\Api\Runtime\Client\BaseEndp
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

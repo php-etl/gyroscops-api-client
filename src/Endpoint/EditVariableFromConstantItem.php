@@ -19,9 +19,9 @@ class EditVariableFromConstantItem extends \Gyroscops\Api\Runtime\Client\BaseEnd
     /**
      * Replaces the VariableFromConstant resource.
      *
-     * @param string                                                              $id          Resource identifier
-     * @param \Gyroscops\Api\Model\VariableFromConstantJsonldWrite|\stdClass|null $requestBody
-     * @param array                                                               $accept      Accept content header application/ld+json|application/json|text/html
+     * @param string                                                                                                                     $id          Resource identifier
+     * @param \Gyroscops\Api\Model\VariableFromConstantJsonldVariableUpdate|\Gyroscops\Api\Model\VariableFromConstantVariableUpdate|null $requestBody
+     * @param array                                                                                                                      $accept      Accept content header application/ld+json|application/json|text/html
      */
     public function __construct(string $id, $requestBody = null, array $accept = [])
     {
@@ -37,18 +37,18 @@ class EditVariableFromConstantItem extends \Gyroscops\Api\Runtime\Client\BaseEnd
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/variables-from-constant/{id}');
+        return str_replace(['{id}'], [$this->id], '/environment/variables-from-constant/{id}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\VariableFromConstantJsonldWrite) {
+        if ($this->body instanceof \Gyroscops\Api\Model\VariableFromConstantJsonldVariableUpdate) {
             return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \stdClass) {
-            return [['Content-Type' => ['application/json']], json_encode($this->body)];
+        if ($this->body instanceof \Gyroscops\Api\Model\VariableFromConstantVariableUpdate) {
+            return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \stdClass) {
+        if ($this->body instanceof \Gyroscops\Api\Model\VariableFromConstantVariableUpdate) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -65,9 +65,7 @@ class EditVariableFromConstantItem extends \Gyroscops\Api\Runtime\Client\BaseEnd
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\VariableFromConstantJsonldRead|\Gyroscops\Api\Model\VariableFromConstantRead
+     * @return \Gyroscops\Api\Model\VariableFromConstantJsonldVariableViewEnvironmentView|\Gyroscops\Api\Model\VariableFromConstantVariableViewEnvironmentView
      *
      * @throws \Gyroscops\Api\Exception\EditVariableFromConstantItemBadRequestException
      * @throws \Gyroscops\Api\Exception\EditVariableFromConstantItemUnprocessableEntityException
@@ -80,10 +78,10 @@ class EditVariableFromConstantItem extends \Gyroscops\Api\Runtime\Client\BaseEnd
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\VariableFromConstantJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\VariableFromConstantJsonldVariableViewEnvironmentView', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\VariableFromConstantRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\VariableFromConstantVariableViewEnvironmentView', 'json');
             }
         }
         if (400 === $status) {
@@ -100,6 +98,6 @@ class EditVariableFromConstantItem extends \Gyroscops\Api\Runtime\Client\BaseEnd
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

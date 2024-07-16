@@ -58,11 +58,11 @@ class BuyableJsonld extends \ArrayObject
      */
     protected $description;
     /**
-     * @var string[]|null
+     * @var list<string>|null
      */
     protected $features;
     /**
-     * @var PriceJsonld[]|null
+     * @var list<BuyablePriceJsonld>|null
      */
     protected $priceList;
     /**
@@ -82,17 +82,11 @@ class BuyableJsonld extends \ArrayObject
      */
     protected $activeUntil;
 
-    /**
-     * @return mixed
-     */
     public function getContext()
     {
         return $this->context;
     }
 
-    /**
-     * @param mixed $context
-     */
     public function setContext($context): self
     {
         $this->initialized['context'] = true;
@@ -206,7 +200,7 @@ class BuyableJsonld extends \ArrayObject
     }
 
     /**
-     * @return string[]|null
+     * @return list<string>|null
      */
     public function getFeatures(): ?array
     {
@@ -214,7 +208,7 @@ class BuyableJsonld extends \ArrayObject
     }
 
     /**
-     * @param string[]|null $features
+     * @param list<string>|null $features
      */
     public function setFeatures(?array $features): self
     {
@@ -225,7 +219,7 @@ class BuyableJsonld extends \ArrayObject
     }
 
     /**
-     * @return PriceJsonld[]|null
+     * @return list<BuyablePriceJsonld>|null
      */
     public function getPriceList(): ?array
     {
@@ -233,7 +227,7 @@ class BuyableJsonld extends \ArrayObject
     }
 
     /**
-     * @param PriceJsonld[]|null $priceList
+     * @param list<BuyablePriceJsonld>|null $priceList
      */
     public function setPriceList(?array $priceList): self
     {

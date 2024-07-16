@@ -34,7 +34,7 @@ class Subscription extends \ArrayObject
      */
     protected $offer;
     /**
-     * @var string[]|null
+     * @var list<string>|null
      */
     protected $options;
     /**
@@ -42,7 +42,7 @@ class Subscription extends \ArrayObject
      */
     protected $cost;
     /**
-     * @var string[]|null
+     * @var list<string>|null
      */
     protected $periods;
 
@@ -86,7 +86,7 @@ class Subscription extends \ArrayObject
     }
 
     /**
-     * @return string[]|null
+     * @return list<string>|null
      */
     public function getOptions(): ?array
     {
@@ -94,7 +94,7 @@ class Subscription extends \ArrayObject
     }
 
     /**
-     * @param string[]|null $options
+     * @param list<string>|null $options
      */
     public function setOptions(?array $options): self
     {
@@ -118,17 +118,17 @@ class Subscription extends \ArrayObject
     }
 
     /**
-     * @return string[]|null
+     * @return list<string>|null
      */
-    public function getPeriods(): ?iterable
+    public function getPeriods(): ?array
     {
         return $this->periods;
     }
 
     /**
-     * @param string[]|null $periods
+     * @param list<string>|null $periods
      */
-    public function setPeriods(?iterable $periods): self
+    public function setPeriods(?array $periods): self
     {
         $this->initialized['periods'] = true;
         $this->periods = $periods;

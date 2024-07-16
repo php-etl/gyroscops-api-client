@@ -19,9 +19,9 @@ class EditConfigurationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
     /**
      * Replaces the Configuration resource.
      *
-     * @param string                                                                                   $id          Resource identifier
-     * @param \Gyroscops\Api\Model\ConfigurationJsonldEdit|\Gyroscops\Api\Model\ConfigurationEdit|null $requestBody
-     * @param array                                                                                    $accept      Accept content header application/ld+json|application/json|text/html
+     * @param string                                                                                                                 $id          Resource identifier
+     * @param \Gyroscops\Api\Model\ConfigurationJsonldConfigurationUpdate|\Gyroscops\Api\Model\ConfigurationConfigurationUpdate|null $requestBody
+     * @param array                                                                                                                  $accept      Accept content header application/ld+json|application/json|text/html
      */
     public function __construct(string $id, $requestBody = null, array $accept = [])
     {
@@ -42,13 +42,13 @@ class EditConfigurationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\ConfigurationJsonldEdit) {
+        if ($this->body instanceof \Gyroscops\Api\Model\ConfigurationJsonldConfigurationUpdate) {
             return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\ConfigurationEdit) {
+        if ($this->body instanceof \Gyroscops\Api\Model\ConfigurationConfigurationUpdate) {
             return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\ConfigurationEdit) {
+        if ($this->body instanceof \Gyroscops\Api\Model\ConfigurationConfigurationUpdate) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -65,9 +65,7 @@ class EditConfigurationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\ConfigurationJsonld|\Gyroscops\Api\Model\Configuration
+     * @return \Gyroscops\Api\Model\ConfigurationJsonldConfigurationView|\Gyroscops\Api\Model\ConfigurationConfigurationView
      *
      * @throws \Gyroscops\Api\Exception\EditConfigurationItemBadRequestException
      * @throws \Gyroscops\Api\Exception\EditConfigurationItemUnprocessableEntityException
@@ -80,10 +78,10 @@ class EditConfigurationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ConfigurationJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ConfigurationJsonldConfigurationView', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Configuration', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ConfigurationConfigurationView', 'json');
             }
         }
         if (400 === $status) {
@@ -100,6 +98,6 @@ class EditConfigurationItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

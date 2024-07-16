@@ -17,7 +17,7 @@ class GetPipelineStepItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
     protected $accept;
 
     /**
-     * Retrieves a PipelineStep resource.
+     * Get a Step configuration. The step is part of a Pipeline, itself a Job, part of a Workflow.
      *
      * @param string $id     Resource identifier
      * @param array  $accept Accept content header application/ld+json|application/json|text/html
@@ -53,9 +53,7 @@ class GetPipelineStepItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\PipelineStepJsonld|\Gyroscops\Api\Model\PipelineStep
+     * @return \Gyroscops\Api\Model\PipelineStepJsonldStepRead|\Gyroscops\Api\Model\PipelineStepStepRead
      *
      * @throws \Gyroscops\Api\Exception\GetPipelineStepItemNotFoundException
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
@@ -66,10 +64,10 @@ class GetPipelineStepItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\PipelineStepJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\PipelineStepJsonldStepRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\PipelineStep', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\PipelineStepStepRead', 'json');
             }
         }
         if (404 === $status) {
@@ -80,6 +78,6 @@ class GetPipelineStepItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imp
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

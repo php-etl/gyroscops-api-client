@@ -20,8 +20,12 @@ class GetUserCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imple
      *
      * @param array $queryParameters {
      *
-     *     @var int $page The collection page number
-     * }
+     * @var int    $page The collection page number
+     * @var string $organization
+     * @var array  $organization[]
+     * @var string $email
+     * @var array  $email[]
+     *             }
      *
      * @param array $accept Accept content header application/ld+json|application/json|text/html
      */
@@ -58,18 +62,20 @@ class GetUserCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imple
     protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(['page']);
+        $optionsResolver->setDefined(['page', 'organization', 'email']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults(['page' => 1]);
         $optionsResolver->addAllowedTypes('page', ['int']);
+        $optionsResolver->addAllowedTypes('organization', ['string']);
+        $optionsResolver->addAllowedTypes('organization', ['array']);
+        $optionsResolver->addAllowedTypes('email', ['string']);
+        $optionsResolver->addAllowedTypes('email', ['array']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\AuthenticationUsersGetLdjsonResponse200|\Gyroscops\Api\Model\User[]
+     * @return \Gyroscops\Api\Model\AuthenticationUsersGetLdjsonResponse200|\Gyroscops\Api\Model\UserUserRead[]
      *
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
@@ -79,10 +85,10 @@ class GetUserCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imple
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\AuthenticationUsersGetLdjsonResponse200', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\AuthenticationUsersGetLdjsonResponse200', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\User[]', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\UserUserRead[]', 'json');
             }
         }
         throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
@@ -90,6 +96,6 @@ class GetUserCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint imple
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

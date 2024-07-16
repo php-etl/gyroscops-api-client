@@ -19,9 +19,9 @@ class RemoveValuesSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
     /**
      * Remove some secret values inside an existing secrets storage.
      *
-     * @param string                                                                                                         $id          Resource identifier
-     * @param \Gyroscops\Api\Model\SecretRemoveSecretValueInputJsonld|\Gyroscops\Api\Model\SecretRemoveSecretValueInput|null $requestBody
-     * @param array                                                                                                          $accept      Accept content header application/ld+json|application/json|text/html
+     * @param string                                                                                                                                 $id          Secret identifier
+     * @param \Gyroscops\Api\Model\SecretRemoveSecretValueInputJsonldSecretUpdate|\Gyroscops\Api\Model\SecretRemoveSecretValueInputSecretUpdate|null $requestBody
+     * @param array                                                                                                                                  $accept      Accept content header application/ld+json|application/json|text/html
      */
     public function __construct(string $id, $requestBody = null, array $accept = [])
     {
@@ -42,13 +42,13 @@ class RemoveValuesSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\SecretRemoveSecretValueInputJsonld) {
+        if ($this->body instanceof \Gyroscops\Api\Model\SecretRemoveSecretValueInputJsonldSecretUpdate) {
             return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\SecretRemoveSecretValueInput) {
+        if ($this->body instanceof \Gyroscops\Api\Model\SecretRemoveSecretValueInputSecretUpdate) {
             return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\SecretRemoveSecretValueInput) {
+        if ($this->body instanceof \Gyroscops\Api\Model\SecretRemoveSecretValueInputSecretUpdate) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -65,9 +65,7 @@ class RemoveValuesSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\SecretJsonld|\Gyroscops\Api\Model\Secret
+     * @return \Gyroscops\Api\Model\SecretJsonldSecretRead|\Gyroscops\Api\Model\SecretSecretRead
      *
      * @throws \Gyroscops\Api\Exception\RemoveValuesSecretItemBadRequestException
      * @throws \Gyroscops\Api\Exception\RemoveValuesSecretItemUnprocessableEntityException
@@ -80,10 +78,10 @@ class RemoveValuesSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\SecretJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\SecretJsonldSecretRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Secret', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\SecretSecretRead', 'json');
             }
         }
         if (400 === $status) {
@@ -100,6 +98,6 @@ class RemoveValuesSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint 
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

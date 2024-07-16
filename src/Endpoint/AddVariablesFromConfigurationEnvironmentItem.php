@@ -20,10 +20,10 @@ class AddVariablesFromConfigurationEnvironmentItem extends \Gyroscops\Api\Runtim
     /**
      * Add variables from an existing configuration storage.
      *
-     * @param string                                                                                                                                                         $configuration Configuration identifier
-     * @param string                                                                                                                                                         $id            Resource identifier
-     * @param \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConfigurationInputJsonld|\Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConfigurationInput|null $requestBody
-     * @param array                                                                                                                                                          $accept        Accept content header application/ld+json|application/json|text/html
+     * @param string                                                                                                                                                                                           $configuration Configuration identifier
+     * @param string                                                                                                                                                                                           $id            Resource identifier
+     * @param \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConfigurationInputJsonldEnvironmentUpdate|\Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConfigurationInputEnvironmentUpdate|null $requestBody
+     * @param array                                                                                                                                                                                            $accept        Accept content header application/ld+json|application/json|text/html
      */
     public function __construct(string $configuration, string $id, $requestBody = null, array $accept = [])
     {
@@ -45,13 +45,13 @@ class AddVariablesFromConfigurationEnvironmentItem extends \Gyroscops\Api\Runtim
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConfigurationInputJsonld) {
+        if ($this->body instanceof \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConfigurationInputJsonldEnvironmentUpdate) {
             return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConfigurationInput) {
+        if ($this->body instanceof \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConfigurationInputEnvironmentUpdate) {
             return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConfigurationInput) {
+        if ($this->body instanceof \Gyroscops\Api\Model\EnvironmentAddMultipleVariableFromConfigurationInputEnvironmentUpdate) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -68,9 +68,7 @@ class AddVariablesFromConfigurationEnvironmentItem extends \Gyroscops\Api\Runtim
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\EnvironmentJsonldRead|\Gyroscops\Api\Model\EnvironmentRead
+     * @return \Gyroscops\Api\Model\EnvironmentJsonldEnvironmentView|\Gyroscops\Api\Model\EnvironmentEnvironmentView
      *
      * @throws \Gyroscops\Api\Exception\AddVariablesFromConfigurationEnvironmentItemBadRequestException
      * @throws \Gyroscops\Api\Exception\AddVariablesFromConfigurationEnvironmentItemUnprocessableEntityException
@@ -83,10 +81,10 @@ class AddVariablesFromConfigurationEnvironmentItem extends \Gyroscops\Api\Runtim
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\EnvironmentJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\EnvironmentJsonldEnvironmentView', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\EnvironmentRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\EnvironmentEnvironmentView', 'json');
             }
         }
         if (400 === $status) {
@@ -103,6 +101,6 @@ class AddVariablesFromConfigurationEnvironmentItem extends \Gyroscops\Api\Runtim
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

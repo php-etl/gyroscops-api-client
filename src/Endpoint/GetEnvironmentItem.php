@@ -53,9 +53,7 @@ class GetEnvironmentItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impl
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\EnvironmentJsonldRead|\Gyroscops\Api\Model\EnvironmentRead
+     * @return \Gyroscops\Api\Model\EnvironmentJsonldEnvironmentView|\Gyroscops\Api\Model\EnvironmentEnvironmentView
      *
      * @throws \Gyroscops\Api\Exception\GetEnvironmentItemNotFoundException
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
@@ -66,10 +64,10 @@ class GetEnvironmentItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impl
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\EnvironmentJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\EnvironmentJsonldEnvironmentView', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\EnvironmentRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\EnvironmentEnvironmentView', 'json');
             }
         }
         if (404 === $status) {
@@ -80,6 +78,6 @@ class GetEnvironmentItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impl
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

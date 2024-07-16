@@ -20,9 +20,9 @@ class GetAkeneoInstanceByPimUrlAkeneoInstanceCollection extends \Gyroscops\Api\R
      *
      * @param array $queryParameters {
      *
-     *     @var string $url
-     *     @var int $page The collection page number
-     * }
+     * @var string $url
+     * @var int    $page The collection page number
+     *             }
      *
      * @param array $accept Accept content header application/ld+json|application/json|text/html
      */
@@ -69,8 +69,6 @@ class GetAkeneoInstanceByPimUrlAkeneoInstanceCollection extends \Gyroscops\Api\R
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \Gyroscops\Api\Model\GatewayAkeneoInstancesFromUrlGetLdjsonResponse200|\Gyroscops\Api\Model\AkeneoInstance[]
      *
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
@@ -81,10 +79,10 @@ class GetAkeneoInstanceByPimUrlAkeneoInstanceCollection extends \Gyroscops\Api\R
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\GatewayAkeneoInstancesFromUrlGetLdjsonResponse200', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\GatewayAkeneoInstancesFromUrlGetLdjsonResponse200', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\AkeneoInstance[]', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\AkeneoInstance[]', 'json');
             }
         }
         throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
@@ -92,6 +90,6 @@ class GetAkeneoInstanceByPimUrlAkeneoInstanceCollection extends \Gyroscops\Api\R
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

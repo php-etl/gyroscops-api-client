@@ -53,8 +53,6 @@ class GetExecutionWorkflowJobActionItem extends \Gyroscops\Api\Runtime\Client\Ba
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \Gyroscops\Api\Model\ExecutionWorkflowJobActionJsonld|\Gyroscops\Api\Model\ExecutionWorkflowJobAction
      *
      * @throws \Gyroscops\Api\Exception\GetExecutionWorkflowJobActionItemNotFoundException
@@ -66,10 +64,10 @@ class GetExecutionWorkflowJobActionItem extends \Gyroscops\Api\Runtime\Client\Ba
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ExecutionWorkflowJobActionJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ExecutionWorkflowJobActionJsonld', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ExecutionWorkflowJobAction', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ExecutionWorkflowJobAction', 'json');
             }
         }
         if (404 === $status) {
@@ -80,6 +78,6 @@ class GetExecutionWorkflowJobActionItem extends \Gyroscops\Api\Runtime\Client\Ba
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

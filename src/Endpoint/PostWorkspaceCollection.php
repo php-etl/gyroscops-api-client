@@ -18,8 +18,8 @@ class PostWorkspaceCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint
     /**
      * Creates a Workspace resource.
      *
-     * @param \Gyroscops\Api\Model\WorkspaceJsonld|\Gyroscops\Api\Model\Workspace|null $requestBody
-     * @param array                                                                    $accept      Accept content header application/ld+json|application/json|text/html
+     * @param \Gyroscops\Api\Model\WorkspaceJsonldWorkspaceWrite|\Gyroscops\Api\Model\WorkspaceWorkspaceWrite|null $requestBody
+     * @param array                                                                                                $accept      Accept content header application/ld+json|application/json|text/html
      */
     public function __construct($requestBody = null, array $accept = [])
     {
@@ -39,13 +39,13 @@ class PostWorkspaceCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\WorkspaceJsonld) {
+        if ($this->body instanceof \Gyroscops\Api\Model\WorkspaceJsonldWorkspaceWrite) {
             return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\Workspace) {
+        if ($this->body instanceof \Gyroscops\Api\Model\WorkspaceWorkspaceWrite) {
             return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\Workspace) {
+        if ($this->body instanceof \Gyroscops\Api\Model\WorkspaceWorkspaceWrite) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -62,9 +62,7 @@ class PostWorkspaceCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\WorkspaceJsonld|\Gyroscops\Api\Model\Workspace
+     * @return \Gyroscops\Api\Model\WorkspaceJsonldWorkspaceRead|\Gyroscops\Api\Model\WorkspaceWorkspaceRead
      *
      * @throws \Gyroscops\Api\Exception\PostWorkspaceCollectionBadRequestException
      * @throws \Gyroscops\Api\Exception\PostWorkspaceCollectionUnprocessableEntityException
@@ -76,10 +74,10 @@ class PostWorkspaceCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint
         $body = (string) $response->getBody();
         if (201 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\WorkspaceJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\WorkspaceJsonldWorkspaceRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Workspace', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\WorkspaceWorkspaceRead', 'json');
             }
         }
         if (400 === $status) {
@@ -93,6 +91,6 @@ class PostWorkspaceCollection extends \Gyroscops\Api\Runtime\Client\BaseEndpoint
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

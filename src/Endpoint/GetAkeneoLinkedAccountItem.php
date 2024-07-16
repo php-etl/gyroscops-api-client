@@ -53,8 +53,6 @@ class GetAkeneoLinkedAccountItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \Gyroscops\Api\Model\AkeneoLinkedAccountJsonld|\Gyroscops\Api\Model\AkeneoLinkedAccount
      *
      * @throws \Gyroscops\Api\Exception\GetAkeneoLinkedAccountItemNotFoundException
@@ -66,10 +64,10 @@ class GetAkeneoLinkedAccountItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\AkeneoLinkedAccountJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\AkeneoLinkedAccountJsonld', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\AkeneoLinkedAccount', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\AkeneoLinkedAccount', 'json');
             }
         }
         if (404 === $status) {
@@ -80,6 +78,6 @@ class GetAkeneoLinkedAccountItem extends \Gyroscops\Api\Runtime\Client\BaseEndpo
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

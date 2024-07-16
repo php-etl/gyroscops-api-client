@@ -53,8 +53,6 @@ class GetAkeneoInstanceItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \Gyroscops\Api\Model\AkeneoInstanceJsonld|\Gyroscops\Api\Model\AkeneoInstance
      *
      * @throws \Gyroscops\Api\Exception\GetAkeneoInstanceItemNotFoundException
@@ -66,10 +64,10 @@ class GetAkeneoInstanceItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\AkeneoInstanceJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\AkeneoInstanceJsonld', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\AkeneoInstance', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\AkeneoInstance', 'json');
             }
         }
         if (404 === $status) {
@@ -80,6 +78,6 @@ class GetAkeneoInstanceItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint i
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

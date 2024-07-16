@@ -34,7 +34,7 @@ class PipelineJsonld extends \ArrayObject
      */
     protected $type;
     /**
-     * @var StepJsonld[]|null
+     * @var list<StepJsonld>|null
      */
     protected $steps;
     /**
@@ -42,17 +42,11 @@ class PipelineJsonld extends \ArrayObject
      */
     protected $code;
 
-    /**
-     * @return mixed
-     */
     public function getContext()
     {
         return $this->context;
     }
 
-    /**
-     * @param mixed $context
-     */
     public function setContext($context): self
     {
         $this->initialized['context'] = true;
@@ -88,7 +82,7 @@ class PipelineJsonld extends \ArrayObject
     }
 
     /**
-     * @return StepJsonld[]|null
+     * @return list<StepJsonld>|null
      */
     public function getSteps(): ?array
     {
@@ -96,7 +90,7 @@ class PipelineJsonld extends \ArrayObject
     }
 
     /**
-     * @param StepJsonld[]|null $steps
+     * @param list<StepJsonld>|null $steps
      */
     public function setSteps(?array $steps): self
     {

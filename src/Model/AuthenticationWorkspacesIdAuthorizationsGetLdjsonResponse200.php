@@ -22,7 +22,7 @@ class AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200 extends \Arra
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var UserAuthorizationJsonld[]|null
+     * @var list<UserAuthorizationJsonldAuthorizationRead>|null
      */
     protected $hydraMember;
     /**
@@ -39,7 +39,7 @@ class AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200 extends \Arra
     protected $hydraSearch;
 
     /**
-     * @return UserAuthorizationJsonld[]|null
+     * @return list<UserAuthorizationJsonldAuthorizationRead>|null
      */
     public function getHydraMember(): ?array
     {
@@ -47,7 +47,7 @@ class AuthenticationWorkspacesIdAuthorizationsGetLdjsonResponse200 extends \Arra
     }
 
     /**
-     * @param UserAuthorizationJsonld[]|null $hydraMember
+     * @param list<UserAuthorizationJsonldAuthorizationRead>|null $hydraMember
      */
     public function setHydraMember(?array $hydraMember): self
     {

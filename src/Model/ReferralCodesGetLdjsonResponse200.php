@@ -22,7 +22,7 @@ class ReferralCodesGetLdjsonResponse200 extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var ReferralCodeJsonldReferralCodeRead[]|null
+     * @var list<ReferralCodeJsonldReferralCodeRead>|null
      */
     protected $hydraMember;
     /**
@@ -39,7 +39,7 @@ class ReferralCodesGetLdjsonResponse200 extends \ArrayObject
     protected $hydraSearch;
 
     /**
-     * @return ReferralCodeJsonldReferralCodeRead[]|null
+     * @return list<ReferralCodeJsonldReferralCodeRead>|null
      */
     public function getHydraMember(): ?array
     {
@@ -47,7 +47,7 @@ class ReferralCodesGetLdjsonResponse200 extends \ArrayObject
     }
 
     /**
-     * @param ReferralCodeJsonldReferralCodeRead[]|null $hydraMember
+     * @param list<ReferralCodeJsonldReferralCodeRead>|null $hydraMember
      */
     public function setHydraMember(?array $hydraMember): self
     {

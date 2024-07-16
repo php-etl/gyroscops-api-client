@@ -32,7 +32,7 @@ class DeleteVariableFromConstantItem extends \Gyroscops\Api\Runtime\Client\BaseE
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/variables-from-constant/{id}');
+        return str_replace(['{id}'], [$this->id], '/environment/variables-from-constant/{id}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
@@ -41,8 +41,6 @@ class DeleteVariableFromConstantItem extends \Gyroscops\Api\Runtime\Client\BaseE
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return null
      *
      * @throws \Gyroscops\Api\Exception\DeleteVariableFromConstantItemNotFoundException
@@ -63,6 +61,6 @@ class DeleteVariableFromConstantItem extends \Gyroscops\Api\Runtime\Client\BaseE
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

@@ -22,7 +22,7 @@ class WorkflowDeclareWorkflowCommandInput extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var Job[]|null
+     * @var list<Job>|null
      */
     protected $jobs;
     /**
@@ -39,7 +39,7 @@ class WorkflowDeclareWorkflowCommandInput extends \ArrayObject
     protected $label;
 
     /**
-     * @return Job[]|null
+     * @return list<Job>|null
      */
     public function getJobs(): ?array
     {
@@ -47,7 +47,7 @@ class WorkflowDeclareWorkflowCommandInput extends \ArrayObject
     }
 
     /**
-     * @param Job[]|null $jobs
+     * @param list<Job>|null $jobs
      */
     public function setJobs(?array $jobs): self
     {

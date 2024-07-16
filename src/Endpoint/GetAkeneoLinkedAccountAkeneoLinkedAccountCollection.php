@@ -21,8 +21,8 @@ class GetAkeneoLinkedAccountAkeneoLinkedAccountCollection extends \Gyroscops\Api
      *
      * @param array $queryParameters {
      *
-     *     @var int $page The collection page number
-     * }
+     * @var int $page The collection page number
+     *          }
      *
      * @param array $accept Accept content header application/ld+json|application/json|text/html
      */
@@ -40,7 +40,7 @@ class GetAkeneoLinkedAccountAkeneoLinkedAccountCollection extends \Gyroscops\Api
 
     public function getUri(): string
     {
-        return str_replace(['{akeneoUserId}'], [$this->akeneoUserId], '/gateway/akeneo/linked-account/{akeneoUserId}');
+        return str_replace(['{akeneoUserId}'], [$this->akeneoUserId], '/gateway/akeneo/linked-accounts/{akeneoUserId}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
@@ -69,9 +69,7 @@ class GetAkeneoLinkedAccountAkeneoLinkedAccountCollection extends \Gyroscops\Api
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountAkeneoUserIdGetLdjsonResponse200|\Gyroscops\Api\Model\AkeneoLinkedAccount[]
+     * @return \Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsAkeneoUserIdGetLdjsonResponse200|\Gyroscops\Api\Model\AkeneoLinkedAccount[]
      *
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
@@ -81,10 +79,10 @@ class GetAkeneoLinkedAccountAkeneoLinkedAccountCollection extends \Gyroscops\Api
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\GatewayAkeneoLinkedAccountAkeneoUserIdGetLdjsonResponse200', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\GatewayAkeneoLinkedAccountsAkeneoUserIdGetLdjsonResponse200', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\AkeneoLinkedAccount[]', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\AkeneoLinkedAccount[]', 'json');
             }
         }
         throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
@@ -92,6 +90,6 @@ class GetAkeneoLinkedAccountAkeneoLinkedAccountCollection extends \Gyroscops\Api
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

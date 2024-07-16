@@ -34,7 +34,7 @@ class ReferralCodeReferralCodeRead extends \ArrayObject
      */
     protected $code;
     /**
-     * @var string[]|null
+     * @var list<string>|null
      */
     protected $referralRequests;
 
@@ -78,7 +78,7 @@ class ReferralCodeReferralCodeRead extends \ArrayObject
     }
 
     /**
-     * @return string[]|null
+     * @return list<string>|null
      */
     public function getReferralRequests(): ?array
     {
@@ -86,7 +86,7 @@ class ReferralCodeReferralCodeRead extends \ArrayObject
     }
 
     /**
-     * @param string[]|null $referralRequests
+     * @param list<string>|null $referralRequests
      */
     public function setReferralRequests(?array $referralRequests): self
     {

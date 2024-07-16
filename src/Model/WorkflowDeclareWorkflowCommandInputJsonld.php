@@ -34,7 +34,7 @@ class WorkflowDeclareWorkflowCommandInputJsonld extends \ArrayObject
      */
     protected $type;
     /**
-     * @var JobJsonld[]|null
+     * @var list<JobJsonld>|null
      */
     protected $jobs;
     /**
@@ -50,17 +50,11 @@ class WorkflowDeclareWorkflowCommandInputJsonld extends \ArrayObject
      */
     protected $label;
 
-    /**
-     * @return mixed
-     */
     public function getContext()
     {
         return $this->context;
     }
 
-    /**
-     * @param mixed $context
-     */
     public function setContext($context): self
     {
         $this->initialized['context'] = true;
@@ -96,7 +90,7 @@ class WorkflowDeclareWorkflowCommandInputJsonld extends \ArrayObject
     }
 
     /**
-     * @return JobJsonld[]|null
+     * @return list<JobJsonld>|null
      */
     public function getJobs(): ?array
     {
@@ -104,7 +98,7 @@ class WorkflowDeclareWorkflowCommandInputJsonld extends \ArrayObject
     }
 
     /**
-     * @param JobJsonld[]|null $jobs
+     * @param list<JobJsonld>|null $jobs
      */
     public function setJobs(?array $jobs): self
     {

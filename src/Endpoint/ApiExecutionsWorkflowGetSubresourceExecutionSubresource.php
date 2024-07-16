@@ -35,7 +35,7 @@ class ApiExecutionsWorkflowGetSubresourceExecutionSubresource extends \Gyroscops
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/runtime/executions/{id}/workflows');
+        return str_replace(['{id}'], [$this->id], '/runtime/executions/{id}/workflow');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
@@ -53,9 +53,7 @@ class ApiExecutionsWorkflowGetSubresourceExecutionSubresource extends \Gyroscops
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\ExecutionWorkflowJsonld|\Gyroscops\Api\Model\ExecutionWorkflow
+     * @return \Gyroscops\Api\Model\ExecutionWorkflowJsonldExecutionWorkflowRead|\Gyroscops\Api\Model\ExecutionWorkflowExecutionWorkflowRead
      *
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
      */
@@ -65,10 +63,10 @@ class ApiExecutionsWorkflowGetSubresourceExecutionSubresource extends \Gyroscops
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ExecutionWorkflowJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ExecutionWorkflowJsonldExecutionWorkflowRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ExecutionWorkflow', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ExecutionWorkflowExecutionWorkflowRead', 'json');
             }
         }
         throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
@@ -76,6 +74,6 @@ class ApiExecutionsWorkflowGetSubresourceExecutionSubresource extends \Gyroscops
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

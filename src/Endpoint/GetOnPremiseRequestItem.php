@@ -53,8 +53,6 @@ class GetOnPremiseRequestItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \Gyroscops\Api\Model\OnPremiseRequestJsonldOnPremiseRequestRead|\Gyroscops\Api\Model\OnPremiseRequestOnPremiseRequestRead
      *
      * @throws \Gyroscops\Api\Exception\GetOnPremiseRequestItemNotFoundException
@@ -66,10 +64,10 @@ class GetOnPremiseRequestItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\OnPremiseRequestJsonldOnPremiseRequestRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\OnPremiseRequestJsonldOnPremiseRequestRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\OnPremiseRequestOnPremiseRequestRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\OnPremiseRequestOnPremiseRequestRead', 'json');
             }
         }
         if (404 === $status) {
@@ -80,6 +78,6 @@ class GetOnPremiseRequestItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

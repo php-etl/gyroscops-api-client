@@ -42,21 +42,15 @@ class CreateSecretInputJsonld extends \ArrayObject
      */
     protected $description;
     /**
-     * @var string[]|null
+     * @var array<string, string>|null
      */
     protected $contents;
 
-    /**
-     * @return mixed
-     */
     public function getContext()
     {
         return $this->context;
     }
 
-    /**
-     * @param mixed $context
-     */
     public function setContext($context): self
     {
         $this->initialized['context'] = true;
@@ -118,7 +112,7 @@ class CreateSecretInputJsonld extends \ArrayObject
     }
 
     /**
-     * @return string[]|null
+     * @return array<string, string>|null
      */
     public function getContents(): ?iterable
     {
@@ -126,7 +120,7 @@ class CreateSecretInputJsonld extends \ArrayObject
     }
 
     /**
-     * @param string[]|null $contents
+     * @param array<string, string>|null $contents
      */
     public function setContents(?iterable $contents): self
     {

@@ -22,7 +22,7 @@ class PatchWorkspaceItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impl
      * @param string $id     Resource identifier
      * @param array  $accept Accept content header application/ld+json|application/json|text/html
      */
-    public function __construct(string $id, ?\Gyroscops\Api\Model\Workspace $requestBody = null, array $accept = [])
+    public function __construct(string $id, ?\Gyroscops\Api\Model\WorkspaceWorkspaceWrite $requestBody = null, array $accept = [])
     {
         $this->id = $id;
         $this->body = $requestBody;
@@ -41,7 +41,7 @@ class PatchWorkspaceItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impl
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\Workspace) {
+        if ($this->body instanceof \Gyroscops\Api\Model\WorkspaceWorkspaceWrite) {
             return [['Content-Type' => ['application/merge-patch+json']], $serializer->serialize($this->body, 'json')];
         }
 
@@ -58,9 +58,7 @@ class PatchWorkspaceItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impl
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\WorkspaceJsonld|\Gyroscops\Api\Model\Workspace
+     * @return \Gyroscops\Api\Model\WorkspaceJsonldWorkspaceRead|\Gyroscops\Api\Model\WorkspaceWorkspaceRead
      *
      * @throws \Gyroscops\Api\Exception\PatchWorkspaceItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PatchWorkspaceItemUnprocessableEntityException
@@ -73,10 +71,10 @@ class PatchWorkspaceItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impl
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\WorkspaceJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\WorkspaceJsonldWorkspaceRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Workspace', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\WorkspaceWorkspaceRead', 'json');
             }
         }
         if (400 === $status) {
@@ -93,6 +91,6 @@ class PatchWorkspaceItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint impl
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

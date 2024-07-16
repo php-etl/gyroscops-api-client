@@ -32,7 +32,7 @@ class DeleteVariableFromSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEnd
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/variables-from-secret/{id}');
+        return str_replace(['{id}'], [$this->id], '/environment/variables-from-secret/{id}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
@@ -41,8 +41,6 @@ class DeleteVariableFromSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEnd
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return null
      *
      * @throws \Gyroscops\Api\Exception\DeleteVariableFromSecretItemNotFoundException
@@ -63,6 +61,6 @@ class DeleteVariableFromSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEnd
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

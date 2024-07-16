@@ -19,9 +19,9 @@ class PutWorkspaceItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implem
     /**
      * Replaces the Workspace resource.
      *
-     * @param string                                                                   $id          Resource identifier
-     * @param \Gyroscops\Api\Model\WorkspaceJsonld|\Gyroscops\Api\Model\Workspace|null $requestBody
-     * @param array                                                                    $accept      Accept content header application/ld+json|application/json|text/html
+     * @param string                                                                                               $id          Resource identifier
+     * @param \Gyroscops\Api\Model\WorkspaceJsonldWorkspaceWrite|\Gyroscops\Api\Model\WorkspaceWorkspaceWrite|null $requestBody
+     * @param array                                                                                                $accept      Accept content header application/ld+json|application/json|text/html
      */
     public function __construct(string $id, $requestBody = null, array $accept = [])
     {
@@ -42,13 +42,13 @@ class PutWorkspaceItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implem
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\WorkspaceJsonld) {
+        if ($this->body instanceof \Gyroscops\Api\Model\WorkspaceJsonldWorkspaceWrite) {
             return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\Workspace) {
+        if ($this->body instanceof \Gyroscops\Api\Model\WorkspaceWorkspaceWrite) {
             return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\Workspace) {
+        if ($this->body instanceof \Gyroscops\Api\Model\WorkspaceWorkspaceWrite) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -65,9 +65,7 @@ class PutWorkspaceItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implem
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\WorkspaceJsonld|\Gyroscops\Api\Model\Workspace
+     * @return \Gyroscops\Api\Model\WorkspaceJsonldWorkspaceRead|\Gyroscops\Api\Model\WorkspaceWorkspaceRead
      *
      * @throws \Gyroscops\Api\Exception\PutWorkspaceItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PutWorkspaceItemUnprocessableEntityException
@@ -80,10 +78,10 @@ class PutWorkspaceItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implem
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\WorkspaceJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\WorkspaceJsonldWorkspaceRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Workspace', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\WorkspaceWorkspaceRead', 'json');
             }
         }
         if (400 === $status) {
@@ -100,6 +98,6 @@ class PutWorkspaceItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint implem
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

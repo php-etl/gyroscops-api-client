@@ -22,7 +22,7 @@ class EnvironmentEnvironmentsGetLdjsonResponse200 extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var EnvironmentJsonldRead[]|null
+     * @var list<EnvironmentJsonldEnvironmentView>|null
      */
     protected $hydraMember;
     /**
@@ -39,7 +39,7 @@ class EnvironmentEnvironmentsGetLdjsonResponse200 extends \ArrayObject
     protected $hydraSearch;
 
     /**
-     * @return EnvironmentJsonldRead[]|null
+     * @return list<EnvironmentJsonldEnvironmentView>|null
      */
     public function getHydraMember(): ?array
     {
@@ -47,7 +47,7 @@ class EnvironmentEnvironmentsGetLdjsonResponse200 extends \ArrayObject
     }
 
     /**
-     * @param EnvironmentJsonldRead[]|null $hydraMember
+     * @param list<EnvironmentJsonldEnvironmentView>|null $hydraMember
      */
     public function setHydraMember(?array $hydraMember): self
     {

@@ -47,8 +47,6 @@ class RemovePipelineStepProbePipelineItem extends \Gyroscops\Api\Runtime\Client\
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return null
      *
      * @throws \Gyroscops\Api\Exception\RemovePipelineStepProbePipelineItemNotFoundException
@@ -69,6 +67,6 @@ class RemovePipelineStepProbePipelineItem extends \Gyroscops\Api\Runtime\Client\
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

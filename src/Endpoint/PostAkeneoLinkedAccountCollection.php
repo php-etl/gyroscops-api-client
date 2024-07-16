@@ -34,7 +34,7 @@ class PostAkeneoLinkedAccountCollection extends \Gyroscops\Api\Runtime\Client\Ba
 
     public function getUri(): string
     {
-        return '/gateway/akeneo/linked-account';
+        return '/gateway/akeneo/linked-accounts';
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
@@ -62,8 +62,6 @@ class PostAkeneoLinkedAccountCollection extends \Gyroscops\Api\Runtime\Client\Ba
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \Gyroscops\Api\Model\AkeneoLinkedAccountJsonld|\Gyroscops\Api\Model\AkeneoLinkedAccount
      *
      * @throws \Gyroscops\Api\Exception\PostAkeneoLinkedAccountCollectionBadRequestException
@@ -76,10 +74,10 @@ class PostAkeneoLinkedAccountCollection extends \Gyroscops\Api\Runtime\Client\Ba
         $body = (string) $response->getBody();
         if (201 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\AkeneoLinkedAccountJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\AkeneoLinkedAccountJsonld', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\AkeneoLinkedAccount', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\AkeneoLinkedAccount', 'json');
             }
         }
         if (400 === $status) {
@@ -93,6 +91,6 @@ class PostAkeneoLinkedAccountCollection extends \Gyroscops\Api\Runtime\Client\Ba
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

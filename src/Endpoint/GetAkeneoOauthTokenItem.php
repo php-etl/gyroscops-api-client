@@ -53,8 +53,6 @@ class GetAkeneoOauthTokenItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \Gyroscops\Api\Model\AkeneoOauthTokenJsonldRead|\Gyroscops\Api\Model\AkeneoOauthTokenRead
      *
      * @throws \Gyroscops\Api\Exception\GetAkeneoOauthTokenItemNotFoundException
@@ -66,10 +64,10 @@ class GetAkeneoOauthTokenItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\AkeneoOauthTokenJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\AkeneoOauthTokenJsonldRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\AkeneoOauthTokenRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\AkeneoOauthTokenRead', 'json');
             }
         }
         if (404 === $status) {
@@ -80,6 +78,6 @@ class GetAkeneoOauthTokenItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoint
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

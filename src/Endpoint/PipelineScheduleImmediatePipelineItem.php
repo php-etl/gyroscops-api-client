@@ -19,9 +19,9 @@ class PipelineScheduleImmediatePipelineItem extends \Gyroscops\Api\Runtime\Clien
     /**
      * Schedule a pipeline for immediate execution.
      *
-     * @param string                                                                                                                                                         $id          Resource identifier
-     * @param \Gyroscops\Api\Model\PipelineDeclarePipelineScheduleImmediateCommandInputJsonld|\Gyroscops\Api\Model\PipelineDeclarePipelineScheduleImmediateCommandInput|null $requestBody
-     * @param array                                                                                                                                                          $accept      Accept content header application/ld+json|application/json|text/html
+     * @param string                                                                                                      $id          Resource identifier
+     * @param \Gyroscops\Api\Model\PipelineDeclarePipelineScheduleImmediateCommandInputJsonldPipelineWrite|\stdClass|null $requestBody
+     * @param array                                                                                                       $accept      Accept content header application/ld+json|application/json|text/html
      */
     public function __construct(string $id, $requestBody = null, array $accept = [])
     {
@@ -42,13 +42,13 @@ class PipelineScheduleImmediatePipelineItem extends \Gyroscops\Api\Runtime\Clien
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineDeclarePipelineScheduleImmediateCommandInputJsonld) {
+        if ($this->body instanceof \Gyroscops\Api\Model\PipelineDeclarePipelineScheduleImmediateCommandInputJsonldPipelineWrite) {
             return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineDeclarePipelineScheduleImmediateCommandInput) {
-            return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
+        if ($this->body instanceof \stdClass) {
+            return [['Content-Type' => ['application/json']], json_encode($this->body)];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineDeclarePipelineScheduleImmediateCommandInput) {
+        if ($this->body instanceof \stdClass) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -65,9 +65,7 @@ class PipelineScheduleImmediatePipelineItem extends \Gyroscops\Api\Runtime\Clien
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\PipelineDeclarePipelineScheduleImmediateCommandJsonldRead|null
+     * @return \Gyroscops\Api\Model\PipelineDeclarePipelineScheduleImmediateCommandJsonldPipelineReadPipelineSubresourceRead|null
      *
      * @throws \Gyroscops\Api\Exception\PipelineScheduleImmediatePipelineItemBadRequestException
      * @throws \Gyroscops\Api\Exception\PipelineScheduleImmediatePipelineItemUnprocessableEntityException
@@ -80,7 +78,7 @@ class PipelineScheduleImmediatePipelineItem extends \Gyroscops\Api\Runtime\Clien
         $body = (string) $response->getBody();
         if (202 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\PipelineDeclarePipelineScheduleImmediateCommandJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\PipelineDeclarePipelineScheduleImmediateCommandJsonldPipelineReadPipelineSubresourceRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
                 return json_decode($body);
@@ -100,6 +98,6 @@ class PipelineScheduleImmediatePipelineItem extends \Gyroscops\Api\Runtime\Clien
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

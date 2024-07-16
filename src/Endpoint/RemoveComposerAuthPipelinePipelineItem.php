@@ -19,9 +19,9 @@ class RemoveComposerAuthPipelinePipelineItem extends \Gyroscops\Api\Runtime\Clie
     /**
      * Removes a composer auth from a pipeline.
      *
-     * @param string                                                                                                                                             $id          Resource identifier
-     * @param \Gyroscops\Api\Model\PipelineRemovePipelineComposerAuthCommandInputJsonld|\Gyroscops\Api\Model\PipelineRemovePipelineComposerAuthCommandInput|null $requestBody
-     * @param array                                                                                                                                              $accept      Accept content header application/ld+json|application/json|text/html
+     * @param string                                                                                                $id          Resource identifier
+     * @param \Gyroscops\Api\Model\PipelineRemovePipelineComposerAuthCommandInputJsonldPipelineWrite|\stdClass|null $requestBody
+     * @param array                                                                                                 $accept      Accept content header application/ld+json|application/json|text/html
      */
     public function __construct(string $id, $requestBody = null, array $accept = [])
     {
@@ -42,13 +42,13 @@ class RemoveComposerAuthPipelinePipelineItem extends \Gyroscops\Api\Runtime\Clie
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineRemovePipelineComposerAuthCommandInputJsonld) {
+        if ($this->body instanceof \Gyroscops\Api\Model\PipelineRemovePipelineComposerAuthCommandInputJsonldPipelineWrite) {
             return [['Content-Type' => ['application/ld+json']], $serializer->serialize($this->body, 'json')];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineRemovePipelineComposerAuthCommandInput) {
-            return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
+        if ($this->body instanceof \stdClass) {
+            return [['Content-Type' => ['application/json']], json_encode($this->body)];
         }
-        if ($this->body instanceof \Gyroscops\Api\Model\PipelineRemovePipelineComposerAuthCommandInput) {
+        if ($this->body instanceof \stdClass) {
             return [['Content-Type' => ['text/html']], $this->body];
         }
 
@@ -65,9 +65,7 @@ class RemoveComposerAuthPipelinePipelineItem extends \Gyroscops\Api\Runtime\Clie
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\PipelineRemovePipelineComposerAuthCommandJsonldRead|null
+     * @return \Gyroscops\Api\Model\PipelineRemovePipelineComposerAuthCommandJsonldPipelineReadPipelineSubresourceRead|null
      *
      * @throws \Gyroscops\Api\Exception\RemoveComposerAuthPipelinePipelineItemBadRequestException
      * @throws \Gyroscops\Api\Exception\RemoveComposerAuthPipelinePipelineItemUnprocessableEntityException
@@ -80,7 +78,7 @@ class RemoveComposerAuthPipelinePipelineItem extends \Gyroscops\Api\Runtime\Clie
         $body = (string) $response->getBody();
         if (202 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\PipelineRemovePipelineComposerAuthCommandJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\PipelineRemovePipelineComposerAuthCommandJsonldPipelineReadPipelineSubresourceRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
                 return json_decode($body);
@@ -100,6 +98,6 @@ class RemoveComposerAuthPipelinePipelineItem extends \Gyroscops\Api\Runtime\Clie
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

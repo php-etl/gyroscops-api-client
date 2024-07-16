@@ -22,8 +22,8 @@ class ApiSubscriptionOffersOptionsGetSubresourceSubscriptionOfferSubresource ext
      * @param string $id              SubscriptionOffer identifier
      * @param array  $queryParameters {
      *
-     *     @var int $page The collection page number
-     * }
+     * @var int $page The collection page number
+     *          }
      *
      * @param array $accept Accept content header application/ld+json|application/json|text/html
      */
@@ -70,8 +70,6 @@ class ApiSubscriptionOffersOptionsGetSubresourceSubscriptionOfferSubresource ext
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \Gyroscops\Api\Model\AuthenticationOffersIdOptionsGetLdjsonResponse200|\Gyroscops\Api\Model\Option[]
      *
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
@@ -82,10 +80,10 @@ class ApiSubscriptionOffersOptionsGetSubresourceSubscriptionOfferSubresource ext
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\AuthenticationOffersIdOptionsGetLdjsonResponse200', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\AuthenticationOffersIdOptionsGetLdjsonResponse200', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\Option[]', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\Option[]', 'json');
             }
         }
         throw new \Gyroscops\Api\Exception\UnexpectedStatusCodeException($status, $body);
@@ -93,6 +91,6 @@ class ApiSubscriptionOffersOptionsGetSubresourceSubscriptionOfferSubresource ext
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

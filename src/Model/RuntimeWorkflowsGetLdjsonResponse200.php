@@ -22,7 +22,7 @@ class RuntimeWorkflowsGetLdjsonResponse200 extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var WorkflowJsonldRead[]|null
+     * @var list<WorkflowJsonldWorkflowRead>|null
      */
     protected $hydraMember;
     /**
@@ -39,7 +39,7 @@ class RuntimeWorkflowsGetLdjsonResponse200 extends \ArrayObject
     protected $hydraSearch;
 
     /**
-     * @return WorkflowJsonldRead[]|null
+     * @return list<WorkflowJsonldWorkflowRead>|null
      */
     public function getHydraMember(): ?array
     {
@@ -47,7 +47,7 @@ class RuntimeWorkflowsGetLdjsonResponse200 extends \ArrayObject
     }
 
     /**
-     * @param WorkflowJsonldRead[]|null $hydraMember
+     * @param list<WorkflowJsonldWorkflowRead>|null $hydraMember
      */
     public function setHydraMember(?array $hydraMember): self
     {

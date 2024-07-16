@@ -35,7 +35,7 @@ class GetVariableFromSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoi
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/variables-from-secret/{id}');
+        return str_replace(['{id}'], [$this->id], '/environment/variables-from-secret/{id}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
@@ -53,9 +53,7 @@ class GetVariableFromSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoi
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\VariableFromSecretJsonldRead|\Gyroscops\Api\Model\VariableFromSecretRead
+     * @return \Gyroscops\Api\Model\VariableFromSecretJsonldVariableViewEnvironmentView|\Gyroscops\Api\Model\VariableFromSecretVariableViewEnvironmentView
      *
      * @throws \Gyroscops\Api\Exception\GetVariableFromSecretItemNotFoundException
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
@@ -66,10 +64,10 @@ class GetVariableFromSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoi
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\VariableFromSecretJsonldRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\VariableFromSecretJsonldVariableViewEnvironmentView', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\VariableFromSecretRead', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\VariableFromSecretVariableViewEnvironmentView', 'json');
             }
         }
         if (404 === $status) {
@@ -80,6 +78,6 @@ class GetVariableFromSecretItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoi
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

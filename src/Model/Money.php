@@ -44,7 +44,7 @@ class Money extends \ArrayObject
     /**
      * Required by interface MoneyContainer.
      *
-     * @var BigNumber[]|null
+     * @var list<BigNumber>|null
      */
     protected $amounts;
     /**
@@ -152,7 +152,7 @@ class Money extends \ArrayObject
     /**
      * Required by interface MoneyContainer.
      *
-     * @return BigNumber[]|null
+     * @return list<BigNumber>|null
      */
     public function getAmounts(): ?array
     {
@@ -162,7 +162,7 @@ class Money extends \ArrayObject
     /**
      * Required by interface MoneyContainer.
      *
-     * @param BigNumber[]|null $amounts
+     * @param list<BigNumber>|null $amounts
      */
     public function setAmounts(?array $amounts): self
     {

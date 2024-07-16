@@ -53,9 +53,7 @@ class GetPipelineStepProbeItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoin
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\PipelineStepProbeJsonld|\Gyroscops\Api\Model\PipelineStepProbe
+     * @return \Gyroscops\Api\Model\PipelineStepProbeJsonldStepProbeRead|\Gyroscops\Api\Model\PipelineStepProbeStepProbeRead
      *
      * @throws \Gyroscops\Api\Exception\GetPipelineStepProbeItemNotFoundException
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
@@ -66,10 +64,10 @@ class GetPipelineStepProbeItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoin
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\PipelineStepProbeJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\PipelineStepProbeJsonldStepProbeRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\PipelineStepProbe', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\PipelineStepProbeStepProbeRead', 'json');
             }
         }
         if (404 === $status) {
@@ -80,6 +78,6 @@ class GetPipelineStepProbeItem extends \Gyroscops\Api\Runtime\Client\BaseEndpoin
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

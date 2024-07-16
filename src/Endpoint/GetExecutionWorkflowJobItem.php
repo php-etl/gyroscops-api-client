@@ -53,9 +53,7 @@ class GetExecutionWorkflowJobItem extends \Gyroscops\Api\Runtime\Client\BaseEndp
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Gyroscops\Api\Model\ExecutionWorkflowJobJsonld|\Gyroscops\Api\Model\ExecutionWorkflowJob
+     * @return \Gyroscops\Api\Model\ExecutionWorkflowJobJsonldExecutionWorkflowJobRead|\Gyroscops\Api\Model\ExecutionWorkflowJobExecutionWorkflowJobRead
      *
      * @throws \Gyroscops\Api\Exception\GetExecutionWorkflowJobItemNotFoundException
      * @throws \Gyroscops\Api\Exception\UnexpectedStatusCodeException
@@ -66,10 +64,10 @@ class GetExecutionWorkflowJobItem extends \Gyroscops\Api\Runtime\Client\BaseEndp
         $body = (string) $response->getBody();
         if (200 === $status) {
             if (mb_strpos($contentType, 'application/ld+json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ExecutionWorkflowJobJsonld', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ExecutionWorkflowJobJsonldExecutionWorkflowJobRead', 'json');
             }
             if (mb_strpos($contentType, 'application/json') !== false) {
-                return $serializer->deserialize($body, 'Gyroscops\\Api\\Model\\ExecutionWorkflowJob', 'json');
+                return $serializer->deserialize($body, 'Gyroscops\Api\Model\ExecutionWorkflowJobExecutionWorkflowJobRead', 'json');
             }
         }
         if (404 === $status) {
@@ -80,6 +78,6 @@ class GetExecutionWorkflowJobItem extends \Gyroscops\Api\Runtime\Client\BaseEndp
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKey'];
+        return ['JWT'];
     }
 }

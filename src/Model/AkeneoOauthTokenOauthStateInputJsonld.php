@@ -38,21 +38,15 @@ class AkeneoOauthTokenOauthStateInputJsonld extends \ArrayObject
      */
     protected $url;
     /**
-     * @var string[]|null
+     * @var list<string>|null
      */
     protected $scope;
 
-    /**
-     * @return mixed
-     */
     public function getContext()
     {
         return $this->context;
     }
 
-    /**
-     * @param mixed $context
-     */
     public function setContext($context): self
     {
         $this->initialized['context'] = true;
@@ -101,7 +95,7 @@ class AkeneoOauthTokenOauthStateInputJsonld extends \ArrayObject
     }
 
     /**
-     * @return string[]|null
+     * @return list<string>|null
      */
     public function getScope(): ?array
     {
@@ -109,7 +103,7 @@ class AkeneoOauthTokenOauthStateInputJsonld extends \ArrayObject
     }
 
     /**
-     * @param string[]|null $scope
+     * @param list<string>|null $scope
      */
     public function setScope(?array $scope): self
     {
